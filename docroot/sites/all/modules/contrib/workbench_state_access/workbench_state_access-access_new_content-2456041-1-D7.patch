@@ -1,0 +1,15 @@
+diff --git a/workbench_state_access.module b/workbench_state_access.module
+index f4999eb..74d5a2c 100644
+--- a/workbench_state_access.module
++++ b/workbench_state_access.module
+@@ -39,8 +39,8 @@ function _workbench_state_access_node_edit($node){
+     return false;
+   }
+ 
+-  if(isset($node->workbench_moderation['current']) && isset($node->workbench_moderation['published'])){
+-    if($node->workbench_moderation['current']->vid != $node->workbench_moderation['published']->vid ){
++  if (isset($node->workbench_moderation['current'])) {
++    if ((isset($node->workbench_moderation['published']) && $node->workbench_moderation['current']->vid != $node->workbench_moderation['published']->vid ) || (!isset($node->workbench_moderation['published']) && $node->workbench_moderation['current']->published == 0)) {
+ 
+       $can_edit = user_access("edit revisions in ". $node->workbench_moderation['current']->state ." state",$account);
+ 

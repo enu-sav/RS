@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Stops page from changing when user is posting.
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function node_edit_protection_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#node_edit_form'])) {
+    // Calls function even after validation.
+    $form['#after_build'][] = 'node_edit_protection_after_build';
+  }
+}
+
+/**
+ * This function will be called every time while form building.
+ */
+function node_edit_protection_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'node_edit_protection') . '/node-edit-protection.js');
+  return $form;
+}

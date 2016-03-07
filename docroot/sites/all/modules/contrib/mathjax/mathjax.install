@@ -1,0 +1,60 @@
+<?php
+/**
+ * @file
+ * MathJax module install.
+ */
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function mathjax_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'mathjax_%'");
+  cache_clear_all('variables', 'cache_bootstrap');
+}
+
+
+/**
+ * Implements hook_requirements().
+ *
+ * This hook will issue warnings if:
+ * - MathJax relies on local files and the source files are not found
+ */
+function mathjax_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time.
+  $t = get_t();
+
+  if ($phase == 'runtime' && !variable_get('mathjax_use_cdn', TRUE)) {
+    $requirements['mathjax'] = array(
+      'title' => $t('MathJax'),
+      'value' => $t('Installed correctly'),
+      'severity' => REQUIREMENT_OK,
+    );
+
+    if (!_mathjax_requirements_isinstalled()) {
+      $requirements['mathjax']['value'] = $t('Third party MathJax software not properly installed');
+      $requirements['mathjax']['description'] = $t('MathJax was not found in any \'libraries\' folder (e.g. sites/all/libraries).');
+      $requirements['mathjax']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Determines whether the MathJax sources are present.
+ *
+ * It checks if MathJax.js is present.
+ * This function is used by mathjax_requirements()
+ *
+ * @return bool
+ *   True if MathJax is installed
+ */
+function _mathjax_requirements_isinstalled() {
+  $mathjax_path = libraries_get_path('mathjax');
+  $jspath = $mathjax_path . '/MathJax.js';
+  $jsp = file_exists($jspath);
+
+  return $jsp;
+}

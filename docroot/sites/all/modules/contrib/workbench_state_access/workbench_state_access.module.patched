@@ -1,0 +1,92 @@
+<?php
+/**
+ * Implements hook_permission().
+ */
+function workbench_state_access_permission() {
+  $states = workbench_moderation_states();
+  $perms = array();
+  foreach($states as $machine_name => $state){
+    $perms["edit revisions in " . $machine_name . " state"] = array('title' => t('Can <em>edit</em> revisions in <em>' . $state->label . '</em> state'));
+  }
+
+  $perms["edit revisions in any state"] = array('title' => t('Can <em>edit</em> revisions in <em> Any </em> state'));
+
+  foreach($states as $machine_name => $state){
+    $perms["block view revisions in " . $machine_name . " state"] = array('title' => t('Block <em>view</em> revisions in <em>' . $state->label . '</em> state'));
+  }
+
+  $perms["view revisions in any state"] = array('title' => t('Can <em>view</em> revisions in <em> Any </em> state'));
+  return $perms;
+}
+
+
+/**
+ * Implements hook_menu_alter().
+ */
+function workbench_state_access_menu_alter(&$items) {
+  $items['node/%node/edit']['access callback'] = '_workbench_state_access_node_edit';
+  $items['node/%node/edit']['access arguments'] = array(1);
+
+  $items['node/%node/draft']['access callback'] = '_workbench_state_access_node_draft_view';
+  $items['node/%node/draft']['access arguments'] = array(1);
+}
+
+
+function _workbench_state_access_node_edit($node){
+  global $user;
+  $account = $user;
+  if($account->uid == 0){
+    return false;
+  }
+
+  if (isset($node->workbench_moderation['current'])) {
+    if ((isset($node->workbench_moderation['published']) && $node->workbench_moderation['current']->vid != $node->workbench_moderation['published']->vid ) || (!isset($node->workbench_moderation['published']) && $node->workbench_moderation['current']->published == 0)) {
+
+      $can_edit = user_access("edit revisions in ". $node->workbench_moderation['current']->state ." state",$account);
+
+      $can_edit_all = user_access("edit revisions in any state",$account);
+
+      if(!$can_edit && !$can_edit_all){
+        if(arg(2) == "edit"){
+          drupal_goto('node/'.$node->nid);
+        }else{
+          drupal_set_message(t('This content have a revision under '.workbench_moderation_state_label($node->workbench_moderation['current']->state) .' state. you can\'t edit revision in this state. Thank you.'), 'warning', false);
+        }
+        return false;
+      }
+    }
+  }
+  return node_access('update',$node, $account);
+}
+
+function _workbench_state_access_node_draft_view($node){
+  global $user;
+  $account = $user;
+
+  if($account->uid == 0){
+    return false;
+  }
+
+  if(isset($node->workbench_moderation['current']) && isset($node->workbench_moderation['published'])){
+    if($node->workbench_moderation['current']->vid != $node->workbench_moderation['published']->vid ){
+
+      $block_view = user_access("block view revisions in ". $node->workbench_moderation['current']->state ." state",$account);
+
+      $can_edit = user_access("edit revisions in ". $node->workbench_moderation['current']->state ." state",$account);
+
+      $can_view_all = user_access("view revisions in any state",$account);
+
+      if($block_view && !$can_edit && !$can_view_all){
+        if(arg(2) == "draft"){
+            drupal_goto('node/'.$node->nid);
+        }else{
+          drupal_set_message(t('This content have a revision under '.workbench_moderation_state_label($node->workbench_moderation['current']->state) .' state. you can\'t view revision in this state. Thank you.'), 'warning', false);
+        }
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  return node_access('view',$node, $account);
+}

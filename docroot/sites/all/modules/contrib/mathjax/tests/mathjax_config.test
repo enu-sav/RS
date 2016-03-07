@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Configuration test file for MathJax module.
+ */
+
+/**
+ * Configuration test case for the module.
+ */
+class MathjaxConfigTestCase extends DrupalWebTestCase {
+
+  /**
+   * Provide info on these tests to the admin interface.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'MathJax configuration',
+      'description' => 'Tests the Javascript settings inclusion.',
+      'group' => 'MathJax',
+    );
+  }
+
+  /**
+   * Set up the test evironment.
+   */
+  protected function setUp() {
+    parent::setUp('mathjax');
+  }
+
+  /**
+   * Test the configuration data.
+   */
+  public function testConfig() {
+    $path = '<front>';
+
+    // Initial text on form load.
+    $this->drupalGet($path);
+    $this->assertRaw(mathjax_default_cdn_url(), 'Default CDN URL found.');
+    $this->assertRaw('<script type="text/x-mathjax-config">' . mathjax_default_config_string() . '</script>', 'Default configuration string found.');
+  }
+}

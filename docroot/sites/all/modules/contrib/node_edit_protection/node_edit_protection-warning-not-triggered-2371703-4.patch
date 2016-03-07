@@ -1,0 +1,35 @@
+From 1f06c7cf2c9ad9ebef8cf3491ddd275d0fa82265 Mon Sep 17 00:00:00 2001
+From: NWOM <NWOM>
+Date: Thu, 21 Jan 2016 09:10:08 +0100
+Subject: Issue #2371703 by NWOM, ryank90: Warning not triggered when using the
+ browser back button if only one field has been modified and that field is not
+ using wysiwyg
+
+---
+ node-edit-protection.js | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/node-edit-protection.js b/node-edit-protection.js
+index 9b7d0a6..1f81582 100755
+--- a/node-edit-protection.js
++++ b/node-edit-protection.js
+@@ -7,8 +7,14 @@
+     attach : function(context) {
+       // If they leave an input field, assume they changed it.
+       $(".node-form :input", context).each(function() {
+-        $(this).blur(function() {
+-          edit = true;
++        // Get default value of field.
++        var defaultValue = $(this).val();
++        // Make sure we capture all scenarios.
++        $(this).bind('change keyup input paste blur', function (e) {
++          // Is the default value the same as the last value?
++          if (defaultValue != $(this).val()) {
++            edit = true;
++          }
+         });
+       });
+
+--
+1.9.1
+

@@ -1,0 +1,61 @@
+<?php 
+
+ /**
+  * Implements hook_install().
+  */
+function workbench_assignee_install() {
+  
+  $field = array(
+    'type' => 'int',
+    'not null' => FALSE,
+    'default' => NULL,
+    'description' => 'The user id of the department of the assignee . Foreign key to taxonomy.',
+  );
+
+  if(!db_field_exists('workbench_moderation_node_history', 'department')){
+    db_add_field('workbench_moderation_node_history', 'department', $field);
+  }
+
+  $field = array(
+    'type' => 'int',
+    'not null' => FALSE,
+    'default' => NULL,
+    'description' => 'The user id of the moderator who is assigneed to the current state. Foreign key to users.',
+  );
+
+  if(!db_field_exists('workbench_moderation_node_history', 'asid')){
+    db_add_field('workbench_moderation_node_history', 'asid', $field);
+  }
+
+  $weight = db_select('system', 's')
+              ->fields('s', array('weight'))
+              ->condition('name', 'workbench_email', '=')
+              ->execute()
+              ->fetchField();
+
+  db_update('system')
+    ->fields(array('weight' => $weight +1))
+    ->condition('name', 'workbench_assignee', '=')
+    ->execute();
+}
+
+/**
+* Implements hook_schema_alter()
+*/
+function workbench_assignee_schema_alter(&$schema) {
+  // Add field to existing schema.
+  $schema['workbench_moderation_node_history']['fields']['department'] = array(
+    'type' => 'int',
+    'not null' => FALSE,
+    'default' => '',
+    'description' => 'The user id of the department of the assignee . Foreign key to taxonomy.',
+  );
+
+  $schema['workbench_moderation_node_history']['fields']['asid'] = array(
+    'type' => 'int',
+    'not null' => FALSE,
+    'default' => '',
+    'description' => 'The user id of the moderator who is assigneed to the current state. Foreign key to users.',
+  );
+
+}

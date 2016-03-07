@@ -1,0 +1,5 @@
+name=Beliana
+core=7.x
+
+files[] = beliana.module
+files[] = beliana.pages.inc

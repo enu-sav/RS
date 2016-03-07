@@ -1,0 +1,47 @@
+diff --git a/node-edit-protection.js b/node-edit-protection.js
+index 117cc05..8ba72df 100755
+--- a/node-edit-protection.js
++++ b/node-edit-protection.js
+@@ -12,6 +12,10 @@
+         });
+       });
+ 
++      if ($(".node-form :input", context).hasClass("error")) {
++        edit = true;
++      }
++
+       // Let all form submit buttons through
+       $(".node-form input[type='submit']").each(function() {
+         $(this).addClass('node-edit-protection-processed');
+diff --git a/node_edit_protection.module b/node_edit_protection.module
+index 2a52c36..ff3b0c8 100644
+--- a/node_edit_protection.module
++++ b/node_edit_protection.module
+@@ -1,10 +1,24 @@
+ <?php
++
+ /**
+- * @file 
++ * @file
+  * Stops page from changing when user is posting.
+  */
++
++/**
++ * Implements hook_form_alter().
++ */
+ function node_edit_protection_form_alter(&$form, &$form_state, $form_id) {
+-  if(isset($form['#node_edit_form'])) {
+-    drupal_add_js(drupal_get_path('module', 'node_edit_protection') . '/node-edit-protection.js');
++  if (isset($form['#node_edit_form'])) {
++    // Calls function even after validation.
++    $form['#after_build'][] = 'node_edit_protection_after_build';
+   }
+ }
++
++/**
++ * This function will be called every time while form building.
++ */
++function node_edit_protection_after_build($form, &$form_state) {
++  drupal_add_js(drupal_get_path('module', 'node_edit_protection') . '/node-edit-protection.js');
++  return $form;
++}

@@ -1,0 +1,572 @@
+<?php
+/**
+ * @file
+ * Code for the Workbench Assignee Module.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function workbench_assignee_menu() {
+  $items = array();
+
+  $items['admin/config/workbench/moderation/assingee'] = array(
+    'title' => 'Assignee',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('workbench_assignee_admin_form'),
+    'access arguments' => array('administer workbench assingee'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'workbench_assignee.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function workbench_assignee_permission() {
+  $permissions = array();
+  $permissions['administer workbench assingee'] = array(
+    'title' => t('Administer Workbench Assingee'),
+    'description' => t('Perform administration tasks
+                       related to Workbench Assingee.'),
+  );
+  return $permissions;
+}
+
+
+/**
+ * Implments hook_module_implements_alter().
+ *
+ * Make sure workbench_assignee form_alter fires last
+ * form_alter.
+ */
+function workbench_assignee_module_implements_alter(&$implementations, $hook) {
+  if (strpos($hook, 'form') !== FALSE) {
+    if (isset($implementations['workbench_assignee'])) {
+      $workbench_assignee = $implementations['workbench_assignee'];
+      unset($implementations['workbench_assignee']);
+      $implementations['workbench_assignee'] = $workbench_assignee;
+    }
+  }
+}
+
+function workbench_assignee_workbench_moderation_transition($node, $old_state, $new_state){
+  $assigned_user = "";
+
+  $hide_email = variable_get('workbench_assignee_hide_email',0);
+  if (isset($node->workbench_assignee)) {
+    $assignee = $node->workbench_assignee;
+  }else{
+    $assignee = workbench_assignee_get_latest_assignee($node->nid, $node->workbench_moderation['current']->hid);
+  }
+
+
+  $assigned_user_id = 0;
+  $assigned_department = 0;
+  if(strpos($assignee,'department:') === false){
+    $assigned_user = user_load($assignee);
+    $assigned_user_id = $assigned_user->uid;
+
+    $department_fields = array_keys(workbench_assignee_get_assigned_fields('user'));
+    
+    if($department_fields){
+      foreach($department_fields as $department_field){
+        $user_fields = field_get_items('user', $assigned_user, $department_field);
+        if(!empty($user_fields)){
+          $assigned_department = $user_fields[0]['tid'];
+        }
+      }
+    }
+  }else{
+    $assigned_department = explode(":",$assignee);
+    $assigned_department = $assigned_department[1];
+  }
+
+  if(!workbench_assignee_can_be_assigned($assigned_user, $new_state)){
+    $assigned_user_id = 0;
+  }
+
+  $latest_id = $node->workbench_moderation['current']->hid;
+  db_update('workbench_moderation_node_history')
+  ->condition('nid', $node->nid)
+  ->condition('hid', $latest_id)
+  ->fields(array('asid' => $assigned_user_id,'department' => $assigned_department))
+  ->execute();
+
+  if($hide_email){
+    $workbench_emails = workbench_email_get();
+    $current_email_transition = '';
+    foreach ($workbench_emails as $transition => $email_roles) {
+      foreach ($email_roles as $rid => $email_transition) {
+        if ($email_transition->from_name == $old_state && $email_transition->to_name == $new_state) {
+           $current_email_transition = $email_transition;
+        }
+      }
+    } 
+
+
+    if($assigned_user_id != 0 && $current_email_transition){
+      workbench_email_mail_send($assigned_user->mail, $current_email_transition, $node);
+    }elseif($assigned_department){
+      $department_fields = workbench_assignee_get_assigned_fields('user');
+      $users = workbench_assignee_determine_valid_users($new_state);
+      if($department_fields){
+        $department_fields = array_keys($department_fields);
+        foreach($department_fields as $department_field){
+          foreach($users as $uid => $account){
+            $user_fields = field_get_items('user', $account, $department_field);
+            if(!empty($user_fields) && $user_fields[0]['tid'] == $assigned_department){
+              workbench_email_mail_send($account->mail, $current_email_transition, $node);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+function workbench_assignee_form_workbench_moderation_moderate_form_alter(&$form, &$form_state) {
+
+  if (isset($form['#access']) && $form['#access'] === FALSE) {
+    return;
+  }
+  if(isset($form['publishing_options'])){
+    $wrapper_id = 'publishing_options';
+  }
+
+  $form[$wrapper_id]['state']['#ajax'] = array(
+    'callback' => 'workbench_assignee_form_node_callback',
+    'wrapper' => 'workbench-assignee',
+    'effect' => 'fade',
+    'event' => 'change',
+  );
+
+  $to_state = '';
+  if(isset($form_state['values']['state'])){
+    $to_state = $form_state['values']['state'];
+  }else{
+    $to_state = $form[$wrapper_id]['state']['#default_value'];
+  }
+
+  $initial_state = workbench_moderation_state_none();
+  $users = array();
+  if($to_state != $initial_state){
+    $users = workbench_assignee_determine_valid_users($to_state);
+  }
+  $nid = $form['node']['#value']->nid;
+  workbench_assignee_create_form_element($form, $users, $nid);
+
+  $form[$wrapper_id]['workbench_assignee']['#weight'] = -20;
+  array_unshift($form['#submit'],'workbench_assignee_form_workbench_moderation_moderate');
+
+  if(isset($form[$wrapper_id]['note'])){
+    $note = $form[$wrapper_id]['note'];
+    unset($form[$wrapper_id]['note']);
+    $form[$wrapper_id]['note'] = $note;
+  }
+
+  if(!module_exists('workbench_moderation_notes')){
+    foreach($form['#submit'] as $k => $callback) {
+      if ($callback == 'workbench_moderation_moderate_form_submit') {
+        unset($form['#submit'][$k]);
+      }
+    }
+  }
+
+}
+
+
+function workbench_assignee_form_workbench_moderation_moderate(&$form, &$form_state){
+  $form['node']['#value']->workbench_assignee = $form_state['values']['workbench_assignee'];
+
+  if(!module_exists('workbench_moderation_notes')){
+    if (_workbench_moderation_moderate_access($form_state['values']['node'], $form_state['values']['state'])) {
+      workbench_moderation_moderate($form_state['values']['node'], $form_state['values']['state']);
+    }
+    if (!empty($form['#destination'])) {
+      if ($form_state['values']['state'] == workbench_moderation_state_published()) {
+        if ($uri = entity_uri('node', $form['node']['#value'])) {
+          $form_state['redirect'] = array($uri['path'], $uri['options']);
+        }
+      }
+      else {
+        $form_state['redirect'] = $form['#destination'];
+      }
+      drupal_redirect_form($form_state);
+    }
+  }
+
+}
+
+/**
+ * Implements hook_FORM_ID_form_alter().
+ */
+function workbench_assignee_form_node_form_alter(&$form, &$form_state) {
+  // This must be a node form and a type that has moderation enabled
+  if (workbench_moderation_node_type_moderated($form['type']['#value'])) {
+    $available = FALSE;
+    // Workbench Moderation uses "options" fieldset in favor of "revision information"
+    // if "administer roles" perm is given to content moderator.
+    if (isset($form['revision_information']['workbench_moderation_state_new'])) {
+      $wrapper_id = 'revision_information';
+      $available = TRUE;
+    }
+    else if (isset($form['options']['workbench_moderation_state_new'])) {
+      $wrapper_id = 'options';
+      $available = TRUE;
+    }
+
+
+    if (!$available) {
+      return;
+    }
+
+
+    $form[$wrapper_id]['workbench_moderation_state_new']['#ajax'] = array(
+      'callback' => 'workbench_assignee_form_node_callback',
+      'wrapper' => 'workbench-assignee',
+      'effect' => 'fade',
+      'event' => 'change',
+    );
+
+    // Determine current state.
+    if (isset($form['#node']->workbench_moderation['current']->state)) {
+      $current_from_state = $form['#node']->workbench_moderation['current']->state;
+    }
+    else {
+      $current_from_state = variable_get('workbench_moderation_default_state_' . $form['type']['#value'], workbench_moderation_state_none());
+    }
+    if ($current_from_state == workbench_moderation_state_published()) {
+      $current_from_state = workbench_moderation_state_none();
+    }
+
+    // Initialize to the current state.
+    $form_moderation_state = $current_from_state;
+    if (empty($form_state['values'])) {
+      $form_moderation_state = $current_from_state;
+    }
+    if (!empty($form_state['values']) &&
+        isset($form_state['values']['workbench_moderation_state_new'])) {
+      $form_moderation_state = $form_state['values']['workbench_moderation_state_new'];
+    }
+    if (!empty($form_state['values']) &&
+        isset($form_state['values'][$wrapper_id]['workbench_moderation_state_new'])) {
+      $form_moderation_state = $form_state['values'][$wrapper_id]['workbench_moderation_state_new'];
+    }
+
+    $from_state = $current_from_state;
+    $to_state = $form_moderation_state;
+    $initial_state = workbench_moderation_state_none();
+    $users = array();
+    if($to_state != $initial_state){
+      $users = workbench_assignee_determine_valid_users($to_state);
+    }
+
+    $nid = isset($form['#node']->nid) ? $form['#node']->nid : 0;
+
+    workbench_assignee_create_form_element($form, $users, $nid);
+  }
+}
+
+/**
+ *  Ajax callback function, targets the workflow_email container.
+ *
+ * @param array $form
+ *   The form array
+ *
+ * @param array $form_state
+ *   The form_state array
+ */
+function workbench_assignee_form_node_callback($form, $form_state) {
+
+  $hide_email = variable_get('workbench_assignee_hide_email',0);
+
+  if ($form['options']['#access']) {
+    $workbench_assignee = drupal_render($form['options']['workbench_assignee']);
+  }elseif(isset($form['publishing_options']['workbench_assignee'])){
+    $workbench_assignee = drupal_render($form['publishing_options']['workbench_assignee']);
+  }else{
+    $workbench_assignee = drupal_render($form['revision_information']['workbench_assignee']);
+  }
+
+  $commands[] = ajax_command_replace('#workbench-assignee', $workbench_assignee);
+
+  if(!$hide_email){
+
+    if($form['options']['#access'] && isset($form['options']['workflow_email'])){
+      $workflow_email = drupal_render($form['options']['workflow_email']);
+    }elseif(isset($form['publishing_options']['workflow_email'])){
+      $workflow_email = drupal_render($form['publishing_options']['workflow_email']);
+    }else{
+      $workflow_email = drupal_render($form['revision_information']['workflow_email']);
+    }
+    $commands[] = ajax_command_replace('#wv-workflow-form-node', $workflow_email);
+  }else{
+    $commands[] = ajax_command_replace('#wv-workflow-form-node', '');
+  }
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+
+function workbench_assignee_can_be_assigned($assigned_user, $new_state){
+  if(!$assigned_user) 
+    return false;
+  
+  $roles_list = workbench_assignee_determine_valid_roles($new_state);
+  $user_roles = array_keys($assigned_user->roles);
+  foreach($roles_list as $key => $value){
+    if(in_array($value, $user_roles)){
+      return true;
+    }
+  }
+  return false;
+}
+
+function workbench_assignee_determine_valid_roles($to_state){
+  $roles_list = array();
+  $transitions = workbench_moderation_transitions();
+  foreach($transitions as $transition){
+    if($transition->from_name == $to_state){
+      $roles = user_roles(TRUE, "moderate content from " . $transition->from_name . " to " . $transition->to_name);
+      $roles_list = array_merge($roles_list,array_keys($roles));
+    }
+  }
+
+  return array_unique($roles_list, SORT_REGULAR);
+}
+
+function workbench_assignee_determine_valid_users($to_state){
+  $roles_list = workbench_assignee_determine_valid_roles($to_state);
+
+  if(!empty($roles_list)){
+    return workbench_assignee_get_users($roles_list);
+  }
+  return false;
+}
+
+
+
+/**
+ * Create the email selection form element.
+ *
+ * Creates the appropriate multi select list for a given role and stores
+ * some email transition information into the form element.
+ *
+ * @param array $form
+ *   The form array passed by reference
+ *
+ * @param object $params
+ *   A object containing information relating to the email transition
+ */
+function workbench_assignee_create_form_element(&$form, $users, $nid = 0) {
+
+  ((isset($form['options']['#access']) && $form['options']['#access']) ? $wrapper_id = 'options' : $wrapper_id = 'revision_information');
+  if(isset($form['publishing_options'])){
+    $wrapper_id = 'publishing_options';
+  }
+  
+  if (!empty($users)) {
+    $users_list = workbench_assignee_create_form_element_options($users);
+    $latest = 0;
+
+    if($nid){
+      $latest = workbench_assignee_get_latest_assignee($nid);
+    }
+    
+    $form[$wrapper_id]['workbench_assignee'] = array(
+      '#prefix' => '<div id="workbench-assignee">',
+      '#suffix' => '</div>',
+      '#type' => 'select',
+      '#title' => t("Assign to"),
+      '#options' =>  $users_list,
+      '#description' => t('Select user or a department to assign to'),
+      '#multiple' => FALSE,
+      '#default_value' => array($latest),
+    );
+  }else{
+
+    $form[$wrapper_id]['workbench_assignee'] = array(
+      '#prefix' => '<div id="workbench-assignee">',
+      '#suffix' => '</div>',
+    );
+  }
+}
+
+
+function workbench_assignee_get_latest_assignee($nid , $hid = null){
+  $query = db_select('workbench_moderation_node_history', 'w')
+            ->condition('w.nid', $nid);
+  $query->fields('w', array('department', 'asid'));
+  $query->orderBy('w.hid','DESC');
+
+  if($hid){
+    $query->condition('w.hid', $hid, '<');
+    $query->range(0,1);
+  }
+
+  $latest = $query->execute()->fetchAll();
+
+  if(isset($latest[0])){
+    if(!$latest[0]->asid && !$latest[0]->department){
+      return 0;
+    }else if(!$latest[0]->asid){
+      return "department:".$latest[0]->department;
+    }
+      return $latest[0]->asid;
+  }
+  return 0;
+}
+
+function workbench_assignee_create_form_element_options($users_array = array()){
+  $department_fields = workbench_assignee_get_assigned_fields('user');
+  global $user;
+  if($department_fields){
+    $department_fields = array_keys($department_fields);
+    foreach($department_fields as $department_field){
+      foreach ($users_array as $uid => $account) {
+        $user_fields = field_get_items('user', $account, $department_field);
+        if(!empty($user_fields)){
+          $term = taxonomy_term_load($user_fields[0]['tid']);
+          $users[$term->tid]["all"] = t("All of ".$term->name);
+          $users[$term->tid][$account->uid] = $account->name;
+        }else{
+          $users[$account->uid] = $account->name;
+        }
+      } 
+    }
+
+    $users_list = array();
+    $dash = "";
+    $users_list['No Department'] = array();
+    $users_list['Department'] = array();
+    foreach($users as $key => $value){
+      if(is_array($value)){
+        foreach($value as $id => $name){
+          if($id == "all"){
+            $users_list['Department']["department:".$key] = $name;
+            $dash = "|--";
+          }else{
+            $users_list['Department'][$id] = $dash.$name;
+          }
+        }
+        $dash = "";
+      }else{
+        $users_list['No Department'][$key] = $value;
+      }
+    }
+    if(empty($users_list['Department'])){
+      unset($users_list['Department']);
+    }
+    if(empty($users_list['No Department'])){
+      unset($users_list['No Department']);
+    }
+  }else{
+    foreach ($users_array as $uid => $account) {
+      $users_list[$account->uid] = $account->name;
+    }
+  }
+  return $users_list;
+}
+
+/**
+ * Returns user array if they have a certain role.
+ *
+ * @param array $rid
+ *   The role ID(s)
+ *
+ * @return users
+ *   Returns an array of users or an empty array
+ */
+
+function workbench_assignee_get_users($rids) {
+  $uids = array();
+
+  $query = db_select('users_roles', 'ur')
+    ->fields('ur', array('uid'))
+    ->condition('ur.rid', $rids, "IN");
+  $query->distinct();
+  $result = $query->execute();
+  foreach ($result as $row) {
+    $uids[] = $row->uid;
+  }
+  $users = array();
+  $users = user_load_multiple($uids);
+
+  return $users;
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+
+function workbench_assignee_form_user_profile_form_alter(&$form, &$form_state) {
+
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+
+function workbench_assignee_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  $form['instance']['workbench_assignee_field'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Workbench Assignee department field'),
+    '#description' => t('Use this field to determine assigne department.'),
+    '#default_value' => !empty($form['#instance']['workbench_assignee_field']),
+    '#weight' => -15,
+  );
+  $allowed = workbench_assignee_get_assigned_fields($form['#instance']['bundle']);
+  $instance = $form['#instance']['field_name'];
+  if (!isset($allowed[$instance])) {
+    $form['instance']['workbench_assignee_field']['#disabled'] = TRUE;
+    $form['instance']['workbench_assignee_field']['#default_value'] = 0;
+    $form['instance']['workbench_assignee_field']['#description'] = t('This field cannot be used for Assignee department.');
+  }
+}
+
+/**
+ * Finds fields associated with a content type.
+ *
+ * @param $type
+ *  The content type machine name.
+ * @return
+ *  An array of field data that matches the current assignee vocabulary.
+ */
+
+function workbench_assignee_get_assigned_fields($type) {
+  $matches = array();
+  $fields = field_info_instances('user', $type);
+
+  $taxonomy = variable_get('workbench_assignee_taxonomy');
+  foreach ($fields as $field => $info) {
+    $data = field_info_field($field);
+    if ($data['module'] == "taxonomy") {
+      foreach ($data['settings']['allowed_values'] as $key => $value) {
+        // Currently, only works for taxonomy.
+        $instance = field_info_instance('user', $field, $type);
+        if (($taxonomy == $value['vocabulary'])) {
+          $data['instance_info'] = $info;
+          $matches[$field] = $data;
+        }
+      }
+    }
+  }
+  return !empty($matches) ? $matches : false;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function workbench_assignee_views_api() {
+  return array('api' => 2.0);
+}

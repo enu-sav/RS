@@ -1,0 +1,14 @@
+name = Workbench Assignee
+description = Adding the ability to assign user for the new state change
+package = Workbench
+core = 7.x
+
+files[] = includes/workbench_assignee_handler_field_asid.inc
+files[] = includes/workbench_assignee_handler_filter_department.inc
+dependencies[] = workbench_moderation
+; Information added by drupal.org packaging script on 2013-09-26
+version = "7.x-1.1"
+core = "7.x"
+project = "workbench_assignee"
+datestamp = "1380217146"
+

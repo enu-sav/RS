@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Primarily Drupal hooks for this module.
+ */
+
+// Label of field_array name key.
+define('CONTENT_DEPENDENCY_FIELD_ARRAY_NAME_KEY', 'name');
+// Label of field_array type key.
+define('CONTENT_DEPENDENCY_FIELD_ARRAY_TYPE_KEY', 'type');
+// Anchor target type of new content (_blank,_self,_window, etc.).
+define('CONTENT_DEPENDENCY_NEW_CONTENT_ANCHOR_TARGET_TYPE', '_blank');
+// Boolean. Define whether to show add new content link
+// when no dependency content exists.
+define('CONTENT_DEPENDENCY_NEW_CONTENT_ADD_NO_ENTITY_OUTPUT', TRUE);
+// Boolean. Determine whether to display or not content dependency
+// block when there are no entities.
+define('CONTENT_DEPENDENCY_DISPLAY_NO_ENTITY_BLOCK', TRUE);
+
+/**
+ * Implements hook_permission().
+ */
+function content_dependency_permission() {
+  return array(
+    'content dependency main' => array(
+      'title' => t('Enable content dependency features'),
+      'description' => t('Enable content dependency main features.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ * 
+ * Adds tab at node admin page.
+ */
+function content_dependency_menu() {
+  $items = array();
+
+  $items['node/%node/content_dependency'] = array(
+    'title' => 'Content Dependency',
+    'page callback' => 'ContentDependencyMain::getMainContentHtml',
+    'file' => 'includes/content_dependency.class.inc',
+    'theme callback' => 'variable_get',
+    'theme arguments' => array('admin_theme'),
+    'access arguments' => array('content dependency main'),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function content_dependency_theme() {
+  return array(
+    'content_dependency_tab' => array(
+      'variables' => array('content_dependency_settings_array' => NULL),
+      'template' => 'tpl/content_dependency_tab',
+    ),
+  );
+}

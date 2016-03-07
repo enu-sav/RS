@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Admin page test file for MathJax module.
+ */
+
+/**
+ * Admin test case for the module.
+ */
+class MathjaxAdminTestCase extends DrupalWebTestCase {
+
+  /**
+   * Provide info on these tests to the admin interface.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'MathJax administration',
+      'description' => 'Tests the administration forms.',
+      'group' => 'MathJax',
+    );
+  }
+
+  /**
+   * Set up the test evironment.
+   */
+  protected function setUp() {
+    parent::setUp('mathjax');
+
+    $this->administrator = $this->drupalCreateUser(array(
+      'administer mathjax',
+    ));
+  }
+
+  /**
+   * Test the configuration data.
+   */
+  public function testAdmin() {
+    $this->drupalLogin($this->administrator);
+    $this->drupalGet('admin/config/content/mathjax');
+    $this->assertTitle('MathJax | Drupal', 'Page title set.');
+    $this->assertText('Global switch');
+    $this->assertText('Check this box to enable MathJax for the entire site.');
+    $this->assertFieldChecked('edit-mathjax-enabled', 'MathJax is enabled by default.');
+    $this->assertText('MathJax CDN url');
+    $this->assertFieldByName('mathjax_cdn_url', mathjax_default_cdn_url(), 'Default CDN config string found.');
+    $this->assertText('Enter the Mathjax CDN url here or leave it unchanged to use the one provided by www.mathjax.org.');
+    $this->assertText('MathJax configuration');
+    $this->assertFieldByName('mathjax_config_string', mathjax_default_config_string(), 'Found default config string.');
+    $this->assertText('Enter a javascript configuration string as documented on');
+  }
+}
