@@ -80,7 +80,7 @@ function workbench_moderation_views_data() {
       'handler' => 'workbench_moderation_handler_filter_state',
     ),
     'field' => array(
-      'handler' => 'views_handler_field',
+      'handler' => 'workbench_moderation_handler_field_state',
       'click sortable' => TRUE,
     ),
     'sort' => array(

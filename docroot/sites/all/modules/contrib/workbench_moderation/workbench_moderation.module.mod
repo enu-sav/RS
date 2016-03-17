@@ -919,8 +919,7 @@ function workbench_moderation_form_node_form_alter(&$form, $form_state) {
     $moderation_state = $form['#node']->workbench_moderation['current']->state;
   }
   else {
-//    $moderation_state = workbench_moderation_state_none();
-    $moderation_state = variable_get('workbench_moderation_default_state_' . $form['type']['#value'], workbench_moderation_state_none());
+    $moderation_state = workbench_moderation_state_none();
   }
 
   // Store the current moderation state
