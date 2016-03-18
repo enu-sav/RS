@@ -1,10 +1,19 @@
 <?php
+/**
+ * @file
+ * Beliana workbench module file.
+ */
 
 /**
  * Implements hook_views_query_alter().
+ *
+ * We are are altering views generated query, so we can display
+ * label of workbench states.
+ *
+ * @inheritdoc
  */
 function beliana_workbench_views_query_alter(&$view, &$query) {
-  if('beliana' === $view->name) {
+  if ('beliana' === $view->name) {
     $join = new views_join();
     $join->table = 'workbench_moderation_states';
     $join->field = 'name';

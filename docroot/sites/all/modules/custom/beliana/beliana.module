@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Module file for beliana module.
+ */
 
 /**
  * Implements hook_menu().
@@ -7,63 +11,106 @@
  */
 function beliana_menu() {
   $items = array();
-  $items['admin/beliana/print'] = array(
-    'title' => t('Print'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('beliana_print_form'),
-    'access arguments' => array('access content'),
-    'item type' => MENU_LOCAL_TASK,
-    'file' => 'beliana.pages.inc',
-  );
- 
   $items['admin/users-list'] = array(
-    'title' =>t('Users list'),
+    'title' => 'Users list',
     'page callback' => 'beliana_users_list',
     'access arguments' => array('bypass node access'),
   );
 
-
-  $items['admin/skupina-list'] = array(
-    'title' =>t('Skupina list'),
-    'page callback' => 'beliana_skupina_list',
+  $items['admin/group-list'] = array(
+    'title' => 'Group list',
+    'page callback' => 'beliana_group_list',
     'access arguments' => array('bypass node access'),
   );
 
   return $items;
 }
 
+/**
+ * Implements hook_menu_alter().
+ *
+ * @inheritdoc
+ */
+function beliana_menu_alter(&$items) {
+  if (isset($items['admin/workbench/sections'])) {
+    unset($items['admin/workbench/sections']);
+  }
 
-function beliana_skupina_list() {
+  if (isset($items['node/%node/draft'])) {
+    unset($items['node/%node/draft']);
+  }
+
+  if (isset($items['node/%node/revisions'])) {
+    unset($items['node/%node/revisions']);
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * @inheritdoc
+ */
+function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  if (isset($data['tabs'][0]['output'])) {
+    foreach ($data['tabs'][0]['output'] as $i => $tab) {
+      if (in_array($tab['#link']['path'], array(
+        'admin/tasks',
+        'admin/index',
+      ))) {
+        unset($data['tabs'][0]['output'][$i]);
+      }
+    }
+  }
+}
+
+
+/**
+ * Menu callback for `admin/group-list` path.
+ *
+ * We are printing users grouped by terms assigned to users.
+ *
+ * @return string
+ *   HTML output of users.
+ */
+function beliana_group_list() {
   $users = entity_load('user');
   $terms = taxonomy_get_tree(2);
   $output = '';
-  foreach($terms as $term) {
-    $output.= '<h3>'.$term->name.'</h3>';
-    $output.='<ul>';
-    foreach($users as $user) {
-      if(isset($user->workbench_access[$term->tid])) {
-        $output.='<li>'.$user->name.'</li>';
+  foreach ($terms as $term) {
+    $output .= '<h3>' . $term->name . '</h3>';
+    $output .= '<ul>';
+    foreach ($users as $user) {
+      if (isset($user->workbench_access[$term->tid])) {
+        $output .= '<li>' . $user->name . '</li>';
       }
     }
-    $output.='</ul><br><br>';
+    $output .= '</ul><br><br>';
   }
   return $output;
 }
 
+/**
+ * Menu callback for `admin/users-list` path.
+ *
+ * We are printing users with group assigned to users.
+ *
+ * @return string
+ *   HTML output of all users with their groups.
+ */
 function beliana_users_list() {
   $users = entity_load('user');
   $terms = taxonomy_get_tree(2);
   $output = '';
-  foreach($users as $user) {
-    $output.= '<div>';
-    $output.= '<h3>'.$user->name.'</h3>';
-    $output.='<ul>';
-    foreach($terms as $t) {
-      if(isset($user->workbench_access[$t->tid])) {
-        $output.='<li>'.$t->name.'</li>';
+  foreach ($users as $user) {
+    $output .= '<div>';
+    $output .= '<h3>' . $user->name . '</h3>';
+    $output .= '<ul>';
+    foreach ($terms as $t) {
+      if (isset($user->workbench_access[$t->tid])) {
+        $output .= '<li>' . $t->name . '</li>';
       }
     }
-    $output.='</ul><br><br></div>';
+    $output .= '</ul><br><br></div>';
   }
   return $output;
 }
@@ -108,9 +155,7 @@ function beliana_action_info() {
 /**
  * Configuration form for `beliana_assign_author` action.
  *
- * @param $form
- * @param $form_state
- * @return array
+ * @inheritdoc
  */
 function beliana_assign_author_form($form, &$form_state) {
   return _beliana_assign_user_form();
@@ -119,8 +164,7 @@ function beliana_assign_author_form($form, &$form_state) {
 /**
  * Validation for `beliana_assign_author_form`.
  *
- * @param $form
- * @param $form_state
+ * @inheritdoc
  */
 function beliana_assign_author_validate($form, &$form_state) {
   _beliana_validate_assign_user_form($form_state);
@@ -129,9 +173,7 @@ function beliana_assign_author_validate($form, &$form_state) {
 /**
  * Submit function for `beliana_assign_author_form`.
  *
- * @param $form
- * @param $form_state
- * @return array
+ * @inheritdoc
  */
 function beliana_assign_author_submit($form, $form_state) {
   return _beliana_submit_assign_user_form($form_state, 'u_autora');
@@ -140,11 +182,11 @@ function beliana_assign_author_submit($form, $form_state) {
 
 /**
  * Callback for `beliana_assign_author` action.
- * Assigns selected user as node author and changes workflow status to `u_autora`.
  *
- * @param $node
- * @param $context
- * @throws \Exception
+ * Assigns selected user as node author and
+ * changes workflow status to `u_autora`.
+ *
+ * @inheritdoc
  */
 function beliana_assign_author(&$node, $context) {
   _beliana_assign_user($node, $context);
@@ -153,9 +195,7 @@ function beliana_assign_author(&$node, $context) {
 /**
  * Configuration form for `beliana_assign_corrector` action.
  *
- * @param $form
- * @param $form_state
- * @return array
+ * @inheritdoc
  */
 function beliana_assign_corrector_form($form, &$form_state) {
   return _beliana_assign_user_form();
@@ -164,8 +204,7 @@ function beliana_assign_corrector_form($form, &$form_state) {
 /**
  * Validation for `beliana_assign_corrector_form` form.
  *
- * @param $form
- * @param $form_state
+ * @inheritdoc
  */
 function beliana_assign_corrector_validate($form, &$form_state) {
   _beliana_validate_assign_user_form($form_state);
@@ -175,9 +214,7 @@ function beliana_assign_corrector_validate($form, &$form_state) {
 /**
  * Submit function for for `beliana_assign_corrector_form` form.
  *
- * @param $form
- * @param $form_state
- * @return array
+ * @inheritdoc
  */
 function beliana_assign_corrector_submit($form, $form_state) {
   return _beliana_submit_assign_user_form($form_state, 'needs_review');
@@ -185,11 +222,11 @@ function beliana_assign_corrector_submit($form, $form_state) {
 
 /**
  * Callback function for `beliana_assign_corrector` action.
- * Assigns selected user as node author and change workflow status to `needs_review`.
  *
- * @param $node
- * @param $context
- * @throws \Exception
+ * Assigns selected user as node author and
+ * change workflow status to `needs_review`.
+ *
+ * @inheritdoc
  */
 function beliana_assign_corrector(&$node, $context) {
   _beliana_assign_user($node, $context);
@@ -198,13 +235,13 @@ function beliana_assign_corrector(&$node, $context) {
 /**
  * Callback function for `beliana_merge` action.
  *
- * @see beliana_action_info.
- * @param $entity
- * @param array $context
- * @throws \Exception
+ * @inheritdoc
+ *
+ * @see beliana_action_info
  */
 function beliana_merge(&$entity, $context = array()) {
-  // If current entity is the first one, create new entity `Heslo` and store its nid into session.
+  // If current entity is the first one,
+  // create new entity `Heslo` and store its nid into session.
   if ($context['progress']['current'] === 1) {
     $master = new stdClass();
     $master->type = 'heslo';
@@ -240,9 +277,7 @@ function beliana_merge(&$entity, $context = array()) {
         $master->field_text_k_ilustraciam[LANGUAGE_NONE][] = $text;
       }
     }
-
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
-
     $master->field_autor_povodneho_textu[LANGUAGE_NONE][]['target_id'] = $entity->uid;
 
 
@@ -289,68 +324,40 @@ function beliana_merge(&$entity, $context = array()) {
  * @inheritdoc
  */
 function beliana_node_presave($node) {
-  // Nacitanie pouzivatela ktory je autorom node
+  // Load user which is author of the node.
   $author = user_load($node->uid);
-  /* MSMS
-  // Okrem importovanych hesiel
-  if (!isset($node->workbench_moderation) && $author->name != 'import') {
-    setlocale(LC_COLLATE, 'sk_SK.utf8');
+  setlocale(LC_COLLATE, 'sk_SK.utf8');
 
+  // If field for ordering is empty, we need to fill in value for it.
+  if ($node->field_na_zoradenie['und'][0]['value'] == '') {
     $transliterated = _belina_remove_accents($node->title);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = $transliterated;
+  }
+  else {
+    $transliterated = $node->field_na_zoradenie['und'][0]['value'];
+  }
 
-    $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
-    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+  // Set taxonomy grop, because it can be changed by admin.
+  $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
+  $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
 
-    foreach ($terms as $term) {
-      $term_transliterated = _belina_remove_accents($term->name);
-      $term_transliterated = strtolower($term_transliterated);
-      $term_transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $term_transliterated);
+  foreach ($terms as $term) {
+    $term_transliterated = _belina_remove_accents($term->name);
+    $term_transliterated = strtolower($term_transliterated);
+    $term_transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $term_transliterated);
 
-      if (strcoll($term_transliterated, $transliterated) >= 0) {
-        $node->field_taxsubor['und'][0]['tid'] = $term->tid;
-        break;
-      }
+    if (strcoll($term_transliterated, $transliterated) >= 0) {
+      $node->field_taxsubor['und'][0]['tid'] = $term->tid;
+      break;
     }
   }
-  */
-  // MSMS zaciatok
-    setlocale(LC_COLLATE, 'sk_SK.utf8');
 
-    // ak je field_na_zoradenie prazdny, treba vytvorit, 
-    if ($node->field_na_zoradenie['und'][0]['value'] == '') { 
-        $transliterated = _belina_remove_accents($node->title);
-        $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $transliterated);
-        $transliterated = strtolower($transliterated);
-        $node->field_na_zoradenie['und'][0]['value'] = $transliterated;
-    } else {
-        $transliterated = $node->field_na_zoradenie['und'][0]['value'];
-    }
-
-    // znovunastavime field_taxsubor, lebo field_na_zoradenie sa mohlo zmenit (admin moze)
-    $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
-    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-
-    foreach ($terms as $term) {
-      $term_transliterated = _belina_remove_accents($term->name);
-      $term_transliterated = strtolower($term_transliterated);
-      $term_transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $term_transliterated);
-        
-      if (strcoll($term_transliterated, $transliterated) >= 0) {
-        $node->field_taxsubor['und'][0]['tid'] = $term->tid;
-        break;
-      }
-    }
-  //MSMS koniec
-
-
-  // Ked je nove tak nema este ziadnu aktualny stav
+  // New nodes don't have any state.
   if (isset($node->workbench_moderation['current']->state) && isset($node->workbench_moderation_state_new)) {
     if (($node->workbench_moderation['current']->state === 'na_jazykovu_korekturu'
       && $node->workbench_moderation_state_new === '1_korektura')
-      /*|| ($node->workbench_moderation['current']->state === 'zlucene' && $node->workbench_moderation_state_new === 'na_jazykovu_korekturu')*/
     ) {
       $node->field_lexikalna_skupina['und'][0] = array_shift($node->field_spravit_1_korekturu['und']);
     }
@@ -378,18 +385,15 @@ function beliana_node_presave($node) {
     }
   }
 
-  // Redaktor pri priraďovaní hesla musí najskôr zmeniť autora z 'import' na niečo iné.
-  // Preto, pokiaľ má heslo autora 'import', tak treba tento prechod zakázať.
-  // Ak sa o to redaktor pokúsi treba vypísať hlášku:
-  // "$Nazov_hesla: Pred zmenou stavu treba heslo priradiť autorovi".
-  // https://basecamp.com/2901682/projects/10066656/todos/206616494
+  // Editor has to change author from 'import' to something else.
+  // If node is assigned to 'import', we need to forbid change of state.
   if ($author->name === 'import'
     && isset($node->workbench_moderation_state_new)
     && isset($node->workbench_moderation['current']->state)
     && $node->workbench_moderation['current']->state === 'zaradene'
     && in_array($node->workbench_moderation_state_new, array(
       'u_autora',
-      'needs_review'
+      'needs_review',
     ))
   ) {
     $node->workbench_moderation_state_new = 'zaradene';
@@ -400,13 +404,12 @@ function beliana_node_presave($node) {
 /**
  * Implements hook_form_alter().
  *
- * Change as required here https://basecamp.com/2901682/projects/10066656/todos/204880348
- * Change as required here https://basecamp.com/2901682/projects/10066656/todos/206616494
- *
  * @inheritdoc
  */
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   if ('workbench_moderation_moderate_form' === $form_id) {
+    // If user is import and state is `zaradene`,
+    // we remove option `u_autora` from possible next states.
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene'
       && $form['node']['#value']->uid == 719
     ) {
@@ -417,6 +420,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
+    // Add custom submit handler.
     $form['#submit'][] = 'beliana_workflow_reaction';
   }
 }
@@ -424,12 +428,11 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Callback function for `workbench_moderation_moderate_form` submit.
  *
- * @param $form
- * @param $form_state
+ * @inheritdoc
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
-  // Ked je nove tak nema este ziadnu aktualny stav
+  // If is new, current state is empty.
   if (isset($values['node']->workbench_moderation['current']->state)) {
     if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura')) {
       $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
@@ -441,21 +444,12 @@ function beliana_workflow_reaction(&$form, &$form_state) {
         $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
       }
       else {
-//        $load_term = taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny');
-//        $term = array_shift($load_term);
         $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
       }
     }
 
     if ($values['state'] === '2_korekt_ra') {
-//      $term = array_shift(taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny'));
-//      foreach ($values['node']->field_lexikalna_skupina['und'] as $ls) {
-//        if ($ls['tid'] == $term->tid) {
-//          drupal_set_message('Ako lexikálnu skupinu zadajte meno redaktora!', 'error');
-//          $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-//        }
-//      }
-      if (sizeof($values['node']->field_lexikalna_skupina['und']) != 1) {
+      if (count($values['node']->field_lexikalna_skupina['und']) != 1) {
         drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
         $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
       }
@@ -469,48 +463,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_menu_alter().
- *
- * Change as required here https://basecamp.com/2901682/projects/10066656/todos/212068993
- *
- * @inheritdoc
- */
-function beliana_menu_alter(&$items) {
-  if (isset($items['admin/workbench/sections'])) {
-    unset($items['admin/workbench/sections']);
-  }
-
-  if (isset($items['node/%node/draft'])) {
-    unset($items['node/%node/draft']);
-  }
-
-  if (isset($items['node/%node/revisions'])) {
-    unset($items['node/%node/revisions']);
-  }
-}
-
-/**
- * Implements hook_menu_local_tasks_alter().
- *
- * @inheritdoc
- */
-function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
-  if (isset($data['tabs'][0]['output'])) {
-    foreach ($data['tabs'][0]['output'] as $i => $tab) {
-      if (in_array($tab['#link']['path'], array(
-        'admin/tasks',
-        'admin/index'
-      ))) {
-        unset($data['tabs'][0]['output'][$i]);
-      }
-    }
-  }
-}
-
-/**
  * Helper function to get user autocomplete form.
  *
  * @return array
+ *   Array with form element.
  */
 function _beliana_assign_user_form() {
   $form = array();
@@ -527,7 +483,8 @@ function _beliana_assign_user_form() {
 /**
  * Helper function for user autocomplete form validation.
  *
- * @param $form_state
+ * @param array $form_state
+ *   Array with form values.
  */
 function _beliana_validate_assign_user_form(&$form_state) {
   if (user_load_by_name($form_state['values']['user']) === FALSE) {
@@ -538,8 +495,13 @@ function _beliana_validate_assign_user_form(&$form_state) {
 /**
  * Helper function for processing user autocomplete form submit.
  *
- * @param $form_state
+ * @param array $form_state
+ *   Array with form values.
+ * @param string $state
+ *   New status for node.
+ *
  * @return array
+ *   Keyed array with user nd status.
  */
 function _beliana_submit_assign_user_form($form_state, $state) {
   $return = array();
@@ -551,15 +513,21 @@ function _beliana_submit_assign_user_form($form_state, $state) {
 /**
  * Helper function changing node author and workflow status.
  *
- * @param $node
- * @param $context
+ * @param object $node
+ *   Object of node.
+ * @param array $context
+ *   Array of context.
+ *
  * @throws \Exception
+ *
+ * @return FALSE
+ *   Return FALSE if assigning of the new group failed.
  */
 function _beliana_assign_user(&$node, $context) {
   $user = user_load_by_name($context['user']);
   if ($user !== FALSE) {
     if (!isset($user->workbench_access[reset($node->workbench_access)])) {
-      drupal_set_message($node->title. ' sa nepodarilo priradiť autorovi, pretože nemá zodpovedajúcu lexikálnu skupinu.','error');
+      drupal_set_message($node->title . ' sa nepodarilo priradiť autorovi, pretože nemá zodpovedajúcu lexikálnu skupinu.', 'error');
       return FALSE;
     }
     $node->uid = $user->uid;
@@ -572,8 +540,11 @@ function _beliana_assign_user(&$node, $context) {
 /**
  * Helper function removing accents.
  *
- * @param $text
+ * @param string $text
+ *   String we want to remove accents from.
+ *
  * @return string
+ *   String without accents.
  */
 function _belina_remove_accents($text) {
   $trans = array(
