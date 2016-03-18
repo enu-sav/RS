@@ -277,8 +277,6 @@ function template_preprocess_views_data_export_msoffice_body(&$vars) {
 
   // Construct the tbody of a table, see theme_table().
 
-  // $ts = tablesort_init($vars['header']);
-
   $flip = array(
     'even' => 'odd',
     'odd' => 'even',
@@ -312,13 +310,9 @@ function template_preprocess_views_data_export_msoffice_body(&$vars) {
       }
 
       // Build row
-  //    $output .= ' <tr' . drupal_attributes($attributes) . '>';
-      $i = 0;
       foreach ($cells as $cell) {
-        // $cell = tablesort_cell($cell, $vars['header'], $ts, $i++);
         $output .= render($cell);
       }
-    //  $output .= " </tr>\n";
     }
   }
 
@@ -353,9 +347,7 @@ function template_preprocess_views_data_export_msoffice_header(&$vars) {
 
   $vars['header_row'] .= '</tr></thead>';
 
-  $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']); // strip 'a' and 'span' tags
-  
-  //$vars['header_row'] = '';
+  $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']); // Strip 'a' and 'span' tags.
 }
 
 /**
