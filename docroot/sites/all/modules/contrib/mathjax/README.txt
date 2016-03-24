@@ -1,87 +1,75 @@
-MathJax is the up-to-date ajax framework to display math in HTML environment
-using LaTeX and MathML syntax. This module allows to activate MathJax-based
-LaTeX rendering on your drupal website. By default, MathJax source is loaded
-automatically from the internet using MathJax Content Delivery Network (CDN).
+This module integrates the MathJax library into your Drupal site. MathJax is the
+modern JavaScript-based LaTeX rendering solution for the Internet.
 
-Currently there is no settings available: MathJax is activated on all nodes and
-profile pages. LaTeX inline formula can be entered as $formula$ or \(formula\),
-and display formula as $$formula$$ or \[formula\].
+By default, MathJax source is loaded automatically from the Internet using the 
+MathJax Content Delivery Network (CDN).
 
-Dollar signs in formulas can be escaped using \. < and > signs must be handled
-with care as they may be interpreted as start and end of HTML tags: either use
-spaces around (e.g. $< dx >$) or the HTML special chars &lt; and &gt; or their
-MathJax LaTeX-like equivalents \lt and \gt. More details on MathJax TeX support
-on http://www.mathjax.org/resources/docs/?tex.html
+There are two MathJax configuration options: Text format (recommended), or 
+Custom.
 
+If you select "Text format", MathJax will be available as a text filter.
+Mathematics inside the default delimiters will be rendered by MathJax. The
+default math delimiters are $$...$$ and \[...\] for displayed mathematics, and
+$...$ and \(...\) for in-line mathematics. You must add the MathJax filter to a 
+text format and put MathJax at the bottom of the filter processing order.
+
+You may select "Custom" if you need a more specific configuration. "Custom" is
+the default when upgrading.
+
+If you want to emulate the previous behavior with a custom configuration, use
+the following:
+
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+    processEscapes: true
+  }
+});
 
 INSTALLATION
 ============
 
-Using MathJax CDN - recommended
+Using the MathJax CDN (recommended)
 -------------------------------
 
-1. Place the "mathjax" folder in your "modules" directory (e.g. sites/all/modules/mathjax).
+1. Install and enable this module.
 
-2. Enable the MathJax module under Administration >> Modules.
+2. Add the MathJax filter to an existing or new text format under 
+   Administration >> Configuration >> Text Formats. Put the MathJax filter at
+   the bottom of the "Filter processing order".
 
-3. Test it by adding a LaTeX formula between '$' in any node body (e.g. $2 + 2 = 4$).
+3. Test it by adding a LaTeX formula between '$' in any node body (for example: 
+   $2 + 2 = 4$). Select the body text format you configured on the Text Formats
+   administration screen.
 
 
-Using a local copy of mathjax (relies on libraries module)
+Using a local copy of MathJax (relies on libraries module)
 ----------------------------------------------------------
 
-1. Download and install the "Libraries API" module: uncompress the "libraries"
-folder, copy it to your "modules" directory, and enable it under
-Administer >> Site building >> Modules.
+1. Install and enable this module.
 
-http://drupal.org/project/libraries
+2. Install and enable "libraries". See http://drupal.org/project/libraries.
 
-2. Place the "mathjax" folder in your "modules" directory (e.g. sites/all/modules/mathjax).
-
-3. Install third party MathJax software
-     Download MathJax 1.1 source from MathJax website (e.g. https://github.com/mathjax/MathJax/zipball/v1.1a)
-     Unarchive it into your "libraries" directory (e.g. sites/all/libraries).
+3. Install the third-party MathJax software:
+     Download MathJax source from the MathJax website.
+     Un-archive it into your "libraries" directory (e.g. sites/all/libraries).
      You may need to create the "libraries" directory first.
      Rename it to "mathjax" (lower case).
-NB: Relying on libraries module to locate 'mathjax' folder allows you to place
-it in a site specific (e.g. sites/mysite/libraries) or default folder
+Relying on the libraries module to locate the 'mathjax' folder allows you to place
+it in a site-specific directory (e.g. sites/mysite/libraries) or in the default directory
 (e.g. sites/all/libraries). Site-specific versions are selected preferentially.
 
-3. Enable the MathJax module under Administration >> Modules.
+4. Follow from step #2 above.
 
-4. Disable the "Use MathJax CDN" checkbox in Administration >> Configuration >> MathJax (in the Content Authoring section, admin/config/content/mathjax)
-
-5. Test it by adding a LaTeX formula between '$' in any node body (e.g. $2 + 2 = 4$).
-
-
-
-INSTALLATION USING DRUSH
-========================
-
-Using MathJax CDN - recommended
--------------------------------
-drush en mathjax
-
-
-Using a local copy of mathjax
-------------------------------
-drush dl libraries
-drush en libraries mathjax
-drush mathjax-download
-drush vset --yes mathjax_use_cdn 0
-
-
-AUTHOR
-======
+ORIGINAL AUTHOR
+===============
 Module written by Thomas Julou.
 http://drupal.org/user/273952
 
-MathJax
-http://www.mathjax.org/
+MAINTAINER(S)
+=============
+2013: Chris McCafferty (cilefen) https://drupal.org/u/cilefen
+2014: P. Magunia (pmagunia) https://www.drupal.org/u/pmagunia
 
-
-TO DO
-=====
-- set mathjax parameters on admin page (size, source type, ...)
-- show source code in lightbox-like modules (set link attribute)
-- support MathML syntax

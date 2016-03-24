@@ -5,28 +5,63 @@
  */
 
 /**
- * Default setting for CDN url for MathJax. Can be overridden in the settings.
+ * Implements hook_permission().
  */
-function mathjax_default_cdn_url() {
-  return 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+function mathjax_permission() {
+  return array(
+    'administer mathjax' => array(
+      'title' => t('Administer MathJax'),
+    ),
+  );
 }
 
 /**
- * Default config string for MathJax parsing. Can be overridden in the settings.
- *
- * @return string 
+ * Implements hook_menu().
  */
-function mathjax_default_config_string() {
-  return "
+function mathjax_menu() {
+
+  $items['admin/config/content/mathjax'] = array(
+    'title' => 'MathJax',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mathjax_global_settings'),
+    'access arguments' => array('administer mathjax'),
+    'description' => 'Configure global settings for MathJax.',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Default values for MathJax configuration. May be overridden in the config.
+ *
+ * @param $parameter
+ *   Decides which default config to fetch. Either 'cdn url' or 'config string'.
+ * @return
+ *   The default configuration.
+ */
+function mathjax_default($parameter) {
+  switch ($parameter) {
+    case 'cdn url':
+      return 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    case 'config string':
+      return "
 MathJax.Hub.Config({
   extensions: ['tex2jax.js'],
   jax: ['input/TeX','output/HTML-CSS'],
   tex2jax: {
     inlineMath: [ ['$','$'], ['\\\\(','\\\\)'] ],
-    processEscapes: true
-  }
+    processEscapes: true,
+    processClass: 'tex2jax',
+    ignoreClass: 'html'
+  },
+  showProcessingMessages: false,
+  messageStyle: 'none'
 });
 ";
+    default :
+      return;
+  }
 }
 
 /**
@@ -47,99 +82,75 @@ function mathjax_help($path, $arg) {
  * Implements hook_init().
  */
 function mathjax_init() {
-  global $base_url;
-  global $base_path;
-
-  // Load Mathjax only on specified nodes.
-  if (mathjax_active() && variable_get('mathjax_enabled', TRUE)) {
-    $config = array(
-      '#type' => 'markup',
-      '#markup' => '<script type="text/x-mathjax-config">' . variable_get('mathjax_config_string', mathjax_default_config_string()) . '</script>',
-    );
-    drupal_add_html_head($config, 'mathjax-config');
-    drupal_add_js(drupal_get_path('module', 'mathjax') . '/mathjax.js');
-    if (variable_get('mathjax_use_cdn', TRUE)) {
-      $cdn_url = variable_get('mathjax_cdn_url', mathjax_default_cdn_url());
-      drupal_add_js($cdn_url, 'external');
-    }
-    else {
-      // Use the local library.
-      $library = DRUPAL_ROOT . $base_path . libraries_get_path('mathjax') . '/MathJax.js';
-      if (file_exists($library)) {
-        drupal_add_js($base_path . libraries_get_path('mathjax') . '/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
-      }
-      else {
-        // Throw an error.
-        drupal_set_message('MathJax is configured to load from a local library, but could not find the files. Check the module settings.', 'error');
-      }
-    }
-  }
-}
-
-/**
- * Verify that MathJax should be active for the current URL.
- *
- * (taken from Block module)
- *
- * @return bool
- *   TRUE if MathJax should be active for the current page.
- */
-function mathjax_active() {
-  $pages = variable_get('mathjax_pages', "admin*\nnode/add/*\nnode/*/edit");
-  $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
-  // Compare the lowercase internal and lowercase path alias (if any).
-  $page_match = drupal_match_path($path, $pages);
-  if ($path != $_GET['q']) {
-    $page_match = $page_match || drupal_match_path($_GET['q'], $pages);
-  }
-
-  if (variable_get('mathjax_active_type', 'disable') == 'disable') {
-    return !$page_match;
+  if(variable_get('mathjax_config_type', 0) == 0) {
+    $config_string = mathjax_default('config string');
   }
   else {
-    return $page_match;
+    $config_string = variable_get('mathjax_config_string', mathjax_default('config string'));
+  }
+  // Load Mathjax.
+  $config = array(
+    '#type' => 'markup',
+    '#markup' => '<script type="text/x-mathjax-config">' . $config_string . '</script>',
+  );
+  drupal_add_html_head($config, 'mathjax-config');
+  drupal_add_js(drupal_get_path('module', 'mathjax') . '/mathjax.js');
+  if (variable_get('mathjax_use_cdn', TRUE)) {
+    $cdn_url = variable_get('mathjax_cdn_url', mathjax_default('cdn url'));
+    drupal_add_js($cdn_url, 'external');
+  }
+  else {
+    if (function_exists('libraries_get_path')) {
+      drupal_add_js(libraries_get_path('mathjax', TRUE) . '/MathJax.js?config=TeX-AMS-MML_HTMLorMML', 'external');
+    }
   }
 }
 
-
 /**
- * Implements hook_permission().
+ * Implements hook_filter_info().
+ *
+ * Defines a MathJax filter.
  */
-function mathjax_permission() {
-  return array(
-    'administer mathjax' => array(
-      'title' => t('Administer MathJax'),
-    ),
+function mathjax_filter_info() {
+  $filters['filter_mathjax'] = array(
+    'title' => t('MathJax'),
+    'description' => t('Mathematics inside the <a href="@url">configured delimiters</a> is rendered by MathJax.', array('@url' => url('admin/config/content/mathjax'))),
+    'process callback'  => 'mathjax_filter_process',
+    'tips callback' => 'mathjax_filter_tips',
+    'weight' => 50,
   );
+  return $filters;
 }
 
+/**
+ * Mathjax filter process callback.
+ */
+function mathjax_filter_process($text, $filter, $format) {
+  return '<div class="tex2jax">' . $text . '</div>';
+}
 
 /**
- * Implements hook_menu().
+ * Filter tips callback for the mathjax filter.
  */
-function mathjax_menu() {
-
-  $items['admin/config/content/mathjax'] = array(
-    'title' => 'MathJax',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('mathjax_global_settings'),
-    'access arguments' => array('administer mathjax'),
-    'description' => 'Configure global settings for MathJax.',
-    'type' => MENU_NORMAL_ITEM,
+function mathjax_filter_tips($filter, $format, $long = FALSE) {
+  return t('<span class="tex2jax_ignore">Mathematics inside the <a href="@url">configured delimiters</a> is
+    rendered by MathJax. The default math delimiters are $$...$$ and \[...\] for
+    displayed mathematics, and $...$ and \(...\) for in-line mathematics.</span>',
+      array('@url' => url('admin/config/content/mathjax'))
   );
-
-  return $items;
 }
 
 /**
  * Configure global settings for MathJax.
  */
 function mathjax_global_settings() {
-  $form['mathjax']['mathjax_enabled'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Global switch'),
-    '#default_value' => variable_get('mathjax_enabled', TRUE),
-    '#description' => t('Check this box to enable MathJax for the entire site.'),
+  $form['mathjax']['mathjax_test'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'MathJax Test',
+  );
+  $form['mathjax']['mathjax_test']['markup'] = array(
+    '#type' => 'item',
+    '#markup' => '<div class="tex2jax"><p>If the MathJax library is installed properly, you should see the square root of x here: $ \sqrt{x} $ and the square root of y here: \(\sqrt{y}\)</p><p>$$\text{The quadratic formula should appear here: } x = \frac {-b \pm \sqrt {b^2 - 4ac}}{2a}$$</p><p>\[\text{The cubic equation should appear here: } a x^3\; +\; b x^2\; +\; c x\; +\; d\; =\; 0\]</p></div>',
   );
   $form['mathjax']['mathjax_use_cdn'] = array(
     '#type' => 'checkbox',
@@ -149,40 +160,48 @@ function mathjax_global_settings() {
   );
   $form['mathjax']['mathjax_cdn_url'] = array(
     '#type' => 'textfield',
-    '#title' => t('MathJax CDN url'),
-    '#default_value' => variable_get('mathjax_cdn_url', mathjax_default_cdn_url()),
-    '#description' => t("Enter the Mathjax CDN url here or leave it unchanged to use the one provided by <a target='_blank' href='@mathjax-homepage'>www.mathjax.org</a>.", array('@mathjax-homepage' => 'http://www.mathjax.org')),
+    '#title' => t('MathJax CDN URL'),
+    '#default_value' => variable_get('mathjax_cdn_url', mathjax_default('cdn url')),
+    '#description' => t("Enter the Mathjax CDN url here or leave it unchanged to use the one provided by <a target='_blank' href='@mathjax-homepage'>www.mathjax.org</a>.", array('@mathjax-homepage' => url('http://www.mathjax.org'))),
+  );
+  $form['mathjax']['mathjax_config_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Configuration Type'),
+    '#options' => array(
+      0 => t('Text Format (Recommended&mdash;Add the MathJax filter to a <a href="@textformats">text format</a>.)', 
+          array('@textformats' => url('admin/config/content/formats'))),
+      1 => t('Custom'),
+    ),
+    '#default_value' => variable_get('mathjax_config_type', 0),
+  );
+  $form['mathjax']['mathjax_note_default'] = array(
+    '#type' => 'item',
+    '#prefix' => '<span class="tex2jax_ignore">',
+    '#markup' => t('MathJax 
+      will be available as a text filter. Mathematics inside the 
+      default delimiters will be rendered by MathJax. The 
+      default math delimiters are $$...$$ and \[...\] for displayed mathematics,
+      and $...$ and \(...\) for in-line mathematics. <strong>You must add 
+      the MathJax filter to a <a href="@textformats">text format</a> and put 
+      MathJax at the bottom of the filter processing order.</strong>',
+      array('@textformats' => url('admin/config/content/formats'))),
+    '#suffix' => '</span>',
+    '#states' => array(
+      'invisible' => array(
+        ':input[name="mathjax_config_type"]' => array('value' => 1),
+      ),
+    ),
   );
   $form['mathjax']['mathjax_config_string'] = array(
     '#type' => 'textarea',
-    '#title' => t('MathJax configuration'),
-    '#default_value' => variable_get('mathjax_config_string', mathjax_default_config_string()),
-    '#description' => t("Enter a javascript configuration string as documented on  <a target='_blank' href='@mathjax-help'>MathJax help</a> Use with caution as you may introduce javascript errors.", array('@mathjax-help' => 'http://docs.mathjax.org/en/latest/')),
-  );
-  $form['mathjax']['active'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Page specific activation settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-  );
-  $form['mathjax']['active']['mathjax_active_type'] = array(
-    '#type' => 'radios',
-    '#title' => t('Enable MathJax on specific pages'),
-    '#options' => array('disable' => 'Enable on every page except the listed pages.', 'enable' => 'Enable on the listed pages only.'),
-    '#default_value' => variable_get('mathjax_active_type', 'disable'),
-  );
-  $form['mathjax']['active']['mathjax_pages'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Pages'),
-    '#default_value' => variable_get('mathjax_pages', "admin*\nnode/add/*\nnode/*/edit"),
-    '#description' => t("Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.",
-        array(
-          '%blog' => 'blog',
-          '%blog-wildcard' => 'blog/*',
-          '%front' => '<front>',
-        )
+    '#title' => t('Custom configuration'),
+    '#default_value' => variable_get('mathjax_config_string', mathjax_default('config string')),
+    '#description' => t("Enter a JavaScript configuration string as documented on  <a target='_blank' href='@mathjax-help'>MathJax help</a>. Use with caution as you may introduce JavaScript errors.", array('@mathjax-help' => url('http://docs.mathjax.org/en/latest/'))),
+    '#states' => array(
+      'invisible' => array(
+        ':input[name="mathjax_config_type"]' => array('value' => 0),
+      ),
     ),
   );
-
   return system_settings_form($form);
 }

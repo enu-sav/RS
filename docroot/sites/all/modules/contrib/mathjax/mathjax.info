@@ -2,13 +2,11 @@ name = MathJax
 description = Javascript-based LaTeX rendering solution for your Drupal website.
 core = 7.x
 configure = admin/config/content/mathjax
-dependencies[] = libraries
-files[] = tests/mathjax_config.test
-files[] = tests/mathjax_admin.test
+files[] = mathjax.test
 
-; Information added by Drupal.org packaging script on 2014-07-14
-version = "7.x-1.5"
+; Information added by Drupal.org packaging script on 2014-10-02
+version = "7.x-2.4"
 core = "7.x"
 project = "mathjax"
-datestamp = "1405360431"
+datestamp = "1412213634"
 
