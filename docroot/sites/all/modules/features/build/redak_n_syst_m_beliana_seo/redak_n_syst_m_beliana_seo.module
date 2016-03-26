@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Redakčný systém Beliana SEO feature.
+ */
+
+include_once 'redak_n_syst_m_beliana_seo.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Redakčný systém Beliana Ilustrácia feature.
+ */
+
+include_once 'redak_n_syst_m_beliana_node_ilustracia.features.inc';

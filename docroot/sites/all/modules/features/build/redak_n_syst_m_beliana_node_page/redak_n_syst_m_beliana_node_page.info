@@ -1,0 +1,17 @@
+name = Redakčný systém Beliana Basic page
+core = 7.x
+package = Content
+dependencies[] = features
+dependencies[] = redak_n_syst_m_beliana_fields
+dependencies[] = redak_n_syst_m_beliana_seo
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[field_instance][] = node-page-body
+features[node][] = page
+features[variable][] = comment_page
+features[variable][] = field_bundle_settings_node__page
+features[variable][] = node_options_page
+features[variable][] = node_submitted_page
+features_exclude[field_base][] = body
+features_exclude[variable][] = pathauto_node_page_pattern
