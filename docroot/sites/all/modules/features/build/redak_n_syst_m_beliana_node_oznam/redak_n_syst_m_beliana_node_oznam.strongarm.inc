@@ -13,6 +13,13 @@ function redak_n_syst_m_beliana_node_oznam_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'additional_settings__active_tab_oznam';
+  $strongarm->value = 'edit-diff';
+  $export['additional_settings__active_tab_oznam'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_oznam';
   $strongarm->value = 0;
   $export['comment_anonymous_oznam'] = $strongarm;
@@ -58,6 +65,27 @@ function redak_n_syst_m_beliana_node_oznam_strongarm() {
   $strongarm->name = 'comment_subject_field_oznam';
   $strongarm->value = 1;
   $export['comment_subject_field_oznam'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_oznam';
+  $strongarm->value = 0;
+  $export['diff_enable_revisions_page_node_oznam'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_oznam';
+  $strongarm->value = 0;
+  $export['diff_show_preview_changes_node_oznam'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_oznam';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_oznam'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -140,6 +168,13 @@ function redak_n_syst_m_beliana_node_oznam_strongarm() {
   $strongarm->name = 'node_submitted_oznam';
   $strongarm->value = 0;
   $export['node_submitted_oznam'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'save_continue_oznam';
+  $strongarm->value = 'Uložiť a pridať polia';
+  $export['save_continue_oznam'] = $strongarm;
 
   return $export;
 }
