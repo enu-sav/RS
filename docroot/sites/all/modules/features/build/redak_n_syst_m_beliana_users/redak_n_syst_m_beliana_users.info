@@ -18,7 +18,6 @@ dependencies[] = feeds_tamper
 dependencies[] = field_permissions
 dependencies[] = filter
 dependencies[] = flood_unblock
-dependencies[] = hacked
 dependencies[] = image
 dependencies[] = imce
 dependencies[] = locale

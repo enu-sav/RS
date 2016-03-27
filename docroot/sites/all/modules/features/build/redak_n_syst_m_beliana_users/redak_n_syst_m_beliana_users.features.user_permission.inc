@@ -2948,15 +2948,6 @@ function redak_n_syst_m_beliana_users_user_default_permissions() {
     'module' => 'view_unpublished',
   );
 
-  // Exported permission: 'view diffs of changed files'.
-  $permissions['view diffs of changed files'] = array(
-    'name' => 'view diffs of changed files',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'hacked',
-  );
-
   // Exported permission: 'view field_atributy'.
   $permissions['view field_atributy'] = array(
     'name' => 'view field_atributy',
