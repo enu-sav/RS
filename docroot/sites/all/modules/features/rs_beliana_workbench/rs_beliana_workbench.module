@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the RS Beliana Workbench feature.
+ */
+
+include_once 'rs_beliana_workbench.features.inc';
