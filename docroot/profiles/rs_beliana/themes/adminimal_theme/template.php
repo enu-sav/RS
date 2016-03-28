@@ -38,12 +38,27 @@ function adminimal_preprocess_html(&$vars) {
   // Add conditional CSS for IE6.
   drupal_add_css($adminimal_path . '/css/ie6.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 6', '!IE' => FALSE), 'weight' => 999, 'preprocess' => TRUE));
 
+  //Add Homebox module support
+  if (module_exists('homebox')) {
+    drupal_add_css($adminimal_path . '/css/homebox_custom.css', array('group' => CSS_THEME, 'media' => 'all', 'weight' => 1));
+  }
+
   // Add theme name to body class.
   $vars['classes_array'][] = 'adminimal-theme';
 
   // Style checkbox and radio buttons in Webkit Browsers.
   if (theme_get_setting('style_checkboxes')) {
     $vars['classes_array'][] = 'style-checkboxes';
+  }
+
+  // Disable rounded buttons setting.
+  if (!theme_get_setting('rounded_buttons')) {
+    $vars['classes_array'][] = 'no-rounded-buttons';
+  }
+
+  // Enable sticky action buttons.
+  if (theme_get_setting('sticky_actions')) {
+    $vars['classes_array'][] = 'sticky-actions';
   }
 
   // Add icons to the admin configuration page.
@@ -54,6 +69,11 @@ function adminimal_preprocess_html(&$vars) {
   // Add icons to the admin configuration page.
   if (theme_get_setting('avoid_custom_font')) {
     drupal_add_css($adminimal_path . '/css/avoid_custom_font.css', array('group' => CSS_THEME, 'weight' => 9000, 'preprocess' => TRUE));
+  }
+
+  // Load CKEditor styles if enabled in settings.
+  if (theme_get_setting('adminimal_ckeditor')) {
+    drupal_add_css($adminimal_path . '/css/ckeditor-adminimal.css', array('group' => CSS_THEME, 'media' => 'all', 'weight' => 2));
   }
 
   // Define Default media queries.
@@ -103,6 +123,26 @@ function adminimal_preprocess_html(&$vars) {
   );
   drupal_add_html_head($viewport, 'viewport');
 
+  // Remove the no-sidebars class which is always added by core. Core assumes
+  // the sidebar regions are called sidebar_first and sidebar_second, which
+  // is not the case in this theme.
+  $key = array_search('no-sidebars', $vars['classes_array']);
+  if ($key !== FALSE) {
+    unset($vars['classes_array'][$key]);
+  }
+  // Add information about the number of sidebars.
+  if (!empty($vars['page']['sidebar_left']) && !empty($vars['page']['sidebar_right'])) {
+    $vars['classes_array'][] = 'two-sidebars';
+  }
+  elseif (!empty($vars['page']['sidebar_left'])) {
+    $vars['classes_array'][] = 'one-sidebar sidebar-left';
+  }
+  elseif (!empty($vars['page']['sidebar_right'])) {
+    $vars['classes_array'][] = 'one-sidebar sidebar-right';
+  }
+  else {
+    $vars['classes_array'][] = 'no-sidebars';
+  }
 }
 
 /**
@@ -115,7 +155,7 @@ function adminimal_preprocess_page(&$vars) {
     '#theme' => 'menu_local_tasks',
     '#secondary' => $vars['tabs']['#secondary'],
   );
-
+  unset($vars['page']['hidden']);
 }
 
 /**
@@ -243,7 +283,6 @@ function adminimal_admin_block($variables) {
   $output .= '</div>';
 
   return $output;
-
 }
 
 /**
@@ -420,151 +459,3 @@ function adminimal_table($variables) {
   $output .= "</div>\n";
   return $output;
 }
-
-function adminimal_preprocess_node(&$args) {
-      if($args['view_mode'] === 'export') {
-                $node = &$args['node'];
-                if ($node->type === 'ilustracia') {
-			$no_render = FALSE;
-                        if(empty($node->field_obrazok_na_zverejnenie_)) {
-				$no_render = TRUE;
-                        }
-			$args['no_render'] = $no_render;
-                }
-      }
-}
-
-
-function adminimal_preprocess_views_view_fields(&$vars) {
-
-  $view = $vars['view'];
-  if($view->name == 'export') {
-  // Loop through the fields for this view.
-  $previous_inline = FALSE;
-  $vars['fields'] = array(); // ensure it's at least an empty array.
-  foreach ($view->field as $id => $field) {
-    // render this even if set to exclude so it can be used elsewhere.
-    $field_output = $view->style_plugin->get_field($view->row_index, $id);
-    $field_output = preg_replace('/a/','a',$field_output); 
-   $empty = $field->is_value_empty($field_output, $field->options['empty_zero']);
-    if (empty($field->options['exclude']) && (!$empty || (empty($field->options['hide_empty']) && empty($vars['options']['hide_empty'])))) {
-      $object = new stdClass();
-      $object->handler = &$view->field[$id];
-      $object->inline = !empty($vars['options']['inline'][$id]);
-
-      $object->element_type = $object->handler->element_type(TRUE, !$vars['options']['default_field_elements'], $object->inline);
-      if ($object->element_type) {
-        $class = '';
-        if ($object->handler->options['element_default_classes']) {
-          $class = 'field-content';
-        }
-
-        if ($classes = $object->handler->element_classes($view->row_index)) {
-          if ($class) {
-            $class .= ' ';
-          }
-          $class .= $classes;
-        }
-
-        $pre = '<' . $object->element_type;
-        if ($class) {
-          $pre .= ' class="' . $class . '"';
-        }
-        $field_output = $pre . '>' . $field_output . '</' . $object->element_type . '>';
-      }
-
-      // Protect ourself somewhat for backward compatibility. This will prevent
-      // old templates from producing invalid HTML when no element type is selected.
-      if (empty($object->element_type)) {
-        $object->element_type = 'span';
-      }
-
-      $object->content = $field_output;
-      if (isset($view->field[$id]->field_alias) && isset($vars['row']->{$view->field[$id]->field_alias})) {
-        $object->raw = $vars['row']->{$view->field[$id]->field_alias};
-      }
-      else {
-        $object->raw = NULL; // make sure it exists to reduce NOTICE
-      }
-
-      if (!empty($vars['options']['separator']) && $previous_inline && $object->inline && $object->content) {
-        $object->separator = filter_xss_admin($vars['options']['separator']);
-      }
-
-      $object->class = drupal_clean_css_identifier($id);
-
-      $previous_inline = $object->inline;
-      $object->inline_html = $object->handler->element_wrapper_type(TRUE, TRUE);
-      if ($object->inline_html === '' && $vars['options']['default_field_elements']) {
-        $object->inline_html = $object->inline ? 'span' : 'div';
-      }
-
-      // Set up the wrapper HTML.
-      $object->wrapper_prefix = '';
-      $object->wrapper_suffix = '';
-
-      if ($object->inline_html) {
-        $class = '';
-        if ($object->handler->options['element_default_classes']) {
-          $class = "views-field views-field-" . $object->class;
-        }
-
-        if ($classes = $object->handler->element_wrapper_classes($view->row_index)) {
-          if ($class) {
-            $class .= ' ';
-          }
-          $class .= $classes;
-        }
-
-        $object->wrapper_prefix = '<' . $object->inline_html;
-        if ($class) {
-          $object->wrapper_prefix .= ' class="' . $class . '"';
-        }
-        $object->wrapper_prefix .= '>';
-        $object->wrapper_suffix = '</' . $object->inline_html . '>';
-      }
-
-      // Set up the label for the value and the HTML to make it easier
-      // on the template.
-      $object->label = check_plain($view->field[$id]->label());
-      $object->label_html = '';
-      if ($object->label) {
-        $object->label_html .= $object->label;
-        if ($object->handler->options['element_label_colon']) {
-          $object->label_html .= ': ';
-        }
-
-        $object->element_label_type = $object->handler->element_label_type(TRUE, !$vars['options']['default_field_elements']);
-        if ($object->element_label_type) {
-          $class = '';
-          if ($object->handler->options['element_default_classes']) {
-            $class = 'views-label views-label-' . $object->class;
-          }
-
-          $element_label_class = $object->handler->element_label_classes($view->row_index);
-          if ($element_label_class) {
-            if ($class) {
-              $class .= ' ';
-            }
-
-            $class .= $element_label_class;
-          }
-
-          $pre = '<' . $object->element_label_type;
-          if ($class) {
-            $pre .= ' class="' . $class . '"';
-          }
-          $pre .= '>';
-
-          $object->label_html = $pre . $object->label_html . '</' . $object->element_label_type . '>';
-        }
-      }
-
-      $vars['fields'][$id] = $object;
-    }
-  }
-}
-
-}
-
-

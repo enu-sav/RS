@@ -1,0 +1,4 @@
+name = RS Beliana Theme
+description = Minimalist administration theme.
+core = 7.x
+base theme = adminimal
