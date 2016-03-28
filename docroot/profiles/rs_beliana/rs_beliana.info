@@ -1,0 +1,32 @@
+name = RS Beliana
+description = Install profile for RS Beliana.
+version = 7.x-1.0-beta1
+
+exclusive = true
+
+api = 2
+core = 7.x
+
+; Core.
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = image
+dependencies[] = list
+dependencies[] = locale
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = search
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = update
+dependencies[] = user
