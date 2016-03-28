@@ -3,3 +3,15 @@
  * @file
  * Install, update and uninstall functions for the Beliana installation profile.
  */
+
+/**
+ * Implements hook_install_tasks_alter().
+ *
+ * @inheritdoc
+ */
+function rs_beliana_install_tasks_alter(&$tasks, $install_state) {
+  global $install_state;
+  $install_state['parameters']['locale'] = 'sk';
+  $tasks['install_select_profile']['display'] = FALSE;
+  $tasks['install_select_locale']['display'] = FALSE;
+}
