@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_fields.features.field_base.inc
+ * rs_beliana_fields.features.field_base.inc
  */
 
 /**
@@ -345,6 +345,7 @@ function rs_beliana_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -374,6 +375,7 @@ function rs_beliana_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -659,6 +661,7 @@ function rs_beliana_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -709,6 +712,7 @@ function rs_beliana_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -764,6 +768,7 @@ function rs_beliana_fields_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',

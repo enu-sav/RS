@@ -6,6 +6,7 @@ dependencies[] = rs_beliana_seo
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = taxonomy_manager
+dependencies[] = title
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[taxonomy][] = lexikalne_skupiny
