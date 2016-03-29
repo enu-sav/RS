@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Redakčný systém Beliana Kanály správ feature.
- */
-
-include_once 'redak_n_syst_m_beliana_feeds.features.inc';

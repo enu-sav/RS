@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Redakčný systém Beliana Importované heslo feature.
- */
-
-include_once 'redak_n_syst_m_beliana_node_importovane_heslo.features.inc';

@@ -1,8 +1,0 @@
-name = "Beliana Workbench"
-description = "Module provides modifications for workbench suite modules"
-core = 7.x
-dependencies[] = workbench
-dependencies[] = workbench_access
-dependencies[] = workbench_moderation
-dependencies[] = workbench_state_access
-dependencies[] = views

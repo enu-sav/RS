@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Redakčný systém Beliana Zobrazenia feature.
+ */
+
+include_once 'rs_beliana_views.features.inc';
