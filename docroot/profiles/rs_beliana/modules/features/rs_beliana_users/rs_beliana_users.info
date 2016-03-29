@@ -345,7 +345,6 @@ features[user_permission][] = view any unpublished ilustracia content
 features[user_permission][] = view any unpublished importovane_heslo content
 features[user_permission][] = view any unpublished oznam content
 features[user_permission][] = view any unpublished page content
-features[user_permission][] = view diffs of changed files
 features[user_permission][] = view field_atributy
 features[user_permission][] = view field_lexikalna_skupina
 features[user_permission][] = view field_na_zoradenie
