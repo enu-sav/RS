@@ -94,16 +94,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'dashboard',
   );
 
-  // Exported permission: 'access devel information'.
-  $permissions['access devel information'] = array(
-    'name' => 'access devel information',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'access environment indicator'.
   $permissions['access environment indicator'] = array(
     'name' => 'access environment indicator',
@@ -2034,16 +2024,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'execute php code'.
-  $permissions['execute php code'] = array(
-    'name' => 'execute php code',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'flush caches'.
   $permissions['flush caches'] = array(
     'name' => 'flush caches',
@@ -2652,16 +2632,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'shortcut',
-  );
-
-  // Exported permission: 'switch users'.
-  $permissions['switch users'] = array(
-    'name' => 'switch users',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'devel',
   );
 
   // Exported permission: 'tamper bb'.

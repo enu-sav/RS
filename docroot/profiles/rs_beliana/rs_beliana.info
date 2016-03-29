@@ -8,6 +8,7 @@ api = 2
 core = 7.x
 
 ; Core.
+dependencies[] = adminimal_admin_menu
 dependencies[] = block
 dependencies[] = comment
 dependencies[] = contextual
@@ -19,8 +20,10 @@ dependencies[] = filter
 dependencies[] = image
 dependencies[] = list
 dependencies[] = locale
+dependencies[] = mathjax
 dependencies[] = menu
 dependencies[] = node
+dependencies[] = node_edit_protection
 dependencies[] = number
 dependencies[] = options
 dependencies[] = path
