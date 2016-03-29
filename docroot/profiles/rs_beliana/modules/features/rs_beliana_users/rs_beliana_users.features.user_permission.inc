@@ -492,16 +492,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'sharedemail',
   );
 
-  // Exported permission: 'administer shortcuts'.
-  $permissions['administer shortcuts'] = array(
-    'name' => 'administer shortcuts',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'shortcut',
-  );
-
   // Exported permission: 'administer simplify'.
   $permissions['administer simplify'] = array(
     'name' => 'administer simplify',
@@ -1150,16 +1140,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'ckeditor',
-  );
-
-  // Exported permission: 'customize shortcut links'.
-  $permissions['customize shortcut links'] = array(
-    'name' => 'customize shortcut links',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'shortcut',
   );
 
   // Exported permission: 'delete any article content'.
@@ -2622,16 +2602,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'comment',
-  );
-
-  // Exported permission: 'switch shortcut sets'.
-  $permissions['switch shortcut sets'] = array(
-    'name' => 'switch shortcut sets',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'shortcut',
   );
 
   // Exported permission: 'tamper bb'.
