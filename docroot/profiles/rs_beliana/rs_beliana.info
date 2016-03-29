@@ -30,6 +30,7 @@ dependencies[] = path
 dependencies[] = search
 dependencies[] = system
 dependencies[] = taxonomy
+dependencies[] = taxomomy_manager
 dependencies[] = text
 dependencies[] = update
 dependencies[] = user
