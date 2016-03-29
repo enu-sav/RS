@@ -1,6 +1,7 @@
 name = Redakčný systém Beliana Kanály správ
 core = 7.x
 package = Feeds
+dependencies[] = ctools
 dependencies[] = feeds
 dependencies[] = feeds_import
 dependencies[] = feeds_tamper
@@ -13,8 +14,6 @@ features[feeds_importer][] = bb
 features[feeds_importer][] = beliana_importovanie_gh
 features[feeds_importer][] = import_ilustr_cie
 features[feeds_importer][] = import_pou_vate_ov_beliany
-features[feeds_importer][] = node
-features[feeds_importer][] = user
 features[feeds_tamper][] = bb-ilustracia-explode
 features[feeds_tamper][] = bb-kategoria-explode
 features[feeds_tamper][] = beliana_importovanie_gh-geo-explode
