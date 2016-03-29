@@ -30,3 +30,23 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = update
 dependencies[] = user
+
+; Custom & Features
+dependencies[] = beliana
+dependencies[] = rs_beliana_feeds
+dependencies[] = rs_beliana_fields
+dependencies[] = rs_beliana_media
+dependencies[] = rs_beliana_menu
+dependencies[] = rs_beliana_node_article
+dependencies[] = rs_beliana_node_heslo
+dependencies[] = rs_beliana_node_ilustracia
+dependencies[] = rs_beliana_node_importovane_heslo
+dependencies[] = rs_beliana_node_oznam
+dependencies[] = rs_beliana_node_page
+dependencies[] = rs_beliana_rules
+dependencies[] = rs_beliana_seo
+dependencies[] = rs_beliana_site
+dependencies[] = rs_beliana_taxonomy
+dependencies[] = rs_beliana_users
+dependencies[] = rs_beliana_views
+dependencies[] = rs_beliana_workbench
