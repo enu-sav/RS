@@ -9,7 +9,7 @@
  */
 function rs_beliana_menu_menu_default_menu_links() {
   $menu_links = array();
-  
+
   // Exported menu link: management_ilustrcie-r:admin/beliana/Ilustracie-r.
   $menu_links['management_ilustrcie-r:admin/beliana/Ilustracie-r'] = array(
     'menu_name' => 'management',
@@ -134,7 +134,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => -49,
     'customized' => 1,
-    'parent_identifier' => 'management_administrcia:admin',
   );
   // Exported menu link: management_na-posdenie-r:admin/beliana/na-posudenie-r.
   $menu_links['management_na-posdenie-r:admin/beliana/na-posudenie-r'] = array(
@@ -365,7 +364,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'expanded' => 1,
     'weight' => -50,
     'customized' => 1,
-    'parent_identifier' => 'management_administrcia:admin',
   );
   // Exported menu link: management_rozpracovan-hesl:admin/beliana/drafts.
   $menu_links['management_rozpracovan-hesl:admin/beliana/drafts'] = array(
@@ -493,84 +491,9 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_export-na-import:export-na-import.
-  $menu_links['management_export-na-import:export-na-import'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export-na-import',
-    'router_path' => 'export-na-import',
-    'link_title' => 'Export na import',
-    'options' => array(
-      'identifier' => 'management_export-na-import:export-na-import',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_exportova-a-tlai:export.
-  $menu_links['management_exportova-a-tlai:export'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export',
-    'router_path' => 'export',
-    'link_title' => 'Exportovať a tlačiť',
-    'options' => array(
-      'identifier' => 'management_exportova-a-tlai:export',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_vyhada-hesl:vyhľadať.
-  $menu_links['management_vyhada-hesl:vyhľadať'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'vyhľadať',
-    'router_path' => 'vyhladat',
-    'link_title' => 'Vyhľadať heslá',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_vyhada-hesl:vyhľadať',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -50,
-    'customized' => 1,
-  );
-  // Exported menu link: management_vyhada-ilustrcie:vyhľadať-ilustrácie.
-  $menu_links['management_vyhada-ilustrcie:vyhľadať-ilustrácie'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'vyhľadať-ilustrácie',
-    'router_path' => 'vyhladat-ilustracie',
-    'link_title' => 'Vyhľadať ilustrácie',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_vyhada-ilustrcie:vyhľadať-ilustrácie',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -49,
-    'customized' => 1,
-  );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Comments');
   t('Ilustrácie (R)');
   t('Jazyková redakcia 1');
   t('Jazyková redakcia 2');
@@ -594,10 +517,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Všetky moje heslá');
   t('Zlúčené');
   t('Zlúčiť');
-  t('Export na import');
-  t('Exportovať a tlačiť');
-  t('Vyhľadať heslá');
-  t('Vyhľadať ilustrácie');
 
   return $menu_links;
 }
