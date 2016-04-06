@@ -28,6 +28,7 @@ dependencies[] = password_policy
 dependencies[] = path
 dependencies[] = pathauto
 dependencies[] = rs_beliana_fields
+dependencies[] = rs_beliana_workbench
 dependencies[] = rules
 dependencies[] = search
 dependencies[] = sharedemail
