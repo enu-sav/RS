@@ -10,19 +10,29 @@
  * @inheritdoc
  */
 function rs_beliana_install() {
-  // Enable the admin theme.
-  db_update('system')
-    ->fields(array('status' => 1))
-    ->condition('type', 'theme')
-    ->condition('name', 'rs_beliana_theme')
-    ->execute();
-  db_update('system')
-    ->fields(array('status' => 1))
-    ->condition('type', 'theme')
-    ->condition('name', 'adminimal')
-    ->execute();
-  variable_set('admin_theme', 'rs_beliana_theme');
-  variable_set('theme_default', 'rs_beliana_theme');
+  // Any themes without keys here will get numeric keys and so will be enabled,
+  // but not placed into variables.
+  $themes = array(
+    'rs_beliana_theme',
+    'adminimal',
+    'theme_default' => 'rs_beliana_theme',
+    'admin_theme' => 'rs_beliana_theme',
+  );
+
+  theme_enable($themes);
+
+  foreach ($themes as $var => $theme) {
+    if (!is_numeric($var)) {
+      variable_set($var, $theme);
+    }
+  }
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  // Rebuild permissions and clear cache.
+  node_access_rebuild();
+  drupal_flush_all_caches();
 }
 
 /**
