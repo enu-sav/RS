@@ -9,28 +9,7 @@
  */
 function rs_beliana_menu_menu_default_menu_links() {
   $menu_links = array();
-
-  // Exported menu link: management_comments:admin/content/comment.
-  $menu_links['management_comments:admin/content/comment'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/content/comment',
-    'router_path' => 'admin/content/comment',
-    'link_title' => 'Comments',
-    'options' => array(
-      'attributes' => array(
-        'title' => 'List and edit site comments and the comment approval queue.',
-      ),
-      'identifier' => 'management_comments:admin/content/comment',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-    'parent_identifier' => 'management_obsah:admin/content',
-  );
+  
   // Exported menu link: management_ilustrcie-r:admin/beliana/Ilustracie-r.
   $menu_links['management_ilustrcie-r:admin/beliana/Ilustracie-r'] = array(
     'menu_name' => 'management',

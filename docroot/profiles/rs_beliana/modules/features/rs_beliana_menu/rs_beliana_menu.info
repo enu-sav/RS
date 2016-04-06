@@ -11,7 +11,6 @@ features[menu_custom][] = main-menu
 features[menu_custom][] = management
 features[menu_custom][] = navigation
 features[menu_custom][] = user-menu
-features[menu_links][] = management_comments:admin/content/comment
 features[menu_links][] = management_ilustrcie-r:admin/beliana/Ilustracie-r
 features[menu_links][] = management_jazykov-redakcia-1:admin/beliana/jaz-redakcia-1
 features[menu_links][] = management_jazykov-redakcia-2:admin/beliana/jaz-redakcia-2
