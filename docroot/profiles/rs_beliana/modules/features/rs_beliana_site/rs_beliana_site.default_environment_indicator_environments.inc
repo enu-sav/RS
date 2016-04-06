@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_site.default_environment_indicator_environments.inc
+ * rs_beliana_site.default_environment_indicator_environments.inc
  */
 
 /**

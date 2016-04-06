@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_site.features.inc
+ * rs_beliana_site.features.inc
  */
 
 /**

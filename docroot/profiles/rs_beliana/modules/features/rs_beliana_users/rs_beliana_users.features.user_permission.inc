@@ -928,24 +928,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'feeds',
   );
 
-  // Exported permission: 'clear node feeds'.
-  $permissions['clear node feeds'] = array(
-    'name' => 'clear node feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: 'clear user feeds'.
-  $permissions['clear user feeds'] = array(
-    'name' => 'clear user feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
-    'module' => 'feeds',
-  );
-
   // Exported permission: 'create article content'.
   $permissions['create article content'] = array(
     'name' => 'create article content',
@@ -2066,24 +2048,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'feeds',
   );
 
-  // Exported permission: 'import node feeds'.
-  $permissions['import node feeds'] = array(
-    'name' => 'import node feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: 'import user feeds'.
-  $permissions['import user feeds'] = array(
-    'name' => 'import user feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
-    'module' => 'feeds',
-  );
-
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -2638,26 +2602,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'feeds_tamper',
   );
 
-  // Exported permission: 'tamper node'.
-  $permissions['tamper node'] = array(
-    'name' => 'tamper node',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'feeds_tamper',
-  );
-
-  // Exported permission: 'tamper user'.
-  $permissions['tamper user'] = array(
-    'name' => 'tamper user',
-    'roles' => array(
-      'admin' => 'admin',
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'feeds_tamper',
-  );
-
   // Exported permission: 'translate interface'.
   $permissions['translate interface'] = array(
     'name' => 'translate interface',
@@ -2706,24 +2650,6 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'unlock import_pou_vate_ov_beliany feeds'.
   $permissions['unlock import_pou_vate_ov_beliany feeds'] = array(
     'name' => 'unlock import_pou_vate_ov_beliany feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: 'unlock node feeds'.
-  $permissions['unlock node feeds'] = array(
-    'name' => 'unlock node feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: 'unlock user feeds'.
-  $permissions['unlock user feeds'] = array(
-    'name' => 'unlock user feeds',
     'roles' => array(
       'admin' => 'admin',
     ),
