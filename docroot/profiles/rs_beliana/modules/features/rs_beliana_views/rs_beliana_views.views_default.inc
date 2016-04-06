@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_views.views_default.inc
+ * rs_beliana_views.views_default.inc
  */
 
 /**
@@ -9,110 +9,6 @@
  */
 function rs_beliana_views_views_default_views() {
   $export = array();
-
-  $view = new view();
-  $view->name = 'archive';
-  $view->description = 'Display a list of months that link to content for that month.';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Archive';
-  $view->core = 0;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Monthly archive';
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'viac';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použiť';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'node';
-  /* Kritéria zoradenia: Obsah: Dátum odoslania */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Obsah: Vytvorené rok + mesiac */
-  $handler->display->display_options['arguments']['created_year_month']['id'] = 'created_year_month';
-  $handler->display->display_options['arguments']['created_year_month']['table'] = 'node';
-  $handler->display->display_options['arguments']['created_year_month']['field'] = 'created_year_month';
-  $handler->display->display_options['arguments']['created_year_month']['default_action'] = 'summary';
-  $handler->display->display_options['arguments']['created_year_month']['exception']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['created_year_month']['exception']['title'] = 'Všetky';
-  $handler->display->display_options['arguments']['created_year_month']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['created_year_month']['title'] = '%1';
-  $handler->display->display_options['arguments']['created_year_month']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['created_year_month']['summary']['sort_order'] = 'desc';
-  $handler->display->display_options['arguments']['created_year_month']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['created_year_month']['summary_options']['override'] = TRUE;
-  $handler->display->display_options['arguments']['created_year_month']['summary_options']['items_per_page'] = '30';
-  $handler->display->display_options['arguments']['created_year_month']['specify_validation'] = TRUE;
-  /* Filter criterion: Obsah: Zverejnené */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'archive';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Obsah: Vytvorené rok + mesiac */
-  $handler->display->display_options['arguments']['created_year_month']['id'] = 'created_year_month';
-  $handler->display->display_options['arguments']['created_year_month']['table'] = 'node';
-  $handler->display->display_options['arguments']['created_year_month']['field'] = 'created_year_month';
-  $handler->display->display_options['arguments']['created_year_month']['default_action'] = 'summary';
-  $handler->display->display_options['arguments']['created_year_month']['exception']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['created_year_month']['exception']['title'] = 'Všetky';
-  $handler->display->display_options['arguments']['created_year_month']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['created_year_month']['title'] = '%1';
-  $handler->display->display_options['arguments']['created_year_month']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['created_year_month']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['created_year_month']['summary_options']['items_per_page'] = '30';
-  $handler->display->display_options['arguments']['created_year_month']['specify_validation'] = TRUE;
-  $translatables['archive'] = array(
-    t('Master'),
-    t('Monthly archive'),
-    t('viac'),
-    t('Použiť'),
-    t('Reset'),
-    t('Zoradiť podľa'),
-    t('Vzostupne'),
-    t('Zostupne'),
-    t('Položiek na stránku'),
-    t('- Všetko -'),
-    t('Offset'),
-    t('« prvá'),
-    t('‹ predchádzajúca'),
-    t('nasledujúca ›'),
-    t('posledná »'),
-    t('Všetky'),
-    t('%1'),
-    t('Page'),
-    t('Block'),
-  );
-  $export['archive'] = $view;
 
   $view = new view();
   $view->name = 'beliana';
@@ -150,6 +46,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -4618,7 +4515,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -4746,119 +4643,6 @@ function rs_beliana_views_views_default_views() {
   $export['beliana'] = $view;
 
   $view = new view();
-  $view->name = 'comments_recent';
-  $view->description = 'Contains a block and a page to list recent comments; the block will automatically link to the page, which displays the comment body as well as a link to the node.';
-  $view->tag = 'default';
-  $view->base_table = 'comment';
-  $view->human_name = 'Recent comments';
-  $view->core = 0;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Nedávne komentáre';
-  $handler->display->display_options['use_more'] = TRUE;
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'viac';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'access comments';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použiť';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = 5;
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['row_plugin'] = 'fields';
-  /* Vzťah: Komentár: Obsah */
-  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['table'] = 'comment';
-  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
-  /* Pole: Komentár: Názov */
-  $handler->display->display_options['fields']['subject']['id'] = 'subject';
-  $handler->display->display_options['fields']['subject']['table'] = 'comment';
-  $handler->display->display_options['fields']['subject']['field'] = 'subject';
-  $handler->display->display_options['fields']['subject']['label'] = '';
-  /* Pole: Komentár: Dátum aktualizácie */
-  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'comment';
-  $handler->display->display_options['fields']['timestamp']['field'] = 'changed';
-  $handler->display->display_options['fields']['timestamp']['label'] = '';
-  $handler->display->display_options['fields']['timestamp']['date_format'] = 'time ago';
-  /* Kritéria zoradenia: Komentár: Dátum aktualizácie */
-  $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['sorts']['timestamp']['table'] = 'comment';
-  $handler->display->display_options['sorts']['timestamp']['field'] = 'changed';
-  $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
-  /* Filter criterion: Obsah: Publikované alebo administrácia */
-  $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
-  $handler->display->display_options['filters']['status_extra']['table'] = 'node';
-  $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
-  $handler->display->display_options['filters']['status_extra']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['status_extra']['group'] = 0;
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['inline'] = array(
-    'title' => 'title',
-    'timestamp' => 'timestamp',
-  );
-  $handler->display->display_options['row_options']['separator'] = '&nbsp;';
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Obsah: Názov */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['title']['label'] = 'Reply to';
-  /* Pole: Komentár: Dátum aktualizácie */
-  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'comment';
-  $handler->display->display_options['fields']['timestamp']['field'] = 'changed';
-  $handler->display->display_options['fields']['timestamp']['label'] = '';
-  $handler->display->display_options['fields']['timestamp']['date_format'] = 'time ago';
-  /* Pole: Komentár: Názov */
-  $handler->display->display_options['fields']['subject']['id'] = 'subject';
-  $handler->display->display_options['fields']['subject']['table'] = 'comment';
-  $handler->display->display_options['fields']['subject']['field'] = 'subject';
-  $handler->display->display_options['fields']['subject']['label'] = '';
-  /* Pole: Komentár: Comment */
-  $handler->display->display_options['fields']['comment']['id'] = 'comment';
-  $handler->display->display_options['fields']['comment']['table'] = 'field_data_comment_body';
-  $handler->display->display_options['fields']['comment']['field'] = 'comment_body';
-  $handler->display->display_options['fields']['comment']['label'] = '';
-  $handler->display->display_options['path'] = 'comments/recent';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
-  $translatables['comments_recent'] = array(
-    t('Master'),
-    t('Nedávne komentáre'),
-    t('viac'),
-    t('Použiť'),
-    t('Reset'),
-    t('Zoradiť podľa'),
-    t('Vzostupne'),
-    t('Zostupne'),
-    t('Obsah'),
-    t('Page'),
-    t('Reply to'),
-    t('Block'),
-  );
-  $export['comments_recent'] = $view;
-
-  $view = new view();
   $view->name = 'export';
   $view->description = '';
   $view->tag = 'default';
@@ -4890,6 +4674,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -4962,34 +4747,31 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
   $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['value'] = array(
-    696 => '696',
-  );
   $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    3 => 0,
+    8 => 0,
+    9 => 0,
     5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
     6 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
     13 => 0,
-    19 => 0,
     14 => 0,
     15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
+    4 => 0,
     17 => 0,
+    18 => 0,
+    16 => 0,
+    7 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
@@ -5038,6 +4820,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = 'Pomocou nastavení vyberte požadované heslá, a potom kliknite na oranžové tlačidlo HTML, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa stránka vo formáte HTML, ktorá sa podľa typu a nastavení prehliadača buď priamo v prehliadači zobrazí alebo prehliadač ponúkne inú možnosť. Stránku môžete uložiť do súboru, ktorý môžete otvoriť v textovom editore a tam upraviť, vytlačiť alebo niekomu poslať. Vytvorenú stránku môžete vytlačiť aj priamo z prehliadača. Vybrané heslá sa zobrazia po 20-tich, exportujú sa však všetky vybrané heslá. Povinne treba zadať práve jeden súbor.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['path'] = 'export';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Exportovať a tlačiť';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
 
   /* Display: Data export */
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
@@ -5063,7 +4851,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -5108,6 +4896,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '500';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -5268,6 +5057,12 @@ function rs_beliana_views_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'export-na-import';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Export na import';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
 
   /* Display: Data export */
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
@@ -5323,7 +5118,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -5339,532 +5134,6 @@ function rs_beliana_views_views_default_views() {
     t('Stav'),
   );
   $export['export_na_import'] = $view;
-
-  $view = new view();
-  $view->name = 'feeds_log';
-  $view->description = 'Feeds log displays for overview, standalone importers and feed nodes.';
-  $view->tag = 'Feeds';
-  $view->base_table = 'feeds_log';
-  $view->human_name = 'Feeds log';
-  $view->core = 0;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Defaults */
-  $handler = $view->new_display('default', 'Defaults', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'viac';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'administer feeds';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použiť';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'log_time' => 'log_time',
-    'request_time' => 'request_time',
-    'message' => 'message',
-    'severity' => 'severity',
-    'importer_name' => 'importer_name',
-    'title' => 'title',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'log_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'request_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'message' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'severity' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'importer_name' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-  );
-  /* No results behavior: Globálny: Rozsiahle textové pole */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'There are no log messages.';
-  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
-  /* Pole: Feeds log: Log time */
-  $handler->display->display_options['fields']['log_time']['id'] = 'log_time';
-  $handler->display->display_options['fields']['log_time']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['log_time']['field'] = 'log_time';
-  $handler->display->display_options['fields']['log_time']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['log_time']['custom_date_format'] = 'Y-m-d H:i:s';
-  /* Pole: Feeds log: Request time */
-  $handler->display->display_options['fields']['request_time']['id'] = 'request_time';
-  $handler->display->display_options['fields']['request_time']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['request_time']['field'] = 'request_time';
-  $handler->display->display_options['fields']['request_time']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['request_time']['custom_date_format'] = 'Y-m-d H:i:s';
-  /* Pole: Feeds log: Správa záznamu */
-  $handler->display->display_options['fields']['message']['id'] = 'message';
-  $handler->display->display_options['fields']['message']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['message']['field'] = 'message';
-  $handler->display->display_options['fields']['message']['label'] = 'Správa';
-  /* Pole: Feeds log: Závažnosť */
-  $handler->display->display_options['fields']['severity']['id'] = 'severity';
-  $handler->display->display_options['fields']['severity']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['severity']['field'] = 'severity';
-  /* Kritéria zoradenia: Feeds log: Log id */
-  $handler->display->display_options['sorts']['flid']['id'] = 'flid';
-  $handler->display->display_options['sorts']['flid']['table'] = 'feeds_log';
-  $handler->display->display_options['sorts']['flid']['field'] = 'flid';
-  $handler->display->display_options['sorts']['flid']['order'] = 'DESC';
-  /* Contextual filter: Feeds log: Importer id */
-  $handler->display->display_options['arguments']['id']['id'] = 'id';
-  $handler->display->display_options['arguments']['id']['table'] = 'feeds_log';
-  $handler->display->display_options['arguments']['id']['field'] = 'id';
-  $handler->display->display_options['arguments']['id']['default_action'] = 'empty';
-  $handler->display->display_options['arguments']['id']['exception']['title'] = 'Všetky';
-  $handler->display->display_options['arguments']['id']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['id']['limit'] = '0';
-  /* Filter criterion: Feeds log: Feed node id */
-  $handler->display->display_options['filters']['feed_nid']['id'] = 'feed_nid';
-  $handler->display->display_options['filters']['feed_nid']['table'] = 'feeds_log';
-  $handler->display->display_options['filters']['feed_nid']['field'] = 'feed_nid';
-  $handler->display->display_options['filters']['feed_nid']['value']['value'] = '0';
-  /* Filter criterion: Feeds log: Závažnosť */
-  $handler->display->display_options['filters']['severity']['id'] = 'severity';
-  $handler->display->display_options['filters']['severity']['table'] = 'feeds_log';
-  $handler->display->display_options['filters']['severity']['field'] = 'severity';
-  $handler->display->display_options['filters']['severity']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['severity']['expose']['operator_id'] = 'severity_op';
-  $handler->display->display_options['filters']['severity']['expose']['label'] = 'Závažnosť';
-  $handler->display->display_options['filters']['severity']['expose']['operator'] = 'severity_op';
-  $handler->display->display_options['filters']['severity']['expose']['identifier'] = 'severity';
-
-  /* Display: Standalone importer page */
-  $handler = $view->new_display('page', 'Standalone importer page', 'page_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['path'] = 'import/%/log';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Log';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['context'] = 0;
-
-  /* Display: Feed node page */
-  $handler = $view->new_display('page', 'Feed node page', 'page_2');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Feeds log: Feed node id */
-  $handler->display->display_options['arguments']['feed_nid']['id'] = 'feed_nid';
-  $handler->display->display_options['arguments']['feed_nid']['table'] = 'feeds_log';
-  $handler->display->display_options['arguments']['feed_nid']['field'] = 'feed_nid';
-  $handler->display->display_options['arguments']['feed_nid']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['feed_nid']['exception']['title'] = 'Všetky';
-  $handler->display->display_options['arguments']['feed_nid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['feed_nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['feed_nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['feed_nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['feed_nid']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['feed_nid']['validate']['type'] = 'feed_nid';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Feeds log: Závažnosť */
-  $handler->display->display_options['filters']['severity']['id'] = 'severity';
-  $handler->display->display_options['filters']['severity']['table'] = 'feeds_log';
-  $handler->display->display_options['filters']['severity']['field'] = 'severity';
-  $handler->display->display_options['filters']['severity']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['severity']['expose']['operator_id'] = 'severity_op';
-  $handler->display->display_options['filters']['severity']['expose']['label'] = 'Závažnosť';
-  $handler->display->display_options['filters']['severity']['expose']['operator'] = 'severity_op';
-  $handler->display->display_options['filters']['severity']['expose']['identifier'] = 'severity';
-  $handler->display->display_options['path'] = 'node/%/log';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Log';
-  $handler->display->display_options['menu']['weight'] = '12';
-  $handler->display->display_options['menu']['context'] = 0;
-
-  /* Display: All entries */
-  $handler = $view->new_display('page', 'All entries', 'page_3');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Feeds log';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Vzťah: Feeds log: Feed node */
-  $handler->display->display_options['relationships']['feed_nid']['id'] = 'feed_nid';
-  $handler->display->display_options['relationships']['feed_nid']['table'] = 'feeds_log';
-  $handler->display->display_options['relationships']['feed_nid']['field'] = 'feed_nid';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Feeds log: Log time */
-  $handler->display->display_options['fields']['log_time']['id'] = 'log_time';
-  $handler->display->display_options['fields']['log_time']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['log_time']['field'] = 'log_time';
-  $handler->display->display_options['fields']['log_time']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['log_time']['custom_date_format'] = 'Y-m-d H:i:s';
-  /* Pole: Feeds log: Request time */
-  $handler->display->display_options['fields']['request_time']['id'] = 'request_time';
-  $handler->display->display_options['fields']['request_time']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['request_time']['field'] = 'request_time';
-  $handler->display->display_options['fields']['request_time']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['request_time']['custom_date_format'] = 'Y-m-d H:i:s';
-  /* Pole: Feeds log: Správa záznamu */
-  $handler->display->display_options['fields']['message']['id'] = 'message';
-  $handler->display->display_options['fields']['message']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['message']['field'] = 'message';
-  $handler->display->display_options['fields']['message']['label'] = 'Správa';
-  /* Pole: Feeds log: Závažnosť */
-  $handler->display->display_options['fields']['severity']['id'] = 'severity';
-  $handler->display->display_options['fields']['severity']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['severity']['field'] = 'severity';
-  /* Pole: Feeds log: Importer name */
-  $handler->display->display_options['fields']['importer_name']['id'] = 'importer_name';
-  $handler->display->display_options['fields']['importer_name']['table'] = 'feeds_log';
-  $handler->display->display_options['fields']['importer_name']['field'] = 'importer_name';
-  $handler->display->display_options['fields']['importer_name']['label'] = 'Importer';
-  $handler->display->display_options['fields']['importer_name']['link'] = '2';
-  /* Pole: Obsah: Názov */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'feed_nid';
-  $handler->display->display_options['fields']['title']['label'] = 'Feed node';
-  $handler->display->display_options['fields']['title']['alter']['max_length'] = '40';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Feeds log: Závažnosť */
-  $handler->display->display_options['filters']['severity']['id'] = 'severity';
-  $handler->display->display_options['filters']['severity']['table'] = 'feeds_log';
-  $handler->display->display_options['filters']['severity']['field'] = 'severity';
-  $handler->display->display_options['filters']['severity']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['severity']['expose']['operator_id'] = 'severity_op';
-  $handler->display->display_options['filters']['severity']['expose']['label'] = 'Závažnosť';
-  $handler->display->display_options['filters']['severity']['expose']['operator'] = 'severity_op';
-  $handler->display->display_options['filters']['severity']['expose']['identifier'] = 'severity';
-  $handler->display->display_options['path'] = 'admin/reports/feeds';
-  $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Feeds log';
-  $handler->display->display_options['menu']['description'] = 'Review log messages of imports and subscriptions to feeds.';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'management';
-  $handler->display->display_options['menu']['context'] = 0;
-  $translatables['feeds_log'] = array(
-    t('Defaults'),
-    t('viac'),
-    t('Použiť'),
-    t('Reset'),
-    t('Zoradiť podľa'),
-    t('Vzostupne'),
-    t('Zostupne'),
-    t('Položiek na stránku'),
-    t('- Všetko -'),
-    t('Offset'),
-    t('« prvá'),
-    t('‹ predchádzajúca'),
-    t('nasledujúca ›'),
-    t('posledná »'),
-    t('There are no log messages.'),
-    t('Log time'),
-    t('Request time'),
-    t('Správa'),
-    t('Závažnosť'),
-    t('Všetky'),
-    t('Standalone importer page'),
-    t('Feed node page'),
-    t('All entries'),
-    t('Feeds log'),
-    t('Feed node'),
-    t('Importer'),
-  );
-  $export['feeds_log'] = $view;
-
-  $view = new view();
-  $view->name = 'frontpage';
-  $view->description = 'Emulates the default Drupal front page; you may set the default home page path to this view to make it your front page.';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Front page';
-  $view->core = 0;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'viac';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použiť';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'node';
-  /* Kritéria zoradenia: Obsah: Prilepený v zozname */
-  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
-  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
-  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
-  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
-  /* Kritéria zoradenia: Obsah: Dátum odoslania */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Obsah: Zobrazené na titulnej strane */
-  $handler->display->display_options['filters']['promote']['id'] = 'promote';
-  $handler->display->display_options['filters']['promote']['table'] = 'node';
-  $handler->display->display_options['filters']['promote']['field'] = 'promote';
-  $handler->display->display_options['filters']['promote']['value'] = '1';
-  $handler->display->display_options['filters']['promote']['group'] = 0;
-  $handler->display->display_options['filters']['promote']['expose']['operator'] = FALSE;
-  /* Filter criterion: Obsah: Zverejnené */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'frontpage';
-
-  /* Display: Feed */
-  $handler = $view->new_display('feed', 'Feed', 'feed');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Front page feed';
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['style_plugin'] = 'rss';
-  $handler->display->display_options['row_plugin'] = 'node_rss';
-  $handler->display->display_options['path'] = 'rss.xml';
-  $handler->display->display_options['displays'] = array(
-    'default' => 'default',
-    'page' => 'page',
-  );
-  $handler->display->display_options['sitename_title'] = '1';
-  $translatables['frontpage'] = array(
-    t('Master'),
-    t('viac'),
-    t('Použiť'),
-    t('Reset'),
-    t('Zoradiť podľa'),
-    t('Vzostupne'),
-    t('Zostupne'),
-    t('Položiek na stránku'),
-    t('- Všetko -'),
-    t('Offset'),
-    t('« prvá'),
-    t('‹ predchádzajúca'),
-    t('nasledujúca ›'),
-    t('posledná »'),
-    t('Page'),
-    t('Feed'),
-    t('Front page feed'),
-  );
-  $export['frontpage'] = $view;
-
-  $view = new view();
-  $view->name = 'glossary';
-  $view->description = 'A list of all content, by letter.';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Glossary';
-  $view->core = 0;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_ajax'] = TRUE;
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'viac';
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    2 => '2',
-  );
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použiť';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = 36;
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'title' => 'title',
-    'name' => 'name',
-    'changed' => 'changed',
-  );
-  $handler->display->display_options['style_options']['default'] = 'title';
-  $handler->display->display_options['style_options']['info'] = array(
-    'title' => array(
-      'sortable' => 1,
-      'separator' => '',
-    ),
-    'name' => array(
-      'sortable' => 1,
-      'separator' => '',
-    ),
-    'changed' => array(
-      'sortable' => 1,
-      'separator' => '',
-    ),
-  );
-  /* Vzťah: Obsah: Autor */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Pole: Obsah: Názov */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  /* Pole: Používateľ: Názov */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'users';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Autor';
-  /* Pole: Obsah: Dátum aktualizácie */
-  $handler->display->display_options['fields']['changed']['id'] = 'changed';
-  $handler->display->display_options['fields']['changed']['table'] = 'node';
-  $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Posledná aktualizácia';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'large';
-  /* Contextual filter: Obsah: Názov */
-  $handler->display->display_options['arguments']['title']['id'] = 'title';
-  $handler->display->display_options['arguments']['title']['table'] = 'node';
-  $handler->display->display_options['arguments']['title']['field'] = 'title';
-  $handler->display->display_options['arguments']['title']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['title']['exception']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['title']['exception']['title'] = 'Všetky';
-  $handler->display->display_options['arguments']['title']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['title']['default_argument_options']['argument'] = 'a';
-  $handler->display->display_options['arguments']['title']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['title']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['title']['glossary'] = TRUE;
-  $handler->display->display_options['arguments']['title']['limit'] = '1';
-  $handler->display->display_options['arguments']['title']['case'] = 'upper';
-  $handler->display->display_options['arguments']['title']['path_case'] = 'lower';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'glossary';
-  $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Glossary';
-  $handler->display->display_options['menu']['weight'] = '0';
-
-  /* Display: Attachment */
-  $handler = $view->new_display('attachment', 'Attachment', 'attachment');
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Obsah: Názov */
-  $handler->display->display_options['arguments']['title']['id'] = 'title';
-  $handler->display->display_options['arguments']['title']['table'] = 'node';
-  $handler->display->display_options['arguments']['title']['field'] = 'title';
-  $handler->display->display_options['arguments']['title']['default_action'] = 'summary';
-  $handler->display->display_options['arguments']['title']['exception']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['title']['exception']['title'] = 'Všetky';
-  $handler->display->display_options['arguments']['title']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['title']['default_argument_options']['argument'] = 'a';
-  $handler->display->display_options['arguments']['title']['summary']['format'] = 'unformatted_summary';
-  $handler->display->display_options['arguments']['title']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['title']['summary_options']['inline'] = TRUE;
-  $handler->display->display_options['arguments']['title']['summary_options']['separator'] = ' | ';
-  $handler->display->display_options['arguments']['title']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['title']['glossary'] = TRUE;
-  $handler->display->display_options['arguments']['title']['limit'] = '1';
-  $handler->display->display_options['arguments']['title']['case'] = 'upper';
-  $handler->display->display_options['arguments']['title']['path_case'] = 'lower';
-  $handler->display->display_options['displays'] = array(
-    'default' => 'default',
-    'page' => 'page',
-  );
-  $handler->display->display_options['inherit_arguments'] = FALSE;
-  $translatables['glossary'] = array(
-    t('Master'),
-    t('viac'),
-    t('Použiť'),
-    t('Reset'),
-    t('Zoradiť podľa'),
-    t('Vzostupne'),
-    t('Zostupne'),
-    t('Položiek na stránku'),
-    t('- Všetko -'),
-    t('Offset'),
-    t('« prvá'),
-    t('‹ predchádzajúca'),
-    t('nasledujúca ›'),
-    t('posledná »'),
-    t('autor'),
-    t('Názov'),
-    t('Autor'),
-    t('Posledná aktualizácia'),
-    t('Všetky'),
-    t('Page'),
-    t('Attachment'),
-  );
-  $export['glossary'] = $view;
 
   $view = new view();
   $view->name = 'oznamy';
@@ -5893,6 +5162,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -5949,7 +5219,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -5991,6 +5261,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '25';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -6115,7 +5386,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -6168,6 +5439,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -6443,7 +5715,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -6493,6 +5765,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -6703,7 +5976,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať';
   $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
@@ -6887,9 +6160,9 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['path'] = 'opravit-importovane';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Vyhľadať';
+  $handler->display->display_options['menu']['title'] = 'Opraviť importované';
   $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['v_etky_hesl_'] = array(
@@ -6903,7 +6176,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -6959,6 +6232,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -7261,7 +6535,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -7321,6 +6595,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -7539,7 +6814,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
   $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['vyhladat_ilustracie'] = array(
@@ -7553,7 +6828,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
@@ -7603,6 +6878,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
@@ -7679,7 +6955,7 @@ function rs_beliana_views_views_default_views() {
     t('Zostupne'),
     t('Položiek na stránku'),
     t('- Všetko -'),
-    t('Offset'),
+    t('Zobraziť od'),
     t('« prvá'),
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
