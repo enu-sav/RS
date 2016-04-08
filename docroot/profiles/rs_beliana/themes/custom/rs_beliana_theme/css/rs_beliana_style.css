@@ -21,3 +21,11 @@
     margin-bottom: 0px;
     font-size: 2em;
 }
+
+.adminimal-frontend table td,
+.adminimal-frontend table th {
+    vertical-align: middle;
+    padding: 8px 10px;
+    border: 1px solid black;
+    color: #000;
+}
