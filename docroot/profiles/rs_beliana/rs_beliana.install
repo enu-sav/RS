@@ -27,12 +27,16 @@ function rs_beliana_install() {
     }
   }
 
+  drush_features_revert_all();
+
   // Cache a fully-built schema.
   drupal_get_schema(NULL, TRUE);
 
   // Rebuild permissions and clear cache.
   node_access_rebuild();
   drupal_flush_all_caches();
+
+  drush_features_revert_all();
 }
 
 /**
