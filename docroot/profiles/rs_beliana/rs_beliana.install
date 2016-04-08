@@ -27,6 +27,33 @@ function rs_beliana_install() {
     }
   }
 
+  $blocks = array(
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => 'rs_beliana_theme',
+      'status' => 1,
+      'weight' => -100,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array(
+    'module',
+    'delta',
+    'theme',
+    'status',
+    'weight',
+    'region',
+    'pages',
+    'cache',
+  ));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
   drush_features_revert_all();
 
   // Cache a fully-built schema.
@@ -49,4 +76,58 @@ function rs_beliana_install_tasks_alter(&$tasks, $install_state) {
   $install_state['parameters']['locale'] = 'sk';
   $tasks['install_select_profile']['display'] = FALSE;
   $tasks['install_select_locale']['display'] = FALSE;
+}
+
+/**
+ * Place user login block.
+ */
+function rs_beliana_update_7001() {
+  $query = db_select('block', 'b')
+    ->fields('b')
+    ->condition('module', 'user')
+    ->condition('delta', 'login')
+    ->condition('theme', 'rs_beliana_theme');
+  $result = $query->execute()->fetchAll();
+
+  if (!empty($result)) {
+    db_update('block')
+      ->condition('module', 'user')
+      ->condition('delta', 'login')
+      ->condition('theme', 'rs_beliana_theme')
+      ->fields(array(
+        'module' => 'user',
+        'delta' => 'login',
+        'theme' => 'rs_beliana_theme',
+        'status' => 1,
+        'weight' => -100,
+        'region' => 'content',
+        'pages' => '',
+        'cache' => -1,
+      ))
+      ->execute();
+  }
+  else {
+    db_insert('block')
+      ->fields(array(
+        'module',
+        'delta',
+        'theme',
+        'status',
+        'weight',
+        'region',
+        'pages',
+        'cache',
+      ))
+      ->values(array(
+        'module' => 'user',
+        'delta' => 'login',
+        'theme' => 'rs_beliana_theme',
+        'status' => 1,
+        'weight' => -100,
+        'region' => 'content',
+        'pages' => '',
+        'cache' => -1,
+      ))
+      ->execute();
+  }
 }
