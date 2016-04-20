@@ -522,7 +522,12 @@ class views_plugin_style extends views_plugin {
         foreach ($result as $count => $row) {
           $this->view->row_index = $count;
           foreach ($keys as $id) {
-            $this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
+            //$this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
+	    if ($id == "field_text_hesla"){
+            	$this->rendered_fields[$count][$id] = $row->_field_data["nid"]["entity"]->field_text_hesla["und"][0]["value"];
+	    } else {
+            	$this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
+	    } 
           }
 
           $this->row_tokens[$count] = $this->view->field[$id]->get_render_tokens(array());
