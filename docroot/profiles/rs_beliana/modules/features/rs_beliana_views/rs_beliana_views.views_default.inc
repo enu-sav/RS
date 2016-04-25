@@ -4880,7 +4880,7 @@ function rs_beliana_views_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Export na import';
+  $handler->display->display_options['title'] = 'Exportovať importované heslá';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'viac';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -5054,8 +5054,8 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Export importované */
+  $handler = $view->new_display('page', 'Export importované', 'page');
   $handler->display->display_options['path'] = 'export-na-import';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Export na import';
@@ -5064,8 +5064,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Data export */
-  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  /* Display: Export importované - dáta */
+  $handler = $view->new_display('views_data_export', 'Export importované - dáta', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
@@ -5078,38 +5078,94 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Obsah: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'NID';
-  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Pole: Feeds item: Item GUID */
+  $handler->display->display_options['fields']['guid']['id'] = 'guid';
+  $handler->display->display_options['fields']['guid']['table'] = 'feeds_item';
+  $handler->display->display_options['fields']['guid']['field'] = 'guid';
+  $handler->display->display_options['fields']['guid']['label'] = 'guid';
+  $handler->display->display_options['fields']['guid']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['label'] = 'kategoria';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Obsah: Komentár/inštrukcie */
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['label'] = 'komentar';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['type'] = 'text_plain';
-  /* Pole: Workbench Moderation: Stav */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  $handler->display->display_options['path'] = 'export-import.csv';
+  /* Pole: Obsah: Dátum */
+  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['label'] = 'datum';
+  $handler->display->display_options['fields']['field_datum']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_datum']['type'] = 'date_plain';
+  $handler->display->display_options['fields']['field_datum']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => '',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
+  /* Pole: Obsah: Ilustrácia */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['label'] = 'ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'view_mode' => 'default',
+    'links' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  /* Pole: Obsah: Atribúty */
+  $handler->display->display_options['fields']['field_atributy']['id'] = 'field_atributy';
+  $handler->display->display_options['fields']['field_atributy']['table'] = 'field_data_field_atributy';
+  $handler->display->display_options['fields']['field_atributy']['field'] = 'field_atributy';
+  $handler->display->display_options['fields']['field_atributy']['label'] = 'atrib';
+  $handler->display->display_options['fields']['field_atributy']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Erráta */
+  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
+  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
+  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
+  $handler->display->display_options['fields']['field_errta']['label'] = 'errata';
+  $handler->display->display_options['fields']['field_errta']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Cesta */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = 'alias';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['path'] = 'exim_importovane.csv';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
   );
+  $handler->display->display_options['sitename_title'] = 0;
   $handler->display->display_options['use_batch'] = 'batch';
   $handler->display->display_options['segment_size'] = '100';
   $translatables['export_na_import'] = array(
     t('Master'),
-    t('Export na import'),
+    t('Exportovať importované heslá'),
     t('viac'),
     t('Použiť'),
     t('Reset'),
@@ -5128,10 +5184,16 @@ function rs_beliana_views_views_default_views() {
     t('Text hesla'),
     t('Súbor'),
     t('Lexikálna skupina'),
-    t('Page'),
-    t('Data export'),
-    t('NID'),
-    t('Stav'),
+    t('Export importované'),
+    t('Export importované - dáta'),
+    t('guid'),
+    t('kategoria'),
+    t('komentar'),
+    t('datum'),
+    t('ilustracia'),
+    t('atrib'),
+    t('errata'),
+    t('alias'),
   );
   $export['export_na_import'] = $view;
 
