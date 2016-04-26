@@ -5088,8 +5088,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'nazov';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
@@ -5108,16 +5111,19 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['label'] = 'text';
+  $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_hesla']['type'] = 'text_plain';
   /* Pole: Obsah: Dátum */
   $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
   $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
   $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
   $handler->display->display_options['fields']['field_datum']['label'] = 'datum';
+  $handler->display->display_options['fields']['field_datum']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['field_datum']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_datum']['type'] = 'date_plain';
+  $handler->display->display_options['fields']['field_datum']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_datum']['settings'] = array(
-    'format_type' => 'long',
+    'format_type' => 'short',
     'fromto' => '',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -5125,6 +5131,7 @@ function rs_beliana_views_views_default_views() {
     'show_remaining_days' => 0,
   );
   $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_datum']['separator'] = ';';
   /* Pole: Obsah: Ilustrácia */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
@@ -5551,8 +5558,10 @@ function rs_beliana_views_views_default_views() {
     t('Export importované'),
     t('Export importované - dáta'),
     t('guid'),
+    t('nazov'),
     t('kategoria'),
     t('komentar'),
+    t('text'),
     t('datum'),
     t('ilustracia'),
     t('atrib'),

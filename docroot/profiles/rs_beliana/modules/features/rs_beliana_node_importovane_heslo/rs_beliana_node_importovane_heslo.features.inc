@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_node_importovane_heslo.features.inc
+ * rs_beliana_node_importovane_heslo.features.inc
  */
 
 /**

@@ -33,6 +33,7 @@ function rs_beliana_feeds_feeds_importer_default() {
       'config' => array(
         'delimiter' => ',',
         'no_headers' => 0,
+        'encoding' => 'UTF-8',
       ),
     ),
     'processor' => array(
@@ -46,53 +47,75 @@ function rs_beliana_feeds_feeds_importer_default() {
             'source' => 'guid',
             'target' => 'guid',
             'unique' => 1,
+            'language' => 'und',
           ),
           1 => array(
             'source' => 'nazov',
             'target' => 'title',
             'unique' => FALSE,
+            'language' => 'und',
           ),
           2 => array(
-            'source' => 'zorad',
-            'target' => 'field_na_zoradenie',
-            'unique' => FALSE,
-          ),
-          3 => array(
             'source' => 'text',
             'target' => 'field_text_hesla',
             'unique' => FALSE,
+            'language' => 'und',
           ),
-          4 => array(
+          3 => array(
             'source' => 'atrib',
             'target' => 'field_atributy',
             'unique' => FALSE,
+            'language' => 'und',
           ),
-          5 => array(
+          4 => array(
             'source' => 'jazyk',
             'target' => 'language',
             'unique' => FALSE,
+            'language' => 'und',
           ),
-          6 => array(
+          5 => array(
             'source' => 'alias',
             'target' => 'path_alias',
             'unique' => FALSE,
+            'language' => 'und',
           ),
-          7 => array(
+          6 => array(
             'source' => 'ilustracia',
             'target' => 'field_ilustracia',
             'unique' => FALSE,
+            'language' => 'und',
           ),
-          8 => array(
+          7 => array(
             'source' => 'kategoria',
             'target' => 'field_lexikalna_skupina',
+            'unique' => FALSE,
+            'language' => 'und',
+          ),
+          8 => array(
+            'source' => 'komentar',
+            'target' => 'field_komentar_instrukcie',
+            'unique' => FALSE,
+            'language' => 'und',
+          ),
+          9 => array(
+            'source' => 'datum',
+            'target' => 'field_datum:start',
+            'unique' => FALSE,
+            'language' => 'und',
+          ),
+          10 => array(
+            'source' => 'errata',
+            'target' => 'field_errta',
             'unique' => FALSE,
           ),
         ),
         'update_existing' => '1',
         'input_format' => 'filtered_html',
-        'skip_hash_check' => 1,
+        'skip_hash_check' => 0,
         'bundle' => 'importovane_heslo',
         'update_non_existent' => 'skip',
+        'insert_new' => '1',
+        'language' => 'und',
       ),
     ),
     'content_type' => '',
