@@ -30,7 +30,6 @@ features[field_instance][] = node-ilustracia-field_komentar_instrukcie
 features[field_instance][] = node-ilustracia-field_lexikalna_skupina_il
 features[field_instance][] = node-ilustracia-field_licencia1
 features[field_instance][] = node-ilustracia-field_meno_autora_diela
-features[field_instance][] = node-ilustracia-field_modifikovane
 features[field_instance][] = node-ilustracia-field_na_zoradenie
 features[field_instance][] = node-ilustracia-field_nazov_diela
 features[field_instance][] = node-ilustracia-field_obrazok_na_zverejnenie_

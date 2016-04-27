@@ -5356,25 +5356,20 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['guid']['field'] = 'guid';
   $handler->display->display_options['fields']['guid']['label'] = 'guid';
   $handler->display->display_options['fields']['guid']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Názov */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'nid';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Cesta */
-  $handler->display->display_options['fields']['path']['id'] = 'path';
-  $handler->display->display_options['fields']['path']['table'] = 'node';
-  $handler->display->display_options['fields']['path']['field'] = 'path';
-  $handler->display->display_options['fields']['path']['label'] = 'alias';
-  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'nazov';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['id'] = 'field_lexikalna_skupina_il';
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['table'] = 'field_data_field_lexikalna_skupina_il';
@@ -5382,6 +5377,128 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['label'] = 'kategoria';
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['delta_offset'] = '0';
+  /* Pole: Obsah: Komentár/inštrukcie */
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['label'] = 'komentar';
+  /* Pole: Obsah: Popis ilustrácie */
+  $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
+  $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
+  $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
+  $handler->display->display_options['fields']['field_popis']['label'] = 'popis';
+  $handler->display->display_options['fields']['field_popis']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_popis']['alter']['preserve_tags'] = '<p><strong><em><sub><sup>';
+  /* Pole: Obsah: Obrázok (na použitie) */
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['id'] = 'field_obrazok_na_zverejnenie_';
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['table'] = 'field_data_field_obrazok_na_zverejnenie_';
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['field'] = 'field_obrazok_na_zverejnenie_';
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['label'] = 'nazverejnenie';
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['type'] = 'image_url';
+  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['settings'] = array(
+    'url_type' => '0',
+    'image_style' => '',
+    'image_link' => '',
+  );
+  /* Pole: Obsah: Obrázok (návrh) */
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'obr_navrh';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['type'] = 'image_url';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
+    'url_type' => '0',
+    'image_style' => '',
+    'image_link' => '',
+  );
+  /* Pole: Obsah: Použiť */
+  $handler->display->display_options['fields']['field_pouzit']['id'] = 'field_pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['table'] = 'field_data_field_pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['field'] = 'field_pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['label'] = 'pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field_pouzit']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_pouzit']['separator'] = ';';
+  /* Pole: Obsah: Pôvod ilustrácie */
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['id'] = 'field_zdroj_ilustracie';
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['table'] = 'field_data_field_zdroj_ilustracie';
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['field'] = 'field_zdroj_ilustracie';
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['label'] = 'povod_ilustracie';
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['type'] = 'list_key';
+  /* Pole: Obsah: Licencia */
+  $handler->display->display_options['fields']['field_licencia1']['id'] = 'field_licencia1';
+  $handler->display->display_options['fields']['field_licencia1']['table'] = 'field_data_field_licencia1';
+  $handler->display->display_options['fields']['field_licencia1']['field'] = 'field_licencia1';
+  $handler->display->display_options['fields']['field_licencia1']['label'] = 'licencia';
+  /* Pole: Nefunkčný/chýbajúci ovládač */
+  $handler->display->display_options['fields']['field_modifikovane']['id'] = 'field_modifikovane';
+  $handler->display->display_options['fields']['field_modifikovane']['table'] = 'field_data_field_modifikovane';
+  $handler->display->display_options['fields']['field_modifikovane']['field'] = 'field_modifikovane';
+  $handler->display->display_options['fields']['field_modifikovane']['label'] = 'modifikovane';
+  /* Pole: Obsah: Názov diela */
+  $handler->display->display_options['fields']['field_nazov_diela']['id'] = 'field_nazov_diela';
+  $handler->display->display_options['fields']['field_nazov_diela']['table'] = 'field_data_field_nazov_diela';
+  $handler->display->display_options['fields']['field_nazov_diela']['field'] = 'field_nazov_diela';
+  $handler->display->display_options['fields']['field_nazov_diela']['label'] = 'nazov_diela';
+  /* Pole: Obsah: Dátum prevzatia diela */
+  $handler->display->display_options['fields']['field_d_tum_prevzatia']['id'] = 'field_d_tum_prevzatia';
+  $handler->display->display_options['fields']['field_d_tum_prevzatia']['table'] = 'field_data_field_d_tum_prevzatia';
+  $handler->display->display_options['fields']['field_d_tum_prevzatia']['field'] = 'field_d_tum_prevzatia';
+  $handler->display->display_options['fields']['field_d_tum_prevzatia']['label'] = 'datum_prevzatia';
+  $handler->display->display_options['fields']['field_d_tum_prevzatia']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Inštitúcia */
+  $handler->display->display_options['fields']['field_institucia']['id'] = 'field_institucia';
+  $handler->display->display_options['fields']['field_institucia']['table'] = 'field_data_field_institucia';
+  $handler->display->display_options['fields']['field_institucia']['field'] = 'field_institucia';
+  $handler->display->display_options['fields']['field_institucia']['label'] = 'institucia';
+  /* Pole: Obsah: Držiteľ práv */
+  $handler->display->display_options['fields']['field_drzitel_prav']['id'] = 'field_drzitel_prav';
+  $handler->display->display_options['fields']['field_drzitel_prav']['table'] = 'field_data_field_drzitel_prav';
+  $handler->display->display_options['fields']['field_drzitel_prav']['field'] = 'field_drzitel_prav';
+  $handler->display->display_options['fields']['field_drzitel_prav']['label'] = 'drzitel_prav';
+  /* Pole: Obsah: URL textu licencie */
+  $handler->display->display_options['fields']['field_url_textu_licencie_l']['id'] = 'field_url_textu_licencie_l';
+  $handler->display->display_options['fields']['field_url_textu_licencie_l']['table'] = 'field_data_field_url_textu_licencie_l';
+  $handler->display->display_options['fields']['field_url_textu_licencie_l']['field'] = 'field_url_textu_licencie_l';
+  $handler->display->display_options['fields']['field_url_textu_licencie_l']['label'] = 'URL_licencie';
+  $handler->display->display_options['fields']['field_url_textu_licencie_l']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_url_textu_licencie_l']['type'] = 'link_absolute';
+  /* Pole: Obsah: URL autora diela */
+  $handler->display->display_options['fields']['field_url_autora_diela_l']['id'] = 'field_url_autora_diela_l';
+  $handler->display->display_options['fields']['field_url_autora_diela_l']['table'] = 'field_data_field_url_autora_diela_l';
+  $handler->display->display_options['fields']['field_url_autora_diela_l']['field'] = 'field_url_autora_diela_l';
+  $handler->display->display_options['fields']['field_url_autora_diela_l']['label'] = 'URL_autora';
+  $handler->display->display_options['fields']['field_url_autora_diela_l']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_url_autora_diela_l']['type'] = 'link_absolute';
+  /* Pole: Obsah: URL diela */
+  $handler->display->display_options['fields']['field_url_diela_l']['id'] = 'field_url_diela_l';
+  $handler->display->display_options['fields']['field_url_diela_l']['table'] = 'field_data_field_url_diela_l';
+  $handler->display->display_options['fields']['field_url_diela_l']['field'] = 'field_url_diela_l';
+  $handler->display->display_options['fields']['field_url_diela_l']['label'] = 'URL_diela';
+  $handler->display->display_options['fields']['field_url_diela_l']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_url_diela_l']['type'] = 'link_absolute';
+  /* Pole: Obsah: Jazyk */
+  $handler->display->display_options['fields']['language']['id'] = 'language';
+  $handler->display->display_options['fields']['language']['table'] = 'node';
+  $handler->display->display_options['fields']['language']['field'] = 'language';
+  $handler->display->display_options['fields']['language']['label'] = 'jazyk';
+  $handler->display->display_options['fields']['language']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['language']['alter']['text'] = 'sk';
+  /* Pole: Obsah: Cesta */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = 'alias';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
@@ -5570,6 +5687,22 @@ function rs_beliana_views_views_default_views() {
     t('Export ilustrácie'),
     t('Export ilustácie - dáta'),
     t('nid'),
+    t('popis'),
+    t('nazverejnenie'),
+    t('obr_navrh'),
+    t('pouzit'),
+    t('povod_ilustracie'),
+    t('licencia'),
+    t('modifikovane'),
+    t('nazov_diela'),
+    t('datum_prevzatia'),
+    t('institucia'),
+    t('drzitel_prav'),
+    t('URL_licencie'),
+    t('URL_autora'),
+    t('URL_diela'),
+    t('jazyk'),
+    t('sk'),
   );
   $export['export_na_import'] = $view;
 
