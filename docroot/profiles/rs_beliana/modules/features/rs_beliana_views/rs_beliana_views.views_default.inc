@@ -7244,10 +7244,10 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['vocabulary'] = 'lexikalne_skupiny';
 
-  /* Display: Vyhľadať */
-  $handler = $view->new_display('page', 'Vyhľadať', 'page');
+  /* Display: Vyhľadať ilustrácie */
+  $handler = $view->new_display('page', 'Vyhľadať ilustrácie', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Vyhľadať';
+  $handler->display->display_options['title'] = 'Vyhľadať ilustrácie';
   $handler->display->display_options['path'] = 'vyhladat-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
@@ -7282,7 +7282,7 @@ function rs_beliana_views_views_default_views() {
     t('Súbor'),
     t('Súbor (field_taxsubor)'),
     t('Lexikálna skupina'),
-    t('Vyhľadať'),
+    t('Vyhľadať ilustrácie'),
   );
   $export['vyhladat_ilustracie'] = $view;
 

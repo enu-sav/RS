@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_node_ilustracia.features.conditional_fields.inc
+ * rs_beliana_node_ilustracia.features.conditional_fields.inc
  */
 
 /**
@@ -1828,7 +1828,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
   $items["node:ilustracia:8"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
-    'dependent' => 'field_url_a_meno_autora_diela',
+    'dependent' => 'field_url_autora_diela_l',
     'dependee' => 'field_zdroj_ilustracie',
     'options' => array(
       'state' => 'visible',
@@ -1908,6 +1908,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -1929,14 +1936,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1957,7 +1964,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2007,6 +2014,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -2019,11 +2030,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -2035,7 +2046,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
@@ -2054,7 +2065,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
   $items["node:ilustracia:9"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
-    'dependent' => 'field_url_a_nazov_diela',
+    'dependent' => 'field_url_diela_l',
     'dependee' => 'field_zdroj_ilustracie',
     'options' => array(
       'state' => 'visible',
@@ -2134,6 +2145,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -2155,14 +2173,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2183,7 +2201,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2233,6 +2251,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -2245,11 +2267,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -2261,7 +2283,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
@@ -2280,7 +2302,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
   $items["node:ilustracia:10"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
-    'dependent' => 'field_url_textu_licencie',
+    'dependent' => 'field_url_textu_licencie_l',
     'dependee' => 'field_zdroj_ilustracie',
     'options' => array(
       'state' => 'visible',
@@ -2360,6 +2382,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -2381,14 +2410,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2409,7 +2438,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2459,6 +2488,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -2471,11 +2504,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -2487,20 +2520,18 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
       ),
       'selector' => '',
-      'values_set' => 1,
-      'value_form' => 'CC licencia',
-      'value' => array(
-        0 => array(
-          'value' => 'CC licencia',
-        ),
+      'values_set' => 3,
+      'value_form' => NULL,
+      'values' => array(
+        0 => 'CC licencia',
       ),
-      'values' => array(),
+      'value' => array(),
     ),
   );
 

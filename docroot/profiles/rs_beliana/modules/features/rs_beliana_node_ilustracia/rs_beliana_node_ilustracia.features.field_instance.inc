@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_node_ilustracia.features.field_instance.inc
+ * rs_beliana_node_ilustracia.features.field_instance.inc
  */
 
 /**
@@ -786,155 +786,194 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-ilustracia-field_url_a_meno_autora_diela'.
-  $field_instances['node-ilustracia-field_url_a_meno_autora_diela'] = array(
+  // Exported field_instance: 'node-ilustracia-field_url_autora_diela_l'.
+  $field_instances['node-ilustracia-field_url_autora_diela_l'] = array(
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte odkaz (URL) na stránku autora (maliara, fotografa) diela. Ak na stránke diela nie je uvedený odkaz na stránku autora, pole nechajte prázdne.',
+    'description' => 'Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
-        'module' => 'url',
-        'settings' => array(
-          'nofollow' => FALSE,
-          'trim_length' => 80,
-        ),
-        'type' => 'url_default',
-        'weight' => 12,
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 21,
       ),
       'export' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_url_a_meno_autora_diela',
+    'field_name' => 'field_url_autora_diela_l',
     'label' => 'URL autora diela',
     'required' => 0,
     'settings' => array(
-      'title_fetch' => 0,
-      'title_field' => 0,
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'rel_remove' => 'default',
+      'title' => 'none',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
       'user_register_form' => FALSE,
+      'validate_url' => 1,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'url',
-      'settings' => array(
-        'size' => 255,
-      ),
-      'type' => 'url_external',
-      'weight' => 16,
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-ilustracia-field_url_a_nazov_diela'.
-  $field_instances['node-ilustracia-field_url_a_nazov_diela'] = array(
+  // Exported field_instance: 'node-ilustracia-field_url_diela_l'.
+  $field_instances['node-ilustracia-field_url_diela_l'] = array(
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
-        'module' => 'url',
-        'settings' => array(
-          'nofollow' => FALSE,
-          'trim_length' => 80,
-        ),
-        'type' => 'url_default',
-        'weight' => 11,
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 22,
       ),
       'export' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_url_a_nazov_diela',
+    'field_name' => 'field_url_diela_l',
     'label' => 'URL diela',
     'required' => 1,
     'settings' => array(
-      'title_fetch' => 0,
-      'title_field' => 0,
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'rel_remove' => 'default',
+      'title' => 'none',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
       'user_register_form' => FALSE,
+      'validate_url' => 1,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'url',
-      'settings' => array(
-        'size' => 255,
-      ),
-      'type' => 'url_external',
-      'weight' => 14,
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-ilustracia-field_url_textu_licencie'.
-  $field_instances['node-ilustracia-field_url_textu_licencie'] = array(
+  // Exported field_instance: 'node-ilustracia-field_url_textu_licencie_l'.
+  $field_instances['node-ilustracia-field_url_textu_licencie_l'] = array(
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
-        'module' => 'url',
-        'settings' => array(
-          'nofollow' => FALSE,
-          'trim_length' => 80,
-        ),
-        'type' => 'url_default',
-        'weight' => 14,
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 20,
       ),
       'export' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_url_textu_licencie',
+    'field_name' => 'field_url_textu_licencie_l',
     'label' => 'URL textu licencie',
     'required' => 1,
     'settings' => array(
-      'title_fetch' => 0,
-      'title_field' => 0,
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'rel_remove' => 'default',
+      'title' => 'none',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
       'user_register_form' => FALSE,
+      'validate_url' => 1,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'url',
-      'settings' => array(
-        'size' => 255,
-      ),
-      'type' => 'url_external',
-      'weight' => 12,
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1077,7 +1116,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela');
-  t('Uveďte odkaz (URL) na stránku autora (maliara, fotografa) diela. Ak na stránke diela nie je uvedený odkaz na stránku autora, pole nechajte prázdne.');
   t('Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.');
   t('Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
