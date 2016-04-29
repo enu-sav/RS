@@ -297,7 +297,9 @@ function beliana_merge(&$entity, $context = array()) {
       }
       if (!$found) {
         $master->field_spravit_1_korekturu[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
-        $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
+	//MS we want to preserve the original taxonomy values in further processing
+        //MS $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
+        $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
       }
     }
     node_save($master);
@@ -450,7 +452,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
     if ($values['state'] === '2_korekt_ra') {
       if (count($values['node']->field_lexikalna_skupina['und']) != 1) {
-        drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
+        //MS drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
+        drupal_set_message('Heslo je zlúčené a má viacero lexikálnych skupín. Pri odosielaní na 2. korektúru však heslo môže ma len jednu lexikálnu skupinu.', 'error');
+        drupal_set_message('Lexikálne skupiny upravte, heslo uložte a potom odošlite na 2. korektúru ešte raz. Po návrate z 2. korektúry sa lexikálne skupiny vrátia do pôvodného stavu.', 'error');
         $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
       }
     }
