@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_media.features.ckeditor_profile.inc
+ * rs_beliana_media.features.ckeditor_profile.inc
  */
 
 /**
@@ -93,6 +93,7 @@ config.specialChars = [
 [\'±\', \'plus minus\'],
 [\'µ\',\'mikro\'],
 [\'Ω\',\'Ohm\'],
+[\'∞\',\'nekonečno\'],
 [\'*\',\'hviezdička\'],
 [\'#\',\'\'],
 [\'≈\',\'približne rovné\'],

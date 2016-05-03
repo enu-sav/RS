@@ -5432,11 +5432,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_licencia1']['table'] = 'field_data_field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['field'] = 'field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['label'] = 'licencia';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
-  $handler->display->display_options['fields']['field_modifikovane']['id'] = 'field_modifikovane';
-  $handler->display->display_options['fields']['field_modifikovane']['table'] = 'field_data_field_modifikovane';
-  $handler->display->display_options['fields']['field_modifikovane']['field'] = 'field_modifikovane';
-  $handler->display->display_options['fields']['field_modifikovane']['label'] = 'modifikovane';
   /* Pole: Obsah: Názov diela */
   $handler->display->display_options['fields']['field_nazov_diela']['id'] = 'field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['table'] = 'field_data_field_nazov_diela';
@@ -5447,6 +5442,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['table'] = 'field_data_field_d_tum_prevzatia';
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['field'] = 'field_d_tum_prevzatia';
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['label'] = 'datum_prevzatia';
+  $handler->display->display_options['fields']['field_d_tum_prevzatia']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['settings'] = array(
     'format_type' => 'short',
     'fromto' => 'both',
@@ -5693,7 +5689,6 @@ function rs_beliana_views_views_default_views() {
     t('pouzit'),
     t('povod_ilustracie'),
     t('licencia'),
-    t('modifikovane'),
     t('nazov_diela'),
     t('datum_prevzatia'),
     t('institucia'),

@@ -840,10 +840,10 @@ function rs_beliana_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'Zatiaľ neurčený' => 'Zatiaľ neurčený',
-        'Vlastná ilustrácia' => ' Vlastná ilustrácia (EncÚ)',
-        'Public domain' => ' Voľné dielo, 70 (50) rokov od smrti autora. Prevzaté z webu bez zmluvy.',
-        'CC licencia' => ' CC, voľné dielo alebo iné, rozhodnutím autora. Prevzaté z webu bez zmluvy.',
-        'Získané na základe zmluvy' => ' Získané na základe zmluvy s inštitúciou (v poli Použiť zaškrtnite povolený spôsob použitia)',
+        'Vlastná ilustrácia' => ' Vlastná ilustrácia EncÚ',
+        'Public domain' => ' Voľné dielo, 70 (50) rokov od smrti autora',
+        'CC licencia' => ' CC alebo voľné dielo, rozhodnutím autora',
+        'Získané na základe zmluvy' => 'Získané na základe zmluvy',
       ),
       'allowed_values_function' => '',
     ),

@@ -109,7 +109,7 @@ function rs_beliana_feeds_feeds_tamper_default() {
   $feeds_tamper->importer = 'import_ilustr_cie';
   $feeds_tamper->source = 'datum_prevzatia';
   $feeds_tamper->plugin_id = 'strtotime';
-  $feeds_tamper->settings = '';
+  $feeds_tamper->settings = array();
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'String to Unix timestamp';
   $export['import_ilustr_cie-datum_prevzatia-strtotime'] = $feeds_tamper;

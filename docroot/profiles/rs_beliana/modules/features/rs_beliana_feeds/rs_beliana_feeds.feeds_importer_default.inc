@@ -316,54 +316,48 @@ function rs_beliana_feeds_feeds_importer_default() {
             'language' => 'und',
           ),
           11 => array(
-            'source' => 'modifikovane',
-            'target' => 'field_modifikovane',
-            'unique' => FALSE,
-            'language' => 'und',
-          ),
-          12 => array(
             'source' => 'nazov_diela',
             'target' => 'field_nazov_diela',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          13 => array(
+          12 => array(
             'source' => 'datum_prevzatia',
             'target' => 'field_d_tum_prevzatia:start',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          14 => array(
+          13 => array(
             'source' => 'institucia',
             'target' => 'field_institucia',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          15 => array(
+          14 => array(
             'source' => 'drzitel_prav',
             'target' => 'field_drzitel_prav',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          16 => array(
+          15 => array(
             'source' => 'URL_licencie',
             'target' => 'field_url_textu_licencie_l:url',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          17 => array(
+          16 => array(
             'source' => 'URL_autora',
             'target' => 'field_url_autora_diela_l:url',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          18 => array(
+          17 => array(
             'source' => 'URL_diela',
             'target' => 'field_url_diela_l:url',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          19 => array(
+          18 => array(
             'source' => 'jazyk',
             'target' => 'language',
             'unique' => FALSE,
