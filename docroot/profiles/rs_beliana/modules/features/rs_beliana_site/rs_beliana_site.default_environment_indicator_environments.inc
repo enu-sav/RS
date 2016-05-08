@@ -30,7 +30,7 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment->api_version = 1;
   $environment->machine = 'dev';
   $environment->name = 'DEV';
-  $environment->regexurl = 'rs.encyclopaedia.sk/dev/';
+  $environment->regexurl = 'dev.beliana.sav.sk';
   $environment->settings = array(
     'color' => '#37aa33',
     'text_color' => '#ffffff',
@@ -43,9 +43,9 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment = new stdClass();
   $environment->disabled = FALSE; /* Edit this to true to make a default environment disabled initially */
   $environment->api_version = 1;
-  $environment->machine = 'test';
-  $environment->name = 'TEST';
-  $environment->regexurl = 'rs.encyclopaedia.sk/test/';
+  $environment->machine = 'prod';
+  $environment->name = 'PROD';
+  $environment->regexurl = 'rs.beliana.sav.sk';
   $environment->settings = array(
     'color' => '#d0d0d0',
     'text_color' => '#ffffff',
@@ -53,7 +53,7 @@ function rs_beliana_site_default_environment_indicator_environment() {
     'position' => 'top',
     'fixed' => 1,
   );
-  $export['test'] = $environment;
+  $export['prod'] = $environment;
 
   return $export;
 }
