@@ -1,0 +1,166 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Beliana installation profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @inheritdoc
+ */
+function rs_beliana_install() {
+  // Any themes without keys here will get numeric keys and so will be enabled,
+  // but not placed into variables.
+  $themes = array(
+    'rs_beliana_theme',
+    'adminimal',
+    'theme_default' => 'rs_beliana_theme',
+    'admin_theme' => 'rs_beliana_theme',
+  );
+
+  theme_enable($themes);
+
+  foreach ($themes as $var => $theme) {
+    if (!is_numeric($var)) {
+      variable_set($var, $theme);
+    }
+  }
+
+  $blocks = array(
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => 'rs_beliana_theme',
+      'status' => 1,
+      'weight' => -100,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array(
+    'module',
+    'delta',
+    'theme',
+    'status',
+    'weight',
+    'region',
+    'pages',
+    'cache',
+  ));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  // Enable Shield module for dev and prod environments.
+  if (!module_exists('environment_indicator')) {
+    module_enable(array('environment_indicator'));
+    drupal_flush_all_caches();
+  }
+
+  if (module_exists('environment_indicator')) {
+    module_load_include('module', 'environment_indicator');
+    $active = environment_indicator_get_active();
+    if (in_array($active['name'], array('DEV', 'PROD'))) {
+      module_enable(array('shield'));
+      variable_set('shield_user', 'beliana');
+      variable_set('shield_pass', 'RSbelianaPASS');
+    }
+  }
+
+  // Rebuild permissions and clear cache.
+  node_access_rebuild();
+  drupal_flush_all_caches();
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ *
+ * @inheritdoc
+ */
+function rs_beliana_install_tasks_alter(&$tasks, $install_state) {
+  global $install_state;
+  $install_state['parameters']['locale'] = 'sk';
+  $tasks['install_select_profile']['display'] = FALSE;
+  $tasks['install_select_locale']['display'] = FALSE;
+}
+
+/**
+ * Place user login block.
+ */
+function rs_beliana_update_7001() {
+  $query = db_select('block', 'b')
+    ->fields('b')
+    ->condition('module', 'user')
+    ->condition('delta', 'login')
+    ->condition('theme', 'rs_beliana_theme');
+  $result = $query->execute()->fetchAll();
+
+  if (!empty($result)) {
+    db_update('block')
+      ->condition('module', 'user')
+      ->condition('delta', 'login')
+      ->condition('theme', 'rs_beliana_theme')
+      ->fields(array(
+        'module' => 'user',
+        'delta' => 'login',
+        'theme' => 'rs_beliana_theme',
+        'status' => 1,
+        'weight' => -100,
+        'region' => 'content',
+        'pages' => '',
+        'cache' => -1,
+      ))
+      ->execute();
+  }
+  else {
+    db_insert('block')
+      ->fields(array(
+        'module',
+        'delta',
+        'theme',
+        'status',
+        'weight',
+        'region',
+        'pages',
+        'cache',
+      ))
+      ->values(array(
+        'module' => 'user',
+        'delta' => 'login',
+        'theme' => 'rs_beliana_theme',
+        'status' => 1,
+        'weight' => -100,
+        'region' => 'content',
+        'pages' => '',
+        'cache' => -1,
+      ))
+      ->execute();
+  }
+}
+
+/**
+ * Enable Shield module for dev and prod environments.
+ */
+function rs_beliana_update_7002() {
+  // Enable Shield module for dev and prod environments.
+  if (!module_exists('environment_indicator')) {
+    module_enable(array('environment_indicator'));
+    drupal_flush_all_caches();
+  }
+
+  if (module_exists('environment_indicator')) {
+    module_load_include('module', 'environment_indicator');
+    $active = environment_indicator_get_active();
+    if (in_array($active['name'], array('DEV', 'PROD'))) {
+      module_enable(array('shield'));
+      variable_set('shield_user', 'beliana');
+      variable_set('shield_pass', 'RSbelianaPASS');
+    }
+  }
+}

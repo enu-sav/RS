@@ -1,0 +1,8 @@
+name=Beliana
+core=7.x
+
+dependencies[] = workbench
+dependencies[] = workbench_access
+dependencies[] = workbench_moderation
+dependencies[] = workbench_state_access
+dependencies[] = views_bulk_operations

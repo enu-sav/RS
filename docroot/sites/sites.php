@@ -54,6 +54,5 @@
  * @see http://drupal.org/documentation/install/multi-site
  */
 
-$sites['rs.encyclopaedia.sk.dev'] = 'dev';
-$sites['rs.encyclopaedia.sk.stage'] = 'stage';
-$sites['rs.encyclopaedia.sk'] = 'prod';
+$sites['dev.beliana.sav.sk'] = 'dev';
+$sites['rs.beliana.sav.sk'] = 'prod';

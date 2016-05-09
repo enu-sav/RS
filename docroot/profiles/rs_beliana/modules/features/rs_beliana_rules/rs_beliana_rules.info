@@ -1,0 +1,9 @@
+name = Redakčný systém Beliana Pravidlá
+core = 7.x
+package = Configuration
+dependencies[] = entity
+dependencies[] = rules
+dependencies[] = workbench_moderation
+features[features_api][] = api:2
+features[rules_config][] = rules_after_new_heslo_creation
+features[rules_config][] = rules_after_new_importovane_heslo_creation
