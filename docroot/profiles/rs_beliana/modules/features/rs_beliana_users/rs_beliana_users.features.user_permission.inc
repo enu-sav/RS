@@ -123,9 +123,9 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'environment_indicator',
   );
 
-  // Exported permission: 'access environment indicator test'.
-  $permissions['access environment indicator test'] = array(
-    'name' => 'access environment indicator test',
+  // Exported permission: 'access environment indicator prod'.
+  $permissions['access environment indicator prod'] = array(
+    'name' => 'access environment indicator prod',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
