@@ -54,16 +54,28 @@ function rs_beliana_install() {
   }
   $query->execute();
 
-  drush_features_revert_all();
-
   // Cache a fully-built schema.
   drupal_get_schema(NULL, TRUE);
+
+  // Enable Shield module for dev and prod environments.
+  if (!module_exists('environment_indicator')) {
+    module_enable(array('environment_indicator'));
+    drupal_flush_all_caches();
+  }
+
+  if (module_exists('environment_indicator')) {
+    module_load_include('module', 'environment_indicator');
+    $active = environment_indicator_get_active();
+    if (in_array($active, array('dev', 'prod'))) {
+      module_enable(array('shield'));
+      variable_set('shield_user', 'beliana');
+      variable_set('shield_pass', 'RSbelianaPASS');
+    }
+  }
 
   // Rebuild permissions and clear cache.
   node_access_rebuild();
   drupal_flush_all_caches();
-
-  drush_features_revert_all();
 }
 
 /**
@@ -129,5 +141,26 @@ function rs_beliana_update_7001() {
         'cache' => -1,
       ))
       ->execute();
+  }
+}
+
+/**
+ * Enable Shield module for dev and prod environments.
+ */
+function rs_beliana_update_7002() {
+  // Enable Shield module for dev and prod environments.
+  if (!module_exists('environment_indicator')) {
+    module_enable(array('environment_indicator'));
+    drupal_flush_all_caches();
+  }
+
+  if (module_exists('environment_indicator')) {
+    module_load_include('module', 'environment_indicator');
+    $active = environment_indicator_get_active();
+    if (in_array($active, array('dev', 'prod'))) {
+      module_enable(array('shield'));
+      variable_set('shield_user', 'beliana');
+      variable_set('shield_pass', 'RSbelianaPASS');
+    }
   }
 }
