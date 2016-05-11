@@ -1057,6 +1057,7 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -1328,6 +1329,7 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -1608,6 +1610,7 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -1811,6 +1814,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit revisions in nova_ilustracia state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'workbench_state_access',
   );
