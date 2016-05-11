@@ -435,7 +435,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
   // If is new, current state is empty.
-  if (isset($values['node']->workbench_moderation['current']->state)) {
+  //MS modify field_lexikalna_skupina only for merged items, i.e. >field_zlucene_z is not empty
+  if (isset($values['node']->workbench_moderation['current']->state) && count($values['node']->field_zlucene_z['und']) > 0) {
     if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura')) {
       $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
     }
@@ -453,7 +454,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     if ($values['state'] === '2_korekt_ra') {
       if (count($values['node']->field_lexikalna_skupina['und']) != 1) {
         //MS drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
-        drupal_set_message('Heslo je zlúčené a má viacero lexikálnych skupín. Pri odosielaní na 2. korektúru však heslo môže ma len jednu lexikálnu skupinu.', 'error');
+        drupal_set_message('Heslo je zlúčené a má viacero lexikálnych skupín. Pri odosielaní na 2. korektúru však heslo môže mať len jednu lexikálnu skupinu.', 'error');
         drupal_set_message('Lexikálne skupiny upravte, heslo uložte a potom odošlite na 2. korektúru ešte raz. Po návrate z 2. korektúry sa lexikálne skupiny vrátia do pôvodného stavu.', 'error');
         $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
       }
