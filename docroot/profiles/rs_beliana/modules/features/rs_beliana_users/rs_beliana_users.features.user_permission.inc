@@ -99,7 +99,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'access environment indicator',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'environment_indicator',
   );
@@ -108,7 +107,7 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access environment indicator dev'] = array(
     'name' => 'access environment indicator dev',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'environment_indicator',
   );
@@ -118,7 +117,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'access environment indicator overwritten_environment',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'environment_indicator',
   );
@@ -127,7 +125,7 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access environment indicator prod'] = array(
     'name' => 'access environment indicator prod',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'environment_indicator',
   );
