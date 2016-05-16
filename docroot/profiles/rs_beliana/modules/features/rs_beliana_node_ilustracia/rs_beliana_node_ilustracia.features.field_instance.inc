@@ -378,6 +378,50 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-ilustracia-field_modifikovane'.
+  $field_instances['node-ilustracia-field_modifikovane'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'export' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_modifikovane',
+    'label' => 'Modifikované',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 11,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-ilustracia-field_na_zoradenie'.
   $field_instances['node-ilustracia-field_na_zoradenie'] = array(
     'bundle' => 'ilustracia',
@@ -1054,6 +1098,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Lexikálna skupina');
   t('Licencia');
   t('Meno autora diela');
+  t('Modifikované');
   t('Na zoradenie');
   t('Názov');
   t('Názov diela');
@@ -1078,6 +1123,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí.');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia.1" a podobne.');
+  t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');
   t('Zvoľte, kde má byť obrázok použitý.');
 
   return $field_instances;
