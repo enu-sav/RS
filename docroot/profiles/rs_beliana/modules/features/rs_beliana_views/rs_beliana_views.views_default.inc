@@ -5060,9 +5060,11 @@ function rs_beliana_views_views_default_views() {
 
   /* Display: Export importované */
   $handler = $view->new_display('page', 'Export importované', 'page');
-  $handler->display->display_options['path'] = 'export-na-import';
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Exportovať vydané heslá';
+  $handler->display->display_options['path'] = 'export-vydane';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Export na import';
+  $handler->display->display_options['menu']['title'] = 'Export vydané';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -5070,6 +5072,8 @@ function rs_beliana_views_views_default_views() {
 
   /* Display: Export importované - dáta */
   $handler = $view->new_display('views_data_export', 'Export importované - dáta', 'views_data_export_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Exportovať vydané heslá';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
@@ -5393,19 +5397,16 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_popis']['label'] = 'popis';
   $handler->display->display_options['fields']['field_popis']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['field_popis']['alter']['preserve_tags'] = '<p><strong><em><sub><sup>';
-  /* Pole: Obsah: Obrázok (na použitie) */
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['id'] = 'field_obrazok_na_zverejnenie_';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['table'] = 'field_data_field_obrazok_na_zverejnenie_';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['field'] = 'field_obrazok_na_zverejnenie_';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['label'] = 'nazverejnenie';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['type'] = 'image_url';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['settings'] = array(
-    'url_type' => '0',
-    'image_style' => '',
-    'image_link' => '',
-  );
-  /* Pole: Obsah: Obrázok (návrh) */
+  /* Pole: Obsah: Súbor ilustrácie */
+  $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['table'] = 'field_data_field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['field'] = 'field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['label'] = 'nazverejnenie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['type'] = 'file_url_plain';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['separator'] = ';';
+  /* Pole: Obsah: Obrázok (náhľad) */
   $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
@@ -5673,6 +5674,7 @@ function rs_beliana_views_views_default_views() {
     t('Súbor'),
     t('Lexikálna skupina'),
     t('Export importované'),
+    t('Exportovať vydané heslá'),
     t('Export importované - dáta'),
     t('guid'),
     t('nazov'),
@@ -6328,7 +6330,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
-  $handler->display->display_options['pager']['type'] = 'lite';
+  $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
@@ -6342,6 +6344,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['separator'] = '<br />';
+  $handler->display->display_options['row_options']['hide_empty'] = TRUE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
@@ -7176,8 +7180,9 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
   $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['row_plugin'] = 'entity';
-  $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['separator'] = '<br />';
+  $handler->display->display_options['row_options']['hide_empty'] = TRUE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
@@ -7211,7 +7216,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['label'] = '';
   $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Obrázok (návrh) */
+  /* Pole: Obsah: Obrázok (náhľad) */
   $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
@@ -7411,7 +7416,7 @@ function rs_beliana_views_views_default_views() {
     t('Krátky popis'),
     t('V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.'),
     t('Stav'),
-    t('Obrázok (návrh)'),
+    t('Obrázok (náhľad)'),
     t('Obrázok (na použitie)'),
     t('Názov'),
     t('dddd'),

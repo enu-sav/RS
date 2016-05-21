@@ -93,6 +93,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -114,14 +121,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -142,7 +149,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -192,6 +199,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -204,11 +215,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -220,19 +231,20 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
       ),
       'selector' => '',
-      'values_set' => 3,
-      'value_form' => NULL,
-      'values' => array(
-        0 => 'Public domain',
-        1 => 'CC licencia',
+      'values_set' => 1,
+      'value_form' => 'CC licencia',
+      'value' => array(
+        0 => array(
+          'value' => 'CC licencia',
+        ),
       ),
-      'value' => array(),
+      'values' => array(),
     ),
   );
 
@@ -319,6 +331,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -340,14 +359,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -368,7 +387,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -418,6 +437,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -430,11 +453,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -446,7 +469,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
@@ -464,6 +487,244 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
   );
 
   $items["node:ilustracia:2"] = array(
+    'entity' => 'node',
+    'bundle' => 'ilustracia',
+    'dependent' => 'field_drzitel_prav',
+    'dependee' => 'field_zdroj_ilustracie',
+    'options' => array(
+      'state' => 'required',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => FALSE,
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 1,
+      'value_form' => 'Získané na základe zmluvy',
+      'value' => array(
+        0 => array(
+          'value' => 'Získané na základe zmluvy',
+        ),
+      ),
+      'values' => array(),
+    ),
+  );
+
+  $items["node:ilustracia:3"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_institucia',
@@ -546,6 +807,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -567,14 +835,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -595,7 +863,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -645,6 +913,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -657,11 +929,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -673,24 +945,261 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
       ),
       'selector' => '',
-      'values_set' => 1,
-      'value_form' => 'Získané na základe zmluvy',
-      'value' => array(
-        0 => array(
-          'value' => 'Získané na základe zmluvy',
-        ),
+      'values_set' => 3,
+      'value_form' => NULL,
+      'values' => array(
+        0 => 'Public domain',
+        1 => 'Získané na základe zmluvy',
+        2 => 'Muzeálny objekt',
       ),
-      'values' => array(),
+      'value' => array(),
     ),
   );
 
-  $items["node:ilustracia:3"] = array(
+  $items["node:ilustracia:4"] = array(
+    'entity' => 'node',
+    'bundle' => 'ilustracia',
+    'dependent' => 'field_institucia',
+    'dependee' => 'field_zdroj_ilustracie',
+    'options' => array(
+      'state' => 'required',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => FALSE,
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 3,
+      'value_form' => NULL,
+      'values' => array(
+        0 => 'Získané na základe zmluvy',
+        1 => 'Muzeálny objekt',
+      ),
+      'value' => array(),
+    ),
+  );
+
+  $items["node:ilustracia:5"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_licencia1',
@@ -773,6 +1282,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -794,14 +1310,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -822,7 +1338,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -872,6 +1388,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -884,11 +1404,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -900,7 +1420,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
@@ -917,7 +1437,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:4"] = array(
+  $items["node:ilustracia:6"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_meno_autora_diela',
@@ -1000,6 +1520,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -1021,14 +1548,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1049,7 +1576,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1099,6 +1626,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -1111,11 +1642,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1127,7 +1658,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1144,7 +1675,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:5"] = array(
+  $items["node:ilustracia:7"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_meno_autora_diela',
@@ -1227,6 +1758,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -1248,14 +1786,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1276,7 +1814,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1326,6 +1864,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -1338,11 +1880,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1354,7 +1896,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1371,7 +1913,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:6"] = array(
+  $items["node:ilustracia:8"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_modifikovane',
@@ -1609,7 +2151,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:7"] = array(
+  $items["node:ilustracia:9"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_nazov_diela',
@@ -1692,6 +2234,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         14 => array(
           1 => 1,
           2 => 2,
@@ -1713,14 +2262,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           2 => 2,
           5 => 0,
           3 => 0,
           4 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1741,7 +2290,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
+        20 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1791,6 +2340,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
         14 => array(
           1 => 1,
           3 => 0,
@@ -1803,11 +2356,11 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        3 => array(
+        18 => array(
           1 => 1,
           3 => 0,
         ),
-        8 => array(
+        3 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1819,24 +2372,261 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        20 => array(
+          1 => 1,
+          3 => 0,
+        ),
+      ),
+      'selector' => '',
+      'values_set' => 3,
+      'value_form' => 'Zatiaľ neurčený',
+      'values' => array(
+        0 => 'Zatiaľ neurčený',
+        1 => 'Vlastná ilustrácia',
+      ),
+      'value' => array(),
+    ),
+  );
+
+  $items["node:ilustracia:10"] = array(
+    'entity' => 'node',
+    'bundle' => 'ilustracia',
+    'dependent' => 'field_nazov_diela',
+    'dependee' => 'field_zdroj_ilustracie',
+    'options' => array(
+      'state' => 'required',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'effect' => FALSE,
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(
+        1 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        20 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+      ),
+      'element_edit' => array(
+        1 => 1,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(
+        1 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        2 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        5 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        4 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        7 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        12 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        6 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        13 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        19 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        15 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        16 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        3 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        17 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        20 => array(
           1 => 1,
           3 => 0,
         ),
       ),
       'selector' => '',
       'values_set' => 1,
-      'value_form' => 'Zatiaľ neurčený',
+      'value_form' => 'Získané na základe zmluvy',
       'value' => array(
         0 => array(
-          'value' => 'Zatiaľ neurčený',
+          'value' => 'Získané na základe zmluvy',
         ),
       ),
       'values' => array(),
     ),
   );
 
-  $items["node:ilustracia:8"] = array(
+  $items["node:ilustracia:11"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_url_autora_diela_l',
@@ -2063,17 +2853,18 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
         ),
       ),
       'selector' => '',
-      'values_set' => 3,
-      'value_form' => NULL,
-      'values' => array(
-        0 => 'Public domain',
-        1 => 'CC licencia',
+      'values_set' => 1,
+      'value_form' => 'CC licencia',
+      'value' => array(
+        0 => array(
+          'value' => 'CC licencia',
+        ),
       ),
-      'value' => array(),
+      'values' => array(),
     ),
   );
 
-  $items["node:ilustracia:9"] = array(
+  $items["node:ilustracia:12"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_url_diela_l',
@@ -2300,17 +3091,53 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
         ),
       ),
       'selector' => '',
-      'values_set' => 3,
-      'value_form' => 'Public domain',
-      'values' => array(
-        0 => 'Public domain',
-        1 => 'CC licencia',
+      'values_set' => 1,
+      'value_form' => 'CC licencia',
+      'value' => array(
+        0 => array(
+          'value' => 'CC licencia',
+        ),
       ),
-      'value' => array(),
+      'values' => array(),
     ),
   );
 
-  $items["node:ilustracia:10"] = array(
+  $items["node:ilustracia:13"] = array(
+    'entity' => 'node',
+    'bundle' => 'ilustracia',
+    'dependent' => 'field_url_textu_licencie_l',
+    'dependee' => 'field_drzitel_prav',
+    'options' => array(
+      'state' => 'visible',
+      'condition' => 'value',
+      'grouping' => 'AND',
+      'values_set' => 1,
+      'value' => array(),
+      'values' => array(),
+      'value_form' => array(),
+      'effect' => 'show',
+      'effect_options' => array(),
+      'element_view' => array(
+        1 => 1,
+        2 => 2,
+        5 => 0,
+        3 => 0,
+        4 => 0,
+      ),
+      'element_view_per_role' => 0,
+      'element_view_roles' => array(),
+      'element_edit' => array(
+        1 => 1,
+        2 => 0,
+        3 => 0,
+      ),
+      'element_edit_per_role' => 0,
+      'element_edit_roles' => array(),
+      'selector' => '',
+    ),
+  );
+
+  $items["node:ilustracia:14"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_url_textu_licencie_l',
@@ -2537,12 +3364,14 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
         ),
       ),
       'selector' => '',
-      'values_set' => 3,
-      'value_form' => NULL,
-      'values' => array(
-        0 => 'CC licencia',
+      'values_set' => 1,
+      'value_form' => 'CC licencia',
+      'value' => array(
+        0 => array(
+          'value' => 'CC licencia',
+        ),
       ),
-      'value' => array(),
+      'values' => array(),
     ),
   );
 
