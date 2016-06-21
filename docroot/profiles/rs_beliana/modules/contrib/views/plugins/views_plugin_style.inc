@@ -123,13 +123,23 @@ class views_plugin_style extends views_plugin {
   function get_row_class($row_index) {
     if ($this->uses_row_class()) {
       $class = $this->options['row_class'];
+
       if ($this->uses_fields() && $this->view->field) {
-        $class = strip_tags($this->tokenize_value($class, $row_index));
+        $classes = array();
+
+        // Explode the value by whitespace, this allows the function to handle
+        // a single class name and multiple class names that are then tokenized.
+        foreach(explode(' ', $class) as $token_class) {
+          $classes[] = strip_tags($this->tokenize_value($token_class, $row_index));
+        }
+      }
+      else {
+        $classes = explode(' ', $class);
       }
 
-      $classes = explode(' ', $class);
+      // Convert whatever the result is to a nice clean class name
       foreach ($classes as &$class) {
-        $class = drupal_clean_css_identifier($class);
+        $class = drupal_html_class($class);
       }
       return implode(' ', $classes);
     }
@@ -522,12 +532,7 @@ class views_plugin_style extends views_plugin {
         foreach ($result as $count => $row) {
           $this->view->row_index = $count;
           foreach ($keys as $id) {
-            //$this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
-	    if ($id == "field_text_hesla"){
-            	$this->rendered_fields[$count][$id] = $row->_field_data["nid"]["entity"]->field_text_hesla["und"][0]["value"];
-	    } else {
-            	$this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
-	    } 
+            $this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
           }
 
           $this->row_tokens[$count] = $this->view->field[$id]->get_render_tokens(array());
