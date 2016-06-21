@@ -6264,6 +6264,13 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = ' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. ';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -6285,6 +6292,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['table'] = 'field_data_field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['field'] = 'field_lexikalna_skupina_editable';
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['widget_type'] = '0';
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_label'] = 0;
@@ -6322,6 +6330,7 @@ function rs_beliana_views_views_default_views() {
     t('more'),
     t('Upravovatelny2'),
     t('Opraviť LS'),
+    t(' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. '),
     t('Text hesla (skrátený)'),
   );
   $export['upravovatelny'] = $view;
