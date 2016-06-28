@@ -5973,6 +5973,64 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Opraviť text hesla */
+  $handler = $view->new_display('page', 'Opraviť text hesla', 'page_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Opraviť text hesla';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    9 => '9',
+  );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_lexikalna_skupina_editable' => 'field_lexikalna_skupina_editable',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lexikalna_skupina_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'Upravte text a potom stlačte "Uložiť vľavo dolu. ';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Text hesla (editable) */
+  $handler->display->display_options['fields']['field_text_hesla_editable']['id'] = 'field_text_hesla_editable';
+  $handler->display->display_options['fields']['field_text_hesla_editable']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla_editable']['field'] = 'field_text_hesla_editable';
+  $handler->display->display_options['fields']['field_text_hesla_editable']['label'] = 'Text hesla';
+  $handler->display->display_options['fields']['field_text_hesla_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_text_hesla_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_text_hesla_editable']['suppress_description'] = 0;
+  $handler->display->display_options['path'] = 'opravit-text';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Opraviť text';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['upravovatelny'] = array(
     t('Master'),
     t('Opraviť lexikálnu skupinu'),
@@ -5999,6 +6057,8 @@ function rs_beliana_views_views_default_views() {
     t('Opraviť LS'),
     t(' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. '),
     t('Text hesla (skrátený)'),
+    t('Opraviť text hesla'),
+    t('Upravte text a potom stlačte "Uložiť vľavo dolu. '),
   );
   $export['upravovatelny'] = $view;
 
