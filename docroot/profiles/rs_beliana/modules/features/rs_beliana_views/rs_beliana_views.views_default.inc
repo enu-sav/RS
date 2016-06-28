@@ -6013,7 +6013,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Upravte text a potom stlačte "Uložiť vľavo dolu. ';
+  $handler->display->display_options['header']['area']['content'] = 'Upravte text a potom uložte kliknutím na "Uložiť" vľavo dolu. Ak treba, na ďalšie heslá prejdete kliknutím na odkaz "nasledujúca". ';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Text hesla (editable) */
@@ -6058,7 +6058,7 @@ function rs_beliana_views_views_default_views() {
     t(' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. '),
     t('Text hesla (skrátený)'),
     t('Opraviť text hesla'),
-    t('Upravte text a potom stlačte "Uložiť vľavo dolu. '),
+    t('Upravte text a potom uložte kliknutím na "Uložiť" vľavo dolu. Ak treba, na ďalšie heslá prejdete kliknutím na odkaz "nasledujúca". '),
   );
   $export['upravovatelny'] = $view;
 
