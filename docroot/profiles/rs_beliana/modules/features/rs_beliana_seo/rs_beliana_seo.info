@@ -1,6 +1,7 @@
 name = Redakčný systém Beliana SEO
 core = 7.x
 package = Configuration
+dependencies[] = ctools
 dependencies[] = pathauto
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1

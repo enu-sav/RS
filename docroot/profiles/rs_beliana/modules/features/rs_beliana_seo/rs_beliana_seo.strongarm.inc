@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_seo.strongarm.inc
+ * rs_beliana_seo.strongarm.inc
  */
 
 /**
@@ -77,7 +77,7 @@ function rs_beliana_seo_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_importovane_heslo_pattern';
-  $strongarm->value = 'vydane/[node:title]';
+  $strongarm->value = 'heslo/[node:title]';
   $export['pathauto_node_importovane_heslo_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
