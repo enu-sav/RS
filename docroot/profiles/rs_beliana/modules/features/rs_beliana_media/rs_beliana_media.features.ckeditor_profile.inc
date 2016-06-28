@@ -58,7 +58,11 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'html_entities' => 'f',
         'scayt_autoStartup' => 'f',
         'theme_config_js' => 'f',
-        'js_conf' => 'config.height = 500;
+        'js_conf' => 'config.autoGrow_maxHeight = 500;
+config.autoGrow_minHeight = 50;
+config.autoGrow_bottomSpace = 10;
+config.autoGrow_onStartup = true;
+config.height = 500;
 config.entities = false;
 config.defaultLanguage = \'sk\';
 config.language = \'sk\';
@@ -133,6 +137,13 @@ config.specialChars = [
 ];
 ',
         'loadPlugins' => array(
+          'autogrow' => array(
+            'name' => 'autogrow',
+            'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
+            'path' => '//cdn.ckeditor.com/4.5.7/full-all/plugins/autogrow/',
+            'buttons' => FALSE,
+            'default' => 'f',
+          ),
           'counter' => array(
             'name' => 'counter',
             'desc' => 'Plugin to count symbols, symbols without blanks and words',
@@ -155,7 +166,7 @@ config.specialChars = [
           'mathjax' => array(
             'name' => 'mathjax',
             'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-            'path' => '//cdn.ckeditor.com/4.4.3/full-all/plugins/mathjax/',
+            'path' => '//cdn.ckeditor.com/4.5.7/full-all/plugins/mathjax/',
             'buttons' => array(
               'Mathjax' => array(
                 'icon' => 'icons/mathjax.png',
@@ -167,7 +178,7 @@ config.specialChars = [
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.4.3/full-all/plugins/tableresize/',
+            'path' => '//cdn.ckeditor.com/4.5.7/full-all/plugins/tableresize/',
             'buttons' => FALSE,
             'default' => 't',
           ),
