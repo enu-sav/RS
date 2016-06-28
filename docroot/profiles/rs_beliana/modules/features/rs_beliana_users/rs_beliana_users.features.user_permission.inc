@@ -99,7 +99,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'access environment indicator',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'environment_indicator',
   );
@@ -108,7 +107,7 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access environment indicator dev'] = array(
     'name' => 'access environment indicator dev',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'environment_indicator',
   );
@@ -118,7 +117,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'access environment indicator overwritten_environment',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'environment_indicator',
   );
@@ -127,7 +125,7 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access environment indicator prod'] = array(
     'name' => 'access environment indicator prod',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'environment_indicator',
   );
@@ -1057,6 +1055,7 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -1328,6 +1327,7 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -1608,6 +1608,7 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -1811,6 +1812,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit revisions in nova_ilustracia state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'workbench_state_access',
   );

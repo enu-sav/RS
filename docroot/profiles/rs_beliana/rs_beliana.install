@@ -164,3 +164,21 @@ function rs_beliana_update_7002() {
     }
   }
 }
+
+/**
+ * Enable Libraries module.
+ */
+function rs_beliana_update_7003() {
+  if (!module_exists('libraries')) {
+    module_enable(array('libraries'));
+  }
+}
+
+/**
+ * Enable RS Beliana theme and set it as default and administration.
+ */
+function rs_beliana_update_7004() {
+  theme_enable(array('rs_beliana_theme', 'adminimal'));
+  variable_set('theme_default', 'rs_beliana_theme');
+  variable_set('admin_theme', 'rs_beliana_theme');
+}

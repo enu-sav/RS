@@ -280,88 +280,87 @@ function rs_beliana_feeds_feeds_importer_default() {
             'language' => 'und',
           ),
           5 => array(
-            'source' => 'nazverejnenie',
-            'target' => 'field_obrazok_na_zverejnenie_:uri',
-            'unique' => FALSE,
-            'language' => 'und',
-          ),
-          6 => array(
             'source' => 'obr_navrh',
             'target' => 'field_obrazok_navrh_:uri',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          7 => array(
+          6 => array(
             'source' => 'pouzit',
             'target' => 'field_pouzit',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          8 => array(
+          7 => array(
             'source' => 'povod_ilustracie',
             'target' => 'field_zdroj_ilustracie',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          9 => array(
+          8 => array(
             'source' => 'institucia',
             'target' => 'field_institucia',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          10 => array(
+          9 => array(
             'source' => 'licencia',
             'target' => 'field_licencia1',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          11 => array(
+          10 => array(
             'source' => 'nazov_diela',
             'target' => 'field_nazov_diela',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          12 => array(
+          11 => array(
             'source' => 'datum_prevzatia',
             'target' => 'field_d_tum_prevzatia:start',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          13 => array(
+          12 => array(
             'source' => 'institucia',
             'target' => 'field_institucia',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          14 => array(
+          13 => array(
             'source' => 'drzitel_prav',
             'target' => 'field_drzitel_prav',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          15 => array(
+          14 => array(
             'source' => 'URL_licencie',
             'target' => 'field_url_textu_licencie_l:url',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          16 => array(
+          15 => array(
             'source' => 'URL_autora',
             'target' => 'field_url_autora_diela_l:url',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          17 => array(
+          16 => array(
             'source' => 'URL_diela',
             'target' => 'field_url_diela_l:url',
             'unique' => FALSE,
             'language' => 'und',
           ),
-          18 => array(
+          17 => array(
             'source' => 'jazyk',
             'target' => 'language',
             'unique' => FALSE,
             'language' => 'und',
+          ),
+          18 => array(
+            'source' => 'nazverejnenie',
+            'target' => 'field_subor_ilustracie:uri',
+            'unique' => FALSE,
           ),
         ),
         'update_existing' => '1',

@@ -21,6 +21,7 @@ features[feeds_tamper][] = beliana_importovanie_gh-geo-explode
 features[feeds_tamper][] = beliana_importovanie_gh-kategoria-explode
 features[feeds_tamper][] = import_ilustr_cie-datum_prevzatia-strtotime
 features[feeds_tamper][] = import_ilustr_cie-kategoria-explode
+features[feeds_tamper][] = import_ilustr_cie-nazverejnenie-explode
 features[feeds_tamper][] = import_ilustr_cie-pouzit-explode
 features[variable][] = default_feeds_tamper
 features[variable][] = feeds_reschedule
