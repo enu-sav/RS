@@ -182,3 +182,12 @@ function rs_beliana_update_7004() {
   variable_set('theme_default', 'rs_beliana_theme');
   variable_set('admin_theme', 'rs_beliana_theme');
 }
+
+/**
+ * Enable RS Beliana export feature.
+ */
+function rs_beliana_update_7005() {
+  if (!module_exists('rs_beliana_export')) {
+    module_enable(array('rs_beliana_export'));
+  }
+}
