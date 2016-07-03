@@ -14,6 +14,7 @@ dependencies[] = rs_beliana_taxonomy
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
+dependencies[] = title
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_instance][] = comment-comment_node_heslo-comment_body
