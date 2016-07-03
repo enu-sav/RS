@@ -1,0 +1,161 @@
+diff --git a/docroot/profiles/rs_beliana/modules/contrib/views_data_export/theme/views_data_export.theme.inc b/docroot/profiles/rs_beliana/modules/contrib/views_data_export/theme/views_data_export.theme.inc
+index 1147a94..f0811b6 100644
+--- a/docroot/profiles/rs_beliana/modules/contrib/views_data_export/theme/views_data_export.theme.inc
++++ b/docroot/profiles/rs_beliana/modules/contrib/views_data_export/theme/views_data_export.theme.inc
+@@ -45,7 +45,11 @@ function theme_views_data_export_feed_icon($variables) {
+   if ($query) {
+     $url_options['query'] = $query;
+   }
+-  $image = theme('image', array('path' => $image_path, 'alt' => $text, 'title' => $text));
++  $image = theme('image', array(
++    'path' => $image_path,
++    'alt' => $text,
++    'title' => $text
++  ));
+   return l($image, $url, $url_options);
+ }
+ 
+@@ -58,7 +62,13 @@ function theme_views_data_export_feed_icon($variables) {
+ function theme_views_data_export_complete_page($variables) {
+   extract($variables, EXTR_SKIP);
+   drupal_set_title(t('Data export successful'));
+-  drupal_add_html_head(array('#tag' => 'meta', '#attributes' => array('http-equiv' =>"Refresh", 'content' => '3;url='. $file)), 'views_data_export_download');
++  drupal_add_html_head(array(
++    '#tag' => 'meta',
++    '#attributes' => array(
++      'http-equiv' => "Refresh",
++      'content' => '3;url=' . $file
++    )
++  ), 'views_data_export_download');
+   $output = '';
+   $output .= '<p>';
+   $output .= t('Your export has been created. View/download the file <a href="@link">here</a> (will automatically download in 3 seconds.)', array('@link' => $file));
+@@ -78,8 +88,8 @@ function template_preprocess_views_data_export(&$vars) {
+   $vars['body'] = $vars['rows']['body'];
+   $vars['footer'] = $vars['rows']['footer'];
+ 
+-  $view     = $vars['view'];
+-  $fields   = &$view->field;
++  $view = $vars['view'];
++  $fields = &$view->field;
+ }
+ 
+ function template_preprocess_views_data_export_csv_header(&$vars) {
+@@ -91,7 +101,7 @@ function template_preprocess_views_data_export_csv_header(&$vars) {
+   }
+   // Support old misspelled templates. LEGACY
+   $vars['seperator'] =
+-    $vars['separator'] = $vars['options']['separator'];
++  $vars['separator'] = $vars['options']['separator'];
+ 
+   // Special handling when quoted values are involved.
+   if ($vars['options']['quote']) {
+@@ -111,7 +121,7 @@ function template_preprocess_views_data_export_csv_header(&$vars) {
+       $output = trim($output);
+     }
+     if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
+-      switch($vars['options']['encoding']) {
++      switch ($vars['options']['encoding']) {
+         case 'utf8_decode':
+           $converted = utf8_decode($output);
+           break;
+@@ -136,7 +146,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
+   }
+   // Support old misspelled templates. LEGACY
+   $vars['seperator'] =
+-    $vars['separator'] = $vars['options']['separator'];
++  $vars['separator'] = $vars['options']['separator'];
+ 
+   // Special handling when quoted values are involved.
+   if ($vars['options']['quote']) {
+@@ -158,7 +168,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
+       }
+ 
+       if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
+-        switch($vars['options']['encoding']) {
++        switch ($vars['options']['encoding']) {
+           case 'utf8_decode':
+             $converted = utf8_decode($output);
+             break;
+@@ -172,7 +182,11 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
+       }
+       if (!empty($vars['options']['replace_newlines'])) {
+         if (!empty($vars['options']['newline_token'])) {
+-          $output = str_replace( array("\r\n", "\r", "\n"), $vars['options']['newline_replacement'], $output);
++          $output = str_replace(array(
++            "\r\n",
++            "\r",
++            "\n"
++          ), $vars['options']['newline_replacement'], $output);
+         }
+         else {
+           $output = str_replace("\n", $vars['options']['newline_replacement'], $output);
+@@ -196,7 +210,7 @@ function template_preprocess_views_data_export_csv(&$vars) {
+   }
+   // Support old misspelled templates. LEGACY
+   $vars['seperator'] =
+-    $vars['separator'] = $vars['options']['separator'];
++  $vars['separator'] = $vars['options']['separator'];
+ 
+   // Special handling when quoted values are involved.
+   if ($vars['options']['quote']) {
+@@ -215,7 +229,7 @@ function template_preprocess_views_data_export_csv(&$vars) {
+       $output = trim($output);
+     }
+     if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
+-      switch($vars['options']['encoding']) {
++      switch ($vars['options']['encoding']) {
+         case 'ASCII':
+           $converted = iconv("UTF-8", "ASCII//TRANSLIT", $output);
+           if ($converted !== FALSE) {
+@@ -235,7 +249,7 @@ function template_preprocess_views_data_export_csv(&$vars) {
+         $output = trim($output);
+       }
+       if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
+-        switch($vars['options']['encoding']) {
++        switch ($vars['options']['encoding']) {
+           case 'ASCII':
+             $converted = iconv("UTF-8", "ASCII//TRANSLIT", $output);
+             if ($converted !== FALSE) {
+@@ -316,8 +330,17 @@ function template_preprocess_views_data_export_msoffice_body(&$vars) {
+     }
+   }
+ 
+-
+-  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
++  // Export na tlac
++  if ($vars['name'] === 'export' && $vars['display_id'] === 'views_data_export_1') {
++    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some html tags
++  }
++  // Export pre sadzac
++  else  if ($vars['name'] === 'export_sadzac' && $vars['display_id'] === 'views_data_export_1') {
++    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
++  }
++  else {
++    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
++  }
+ 
+ }
+ 
+@@ -472,8 +495,8 @@ function _views_data_export_xml_tag_clean($tag) {
+  * Shared helper function for export preprocess functions.
+  */
+ function _views_data_export_header_shared_preprocess(&$vars) {
+-  $view     = $vars['view'];
+-  $fields   = &$view->field;
++  $view = $vars['view'];
++  $fields = &$view->field;
+   $fields_info = $view->display_handler->get_option('fields');
+   $vars['header'] = array();
+   foreach ($fields as $key => $field) {
+@@ -492,8 +515,8 @@ function _views_data_export_header_shared_preprocess(&$vars) {
+  * Shared helper function for export preprocess functions.
+  */
+ function _views_data_export_body_shared_preprocess(&$vars) {
+-  $view     = $vars['view'];
+-  $fields   = &$view->field;
++  $view = $vars['view'];
++  $fields = &$view->field;
+   $hide_empty_support = !empty($vars['hide_empty_support']);
+ 
+   $rows = $vars['rows'];
