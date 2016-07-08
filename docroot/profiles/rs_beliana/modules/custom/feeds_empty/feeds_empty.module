@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Configurable empty value handling for Feeds.
+ */
+
+/**
+ * Implementation of hook_module_implements_alter().
+ *
+ * Make sure our hook runs last.
+ */
+function feeds_empty_module_implements_alter(&$implementations, $hook) {
+  switch ($hook) {
+    case 'feeds_processor_targets_alter':
+      $module = 'feeds_empty';
+      $group = $implementations[$module];
+      unset($implementations[$module]);
+      $implementations[$module] = $group;
+      break;
+  }
+}
