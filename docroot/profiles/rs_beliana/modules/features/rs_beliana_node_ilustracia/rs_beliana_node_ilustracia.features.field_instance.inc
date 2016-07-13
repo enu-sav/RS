@@ -775,7 +775,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'ilustracia/na_zverejnenie',
-      'file_extensions' => 'jpg cdr eps svg',
+      'file_extensions' => 'jpg cdr eps svg png',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -831,6 +831,108 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-ilustracia-field_url_a_meno_autora_diela'.
+  $field_instances['node-ilustracia-field_url_a_meno_autora_diela'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Uveďte odkaz (URL) na stránku autora (maliara, fotografa) diela. Ak na stránke diela nie je uvedený odkaz na stránku autora, pole nechajte prázdne.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'url',
+        'settings' => array(
+          'nofollow' => FALSE,
+          'trim_length' => 80,
+        ),
+        'type' => 'url_default',
+        'weight' => 12,
+      ),
+      'export' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_url_a_meno_autora_diela',
+    'label' => 'URL autora diela',
+    'required' => 0,
+    'settings' => array(
+      'title_fetch' => 0,
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'url',
+      'settings' => array(
+        'size' => 255,
+      ),
+      'type' => 'url_external',
+      'weight' => 16,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-ilustracia-field_url_a_nazov_diela'.
+  $field_instances['node-ilustracia-field_url_a_nazov_diela'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'url',
+        'settings' => array(
+          'nofollow' => FALSE,
+          'trim_length' => 80,
+        ),
+        'type' => 'url_default',
+        'weight' => 11,
+      ),
+      'export' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_url_a_nazov_diela',
+    'label' => 'URL diela',
+    'required' => 1,
+    'settings' => array(
+      'title_fetch' => 0,
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'url',
+      'settings' => array(
+        'size' => 255,
+      ),
+      'type' => 'url_external',
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -959,6 +1061,57 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'settings' => array(),
       'type' => 'link_field',
       'weight' => 24,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-ilustracia-field_url_textu_licencie'.
+  $field_instances['node-ilustracia-field_url_textu_licencie'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'url',
+        'settings' => array(
+          'nofollow' => FALSE,
+          'trim_length' => 80,
+        ),
+        'type' => 'url_default',
+        'weight' => 14,
+      ),
+      'export' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_url_textu_licencie',
+    'label' => 'URL textu licencie',
+    'required' => 1,
+    'settings' => array(
+      'title_fetch' => 0,
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'url',
+      'settings' => array(
+        'size' => 255,
+      ),
+      'type' => 'url_external',
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -1166,6 +1319,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela alebo názov inštitúcie, z ktorej stránky bolo (public domain) dielo prevzaté');
+  t('Uveďte odkaz (URL) na stránku autora (maliara, fotografa) diela. Ak na stránke diela nie je uvedený odkaz na stránku autora, pole nechajte prázdne.');
   t('Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.');
   t('Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
