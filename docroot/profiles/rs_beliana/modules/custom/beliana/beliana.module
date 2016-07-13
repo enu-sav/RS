@@ -497,6 +497,18 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       }
     }
 
+    // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
+    if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])){
+        drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+    }
+
+    // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
+    if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])){
+        drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+    }
+
     if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_3') {
       $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
     }
