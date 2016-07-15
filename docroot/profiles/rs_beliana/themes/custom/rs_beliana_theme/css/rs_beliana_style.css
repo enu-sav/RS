@@ -33,3 +33,7 @@
     border: 1px solid lightgray;
     color: #000;
 }
+
+.filter-guidelines {
+    display: none;
+}
