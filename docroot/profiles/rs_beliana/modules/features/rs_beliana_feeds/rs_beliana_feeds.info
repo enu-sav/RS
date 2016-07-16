@@ -18,6 +18,7 @@ features[feeds_tamper][] = bb-datum-strtotime
 features[feeds_tamper][] = bb-ilustracia-explode
 features[feeds_tamper][] = bb-kategoria-explode
 features[feeds_tamper][] = beliana_importovanie_gh-geo-explode
+features[feeds_tamper][] = beliana_importovanie_gh-ilustracia-explode
 features[feeds_tamper][] = beliana_importovanie_gh-kategoria-explode
 features[feeds_tamper][] = import_ilustr_cie-datum_prevzatia-strtotime
 features[feeds_tamper][] = import_ilustr_cie-kategoria-explode

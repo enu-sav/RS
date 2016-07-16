@@ -191,3 +191,15 @@ function rs_beliana_update_7005() {
     module_enable(array('rs_beliana_export'));
   }
 }
+
+/**
+ * Disable Shield on PROD environment.
+ */
+function rs_beliana_update_7006() {
+  if (module_exists('environment_indicator')) {
+    module_load_include('module', 'environment_indicator');
+    $active = environment_indicator_get_active();
+    if (in_array($active['name'], array('PROD'))) {
+      module_disable(array('shield'));
+    }
+  }}

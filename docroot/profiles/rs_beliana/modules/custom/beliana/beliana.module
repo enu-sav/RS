@@ -266,21 +266,7 @@ function beliana_merge(&$entity, $context = array()) {
 
   // If master entity found, copy fields from current entity into it.
   if ($master != FALSE) {
-    $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
-
-    if (!empty($entity->field_image)) {
-      foreach ($entity->field_image[LANGUAGE_NONE] as $img) {
-        $master->field_image[LANGUAGE_NONE][] = $img;
-      }
-
-      foreach ($entity->field_text_k_ilustraciam[LANGUAGE_NONE] as $text) {
-        $master->field_text_k_ilustraciam[LANGUAGE_NONE][] = $text;
-      }
-    }
-    $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
-    $master->field_autor_povodneho_textu[LANGUAGE_NONE][]['target_id'] = $entity->uid;
-
-
+    // Merge field_lexikalna_skupina.
     foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $ls) {
       $parents = taxonomy_get_parents_all($ls['tid']);
       foreach ($parents as $parent) {
@@ -297,14 +283,58 @@ function beliana_merge(&$entity, $context = array()) {
       }
       if (!$found) {
         $master->field_spravit_1_korekturu[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
-	//MS we want to preserve the original taxonomy values in further processing
-        //MS $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
+        // We want to preserve the original taxonomy values in further processing.
         $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
       }
     }
+
+    // Merge field_komentar_instrukcie, use "\n" as separator.
+    if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+    }
+
+    // Merge field_text_hesla, use "</p>\n<p>" as separator.
+    if (!isset($master->field_text_hesla[LANGUAGE_NONE][0]['value']) || empty($master->field_text_hesla[LANGUAGE_NONE][0]['value'])) {
+      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+    }
+
+    // Merge field_text_z_gh, use "\n" as separator.
+    if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+    }
+
+    // Merge field_ilustracia.
+    if (!empty($entity->field_ilustracia)) {
+      foreach ($entity->field_ilustracia[LANGUAGE_NONE] as $img) {
+        $master->field_ilustracia[LANGUAGE_NONE][] = $img;
+      }
+    }
+
+    // Merge field_text_z_gh, use "\n" as separator.
+    if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
+      $master->field_atributy[LANGUAGE_NONE][0]['value'] .= $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+    }
+
+    $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
     node_save($master);
 
     $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
+    // Empty alias for original entity.
+    $entity->path['alias'] = '';
+    // Set automatic alias creation to FALSE.
+    $entity->path['pathauto'] = FALSE;
     node_save($entity);
     workbench_moderation_moderate($entity, 'ukoncenezluene');
   }
@@ -312,6 +342,13 @@ function beliana_merge(&$entity, $context = array()) {
   // If current entity is the last, make workflow transition.
   if ($context['progress']['current'] === $context['progress']['total']) {
     $master = node_load($_SESSION['master']);
+    // Reset fields.
+    $master->field_vyplatit = NULL;
+    $master->field_errta = NULL;
+    $master->field_datum = NULL;
+    // Set automatic alias creation to FALSE.
+    $master->path['pathauto'] = FALSE;
+    // Set field_lexikalna_skupina to `Zlúčené heslo`.
     $term = array_shift(taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny'));
     $master->field_lexikalna_skupina[LANGUAGE_NONE][]['tid'] = $term->tid;
     node_save($master);
@@ -458,6 +495,18 @@ function beliana_workflow_reaction(&$form, &$form_state) {
         drupal_set_message('Lexikálne skupiny upravte, heslo uložte a potom odošlite na 2. korektúru ešte raz. Po návrate z 2. korektúry sa lexikálne skupiny vrátia do pôvodného stavu.', 'error');
         $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
       }
+    }
+
+    // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
+    if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])){
+        drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+    }
+
+    // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
+    if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])){
+        drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
     }
 
     if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_3') {

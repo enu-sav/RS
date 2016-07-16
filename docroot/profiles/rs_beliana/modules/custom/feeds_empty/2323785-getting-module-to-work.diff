@@ -1,0 +1,162 @@
+diff --git a/feeds_empty.feeds.inc b/feeds_empty.feeds.inc
+index 6b84c7b..4bac7aa 100644
+--- a/feeds_empty.feeds.inc
++++ b/feeds_empty.feeds.inc
+@@ -1,29 +1,12 @@
+ <?php
+ 
+ /**
+- * @file
+- * Feeds hooks and callbacks.
+- */
+-
+-/**
+  * Implementaion of hook_feeds_processor_targets_alter().
+  */
+ function feeds_empty_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name) {
+   foreach ($targets as $target => &$info) {
+-    if (!empty($info['post_process']) && in_array('feeds_filter_empty_field_items', $info['post_process'])) {
+-
+-      $info['post_process'][] = 'feeds_empty_post_process_callback';
+-
+-      if (isset($info['form_callback'])) {
+-        $info['feeds_empty_old_form_callback'] = $info['form_callback'];
+-      }
+-      if (isset($info['summary_callback'])) {
+-        $info['feeds_empty_old_summary_callback'] = $info['summary_callback'];
+-      }
+-
+-      $info['form_callback'] = 'feeds_empty_form_callback';
+-      $info['summary_callback'] = 'feeds_empty_summary_callback';
+-    }
++    $targets[$target]['form_callbacks'][] = 'feeds_empty_form_callback';
++    $targets[$target]['summary_callbacks'][] = 'feeds_empty_summary_callback';
+   }
+ }
+ 
+@@ -40,7 +23,9 @@ function feeds_empty_summary_callback($mapping, $target, $form, $form_state) {
+   }
+ 
+   if (isset($target['feeds_empty_old_summary_callback'])) {
+-    $summary = $summary . '<br />' . $target['feeds_empty_old_summary_callback']($mapping, $target, $form, $form_state);
++    foreach ($target['feeds_empty_old_summary_callback'] as $key => $value) {
++      $summary = $summary . '<br />' . $value($mapping, $target, $form, $form_state);
++    }
+   }
+ 
+   return $summary;
+@@ -50,7 +35,6 @@ function feeds_empty_summary_callback($mapping, $target, $form, $form_state) {
+  * Mapping form callback.
+  */
+ function feeds_empty_form_callback($mapping, $target, $form, $form_state) {
+-
+   $mapping_form = array();
+ 
+   $mapping_form['feeds_empty_use_old'] = array(
+@@ -59,36 +43,70 @@ function feeds_empty_form_callback($mapping, $target, $form, $form_state) {
+     '#default_value' => !empty($mapping['feeds_empty_use_old']),
+   );
+ 
+-  if (isset($target['feeds_empty_old_form_callback'])) {
+-    $mapping_form += $target['feeds_empty_old_form_callback']($mapping, $target, $form, $form_state);
++  foreach ($variable as $key => $value) {
++    if (isset($target['feeds_empty_old_form_callback'])) {
++      $mapping_form += $value($mapping, $target, $form, $form_state);
++    }
+   }
+ 
+   return $mapping_form;
+ }
+ 
+ /**
+- * Post-process callback.
+- *
+- * Add existing values if the field is empty, and configured to do so.
++ * Implements hook_feeds_presave().
+  */
+-function feeds_empty_post_process_callback(FeedsSource $source, $entity, $target, array $target_info, array $mapping) {
+-  // We haven't been configured to run.
+-  if (empty($mapping['feeds_empty_use_old'])) {
+-    return;
+-  }
++function feeds_empty_feeds_presave(FeedsSource $source, $entity, $item, $entity_id) {
++  // Get the mapping from source.
++  $mappings = $source->importer->processor->config['mappings'];
+ 
+-  $field_name = $target;
+-  if (!empty($target_info['real_target'])) {
+-    $field_name = $target_info['real_target'];
+-  }
++  array_change_key_case($item, CASE_LOWER);
++
++  // Walk through fields mappings
++  foreach ($mappings as $mapping) {
+ 
+-  if (empty($entitiy->$field_name) || empty($entitiy->{$field_name}['und'])) {
+-    $entity_type = $source->importer->processor->entityType();
+-    list($id, , ) = entity_extract_ids($entity_type, $entity);
++    $mapping_field_source_name = mb_strtolower($mapping['source']);
++    $mapping_field_target_name = $mapping['target'];
+ 
+-    if ($id) {
+-      $old_entity = entity_load_unchanged($entity_type, $id);
++    $source_field_value = $item[$mapping_field_source_name];
++    if (is_array($source_field_value)) {
++      $source_field_value = reset($source_field_value);
++    }
++
++    // Will do only if our setting on that mapping is set.
++    if (empty($mapping['feeds_empty_use_old']) ) {
++      continue;
++    }
++
++    // Will do only if we have really empty source value.
++    if (!empty($source_field_value)) {
++      continue;
++    }
++
++    $field_name = $mapping_field_target_name;
++    if (!empty($mapping['real_target'])) {
++      $field_name = $mapping['real_target'];
++    }
++
++    // Get the first part of the field name (in case of field_image:uri)
++    $field_name = explode(':', $field_name);
++    $field_name = reset($field_name);
++
++    // Respect feeds_taxonomy_hierarchy module fileld naming
++    if (preg_match('/^.+_hierarchical$/', $field_name)) {
++      $field_name = substr($field_name, 0, -13);
++    }
++
++    // Get unchanged entity if we had not yet.
++    if (empty($old_entity)) {
++      $entity_type = $source->importer->processor->entityType();
++      $old_entity = entity_load_unchanged($entity_type, $entity_id);
++    }
++
++    // If we've got unchanged entity, get the value of the field from there
++    // and set it to the new entity.
++    if (!empty($old_entity)) {
+       $entity->$field_name = $old_entity->$field_name;
+     }
++
+   }
+ }
+diff --git a/feeds_empty.module b/feeds_empty.module
+index ccaacff..56ce2ca 100644
+--- a/feeds_empty.module
++++ b/feeds_empty.module
+@@ -13,8 +13,10 @@
+ function feeds_empty_module_implements_alter(&$implementations, $hook) {
+   switch ($hook) {
+     case 'feeds_processor_targets_alter':
+-      unset($implementations['feeds_empty']);
+-      $implementations['feeds_empty'] = FALSE;
++      $module = 'feeds_empty';
++      $group = $implementations[$module];
++      unset($implementations[$module]);
++      $implementations[$module] = $group;
+       break;
+   }
+ }

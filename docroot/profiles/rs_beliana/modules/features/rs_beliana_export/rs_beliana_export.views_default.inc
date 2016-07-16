@@ -63,14 +63,15 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['label'] = 'Ilustrácie';
+  $handler->display->display_options['fields']['field_ilustracia']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_ilustracia']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'view_mode' => 'export',
+    'view_mode' => 'teaser',
     'links' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
+  $handler->display->display_options['fields']['field_ilustracia']['separator'] = '';
   /* Kritéria zoradenia: Obsah: Na zoradenie (field_na_zoradenie) */
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
@@ -181,7 +182,7 @@ function rs_beliana_export_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Exportovanie hesiel';
+  $handler->display->display_options['title'] = 'Exportovanie hesiel (sadzba)';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -232,7 +233,7 @@ function rs_beliana_export_views_default_views() {
     t('Súbor'),
     t('Lexikálna skupina'),
     t('Page'),
-    t('Exportovanie hesiel'),
+    t('Exportovanie hesiel (sadzba)'),
     t('Krátky popis'),
     t('Pomocou nastavení vyberte požadované heslá, a potom kliknite na oranžové tlačidlo HTML, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa stránka vo formáte HTML, ktorá sa podľa typu a nastavení prehliadača buď priamo v prehliadači zobrazí alebo prehliadač ponúkne inú možnosť. Stránku môžete uložiť do súboru, ktorý môžete otvoriť v textovom editore a tam upraviť, vytlačiť alebo niekomu poslať. Vytvorenú stránku môžete vytlačiť aj priamo z prehliadača. Vybrané heslá sa zobrazia po 20-tich, exportujú sa však všetky vybrané heslá. Povinne treba zadať práve jeden súbor.'),
     t('Data export'),

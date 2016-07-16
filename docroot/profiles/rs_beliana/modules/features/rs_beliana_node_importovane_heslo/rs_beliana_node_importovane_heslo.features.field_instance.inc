@@ -116,27 +116,30 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_datum',
     'label' => 'Dátum',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
         'input_format' => 'd.m.Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
       'weight' => 5,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-importovane_heslo-field_errta'.
