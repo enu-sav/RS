@@ -7162,7 +7162,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Záhlavie';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
@@ -7172,12 +7172,21 @@ function rs_beliana_views_views_default_views() {
     2 => '2',
     1 => 0,
     5 => 0,
-    7 => 0,
     4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
     6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
     3 => 0,
-    8 => 0,
     9 => 0,
+    17 => 0,
+    20 => 0,
   );
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
@@ -7358,7 +7367,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['field'] = 'field_lexikalna_skupina_tid';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina (field_lexikalna_skupina)';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
@@ -7421,6 +7430,20 @@ function rs_beliana_views_views_default_views() {
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          'importovane_heslo::field_taxsubor' => 'importovane_heslo::field_taxsubor',
+          'importovane_heslo::field_lexikalna_skupina' => 'importovane_heslo::field_lexikalna_skupina',
+        ),
+      ),
     ),
     'action::node_assign_owner_action' => array(
       'selected' => 1,
@@ -7509,14 +7532,13 @@ function rs_beliana_views_views_default_views() {
     t('Naposledy upravil'),
     t('Lexikálna skupina'),
     t('Autor'),
-    t('Záhlavie'),
+    t('Názov'),
     t('dddd'),
     t('Text hesla'),
     t('ddddd'),
     t('Atribúty'),
     t('Súbor'),
     t(' Upravil niektorú verziu '),
-    t('Lexikálna skupina (field_lexikalna_skupina)'),
     t('Všetky heslá - prehľad'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
