@@ -6148,7 +6148,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -6233,19 +6233,18 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
   /* Filter criterion: Obsah: Lexikálna skupina (field_lexikalna_skupina) */
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['id'] = 'field_lexikalna_skupina_tid';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['table'] = 'field_data_field_lexikalna_skupina';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['field'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['value'] = '';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['remember_roles'] = array(
     2 => '2',
@@ -6267,18 +6266,19 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
   $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['value'] = '';
   $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
@@ -6300,7 +6300,9 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['hierarchy'] = 1;
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
@@ -6311,7 +6313,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -6330,6 +6331,7 @@ function rs_beliana_views_views_default_views() {
     3 => 0,
     9 => 0,
     17 => 0,
+    20 => 0,
   );
 
   /* Display: Upravovatelny */
