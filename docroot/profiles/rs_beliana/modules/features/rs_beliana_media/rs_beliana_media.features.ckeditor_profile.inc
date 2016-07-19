@@ -58,7 +58,9 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'html_entities' => 'f',
         'scayt_autoStartup' => 'f',
         'theme_config_js' => 'f',
-        'js_conf' => 'config.autoGrow_maxHeight = 500;
+        'js_conf' => '// na https stránke je požadovaný https pristup na cdn
+config.mathJaxLib = \'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
+config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
