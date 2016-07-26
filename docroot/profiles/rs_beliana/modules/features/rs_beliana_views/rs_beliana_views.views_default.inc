@@ -6434,8 +6434,8 @@ function rs_beliana_views_views_default_views() {
   $handler = $view->new_display('page', 'Upravovatelny2', 'page_1');
   $handler->display->display_options['path'] = 'upravovatelny2';
 
-  /* Display: Opraviť LS */
-  $handler = $view->new_display('page', 'Opraviť LS', 'page_2');
+  /* Display: Opraviť LS 1 */
+  $handler = $view->new_display('page', 'Opraviť LS 1', 'page_2');
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -6500,16 +6500,16 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['widget_type'] = '0';
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_label'] = 0;
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_description'] = 0;
-  $handler->display->display_options['path'] = 'opravit-ls';
+  $handler->display->display_options['path'] = 'opravit-ls1';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Opraviť LS';
+  $handler->display->display_options['menu']['title'] = 'Opraviť LS 1';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Opraviť text hesla */
-  $handler = $view->new_display('page', 'Opraviť text hesla', 'page_3');
+  /* Display: Opraviť text hesla 1 */
+  $handler = $view->new_display('page', 'Opraviť text hesla 1', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Opraviť text hesla';
   $handler->display->display_options['defaults']['access'] = FALSE;
@@ -6740,9 +6740,9 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
-  $handler->display->display_options['path'] = 'opravit-text';
+  $handler->display->display_options['path'] = 'opravit-text1';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Opraviť text';
+  $handler->display->display_options['menu']['title'] = 'Opraviť text 1';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -7000,6 +7000,93 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Opraviť LS 3 */
+  $handler = $view->new_display('page', 'Opraviť LS 3', 'page_5');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    4 => '4',
+    10 => '10',
+  );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_lexikalna_skupina_editable' => 'field_lexikalna_skupina_editable',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lexikalna_skupina_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = ' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. ';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['label'] = 'Text hesla (skrátený)';
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['max_length'] = '400';
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Lexikálna skupina (editable) */
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['id'] = 'field_lexikalna_skupina_editable';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['field'] = 'field_lexikalna_skupina_editable';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_description'] = 0;
+  $handler->display->display_options['path'] = 'opravit-ls3';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Opraviť LS 3';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['upravovatelny'] = array(
     t('Master'),
     t('Opraviť lexikálnu skupinu'),
@@ -7023,13 +7110,15 @@ function rs_beliana_views_views_default_views() {
     t('Text hesla'),
     t('Upravovatelny'),
     t('Upravovatelny2'),
-    t('Opraviť LS'),
+    t('Opraviť LS 1'),
     t(' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. '),
     t('Text hesla (skrátený)'),
+    t('Opraviť text hesla 1'),
     t('Opraviť text hesla'),
     t('Upravte text a potom uložte kliknutím na "Uložiť" vľavo dolu. Ak treba, na ďalšie heslá prejdete kliknutím na odkaz "nasledujúca". '),
     t('Komentár/inštrukcie'),
     t('Opraviť text hesla 3'),
+    t('Opraviť LS 3'),
   );
   $export['upravovatelny'] = $view;
 
