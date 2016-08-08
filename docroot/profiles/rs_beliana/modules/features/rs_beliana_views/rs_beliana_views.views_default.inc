@@ -6275,6 +6275,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['multiple'] = TRUE;
@@ -6436,6 +6437,8 @@ function rs_beliana_views_views_default_views() {
 
   /* Display: Opraviť LS 1 */
   $handler = $view->new_display('page', 'Opraviť LS 1', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Opraviť lexikálnu skupinu 1';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -6511,7 +6514,7 @@ function rs_beliana_views_views_default_views() {
   /* Display: Opraviť text hesla 1 */
   $handler = $view->new_display('page', 'Opraviť text hesla 1', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Opraviť text hesla';
+  $handler->display->display_options['title'] = 'Opraviť text hesla 1';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -7003,6 +7006,8 @@ function rs_beliana_views_views_default_views() {
 
   /* Display: Opraviť LS 3 */
   $handler = $view->new_display('page', 'Opraviť LS 3', 'page_5');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Opraviť lexikálnu skupinu 3';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -7111,14 +7116,15 @@ function rs_beliana_views_views_default_views() {
     t('Upravovatelny'),
     t('Upravovatelny2'),
     t('Opraviť LS 1'),
+    t('Opraviť lexikálnu skupinu 1'),
     t(' V zozname hesiel v poli "Lexikálna skupina" vpravo zmažte nesprávnu lexikálnu skupinu a vložte správnu (napíšte niekoľko písmen jej názvu a vyberte zo zoznamu) alebo vložte lexikálnu skupinu Neurčená. '),
     t('Text hesla (skrátený)'),
     t('Opraviť text hesla 1'),
-    t('Opraviť text hesla'),
     t('Upravte text a potom uložte kliknutím na "Uložiť" vľavo dolu. Ak treba, na ďalšie heslá prejdete kliknutím na odkaz "nasledujúca". '),
     t('Komentár/inštrukcie'),
     t('Opraviť text hesla 3'),
     t('Opraviť LS 3'),
+    t('Opraviť lexikálnu skupinu 3'),
   );
   $export['upravovatelny'] = $view;
 
