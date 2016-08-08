@@ -1,0 +1,13 @@
+diff --git a/docroot/profiles/rs_beliana/modules/contrib/editableviews/editableviews.module b/docroot/profiles/rs_beliana/modules/contrib/editableviews/editableviews.module
+index b24f599..a4d2467 100644
+--- a/docroot/profiles/rs_beliana/modules/contrib/editableviews/editableviews.module
++++ b/docroot/profiles/rs_beliana/modules/contrib/editableviews/editableviews.module
+@@ -357,6 +357,8 @@ function editableviews_entity_save($entities, $save_messages) {
+       }
+ 
+       // Save the entity using Entity API.
++      // MS, see https://www.drupal.org/node/1969848#comment-11469425
++      $entity->revision = TRUE;
+       entity_save($entity_type, $entity);
+ 
+       // If the entity was a new one, and on a forward relationship, we need
