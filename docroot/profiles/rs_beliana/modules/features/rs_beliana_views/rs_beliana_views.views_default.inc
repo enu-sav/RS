@@ -7643,6 +7643,237 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Vyhľadať ilustrácie */
+  $handler = $view->new_display('page', 'Vyhľadať ilustrácie', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Vyhľadať ilustrácie';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = ' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['label'] = '';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Popis ilustrácie */
+  $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
+  $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
+  $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
+  $handler->display->display_options['fields']['field_popis']['label'] = '';
+  $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Obrázok (náhľad) */
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
+    'image_style' => 'thumbnail',
+    'image_link' => '',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'ilustracia' => 'ilustracia',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
+  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['description'] = ' ';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
+  );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['label'] = 'Súbor (field_taxsubor)';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['error_message'] = FALSE;
+  /* Filter criterion: Obsah: Lexikálna skupina (field_lexikalna_skupina) */
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['id'] = 'field_lexikalna_skupina_tid';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['field'] = 'field_lexikalna_skupina_tid';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['description'] = 'Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
+  );
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['error_message'] = FALSE;
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    7 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+  );
+  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
+  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_label'] = 'ddddd';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    7 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    8 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: Obsah: Erráta (field_errta) */
+  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
+  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
+  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
+  $handler->display->display_options['filters']['field_errta_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
+  );
+  $handler->display->display_options['path'] = 'vyhladat-ilustracie';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['v_etky_hesl_'] = array(
     t('Master'),
     t('Všetky heslá'),
@@ -7677,6 +7908,9 @@ function rs_beliana_views_views_default_views() {
     t('V tomto náhľade možno importované (vydané) heslá prehľadávať aj na základe atribútov. Atribút je nejaká vlastnosť, ktorá bola zistená pri konverzii z doc súborov (bez diakritiky): \'instrukciepalo\' a \'instrukciesemancik\' (inštrukcie pre typografa), \'image\' (v texte má byť vložený obrázok), \'tabulka\' , \'matematika\', ghPriblizne\' a \'ghMultiPriblizne\' (lexikálnu skupinu hesla nebolo na základe informácií z generálneho heslára možné určiť jednoznačne). '),
     t('Zadajte časť názvu lex. skupiny, napr. "deji". Vyhľadávanie podľa mena redaktora nie je možné.'),
     t('Atribúty'),
+    t('Vyhľadať ilustrácie'),
+    t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.'),
+    t('Obrázok (náhľad)'),
   );
   $export['v_etky_hesl_'] = $view;
 
@@ -8511,18 +8745,6 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
-
-  /* Display: Vyhľadať ilustrácie */
-  $handler = $view->new_display('page', 'Vyhľadať ilustrácie', 'page');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Vyhľadať ilustrácie';
-  $handler->display->display_options['path'] = 'vyhladat-ilustracie';
-  $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'management';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['vyhladat_ilustracie'] = array(
     t('Master'),
     t('Všetky ilustrácie'),
@@ -8550,7 +8772,6 @@ function rs_beliana_views_views_default_views() {
     t('Názov'),
     t('dddd'),
     t('Popis ilustrácie'),
-    t('Vyhľadať ilustrácie'),
   );
   $export['vyhladat_ilustracie'] = $view;
 
