@@ -7655,7 +7655,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = ' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.';
+  $handler->display->display_options['header']['area']['content'] = ' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
@@ -7693,6 +7693,11 @@ function rs_beliana_views_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Kritéria zoradenia: Obsah: Názov */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
@@ -7909,7 +7914,7 @@ function rs_beliana_views_views_default_views() {
     t('Zadajte časť názvu lex. skupiny, napr. "deji". Vyhľadávanie podľa mena redaktora nie je možné.'),
     t('Atribúty'),
     t('Vyhľadať ilustrácie'),
-    t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.'),
+    t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.'),
     t('Obrázok (náhľad)'),
   );
   $export['v_etky_hesl_'] = $view;
