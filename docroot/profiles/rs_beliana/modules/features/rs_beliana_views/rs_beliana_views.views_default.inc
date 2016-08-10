@@ -6505,7 +6505,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_description'] = 0;
   $handler->display->display_options['path'] = 'opravit-ls1';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Opraviť LS 1';
+  $handler->display->display_options['menu']['title'] = 'Opraviť LS 1 heslo';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -6745,7 +6745,7 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['path'] = 'opravit-text1';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Opraviť text 1';
+  $handler->display->display_options['menu']['title'] = 'Opraviť text 1 heslo';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -6998,7 +6998,7 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['path'] = 'opravit-text3';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Opraviť text 3';
+  $handler->display->display_options['menu']['title'] = 'Opraviť text 3 hesla';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -7087,7 +7087,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina_editable']['suppress_description'] = 0;
   $handler->display->display_options['path'] = 'opravit-ls3';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Opraviť LS 3';
+  $handler->display->display_options['menu']['title'] = 'Opraviť LS 3 hesla';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
