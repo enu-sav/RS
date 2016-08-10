@@ -118,7 +118,7 @@ config.specialChars = [
 \'α\', \'β\', \'γ\', \'δ\', \'ε\', \'ζ\', \'η\', \'θ\', \'ι\', \'κ\', \'λ\', \'μ\', \'ν\', \'ξ\', \'ο\', \'π\', \'ρ\', \'σ\', \'τ\', \'υ\', \'φ\', \'χ\', \'ψ\', \'ω\',
 \'Α\', \'Β\', \'Γ\', \'Δ\', \'Ε\', \'Ζ\', \'Η\', \'Θ\', \'Ι\', \'Κ\', \'Λ\', \'Μ\', \'Ν\', \'Ξ\', \'Ο\', \'Π\', \'Ρ\', \'Σ\', \'Τ\', \'Υ\', \'Φ\', \'Χ\', \'Ψ\', \'Ω\',
 \'à\', \'á\', \'â\', \'ã\', \'ä\', \'ā\', \'ą\', \'ă\', \'å\', \'æ\', 
-\'ç\', \'ć\', \'č\', \'ĉ\', \'ċ\', \'ď\', \'đ\', \'è\', \'é\', \'ê\', 
+\'ç\', \'ć\', \'č\', \'ĉ\', \'ċ\', \'ď\', [\'ð\',\'znak eth, islandčina, faerčina, stará angličtina\'],[\'đ\',\'chorvátčina, vietnamčima, sami\'], \'è\', \'é\', \'ê\', 
 \'ë\', \'ē\', \'ę\', \'ě\', \'ĕ\', \'ė\', \'ƒ\', \'ǧ\', \'ĝ\', \'ğ\', \'ġ\', 
 \'ģ\', \'ȟ\', \'ĥ\', \'ħ\', \'ì\', \'í\', \'î\', \'ï\', \'ī\', \'ĩ\', \'ĭ\', 
 \'į\', \'ı\', \'ĵ\', \'ķ\', \'ĸ\', \'ł\', \'ľ\', \'ĺ\', \'ļ\', \'ŀ\', 
@@ -128,7 +128,7 @@ config.specialChars = [
 \'ű\', \'ŭ\', \'ũ\', \'ų\', \'ŵ\', \'ÿ\', \'ý\', \'ŷ\', \'ż\', \'ź\', 
 \'ž\', \'ß\', 
 \'À\', \'Á\', \'Â\', \'Ã\', \'Ä\', \'Å\', \'Æ\', \'Ā\', \'Ç\', \'Ć\', 
-\'Č\', \'Ĉ\', \'Ċ\', \'Ď\', \'Đ\', \'È\', \'É\', \'Ê\', \'Ë\', \'Ē\', 
+\'Č\', \'Ĉ\', \'Ċ\', \'Ď\', [\'Ð\',\'znak eth, islandčina, faerčina, stará angličtina\'],[\'Đ\',\'chorvátčina, vietnamčima, sami\'], \'È\', \'É\', \'Ê\', \'Ë\', \'Ē\', 
 \'Ę\', \'Ě\', \'Ĕ\', \'Ė\', \'Ǧ\', \'Ĝ\', \'Ğ\', \'Ġ\', \'Ģ\', \'Ȟ\', \'Ĥ\', \'Ì\', 
 \'Í\', \'Î\', \'Ï\', \'Ī\', \'Ĩ\', \'Ĭ\', \'Į\', \'İ\', \'Ĵ\', \'Ķ\', 
 \'Ľ\', \'Ĺ\', \'Ļ\', \'Ŀ\', \'Ł\', \'Ñ\', \'Ń\', \'Ň\', \'Ņ\', \'Ŋ\', 
@@ -142,7 +142,7 @@ config.specialChars = [
           'autogrow' => array(
             'name' => 'autogrow',
             'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.4.8/full-all/plugins/autogrow/',
+            'path' => '//cdn.ckeditor.com/4.5.7/full-all/plugins/autogrow/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
@@ -168,7 +168,7 @@ config.specialChars = [
           'mathjax' => array(
             'name' => 'mathjax',
             'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-            'path' => '//cdn.ckeditor.com/4.4.8/full-all/plugins/mathjax/',
+            'path' => '//cdn.ckeditor.com/4.5.7/full-all/plugins/mathjax/',
             'buttons' => array(
               'Mathjax' => array(
                 'icon' => 'icons/mathjax.png',
@@ -180,7 +180,7 @@ config.specialChars = [
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.4.8/full-all/plugins/tableresize/',
+            'path' => '//cdn.ckeditor.com/4.5.7/full-all/plugins/tableresize/',
             'buttons' => FALSE,
             'default' => 't',
           ),
