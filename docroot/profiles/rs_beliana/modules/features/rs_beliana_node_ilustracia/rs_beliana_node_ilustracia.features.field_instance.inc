@@ -575,7 +575,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_obrazok_navrh_'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => 'Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. ',
+    'description' => 'Autor a redaktor: Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. Grafik: vložte náhľad finálneho obrázka ',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -610,7 +610,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_obrazok_navrh_',
-    'label' => 'Obrázok (náhľad)',
+    'label' => 'Obrázok (návrh/náhľad)',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -740,7 +740,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_subor_ilustracie'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => 'Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je jpg, pokiaľ ide o vektorový obrázok, povolené typy sú eps (pre tlačenú verziu), svg (pre webovú verziu) a cdr (zdrojový súbor pre eps a svg). Vkladá sa buď jpg súbor, alebo trojica eps, svg a cdr. jpg s ostatnými kombinovať nemožno. Pokiaľ eps alebo svg nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí. cdr je nepovinné, ale odporúčané.',
+    'description' => 'Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je <b>jpg</b>, pokiaľ ide o vektorový obrázok, povolené typy sú <b>eps</b> (pre tlačenú verziu), <b>svg</b> (pre webovú verziu) a <b>cdr</b> (zdrojový súbor pre eps a svg). Vkladá sa buď <b>jpg</b> súbor, alebo trojica <b>eps</b>, <b>svg</b> a <b>cdr</b>. Obrázky <b>jpg</b> s ostatnými typmi kombinovať nemožno. Pokiaľ <b>eps</b> alebo <b>svg</b> nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -766,7 +766,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_subor_ilustracie',
-    'label' => 'Súbor ilustrácie',
+    'label' => 'Súbory ilustrácie',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
@@ -964,7 +964,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte odkaz na text licencie, ktorý bol použitý na stránke dielassss',
+    'description' => 'Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1129,6 +1129,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Autor a redaktor: Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. Grafik: vložte náhľad finálneho obrázka ');
   t('Comment');
   t('Držiteľ práv');
   t('Dátum prevzatia diela');
@@ -1143,12 +1144,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Názov');
   t('Názov diela');
   t('Obrázok (na použitie)');
-  t('Obrázok (náhľad)');
+  t('Obrázok (návrh/náhľad)');
   t('Popis ilustrácie');
   t('Použiť');
   t('Pôvod ilustrácie');
   t('Súbor');
-  t('Súbor ilustrácie');
+  t('Súbory ilustrácie');
   t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.');
   t('URL autora diela');
   t('URL diela');
@@ -1158,11 +1159,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela alebo názov inštitúcie, z ktorej stránky bolo (public domain) dielo prevzaté');
   t('Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.');
-  t('Uveďte odkaz na text licencie, ktorý bol použitý na stránke dielassss');
+  t('Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela.');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia je dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
-  t('Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. ');
-  t('Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je jpg, pokiaľ ide o vektorový obrázok, povolené typy sú eps (pre tlačenú verziu), svg (pre webovú verziu) a cdr (zdrojový súbor pre eps a svg). Vkladá sa buď jpg súbor, alebo trojica eps, svg a cdr. jpg s ostatnými kombinovať nemožno. Pokiaľ eps alebo svg nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí. cdr je nepovinné, ale odporúčané.');
+  t('Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je <b>jpg</b>, pokiaľ ide o vektorový obrázok, povolené typy sú <b>eps</b> (pre tlačenú verziu), <b>svg</b> (pre webovú verziu) a <b>cdr</b> (zdrojový súbor pre eps a svg). Vkladá sa buď <b>jpg</b> súbor, alebo trojica <b>eps</b>, <b>svg</b> a <b>cdr</b>. Obrázky <b>jpg</b> s ostatnými typmi kombinovať nemožno. Pokiaľ <b>eps</b> alebo <b>svg</b> nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí.');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia.1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');
