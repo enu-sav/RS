@@ -5297,7 +5297,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_popis']['label'] = 'popis';
   $handler->display->display_options['fields']['field_popis']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['field_popis']['alter']['preserve_tags'] = '<p><strong><em><sub><sup>';
-  /* Pole: Obsah: Súbor ilustrácie */
+  /* Pole: Obsah: Súbory ilustrácie */
   $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
   $handler->display->display_options['fields']['field_subor_ilustracie']['table'] = 'field_data_field_subor_ilustracie';
   $handler->display->display_options['fields']['field_subor_ilustracie']['field'] = 'field_subor_ilustracie';
@@ -5306,7 +5306,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_subor_ilustracie']['type'] = 'file_url_plain';
   $handler->display->display_options['fields']['field_subor_ilustracie']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_subor_ilustracie']['separator'] = ';';
-  /* Pole: Obsah: Obrázok (náhľad) */
+  /* Pole: Obsah: Obrázok (návrh/náhľad) */
   $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
@@ -7684,10 +7684,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['label'] = '';
   $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Obrázok (náhľad) */
+  /* Pole: Obsah: Obrázok (návrh/náhľad) */
   $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
     'image_style' => 'thumbnail',
@@ -7938,6 +7939,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     17 => '17',
     3 => '3',
+    10 => '10',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -8572,7 +8574,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['label'] = '';
   $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Obrázok (náhľad) */
+  /* Pole: Obsah: Obrázok (návrh/náhľad) */
   $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
@@ -8769,7 +8771,7 @@ function rs_beliana_views_views_default_views() {
     t('Krátky popis'),
     t('V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.'),
     t('Stav'),
-    t('Obrázok (náhľad)'),
+    t('Obrázok (návrh/náhľad)'),
     t('Obrázok (na použitie)'),
     t('Súbor'),
     t('Súbor (field_taxsubor)'),
