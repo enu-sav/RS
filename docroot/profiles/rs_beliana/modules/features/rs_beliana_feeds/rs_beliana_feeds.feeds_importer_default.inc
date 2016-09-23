@@ -403,11 +403,6 @@ function rs_beliana_feeds_feeds_importer_default() {
             'unique' => FALSE,
             'language' => 'und',
           ),
-          19 => array(
-            'source' => 'nahlad',
-            'target' => 'field_obrazok_navrh_:uri',
-            'unique' => FALSE,
-          ),
         ),
         'update_existing' => '1',
         'update_non_existent' => 'skip',

@@ -138,9 +138,9 @@ function rs_beliana_feeds_feeds_tamper_default() {
   $feeds_tamper->source = 'kategoria';
   $feeds_tamper->plugin_id = 'explode';
   $feeds_tamper->settings = array(
-    'separator' => ';',
+    'separator' => ',',
     'limit' => '',
-    'real_separator' => ';',
+    'real_separator' => ',',
   );
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'Explode';
@@ -155,7 +155,7 @@ function rs_beliana_feeds_feeds_tamper_default() {
   $feeds_tamper->plugin_id = 'explode';
   $feeds_tamper->settings = array(
     'separator' => ';',
-    'limit' => '',
+    'limit' => 3,
     'real_separator' => ';',
   );
   $feeds_tamper->weight = 0;

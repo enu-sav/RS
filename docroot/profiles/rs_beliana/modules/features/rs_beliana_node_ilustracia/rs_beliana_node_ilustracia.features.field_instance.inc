@@ -771,7 +771,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'ilustracia/na_zverejnenie',
-      'file_extensions' => 'jpg cdr eps svg png',
+      'file_extensions' => 'jpg cdr eps svg png odg',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
