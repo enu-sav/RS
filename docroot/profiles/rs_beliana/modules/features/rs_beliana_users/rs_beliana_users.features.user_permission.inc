@@ -985,6 +985,17 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_subor_ilustracie'.
+  $permissions['create field_subor_ilustracie'] = array(
+    'name' => 'create field_subor_ilustracie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_taxsubor'.
   $permissions['create field_taxsubor'] = array(
     'name' => 'create field_taxsubor',
@@ -1423,6 +1434,17 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_subor_ilustracie'.
+  $permissions['edit field_subor_ilustracie'] = array(
+    'name' => 'edit field_subor_ilustracie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_taxsubor'.
   $permissions['edit field_taxsubor'] = array(
     'name' => 'edit field_taxsubor',
@@ -1535,6 +1557,17 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit own field_spravit_1_korekturu'] = array(
     'name' => 'edit own field_spravit_1_korekturu',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_subor_ilustracie'.
+  $permissions['edit own field_subor_ilustracie'] = array(
+    'name' => 'edit own field_subor_ilustracie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -2866,6 +2899,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_subor_ilustracie'.
+  $permissions['view field_subor_ilustracie'] = array(
+    'name' => 'view field_subor_ilustracie',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_taxsubor'.
   $permissions['view field_taxsubor'] = array(
     'name' => 'view field_taxsubor',
@@ -3018,6 +3060,17 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view own field_spravit_1_korekturu'] = array(
     'name' => 'view own field_spravit_1_korekturu',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_subor_ilustracie'.
+  $permissions['view own field_subor_ilustracie'] = array(
+    'name' => 'view own field_subor_ilustracie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
