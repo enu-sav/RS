@@ -2,6 +2,7 @@ name = Redakčný systém Beliana Médiá
 core = 7.x
 package = Configuration
 dependencies[] = ckeditor
+dependencies[] = ckeditor_lite
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = filter
