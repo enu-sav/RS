@@ -1,7 +1,5 @@
 <?php
 /**
  * @file
- * Code for the Redakčný systém Beliana Private messages feature.
+ * Drupal needs this blank file.
  */
-
-include_once 'rs_beliana_private_messages.features.inc';
