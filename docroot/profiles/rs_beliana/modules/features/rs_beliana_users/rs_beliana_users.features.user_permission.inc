@@ -257,6 +257,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'ckeditor',
   );
 
+  // Exported permission: 'administer ckeditor_lite'.
+  $permissions['administer ckeditor_lite'] = array(
+    'name' => 'administer ckeditor_lite',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'ckeditor_lite',
+  );
+
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
@@ -610,6 +619,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'allow disabling privatemsg'.
+  $permissions['allow disabling privatemsg'] = array(
+    'name' => 'allow disabling privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'privatemsg',
+  );
+
   // Exported permission: 'assign workbench access'.
   $permissions['assign workbench access'] = array(
     'name' => 'assign workbench access',
@@ -890,6 +908,15 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'ckeditor_lite highlight changes'.
+  $permissions['ckeditor_lite highlight changes'] = array(
+    'name' => 'ckeditor_lite highlight changes',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'ckeditor_lite',
   );
 
   // Exported permission: 'clear bb feeds'.
@@ -1248,6 +1275,15 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'delete privatemsg'.
+  $permissions['delete privatemsg'] = array(
+    'name' => 'delete privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'privatemsg',
   );
 
   // Exported permission: 'delete revisions'.
@@ -2544,6 +2580,25 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'read all private messages'.
+  $permissions['read all private messages'] = array(
+    'name' => 'read all private messages',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'privatemsg',
+  );
+
+  // Exported permission: 'read privatemsg'.
+  $permissions['read privatemsg'] = array(
+    'name' => 'read privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'privatemsg',
+  );
+
   // Exported permission: 'rename features'.
   $permissions['rename features'] = array(
     'name' => 'rename features',
@@ -2551,6 +2606,15 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'features',
+  );
+
+  // Exported permission: 'reply only privatemsg'.
+  $permissions['reply only privatemsg'] = array(
+    'name' => 'reply only privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'privatemsg',
   );
 
   // Exported permission: 'revert revisions'.
@@ -2581,6 +2645,15 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'select text format for privatemsg'.
+  $permissions['select text format for privatemsg'] = array(
+    'name' => 'select text format for privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'privatemsg',
   );
 
   // Exported permission: 'show warning text'.
@@ -2729,6 +2802,15 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'filter',
+  );
+
+  // Exported permission: 'use tokens in privatemsg'.
+  $permissions['use tokens in privatemsg'] = array(
+    'name' => 'use tokens in privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'privatemsg',
   );
 
   // Exported permission: 'use workbench_moderation my drafts tab'.
@@ -3240,6 +3322,16 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_access',
+  );
+
+  // Exported permission: 'write privatemsg'.
+  $permissions['write privatemsg'] = array(
+    'name' => 'write privatemsg',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'privatemsg',
   );
 
   return $permissions;
