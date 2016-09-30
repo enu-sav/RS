@@ -345,6 +345,27 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
+  // Exported menu link: management_private-message-settings:admin/config/messaging/privatemsg.
+  $menu_links['management_private-message-settings:admin/config/messaging/privatemsg'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/config/messaging/privatemsg',
+    'router_path' => 'admin/config/messaging/privatemsg',
+    'link_title' => 'Private message settings',
+    'options' => array(
+      'attributes' => array(
+        'title' => 'Configure private messaging settings.',
+      ),
+      'identifier' => 'management_private-message-settings:admin/config/messaging/privatemsg',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 0,
+    'parent_identifier' => 'management_messaging:admin/config/messaging',
+  );
   // Exported menu link: management_redakn-systm:admin/beliana.
   $menu_links['management_redakn-systm:admin/beliana'] = array(
     'menu_name' => 'management',
@@ -385,6 +406,26 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => -40,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
+  );
+  // Exported menu link: management_sprvy:messages.
+  $menu_links['management_sprvy:messages'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'messages',
+    'router_path' => 'messages',
+    'link_title' => 'Správy',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'management_sprvy:messages',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -50,
+    'customized' => 1,
   );
   // Exported menu link: management_vetky-moje-hesl:admin/beliana/all.
   $menu_links['management_vetky-moje-hesl:admin/beliana/all'] = array(
@@ -491,6 +532,23 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
+  // Exported menu link: user-menu_messages:messages.
+  $menu_links['user-menu_messages:messages'] = array(
+    'menu_name' => 'user-menu',
+    'link_path' => 'messages',
+    'router_path' => 'messages',
+    'link_title' => 'Messages',
+    'options' => array(
+      'identifier' => 'user-menu_messages:messages',
+    ),
+    'module' => 'system',
+    'hidden' => 1,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -499,6 +557,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Jazyková redakcia 2');
   t('Korektúra 1');
   t('Korektúra 2');
+  t('Messages');
   t('My Workbench');
   t('Na posúdenie (R)');
   t('Na posúdenie (VR1)');
@@ -510,8 +569,10 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Nepriradené heslá');
   t('Odovzdané heslá');
   t('Priradiť autora');
+  t('Private message settings');
   t('Redakčný systém');
   t('Rozpracované heslá');
+  t('Správy');
   t('Vyradené');
   t('Vytvoriť');
   t('Všetky moje heslá');
