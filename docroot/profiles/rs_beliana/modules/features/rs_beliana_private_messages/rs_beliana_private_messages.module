@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Redakčný systém Beliana Private messages feature.
- */
-
-include_once 'rs_beliana_private_messages.features.inc';
