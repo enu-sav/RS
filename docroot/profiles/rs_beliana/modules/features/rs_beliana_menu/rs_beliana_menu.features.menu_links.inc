@@ -345,27 +345,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_private-message-settings:admin/config/messaging/privatemsg.
-  $menu_links['management_private-message-settings:admin/config/messaging/privatemsg'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/config/messaging/privatemsg',
-    'router_path' => 'admin/config/messaging/privatemsg',
-    'link_title' => 'Private message settings',
-    'options' => array(
-      'attributes' => array(
-        'title' => 'Configure private messaging settings.',
-      ),
-      'identifier' => 'management_private-message-settings:admin/config/messaging/privatemsg',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-    'parent_identifier' => 'management_messaging:admin/config/messaging',
-  );
   // Exported menu link: management_redakn-systm:admin/beliana.
   $menu_links['management_redakn-systm:admin/beliana'] = array(
     'menu_name' => 'management',
@@ -569,7 +548,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Nepriradené heslá');
   t('Odovzdané heslá');
   t('Priradiť autora');
-  t('Private message settings');
   t('Redakčný systém');
   t('Rozpracované heslá');
   t('Správy');

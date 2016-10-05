@@ -27,7 +27,6 @@ features[menu_links][] = management_navrhnut:admin/beliana/navrhnute
 features[menu_links][] = management_nepriraden-hesl:admin/beliana/nepriradene
 features[menu_links][] = management_odovzdan-hesl:admin/beliana/odovzdane
 features[menu_links][] = management_priradi-autora:admin/beliana/priradit-autora
-features[menu_links][] = management_private-message-settings:admin/config/messaging/privatemsg
 features[menu_links][] = management_redakn-systm:admin/beliana
 features[menu_links][] = management_rozpracovan-hesl:admin/beliana/drafts
 features[menu_links][] = management_sprvy:messages
