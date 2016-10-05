@@ -905,7 +905,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['relationship'] = 'nid';
   $handler->display->display_options['filters']['title']['operator'] = 'starts';
-  $handler->display->display_options['filters']['title']['value'] = 'k';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -924,14 +923,15 @@ function rs_beliana_views_views_default_views() {
     12 => 0,
     6 => 0,
     13 => 0,
+    19 => 0,
     14 => 0,
     15 => 0,
     16 => 0,
+    18 => 0,
     3 => 0,
-    8 => 0,
     9 => 0,
     17 => 0,
-    18 => 0,
+    20 => 0,
   );
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
@@ -3116,7 +3116,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['relationship'] = 'nid';
   $handler->display->display_options['filters']['title']['operator'] = 'starts';
-  $handler->display->display_options['filters']['title']['value'] = 'k';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -3143,6 +3142,7 @@ function rs_beliana_views_views_default_views() {
     3 => 0,
     9 => 0,
     17 => 0,
+    20 => 0,
   );
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
