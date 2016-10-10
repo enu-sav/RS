@@ -45,11 +45,7 @@ function theme_views_data_export_feed_icon($variables) {
   if ($query) {
     $url_options['query'] = $query;
   }
-  $image = theme('image', array(
-    'path' => $image_path,
-    'alt' => $text,
-    'title' => $text
-  ));
+  $image = theme('image', array('path' => $image_path, 'alt' => $text, 'title' => $text));
   return l($image, $url, $url_options);
 }
 
@@ -62,13 +58,7 @@ function theme_views_data_export_feed_icon($variables) {
 function theme_views_data_export_complete_page($variables) {
   extract($variables, EXTR_SKIP);
   drupal_set_title(t('Data export successful'));
-  drupal_add_html_head(array(
-    '#tag' => 'meta',
-    '#attributes' => array(
-      'http-equiv' => "Refresh",
-      'content' => '3;url=' . $file
-    )
-  ), 'views_data_export_download');
+  drupal_add_html_head(array('#tag' => 'meta', '#attributes' => array('http-equiv' =>"Refresh", 'content' => '3;url='. $file)), 'views_data_export_download');
   $output = '';
   $output .= '<p>';
   $output .= t('Your export has been created. View/download the file <a href="@link">here</a> (will automatically download in 3 seconds.)', array('@link' => $file));
@@ -88,8 +78,8 @@ function template_preprocess_views_data_export(&$vars) {
   $vars['body'] = $vars['rows']['body'];
   $vars['footer'] = $vars['rows']['footer'];
 
-  $view = $vars['view'];
-  $fields = &$view->field;
+  $view     = $vars['view'];
+  $fields   = &$view->field;
 }
 
 function template_preprocess_views_data_export_csv_header(&$vars) {
@@ -101,7 +91,7 @@ function template_preprocess_views_data_export_csv_header(&$vars) {
   }
   // Support old misspelled templates. LEGACY
   $vars['seperator'] =
-  $vars['separator'] = $vars['options']['separator'];
+    $vars['separator'] = $vars['options']['separator'];
 
   // Special handling when quoted values are involved.
   if ($vars['options']['quote']) {
@@ -121,7 +111,7 @@ function template_preprocess_views_data_export_csv_header(&$vars) {
       $output = trim($output);
     }
     if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
-      switch ($vars['options']['encoding']) {
+      switch($vars['options']['encoding']) {
         case 'utf8_decode':
           $converted = utf8_decode($output);
           break;
@@ -146,7 +136,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
   }
   // Support old misspelled templates. LEGACY
   $vars['seperator'] =
-  $vars['separator'] = $vars['options']['separator'];
+    $vars['separator'] = $vars['options']['separator'];
 
   // Special handling when quoted values are involved.
   if ($vars['options']['quote']) {
@@ -168,7 +158,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
       }
 
       if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
-        switch ($vars['options']['encoding']) {
+        switch($vars['options']['encoding']) {
           case 'utf8_decode':
             $converted = utf8_decode($output);
             break;
@@ -182,11 +172,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
       }
       if (!empty($vars['options']['replace_newlines'])) {
         if (!empty($vars['options']['newline_token'])) {
-          $output = str_replace(array(
-            "\r\n",
-            "\r",
-            "\n"
-          ), $vars['options']['newline_replacement'], $output);
+          $output = str_replace( array("\r\n", "\r", "\n"), $vars['options']['newline_replacement'], $output);
         }
         else {
           $output = str_replace("\n", $vars['options']['newline_replacement'], $output);
@@ -210,7 +196,7 @@ function template_preprocess_views_data_export_csv(&$vars) {
   }
   // Support old misspelled templates. LEGACY
   $vars['seperator'] =
-  $vars['separator'] = $vars['options']['separator'];
+    $vars['separator'] = $vars['options']['separator'];
 
   // Special handling when quoted values are involved.
   if ($vars['options']['quote']) {
@@ -229,7 +215,7 @@ function template_preprocess_views_data_export_csv(&$vars) {
       $output = trim($output);
     }
     if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
-      switch ($vars['options']['encoding']) {
+      switch($vars['options']['encoding']) {
         case 'ASCII':
           $converted = iconv("UTF-8", "ASCII//TRANSLIT", $output);
           if ($converted !== FALSE) {
@@ -249,7 +235,7 @@ function template_preprocess_views_data_export_csv(&$vars) {
         $output = trim($output);
       }
       if (!empty($vars['options']['encoding']) && function_exists('iconv')) {
-        switch ($vars['options']['encoding']) {
+        switch($vars['options']['encoding']) {
           case 'ASCII':
             $converted = iconv("UTF-8", "ASCII//TRANSLIT", $output);
             if ($converted !== FALSE) {
@@ -273,11 +259,17 @@ function template_preprocess_views_data_export_txt_body(&$vars) {
   _views_data_export_body_shared_preprocess($vars);
 }
 
+/**
+ * Implements hook_preprocess_views_data_export_doc_body().
+ */
 function template_preprocess_views_data_export_doc_body(&$vars) {
   // Pass through the generic MS Office preprocess.
   template_preprocess_views_data_export_msoffice_body($vars);
 }
 
+/**
+ * Implements hook_preprocess_views_data_export_xls_body().
+ */
 function template_preprocess_views_data_export_xls_body(&$vars) {
   // Pass through the generic MS Office preprocess.
   template_preprocess_views_data_export_msoffice_body($vars);
@@ -286,10 +278,31 @@ function template_preprocess_views_data_export_xls_body(&$vars) {
 function template_preprocess_views_data_export_msoffice_body(&$vars) {
   _views_data_export_header_shared_preprocess($vars);
   _views_data_export_body_shared_preprocess($vars);
+}
+
+/**
+ * Implements hook_process_views_data_export_doc_body().
+ */
+function template_process_views_data_export_doc_body(&$vars) {
+  // Pass through the generic MS Office process.
+  template_process_views_data_export_msoffice_body($vars);
+}
+
+/**
+ * Implements hook_process_views_data_export_xls_body().
+ */
+function template_process_views_data_export_xls_body(&$vars) {
+  // Pass through the generic MS Office process.
+  template_process_views_data_export_msoffice_body($vars);
+}
+
+function template_process_views_data_export_msoffice_body(&$vars) {
 
   $output = '';
 
   // Construct the tbody of a table, see theme_table().
+
+  $ts = tablesort_init($vars['header']);
 
   $flip = array(
     'even' => 'odd',
@@ -324,29 +337,18 @@ function template_preprocess_views_data_export_msoffice_body(&$vars) {
       }
 
       // Build row
+      $output .= ' <tr' . drupal_attributes($attributes) . '>';
+      $i = 0;
       foreach ($cells as $cell) {
-        $output .= render($cell);
+        $cell = tablesort_cell($cell, $vars['header'], $ts, $i++);
+        $output .= _theme_table_cell($cell);
       }
+      $output .= " </tr>\n";
     }
   }
 
-  // Export na tlac
-  if ($vars['view']->name === 'export' && $vars['view']->current_display === 'views_data_export_1') {
-    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some html tags
-    $output = preg_replace('/➔ /', '→ ', $output); 
-    $output = preg_replace('/➔/', '→ ', $output); 
-    $vars['tbody'] = $output;
-  }
-  // Export pre sadzac
-  else if ($vars['view']->name === 'export_sadzac' && $vars['view']->current_display === 'views_data_export_1') {
-    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
-    $output = preg_replace('/➔ /', '→ ', $output); 
-    $output = preg_replace('/➔/', '→ ', $output); 
-    $vars['tbody'] = $output;
-  }
-  else {
-    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
-  }
+
+  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
 
 }
 
@@ -376,7 +378,7 @@ function template_preprocess_views_data_export_msoffice_header(&$vars) {
 
   $vars['header_row'] .= '</tr></thead>';
 
-  $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']); // Strip 'a' and 'span' tags.
+  $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']); // strip 'a' and 'span' tags
 }
 
 /**
@@ -501,8 +503,8 @@ function _views_data_export_xml_tag_clean($tag) {
  * Shared helper function for export preprocess functions.
  */
 function _views_data_export_header_shared_preprocess(&$vars) {
-  $view = $vars['view'];
-  $fields = &$view->field;
+  $view     = $vars['view'];
+  $fields   = &$view->field;
   $fields_info = $view->display_handler->get_option('fields');
   $vars['header'] = array();
   foreach ($fields as $key => $field) {
@@ -521,8 +523,8 @@ function _views_data_export_header_shared_preprocess(&$vars) {
  * Shared helper function for export preprocess functions.
  */
 function _views_data_export_body_shared_preprocess(&$vars) {
-  $view = $vars['view'];
-  $fields = &$view->field;
+  $view     = $vars['view'];
+  $fields   = &$view->field;
   $hide_empty_support = !empty($vars['hide_empty_support']);
 
   $rows = $vars['rows'];
