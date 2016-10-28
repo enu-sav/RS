@@ -55,4 +55,5 @@
  */
 
 $sites['dev.beliana.sav.sk'] = 'dev';
+$sites['443.dev.beliana.sav.sk'] = 'dev';
 $sites['rs.beliana.sav.sk'] = 'prod';
