@@ -26,9 +26,7 @@ function rs_beliana_feeds_strongarm() {
     'beliana_importovanie_gh-geo-explode' => FALSE,
     'import_ilustr_cie-kategoria-explode' => FALSE,
     'bb-ilustracia-explode' => FALSE,
-    'import_ilustr_cie-pouzit-explode' => FALSE,
-    'import_ilustr_cie-datum_prevzatia-strtotime' => FALSE,
-    'import_ilustr_cie-nazverejnenie-explode' => FALSE,
+    'bb-datum-strtotime' => FALSE,
   );
   $export['default_feeds_tamper'] = $strongarm;
 
