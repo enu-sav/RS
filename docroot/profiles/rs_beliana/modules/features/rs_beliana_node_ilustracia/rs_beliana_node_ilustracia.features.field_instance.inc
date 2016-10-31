@@ -51,6 +51,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'export' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -61,18 +73,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 8,
-      ),
-      'export' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
         'weight' => 19,
       ),
     ),
@@ -113,9 +113,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 17,
       ),
       'export' => array(
@@ -125,9 +124,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 20,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'list_default',
         'weight' => 15,
       ),
     ),
@@ -159,8 +159,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 16,
+        'type' => 'text_plain',
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'above',
@@ -169,10 +169,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 19,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 13,
+        'type' => 'text_plain',
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -204,9 +205,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'export' => array(
@@ -216,10 +216,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 9,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 17,
+        'type' => 'text_plain',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -251,9 +252,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'export' => array(
@@ -298,10 +298,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 9,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'inline',
@@ -310,11 +309,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 15,
       ),
       'teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -343,9 +342,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 14,
       ),
       'export' => array(
@@ -355,9 +353,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 17,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 10,
       ),
     ),
@@ -390,9 +389,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 12,
       ),
       'export' => array(
@@ -402,9 +400,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 16,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'list_default',
         'weight' => 11,
       ),
     ),
@@ -480,9 +479,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 15,
       ),
       'export' => array(
@@ -492,9 +490,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 18,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 12,
       ),
     ),
@@ -578,14 +577,14 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Autor a redaktor: Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. Grafik: vložte náhľad finálneho obrázka ',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
           'image_style' => 'medium',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'export' => array(
         'label' => 'above',
@@ -598,7 +597,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -647,8 +646,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'type' => 'text_plain',
+        'weight' => 2,
       ),
       'export' => array(
         'label' => 'hidden',
@@ -658,7 +657,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 1,
       ),
       'teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
@@ -701,10 +700,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'inline',
@@ -713,9 +711,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 8,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'list_default',
         'weight' => 20,
       ),
     ),
@@ -746,7 +745,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
-        'type' => 'file_default',
+        'type' => 'file_url_plain',
         'weight' => 21,
       ),
       'export' => array(
@@ -757,11 +756,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 2,
       ),
       'teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
-        'type' => 'file_url_plain',
-        'weight' => 4,
+        'type' => 'file_default',
+        'weight' => 100,
       ),
     ),
     'entity_type' => 'node',
@@ -796,9 +795,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'export' => array(
@@ -840,9 +838,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_default',
+        'type' => 'hidden',
         'weight' => 19,
       ),
       'export' => array(
@@ -852,9 +849,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 6,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'link_url',
         'weight' => 7,
       ),
     ),
@@ -904,9 +902,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_default',
+        'type' => 'hidden',
         'weight' => 20,
       ),
       'export' => array(
@@ -916,9 +913,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 4,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'link_url',
         'weight' => 8,
       ),
     ),
@@ -968,9 +966,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_default',
+        'type' => 'hidden',
         'weight' => 18,
       ),
       'export' => array(
@@ -980,9 +977,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 7,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'link_url',
         'weight' => 9,
       ),
     ),
@@ -1039,7 +1037,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 3,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1048,7 +1046,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 10,
       ),
       'teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -1081,14 +1079,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'title',
-        'settings' => array(
-          'title_class' => '',
-          'title_link' => 'content',
-          'title_style' => '_none',
-        ),
-        'type' => 'title_linked',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'export' => array(
         'label' => 'above',

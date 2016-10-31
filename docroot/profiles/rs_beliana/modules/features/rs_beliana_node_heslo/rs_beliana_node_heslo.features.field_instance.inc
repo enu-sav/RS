@@ -98,9 +98,17 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -140,9 +148,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 8,
       ),
       'teaser' => array(
@@ -181,24 +188,28 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => 1,
+          'links' => 1,
+          'use_content_language' => 1,
+          'view_mode' => 'teaser',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 6,
+        'type' => 'entityreference_entity_view',
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => 1,
+          'links' => TRUE,
+          'use_content_language' => TRUE,
+          'view_mode' => 'default',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
+        'type' => 'entityreference_entity_view',
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ilustracia',
-    'label' => 'Ilustrácia',
+    'label' => 'Ilustrácie',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -233,9 +244,10 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
+        'type' => 'text_default',
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -277,7 +289,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 0,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -435,9 +447,10 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -476,7 +489,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -680,7 +693,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -714,7 +727,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Comment');
   t('Dátum');
   t('Erráta');
-  t('Ilustrácia');
+  t('Ilustrácie');
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
   t('Lexikálna skupina');
   t('Lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením.');

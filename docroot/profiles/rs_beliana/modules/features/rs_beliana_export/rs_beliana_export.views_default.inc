@@ -58,17 +58,17 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['label'] = '';
   $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Ilustrácia */
+  /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['label'] = 'Ilustrácie';
   $handler->display->display_options['fields']['field_ilustracia']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_ilustracia']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'view_mode' => 'teaser',
+    'view_mode' => 'full',
     'links' => 1,
+    'use_content_language' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_ilustracia']['separator'] = '';

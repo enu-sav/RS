@@ -53,9 +53,8 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -195,10 +194,11 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
+          'use_content_language' => 1,
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 6,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'inline',
@@ -210,7 +210,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ilustracia',
-    'label' => 'Ilustrácia',
+    'label' => 'Ilustrácie',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -485,7 +485,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Comment');
   t('Dátum');
   t('Erráta');
-  t('Ilustrácia');
+  t('Ilustrácie');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
   t('Na zoradenie');
