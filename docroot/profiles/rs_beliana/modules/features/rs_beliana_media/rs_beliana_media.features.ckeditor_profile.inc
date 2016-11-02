@@ -166,37 +166,6 @@ config.specialChars = [
             ),
             'default' => 't',
           ),
-          'lite' => array(
-            'name' => 'lite',
-            'desc' => 'LITE: LoopIndex Tracking Enhancement',
-            'path' => '%base_path%profiles/rs_beliana/libraries/ckeditor/plugins/lite/',
-            'buttons' => array(
-              'lite-acceptall' => array(
-                'label' => 'Accept all changes',
-                'icon' => 'icons/lite-acceptall.png',
-              ),
-              'lite-rejectall' => array(
-                'label' => 'Reject all changes',
-                'icon' => 'icons/lite-rejectall.png',
-              ),
-              'lite-acceptone' => array(
-                'label' => 'Accept change',
-                'icon' => 'icons/lite-acceptone.png',
-              ),
-              'lite-rejectone' => array(
-                'label' => 'Reject change',
-                'icon' => 'icons/lite-rejectone.png',
-              ),
-              'lite-toggleshow' => array(
-                'label' => 'Show/hide tracked changes',
-                'icon' => 'icons/lite-toggleshow.png',
-              ),
-              'lite-toggletracking' => array(
-                'label' => 'Start/stop tracking changes',
-                'icon' => 'icons/lite-toggletracking.png',
-              ),
-            ),
-          ),
           'mathjax' => array(
             'name' => 'mathjax',
             'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
