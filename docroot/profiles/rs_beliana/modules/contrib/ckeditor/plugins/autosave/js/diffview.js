@@ -187,10 +187,11 @@ diffview = {
 			for (var i = 0; i < botrows.length; i++) rows.push(botrows[i]);
 		}
 		
-		var msg = "combined <a href='http://snowtide.com/jsdifflib'>jsdifflib</a> ";
-		msg += "and John Resig's <a href='http://ejohn.org/projects/javascript-diff-algorithm/'>diff</a> ";
-		msg += "by <a href='http://richardbondi.net'>Richard Bondi</a>";
-		rows.push(node = ctelt("th", "author", msg));
+		// to apply this change rebuild or manual editing of js/extensions.min.js is required
+		//var msg = "combined <a href='http://snowtide.com/jsdifflib'>jsdifflib</a> ";
+		//msg += "and John Resig's <a href='http://ejohn.org/projects/javascript-diff-algorithm/'>diff</a> ";
+		//msg += "by <a href='http://richardbondi.net'>Richard Bondi</a>";
+		//rows.push(node = ctelt("th", "author", msg));
 		node.setAttribute("colspan", inline ? 3 : 4);
 		
 		tdata.push(node = document.createElement("tbody"));
