@@ -14,6 +14,7 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['administer advanced forum'] = array(
     'name' => 'administer advanced forum',
     'roles' => array(
+      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',
@@ -23,6 +24,7 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['view forum statistics'] = array(
     'name' => 'view forum statistics',
     'roles' => array(
+      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',
@@ -32,6 +34,7 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['view last edited notice'] = array(
     'name' => 'view last edited notice',
     'roles' => array(
+      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',

@@ -49,6 +49,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -1545,6 +1546,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -2576,6 +2578,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -2672,6 +2675,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
