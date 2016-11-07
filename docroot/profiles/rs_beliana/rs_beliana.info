@@ -54,3 +54,4 @@ dependencies[] = rs_beliana_taxonomy
 dependencies[] = rs_beliana_users
 dependencies[] = rs_beliana_views
 dependencies[] = rs_beliana_workbench
+dependencies[] = rs_beliana_forum
