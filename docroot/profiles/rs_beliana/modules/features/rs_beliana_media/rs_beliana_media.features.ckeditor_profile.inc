@@ -74,7 +74,6 @@ config.language = \'sk\';
 config.basicEntities = false;
 config.disableNativeSpellChecker = false;
 //config.removePlugins = \'scayt,menubutton,contextmenu\';
-config.removePlugins = \'contextmenu\';
 config.browserContextMenuOnCtrl = true;
 config.specialChars = [ 
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
