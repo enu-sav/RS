@@ -29,6 +29,7 @@ function rs_beliana_forum_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => 0,
     'customized' => 0,
+    'parent_identifier' => 'management_vytvranie-obsahu:admin/config/content',
   );
 
   // Translatables
