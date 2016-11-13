@@ -43,6 +43,11 @@ function beliana_menu_alter(&$items) {
   if (isset($items['node/%node/revisions'])) {
     unset($items['node/%node/revisions']);
   }
+
+  /* get rid of the 'Index' item in the menu */
+  if (isset($items['admin/index'])) {
+    unset($items['admin/index']);
+  }
 }
 
 /**
