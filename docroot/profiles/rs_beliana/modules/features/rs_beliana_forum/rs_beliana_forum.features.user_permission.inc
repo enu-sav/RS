@@ -20,6 +20,15 @@ function rs_beliana_forum_user_default_permissions() {
     'module' => 'advanced_forum',
   );
 
+  // Exported permission: 'administer forums'.
+  $permissions['administer forums'] = array(
+    'name' => 'administer forums',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'forum',
+  );
+
   // Exported permission: 'create forum content'.
   $permissions['create forum content'] = array(
     'name' => 'create forum content',
