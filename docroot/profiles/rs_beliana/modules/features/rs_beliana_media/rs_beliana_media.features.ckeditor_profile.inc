@@ -115,6 +115,8 @@ config.specialChars = [
 [\'€\', \'Euro\'],
 [\'ᴅ\', \'kapitálka D, zápis chirality\'],
 [\'ʟ\', \'kapitálka L, zápis chirality\'],
+[\'→\', \'šípka v chemickej reakcii\'],
+[\'⇌\', \'šípka v chemickej reakcii\'],
 ["ℵ",\'alef, ALT+2135\'],
 [\'∧\',\'logické AND, ALT+2227\'],
 [\'∨\',\'logické OR, ALT+2228\'],
