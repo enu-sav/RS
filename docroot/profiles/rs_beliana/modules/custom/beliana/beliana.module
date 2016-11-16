@@ -87,12 +87,18 @@ function beliana_group_list() {
   $terms = taxonomy_get_tree(2);
   $output = '';
   foreach ($terms as $term) {
-    $output .= '<h3>' . $term->name . '</h3>';
+    $output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
     $output .= '<ul>';
     foreach ($users as $user) {
       if (isset($user->workbench_access[$term->tid])) {
-        $output .= '<li>' . $user->name . '</li>';
-      }
+        $output .= 
+		'<li>' 
+		. $user->name . ', ' 
+		. $user->field_meno['und'][0][value] . ' ' 
+		. $user->field_priezvisko['und'][0][value] . ', ' 
+		. $user->field_autorska_zmluva['und'][0][value] . ', ' 
+		. $user->mail
+		. '</li>'; }
     }
     $output .= '</ul><br><br>';
   }
@@ -113,7 +119,7 @@ function beliana_users_list() {
   $output = '';
   foreach ($users as $user) {
     $output .= '<div>';
-    $output .= '<h3>' . $user->name . '</h3>';
+    $output .= '<h3> Lexikálne skupiny používateľa <em>' . $user->name . '</em></h3>';
     $output .= '<ul>';
     foreach ($terms as $t) {
       if (isset($user->workbench_access[$t->tid])) {
