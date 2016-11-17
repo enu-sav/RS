@@ -232,17 +232,6 @@ function rs_beliana_forum_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'forum_access_rids';
-  $strongarm->value = array(
-    0 => '1',
-    1 => '2',
-    2 => '3',
-  );
-  $export['forum_access_rids'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'forum_containers';
   $strongarm->value = array();
   $export['forum_containers'] = $strongarm;
