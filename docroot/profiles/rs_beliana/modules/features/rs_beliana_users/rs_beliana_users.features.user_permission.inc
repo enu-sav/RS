@@ -1079,6 +1079,12 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -1791,6 +1797,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_redaktora state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
     ),
     'module' => 'workbench_state_access',
   );

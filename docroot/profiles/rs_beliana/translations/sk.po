@@ -58611,7 +58611,7 @@ msgid "Number of topics"
 msgstr "Počet diskusií"
 
 msgid "Active forum topics"
-msgstr "Aktívne témy"
+msgstr "Populárne témy"
 
 msgid "Read the latest forum topics."
 msgstr "Prečítať najnovšie diskusie."
