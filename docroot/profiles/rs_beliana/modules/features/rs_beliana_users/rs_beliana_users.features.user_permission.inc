@@ -2809,8 +2809,21 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['use text format full_html'] = array(
     'name' => 'use text format full_html',
     'roles' => array(
+      'Grafik' => 'Grafik',
+      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Konzultant' => 'Konzultant',
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'filter',
   );

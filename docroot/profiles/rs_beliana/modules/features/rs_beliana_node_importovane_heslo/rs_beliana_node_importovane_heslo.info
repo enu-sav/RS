@@ -5,6 +5,7 @@ dependencies[] = ctools
 dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = features
+dependencies[] = node
 dependencies[] = options
 dependencies[] = rs_beliana_fields
 dependencies[] = rs_beliana_seo

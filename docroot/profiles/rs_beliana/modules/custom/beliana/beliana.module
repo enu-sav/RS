@@ -50,9 +50,10 @@ function beliana_menu_alter(&$items) {
   }
 
   /* get rid of the create/forum item in the menu */
-  if (isset($items['node/add/forum'])) {
-    unset($items['node/add/forum']);
-  }
+  /* not a good idea - blocks the possibility to create topics */
+  //if (isset($items['node/add/forum'])) {
+    //unset($items['node/add/forum']);
+  //}
 }
 
 /**
