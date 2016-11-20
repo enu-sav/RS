@@ -41,7 +41,10 @@ function rs_beliana_forum_user_default_permissions() {
   // Exported permission: 'delete any forum content'.
   $permissions['delete any forum content'] = array(
     'name' => 'delete any forum content',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'node',
   );
 
@@ -49,7 +52,8 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['delete own forum content'] = array(
     'name' => 'delete own forum content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'node',
   );
@@ -57,7 +61,10 @@ function rs_beliana_forum_user_default_permissions() {
   // Exported permission: 'edit any forum content'.
   $permissions['edit any forum content'] = array(
     'name' => 'edit any forum content',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'node',
   );
 
@@ -67,6 +74,7 @@ function rs_beliana_forum_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
