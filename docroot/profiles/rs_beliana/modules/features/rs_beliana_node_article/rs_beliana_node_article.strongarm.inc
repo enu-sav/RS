@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_node_article.strongarm.inc
+ * rs_beliana_node_article.strongarm.inc
  */
 
 /**

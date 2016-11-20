@@ -16,15 +16,8 @@ function rs_beliana_media_filter_default_formats() {
     'name' => 'Filtered HTML',
     'cache' => 1,
     'status' => 1,
-    'weight' => -10,
+    'weight' => 5,
     'filters' => array(
-      'filter_url' => array(
-        'weight' => 0,
-        'status' => 1,
-        'settings' => array(
-          'filter_url_length' => 72,
-        ),
-      ),
       'filter_autop' => array(
         'weight' => 2,
         'status' => 1,
@@ -49,15 +42,8 @@ function rs_beliana_media_filter_default_formats() {
     'name' => 'Full HTML',
     'cache' => 1,
     'status' => 1,
-    'weight' => -9,
+    'weight' => 2,
     'filters' => array(
-      'filter_url' => array(
-        'weight' => 0,
-        'status' => 1,
-        'settings' => array(
-          'filter_url_length' => 72,
-        ),
-      ),
       'filter_autop' => array(
         'weight' => 1,
         'status' => 1,
@@ -82,7 +68,7 @@ function rs_beliana_media_filter_default_formats() {
     'name' => 'Plain text',
     'cache' => 1,
     'status' => 1,
-    'weight' => -8,
+    'weight' => 10,
     'filters' => array(
       'filter_autop' => array(
         'weight' => 2,
