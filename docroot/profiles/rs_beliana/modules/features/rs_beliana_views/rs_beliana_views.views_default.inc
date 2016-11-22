@@ -2990,7 +2990,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
   $handler->display->display_options['filters']['field_taxsubor_tid']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['operator'] = 'and';
   $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
@@ -3017,6 +3016,7 @@ function rs_beliana_views_views_default_views() {
     9 => 0,
     17 => 0,
     20 => 0,
+    21 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
