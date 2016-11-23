@@ -33,6 +33,7 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['create forum content'] = array(
     'name' => 'create forum content',
     'roles' => array(
+      'Oznamy' => 'Oznamy',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
@@ -52,6 +53,7 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['delete own forum content'] = array(
     'name' => 'delete own forum content',
     'roles' => array(
+      'Oznamy' => 'Oznamy',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -72,6 +74,7 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['edit own forum content'] = array(
     'name' => 'edit own forum content',
     'roles' => array(
+      'Oznamy' => 'Oznamy',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
