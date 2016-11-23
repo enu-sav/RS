@@ -1782,6 +1782,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit revisions in draft state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -1807,7 +1809,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_redaktora state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
     ),
     'module' => 'workbench_state_access',
   );
@@ -1899,7 +1900,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit revisions in nova_ilustracia state'] = array(
     'name' => 'edit revisions in nova_ilustracia state',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'workbench_state_access',
@@ -2012,6 +2012,7 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_state_access',
   );
