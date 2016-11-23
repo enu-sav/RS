@@ -154,6 +154,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_zverejnenie',
       'name' => 'u_vyst_redaktora2-u_vyst_redaktora1',
     ),
+    'u_vyst_redaktora_2:needs_review' => array(
+      'from_name' => 'u_vyst_redaktora_2',
+      'to_name' => 'needs_review',
+      'name' => 'u_vyst_redaktora2-u_redaktora',
+    ),
     'u_vyst_redaktora_2:u_v_st_redaktora_2hp' => array(
       'from_name' => 'u_vyst_redaktora_2',
       'to_name' => 'u_v_st_redaktora_2hp',
