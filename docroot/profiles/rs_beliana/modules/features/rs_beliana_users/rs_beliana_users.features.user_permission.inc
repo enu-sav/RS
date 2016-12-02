@@ -1026,6 +1026,7 @@ function rs_beliana_users_user_default_permissions() {
       'Grafik' => 'Grafik',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1495,6 +1496,7 @@ function rs_beliana_users_user_default_permissions() {
       'Grafik' => 'Grafik',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1622,6 +1624,7 @@ function rs_beliana_users_user_default_permissions() {
       'Grafik' => 'Grafik',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -3187,6 +3190,7 @@ function rs_beliana_users_user_default_permissions() {
       'Grafik' => 'Grafik',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
     ),
     'module' => 'field_permissions',
   );
