@@ -1084,6 +1084,16 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
     $settings['loadPlugins'] = array_intersect_key($settings['loadPlugins'], array_flip($available_plugins));
   }
 
+  // add user information in order to track changes n the LITE plugin by name 
+  // perhaps needs better place
+  // in ckeditor_lite module called by implementing hook_ckeditor_settings_alter():
+  // function ckeditor_lite_ckeditor_settings_alter(&$settings, $conf) 
+  $settings['lite'] = array(
+    'userName' => check_plain(format_username($user)),
+    'userId' => $user->uid,
+    'isTracking' => variable_get('ckeditor_lite_istracking', 1) ? TRUE : FALSE,
+  );
+
   // Allow modules to modify the settings.
   drupal_alter('ckeditor_settings', $settings, $conf);
 
