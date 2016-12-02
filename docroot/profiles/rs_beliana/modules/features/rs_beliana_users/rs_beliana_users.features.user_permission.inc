@@ -258,15 +258,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'ckeditor',
   );
 
-  // Exported permission: 'administer ckeditor_lite'.
-  $permissions['administer ckeditor_lite'] = array(
-    'name' => 'administer ckeditor_lite',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor_lite',
-  );
-
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
@@ -909,15 +900,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: 'ckeditor_lite highlight changes'.
-  $permissions['ckeditor_lite highlight changes'] = array(
-    'name' => 'ckeditor_lite highlight changes',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor_lite',
   );
 
   // Exported permission: 'clear bb feeds'.
