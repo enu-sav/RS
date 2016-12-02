@@ -19,7 +19,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'-\',\'-\']
+    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -173,6 +173,38 @@ config.specialChars = [
               'DrupalBreak' => array(
                 'label' => 'DrupalBreak',
                 'icon' => 'images/drupalbreak.png',
+              ),
+            ),
+            'default' => 't',
+          ),
+          'lite' => array(
+            'name' => 'lite',
+            'desc' => 'Plugin file: lite',
+            'path' => '%plugin_dir%lite/',
+            'buttons' => array(
+              'lite-acceptall' => array(
+                'label' => 'Accept all changes',
+                'icon' => 'icons/lite-acceptall.png',
+              ),
+              'lite-rejectall' => array(
+                'label' => 'Reject all changes',
+                'icon' => 'icons/lite-rejectall.png',
+              ),
+              'lite-acceptone' => array(
+                'label' => 'Accept change',
+                'icon' => 'icons/lite-acceptone.png',
+              ),
+              'lite-rejectone' => array(
+                'label' => 'Reject change',
+                'icon' => 'icons/lite-rejectone.png',
+              ),
+              'lite-toggleshow' => array(
+                'label' => 'Show/hide tracked changes',
+                'icon' => 'icons/lite-toggleshow.png',
+              ),
+              'lite-toggletracking' => array(
+                'label' => 'Start/stop tracking changes',
+                'icon' => 'icons/lite-toggletracking.png',
               ),
             ),
             'default' => 't',
