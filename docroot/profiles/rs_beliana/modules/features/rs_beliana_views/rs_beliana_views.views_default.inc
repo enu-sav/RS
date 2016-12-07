@@ -7402,8 +7402,9 @@ function rs_beliana_views_views_default_views() {
     9 => 0,
     17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
   );
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
