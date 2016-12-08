@@ -17,7 +17,7 @@
 	MINUTE_AGO: "pred minútou",
 	MINUTES_AGO: "pred xMinutes minútami",
 	BY: "autor",
-	ON: "zapnuté",
+	ON: "",
 	AT: "on",
 	LITE_LABELS_DATE: function(day, month, year)
 	{
