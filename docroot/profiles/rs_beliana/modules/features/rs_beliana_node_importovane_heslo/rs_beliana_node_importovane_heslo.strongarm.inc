@@ -14,7 +14,7 @@ function rs_beliana_node_importovane_heslo_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_importovane_heslo';
-  $strongarm->value = 'edit-diff';
+  $strongarm->value = 'edit-submission';
   $export['additional_settings__active_tab_importovane_heslo'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -172,7 +172,7 @@ function rs_beliana_node_importovane_heslo_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_importovane_heslo';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['node_preview_importovane_heslo'] = $strongarm;
 
   $strongarm = new stdClass();
