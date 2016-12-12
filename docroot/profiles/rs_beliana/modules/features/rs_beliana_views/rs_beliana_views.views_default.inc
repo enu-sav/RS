@@ -8506,6 +8506,52 @@ function rs_beliana_views_views_default_views() {
   $handler = $view->new_display('page', 'Vyhľadať', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Vyhľadať';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['label'] = '';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Komentár/inštrukcie */
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['element_label_type'] = 'strong';
+  /* Pole: Obsah: Záznam z pôvodného GH */
+  $handler->display->display_options['fields']['field_text_z_gh']['id'] = 'field_text_z_gh';
+  $handler->display->display_options['fields']['field_text_z_gh']['table'] = 'field_data_field_text_z_gh';
+  $handler->display->display_options['fields']['field_text_z_gh']['field'] = 'field_text_z_gh';
+  $handler->display->display_options['fields']['field_text_z_gh']['label'] = '';
+  $handler->display->display_options['fields']['field_text_z_gh']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_text_z_gh']['type'] = 'text_plain';
+  /* Pole: Obsah: Erráta */
+  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
+  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
+  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
+  $handler->display->display_options['fields']['field_errta']['element_type'] = 'strong';
+  $handler->display->display_options['fields']['field_errta']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_errta']['hide_empty'] = TRUE;
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['label'] = '';
+  $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
   $handler->display->display_options['path'] = 'vyhladat';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať';
@@ -9015,6 +9061,7 @@ function rs_beliana_views_views_default_views() {
     t('Text hesla'),
     t('ddddd'),
     t('Vyhľadať'),
+    t('Komentár/inštrukcie'),
     t('Opraviť importované'),
     t('V tomto náhľade možno importované (vydané) heslá prehľadávať aj na základe atribútov. Atribút je nejaká vlastnosť, ktorá bola zistená pri konverzii z doc súborov (bez diakritiky): \'instrukciepalo\' a \'instrukciesemancik\' (inštrukcie pre typografa), \'image\' (v texte má byť vložený obrázok), \'tabulka\' , \'matematika\', ghPriblizne\' a \'ghMultiPriblizne\' (lexikálnu skupinu hesla nebolo na základe informácií z generálneho heslára možné určiť jednoznačne). '),
     t('Zadajte časť názvu lex. skupiny, napr. "deji". Vyhľadávanie podľa mena redaktora nie je možné.'),
