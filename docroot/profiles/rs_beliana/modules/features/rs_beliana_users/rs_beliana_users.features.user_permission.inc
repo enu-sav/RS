@@ -1034,10 +1034,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'create field_taxsubor'.
   $permissions['create field_taxsubor'] = array(
     'name' => 'create field_taxsubor',
-    'roles' => array(
-      'Správca heslára' => 'Správca heslára',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1504,10 +1501,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit field_taxsubor'.
   $permissions['edit field_taxsubor'] = array(
     'name' => 'edit field_taxsubor',
-    'roles' => array(
-      'Správca heslára' => 'Správca heslára',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1632,10 +1626,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit own field_taxsubor'.
   $permissions['edit own field_taxsubor'] = array(
     'name' => 'edit own field_taxsubor',
-    'roles' => array(
-      'Správca heslára' => 'Správca heslára',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -3198,10 +3189,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'view own field_taxsubor'.
   $permissions['view own field_taxsubor'] = array(
     'name' => 'view own field_taxsubor',
-    'roles' => array(
-      'Správca heslára' => 'Správca heslára',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
