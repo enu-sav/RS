@@ -392,31 +392,25 @@ function beliana_node_presave($node) {
   $author = user_load($node->uid);
   setlocale(LC_COLLATE, 'sk_SK.utf8');
 
-  // If field for ordering is empty, we need to fill in value for it.
-  if ($node->field_na_zoradenie['und'][0]['value'] == '') {
-    $transliterated = _belina_remove_accents($node->title);
-    $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $transliterated);
+ 
+  // fix field_na_zoradenie if necessary
+  if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
+    $transliterated = _beliana_remove_accents($node->title);
+    $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = $transliterated;
   }
-  else {
-    $transliterated = $node->field_na_zoradenie['und'][0]['value'];
-  }
 
-  // Set taxonomy grop, because it can be changed by admin.
+  // set field_taxsubor using the value of field_na_zoradenie 
   $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
-  $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-
-  foreach ($terms as $term) {
-    $term_transliterated = _belina_remove_accents($term->name);
-    $term_transliterated = strtolower($term_transliterated);
-    $term_transliterated = preg_replace('/[^a-zA-ZŠšČčŽž]/', '', $term_transliterated);
-
-    if (strcoll($term_transliterated, $transliterated) >= 0) {
+  //$subory = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)); //default sort instead of Slovak
+  $subory = taxonomy_get_tree($vocabulary->vid);
+  foreach ($subory as $term) {
+    if (strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
-    }
-  }
+     }
+   }
 
   // New nodes don't have any state.
   if (isset($node->workbench_moderation['current']->state) && isset($node->workbench_moderation_state_new)) {
@@ -625,7 +619,7 @@ function _beliana_assign_user(&$node, $context) {
  * @return string
  *   String without accents.
  */
-function _belina_remove_accents($text) {
+function _beliana_remove_accents($text) {
   $trans = array(
     'À' => 'A',
     'Á' => 'A',
