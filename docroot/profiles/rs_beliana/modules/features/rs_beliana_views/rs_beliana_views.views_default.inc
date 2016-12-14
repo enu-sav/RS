@@ -9223,9 +9223,14 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['element_label_colon'] = FALSE;
   /* Pole: Content revision: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node_revision';
@@ -9539,6 +9544,38 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
+  /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['table'] = 'field_data_field_komentar_instrukcie';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['field'] = 'field_komentar_instrukcie_value';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator_id'] = 'field_komentar_instrukcie_value_op';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['label'] = 'Komentár';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator'] = 'field_komentar_instrukcie_value_op';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['identifier'] = 'field_komentar_instrukcie_value';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+  );
 
   /* Display: Všetky heslá - prehľad */
   $handler = $view->new_display('page', 'Všetky heslá - prehľad', 'page');
@@ -9670,6 +9707,8 @@ function rs_beliana_views_views_default_views() {
     t('posledná »'),
     t('revision user'),
     t('autor'),
+    t('Názov'),
+    t('Na zoradenie'),
     t('Nid'),
     t('Typ'),
     t('Stav'),
@@ -9677,7 +9716,6 @@ function rs_beliana_views_views_default_views() {
     t('Naposledy upravil'),
     t('Lexikálna skupina'),
     t('Autor'),
-    t('Názov'),
     t('dddd'),
     t('Text hesla'),
     t('ddddd'),
@@ -9685,6 +9723,7 @@ function rs_beliana_views_views_default_views() {
     t('Erráta'),
     t(' Upravil niektorú verziu '),
     t('Súbor'),
+    t('Komentár'),
     t('Všetky heslá - prehľad'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
