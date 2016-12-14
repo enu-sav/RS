@@ -3736,6 +3736,40 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
+  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
+  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+  );
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
   $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
@@ -5448,6 +5482,7 @@ function rs_beliana_views_views_default_views() {
  ⚫ Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Do poľa <em>Komentár/inštrukcie/návrh/zdôvodnenie </em> napíšte svoj návrh a kliknite na <em>Uložiť </em>
  ⚫ Potom kliknite na <em>Zmeniť stav</em>, zmeňte stav na <em>Navrhnuté na zmenu</em> a kliknite na <em>Použiť</em>.
 <strong>Poznámka: </strong>Návrh na vytvorenie nového hesla môžete zadať v položke menu <em>Vytvoriť / Heslo </em> alebo kliknutím <a href="/node/add/heslo">sem</a>. Aj v tomto prípade sa k návrhu najskôr vyjadrí správca hesiel. '),
+    t('Text hesla'),
     t('Navrhnuté'),
     t('Tu sú zobrazené všetky heslá, ktoré boli navrhnuté na zaradenie do Beliany alebo bola navrhnutá zmena ich názvu alebo lexikálnej skupiny.'),
     t('Vyradené'),
