@@ -398,7 +398,7 @@ function beliana_node_presave($node) {
     $transliterated = _beliana_remove_accents($node->title);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
-    $node->field_na_zoradenie['und'][0]['value'] = $transliterated;
+    $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated,0,50);
   }
 
   // set field_taxsubor using the value of field_na_zoradenie 
