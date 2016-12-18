@@ -29,7 +29,6 @@ function rs_beliana_media_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => 0,
     'customized' => 0,
-    'parent_identifier' => 'management_vvoj:admin/config/development',
   );
 
   // Translatables
