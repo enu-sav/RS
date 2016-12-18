@@ -110,7 +110,7 @@ function rs_beliana_feeds_feeds_importer_default() {
           ),
         ),
         'update_existing' => '1',
-        'input_format' => 'filtered_html',
+        'input_format' => 'full_html',
         'skip_hash_check' => 0,
         'bundle' => 'importovane_heslo',
         'update_non_existent' => 'skip',
