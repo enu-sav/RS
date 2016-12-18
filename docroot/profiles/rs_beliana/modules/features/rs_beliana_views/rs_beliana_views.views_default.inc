@@ -6923,6 +6923,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Pole: Content revision: Dátum aktualizácie */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'short';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'privatemsg_current_day';
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -7083,6 +7089,7 @@ function rs_beliana_views_views_default_views() {
     t('Exportovať heslo GH'),
     t('Export heslo GH - dáta'),
     t('Nid'),
+    t('Dátum aktualizácie'),
     t('povodnyZaznamZGH'),
     t('nazovzorad'),
     t('vyplatenieOdmeny'),
