@@ -19,17 +19,22 @@ function rs_beliana_media_filter_default_formats() {
     'weight' => 5,
     'filters' => array(
       'filter_autop' => array(
-        'weight' => 2,
+        'weight' => -46,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_htmlcorrector' => array(
-        'weight' => 10,
+        'weight' => -45,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      'ckeditor_link_filter' => array(
+        'weight' => -44,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_mathjax' => array(
-        'weight' => 50,
+        'weight' => -43,
         'status' => 1,
         'settings' => array(),
       ),
@@ -45,17 +50,22 @@ function rs_beliana_media_filter_default_formats() {
     'weight' => 2,
     'filters' => array(
       'filter_autop' => array(
-        'weight' => 1,
+        'weight' => -46,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_htmlcorrector' => array(
-        'weight' => 10,
+        'weight' => -45,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      'ckeditor_link_filter' => array(
+        'weight' => -44,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_mathjax' => array(
-        'weight' => 50,
+        'weight' => -43,
         'status' => 1,
         'settings' => array(),
       ),
