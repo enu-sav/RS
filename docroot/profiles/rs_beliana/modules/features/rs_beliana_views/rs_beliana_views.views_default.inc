@@ -9206,6 +9206,60 @@ function rs_beliana_views_views_default_views() {
   $handler = $view->new_display('page', 'Vyhľadať ilustrácie', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Vyhľadať ilustrácie';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_obrazok_navrh_' => 'field_obrazok_navrh_',
+    'field_popis' => 'field_popis',
+    'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
+    'state' => 'state',
+    'field_subor_ilustracie' => 'field_subor_ilustracie',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_obrazok_navrh_' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_popis' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lexikalna_skupina_il' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_subor_ilustracie' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -9220,28 +9274,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Lexikálna skupina */
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['label'] = '';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
-  /* Pole: Workbench Moderation: Stav */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['element_label_type'] = 'strong';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Obsah: Popis ilustrácie */
-  $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
-  $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
-  $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
-  $handler->display->display_options['fields']['field_popis']['label'] = '';
-  $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Obrázok (návrh/náhľad) */
   $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
@@ -9252,6 +9285,29 @@ function rs_beliana_views_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
+  /* Pole: Obsah: Popis ilustrácie */
+  $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
+  $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
+  $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
+  $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina_il']['id'] = 'field_lexikalna_skupina_il';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_il']['table'] = 'field_data_field_lexikalna_skupina_il';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_il']['field'] = 'field_lexikalna_skupina_il';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_il']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina_il']['delta_offset'] = '0';
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Súbory ilustrácie */
+  $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['table'] = 'field_data_field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['field'] = 'field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Kritéria zoradenia: Obsah: Názov */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
@@ -9439,7 +9495,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_obrazok_navrh__title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['operator_id'] = 'field_obrazok_navrh__title_op';
   $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['label'] = 'Obrázok (návrh/náhľad)';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['description'] = 'Použite voľbu "Je prázdne" alebo "Nie je prázdne". Ostatné voľby vyhľadajú všetky ilustrácie.';
+  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['description'] = 'Pole nevyplňujte. Použite voľbu "Je prázdne" alebo "Nie je prázdne". Ostatné voľby vyhľadajú všetky ilustrácie.';
   $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['operator'] = 'field_obrazok_navrh__title_op';
   $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['identifier'] = 'field_obrazok_navrh__title';
@@ -9510,8 +9566,10 @@ function rs_beliana_views_views_default_views() {
     t('Vyhľadať ilustrácie'),
     t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.'),
     t('Obrázok (náhľad)'),
+    t('Popis ilustrácie'),
+    t('Súbory ilustrácie'),
     t('Obrázok (návrh/náhľad)'),
-    t('Použite voľbu "Je prázdne" alebo "Nie je prázdne". Ostatné voľby vyhľadajú všetky ilustrácie.'),
+    t('Pole nevyplňujte. Použite voľbu "Je prázdne" alebo "Nie je prázdne". Ostatné voľby vyhľadajú všetky ilustrácie.'),
   );
   $export['v_etky_hesl_'] = $view;
 
