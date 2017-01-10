@@ -9487,40 +9487,6 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
-  /* Filter criterion: Obsah: Obrázok (návrh/náhľad) (field_obrazok_navrh_:title) */
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['id'] = 'field_obrazok_navrh__title';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['table'] = 'field_data_field_obrazok_navrh_';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['field'] = 'field_obrazok_navrh__title';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['operator_id'] = 'field_obrazok_navrh__title_op';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['label'] = 'Obrázok (návrh/náhľad)';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['description'] = 'Pole nevyplňujte. Použite voľbu "Je prázdne" alebo "Nie je prázdne". Ostatné voľby vyhľadajú všetky ilustrácie.';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['operator'] = 'field_obrazok_navrh__title_op';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['identifier'] = 'field_obrazok_navrh__title';
-  $handler->display->display_options['filters']['field_obrazok_navrh__title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-  );
   $handler->display->display_options['path'] = 'vyhladat-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
@@ -9568,8 +9534,6 @@ function rs_beliana_views_views_default_views() {
     t('Obrázok (náhľad)'),
     t('Popis ilustrácie'),
     t('Súbory ilustrácie'),
-    t('Obrázok (návrh/náhľad)'),
-    t('Pole nevyplňujte. Použite voľbu "Je prázdne" alebo "Nie je prázdne". Ostatné voľby vyhľadajú všetky ilustrácie.'),
   );
   $export['v_etky_hesl_'] = $view;
 
