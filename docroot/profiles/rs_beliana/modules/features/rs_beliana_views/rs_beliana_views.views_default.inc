@@ -3399,7 +3399,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá, ktoré zodpovedajú lexikálnym skupinám používateľa. Použite filtre na zúženie výberu. ';
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá, ktoré zodpovedajú lexikálnym skupinám používateľa a sú už v procese spracovávania. Použite filtre na zúženie výberu. ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Globálny: Rozsiahle textové pole */
@@ -3593,7 +3593,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
     'draft' => 'draft',
-    'vyradene' => 'vyradene',
     'needs_review' => 'needs_review',
     'na_zverejnenie' => 'na_zverejnenie',
     'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
@@ -5473,7 +5472,7 @@ function rs_beliana_views_views_default_views() {
     t('IlustracieR'),
     t('Všetky moje heslá'),
     t('Všetky heslá súvisiace s používateľom'),
-    t('Tu sú zobrazené všetky heslá, ktoré zodpovedajú lexikálnym skupinám používateľa. Použite filtre na zúženie výberu. '),
+    t('Tu sú zobrazené všetky heslá, ktoré zodpovedajú lexikálnym skupinám používateľa a sú už v procese spracovávania. Použite filtre na zúženie výberu. '),
     t('Nepriradené heslá'),
     t('Tu sú zobrazené všetky heslá, ktorým ešte nebol priradený autor (takéto heslá sú v stave <em>Zaradené</em>).
 <b>K textu hesla môžete pridať komentár, webový odkaz, prípadne aj celý text</b> (čo neskôr môže pomôcť autorovi):
