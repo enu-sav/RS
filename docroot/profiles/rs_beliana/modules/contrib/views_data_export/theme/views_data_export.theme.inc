@@ -403,6 +403,9 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     // change order if dit is inside math
     $output = str_replace('.\)</font>', '\)</font>.', $output);  
     $output = str_replace(',\)</font>', '\)</font>,', $output);  
+
+    // set table font
+    $output = str_replace( 'style="width:100%"', 'style="font-family:Arial;font-size:11pt"', $output);  
 //////////////////////
     $vars['tbody'] = $output;
   }
