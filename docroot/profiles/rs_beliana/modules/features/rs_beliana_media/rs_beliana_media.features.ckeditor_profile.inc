@@ -69,10 +69,12 @@ config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
 config.height = 500;
+// in general do not convert to html entities
 config.entities = false;
+// convert some characters (<>&) to html entities
+config.basicEntities = true;
 config.defaultLanguage = \'sk\';
 config.language = \'sk\';
-config.basicEntities = false;
 config.disableNativeSpellChecker = false;
 //config.removePlugins = \'scayt,menubutton,contextmenu\';
 config.browserContextMenuOnCtrl = true;
@@ -306,10 +308,12 @@ config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
 config.height = 500;
+// in general do not convert to html entities
 config.entities = false;
+// convert some characters (<>&) to html entities
+config.basicEntities = true;
 config.defaultLanguage = \'sk\';
 config.language = \'sk\';
-config.basicEntities = false;
 config.disableNativeSpellChecker = false;
 //config.removePlugins = \'scayt,menubutton,contextmenu\';
 config.browserContextMenuOnCtrl = true;
