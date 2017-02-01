@@ -350,9 +350,60 @@ function template_process_views_data_export_msoffice_body(&$vars) {
   }
   // Export pre sadzac
   else if ($vars['view']->name === 'export_sadzac' && $vars['view']->current_display === 'views_data_export_1') {
-    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
-    $output = preg_replace('/➔ /', '→ ', $output); 
-    $output = preg_replace('/➔/', '→ ', $output); 
+    //$output = preg_replace('/➔/', '→ ', $output); 
+//////////////////////
+
+    $output = preg_replace('/<\/?a ?.*?>/', '', $output); // remove links
+    $output = preg_replace('/➔ /', '→ ', $output);
+    $output = preg_replace('/➔/', '→ ', $output);
+    //$output = preg_replace('/<p>\s*<\/p>/', ' ', $output);
+
+    //  fix LaTeX
+    $output = preg_replace('/align*/', 'align', $output);
+    
+    // Remove new paragraph starting with <p><strong>[1-9]
+    $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
+    // remove paragraph starting with <p>— , bahamy.html
+    $output = preg_replace('/<\/p>\s+<p>—/', ' —', $output);
+    // merge paragraph ending  with —<p> ,
+    $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
+    // remove all paragraphs not starting with <strong
+    $output = preg_replace('/<\/p>\s+<p>([^<][^s])/', ' \1', $output);
+
+   
+
+    #Force Arial and 9pt to each paragraph
+    $output = str_replace('<p>', '<p style="font-family:Arial;font-size:11pt;">', $output);  
+    
+    #archimedovska_grupa.html
+    #Single letter math convert to TNR slanted
+    #<span class="math-tex">\(G\)</span>
+    $output = preg_replace(
+        '/<span class="math-tex">\\\\\(([a-zA-Z])\\\\\)<\/span>/',
+        '<font face="Times New Roman" color="green"><em>\1</em></font>', 
+        $output
+    );
+    // ine rozmery ako MathMagic, nepouzivat
+    //$output = preg_replace(
+        //'/<span class="math-tex">\\\\\(([a-zA-Z])_([a-zA-Z])\\\\\)<\/span>/',
+        //'<font face="Times New Roman" color="green"><em>\1<sub>\2</sub></em></font>', 
+        //$output
+    //);
+    //$output = preg_replace(
+        //'/<span class="math-tex">\\\\\(([a-zA-Z])\^([a-zA-Z])\\\\\)<\/span>/',
+        //'<font face="Times New Roman" color="green"><em>\1<sup>\2</sup></em></font>', 
+        //$output
+    //);
+
+    $output = preg_replace(
+        '/<span class="math-tex">(\\\\\([^<]+\\\\\))<\/span>/',
+        '<font color="red">\1</font>', 
+        $output
+    );
+    // change order if dit is inside math
+    $output = str_replace('.\)</font>', '\)</font>.', $output);  
+    $output = str_replace(',\)</font>', '\)</font>,', $output);  
+//////////////////////
     $vars['tbody'] = $output;
   }
   else {
