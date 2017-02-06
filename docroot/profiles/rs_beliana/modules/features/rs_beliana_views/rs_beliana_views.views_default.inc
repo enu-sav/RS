@@ -9493,7 +9493,7 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_obrazok_navrh_' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -9699,42 +9699,18 @@ function rs_beliana_views_views_default_views() {
     6 => 0,
     3 => 0,
   );
-  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
-  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
-  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_label'] = 'ddddd';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    7 => 0,
-    4 => 0,
-    6 => 0,
-    3 => 0,
-    8 => 0,
-    9 => 0,
-  );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Obsah: Text k ilustrácii (field_popis) */
+  $handler->display->display_options['filters']['field_popis_value']['id'] = 'field_popis_value';
+  $handler->display->display_options['filters']['field_popis_value']['table'] = 'field_data_field_popis';
+  $handler->display->display_options['filters']['field_popis_value']['field'] = 'field_popis_value';
+  $handler->display->display_options['filters']['field_popis_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_popis_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_popis_value']['expose']['operator_id'] = 'field_popis_value_op';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['label'] = 'Text k ilustrácii';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_popis_value']['expose']['operator'] = 'field_popis_value_op';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['identifier'] = 'field_popis_value';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     5 => 0,
@@ -9753,6 +9729,9 @@ function rs_beliana_views_views_default_views() {
     9 => 0,
     17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
   );
   $handler->display->display_options['path'] = 'vyhladat-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';

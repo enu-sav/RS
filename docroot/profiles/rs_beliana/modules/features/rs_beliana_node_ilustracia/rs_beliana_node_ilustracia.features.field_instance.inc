@@ -811,7 +811,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
-        'type' => 'file_url_plain',
+        'type' => 'file_default',
         'weight' => 5,
       ),
       'export' => array(
