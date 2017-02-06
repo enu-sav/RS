@@ -3010,6 +3010,27 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        21 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
       ),
       'element_edit' => array(
         1 => 1,
@@ -3089,16 +3110,27 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-      ),
-      'selector' => '',
-      'values_set' => 1,
-      'value_form' => 'CC licencia',
-      'value' => array(
-        0 => array(
-          'value' => 'CC licencia',
+        21 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        22 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        23 => array(
+          1 => 1,
+          3 => 0,
         ),
       ),
-      'values' => array(),
+      'selector' => '',
+      'values_set' => 3,
+      'value_form' => 'CC licencia',
+      'values' => array(
+        0 => 'Public domain',
+        1 => 'CC licencia',
+      ),
+      'value' => array(),
     ),
   );
 
