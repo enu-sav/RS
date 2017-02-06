@@ -499,9 +499,31 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_nazov_diela',
-    'label' => 'Názov diela',
+    'label' => 'Názov diela (predbežne skryté)',
     'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1078,7 +1100,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_zdroj_ilustracie',
-    'label' => 'Pôvod ilustrácie',
+    'label' => 'Typ ilustrácie',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1158,15 +1180,15 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Modifikované');
   t('Na zoradenie');
   t('Názov');
-  t('Názov diela');
+  t('Názov diela (predbežne skryté)');
   t('Obrázok (na použitie)');
   t('Obrázok (návrh/náhľad)');
   t('Popis ilustrácie');
   t('Použiť');
-  t('Pôvod ilustrácie');
   t('Súbor');
   t('Súbory ilustrácie');
   t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.');
+  t('Typ ilustrácie');
   t('URL autora diela');
   t('URL diela');
   t('URL textu licencie');

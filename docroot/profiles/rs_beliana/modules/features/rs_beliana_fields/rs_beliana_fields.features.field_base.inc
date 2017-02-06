@@ -493,7 +493,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_nazov_diela',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
