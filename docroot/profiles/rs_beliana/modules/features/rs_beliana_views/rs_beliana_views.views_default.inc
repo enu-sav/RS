@@ -9640,19 +9640,18 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
   $handler->display->display_options['filters']['field_taxsubor_tid']['error_message'] = FALSE;
-  /* Filter criterion: Obsah: Lexikálna skupina (field_lexikalna_skupina) */
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['id'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['field'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['description'] = 'Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Obsah: Lexikálna skupina (field_lexikalna_skupina_il) */
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['id'] = 'field_lexikalna_skupina_il_tid';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['table'] = 'field_data_field_lexikalna_skupina_il';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['field'] = 'field_lexikalna_skupina_il_tid';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_il_tid_op';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['expose']['operator'] = 'field_lexikalna_skupina_il_tid_op';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['expose']['identifier'] = 'field_lexikalna_skupina_il_tid';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     5 => 0,
@@ -9671,11 +9670,13 @@ function rs_beliana_views_views_default_views() {
     9 => 0,
     17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
   );
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['error_message'] = FALSE;
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['field_lexikalna_skupina_il_tid']['hierarchy'] = 1;
   /* Filter criterion: Obsah: Názov */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
