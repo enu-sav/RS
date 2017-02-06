@@ -153,7 +153,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela alebo názov inštitúcie, z ktorej stránky bolo (public domain) dielo prevzaté',
+    'description' => 'Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -181,6 +181,28 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Inštitúcia',
     'required' => 1,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -943,7 +965,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.',
+    'description' => 'Uveďte odkaz (URL) na stránku, odkiaľ  bolo dielo prevzaté.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1120,7 +1142,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia.1" a podobne.',
+    'description' => 'Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1146,6 +1168,28 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Názov',
     'required' => 1,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'hide_label' => array(
         'entity' => 0,
         'page' => 0,
@@ -1195,14 +1239,14 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Uveďte dátum, kedy bolo dielo prevzaté z pôvodnej stránky');
   t('Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
-  t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela alebo názov inštitúcie, z ktorej stránky bolo (public domain) dielo prevzaté');
-  t('Uveďte odkaz (URL) na stránku prevzatého diela. Ak dielo nemá svoju vlastnú stránku, uveďte odkaz na stránky, kde bolo zobrazené.');
+  t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté');
+  t('Uveďte odkaz (URL) na stránku, odkiaľ  bolo dielo prevzaté.');
   t('Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela.');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia je dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
   t('Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je <b>jpg</b>, pokiaľ ide o vektorový obrázok, povolené typy sú <b>eps</b> (pre tlačenú verziu), <b>svg</b> (pre webovú verziu) a <b>cdr</b> (zdrojový súbor pre eps a svg). Vkladá sa buď <b>jpg</b> súbor, alebo trojica <b>eps</b>, <b>svg</b> a <b>cdr</b>. Obrázky <b>jpg</b> s ostatnými typmi kombinovať nemožno. Pokiaľ <b>eps</b> alebo <b>svg</b> nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí.');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
-  t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia.1" a podobne.');
+  t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');
   t('Zvoľte, kde má byť obrázok použitý.');
 
