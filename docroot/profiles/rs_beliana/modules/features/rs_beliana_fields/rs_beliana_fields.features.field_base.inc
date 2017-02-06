@@ -840,7 +840,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'Zatiaľ neurčený' => 'Zatiaľ neurčený',
-        'Vlastná ilustrácia' => ' Vlastná ilustrácia EncÚ',
+        'Vlastná ilustrácia' => ' Vlastná ilustrácia EnÚ',
         'Public domain' => ' Voľné dielo, 70 (50) rokov od smrti autora',
         'CC licencia' => ' CC alebo voľné dielo, rozhodnutím autora',
         'Získané na základe zmluvy' => 'Autorské dielo (na základe zmluvy alebo súhlasu)',
