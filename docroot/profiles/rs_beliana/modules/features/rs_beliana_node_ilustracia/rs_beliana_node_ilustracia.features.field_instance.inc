@@ -688,7 +688,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_popis',
-    'label' => 'Popis ilustrácie',
+    'label' => 'Text k ilustrácii',
     'required' => 1,
     'settings' => array(
       'better_formats' => array(
@@ -1183,10 +1183,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Názov diela (predbežne skryté)');
   t('Obrázok (na použitie)');
   t('Obrázok (návrh/náhľad)');
-  t('Popis ilustrácie');
   t('Použiť');
   t('Súbor');
   t('Súbory ilustrácie');
+  t('Text k ilustrácii');
   t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.');
   t('Typ ilustrácie');
   t('URL autora diela');
