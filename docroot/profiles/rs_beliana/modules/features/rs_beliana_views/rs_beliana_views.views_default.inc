@@ -5760,12 +5760,39 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'timestamp' => 'timestamp',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'timestamp' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Content revision: Dátum aktualizácie */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'short';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'privatemsg_current_day';
   /* Kritéria zoradenia: Obsah: Na zoradenie (field_na_zoradenie) */
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
@@ -6644,7 +6671,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['label'] = 'komentar';
-  /* Pole: Obsah: Popis ilustrácie */
+  /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
@@ -6680,7 +6707,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_pouzit']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_pouzit']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_pouzit']['separator'] = ';';
-  /* Pole: Obsah: Pôvod ilustrácie */
+  /* Pole: Obsah: Typ ilustrácie */
   $handler->display->display_options['fields']['field_zdroj_ilustracie']['id'] = 'field_zdroj_ilustracie';
   $handler->display->display_options['fields']['field_zdroj_ilustracie']['table'] = 'field_data_field_zdroj_ilustracie';
   $handler->display->display_options['fields']['field_zdroj_ilustracie']['field'] = 'field_zdroj_ilustracie';
@@ -6691,7 +6718,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_licencia1']['table'] = 'field_data_field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['field'] = 'field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['label'] = 'licencia';
-  /* Pole: Obsah: Názov diela */
+  /* Pole: Obsah: Názov diela (predbežne skryté) */
   $handler->display->display_options['fields']['field_nazov_diela']['id'] = 'field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['table'] = 'field_data_field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['field'] = 'field_nazov_diela';
@@ -7374,6 +7401,7 @@ function rs_beliana_views_views_default_views() {
     t('nasledujúca ›'),
     t('posledná »'),
     t('Názov'),
+    t('Dátum aktualizácie'),
     t('Text hesla'),
     t('Súbor'),
     t('Lexikálna skupina'),
@@ -7414,7 +7442,6 @@ function rs_beliana_views_views_default_views() {
     t('Exportovať heslo GH'),
     t('Export heslo GH - dáta'),
     t('Nid'),
-    t('Dátum aktualizácie'),
     t('povodnyZaznamZGH'),
     t('nazovzorad'),
     t('vyplatenieOdmeny'),
@@ -9525,7 +9552,7 @@ function rs_beliana_views_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
-  /* Pole: Obsah: Popis ilustrácie */
+  /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
@@ -9774,7 +9801,7 @@ function rs_beliana_views_views_default_views() {
     t('Vyhľadať ilustrácie'),
     t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.'),
     t('Obrázok (náhľad)'),
-    t('Popis ilustrácie'),
+    t('Text k ilustrácii'),
     t('Súbory ilustrácie'),
   );
   $export['v_etky_hesl_'] = $view;
@@ -10471,7 +10498,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Obsah: Popis ilustrácie */
+  /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
@@ -10623,7 +10650,7 @@ function rs_beliana_views_views_default_views() {
     9 => 0,
     17 => 0,
   );
-  /* Filter criterion: Obsah: Popis ilustrácie (field_popis) */
+  /* Filter criterion: Obsah: Text k ilustrácii (field_popis) */
   $handler->display->display_options['filters']['field_popis_value']['id'] = 'field_popis_value';
   $handler->display->display_options['filters']['field_popis_value']['table'] = 'field_data_field_popis';
   $handler->display->display_options['filters']['field_popis_value']['field'] = 'field_popis_value';
