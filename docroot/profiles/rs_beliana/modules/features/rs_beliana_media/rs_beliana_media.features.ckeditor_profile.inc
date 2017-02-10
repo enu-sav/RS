@@ -72,7 +72,8 @@ config.height = 500;
 // in general do not convert to html entities
 config.entities = false;
 // convert some characters (<>&) to html entities
-config.basicEntities = true;
+//config.basicEntities = true;
+config.basicEntities = false;
 config.defaultLanguage = \'sk\';
 config.language = \'sk\';
 config.disableNativeSpellChecker = false;
@@ -311,7 +312,8 @@ config.height = 500;
 // in general do not convert to html entities
 config.entities = false;
 // convert some characters (<>&) to html entities
-config.basicEntities = true;
+//config.basicEntities = true;
+config.basicEntities = false;
 config.defaultLanguage = \'sk\';
 config.language = \'sk\';
 config.disableNativeSpellChecker = false;
