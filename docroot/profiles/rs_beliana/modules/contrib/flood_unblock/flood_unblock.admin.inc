@@ -63,7 +63,7 @@ function flood_unblock_settings() {
     $prefix .= l('Click here to look at these settings.', 'admin/config/system/flood-control') . '<br />';
   }
   else {
-    $prefix .= 'These settings can be looked at by installed and enabling the ' . l('Flood Control module.', 'http://drupal.org/project/flood_control') . '<br />';
+    $prefix .= 'These settings can be looked at by installing and enabling the ' . l('Flood Control module.', 'http://drupal.org/project/flood_control') . '<br />';
   }
 
   $prefix .= '<br />';
