@@ -7017,16 +7017,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
   $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['value'] = array(
-    634 => '634',
-  );
   $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
@@ -7049,6 +7045,7 @@ function rs_beliana_views_views_default_views() {
     20 => 0,
     21 => 0,
     22 => 0,
+    23 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
@@ -7306,7 +7303,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
@@ -7329,6 +7325,7 @@ function rs_beliana_views_views_default_views() {
     20 => 0,
     21 => 0,
     22 => 0,
+    23 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
@@ -10331,7 +10328,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Pole: Obsah: Typ */
