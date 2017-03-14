@@ -14,7 +14,6 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['administer advanced forum'] = array(
     'name' => 'administer advanced forum',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',
@@ -43,7 +42,6 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['delete any forum content'] = array(
     'name' => 'delete any forum content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -54,7 +52,6 @@ function rs_beliana_forum_user_default_permissions() {
     'name' => 'delete own forum content',
     'roles' => array(
       'Oznamy' => 'Oznamy',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -64,7 +61,6 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['edit any forum content'] = array(
     'name' => 'edit any forum content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -75,7 +71,6 @@ function rs_beliana_forum_user_default_permissions() {
     'name' => 'edit own forum content',
     'roles' => array(
       'Oznamy' => 'Oznamy',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -93,7 +88,6 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['view forum statistics'] = array(
     'name' => 'view forum statistics',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',
@@ -103,7 +97,6 @@ function rs_beliana_forum_user_default_permissions() {
   $permissions['view last edited notice'] = array(
     'name' => 'view last edited notice',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',
