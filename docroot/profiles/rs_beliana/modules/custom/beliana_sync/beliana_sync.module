@@ -1,0 +1,412 @@
+<?php
+
+/**
+ * @file
+ * Beliana sync main file.
+ */
+
+use GuzzleHttp\Client;
+
+/**
+ * Implements hook_menu().
+ */
+function beliana_sync_menu() {
+  return [
+    'sync-test' => [
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['beliana_sync_test_form'],
+      'access arguments' => ['access content'],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_node_insert().
+ *
+ * We are extracting links from `Heslo` nodes.
+ *
+ * {@inheritdoc}
+ */
+function beliana_sync_node_insert($node) {
+  if ($node->type === 'heslo') {
+    // Extract links.
+    beliana_sync_process_links($node->nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ *
+ * We are extracting links from `Heslo` nodes.
+ *
+ * {@inheritdoc}
+ */
+function beliana_sync_node_update($node) {
+  if ($node->type === 'heslo') {
+    // Remove links to old node.
+    db_delete('beliana_links')
+      ->condition('origin', $node->nid)
+      ->execute();
+    // Extract links.
+    beliana_sync_process_links($node->nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+  }
+}
+
+/**
+ * Extract links from node and insert them into beliana_links table.
+ *
+ * @param $node
+ */
+function beliana_sync_process_links($nid, $text, $replace = FALSE) {
+  // Extract links from field_text_hesla.
+  $dom = new \DOMDocument();
+  $dom->loadHTML($text);
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  if (!empty($links)) {
+    for ($i = $links->length - 1; $i >= 0; $i--) {
+      $item = $links->item($i);
+      $target = $item->getAttribute('href');
+      // Get rid of leading slash.
+      if ($target[0] === '/') {
+        $target = substr($target, 1);
+      }
+      // Get non-alias path, so we can get nid from it.
+      $path = drupal_get_normal_path($target);
+      if ($path !== $target) {
+        $path_elements = explode('/', $path);
+        // If alias belong to node, then insert record into beliana_links table.
+        if ($path_elements[0] === 'node' && is_numeric($path_elements[1]) && !$replace) {
+          db_insert('beliana_links')
+            ->fields([
+              'origin' => $nid,
+              'target' => $path_elements[1],
+            ])
+            ->execute();
+        }
+
+        if ($replace) {
+          $remote_id = db_select('beliana_sync', 's')
+            ->fields('s', ['remote'])
+            ->condition('local', $path_elements[1])
+            ->execute()
+            ->fetchCol(0);
+          if (!empty($remote_id)) {
+            // If was synced, then replace href to remote site.
+            $remote_id = reset($remote_id);
+            $item->setAttribute('href', '/node/' . $remote_id);
+          }
+          else {
+            // If not synced, then remove link completely.
+            $lnkText = $item->textContent;
+            $newTxtNode = $dom->createTextNode($lnkText);
+            $item->parentNode->replaceChild($newTxtNode, $item);
+          }
+        }
+      }
+    }
+  }
+
+  if ($replace) {
+    $fragment = '';
+    foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
+      $fragment .= $dom->saveHtml($node);
+    }
+    return $fragment;
+  }
+}
+
+function beliana_sync_sync($nid, &$context) {
+  // Calculate Authorization header.
+  $login = variable_get('beliana_web_login');
+  $pass = variable_get('beliana_password_login');
+  $auth_header = 'Basic ' . base64_encode($login . ':' . $pass);
+
+  // Create client object.
+  $client = new Client([
+    'base_uri' => variable_get('beliana_web_uri'),
+    'headers' => [
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json',
+      'Authorization' => $auth_header,
+    ],
+    'query' => ['_format' => 'json'],
+  ]);
+
+  $node = node_load($nid);
+  $illustrations = [];
+  foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
+    $ilu_node = node_load($illustration['target_id']);
+    if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+      $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+      $illustrations[] = [
+        'url' => $image_url,
+        'title' => $ilu_node->title,
+        'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
+        'license' => _extract_license($ilu_node),
+        'license_information' => _extract_license_information($ilu_node),
+      ];
+    }
+  }
+
+  $dates = [];
+  foreach ($node->field_datum['und'] as $item) {
+    $dates[] = $item['value'];
+  }
+
+  // Load node and form object to be sent over.
+  $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
+  $remote_node_object = [
+    'title' => $node->title,
+    'body' => $body,
+    'images' => $illustrations,
+    'sort' => $node->field_na_zoradenie['und'][0]['value'],
+    'dates' => $dates,
+  ];
+
+  // Use POST for creating new items and PATCH for updating existing items.
+  $remote_id = db_select('beliana_sync', 's')
+    ->fields('s', ['remote'])
+    ->condition('local', $nid)
+    ->execute()
+    ->fetchCol(0);
+  if (!empty($remote_id)) {
+    $remote_id = reset($remote_id);
+    $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
+  }
+  else {
+    $response = $client->request('POST', '/rs/api', ['body' => json_encode($remote_node_object)]);
+    // If new node was created on remote, insert its nid to beliana_sync table.
+    if ($response->getStatusCode() === 201) {
+      $remote_id = (int) json_decode($response->getBody());
+      db_insert('beliana_sync')
+        ->fields(['local' => $nid, 'remote' => $remote_id])
+        ->execute();
+    }
+  }
+}
+
+function _display_on_web($values) {
+  foreach ($values as $value) {
+    if ($value['value'] === 'Zobrazit_na_webe') {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+function get_order($source, $source_links) {
+  $dest = [];
+  $i = 0;
+  $limit = pow(sizeof($source), 2) + 1;
+  $moved = [];
+  while (!empty($source)) {
+    $current = array_shift($source);
+    $links = $source_links[$current];
+    $i++;
+    if ($i % $limit === 0) {
+      $dest[] = $current;
+      $moved[] = $current;
+      continue;
+    }
+    if (!empty($links)) {
+      $found = FALSE;
+      foreach ($links as $link) {
+        if (in_array($link, $source)) {
+          $found = TRUE;
+          $source[] = $current;
+          break;
+        }
+      }
+      if (!$found) {
+        $dest[] = $current;
+      }
+    }
+    else {
+      $dest[] = $current;
+    }
+  }
+
+  $dest = array_merge($dest, $moved);
+  return $dest;
+}
+
+function beliana_sync_prepare_queue($form, $form_state) {
+  $source = $form_state['selection'];
+  $source_links = [];
+  $back_links = [];
+  $back_links_links = [];
+  $operations = [];
+  foreach ($source as $item) {
+    $links = db_select('beliana_links', 'l')
+      ->fields('l', ['target'])
+      ->condition('origin', $item)
+      ->execute()
+      ->fetchCol(0);
+    $source_links[$item] = $links;
+
+    $item_back_links_query = db_select('beliana_links', 'l');
+    $item_back_links_query->join('beliana_sync', 's', 'l.origin=s.local');
+    $item_back_links = $item_back_links_query->fields('l', ['origin'])
+      ->isNotNull('s.local')
+      ->condition('l.target', $item)
+      ->distinct()
+      ->execute()
+      ->fetchCol(0);
+
+    foreach ($item_back_links as $item_back_link) {
+      if (!isset($back_links_links[$item_back_link])) {
+        $back_links_local_links = db_select('beliana_links', 'l')
+          ->fields('l', ['target'])
+          ->condition('origin', $item_back_link)
+          ->execute()
+          ->fetchCol(0);
+        $back_links_links[$item_back_link] = $back_links_local_links;
+      }
+    }
+
+    $back_links = array_merge($back_links, $item_back_links);
+  }
+  $back_links = array_unique($back_links);
+  $sync_queue = get_order($source, $source_links);
+  $back_links_queue = get_order($back_links, $back_links_links);
+  $sync_queue = array_merge($sync_queue, $back_links_queue);
+
+  foreach ($sync_queue as $item) {
+    $operations[] = [
+      'beliana_sync_sync',
+      [$item],
+    ];
+  }
+
+  $batch = array(
+    'title' => t('Publishing content to web version...'),
+    'operations' => $operations,
+    'finished' => 'beliana_sync_sync_finished',
+    'init_message' => t('Publishing is starting ...'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+  );
+
+  batch_set($batch);
+}
+
+function beliana_sync_sync_finished() {
+  dsm('Mission accomplished');
+  return '';
+}
+
+function _extract_image(array $images) {
+  $uri = '';
+  foreach ($images as $image) {
+    if (strpos($image['mimetype'], 'svg') || (empty($uri))) {
+      $uri = $image['uri'];
+    }
+  }
+
+  return file_create_url($uri);
+}
+
+function _extract_license($node) {
+  $formatted_license = '';
+  $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
+  switch ($raw_license) {
+    case 'Vlastná licencia':
+      $formatted_license = 'CC BY-SA';
+      break;
+    case 'Public domain':
+      $formatted_license = 'Public domain';
+      break;
+    case 'CC licencia':
+      $formatted_license = $node->field_licencia1[LANGUAGE_NONE][0]['value'];
+      break;
+    case 'Získané na základe zmluvy':
+      $formatted_license = 'Autorské dielo';
+      break;
+    case 'Muzeálny objekt':
+      $formatted_license = 'Muzeálny objekt';
+      break;
+  }
+  return $formatted_license;
+}
+
+function _extract_license_information($node) {
+  $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
+  $local_license_information = [];
+  switch ($raw_license) {
+    case 'Vlastná licencia':
+      $local_license_information[] = (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value']) ? $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] . ', ' : '') . 'Encyklopedický ústav SAV';
+      break;
+    case 'Public domain':
+      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_url_diela_l[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>URL diela: </strong>' . $node->field_url_diela_l[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
+      }
+      break;
+    case 'CC licencia':
+      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_modifikovane[LANGUAGE_NONE][0]['value'])) {
+        if ($node->field_modifikovane[LANGUAGE_NONE][0]['value'] == 1) {
+          $modified_value = 'Modifikované';
+        }
+        else {
+          $modified_value = 'Nemodifikované';
+        }
+        $local_license_information[] = '<strong>Modifikované: </strong>' . $modified_value;
+      }
+      if (!empty($node->field_d_tum_prevzatia[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Dátum prevzatia: </strong>' . date('d.M.Y', strtotime($node->field_d_tum_prevzatia[LANGUAGE_NONE][0]['value']));
+      }
+      if (!empty($node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>URL textu licencie: </strong>' . $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_url_autora_diela_l[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>URL autora diela: </strong>' . $node->field_url_autora_diela_l[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_url_diela_l[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>URL diela: </strong>' . $node->field_url_diela_l[LANGUAGE_NONE][0]['value'];
+      }
+      break;
+    case 'Získané na základe zmluvy':
+      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_drzitel_prav[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Držiteľ práv: </strong>' . $node->field_drzitel_prav[LANGUAGE_NONE][0]['value'];
+      }
+      break;
+    case 'Muzeálny objekt':
+      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+      }
+      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
+        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
+      }
+      break;
+  }
+  $license_information = implode('<br>', $local_license_information);
+  return $license_information;
+}
