@@ -465,9 +465,10 @@ function beliana_node_presave($node) {
  * @inheritdoc
  */
 function beliana_form_alter(&$form, &$form_state, $form_id) {
+  //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   if ('workbench_moderation_moderate_form' === $form_id) {
-    // If user is import and state is `zaradene`,
-    // we remove option `u_autora` from possible next states.
+    // If user is 'nepriradený' and state is `zaradene`,
+    // we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene'
       && $form['node']['#value']->uid == 719
     ) {

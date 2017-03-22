@@ -110,12 +110,32 @@ address {
   font-style: italic;
 }
 
+/* hide changes by LITE 
 u,ins {
   text-decoration: underline;
 }
 
 s,strike,del {
   text-decoration: line-through;
+}
+*/
+
+u {
+  text-decoration: underline;
+}
+
+s,strike {
+  text-decoration: line-through;
+}
+
+/* hide changes by LITE */
+ins {
+  text-decoration: none;
+}
+
+/* hide changes by LITE */
+del {
+  display:none;
 }
 
 big {
