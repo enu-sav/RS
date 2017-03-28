@@ -43,6 +43,12 @@ function beliana_sync_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ],
+      'updated' => [
+        'description' => t('The Unix timestamp of last sync.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
     ],
     'primary key' => ['local', 'remote'],
   ];

@@ -55,7 +55,7 @@ function beliana_sync_node_update($node) {
 /**
  * Extract links from node and insert them into beliana_links table.
  *
- * @param $node
+ * @param $nid
  */
 function beliana_sync_process_links($nid, $text, $replace = FALSE) {
   // Extract links from field_text_hesla.
@@ -67,13 +67,13 @@ function beliana_sync_process_links($nid, $text, $replace = FALSE) {
     for ($i = $links->length - 1; $i >= 0; $i--) {
       $item = $links->item($i);
       $target = $item->getAttribute('href');
-      // Get rid of leading slash.
-      if ($target[0] === '/') {
-        $target = substr($target, 1);
-      }
-      // Get non-alias path, so we can get nid from it.
-      $path = drupal_get_normal_path($target);
-      if ($path !== $target) {
+      if (!url_is_external($target)) {
+        // Get rid of leading slash.
+        if ($target[0] === '/') {
+          $target = substr($target, 1);
+        }
+        // Get non-alias path, so we can get nid from it.
+        $path = drupal_get_normal_path($target);
         $path_elements = explode('/', $path);
         // If alias belong to node, then insert record into beliana_links table.
         if ($path_elements[0] === 'node' && is_numeric($path_elements[1]) && !$replace) {
@@ -132,11 +132,12 @@ function beliana_sync_sync($nid, &$context) {
     ],
     'query' => ['_format' => 'json'],
   ]);
-
-  $node = node_load($nid);
+  $generic_node = node_load($nid);
+  $node = workbench_moderation_node_current_load($generic_node);
   $illustrations = [];
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
-    $ilu_node = node_load($illustration['target_id']);
+    $ilu_generic_node = node_load($illustration['target_id']);
+    $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
       $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
       $illustrations[] = [
@@ -151,7 +152,8 @@ function beliana_sync_sync($nid, &$context) {
 
   $dates = [];
   foreach ($node->field_datum['und'] as $item) {
-    $dates[] = $item['value'];
+    $only_date = date('Y-m-d',strtotime($item['value']));
+    $dates[] = $only_date;
   }
 
   // Load node and form object to be sent over.
@@ -173,6 +175,10 @@ function beliana_sync_sync($nid, &$context) {
   if (!empty($remote_id)) {
     $remote_id = reset($remote_id);
     $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
+    db_update('beliana_sync')
+      ->fields(['updated' => time()])
+      ->condition('local', $nid)
+      ->execute();
   }
   else {
     $response = $client->request('POST', '/rs/api', ['body' => json_encode($remote_node_object)]);
@@ -180,10 +186,11 @@ function beliana_sync_sync($nid, &$context) {
     if ($response->getStatusCode() === 201) {
       $remote_id = (int) json_decode($response->getBody());
       db_insert('beliana_sync')
-        ->fields(['local' => $nid, 'remote' => $remote_id])
+        ->fields(['local' => $nid, 'remote' => $remote_id, 'updated' => time()])
         ->execute();
     }
   }
+  workbench_moderation_moderate($node, 'published');
 }
 
 function _display_on_web($values) {
@@ -232,8 +239,7 @@ function get_order($source, $source_links) {
   return $dest;
 }
 
-function beliana_sync_prepare_queue($form, $form_state) {
-  $source = $form_state['selection'];
+function beliana_sync_prepare_queue($source) {
   $source_links = [];
   $back_links = [];
   $back_links_links = [];
@@ -293,7 +299,7 @@ function beliana_sync_prepare_queue($form, $form_state) {
 }
 
 function beliana_sync_sync_finished() {
-  dsm('Mission accomplished');
+  drupal_set_message('Synchronizácia bola ukončená.');
   return '';
 }
 
