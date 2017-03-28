@@ -1,0 +1,5 @@
+name = Beliana synchronisation
+core = 7.x
+description = "Module providing interfaces and code for synchronisation with web version"
+package = Beliana
+dependencies[] = composer_manager

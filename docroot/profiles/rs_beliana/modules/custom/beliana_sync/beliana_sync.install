@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function beliana_sync_schema() {
+  $schema = [];
+  $schema['beliana_links'] = [
+    'description' => t('Table storing relations between nodes'),
+    'fields' => [
+      'origin' => [
+        'description' => t('Node containing reference'),
+        'type' => 'int',
+        'length' => 11,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'target' => [
+        'description' => t('Referenced node'),
+        'type' => 'int',
+        'length' => 11,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['origin', 'target'],
+  ];
+
+  $schema['beliana_sync'] = [
+    'description' => t('Table storing local and remote NIDs'),
+    'fields' => [
+      'local' => [
+        'description' => t('Local NID'),
+        'type' => 'int',
+        'length' => 11,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'remote' => [
+        'description' => t('Remote NID'),
+        'type' => 'int',
+        'length' => 11,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'updated' => [
+        'description' => t('The Unix timestamp of last sync.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['local', 'remote'],
+  ];
+
+  return $schema;
+}
+
+function beliana_sync_update_7001() {
+  $schema = beliana_sync_schema();
+  db_create_table('beliana_sync',$schema['beliana_sync']);
+}

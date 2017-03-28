@@ -202,4 +202,20 @@ function rs_beliana_update_7006() {
     if (in_array($active['name'], array('PROD'))) {
       module_disable(array('shield'));
     }
-  }}
+  }
+}
+
+/**
+ * Enable Sync modules.
+ */
+function rs_beliana_update_7007() {
+  if (!module_exists('composer_manager')) {
+    module_enable(array('composer_manager'));
+  }
+  if (!module_exists('beliana_sync')) {
+    module_enable(array('beliana_sync'));
+  }
+  if (!module_exists('rs_beliana_sync_ui')) {
+    module_enable(array('rs_beliana_sync_ui'));
+  }
+}
