@@ -40,7 +40,7 @@ function rs_beliana_sync_ui_action_info() {
   return [
     'rs_beliana_sync_ui_sync' => [
       'type' => 'entity',
-      'label' => t('Publish to web version'),
+      'label' => t('Publikovať do webovej verzie'),
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
@@ -55,7 +55,7 @@ function rs_beliana_sync_ui_action_info() {
  *
  * Note: This should be never called, because we are overriding submit action.
  *
- * @inheritdoc
+ * {@inheritdoc}
  */
 function rs_beliana_sync_ui_sync(&$node, $context) {
   beliana_sync_sync($node, $context);
@@ -64,8 +64,73 @@ function rs_beliana_sync_ui_sync(&$node, $context) {
 /**
  * Implements hook_form_alter().
  */
-function rs_beliana_sync_ui_form_views_form_publish_to_web_page_alter(&$form, &$form_state) {
+function rs_beliana_sync_ui_form_views_form_sync_to_web_page_alter(&$form, &$form_state) {
   if ($form_state['step'] === 'views_bulk_operations_confirm_form') {
-    $form['actions']['submit']['#submit'] = ['beliana_sync_prepare_queue'];
+    $form['actions']['submit']['#submit'] = ['rs_beliana_sync_ui_prepare_queue'];
   }
+}
+
+function rs_beliana_sync_ui_prepare_queue($form, &$form_state) {
+  $source = $form_state['selection'];
+  beliana_sync_prepare_queue($source);
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function rs_beliana_sync_ui_form_heslo_node_form_alter(&$form, array $form_state) {
+  if ($form['#node']->workbench_moderation['current']->state === 'u_v_st_redaktora_5') {
+    $form['actions']['sync'] = [
+      '#type' => 'submit',
+      '#access' => TRUE,
+      '#value' => 'Publikovať vo webovej verzii',
+      '#weight' => 150,
+      '#submit' => [
+        'rs_beliana_sync_ui_node_form_sync',
+      ],
+    ];
+  }
+}
+
+function rs_beliana_sync_ui_node_form_sync($form, &$form_state) {
+  $source = [$form_state['values']['nid']];
+  beliana_sync_prepare_queue($source);
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function rs_beliana_sync_ui_views_data() {
+  $data = [];
+  $data['beliana_sync'] = [
+    'table' => [
+      'group' => 'Beliana sync',
+      'provider' => 'beliana_sync',
+      'join' => [
+        'node' => [
+          'left_field' => 'nid',
+          'field' => 'local',
+        ],
+        'node_revision' => [
+          'left_field' => 'nid',
+          'field' => 'local',
+        ],
+      ],
+    ],
+    'updated' => [
+      'title' => t('The Unix timestamp of last sync.'),
+      'help' => t('The Unix timestamp of last sync.'),
+      'field' => [
+        'id' => 'date',
+        'handler' => 'views_handler_field_date',
+      ],
+      'filter' => [
+        'id' => 'date',
+        'handler' => 'views_handler_filter_date',
+      ],
+    ],
+  ];
+
+  return $data;
 }
