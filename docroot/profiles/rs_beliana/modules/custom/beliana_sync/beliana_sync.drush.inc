@@ -8,7 +8,7 @@
 /**
  * Implements hook_drush_command().
  */
-function beliana_sync_process_drush_command() {
+function beliana_sync_drush_command() {
   $items = [];
   $items['extract-links'] = [
     'aliases' => ['bel-el'],

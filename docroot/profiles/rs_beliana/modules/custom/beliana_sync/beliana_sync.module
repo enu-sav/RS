@@ -77,12 +77,21 @@ function beliana_sync_process_links($nid, $text, $replace = FALSE) {
         $path_elements = explode('/', $path);
         // If alias belong to node, then insert record into beliana_links table.
         if ($path_elements[0] === 'node' && is_numeric($path_elements[1]) && !$replace) {
-          db_insert('beliana_links')
-            ->fields([
-              'origin' => $nid,
-              'target' => $path_elements[1],
-            ])
-            ->execute();
+          $link = db_select('beliana_links', 'l')
+            ->fields('l', ['origin'])
+            ->condition('origin', $nid)
+            ->condition('target', $path_elements[1])
+            ->execute()
+            ->fetchCol(0);
+          // We insert new item only if it already doesn't exist.
+          if (empty($link)) {
+            db_insert('beliana_links')
+              ->fields([
+                'origin' => $nid,
+                'target' => $path_elements[1],
+              ])
+              ->execute();
+          }
         }
 
         if ($replace) {
