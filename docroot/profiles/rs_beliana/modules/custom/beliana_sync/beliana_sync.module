@@ -199,7 +199,7 @@ function beliana_sync_sync($nid, &$context) {
         ->execute();
     }
   }
-  workbench_moderation_moderate($node, 'published');
+  workbench_moderation_moderate($node, 'publikovane_na_webe');
 }
 
 function _display_on_web($values) {
