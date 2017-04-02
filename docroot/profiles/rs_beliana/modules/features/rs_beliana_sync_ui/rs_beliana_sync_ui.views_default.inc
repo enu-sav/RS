@@ -102,32 +102,12 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['updated']['date_format'] = 'short';
   $handler->display->display_options['fields']['updated']['second_date_format'] = 'privatemsg_current_day';
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
-  $handler->display->display_options['filter_groups']['groups'] = array(
-    1 => 'AND',
-    2 => 'AND',
-  );
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Globálny: Fields comparison */
-  $handler->display->display_options['filters']['fields_compare']['id'] = 'fields_compare';
-  $handler->display->display_options['filters']['fields_compare']['table'] = 'views';
-  $handler->display->display_options['filters']['fields_compare']['field'] = 'fields_compare';
-  $handler->display->display_options['filters']['fields_compare']['operator'] = '>';
-  $handler->display->display_options['filters']['fields_compare']['group'] = 1;
-  $handler->display->display_options['filters']['fields_compare']['right_field'] = 'updated';
-  $handler->display->display_options['filters']['fields_compare']['left_field'] = 'timestamp';
   /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -135,37 +115,16 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['type']['relationship'] = 'nid';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: Aktuálny */
-  $handler->display->display_options['filters']['is_current_1']['id'] = 'is_current_1';
-  $handler->display->display_options['filters']['is_current_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current_1']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current_1']['value'] = '1';
-  $handler->display->display_options['filters']['is_current_1']['group'] = 2;
   /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
-  $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state_1']['field'] = 'state';
-  $handler->display->display_options['filters']['state_1']['value'] = array(
-    'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'na_zalomenie' => 'na_zalomenie',
   );
-  $handler->display->display_options['filters']['state_1']['group'] = 2;
-  /* Filter criterion: Beliana sync: The Unix timestamp of last sync. */
-  $handler->display->display_options['filters']['updated']['id'] = 'updated';
-  $handler->display->display_options['filters']['updated']['table'] = 'beliana_sync';
-  $handler->display->display_options['filters']['updated']['field'] = 'updated';
-  $handler->display->display_options['filters']['updated']['operator'] = 'empty';
-  $handler->display->display_options['filters']['updated']['group'] = 2;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'heslo' => 'heslo',
-  );
-  $handler->display->display_options['filters']['type_1']['group'] = 2;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
