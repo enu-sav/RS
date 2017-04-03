@@ -60,7 +60,7 @@ function beliana_sync_node_update($node) {
 function beliana_sync_process_links($nid, $text, $replace = FALSE) {
   // Extract links from field_text_hesla.
   $dom = new \DOMDocument();
-  $dom->loadHTML($text);
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
   if (!empty($links)) {
@@ -126,6 +126,12 @@ function beliana_sync_process_links($nid, $text, $replace = FALSE) {
 }
 
 function beliana_sync_sync($nid, &$context) {
+  $skip = FALSE;
+  // Make sure to only initialize the results the first time.
+  if (!isset($context['results']['success'])) {
+    $context['results']['messages'] = [];
+    $context['results']['success'] = $context['results']['error'] = 0;
+  }
   // Calculate Authorization header.
   $login = variable_get('beliana_web_login');
   $pass = variable_get('beliana_password_login');
@@ -147,59 +153,85 @@ function beliana_sync_sync($nid, &$context) {
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
-    if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+    // Check if illustration has image attached.
+    if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE])) {
+      $context['results']['error']++;
+      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" neobsahuje priloženú ilustráciu.';
+      $skip = TRUE;
+      break;
+    }
+    // Check if illustration is in correct WB status.
+    if ($ilu_node->workbench_moderation['current']->state !== 'na_zalomenie' && !$skip) {
+      $context['results']['error']++;
+      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nenachádza v stave "Na zalomenie".';
+      $skip = TRUE;
+    }
+    // Check if illustration has correct license.
+    if ($ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený' && !$skip) {
+      $context['results']['error']++;
+      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nemá určený typ ilustrácie.';
+      $skip = TRUE;
+    }
+    if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE]) && !$skip) {
       $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
       $illustrations[] = [
-        'url' => $image_url,
+        'uri' => $image_url,
         'title' => $ilu_node->title,
         'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
         'license' => _extract_license($ilu_node),
-        'license_information' => _extract_license_information($ilu_node),
+        'license_info' => _extract_license_information($ilu_node),
       ];
     }
   }
 
-  $dates = [];
-  foreach ($node->field_datum['und'] as $item) {
-    $only_date = date('Y-m-d',strtotime($item['value']));
-    $dates[] = $only_date;
-  }
+  if (!$skip) {
+    $dates = [];
+    foreach ($node->field_datum['und'] as $item) {
+      $only_date = date('Y-m-d', strtotime($item['value']));
+      $dates[] = $only_date;
+    }
 
-  // Load node and form object to be sent over.
-  $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
-  $remote_node_object = [
-    'title' => $node->title,
-    'body' => $body,
-    'images' => $illustrations,
-    'sort' => $node->field_na_zoradenie['und'][0]['value'],
-    'dates' => $dates,
-  ];
+    // Load node and form object to be sent over.
+    $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
+    $remote_node_object = [
+      'title' => $node->title,
+      'body' => $body,
+      'images' => $illustrations,
+      'sort' => $node->field_na_zoradenie['und'][0]['value'],
+      'dates' => $dates,
+    ];
 
-  // Use POST for creating new items and PATCH for updating existing items.
-  $remote_id = db_select('beliana_sync', 's')
-    ->fields('s', ['remote'])
-    ->condition('local', $nid)
-    ->execute()
-    ->fetchCol(0);
-  if (!empty($remote_id)) {
-    $remote_id = reset($remote_id);
-    $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
-    db_update('beliana_sync')
-      ->fields(['updated' => time()])
+    // Use POST for creating new items and PATCH for updating existing items.
+    $remote_id = db_select('beliana_sync', 's')
+      ->fields('s', ['remote'])
       ->condition('local', $nid)
-      ->execute();
-  }
-  else {
-    $response = $client->request('POST', '/rs/api', ['body' => json_encode($remote_node_object)]);
-    // If new node was created on remote, insert its nid to beliana_sync table.
-    if ($response->getStatusCode() === 201) {
-      $remote_id = (int) json_decode($response->getBody());
-      db_insert('beliana_sync')
-        ->fields(['local' => $nid, 'remote' => $remote_id, 'updated' => time()])
+      ->execute()
+      ->fetchCol(0);
+    if (!empty($remote_id)) {
+      $remote_id = reset($remote_id);
+      $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
+      db_update('beliana_sync')
+        ->fields(['updated' => time()])
+        ->condition('local', $nid)
         ->execute();
     }
+    else {
+      $response = $client->request('POST', '/rs/api', ['body' => json_encode($remote_node_object)]);
+      // If new node was created on remote, insert its nid to beliana_sync table.
+      if ($response->getStatusCode() === 201) {
+        $remote_id = (int) json_decode($response->getBody());
+        db_insert('beliana_sync')
+          ->fields([
+            'local' => $nid,
+            'remote' => $remote_id,
+            'updated' => time()
+          ])
+          ->execute();
+      }
+    }
+    workbench_moderation_moderate($node, 'publikovane_na_webe');
+    $context['results']['success']++;
   }
-  workbench_moderation_moderate($node, 'published');
 }
 
 function _display_on_web($values) {
@@ -307,8 +339,11 @@ function beliana_sync_prepare_queue($source) {
   batch_set($batch);
 }
 
-function beliana_sync_sync_finished() {
-  drupal_set_message('Synchronizácia bola ukončená.');
+function beliana_sync_sync_finished($success, $results, $operations) {
+  drupal_set_message('Synchronizácia bola ukončená - ' . $results['success'] . ' úspešne, ' . $results['error'] . ' - neúspešne');
+  foreach ($results['messages'] as $message) {
+    drupal_set_message($message, 'error');
+  }
   return '';
 }
 
@@ -327,7 +362,7 @@ function _extract_license($node) {
   $formatted_license = '';
   $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
   switch ($raw_license) {
-    case 'Vlastná licencia':
+    case 'Vlastná ilustrácia':
       $formatted_license = 'CC BY-SA';
       break;
     case 'Public domain':
@@ -350,8 +385,8 @@ function _extract_license_information($node) {
   $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
   $local_license_information = [];
   switch ($raw_license) {
-    case 'Vlastná licencia':
-      $local_license_information[] = (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value']) ? $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] . ', ' : '') . 'Encyklopedický ústav SAV';
+    case 'Vlastná ilustrácia':
+      $local_license_information[] = '<strong>Autor: </strong>' . (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value']) ? $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] . ', ' : '') . 'Encyklopedický ústav SAV';
       break;
     case 'Public domain':
       if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {

@@ -99,6 +99,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 0,
     ),
+    'publikovane_na_webe' => array(
+      'name' => 'publikovane_na_webe',
+      'label' => 'Publikované na webe',
+      'description' => 'Finálny stav hesla po akcii "Publikovať na webe"',
+      'weight' => 0,
+    ),
     'published' => array(
       'name' => 'published',
       'label' => 'published',
