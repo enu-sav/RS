@@ -373,6 +373,8 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
     // remove all paragraphs not starting with <strong
     $output = preg_replace('/<\/p>\s+<p>([^<][^s])/', ' \1', $output);
+    // add newline between concatenated paragraphs (needed in postprocessing)
+    $output = preg_replace("/<\/p><p>/", "</p>\n<p>", $output);
 
    
 
