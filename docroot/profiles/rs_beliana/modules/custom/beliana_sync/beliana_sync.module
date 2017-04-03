@@ -60,7 +60,7 @@ function beliana_sync_node_update($node) {
 function beliana_sync_process_links($nid, $text, $replace = FALSE) {
   // Extract links from field_text_hesla.
   $dom = new \DOMDocument();
-  $dom->loadHTML($text);
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
   if (!empty($links)) {
