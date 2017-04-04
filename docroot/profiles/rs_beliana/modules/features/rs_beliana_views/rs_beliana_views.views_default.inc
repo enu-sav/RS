@@ -2335,12 +2335,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Pole: Obsah: Súbor */
-  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
   /* Pole: Používateľ: Názov */
   $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
   $handler->display->display_options['fields']['name_1']['table'] = 'users';
@@ -2353,10 +2347,15 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
   $handler->display->display_options['fields']['section']['field'] = 'section';
   $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla_1']['id'] = 'field_text_hesla_1';
+  $handler->display->display_options['fields']['field_text_hesla_1']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla_1']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla_1']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_text_hesla_1']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_text_hesla_1']['settings'] = array(
+    'trim_length' => '600',
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -5466,6 +5465,7 @@ function rs_beliana_views_views_default_views() {
     t('Zlúčiť'),
     t('Zlučovanie VR2'),
     t('Pred zlúčením si treba overiť, či na zlučované heslá neexistuje odkaz. Ak áno, po zlúčení treba tieto odkazy upraviť.'),
+    t('Text hesla'),
     t('1. korektúra'),
     t('<strong>Upozornenie</strong>: Po zmene stavu na <em>U výst. redaktora 3</em> sa môže zobraziť prázdna stránka s oznamom <em>Na prístup k tomuto obsahu nemáte oprávnenie</em>. Je to normálny stav spôsobený tým, že heslo na korektúru dostal iný redaktor.'),
     t('Ilustrácie (R)'),
@@ -5481,7 +5481,6 @@ function rs_beliana_views_views_default_views() {
  ⚫ Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Do poľa <em>Komentár/inštrukcie/návrh/zdôvodnenie </em> napíšte svoj návrh a kliknite na <em>Uložiť </em>
  ⚫ Potom kliknite na <em>Zmeniť stav</em>, zmeňte stav na <em>Navrhnuté na zmenu</em> a kliknite na <em>Použiť</em>.
 <strong>Poznámka: </strong>Návrh na vytvorenie nového hesla môžete zadať v položke menu <em>Vytvoriť / Heslo </em> alebo kliknutím <a href="/node/add/heslo">sem</a>. Aj v tomto prípade sa k návrhu najskôr vyjadrí správca hesiel. '),
-    t('Text hesla'),
     t('Navrhnuté'),
     t('Tu sú zobrazené všetky heslá, ktoré boli navrhnuté na zaradenie do Beliany alebo bola navrhnutá zmena ich názvu alebo lexikálnej skupiny.'),
     t('Vyradené'),
