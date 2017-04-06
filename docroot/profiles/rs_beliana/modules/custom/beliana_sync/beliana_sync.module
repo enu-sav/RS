@@ -28,7 +28,7 @@ function beliana_sync_menu() {
  * {@inheritdoc}
  */
 function beliana_sync_node_insert($node) {
-  if ($node->type === 'heslo') {
+  if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
     // Extract links.
     beliana_sync_process_links($node->nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
   }
@@ -42,7 +42,7 @@ function beliana_sync_node_insert($node) {
  * {@inheritdoc}
  */
 function beliana_sync_node_update($node) {
-  if ($node->type === 'heslo') {
+  if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
     // Remove links to old node.
     db_delete('beliana_links')
       ->condition('origin', $node->nid)
