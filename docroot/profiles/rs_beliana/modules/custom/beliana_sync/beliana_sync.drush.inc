@@ -23,7 +23,7 @@ function beliana_sync_drush_command() {
 function drush_beliana_sync_extract_links() {
   $entity_list = db_select('node', 'n')
     ->fields('n', ['nid'])
-    ->condition('type', 'heslo')
+    ->condition('type', ['heslo', 'importovane_heslo'], 'IN')
     ->execute()
     ->fetchCol(0);
   $chunks = array_chunk($entity_list, 10);
