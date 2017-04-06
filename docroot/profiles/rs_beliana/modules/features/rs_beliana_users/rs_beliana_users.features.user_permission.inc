@@ -3239,6 +3239,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
@@ -3255,6 +3256,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
