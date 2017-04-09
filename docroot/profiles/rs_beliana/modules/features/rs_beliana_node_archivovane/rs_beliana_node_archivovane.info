@@ -14,7 +14,6 @@ features[features_api][] = api:2
 features[field_base][] = field_aheslo_text
 features[field_instance][] = comment-comment_node_archivovane_knizne-comment_body
 features[field_instance][] = node-archivovane_knizne-field_aheslo_text
-features[menu_links][] = navigation_archivovan-knin:node/add/archivovane-knizne
 features[node][] = archivovane_knizne
 features[user_permission][] = create archivovane_knizne content
 features[user_permission][] = delete any archivovane_knizne content
