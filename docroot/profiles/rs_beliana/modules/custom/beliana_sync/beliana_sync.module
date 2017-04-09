@@ -175,6 +175,7 @@ function beliana_sync_sync($nid, &$context) {
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE]) && !$skip) {
       $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
       $illustrations[] = [
+        'nid' => $ilu_node->nid,
         'uri' => $image_url,
         'title' => $ilu_node->title,
         'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
@@ -229,7 +230,13 @@ function beliana_sync_sync($nid, &$context) {
           ->execute();
       }
     }
+    // Change workbench status for node and attached illustrations.
     workbench_moderation_moderate($node, 'publikovane_na_webe');
+    foreach ($illustrations as $illustration) {
+      $ilu_generic_node = node_load($illustration['nid']);
+      $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
+      workbench_moderation_moderate($ilu_node, 'publikovane_na_webe');
+    }
     $context['results']['success']++;
   }
 }
