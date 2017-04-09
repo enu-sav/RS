@@ -153,35 +153,49 @@ function beliana_sync_sync($nid, &$context) {
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
-    // Check if illustration has image attached.
-    if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE])) {
-      $context['results']['error']++;
-      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" neobsahuje priloženú ilustráciu.';
-      $skip = TRUE;
-      break;
-    }
-    // Check if illustration is in correct WB status.
-    if ($ilu_node->workbench_moderation['current']->state !== 'na_zalomenie' && !$skip) {
-      $context['results']['error']++;
-      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nenachádza v stave "Na zalomenie".';
-      $skip = TRUE;
-    }
-    // Check if illustration has correct license.
-    if ($ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený' && !$skip) {
-      $context['results']['error']++;
-      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nemá určený typ ilustrácie.';
-      $skip = TRUE;
-    }
-    if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE]) && !$skip) {
-      $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
-      $illustrations[] = [
-        'nid' => $ilu_node->nid,
-        'uri' => $image_url,
-        'title' => $ilu_node->title,
-        'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
-        'license' => _extract_license($ilu_node),
-        'license_info' => _extract_license_information($ilu_node),
-      ];
+    if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+      // Check if illustration has image attached.
+      if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE])) {
+        $context['results']['error']++;
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" neobsahuje priloženú ilustráciu.';
+        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" neobsahuje priloženú ilustráciu.', [
+          '@title' => $node->title,
+          '@ilu_title' => $ilu_node->title,
+        ], WATCHDOG_ERROR);
+        $skip = TRUE;
+        break;
+      }
+      // Check if illustration is in correct WB status.
+      if ($ilu_node->workbench_moderation['current']->state !== 'na_zalomenie' && !$skip) {
+        $context['results']['error']++;
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nenachádza v stave "Na zalomenie".';
+        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" sa nenachádza v stave "Na zalomenie".', [
+          '@title' => $node->title,
+          '@ilu_title' => $ilu_node->title,
+        ], WATCHDOG_ERROR);
+        $skip = TRUE;
+      }
+      // Check if illustration has correct license.
+      if ($ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený' && !$skip) {
+        $context['results']['error']++;
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá určený typ ilustrácie.';
+        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá určený typ ilustrácie.', [
+          '@title' => $node->title,
+          '@ilu_title' => $ilu_node->title,
+        ], WATCHDOG_ERROR);
+        $skip = TRUE;
+      }
+      if (!$skip) {
+        $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+        $illustrations[] = [
+          'nid' => $ilu_node->nid,
+          'uri' => $image_url,
+          'title' => $ilu_node->title,
+          'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
+          'license' => _extract_license($ilu_node),
+          'license_info' => _extract_license_information($ilu_node),
+        ];
+      }
     }
   }
 
@@ -237,6 +251,10 @@ function beliana_sync_sync($nid, &$context) {
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
       workbench_moderation_moderate($ilu_node, 'publikovane_na_webe');
     }
+    watchdog('sync', 'Heslo "@title" bolo úspešne prenesené.', [
+      '@title' => $node->title,
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_INFO);
     $context['results']['success']++;
   }
 }
@@ -247,7 +265,6 @@ function _display_on_web($values) {
       return TRUE;
     }
   }
-
   return FALSE;
 }
 
