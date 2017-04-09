@@ -9226,6 +9226,15 @@ function rs_beliana_views_views_default_views() {
   $handler = $view->new_display('page', 'Vyhľadať', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Vyhľadať';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. ';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -10134,6 +10143,7 @@ function rs_beliana_views_views_default_views() {
     t('Text hesla'),
     t('ddddd'),
     t('Vyhľadať'),
+    t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
     t('Komentár/inštrukcie'),
     t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
     t('Komentár obsahuje'),
