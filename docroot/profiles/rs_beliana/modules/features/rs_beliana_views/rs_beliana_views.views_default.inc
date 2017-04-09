@@ -5674,6 +5674,40 @@ function rs_beliana_views_views_default_views() {
     9 => 0,
     17 => 0,
   );
+  /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Lexikálna skupina (alt)';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '3';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -5729,6 +5763,7 @@ function rs_beliana_views_views_default_views() {
     t('Lexikálna skupina'),
     t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
     t('Názov'),
+    t('Lexikálna skupina (alt)'),
     t('Page'),
     t('Exportovanie hesiel'),
     t('Krátky popis'),
