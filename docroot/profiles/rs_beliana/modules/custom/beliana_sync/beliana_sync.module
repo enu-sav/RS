@@ -166,7 +166,11 @@ function beliana_sync_sync($nid, &$context) {
         break;
       }
       // Check if illustration is in correct WB status.
-      if ($ilu_node->workbench_moderation['current']->state !== 'na_zalomenie' && !$skip) {
+      if (!in_array($ilu_node->workbench_moderation['current']->state, [
+          'na_zalomenie',
+          'publikovane_na_webe',
+        ]) && !$skip
+      ) {
         $context['results']['error']++;
         $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nenachádza v stave "Na zalomenie".';
         watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" sa nenachádza v stave "Na zalomenie".', [
