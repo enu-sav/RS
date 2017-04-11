@@ -13,6 +13,7 @@ features[feeds_importer][] = bb
 features[feeds_importer][] = beliana_importovanie_gh
 features[feeds_importer][] = import_ilustr_cie
 features[feeds_importer][] = import_pou_vate_ov_beliany
+features[feeds_importer][] = importova_vydan_ako_archivovan_
 features[feeds_tamper][] = bb-datum-explode
 features[feeds_tamper][] = bb-datum-strtotime
 features[feeds_tamper][] = bb-ilustracia-explode
