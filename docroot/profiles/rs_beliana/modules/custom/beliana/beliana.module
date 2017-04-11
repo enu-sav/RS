@@ -345,6 +345,8 @@ function beliana_merge(&$entity, $context = array()) {
     }
 
     // Merge field_text_z_gh, use "\n" as separator.
+dpm($entity);
+dpm($master);
     if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
       $master->field_atributy[LANGUAGE_NONE][0]['value'] .= $entity->field_atributy[LANGUAGE_NONE][0]['value'];
     }
