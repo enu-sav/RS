@@ -10251,16 +10251,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú knižne vydané heslá zväzkov 1 - 8 v originálnej forme, v ktorej boli importované. ';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Obsah: aheslo text */
-  $handler->display->display_options['fields']['field_aheslo_text']['id'] = 'field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['table'] = 'field_data_field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['field'] = 'field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['label'] = '';
-  $handler->display->display_options['fields']['field_aheslo_text']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_aheslo_text']['type'] = 'text_trimmed';
-  $handler->display->display_options['fields']['field_aheslo_text']['settings'] = array(
-    'trim_length' => '600',
-  );
   /* Pole: Hromadné operácie: Obsah */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -10278,6 +10268,16 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
+  );
+  /* Pole: Obsah: aheslo text */
+  $handler->display->display_options['fields']['field_aheslo_text']['id'] = 'field_aheslo_text';
+  $handler->display->display_options['fields']['field_aheslo_text']['table'] = 'field_data_field_aheslo_text';
+  $handler->display->display_options['fields']['field_aheslo_text']['field'] = 'field_aheslo_text';
+  $handler->display->display_options['fields']['field_aheslo_text']['label'] = '';
+  $handler->display->display_options['fields']['field_aheslo_text']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_aheslo_text']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_aheslo_text']['settings'] = array(
+    'trim_length' => '600',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Kritéria zoradenia: Obsah: Názov (title_field) */
