@@ -27,3 +27,4 @@ echo "apply . modules/editable_views/editable_views_enable_new_revision.patch"
 
 echo "apply docroot/profiles/rs_beliana/modules/contrib/workbench_state_access modules/workbench_state_access/workbench_state_access-access_new_content-2456041-1-D7.patch"
 
+echo "apply . modules/shs/shs-fix-hanging-view-lookup.patch"
