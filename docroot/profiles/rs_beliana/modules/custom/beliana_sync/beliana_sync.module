@@ -178,9 +178,10 @@ function beliana_sync_sync($nid, &$context) {
           '@ilu_title' => $ilu_node->title,
         ], WATCHDOG_ERROR);
         $skip = TRUE;
+        break;
       }
       // Check if illustration has correct license.
-      if ($ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený' && !$skip) {
+      if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený') && !$skip) {
         $context['results']['error']++;
         $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá určený typ ilustrácie.';
         watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá určený typ ilustrácie.', [
@@ -188,15 +189,27 @@ function beliana_sync_sync($nid, &$context) {
           '@ilu_title' => $ilu_node->title,
         ], WATCHDOG_ERROR);
         $skip = TRUE;
+        break;
       }
       if (!$skip) {
         $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+        $license = _extract_license($ilu_node);
+        if (empty($license)) {
+          $context['results']['error']++;
+          $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" má neplatný typ ilustrácie.';
+          watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" má neplatný typ ilustrácie.', [
+            '@title' => $node->title,
+            '@ilu_title' => $ilu_node->title,
+          ], WATCHDOG_ERROR);
+          $skip = TRUE;
+          break;
+        }
         $illustrations[] = [
           'nid' => $ilu_node->nid,
           'uri' => $image_url,
           'title' => $ilu_node->title,
           'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
-          'license' => _extract_license($ilu_node),
+          'license' => $license,
           'license_info' => _extract_license_information($ilu_node),
         ];
       }
