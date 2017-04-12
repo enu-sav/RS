@@ -10135,10 +10135,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_aheslo_text']['label'] = '';
   $handler->display->display_options['fields']['field_aheslo_text']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Kritéria zoradenia: Obsah: Názov (title_field) */
-  $handler->display->display_options['sorts']['title_field_value']['id'] = 'title_field_value';
-  $handler->display->display_options['sorts']['title_field_value']['table'] = 'field_data_title_field';
-  $handler->display->display_options['sorts']['title_field_value']['field'] = 'title_field_value';
+  /* Kritéria zoradenia: Obsah: aheslo zorad (field_aheslo_zorad) */
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['id'] = 'field_aheslo_zorad_value';
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['table'] = 'field_data_field_aheslo_zorad';
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['field'] = 'field_aheslo_zorad_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
@@ -10280,10 +10280,10 @@ function rs_beliana_views_views_default_views() {
     'trim_length' => '600',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Kritéria zoradenia: Obsah: Názov (title_field) */
-  $handler->display->display_options['sorts']['title_field_value']['id'] = 'title_field_value';
-  $handler->display->display_options['sorts']['title_field_value']['table'] = 'field_data_title_field';
-  $handler->display->display_options['sorts']['title_field_value']['field'] = 'title_field_value';
+  /* Kritéria zoradenia: Obsah: aheslo zorad (field_aheslo_zorad) */
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['id'] = 'field_aheslo_zorad_value';
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['table'] = 'field_data_field_aheslo_zorad';
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['field'] = 'field_aheslo_zorad_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
