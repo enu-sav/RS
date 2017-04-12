@@ -23,6 +23,19 @@ function rs_beliana_theme_preprocess_node(&$args) {
   }
 }
 
+/**
+* Add line breaks to field
+*/
+function rs_beliana_theme_preprocess_field(&$vars) {
+  if ($vars['element']['#field_type'] == 'text_long') {
+    $field_name = $vars['element']['#field_name'];
+    foreach ($vars['items'] as $key => &$item) {
+      if ($vars['element']['#object']->{$field_name}[LANGUAGE_NONE][$key]['format'] == NULL) {
+        $item['#markup'] = nl2br($item['#markup']);
+      }
+    }
+  }
+}
 
 function rs_beliana_theme_preprocess_views_view_fields(&$vars) {
   $view = $vars['view'];
