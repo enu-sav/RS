@@ -571,6 +571,12 @@ function rs_beliana_feeds_feeds_importer_default() {
             'source' => 'text',
             'target' => 'field_aheslo_text',
             'unique' => FALSE,
+            'language' => 'und',
+          ),
+          4 => array(
+            'source' => 'zorad',
+            'target' => 'field_aheslo_zorad',
+            'unique' => FALSE,
           ),
         ),
         'update_existing' => '1',
