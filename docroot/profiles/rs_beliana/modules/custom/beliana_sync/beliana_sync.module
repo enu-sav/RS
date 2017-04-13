@@ -391,7 +391,7 @@ function beliana_sync_sync_finished($success, $results, $operations) {
 function _extract_image(array $images) {
   $uri = '';
   foreach ($images as $image) {
-    if (strpos($image['mimetype'], 'svg') || (empty($uri))) {
+    if (strpos($image['filemime'], 'svg') || (empty($uri))) {
       $uri = $image['uri'];
     }
   }
