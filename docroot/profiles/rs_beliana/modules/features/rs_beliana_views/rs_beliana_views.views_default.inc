@@ -11,6 +11,171 @@ function rs_beliana_views_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'archivovane';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Archivované';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Archivované';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'viac';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    4 => '4',
+    10 => '10',
+    6 => '6',
+    13 => '13',
+    14 => '14',
+    15 => '15',
+    16 => '16',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použiť';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Zoradiť podľa';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
+  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú knižne vydané heslá zväzkov 1 - 8 v originálnej forme, v ktorej boli importované';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* Pole: Obsah: aheslo text */
+  $handler->display->display_options['fields']['field_aheslo_text']['id'] = 'field_aheslo_text';
+  $handler->display->display_options['fields']['field_aheslo_text']['table'] = 'field_data_field_aheslo_text';
+  $handler->display->display_options['fields']['field_aheslo_text']['field'] = 'field_aheslo_text';
+  $handler->display->display_options['fields']['field_aheslo_text']['label'] = '';
+  $handler->display->display_options['fields']['field_aheslo_text']['element_label_colon'] = FALSE;
+  /* Kritéria zoradenia: Obsah: aheslo zorad (field_aheslo_zorad) */
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['id'] = 'field_aheslo_zorad_value';
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['table'] = 'field_data_field_aheslo_zorad';
+  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['field'] = 'field_aheslo_zorad_value';
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'archivovane_knizne' => 'archivovane_knizne',
+  );
+  /* Filter criterion: Obsah: Názov (title_field) */
+  $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
+  $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title_field_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  /* Filter criterion: Obsah: aheslo text (field_aheslo_text) */
+  $handler->display->display_options['filters']['field_aheslo_text_value']['id'] = 'field_aheslo_text_value';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['table'] = 'field_data_field_aheslo_text';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['field'] = 'field_aheslo_text_value';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['operator_id'] = 'field_aheslo_text_value_op';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['label'] = 'Text hesla';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['operator'] = 'field_aheslo_text_value_op';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['identifier'] = 'field_aheslo_text_value';
+  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'archivovane';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Archivované';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $translatables['archivovane'] = array(
+    t('Master'),
+    t('Archivované'),
+    t('viac'),
+    t('Použiť'),
+    t('Reset'),
+    t('Zoradiť podľa'),
+    t('Vzostupne'),
+    t('Zostupne'),
+    t('Položiek na stránku'),
+    t('- Všetko -'),
+    t('Zobraziť od'),
+    t('« prvá'),
+    t('‹ predchádzajúca'),
+    t('nasledujúca ›'),
+    t('posledná »'),
+    t('Krátky popis'),
+    t('V tomto náhľade sa zobrazujú knižne vydané heslá zväzkov 1 - 8 v originálnej forme, v ktorej boli importované'),
+    t('Názov'),
+    t('Text hesla'),
+    t('Page'),
+  );
+  $export['archivovane'] = $view;
+
+  $view = new view();
   $view->name = 'beliana';
   $view->description = 'Lists content by moderation state.';
   $view->tag = 'Workbench Moderation';
@@ -10113,249 +10278,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: Archivované */
-  $handler = $view->new_display('page', 'Archivované', 'page_3');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Archivované knižné heslá, zväzky 1 - 8';
-  $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Nadpis: Globálny: Rozsiahle textové pole */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
-  $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú knižne vydané heslá zväzkov 1 - 8 v originálnej forme, v ktorej boli importované. ';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Obsah: aheslo text */
-  $handler->display->display_options['fields']['field_aheslo_text']['id'] = 'field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['table'] = 'field_data_field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['field'] = 'field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['label'] = '';
-  $handler->display->display_options['fields']['field_aheslo_text']['element_label_colon'] = FALSE;
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Kritéria zoradenia: Obsah: aheslo zorad (field_aheslo_zorad) */
-  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['id'] = 'field_aheslo_zorad_value';
-  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['table'] = 'field_data_field_aheslo_zorad';
-  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['field'] = 'field_aheslo_zorad_value';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'archivovane_knizne' => 'archivovane_knizne',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Obsah: Názov */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
-  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    7 => 0,
-    4 => 0,
-    6 => 0,
-    3 => 0,
-  );
-  /* Filter criterion: Obsah: aheslo text (field_aheslo_text) */
-  $handler->display->display_options['filters']['field_aheslo_text_value']['id'] = 'field_aheslo_text_value';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['table'] = 'field_data_field_aheslo_text';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['field'] = 'field_aheslo_text_value';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['operator_id'] = 'field_aheslo_text_value_op';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['label'] = 'Text';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['operator'] = 'field_aheslo_text_value_op';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['identifier'] = 'field_aheslo_text_value';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['path'] = 'archivovane';
-  $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Archivované';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'management';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: Archivované - operácie */
-  $handler = $view->new_display('page', 'Archivované - operácie', 'page_4');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Archivované - operácie';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'field_aheslo_text' => 'field_aheslo_text',
-    'views_bulk_operations' => 'views_bulk_operations',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'field_aheslo_text' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'views_bulk_operations' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-  );
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Nadpis: Globálny: Rozsiahle textové pole */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
-  $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú knižne vydané heslá zväzkov 1 - 8 v originálnej forme, v ktorej boli importované. ';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Hromadné operácie: Obsah */
-  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
-  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::views_bulk_operations_delete_item' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-  );
-  /* Pole: Obsah: aheslo text */
-  $handler->display->display_options['fields']['field_aheslo_text']['id'] = 'field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['table'] = 'field_data_field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['field'] = 'field_aheslo_text';
-  $handler->display->display_options['fields']['field_aheslo_text']['label'] = '';
-  $handler->display->display_options['fields']['field_aheslo_text']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_aheslo_text']['type'] = 'text_trimmed';
-  $handler->display->display_options['fields']['field_aheslo_text']['settings'] = array(
-    'trim_length' => '600',
-  );
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Kritéria zoradenia: Obsah: aheslo zorad (field_aheslo_zorad) */
-  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['id'] = 'field_aheslo_zorad_value';
-  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['table'] = 'field_data_field_aheslo_zorad';
-  $handler->display->display_options['sorts']['field_aheslo_zorad_value']['field'] = 'field_aheslo_zorad_value';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'archivovane_knizne' => 'archivovane_knizne',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Obsah: Názov */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
-  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    7 => 0,
-    4 => 0,
-    6 => 0,
-    3 => 0,
-  );
-  /* Filter criterion: Obsah: aheslo text (field_aheslo_text) */
-  $handler->display->display_options['filters']['field_aheslo_text_value']['id'] = 'field_aheslo_text_value';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['table'] = 'field_data_field_aheslo_text';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['field'] = 'field_aheslo_text_value';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['operator_id'] = 'field_aheslo_text_value_op';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['label'] = 'Text';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['operator'] = 'field_aheslo_text_value_op';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['identifier'] = 'field_aheslo_text_value';
-  $handler->display->display_options['filters']['field_aheslo_text_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['path'] = 'archivovane-operacie';
-  $handler->display->display_options['menu']['title'] = 'Archivované';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'management';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['v_etky_hesl_'] = array(
     t('Master'),
     t('Všetky heslá'),
@@ -10401,13 +10323,6 @@ function rs_beliana_views_views_default_views() {
     t('Obrázok (náhľad)'),
     t('Text k ilustrácii'),
     t('Súbory ilustrácie'),
-    t('Archivované'),
-    t('Archivované knižné heslá, zväzky 1 - 8'),
-    t('V tomto náhľade sa zobrazujú knižne vydané heslá zväzkov 1 - 8 v originálnej forme, v ktorej boli importované. '),
-    t('Text'),
-    t('Archivované - operácie'),
-    t('Obsah'),
-    t('Vybrať operáciu'),
   );
   $export['v_etky_hesl_'] = $view;
 
