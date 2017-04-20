@@ -411,6 +411,9 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     // set table font
     $output = str_replace( 'style="width:100%"', 'style="font-family:Arial;font-size:11pt"', $output);  
 //////////////////////
+    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
+    $output = preg_replace('/➔ /', '→ ', $output); 
+    $output = preg_replace('/➔/', '→ ', $output); 
     $vars['tbody'] = $output;
   }
   else {
