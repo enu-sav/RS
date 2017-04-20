@@ -44,7 +44,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzostupne';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Zostupne';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
