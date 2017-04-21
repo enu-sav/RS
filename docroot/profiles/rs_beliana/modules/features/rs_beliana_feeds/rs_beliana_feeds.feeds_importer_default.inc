@@ -272,6 +272,7 @@ function rs_beliana_feeds_feeds_importer_default() {
         'allowed_schemes' => array(
           'public' => 'public',
         ),
+        'delete_uploaded_file' => FALSE,
       ),
     ),
     'parser' => array(
@@ -402,6 +403,11 @@ function rs_beliana_feeds_feeds_importer_default() {
             'target' => 'field_subor_ilustracie:uri',
             'unique' => FALSE,
             'language' => 'und',
+          ),
+          19 => array(
+            'source' => 'meno_autora',
+            'target' => 'field_meno_autora_diela',
+            'unique' => FALSE,
           ),
         ),
         'update_existing' => '1',
