@@ -10465,6 +10465,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
   $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
   $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'view_mode' => 'teaser',
+    'links' => 1,
+    'use_content_language' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['path'] = 'vsetky-operacie';
   $handler->display->display_options['menu']['title'] = 'Prehľad';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -10778,6 +10789,7 @@ function rs_beliana_views_views_default_views() {
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
+    t('Ilustrácie'),
     t('Všetky heslá - prehľad (G)'),
   );
   $export['vsetky_hesla_detaily'] = $view;
