@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * redak_n_syst_m_beliana_taxonomy.features.taxonomy.inc
+ * rs_beliana_taxonomy.features.taxonomy.inc
  */
 
 /**
