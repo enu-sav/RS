@@ -3,6 +3,7 @@ core = 7.x
 package = Feeds
 dependencies[] = ctools
 dependencies[] = feeds
+dependencies[] = feeds_empty
 dependencies[] = feeds_tamper
 dependencies[] = strongarm
 features[ctools][] = feeds:feeds_importer_default:1

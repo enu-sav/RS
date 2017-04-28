@@ -33,7 +33,9 @@ function rs_beliana_feeds_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'feeds_reschedule';
-  $strongarm->value = FALSE;
+  $strongarm->value = array(
+    'import_ls' => 'import_ls',
+  );
   $export['feeds_reschedule'] = $strongarm;
 
   return $export;
