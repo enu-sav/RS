@@ -260,7 +260,7 @@ function rs_beliana_media_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'mathjax_cdn_url';
-  $strongarm->value = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  $strongarm->value = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
   $export['mathjax_cdn_url'] = $strongarm;
 
   $strongarm = new stdClass();
