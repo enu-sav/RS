@@ -431,6 +431,69 @@ function rs_beliana_feeds_feeds_importer_default() {
   $feeds_importer = new stdClass();
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'import_ls';
+  $feeds_importer->config = array(
+    'name' => 'import LS',
+    'description' => 'Importovanie LS a ich tagov',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'csv',
+        'delete_uploaded_file' => 0,
+        'direct' => 0,
+        'directory' => 'public://feeds',
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'encoding' => 'UTF-8',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'tags',
+            'target' => 'field_taglist',
+            'feeds_empty_use_old' => 1,
+          ),
+          1 => array(
+            'source' => 'ls',
+            'target' => 'name',
+            'feeds_empty_use_old' => 0,
+            'unique' => 1,
+            'language' => 'und',
+          ),
+        ),
+        'insert_new' => '0',
+        'update_existing' => '2',
+        'update_non_existent' => 'skip',
+        'input_format' => 'plain_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'lexikalne_skupiny',
+        'language' => 'und',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['import_ls'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'import_pou_vate_ov_beliany';
   $feeds_importer->config = array(
     'name' => 'Import používateľov Beliany',
