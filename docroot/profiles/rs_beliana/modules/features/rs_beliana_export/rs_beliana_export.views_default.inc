@@ -66,7 +66,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_ilustracia']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'view_mode' => 'full',
+    'view_mode' => 'export',
     'links' => 1,
     'use_content_language' => 1,
   );
@@ -80,9 +80,6 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'zlucene' => 'zlucene',
-  );
   $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
@@ -237,7 +234,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['content'] = 'Pomocou nastavení vyberte požadované heslá, a potom kliknite na oranžové tlačidlo HTML, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa stránka vo formáte HTML, ktorá sa podľa typu a nastavení prehliadača buď priamo v prehliadači zobrazí alebo prehliadač ponúkne inú možnosť. Stránku môžete uložiť do súboru, ktorý môžete otvoriť v textovom editore a tam upraviť, vytlačiť alebo niekomu poslať. Vytvorenú stránku môžete vytlačiť aj priamo z prehliadača. Vybrané heslá sa zobrazia po 20-tich, exportujú sa však všetky vybrané heslá. Povinne treba zadať práve jeden súbor.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['path'] = 'export-sadzac';
+  $handler->display->display_options['path'] = 'export-na-sadzbu';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Exportovať (sadzba)';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -253,7 +250,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['filename'] = '%view.html';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'export-sadzba.html';
+  $handler->display->display_options['path'] = 'export-na-sadzbu.html';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
