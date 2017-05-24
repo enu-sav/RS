@@ -348,12 +348,12 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     $output = preg_replace('/➔/', '→ ', $output); 
     $vars['tbody'] = $output;
   }
-  // Export pre sadzac
+  // Export for typographer
   else if ($vars['view']->name === 'export_sadzac' && $vars['view']->current_display === 'views_data_export_1') {
     //$output = preg_replace('/➔/', '→ ', $output); 
 //////////////////////
 
-    // Odstravit html odkazy
+    // Odstranit html odkazy
     // Odstranit aj sipku, pokial ide o odkaz na heslo, ktore navyslo knizne:
     // 1. ak je typ Heslo a zorad mensi ako  "kokpit"
     // ak je datum vytvorenie hesla vacsie ako  datum vydania zvazka, kam abecedne patri
@@ -364,6 +364,15 @@ function template_process_views_data_export_msoffice_body(&$vars) {
 
     //  fix LaTeX
     $output = preg_replace('/align*/', 'align', $output);
+
+    // fix inline images
+    global $base_url;
+    // in: <src="/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
+    // out: <src="https://beliana.sav.sk/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
+    $output = str_replace('src="/sites','src="'.$base_url.'/sites', $output);
+    // in:  style="height:38px; width:33px"
+    // out: height="38" width="33"
+    $output = preg_replace('/style="height:(\d+)px; width:(\d+)px"/i','height="$1" width="$2"', $output);
     
     // Remove new paragraph starting with <p><strong>[1-9]
     $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
