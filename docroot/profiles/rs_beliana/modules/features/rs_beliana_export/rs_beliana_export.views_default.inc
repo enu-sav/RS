@@ -66,7 +66,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_ilustracia']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'view_mode' => 'export',
+    'view_mode' => 'default',
     'links' => 1,
     'use_content_language' => 1,
   );

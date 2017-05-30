@@ -9,7 +9,6 @@ dependencies[] = file
 dependencies[] = image
 dependencies[] = link
 dependencies[] = list
-dependencies[] = node
 dependencies[] = options
 dependencies[] = rs_beliana_fields
 dependencies[] = rs_beliana_seo
