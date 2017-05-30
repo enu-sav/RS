@@ -3658,11 +3658,11 @@ function rs_beliana_views_views_default_views() {
     'na_zverejnenie' => 'na_zverejnenie',
     'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
     'zlucene' => 'zlucene',
+    'ukoncenezluene' => 'ukoncenezluene',
     'u_autora' => 'u_autora',
-    'zlucene_hp' => 'zlucene_hp',
     'na_zalomenie' => 'na_zalomenie',
     'u_konzultanta' => 'u_konzultanta',
-    'u_v_st_redaktora_2hp' => 'u_v_st_redaktora_2hp',
+    'publikovane_na_webe' => 'publikovane_na_webe',
     'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
     'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
     '1_korektura' => '1_korektura',
@@ -3697,10 +3697,11 @@ function rs_beliana_views_views_default_views() {
     18 => 0,
     3 => 0,
     9 => 0,
-    17 => 0,
+    25 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
+    23 => 0,
   );
   $handler->display->display_options['filters']['state_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['state_1']['group_info']['label'] = 'Stav';
