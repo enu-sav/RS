@@ -3671,7 +3671,6 @@ function rs_beliana_views_views_default_views() {
     '2_korekt_ra' => '2_korekt_ra',
     'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
     'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-    'published' => 'published',
   );
   $handler->display->display_options['filters']['state_1']['group'] = 1;
   $handler->display->display_options['filters']['state_1']['exposed'] = TRUE;
