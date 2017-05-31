@@ -293,6 +293,8 @@ function beliana_merge(&$entity, $context = array()) {
   if ($master != FALSE) {
     // Merge field_lexikalna_skupina.
     foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $ls) {
+
+      // find the top most parent (set to editor name) 
       $parents = taxonomy_get_parents_all($ls['tid']);
       foreach ($parents as $parent) {
         if (count(taxonomy_get_parents_all($parent->tid)) == 1) {
@@ -300,7 +302,9 @@ function beliana_merge(&$entity, $context = array()) {
         }
       }
 
+      // store the top most parent to field_spravit_1_korekturu
       $found = FALSE;
+      // field_spravit_1_korekturu holds parent value (editor name)
       foreach ($master->field_spravit_1_korekturu[LANGUAGE_NONE] as $tid) {
         if ($tid['tid'] === $top_parent->tid) {
           $found = TRUE;
@@ -308,9 +312,10 @@ function beliana_merge(&$entity, $context = array()) {
       }
       if (!$found) {
         $master->field_spravit_1_korekturu[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
-        // We want to preserve the original taxonomy values in further processing.
-        $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
       }
+
+      // We want to preserve the original taxonomy values in further processing.
+      $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
     }
 
     // Merge field_komentar_instrukcie, use "\n" as separator.
