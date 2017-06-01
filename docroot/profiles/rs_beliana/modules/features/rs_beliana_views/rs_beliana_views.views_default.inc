@@ -9709,16 +9709,6 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
-  /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['operator'] = 'not in';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'vyradene' => 'vyradene',
-    'ukoncenezluene' => 'ukoncenezluene',
-    'len_vyplatit' => 'len_vyplatit',
-  );
 
   /* Display: Vyhľadať */
   $handler = $view->new_display('page', 'Vyhľadať', 'page');
@@ -10060,6 +10050,20 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '3';
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['operator'] = 'not in';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'vyradene' => 'vyradene',
+    'ukoncenezluene' => 'ukoncenezluene',
+    'len_vyplatit' => 'len_vyplatit',
+  );
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
   $handler->display->display_options['path'] = 'vyhladat';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať';
