@@ -9709,6 +9709,16 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['operator'] = 'not in';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'vyradene' => 'vyradene',
+    'ukoncenezluene' => 'ukoncenezluene',
+    'len_vyplatit' => 'len_vyplatit',
+  );
 
   /* Display: Vyhľadať */
   $handler = $view->new_display('page', 'Vyhľadať', 'page');
