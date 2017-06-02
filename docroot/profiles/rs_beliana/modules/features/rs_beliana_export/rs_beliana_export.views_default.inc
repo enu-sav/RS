@@ -66,7 +66,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_ilustracia']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'view_mode' => 'default',
+    'view_mode' => 'export',
     'links' => 1,
     'use_content_language' => 1,
   );
@@ -80,6 +80,30 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'draft' => 'draft',
+    'zaradene' => 'zaradene',
+    'needs_review' => 'needs_review',
+    'na_zverejnenie' => 'na_zverejnenie',
+    'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
+    'zlucene' => 'zlucene',
+    'u_autora' => 'u_autora',
+    'zlucene_hp' => 'zlucene_hp',
+    'na_zalomenie' => 'na_zalomenie',
+    'na_trenovanie' => 'na_trenovanie',
+    'u_konzultanta' => 'u_konzultanta',
+    'publikovane_na_webe' => 'publikovane_na_webe',
+    'u_v_st_redaktora_2hp' => 'u_v_st_redaktora_2hp',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
+    'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
+    '1_korektura' => '1_korektura',
+    'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
+    'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
+    '2_korekt_ra' => '2_korekt_ra',
+    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
+    'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
+    'importovane' => 'importovane',
+  );
   $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
@@ -110,6 +134,7 @@ function rs_beliana_export_views_default_views() {
     22 => 0,
     23 => 0,
   );
+  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['id'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['table'] = 'node';
@@ -221,6 +246,21 @@ function rs_beliana_export_views_default_views() {
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
+  $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state_1']['field'] = 'state';
+  $handler->display->display_options['filters']['state_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['state_1']['value'] = array(
+    'vyradene' => 'vyradene',
+    'ukoncenezluene' => 'ukoncenezluene',
+    'len_vyplatit' => 'len_vyplatit',
+  );
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
