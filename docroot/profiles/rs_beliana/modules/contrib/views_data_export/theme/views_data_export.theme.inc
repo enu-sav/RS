@@ -353,18 +353,6 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     //$output = preg_replace('/➔/', '→ ', $output); 
 //////////////////////
 
-    // Odstranit html odkazy
-    // Odstranit aj sipku, pokial ide o odkaz na heslo, ktore navyslo knizne:
-    // 1. ak je typ Heslo a zorad mensi ako  "kokpit"
-    // ak je datum vytvorenie hesla vacsie ako  datum vydania zvazka, kam abecedne patri
-    $output = preg_replace('/<\/?a ?.*?>/', '', $output); // remove links
-    $output = preg_replace('/➔ /', '→ ', $output);
-    $output = preg_replace('/➔/', '→ ', $output);
-    //$output = preg_replace('/<p>\s*<\/p>/', ' ', $output);
-
-    //  fix LaTeX
-    $output = preg_replace('/align*/', 'align', $output);
-
     // fix inline images
     global $base_url;
     // in: <src="/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
