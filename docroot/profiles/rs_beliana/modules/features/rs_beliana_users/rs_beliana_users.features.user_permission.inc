@@ -998,7 +998,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'create field_spravit_1_korekturu'.
   $permissions['create field_spravit_1_korekturu'] = array(
     'name' => 'create field_spravit_1_korekturu',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -1086,6 +1088,8 @@ function rs_beliana_users_user_default_permissions() {
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
@@ -1471,7 +1475,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit field_spravit_1_korekturu'.
   $permissions['edit field_spravit_1_korekturu'] = array(
     'name' => 'edit field_spravit_1_korekturu',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -1596,7 +1602,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit own field_spravit_1_korekturu'.
   $permissions['edit own field_spravit_1_korekturu'] = array(
     'name' => 'edit own field_spravit_1_korekturu',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -1673,6 +1681,8 @@ function rs_beliana_users_user_default_permissions() {
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
@@ -2327,6 +2337,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from nova_ilustracia to ilustracia_u_grafika',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2336,6 +2348,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from nova_ilustracia to ilustracia_u_redaktora',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2996,7 +3010,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'view field_spravit_1_korekturu'.
   $permissions['view field_spravit_1_korekturu'] = array(
     'name' => 'view field_spravit_1_korekturu',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -3160,7 +3176,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'view own field_spravit_1_korekturu'.
   $permissions['view own field_spravit_1_korekturu'] = array(
     'name' => 'view own field_spravit_1_korekturu',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
