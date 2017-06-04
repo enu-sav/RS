@@ -1055,7 +1055,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
     ),
     'module' => 'node',
   );
@@ -1346,7 +1345,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
     ),
     'module' => 'node',
   );
@@ -1360,7 +1358,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
@@ -1414,8 +1411,6 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
