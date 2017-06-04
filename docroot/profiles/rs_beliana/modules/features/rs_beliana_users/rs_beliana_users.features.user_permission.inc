@@ -2260,7 +2260,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'moderate content from needs_review to u_konzultanta'.
   $permissions['moderate content from needs_review to u_konzultanta'] = array(
     'name' => 'moderate content from needs_review to u_konzultanta',
-    'roles' => array(),
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+    ),
     'module' => 'workbench_moderation',
   );
 
