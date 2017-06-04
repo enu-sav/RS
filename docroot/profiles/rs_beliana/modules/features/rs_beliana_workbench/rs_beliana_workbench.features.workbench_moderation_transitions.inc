@@ -134,11 +134,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'needs_review',
       'name' => 'u_konzultanta-u_redaktora',
     ),
-    'u_v_st_redaktora_2hp:u_vyst_redaktora_2' => array(
-      'from_name' => 'u_v_st_redaktora_2hp',
-      'to_name' => 'u_vyst_redaktora_2',
-      'name' => 'u_vyst_redaktora2hp-u_vyst_redaktora2',
-    ),
     'u_v_st_redaktora_5:na_zalomenie' => array(
       'from_name' => 'u_v_st_redaktora_5',
       'to_name' => 'na_zalomenie',
@@ -158,11 +153,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'u_vyst_redaktora_2',
       'to_name' => 'needs_review',
       'name' => 'u_vyst_redaktora2-u_redaktora',
-    ),
-    'u_vyst_redaktora_2:u_v_st_redaktora_2hp' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'u_v_st_redaktora_2hp',
-      'name' => 'u_vyst_redaktora2-u_vyst_redaktora2hp',
     ),
     'u_vyst_redaktora_2:ukoncenezluene' => array(
       'from_name' => 'u_vyst_redaktora_2',
@@ -223,16 +213,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'zlucene',
       'to_name' => 'na_jazykovu_korekturu',
       'name' => 'zlucene-u_jaz_redaktora1',
-    ),
-    'zlucene:zlucene_hp' => array(
-      'from_name' => 'zlucene',
-      'to_name' => 'zlucene_hp',
-      'name' => 'zlucene-zlucenehp',
-    ),
-    'zlucene_hp:zlucene' => array(
-      'from_name' => 'zlucene_hp',
-      'to_name' => 'zlucene',
-      'name' => 'zlucenehp-zlucene',
     ),
   );
   return $items;
