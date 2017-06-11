@@ -2472,6 +2472,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2'.
+  $permissions['moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2',
+    'roles' => array(
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3'.
   $permissions['moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3'] = array(
     'name' => 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3',
