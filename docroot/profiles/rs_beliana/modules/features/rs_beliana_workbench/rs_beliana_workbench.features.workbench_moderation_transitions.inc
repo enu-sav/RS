@@ -194,6 +194,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_vyst_redaktora_4',
       'name' => 'u_vyst_redaktora3-u_vyst_redaktora4',
     ),
+    'u_vyst_redaktora_4:u_jaz_redaktora_2' => array(
+      'from_name' => 'u_vyst_redaktora_4',
+      'to_name' => 'u_jaz_redaktora_2',
+      'name' => 'u_vyst_redaktora4-u_jaz_redaktora2',
+    ),
     'u_vyst_redaktora_4:u_vyst_redaktora_3' => array(
       'from_name' => 'u_vyst_redaktora_4',
       'to_name' => 'u_vyst_redaktora_3',
