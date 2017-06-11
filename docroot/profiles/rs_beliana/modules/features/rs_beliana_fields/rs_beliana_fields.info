@@ -37,7 +37,6 @@ features[field_base][] = field_meno
 features[field_base][] = field_meno_autora_diela
 features[field_base][] = field_na_zoradenie
 features[field_base][] = field_nazov_diela
-features[field_base][] = field_obrazok_na_zverejnenie_
 features[field_base][] = field_obrazok_navrh_
 features[field_base][] = field_popis
 features[field_base][] = field_pouzit

@@ -12338,15 +12338,10 @@ function rs_beliana_views_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => 'file',
   );
-  /* Pole: Obsah: Obrázok (na použitie) */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['id'] = 'field_obrazok_na_zverejnenie_';
   $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['table'] = 'field_data_field_obrazok_na_zverejnenie_';
   $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['field'] = 'field_obrazok_na_zverejnenie_';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_obrazok_na_zverejnenie_']['settings'] = array(
-    'image_style' => 'thumbnail',
-    'image_link' => 'file',
-  );
   /* Kritéria zoradenia: Obsah: Názov */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -12527,7 +12522,7 @@ function rs_beliana_views_views_default_views() {
     t('V tomto náhľade sa zobrazujú všetky ilustrácie Beliany. Ilustrácie sú okrem hesla <a href="/heslo/hodiny_01">hodiny</a> (zatiaľ) bez obrázkov.'),
     t('Stav'),
     t('Obrázok (návrh/náhľad)'),
-    t('Obrázok (na použitie)'),
+    t('Broken handler field_data_field_obrazok_na_zverejnenie_.field_obrazok_na_zverejnenie_'),
     t('Súbor'),
     t('Súbor (field_taxsubor)'),
     t('Lexikálna skupina'),

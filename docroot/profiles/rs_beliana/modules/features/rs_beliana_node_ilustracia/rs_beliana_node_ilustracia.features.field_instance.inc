@@ -562,59 +562,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-ilustracia-field_obrazok_na_zverejnenie_'.
-  $field_instances['node-ilustracia-field_obrazok_na_zverejnenie_'] = array(
-    'bundle' => 'ilustracia',
-    'deleted' => 0,
-    'description' => 'Ilustrácia vytvorená alebo upravená grafikom. Pracovná verzia (posúdi redaktor) alebo finálna verzia. ',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 20,
-      ),
-      'export' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 17,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_obrazok_na_zverejnenie_',
-    'label' => 'Obrázok (na použitie)',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => 'ilustracia/na_zverejnenie',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'preview_image_style' => 'medium',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 7,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-ilustracia-field_obrazok_navrh_'.
   $field_instances['node-ilustracia-field_obrazok_navrh_'] = array(
     'bundle' => 'ilustracia',
@@ -1216,7 +1163,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Comment');
   t('Držiteľ práv');
   t('Dátum prevzatia diela');
-  t('Ilustrácia vytvorená alebo upravená grafikom. Pracovná verzia (posúdi redaktor) alebo finálna verzia. ');
   t('Inštitúcia');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
@@ -1226,7 +1172,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Na zoradenie');
   t('Názov');
   t('Názov diela (predbežne skryté)');
-  t('Obrázok (na použitie)');
   t('Obrázok (návrh/náhľad)');
   t('Použiť');
   t('Súbor');
