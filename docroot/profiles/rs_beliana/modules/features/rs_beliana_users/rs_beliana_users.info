@@ -303,6 +303,7 @@ features[user_permission][] = moderate content from u_vyst_redaktora_2 to ukonce
 features[user_permission][] = moderate content from u_vyst_redaktora_2 to vyradene
 features[user_permission][] = moderate content from u_vyst_redaktora_3 to 2_korekt_ra
 features[user_permission][] = moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2
+features[user_permission][] = moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5
 features[user_permission][] = moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4
 features[user_permission][] = moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2
 features[user_permission][] = moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3

@@ -2443,7 +2443,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_3 to 2_korekt_ra'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra',
     'roles' => array(
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -2454,10 +2453,16 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2',
     'roles' => array(
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5'.
+  $permissions['moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5',
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
