@@ -2119,9 +2119,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'moderate content from 2_korekt_ra to u_vyst_redaktora_3'.
   $permissions['moderate content from 2_korekt_ra to u_vyst_redaktora_3'] = array(
     'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_3',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
@@ -2443,6 +2441,7 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_3 to 2_korekt_ra'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra',
     'roles' => array(
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -2462,7 +2461,9 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5'.
   $permissions['moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5',
-    'roles' => array(),
+    'roles' => array(
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -2470,7 +2471,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4',
     'roles' => array(
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -2490,7 +2490,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3'] = array(
     'name' => 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3',
     'roles' => array(
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
