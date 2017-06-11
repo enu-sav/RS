@@ -2129,7 +2129,7 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from 2_korekt_ra to u_vyst_redaktora_4'] = array(
     'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_4',
     'roles' => array(
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Redaktor' => 'Redaktor',
     ),
     'module' => 'workbench_moderation',
   );
