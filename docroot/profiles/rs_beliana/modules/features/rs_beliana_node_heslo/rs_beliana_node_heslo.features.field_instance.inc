@@ -362,7 +362,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením.',
+    'description' => 'Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -385,7 +385,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'taxonomy',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
@@ -402,7 +402,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -443,7 +443,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Pomocné pole požívané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. korektúre.',
+    'description' => 'Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -821,10 +821,11 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Ilustrácie');
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
   t('Lexikálna skupina');
-  t('Lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením.');
   t('Na zoradenie');
   t('Názov');
-  t('Pomocné pole požívané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. korektúre.');
+  t('Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky');
+  t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
+  t('Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.');
   t('Povodne lexikalne skupiny');
   t('Pôvodný text hesla v generálnom heslári pred importovaním z XLS súborov. XLS tabuľka heslára mala 8 stĺpcov ZODAD, HESLO, P_R, L_S, AUT, IL, POZN a POZN 2 . Obsah stĺpcov je uvedený v zátvorke, POZN a POZN2 sú spojené.
 ');
