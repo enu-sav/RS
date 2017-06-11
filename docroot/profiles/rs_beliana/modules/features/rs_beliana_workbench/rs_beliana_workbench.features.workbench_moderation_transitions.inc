@@ -19,6 +19,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_vyst_redaktora_3',
       'name' => '2_korektura-u_vyst_redaktora3',
     ),
+    '2_korekt_ra:u_vyst_redaktora_4' => array(
+      'from_name' => '2_korekt_ra',
+      'to_name' => 'u_vyst_redaktora_4',
+      'name' => '2_korektura-u_vyst_redaktora4',
+    ),
     '_ilustr_cia_u_autora:ilustracia_u_redaktora' => array(
       'from_name' => '_ilustr_cia_u_autora',
       'to_name' => 'ilustracia_u_redaktora',
@@ -59,6 +64,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'ilustracia_u_grafika',
       'name' => 'il_u_redaktora_u_grafika',
     ),
+    'len_vyplatit:zaradene' => array(
+      'from_name' => 'len_vyplatit',
+      'to_name' => 'zaradene',
+      'name' => 'len_vyplatit-zaradene',
+    ),
     'na_jazykovu_korekturu:1_korektura' => array(
       'from_name' => 'na_jazykovu_korekturu',
       'to_name' => '1_korektura',
@@ -78,6 +88,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'na_zverejnenie',
       'to_name' => 'u_vyst_redaktora_2',
       'name' => 'u_vyst_redaktora1-u_vyst_redaktora2',
+    ),
+    'navrhnute_na_vyradenie:len_vyplatit' => array(
+      'from_name' => 'navrhnute_na_vyradenie',
+      'to_name' => 'len_vyplatit',
+      'name' => 'navrhute_na_zmenu-len_vyplatit',
     ),
     'navrhnute_na_vyradenie:vyradene' => array(
       'from_name' => 'navrhnute_na_vyradenie',
@@ -158,6 +173,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'u_vyst_redaktora_2',
       'to_name' => 'ukoncenezluene',
       'name' => 'u_vyst_redaktora2-ukoncene_zlucene',
+    ),
+    'u_vyst_redaktora_2:vyradene' => array(
+      'from_name' => 'u_vyst_redaktora_2',
+      'to_name' => 'vyradene',
+      'name' => 'u_vyst_redaktora2-na_vyradenie',
     ),
     'u_vyst_redaktora_3:2_korekt_ra' => array(
       'from_name' => 'u_vyst_redaktora_3',
