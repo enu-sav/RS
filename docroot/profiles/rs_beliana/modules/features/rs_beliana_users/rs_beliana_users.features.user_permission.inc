@@ -706,6 +706,13 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'block view revisions in len_vyplatit state'.
+  $permissions['block view revisions in len_vyplatit state'] = array(
+    'name' => 'block view revisions in len_vyplatit state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'block view revisions in na_jazykovu_korekturu state'.
   $permissions['block view revisions in na_jazykovu_korekturu state'] = array(
     'name' => 'block view revisions in na_jazykovu_korekturu state',
@@ -744,6 +751,13 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'block view revisions in nova_ilustracia state'.
   $permissions['block view revisions in nova_ilustracia state'] = array(
     'name' => 'block view revisions in nova_ilustracia state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'block view revisions in publikovane_na_webe state'.
+  $permissions['block view revisions in publikovane_na_webe state'] = array(
+    'name' => 'block view revisions in publikovane_na_webe state',
     'roles' => array(),
     'module' => 'workbench_state_access',
   );
@@ -1799,6 +1813,13 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'edit revisions in len_vyplatit state'.
+  $permissions['edit revisions in len_vyplatit state'] = array(
+    'name' => 'edit revisions in len_vyplatit state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'edit revisions in na_jazykovu_korekturu state'.
   $permissions['edit revisions in na_jazykovu_korekturu state'] = array(
     'name' => 'edit revisions in na_jazykovu_korekturu state',
@@ -1848,6 +1869,13 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'iredaktor' => 'iredaktor',
     ),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'edit revisions in publikovane_na_webe state'.
+  $permissions['edit revisions in publikovane_na_webe state'] = array(
+    'name' => 'edit revisions in publikovane_na_webe state',
+    'roles' => array(),
     'module' => 'workbench_state_access',
   );
 
@@ -2097,6 +2125,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from 2_korekt_ra to u_vyst_redaktora_4'.
+  $permissions['moderate content from 2_korekt_ra to u_vyst_redaktora_4'] = array(
+    'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_4',
+    'roles' => array(
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from _ilustr_cia_u_autora to ilustracia_u_redaktora'.
   $permissions['moderate content from _ilustr_cia_u_autora to ilustracia_u_redaktora'] = array(
     'name' => 'moderate content from _ilustr_cia_u_autora to ilustracia_u_redaktora',
@@ -2169,6 +2206,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from len_vyplatit to zaradene'.
+  $permissions['moderate content from len_vyplatit to zaradene'] = array(
+    'name' => 'moderate content from len_vyplatit to zaradene',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from na_jazykovu_korekturu to 1_korektura'.
   $permissions['moderate content from na_jazykovu_korekturu to 1_korektura'] = array(
     'name' => 'moderate content from na_jazykovu_korekturu to 1_korektura',
@@ -2208,6 +2254,15 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from navrhnute_na_vyradenie to len_vyplatit'.
+  $permissions['moderate content from navrhnute_na_vyradenie to len_vyplatit'] = array(
+    'name' => 'moderate content from navrhnute_na_vyradenie to len_vyplatit',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2356,12 +2411,30 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from u_vyst_redaktora_2 to needs_review'.
+  $permissions['moderate content from u_vyst_redaktora_2 to needs_review'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_2 to needs_review',
+    'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from u_vyst_redaktora_2 to ukoncenezluene'.
   $permissions['moderate content from u_vyst_redaktora_2 to ukoncenezluene'] = array(
     'name' => 'moderate content from u_vyst_redaktora_2 to ukoncenezluene',
     'roles' => array(
       'admin' => 'admin',
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from u_vyst_redaktora_2 to vyradene'.
+  $permissions['moderate content from u_vyst_redaktora_2 to vyradene'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_2 to vyradene',
+    'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
     ),
     'module' => 'workbench_moderation',
   );
