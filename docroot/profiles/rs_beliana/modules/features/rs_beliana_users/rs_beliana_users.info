@@ -456,7 +456,6 @@ features[variable][] = user_picture_style
 features[variable][] = user_pictures
 features[variable][] = user_register
 features[variable][] = user_signatures
-features[workbench_moderation_transitions][] = u_vyst_redaktora_4:u_jaz_redaktora_2
 features_exclude[field_base][] = field_autorska_zmluva
 features_exclude[field_base][] = field_meno
 features_exclude[field_base][] = field_priezvisko
