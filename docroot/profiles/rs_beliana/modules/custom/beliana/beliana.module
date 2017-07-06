@@ -361,9 +361,9 @@ function beliana_merge(&$entity, $context = array()) {
 
     $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
     // Empty alias for original entity.
-    $entity->path['alias'] = '';
+    //$entity->path['alias'] = '';
     // Set automatic alias creation to FALSE.
-    $entity->path['pathauto'] = FALSE;
+    //$entity->path['pathauto'] = FALSE;
     node_save($entity);
     workbench_moderation_moderate($entity, 'ukoncenezluene');
   }
