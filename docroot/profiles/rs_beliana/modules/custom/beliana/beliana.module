@@ -392,6 +392,10 @@ function beliana_merge(&$entity, $context = array()) {
  * @inheritdoc
  */
 function beliana_node_presave($node) {
+  // Ignore type 'ilustracia'
+  if($node->type == 'ilustracia') {
+    return;
+  }
   // Load user which is author of the node.
   $author = user_load($node->uid);
   setlocale(LC_COLLATE, 'sk_SK.utf8');
