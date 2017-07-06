@@ -304,9 +304,11 @@ function beliana_merge(&$entity, $context = array()) {
 
       // store the top most parent (editor name) to field_redaktori_zluceneho
       $found = FALSE;
-      foreach ($master->field_redaktori_zluceneho[LANGUAGE_NONE] as $tid) {
-        if ($tid['tid'] === $top_parent->tid) {
-          $found = TRUE;
+      if(isset($master->field_redaktori_zluceneho[LANGUAGE_NONE])) {
+        foreach ($master->field_redaktori_zluceneho[LANGUAGE_NONE] as $tid) {
+          if ($tid['tid'] === $top_parent->tid) {
+            $found = TRUE;
+          }
         }
       }
       if (!$found) {
@@ -319,7 +321,7 @@ function beliana_merge(&$entity, $context = array()) {
 
     // Merge field_komentar_instrukcie, use "\n" as separator.
     if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
-      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
     }
     else {
       $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
@@ -327,7 +329,7 @@ function beliana_merge(&$entity, $context = array()) {
 
     // Merge field_text_hesla, use "</p>\n<p>" as separator.
     if (!isset($master->field_text_hesla[LANGUAGE_NONE][0]['value']) || empty($master->field_text_hesla[LANGUAGE_NONE][0]['value'])) {
-      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
     }
     else {
       $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
@@ -335,7 +337,7 @@ function beliana_merge(&$entity, $context = array()) {
 
     // Merge field_text_z_gh, use "\n" as separator.
     if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
-      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] = $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
     }
     else {
       $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
@@ -350,7 +352,8 @@ function beliana_merge(&$entity, $context = array()) {
 
     // Merge field_text_z_gh, use "\n" as separator.
     if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] .= $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      //$master->field_atributy[LANGUAGE_NONE][0]['value'] .= $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      $master->field_atributy[LANGUAGE_NONE][0]['value'] = $entity->field_atributy[LANGUAGE_NONE][0]['value'];
     }
     else {
       $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
@@ -401,7 +404,8 @@ function beliana_node_presave($node) {
   setlocale(LC_COLLATE, 'sk_SK.utf8');
 
   // fix field_na_zoradenie if necessary
-  if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
+  //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
+  if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
     $transliterated = _beliana_remove_accents($node->title);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
@@ -437,14 +441,16 @@ function beliana_node_presave($node) {
 
 /**
  * Implements hook_form_alter().
+ * If user is 'nepriradený' (uid 719) and state is `zaradene`,
+ * we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
+ * This forces editor to use the view "Priradit autora" to assign article to and author
  *
  * @inheritdoc
  */
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
-  if ('workbench_moderation_moderate_form' === $form_id) {
-    // If user is 'nepriradený' and state is `zaradene`,
-    // we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
+  //$form['node']['#value'] is not set if user cannot modify a node
+  if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene'
       && $form['node']['#value']->uid == 719
     ) {
@@ -467,7 +473,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
-  if (isset($values['node']->workbench_moderation['current']->state) && count($values['node']->field_zlucene_z['und']) > 0) {
+  //if (isset($values['node']->workbench_moderation['current']->state) && count($values['node']->field_zlucene_z['und']) > 0) {
+  if (isset($values['node']->workbench_moderation['current']->state) && isset($values['node']->field_zlucene_z['und'])) {
 
     // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
     if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura'))
