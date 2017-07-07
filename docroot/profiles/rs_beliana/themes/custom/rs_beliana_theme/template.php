@@ -6,24 +6,6 @@
  */
 
 /**
- * Implements hook_preprocess_node().
- *
- * @inheritdoc
- */
-function rs_beliana_theme_preprocess_node(&$args) {
-  if ($args['view_mode'] === 'export') {
-    $node = &$args['node'];
-    if ($node->type === 'ilustracia') {
-      $no_render = FALSE;
-      if (empty($node->field_obrazok_na_zverejnenie_)) {
-        $no_render = TRUE;
-      }
-      $args['no_render'] = $no_render;
-    }
-  }
-}
-
-/**
 * Add line breaks to field
 */
 function rs_beliana_theme_preprocess_field(&$vars) {
