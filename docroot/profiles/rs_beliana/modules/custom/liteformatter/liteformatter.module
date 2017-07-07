@@ -32,9 +32,17 @@ function liteformatter_field_formatter_info() {
 * Implements hook_field_formatter_view().
 */
 function liteformatter_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  global $base_url;
+  $ckeditor_js=$base_url."/".drupal_get_path("module","liteformatter").'/ckeditor/ckeditor.js';
   $element = array(); // Initialize the var
   // load ckeditor installed in the module. We assume LITE is installed in its plugins directory
-  drupal_add_js(drupal_get_path("module","liteformatter").'/ckeditor/ckeditor.js');
+  // these do not work
+  //drupal_add_js(drupal_get_path("module","liteformatter").'/ckeditor/ckeditor.js');
+  //drupal_add_js($ckeditor_js);
+  $ckeditor_script='<script type="text/javascript" src="'.$ckeditor_js.'"></script>';
+  //dpm($ckeditor_script);
+  // this works
+  $ckeditor_script='<script type="text/javascript" src="'.$ckeditor_js.'"></script>';
   $litescript="
 <script>
 	CKEDITOR.on( 'instanceCreated', function( event ) {
@@ -72,7 +80,7 @@ function show_changes() {
   foreach ($items as $delta => $item) { 
     $output = _text_sanitize($instance, $langcode, $item, 'value');
     // render the text twice in different divs to switch between them
-    $element[$delta] = array('#markup' => $butt0.$butt1.$litescript.'<div id="asdfg0" contentEditable="false">'.$output.'</div>'.'<div id="asdfg1" contentEditable="true">'.$output.'</div>'.$cc);
+    $element[$delta] = array('#markup' => $ckeditor_script.$butt0.$butt1.$litescript.'<div id="asdfg0" contentEditable="false">'.$output.'</div>'.'<div id="asdfg1" contentEditable="true">'.$output.'</div>'.$cc);
   }
   return $element;
 }
