@@ -6,6 +6,7 @@ dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = list
+dependencies[] = liteformatter
 dependencies[] = node
 dependencies[] = options
 dependencies[] = rs_beliana_fields

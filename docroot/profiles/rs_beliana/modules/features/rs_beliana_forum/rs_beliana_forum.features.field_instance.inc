@@ -63,6 +63,12 @@ function rs_beliana_forum_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -132,6 +138,12 @@ function rs_beliana_forum_field_default_field_instances() {
         'weight' => 10,
       ),
       'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'lite_display' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

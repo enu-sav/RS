@@ -1,10 +1,13 @@
 name = Redakčný systém Beliana Basic page
 core = 7.x
 package = Content
+dependencies[] = ctools
 dependencies[] = features
+dependencies[] = node
 dependencies[] = rs_beliana_fields
 dependencies[] = rs_beliana_seo
 dependencies[] = strongarm
+dependencies[] = text
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_instance][] = node-page-body
