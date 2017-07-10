@@ -11866,6 +11866,7 @@ function rs_beliana_views_views_default_views() {
       'settings' => array(
         'show_all_tokens' => 1,
         'display_values' => array(
+          'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
           'importovane_heslo::field_taxsubor' => 'importovane_heslo::field_taxsubor',
           'importovane_heslo::field_lexikalna_skupina' => 'importovane_heslo::field_lexikalna_skupina',
         ),
