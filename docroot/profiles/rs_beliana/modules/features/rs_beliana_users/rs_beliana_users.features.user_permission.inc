@@ -974,6 +974,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1446,6 +1448,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1573,6 +1577,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -2981,6 +2987,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -3147,6 +3155,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',

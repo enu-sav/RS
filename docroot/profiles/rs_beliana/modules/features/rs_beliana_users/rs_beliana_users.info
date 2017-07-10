@@ -45,7 +45,6 @@ dependencies[] = views
 dependencies[] = workbench
 dependencies[] = workbench_access
 dependencies[] = workbench_moderation
-dependencies[] = workbench_moderation
 dependencies[] = workbench_state_access
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
