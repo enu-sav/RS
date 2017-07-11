@@ -1372,6 +1372,7 @@ function rs_beliana_users_user_default_permissions() {
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
@@ -2138,15 +2139,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from _ilustr_cia_u_autora to ilustracia_u_redaktora'.
-  $permissions['moderate content from _ilustr_cia_u_autora to ilustracia_u_redaktora'] = array(
-    'name' => 'moderate content from _ilustr_cia_u_autora to ilustracia_u_redaktora',
-    'roles' => array(
-      'Autor' => 'Autor',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from draft to vyradene'.
   $permissions['moderate content from draft to vyradene'] = array(
     'name' => 'moderate content from draft to vyradene',
@@ -2165,15 +2157,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from ilustracia_na_zverejnenie to ilustracia_u_redaktora'.
-  $permissions['moderate content from ilustracia_na_zverejnenie to ilustracia_u_redaktora'] = array(
-    'name' => 'moderate content from ilustracia_na_zverejnenie to ilustracia_u_redaktora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from ilustracia_u_grafika to ilustracia_u_redaktora'.
   $permissions['moderate content from ilustracia_u_grafika to ilustracia_u_redaktora'] = array(
     'name' => 'moderate content from ilustracia_u_grafika to ilustracia_u_redaktora',
@@ -2186,15 +2169,6 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora'.
   $permissions['moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora'] = array(
     'name' => 'moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_redaktora to ilustracia_na_zverejnenie'.
-  $permissions['moderate content from ilustracia_u_redaktora to ilustracia_na_zverejnenie'] = array(
-    'name' => 'moderate content from ilustracia_u_redaktora to ilustracia_na_zverejnenie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
     ),

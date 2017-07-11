@@ -24,11 +24,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_vyst_redaktora_4',
       'name' => '2_korektura-u_vyst_redaktora4',
     ),
-    '_ilustr_cia_u_autora:ilustracia_u_redaktora' => array(
-      'from_name' => '_ilustr_cia_u_autora',
-      'to_name' => 'ilustracia_u_redaktora',
-      'name' => 'il_uautora-u_redaktora',
-    ),
     'draft:vyradene' => array(
       'from_name' => 'draft',
       'to_name' => 'vyradene',
@@ -39,11 +34,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'zaradene',
       'name' => 'navrhnute_zaradene',
     ),
-    'ilustracia_na_zverejnenie:ilustracia_u_redaktora' => array(
-      'from_name' => 'ilustracia_na_zverejnenie',
-      'to_name' => 'ilustracia_u_redaktora',
-      'name' => 'il_na_zverejnenie_u_redaktora',
-    ),
     'ilustracia_u_grafika:ilustracia_u_redaktora' => array(
       'from_name' => 'ilustracia_u_grafika',
       'to_name' => 'ilustracia_u_redaktora',
@@ -52,17 +42,12 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
     'ilustracia_u_redaktora:_ilustr_cia_u_autora' => array(
       'from_name' => 'ilustracia_u_redaktora',
       'to_name' => '_ilustr_cia_u_autora',
-      'name' => 'il_u_redaktora_u_autora',
-    ),
-    'ilustracia_u_redaktora:ilustracia_na_zverejnenie' => array(
-      'from_name' => 'ilustracia_u_redaktora',
-      'to_name' => 'ilustracia_na_zverejnenie',
-      'name' => 'il_u_redaktora_na_zverejnenie',
+      'name' => 'il_u_redaktora-u_autora',
     ),
     'ilustracia_u_redaktora:ilustracia_u_grafika' => array(
       'from_name' => 'ilustracia_u_redaktora',
       'to_name' => 'ilustracia_u_grafika',
-      'name' => 'il_u_redaktora_u_grafika',
+      'name' => 'il_u_redaktora-u_grafika',
     ),
     'len_vyplatit:zaradene' => array(
       'from_name' => 'len_vyplatit',
