@@ -5409,7 +5409,7 @@ function rs_beliana_views_views_default_views() {
   /* Display: Všetky moje ilustrácie */
   $handler = $view->new_display('page', 'Všetky moje ilustrácie', 'page_20');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'IlustracieR';
+  $handler->display->display_options['title'] = 'Všetky moje ilustrácie';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
@@ -6040,6 +6040,7 @@ function rs_beliana_views_views_default_views() {
     'ilustracia_u_grafika' => 'ilustracia_u_grafika',
     'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
     'ilustracia_na_zverejnenie' => 'ilustracia_na_zverejnenie',
+    'ilustracia_u_vyst_redaktora_5' => 'ilustracia_u_vyst_redaktora_5',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Aktuálny */
@@ -6138,6 +6139,7 @@ function rs_beliana_views_views_default_views() {
     'ilustracia_u_grafika' => 'ilustracia_u_grafika',
     'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
     'ilustracia_na_zverejnenie' => 'ilustracia_na_zverejnenie',
+    'ilustracia_u_vyst_redaktora_5' => 'ilustracia_u_vyst_redaktora_5',
   );
   $handler->display->display_options['filters']['state_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state_1']['expose']['operator_id'] = 'state_1_op';
