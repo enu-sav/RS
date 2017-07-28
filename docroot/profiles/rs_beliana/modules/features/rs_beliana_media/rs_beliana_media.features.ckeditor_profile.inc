@@ -14,7 +14,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'Replace\',\'Find\'],
+    [\'Source\',\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
@@ -259,7 +259,7 @@ config.specialChars = [
         'ss' => 2,
         'toolbar' => '[
     [\'Source\'],
-    [\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'Replace\',\'Find\'],
+    [\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
