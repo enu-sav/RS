@@ -117,6 +117,9 @@ function rs_beliana_node_heslo_strongarm() {
       'export' => array(
         'custom_settings' => FALSE,
       ),
+      'lite_display' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

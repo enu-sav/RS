@@ -256,5 +256,56 @@ function rs_beliana_media_strongarm() {
   $strongarm->value = 'scale_and_crop';
   $export['imce_settings_thumb_method'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'mathjax_cdn_url';
+  $strongarm->value = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  $export['mathjax_cdn_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'mathjax_config_string';
+  $strongarm->value = 'MathJax.Hub.Config(
+{
+  	"HTML-CSS": {
+    		preferredFont: "STIX",
+		scale: 85
+  	},
+         CommonHTML: {
+    		scale: 85
+  	},
+  	SVG: {
+    		font: "STIX-Web",
+    		scale: 85
+  	},
+	TeX: {
+    		extensions: ["extpfeil.js"],
+    		extensions: ["mhchem.js"],
+  		Macros: {
+     			RR: "{\\\\bf R}",
+			bold: ["{\\\\ce{#1}}",1],
+     			mc: ["{\\\\require{mhchem} \\\\mathsf{\\\\ce{#1}}}",1] 
+    		}
+	}
+}
+);';
+  $export['mathjax_config_string'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'mathjax_config_type';
+  $strongarm->value = '1';
+  $export['mathjax_config_type'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'mathjax_use_cdn';
+  $strongarm->value = 1;
+  $export['mathjax_use_cdn'] = $strongarm;
+
   return $export;
 }

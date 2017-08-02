@@ -47,16 +47,19 @@ function rs_beliana_users_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'ckeditor' => array(
-          'weight' => '4',
+          'weight' => '10',
         ),
         'account' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'timezone' => array(
-          'weight' => '3',
+          'weight' => '9',
         ),
         'password_policy' => array(
           'weight' => '0',
+        ),
+        'privatemsg' => array(
+          'weight' => '8',
         ),
       ),
       'display' => array(),

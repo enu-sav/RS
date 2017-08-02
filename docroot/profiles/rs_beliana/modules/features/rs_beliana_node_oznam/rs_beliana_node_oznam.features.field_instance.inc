@@ -33,6 +33,12 @@ function rs_beliana_node_oznam_field_default_field_instances() {
         'type' => 'text_trimmed',
         'weight' => 0,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',

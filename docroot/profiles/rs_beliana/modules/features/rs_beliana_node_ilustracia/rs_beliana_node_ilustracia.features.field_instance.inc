@@ -61,6 +61,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 15,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -73,7 +79,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 19,
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'node',
@@ -123,12 +129,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 20,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 13,
       ),
     ),
     'entity_type' => 'node',
@@ -160,7 +172,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'export' => array(
         'label' => 'above',
@@ -169,12 +181,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 3,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -238,12 +256,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -285,11 +309,17 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 19,
       ),
     ),
     'entity_type' => 'node',
@@ -331,12 +361,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 16,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -374,6 +410,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 18,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'inline',
@@ -422,6 +464,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 17,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'list',
@@ -466,11 +514,17 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 18,
       ),
     ),
     'entity_type' => 'node',
@@ -511,6 +565,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 19,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'inline',
@@ -562,59 +622,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-ilustracia-field_obrazok_na_zverejnenie_'.
-  $field_instances['node-ilustracia-field_obrazok_na_zverejnenie_'] = array(
-    'bundle' => 'ilustracia',
-    'deleted' => 0,
-    'description' => 'Ilustrácia vytvorená alebo upravená grafikom. Pracovná verzia (posúdi redaktor) alebo finálna verzia. ',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 20,
-      ),
-      'export' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_obrazok_na_zverejnenie_',
-    'label' => 'Obrázok (na použitie)',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => 'ilustracia/na_zverejnenie',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'preview_image_style' => 'medium',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 7,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-ilustracia-field_obrazok_navrh_'.
   $field_instances['node-ilustracia-field_obrazok_navrh_'] = array(
     'bundle' => 'ilustracia',
@@ -626,7 +633,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'medium',
+          'image_style' => 'thumbnail',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -641,6 +648,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'image',
         'weight' => 0,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'image',
@@ -649,7 +662,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'image_style' => 'medium',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -701,12 +714,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -777,12 +796,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 20,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -806,14 +831,15 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_subor_ilustracie'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => 'Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je <b>jpg</b>, pokiaľ ide o vektorový obrázok, povolené typy sú <b>eps</b> (pre tlačenú verziu), <b>svg</b> (pre webovú verziu) a <b>cdr</b> (zdrojový súbor pre eps a svg). Vkladá sa buď <b>jpg</b> súbor, alebo trojica <b>eps</b>, <b>svg</b> a <b>cdr</b>. Obrázky <b>jpg</b> s ostatnými typmi kombinovať nemožno. Pokiaľ <b>eps</b> alebo <b>svg</b> nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí.',
+    'description' => 'Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
+',
     'display' => array(
       'default' => array(
         'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 5,
+        'type' => 'file_url_plain',
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'inline',
@@ -822,12 +848,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'file_url_plain',
         'weight' => 3,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 100,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -837,7 +869,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'ilustracia/na_zverejnenie',
-      'file_extensions' => 'jpg cdr eps svg png odg cdx',
+      'file_extensions' => 'jpg cdr eps svg png odg cdx tif',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -862,10 +894,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'export' => array(
         'label' => 'inline',
@@ -873,11 +904,17 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 13,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 20,
       ),
     ),
     'entity_type' => 'node',
@@ -915,6 +952,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 7,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'inline',
@@ -980,6 +1023,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'link',
@@ -1043,6 +1092,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'inline',
@@ -1113,12 +1168,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 11,
       ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -1157,11 +1218,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 14,
       ),
-      'teaser' => array(
-        'label' => 'hidden',
+      'lite_display' => array(
+        'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -1216,7 +1284,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Comment');
   t('Držiteľ práv');
   t('Dátum prevzatia diela');
-  t('Ilustrácia vytvorená alebo upravená grafikom. Pracovná verzia (posúdi redaktor) alebo finálna verzia. ');
   t('Inštitúcia');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
@@ -1226,7 +1293,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Na zoradenie');
   t('Názov');
   t('Názov diela (predbežne skryté)');
-  t('Obrázok (na použitie)');
   t('Obrázok (návrh/náhľad)');
   t('Použiť');
   t('Súbor');
@@ -1245,7 +1311,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   t('Uveďte odkaz na text licencie, ktorý bol použitý na stránke diela.');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia je dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
-  t('Vložte súbor obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak povoleným typom je <b>jpg</b>, pokiaľ ide o vektorový obrázok, povolené typy sú <b>eps</b> (pre tlačenú verziu), <b>svg</b> (pre webovú verziu) a <b>cdr</b> (zdrojový súbor pre eps a svg). Vkladá sa buď <b>jpg</b> súbor, alebo trojica <b>eps</b>, <b>svg</b> a <b>cdr</b>. Obrázky <b>jpg</b> s ostatnými typmi kombinovať nemožno. Pokiaľ <b>eps</b> alebo <b>svg</b> nebude vložené, ilustrácia sa v príslušnej verzii nevytvorí.');
+  t('Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
+');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');

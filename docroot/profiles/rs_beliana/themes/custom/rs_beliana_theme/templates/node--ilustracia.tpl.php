@@ -1,6 +1,3 @@
-<?php
-if(!$no_render):
-?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
   <div class="content clearfix"<?php print $content_attributes; ?>>
@@ -21,6 +18,3 @@ if(!$no_render):
   </div>
 
 </div>
-<?php else: ?>
- 
-<?php endif; ?>
