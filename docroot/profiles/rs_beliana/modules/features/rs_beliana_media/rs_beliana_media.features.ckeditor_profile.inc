@@ -339,7 +339,7 @@ config.specialChars = [
 [\'“\', \'sekunda\'],
 [\'@\', \'zavináč\'],
 [\'·\', \'krát\'],
-[\'✕\', \'krát\']
+[\'×\', \'krát\'],
 [\'±\', \'plus minus\'],
 [\'–\',\'znamienko mínus\'],
 [\'>\', \'znak väčší  \'],\'≥\',
