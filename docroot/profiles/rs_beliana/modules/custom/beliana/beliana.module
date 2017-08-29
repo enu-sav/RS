@@ -301,7 +301,6 @@ function beliana_merge(&$entity, $context = array()) {
           $top_parent = $parent;
         }
       }
-
       // store the top most parent (editor name) to field_redaktori_zluceneho
       $found = FALSE;
       if(isset($master->field_redaktori_zluceneho[LANGUAGE_NONE])) {
@@ -320,11 +319,12 @@ function beliana_merge(&$entity, $context = array()) {
     }
 
     // Merge field_komentar_instrukcie, use "\n" as separator.
-    if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
-      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+    if (isset($entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+        $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      } else {
+        $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     // Merge field_text_hesla, use "</p>\n<p>" as separator.
@@ -332,15 +332,21 @@ function beliana_merge(&$entity, $context = array()) {
       $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
     }
     else {
-      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      // special requirement: in merging put GEO articles in front of others
+      if ( $top_parent->tid === "390" ){  // "390" is Lubica Krajcovicova, editor of GEO articles. 
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'] . "</p><br><p>" . $master->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      } else {
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     // Merge field_text_z_gh, use "\n" as separator.
-    if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
-      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] = $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+    if (isset($entity->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+        $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] = $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      } else {
+        $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     // Merge field_ilustracia.
@@ -350,13 +356,13 @@ function beliana_merge(&$entity, $context = array()) {
       }
     }
 
-    // Merge field_text_z_gh, use "\n" as separator.
-    if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
-      //$master->field_atributy[LANGUAGE_NONE][0]['value'] .= $entity->field_atributy[LANGUAGE_NONE][0]['value'];
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] = $entity->field_atributy[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+    // Merge field_atributy, use "\n" as separator.
+    if (isset($entity->field_atributy[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
+        $master->field_atributy[LANGUAGE_NONE][0]['value'] = $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      } else {
+        $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
