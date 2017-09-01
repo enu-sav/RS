@@ -8046,30 +8046,22 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_zdroj_ilustracie']['field'] = 'field_zdroj_ilustracie';
   $handler->display->display_options['fields']['field_zdroj_ilustracie']['label'] = 'povod_ilustracie';
   $handler->display->display_options['fields']['field_zdroj_ilustracie']['type'] = 'list_key';
-  /* Pole: Obsah: Licencia */
+  /* Pole: Obsah: Typ CC licencie */
   $handler->display->display_options['fields']['field_licencia1']['id'] = 'field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['table'] = 'field_data_field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['field'] = 'field_licencia1';
   $handler->display->display_options['fields']['field_licencia1']['label'] = 'licencia';
-  /* Pole: Obsah: Názov diela (predbežne skryté) */
+  /* Pole: Obsah: Názov diela */
   $handler->display->display_options['fields']['field_nazov_diela']['id'] = 'field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['table'] = 'field_data_field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['field'] = 'field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['label'] = 'nazov_diela';
-  /* Pole: Obsah: Dátum prevzatia diela */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['id'] = 'field_d_tum_prevzatia';
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['table'] = 'field_data_field_d_tum_prevzatia';
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['field'] = 'field_d_tum_prevzatia';
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['label'] = 'datum_prevzatia';
   $handler->display->display_options['fields']['field_d_tum_prevzatia']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_d_tum_prevzatia']['settings'] = array(
-    'format_type' => 'short',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
   /* Pole: Obsah: Inštitúcia */
   $handler->display->display_options['fields']['field_institucia']['id'] = 'field_institucia';
   $handler->display->display_options['fields']['field_institucia']['table'] = 'field_data_field_institucia';
@@ -8087,7 +8079,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_url_textu_licencie_l']['label'] = 'URL_licencie';
   $handler->display->display_options['fields']['field_url_textu_licencie_l']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_url_textu_licencie_l']['type'] = 'link_absolute';
-  /* Pole: Obsah: URL autora diela */
+  /* Pole: Obsah: URL autora diela alebo inštitúcie */
   $handler->display->display_options['fields']['field_url_autora_diela_l']['id'] = 'field_url_autora_diela_l';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['table'] = 'field_data_field_url_autora_diela_l';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['field'] = 'field_url_autora_diela_l';
@@ -8946,7 +8938,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Kritéria zoradenia: Obsah: Dátum odoslania */
+  /* Kritéria zoradenia: Obsah: Dátum vytvorenia */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
@@ -12661,7 +12653,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Kritéria zoradenia: Obsah: Dátum odoslania */
+  /* Kritéria zoradenia: Obsah: Dátum vytvorenia */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';

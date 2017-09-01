@@ -22,7 +22,6 @@ features[field_base][] = body
 features[field_base][] = comment_body
 features[field_base][] = field_atributy
 features[field_base][] = field_autorska_zmluva
-features[field_base][] = field_d_tum_prevzatia
 features[field_base][] = field_datum
 features[field_base][] = field_drzitel_prav
 features[field_base][] = field_errta

@@ -28,7 +28,6 @@ features[field_base][] = field_url_autora_diela_l
 features[field_base][] = field_url_diela_l
 features[field_base][] = field_url_textu_licencie_l
 features[field_instance][] = comment-comment_node_ilustracia-comment_body
-features[field_instance][] = node-ilustracia-field_d_tum_prevzatia
 features[field_instance][] = node-ilustracia-field_drzitel_prav
 features[field_instance][] = node-ilustracia-field_institucia
 features[field_instance][] = node-ilustracia-field_komentar_instrukcie

@@ -43,81 +43,6 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-ilustracia-field_d_tum_prevzatia'.
-  $field_instances['node-ilustracia-field_d_tum_prevzatia'] = array(
-    'bundle' => 'ilustracia',
-    'deleted' => 0,
-    'description' => 'Uveďte dátum, kedy bolo dielo prevzaté z pôvodnej stránky',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 12,
-      ),
-      'export' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
-      ),
-      'lite_display' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'inline',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 14,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_d_tum_prevzatia',
-    'label' => 'Dátum prevzatia diela',
-    'required' => 1,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'd.m.Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_text',
-      'weight' => 16,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-ilustracia-field_drzitel_prav'.
   $field_instances['node-ilustracia-field_drzitel_prav'] = array(
     'bundle' => 'ilustracia',
@@ -164,7 +89,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -207,7 +132,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_institucia',
     'label' => 'Inštitúcia',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
@@ -241,7 +166,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -399,7 +324,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -475,7 +400,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -550,7 +475,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -601,7 +526,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -729,7 +654,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -1053,7 +978,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ',
+    'description' => 'Uveďte URL autora alebo inštitúcie, z ktorej stránky bolo dielo prevzaté.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1084,7 +1009,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_url_autora_diela_l',
-    'label' => 'URL autora diela',
+    'label' => 'URL autora diela alebo inštitúcie',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -1114,7 +1039,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 20,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -1185,7 +1110,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 21,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -1256,7 +1181,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 19,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -1409,7 +1334,6 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Autor a redaktor: Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. Grafik: vložte náhľad finálneho obrázka ');
   t('Comment');
   t('Držiteľ práv');
-  t('Dátum prevzatia diela');
   t('Inštitúcia');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
@@ -1427,12 +1351,11 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.');
   t('Typ CC licencie');
   t('Typ ilustrácie');
-  t('URL autora diela');
+  t('URL autora diela alebo inštitúcie');
   t('URL diela');
   t('URL textu licencie');
-  t('Uveďte dátum, kedy bolo dielo prevzaté z pôvodnej stránky');
+  t('Uveďte URL autora alebo inštitúcie, z ktorej stránky bolo dielo prevzaté.');
   t('Uveďte konkrétnu verziu CC licencie alebo zvoľte "Iná verejná licencia"');
-  t('Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte meno autora (maliara, fotografa, architekta) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte meno autora fotografickej snímky trojrozmerného diela (objekt, socha, stavba). ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
