@@ -51,9 +51,17 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 12,
       ),
       'export' => array(
         'label' => 'inline',
@@ -119,9 +127,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
+        'type' => 'list_default',
+        'weight' => 17,
       ),
       'export' => array(
         'label' => 'above',
@@ -172,7 +181,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 3,
+        'weight' => 10,
       ),
       'export' => array(
         'label' => 'above',
@@ -246,9 +255,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
+        'type' => 'text_plain',
+        'weight' => 18,
       ),
       'export' => array(
         'label' => 'above',
@@ -299,9 +309,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
       ),
       'export' => array(
         'label' => 'inline',
@@ -347,13 +358,14 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Uveďte konkrétnu verziu CC licencie alebo zvoľte "Iná verejná licencia"',
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
+        'type' => 'list_default',
+        'weight' => 11,
       ),
       'export' => array(
         'label' => 'inline',
@@ -377,7 +389,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_licencia1',
-    'label' => 'Licencia',
+    'label' => 'Typ CC licencie',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -397,13 +409,14 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ',
+    'description' => 'Uveďte meno autora (maliara, fotografa, architekta) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ',
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 13,
+        'type' => 'text_default',
+        'weight' => 7,
       ),
       'export' => array(
         'label' => 'above',
@@ -430,6 +443,28 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Meno autora diela',
     'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -453,11 +488,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Uveďte meno autora fotografickej snímky trojrozmerného diela (objekt, socha, stavba). ',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 20,
+        'weight' => 8,
       ),
       'export' => array(
         'label' => 'above',
@@ -529,9 +564,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
+        'type' => 'list_default',
+        'weight' => 16,
       ),
       'export' => array(
         'label' => 'inline',
@@ -581,7 +617,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'export' => array(
         'label' => 'above',
@@ -631,9 +667,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
+        'type' => 'text_plain',
+        'weight' => 9,
       ),
       'export' => array(
         'label' => 'above',
@@ -657,7 +694,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_nazov_diela',
-    'label' => 'Názov diela (predbežne skryté)',
+    'label' => 'Názov diela',
     'required' => 0,
     'settings' => array(
       'better_formats' => array(
@@ -711,7 +748,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'image_style' => 'thumbnail',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'export' => array(
         'label' => 'inline',
@@ -780,7 +817,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 1,
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'inline',
@@ -857,13 +894,14 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Zvoľte, kde má byť obrázok použitý.',
+    'description' => 'Zvoľte, kde má byť obrázok použitý. "Zobraziť na webe" možno zvoliť len vtedy, ak to licenčné podmienky diela umožňujú: <br />- Ak je v poli "Typ ilustrácie" uvedené "Vlastná ilustrácia EnÚ", "Voľné dielo", "Creative Commons" alebo "Logo, erb, zástava", tak dielo možno zobraziť na webe. <br />- V prípadoch "Autorské dielo" a "Muzeálny objekt" záleží na zmluve EnÚ s príslušnou inštitúciou. ',
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
+        'type' => 'list_default',
+        'weight' => 2,
       ),
       'export' => array(
         'label' => 'inline',
@@ -914,7 +952,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_url_plain',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'export' => array(
         'label' => 'inline',
@@ -969,9 +1007,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 5,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 0,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1018,9 +1057,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 17,
+        'type' => 'link_default',
+        'weight' => 14,
       ),
       'export' => array(
         'label' => 'above',
@@ -1088,9 +1128,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 18,
+        'type' => 'link_default',
+        'weight' => 15,
       ),
       'export' => array(
         'label' => 'above',
@@ -1158,9 +1199,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 16,
+        'type' => 'link_default',
+        'weight' => 13,
       ),
       'export' => array(
         'label' => 'above',
@@ -1228,17 +1270,18 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak typ ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. 
-"Vlastná ilustrácia EnÚ" je taká ilusytrácia, ktoru vytvoril zamestnanec EnÚ alebo bola vytvorená na objednávku EnÚ,
-Ak je zaškrtnuté "CC alebo voľné dielo, rozhodnutím autora", treba vyplniť aj pole "Licencia"
-"Muzeálny objekt": ide o trojrozmerné dielo (socha, objekt), nie o dvojrozmerný obraz',
+    'description' => 'Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak voľba typu ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. <br />
+"Muzeálny objekt": trojrozmerné dielo (socha, objekt) umiestnené v múzeu, galérii, chráme a podobne. <br />
+"Vlastná ilustrácia EnÚ": ilustrácia, ktorú vytvoril zamestnanec EnÚ alebo bola vytvorená na objednávku EnÚ <br />
+Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplniť aj pole "Typ CC licencie"
+',
     'display' => array(
       'default' => array(
         'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 6,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1288,7 +1331,7 @@ Ak je zaškrtnuté "CC alebo voľné dielo, rozhodnutím autora", treba vyplniť
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 19,
       ),
       'export' => array(
         'label' => 'above',
@@ -1358,10 +1401,11 @@ Ak je zaškrtnuté "CC alebo voľné dielo, rozhodnutím autora", treba vyplniť
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak typ ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. 
-"Vlastná ilustrácia EnÚ" je taká ilusytrácia, ktoru vytvoril zamestnanec EnÚ alebo bola vytvorená na objednávku EnÚ,
-Ak je zaškrtnuté "CC alebo voľné dielo, rozhodnutím autora", treba vyplniť aj pole "Licencia"
-"Muzeálny objekt": ide o trojrozmerné dielo (socha, objekt), nie o dvojrozmerný obraz');
+  t('Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak voľba typu ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. <br />
+"Muzeálny objekt": trojrozmerné dielo (socha, objekt) umiestnené v múzeu, galérii, chráme a podobne. <br />
+"Vlastná ilustrácia EnÚ": ilustrácia, ktorú vytvoril zamestnanec EnÚ alebo bola vytvorená na objednávku EnÚ <br />
+Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplniť aj pole "Typ CC licencie"
+');
   t('Autor a redaktor: Vložte návrh obrázka. Grafik obrázok v prípade potreby upraví alebo prekreslí. Grafik: vložte náhľad finálneho obrázka ');
   t('Comment');
   t('Držiteľ práv');
@@ -1369,25 +1413,27 @@ Ak je zaškrtnuté "CC alebo voľné dielo, rozhodnutím autora", treba vyplniť
   t('Inštitúcia');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
-  t('Licencia');
   t('Meno autora diela');
   t('Meno autora snímky diela');
   t('Modifikované');
   t('Na zoradenie');
   t('Názov');
-  t('Názov diela (predbežne skryté)');
+  t('Názov diela');
   t('Obrázok (návrh/náhľad)');
   t('Použiť');
   t('Súbor');
   t('Súbory ilustrácie');
   t('Text k ilustrácii');
   t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.');
+  t('Typ CC licencie');
   t('Typ ilustrácie');
   t('URL autora diela');
   t('URL diela');
   t('URL textu licencie');
   t('Uveďte dátum, kedy bolo dielo prevzaté z pôvodnej stránky');
+  t('Uveďte konkrétnu verziu CC licencie alebo zvoľte "Iná verejná licencia"');
   t('Uveďte meno autora (maliara, fotografa) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
+  t('Uveďte meno autora (maliara, fotografa, architekta) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte meno autora fotografickej snímky trojrozmerného diela (objekt, socha, stavba). ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté');
@@ -1400,7 +1446,7 @@ Ak je zaškrtnuté "CC alebo voľné dielo, rozhodnutím autora", treba vyplniť
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');
-  t('Zvoľte, kde má byť obrázok použitý.');
+  t('Zvoľte, kde má byť obrázok použitý. "Zobraziť na webe" možno zvoliť len vtedy, ak to licenčné podmienky diela umožňujú: <br />- Ak je v poli "Typ ilustrácie" uvedené "Vlastná ilustrácia EnÚ", "Voľné dielo", "Creative Commons" alebo "Logo, erb, zástava", tak dielo možno zobraziť na webe. <br />- V prípadoch "Autorské dielo" a "Muzeálny objekt" záleží na zmluve EnÚ s príslušnou inštitúciou. ');
 
   return $field_instances;
 }

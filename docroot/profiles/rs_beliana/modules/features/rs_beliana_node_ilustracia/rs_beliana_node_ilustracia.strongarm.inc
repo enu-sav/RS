@@ -124,6 +124,9 @@ function rs_beliana_node_ilustracia_strongarm() {
       'export' => array(
         'custom_settings' => TRUE,
       ),
+      'lite_display' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
