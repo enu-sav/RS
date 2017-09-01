@@ -401,10 +401,6 @@ function beliana_merge(&$entity, $context = array()) {
  * @inheritdoc
  */
 function beliana_node_presave($node) {
-  // Ignore type 'ilustracia'
-  if($node->type == 'ilustracia') {
-    return;
-  }
   // Load user which is author of the node.
   $author = user_load($node->uid);
   setlocale(LC_COLLATE, 'sk_SK.utf8');
@@ -423,7 +419,8 @@ function beliana_node_presave($node) {
   //$subory = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)); //default sort instead of Slovak
   $subory = taxonomy_get_tree($vocabulary->vid);
   foreach ($subory as $term) {
-    if (strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
+    // ignore items starting with digit, such as '1. subor'
+    if (!ctype_digit(substr($term->name,0,1)) && strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
      }
