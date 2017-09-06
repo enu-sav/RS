@@ -669,8 +669,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => 'thumbnail',
+          'image_link' => 'file',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 3,
@@ -695,7 +695,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'file',
           'image_style' => 'medium',
         ),
         'type' => 'image',
