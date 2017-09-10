@@ -10772,6 +10772,42 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
   $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['id'] = 'shs_term_node_tid_depth_1';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['table'] = 'node';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['value'] = '';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['expose']['operator_id'] = 'shs_term_node_tid_depth_1_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['expose']['label'] = 'Lexikálna skupina (doplnenie)';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['expose']['operator'] = 'shs_term_node_tid_depth_1_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['expose']['identifier'] = 'shs_term_node_tid_depth_1';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['type'] = 'textfield';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth_1']['depth'] = '2';
   $handler->display->display_options['path'] = 'vyhladat';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať';
@@ -11359,6 +11395,7 @@ function rs_beliana_views_views_default_views() {
     t('Komentár obsahuje'),
     t('Komentár neobsahuje'),
     t('Lexikálna skupina (alt)'),
+    t('Lexikálna skupina (doplnenie)'),
     t('Opraviť importované'),
     t('V tomto náhľade možno importované (vydané) heslá prehľadávať aj na základe atribútov. Atribút je nejaká vlastnosť, ktorá bola zistená pri konverzii z doc súborov (bez diakritiky): \'instrukciepalo\' a \'instrukciesemancik\' (inštrukcie pre typografa), \'image\' (v texte má byť vložený obrázok), \'tabulka\' , \'matematika\', ghPriblizne\' a \'ghMultiPriblizne\' (lexikálnu skupinu hesla nebolo na základe informácií z generálneho heslára možné určiť jednoznačne). '),
     t('Zadajte časť názvu lex. skupiny, napr. "deji". Vyhľadávanie podľa mena redaktora nie je možné.'),
