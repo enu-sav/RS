@@ -64,11 +64,6 @@ Drupal.Views.parseQueryString = function (query) {
  * Helper function to return a view's arguments based on a path.
  */
 Drupal.Views.parseViewArgs = function (href, viewPath) {
-
-  // Provide language prefix.
-  if (Drupal.settings.pathPrefix) {
-    var viewPath = Drupal.settings.pathPrefix + viewPath;
-  }
   var returnObj = {};
   var path = Drupal.Views.getPath(href);
   // Ensure we have a correct path.
@@ -104,7 +99,7 @@ Drupal.Views.getPath = function (href) {
     href = href.substring(3, href.length);
   }
   var chars = ['#', '?', '&'];
-  for (var i in chars) {
+  for (i in chars) {
     if (href.indexOf(chars[i]) > -1) {
       href = href.substr(0, href.indexOf(chars[i]));
     }
