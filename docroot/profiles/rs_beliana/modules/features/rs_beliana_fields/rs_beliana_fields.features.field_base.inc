@@ -753,7 +753,8 @@ function rs_beliana_fields_field_default_field_bases() {
       'allowed_values' => array(
         'Vyplatiť' => 'Heslo vypracuje autor, vyplatiť',
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
-        'Konzultant' => 'Heslo vypracuje konzultant',
+        'Konzultant' => 'Heslo vypracuje konzultant, vyplatiť',
+        'Konzultant-vyplatené' => 'Heslo vypracuje konzultant, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracuje redaktor',
       ),
       'allowed_values_function' => '',
