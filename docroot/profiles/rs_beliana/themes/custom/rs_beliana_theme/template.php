@@ -6,23 +6,18 @@
  */
 
 /**
- * Implements hook_preprocess_node().
- *
- * @inheritdoc
- */
-function rs_beliana_theme_preprocess_node(&$args) {
-  if ($args['view_mode'] === 'export') {
-    $node = &$args['node'];
-    if ($node->type === 'ilustracia') {
-      $no_render = FALSE;
-      if (empty($node->field_obrazok_na_zverejnenie_)) {
-        $no_render = TRUE;
+* Add line breaks to field
+*/
+function rs_beliana_theme_preprocess_field(&$vars) {
+  if ($vars['element']['#field_type'] == 'text_long') {
+    $field_name = $vars['element']['#field_name'];
+    foreach ($vars['items'] as $key => &$item) {
+      if ($vars['element']['#object']->{$field_name}[LANGUAGE_NONE][$key]['format'] == NULL) {
+        $item['#markup'] = nl2br($item['#markup']);
       }
-      $args['no_render'] = $no_render;
     }
   }
 }
-
 
 function rs_beliana_theme_preprocess_views_view_fields(&$vars) {
   $view = $vars['view'];

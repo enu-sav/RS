@@ -376,12 +376,16 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     
     // Remove new paragraph starting with <p><strong>[1-9]
     $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
+    // Remove new paragraph starting with <p><span
+    $output = preg_replace('/<\/p>\s+<p>(<span)/', ' \1', $output);
     // remove paragraph starting with <p>— , bahamy.html
     $output = preg_replace('/<\/p>\s+<p>—/', ' —', $output);
     // merge paragraph ending  with —<p> ,
     $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
     // remove all paragraphs not starting with <strong
     $output = preg_replace('/<\/p>\s+<p>([^<][^s])/', ' \1', $output);
+    // add newline between concatenated paragraphs (needed in postprocessing)
+    $output = preg_replace("/<\/p><p>/", "</p>\n<p>", $output);
 
    
 

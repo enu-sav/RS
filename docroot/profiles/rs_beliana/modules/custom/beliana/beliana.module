@@ -394,48 +394,62 @@ function beliana_merge(&$entity, $context = array()) {
   if ($master != FALSE) {
     // Merge field_lexikalna_skupina.
     foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $ls) {
+      // find the top most parent (set to editor name) 
       $parents = taxonomy_get_parents_all($ls['tid']);
       foreach ($parents as $parent) {
         if (count(taxonomy_get_parents_all($parent->tid)) == 1) {
           $top_parent = $parent;
         }
       }
-
+      
+      // store the top most parent (editor name) to field_redaktori_zluceneho
       $found = FALSE;
-      foreach ($master->field_spravit_1_korekturu[LANGUAGE_NONE] as $tid) {
-        if ($tid['tid'] === $top_parent->tid) {
-          $found = TRUE;
+      if (isset($master->field_redaktori_zluceneho[LANGUAGE_NONE])) {
+        foreach ($master->field_redaktori_zluceneho[LANGUAGE_NONE] as $tid) {
+          if ($tid['tid'] === $top_parent->tid) {
+            $found = TRUE;
+          }
         }
       }
       if (!$found) {
-        $master->field_spravit_1_korekturu[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
-        // We want to preserve the original taxonomy values in further processing.
-        $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
+        $master->field_redaktori_zluceneho[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
       }
+      // We want to preserve the original taxonomy values in further processing.
+      $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
     }
 
     // Merge field_komentar_instrukcie, use "\n" as separator.
-    if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
-      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+    if (isset($entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+        $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     // Merge field_text_hesla, use "</p>\n<p>" as separator.
     if (!isset($master->field_text_hesla[LANGUAGE_NONE][0]['value']) || empty($master->field_text_hesla[LANGUAGE_NONE][0]['value'])) {
-      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
     }
     else {
-      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      // special requirement: in merging put GEO articles in front of others
+      if ($top_parent->tid === "390") {  // "390" is Lubica Krajcovicova, editor of GEO articles. 
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'] . "</p><br><p>" . $master->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     // Merge field_text_z_gh, use "\n" as separator.
-    if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
-      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+    if (isset($entity->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+        $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] = $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     // Merge field_ilustracia.
@@ -445,12 +459,14 @@ function beliana_merge(&$entity, $context = array()) {
       }
     }
 
-    // Merge field_text_z_gh, use "\n" as separator.
-    if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] .= $entity->field_atributy[LANGUAGE_NONE][0]['value'];
-    }
-    else {
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+    // Merge field_atributy, use "\n" as separator.
+    if (isset($entity->field_atributy[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
+        $master->field_atributy[LANGUAGE_NONE][0]['value'] = $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      }
     }
 
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
@@ -458,9 +474,9 @@ function beliana_merge(&$entity, $context = array()) {
 
     $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
     // Empty alias for original entity.
-    $entity->path['alias'] = '';
+    //$entity->path['alias'] = '';
     // Set automatic alias creation to FALSE.
-    $entity->path['pathauto'] = FALSE;
+    //$entity->path['pathauto'] = FALSE;
     node_save($entity);
     workbench_moderation_moderate($entity, 'ukoncenezluene');
   }
@@ -492,10 +508,10 @@ function beliana_node_presave($node) {
   // Load user which is author of the node.
   $author = user_load($node->uid);
   setlocale(LC_COLLATE, 'sk_SK.utf8');
-
-
+  
   // fix field_na_zoradenie if necessary
-  if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
+  //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
+  if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
     $transliterated = _beliana_remove_accents($node->title);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
@@ -507,38 +523,10 @@ function beliana_node_presave($node) {
   //$subory = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)); //default sort instead of Slovak
   $subory = taxonomy_get_tree($vocabulary->vid);
   foreach ($subory as $term) {
-    if (strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
+    // ignore items starting with digit, such as '1. subor'
+    if (!ctype_digit(substr($term->name, 0, 1)) && strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
-    }
-  }
-
-  // New nodes don't have any state.
-  if (isset($node->workbench_moderation['current']->state) && isset($node->workbench_moderation_state_new)) {
-    if (($node->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $node->workbench_moderation_state_new === '1_korektura')
-    ) {
-      $node->field_lexikalna_skupina['und'][0] = array_shift($node->field_spravit_1_korekturu['und']);
-    }
-
-    if ($node->workbench_moderation['current']->state === '1_korektura' && $node->workbench_moderation_state_new === 'u_vyst_redaktora_3'
-    ) {
-      if (!empty($node->field_spravit_1_korekturu['und'])) {
-        $node->workbench_moderation_state_new = '1_korektura';
-        $node->field_lexikalna_skupina['und'][0] = array_shift($node->field_spravit_1_korekturu['und']);
-      }
-      else {
-        $term = array_shift(taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny'));
-        $node->field_lexikalna_skupina['und'][0] = array('tid' => $term->tid);
-      }
-    }
-
-    if ($node->workbench_moderation_state_new === '2_korekt_ra') {
-      $term = array_shift(taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny'));
-      foreach ($node->field_lexikalna_skupina['und'] as $ls) {
-        if ($ls['tid'] == $term->tid) {
-          drupal_set_message('Ako lexikálnu skupinu zadajte meno redaktora!', 'error');
-        }
-      }
     }
   }
 
@@ -556,14 +544,16 @@ function beliana_node_presave($node) {
 
 /**
  * Implements hook_form_alter().
+ * If user is 'nepriradený' (uid 719) and state is `zaradene`,
+ * we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
+ * This forces editor to use the view "Priradit autora" to assign article to and author
  *
  * @inheritdoc
  */
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
-  if ('workbench_moderation_moderate_form' === $form_id) {
-    // If user is 'nepriradený' and state is `zaradene`,
-    // we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
+  //$form['node']['#value'] is not set if user cannot modify a node
+  if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && $form['node']['#value']->uid == 719
     ) {
       foreach ($form['state']['#options'] as $k => $v) {
@@ -585,48 +575,89 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
-  // If is new, current state is empty.
-  //MS modify field_lexikalna_skupina only for merged items, i.e. >field_zlucene_z is not empty
-  if (isset($values['node']->workbench_moderation['current']->state) && count($values['node']->field_zlucene_z['und']) > 0) {
-    if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura')) {
-      $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
-    }
+  //if (isset($values['node']->workbench_moderation['current']->state) && count($values['node']->field_zlucene_z['und']) > 0) {
+  if (isset($values['node']->workbench_moderation['current']->state) && isset($values['node']->field_zlucene_z['und'])) {
 
-    if ($values['node']->workbench_moderation['current']->state === '1_korektura' && $values['state'] === 'u_vyst_redaktora_3') {
-      if (!empty($values['node']->field_spravit_1_korekturu['und'])) {
-        $values['node']->workbench_moderation_state_new = '1_korektura';
-        $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
-      }
-      else {
-        $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
-      }
-    }
+    // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
+    if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura'))
+      _start_korektura($values);
 
-    if ($values['state'] === '2_korekt_ra') {
-      if (count($values['node']->field_lexikalna_skupina['und']) != 1) {
-        //MS drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
-        drupal_set_message('Heslo je zlúčené a má viacero lexikálnych skupín. Pri odosielaní na 2. korektúru však heslo môže mať len jednu lexikálnu skupinu.', 'error');
-        drupal_set_message('Lexikálne skupiny upravte, heslo uložte a potom odošlite na 2. korektúru ešte raz. Po návrate z 2. korektúry sa lexikálne skupiny vrátia do pôvodného stavu.', 'error');
-        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-      }
-    }
+    // transition 1_korektura >> u_vyst_redaktora_3 
+    if ($values['node']->workbench_moderation['current']->state === '1_korektura' && $values['state'] === 'u_vyst_redaktora_3')
+      _transition_korektura($values, "1_korektura");
 
-    // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
-    if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
-      drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
-      $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-    }
 
-    // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
-    if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
-      drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
-      $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-    }
+    $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
+    if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
+      // starting 'korektura': copy editor names to field_spravit_1_korekturu
+      if (($values['node']->workbench_moderation['current']->state === 'u_vyst_redaktora_3' && $values['state'] === '2_korekt_ra'))
+        _start_korektura($values);
 
-    if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_3') {
-      $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
+      // transition 2_korekt_ra >> u_vyst_redaktora_4 
+      if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_4')
+        _transition_korektura($values, "2_korekt_ra");
     }
+    else // korekt_ra: version with only one editor selected
+      _run_2_korektura_single($values);
     node_save($values['node']);
+  }
+}
+
+/**
+ * Helper function: start 'korektura'
+ */
+function _start_korektura(&$values) {
+  // copy editor names to field_spravit_1_korekturu
+  foreach ($values['node']->field_redaktori_zluceneho['und'] as $redaktor)
+    $values['node']->field_spravit_1_korekturu['und'][]['tid'] = $redaktor['tid'];
+  // take the next editor
+  $values['node']->field_lexikalna_skupina['und'] = array();
+  $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
+}
+
+/**
+ * Helper function: transition korektura >>  next state
+ */
+function _transition_korektura(&$values, $korektura) {
+  if (!empty($values['node']->field_spravit_1_korekturu['und'])) {
+    // return back to '$korektura'
+    $values['node']->workbench_moderation_state_new = $korektura;
+    // take the next editor
+    $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
+  }
+  else {
+    // we are done, restore the initial status
+    $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
+  }
+}
+
+/**
+ * Helper function: transition to 2_korekt_ra
+ */
+function _run_2_korektura_single(&$values) {
+  if ($values['state'] === '2_korekt_ra') {
+    if (count($values['node']->field_lexikalna_skupina['und']) != 1) {
+      //MS drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
+      drupal_set_message('Heslo je zlúčené a má viacero lexikálnych skupín. Pri odosielaní na 2. korektúru však heslo môže mať len jednu lexikálnu skupinu.', 'error');
+      drupal_set_message('Lexikálne skupiny upravte, heslo uložte a potom odošlite na 2. korektúru ešte raz. Po návrate z 2. korektúry sa lexikálne skupiny vrátia do pôvodného stavu.', 'error');
+      $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+    }
+  }
+
+  // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
+  if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
+    drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+  }
+
+  // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
+  if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
+    drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+  }
+
+  if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_3') {
+    $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
   }
 }
 
@@ -1559,3 +1590,5 @@ function _beliana_remove_accents($text) {
   );
   return strtr($text, $trans);
 }
+
+# vim: ai ts=2 sts=2 et sw=2 ft=php

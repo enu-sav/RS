@@ -14,7 +14,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'Replace\',\'Find\'],
+    [\'Source\',\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
@@ -61,7 +61,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'theme_config_js' => 'f',
         'js_conf' => '// na https stránke je požadovaný https pristup na cdn
 // must be placed before the  config.autosave line (and maybe others)
-config.mathJaxLib = \'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
+config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
 // keep autosaved stuff for 14 days
 config.autosave_NotOlderThen = 20160;
 config.autoGrow_maxHeight = 500;
@@ -81,7 +81,7 @@ config.disableNativeSpellChecker = false;
 config.browserContextMenuOnCtrl = true;
 config.specialChars = [ 
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
-[\'–\', \'stredná pomlčka: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
+[\'–\', \'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
 [\'-\', \'spojovník: v zložených slovách bez medzier (Rakúsko-Uhorsko, bielo-modrý).\'],
 [\'➔\', \'odkaz\'],
 [\'*\',\'hviezdička\'],
@@ -98,13 +98,14 @@ config.specialChars = [
 [\'@\', \'zavináč\'],
 [\'·\', \'krát\'],
 [\'×\', \'krát\'],
+[\'±\', \'plus minus\'],
+[\'−\',\'znamienko mínus, Alt +2212\'],
 [\'>\', \'znak väčší  \'], \'≥\',
 [\'<\', \'znak menší\'], \'≤\', 
 [\'‰\', \'Promile\'],
 [\'%\', \'Percento\'],
 [\'&\', \'and\'],
 [\'©\', \'Copyright\'],
-[\'±\', \'plus minus\'],
 [\'µ\',\'mikro\'],
 [\'Ω\',\'Ohm\'],
 [\'∞\',\'nekonečno\'],
@@ -258,7 +259,7 @@ config.specialChars = [
         'ss' => 2,
         'toolbar' => '[
     [\'Source\'],
-    [\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'Replace\',\'Find\'],
+    [\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
@@ -304,7 +305,7 @@ config.specialChars = [
         'theme_config_js' => 'f',
         'js_conf' => '// na https stránke je požadovaný https pristup na cdn
 // must be placed before the  config.autosave line (and maybe others)
-config.mathJaxLib = \'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
+config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
 config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
@@ -322,7 +323,7 @@ config.disableNativeSpellChecker = false;
 config.browserContextMenuOnCtrl = true;
 config.specialChars = [ 
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
-[\'–\', \'stredná pomlčka: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
+[\'–\', \'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
 [\'-\', \'spojovník: v zložených slovách bez medzier (Rakúsko-Uhorsko, bielo-modrý).\'],
 [\'➔\', \'odkaz\'],
 [\'*\',\'hviezdička\'],
@@ -338,7 +339,9 @@ config.specialChars = [
 [\'“\', \'sekunda\'],
 [\'@\', \'zavináč\'],
 [\'·\', \'krát\'],
-[\'✕\', \'krát\'],
+[\'×\', \'krát\'],
+[\'±\', \'plus minus\'],
+[\'−\',\'znamienko mínus, Alt +2212\'],
 [\'>\', \'znak väčší  \'],\'≥\',
 [\'<\', \'znak menší\'],\'≤\',
 [\'‰\', \'Promile\'],

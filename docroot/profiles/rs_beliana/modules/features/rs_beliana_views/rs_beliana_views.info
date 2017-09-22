@@ -21,6 +21,7 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[variable][] = views_exposed_filter_any_label
 features[variable][] = views_show_additional_queries
+features[views_view][] = archivovane
 features[views_view][] = beliana
 features[views_view][] = export
 features[views_view][] = export_na_import

@@ -231,6 +231,7 @@ function beliana_sync_sync($nid, &$context) {
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       'dates' => $dates,
+      'info_published' => _extract_published_info($node).". Aktualizované "._form_date2().".",
     ];
 
     // Use POST for creating new items and PATCH for updating existing items.
@@ -500,4 +501,89 @@ function _extract_license_information($node) {
   }
   $license_information = implode('<br>', $local_license_information);
   return $license_information;
+}
+
+function _extract_published_info($node) {
+  // key is a first string in the next band 
+  $bands = array (
+    "bell" => "Vydané v auguste 1999",
+    "czzzz" => "Vydané v júli 2001",
+    "eh" => "Vydané v máji 2003",
+    "galb" => "Vydané v júli 2005",
+    "his" => "Vydané vo februári 2008",
+    "in" => "Vydané v apríli 2010",
+    "kam" => "Vydané v novembri 2013",
+    "koks" => "Vydané v marci 2017",
+  );
+
+  setlocale(LC_COLLATE, 'sk_SK.utf8');
+  if ( $node->type ==  'importovane_heslo' ){
+    // get name of article collection, specified in node->field_taxsubor 
+    $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
+    $collections = taxonomy_get_tree($vocabulary->vid);
+    foreach ($collections as $term) {
+      if ($term->tid == $node->field_taxsubor['und'][0]['tid']) {
+        $collection = $term->name;
+        break;
+      }
+    }
+
+    # get publication year info
+    foreach ($bands as $key => $txt) {
+      $publishedinfo = $txt;
+      if (strcoll($collection, $key) < 0 ) {
+	# $publishedinfo is not set for the first band
+        #if (!isset($publishedinfo))
+          #$publishedinfo = $txt;
+        break;
+      }
+    }
+  } else {
+    // needs to remember the publication date in node field
+    $publishedinfo = "Vydané "._form_date6(); 
+  }
+  return $publishedinfo;
+}
+
+
+/*
+ * replaces month abbrevoation with inflected full name in genitive 
+ */
+function _form_date2() {
+  setlocale(LC_TIME, 'sk_SK.utf8');
+  $fdate = strftime("%e. %b %Y");
+  $fdate = str_replace("jan","januára",$fdate);
+  $fdate = str_replace("feb","februára",$fdate);
+  $fdate = str_replace("mar","marca",$fdate);
+  $fdate = str_replace("apr","apríla",$fdate);
+  $fdate = str_replace("máj","mája",$fdate);
+  $fdate = str_replace("jún","júna",$fdate);
+  $fdate = str_replace("júl","júla",$fdate);
+  $fdate = str_replace("aug","augusta",$fdate);
+  $fdate = str_replace("sep","septembra",$fdate);
+  $fdate = str_replace("okt","októbra",$fdate);
+  $fdate = str_replace("nov","novembra",$fdate);
+  $fdate = str_replace("dec","decembra",$fdate);
+  return $fdate;
+}
+
+/*
+ * replaces month abbrevoation with inflected full name in local with preposition 
+ */
+function _form_date6() {
+  setlocale(LC_TIME, 'sk_SK.utf8');
+  $fdate = strftime("%b %Y");
+  $fdate = str_replace("jan","v januári",$fdate);
+  $fdate = str_replace("feb","vo februári",$fdate);
+  $fdate = str_replace("mar","v marci",$fdate);
+  $fdate = str_replace("apr","v apríli",$fdate);
+  $fdate = str_replace("máj","v máji",$fdate);
+  $fdate = str_replace("jún","v júni",$fdate);
+  $fdate = str_replace("júl","v júli",$fdate);
+  $fdate = str_replace("aug","v auguste",$fdate);
+  $fdate = str_replace("sep","v septembri",$fdate);
+  $fdate = str_replace("okt","v októbri",$fdate);
+  $fdate = str_replace("nov","v novembri",$fdate);
+  $fdate = str_replace("dec","v decembri",$fdate);
+  return $fdate;
 }

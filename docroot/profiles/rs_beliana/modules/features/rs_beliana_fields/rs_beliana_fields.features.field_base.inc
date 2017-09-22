@@ -100,38 +100,6 @@ function rs_beliana_fields_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_d_tum_prevzatia'.
-  $field_bases['field_d_tum_prevzatia'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_d_tum_prevzatia',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'date',
-    'settings' => array(
-      'cache_count' => 4,
-      'cache_enabled' => 0,
-      'granularity' => array(
-        'day' => 'day',
-        'hour' => 0,
-        'minute' => 0,
-        'month' => 'month',
-        'second' => 0,
-        'year' => 'year',
-      ),
-      'timezone_db' => '',
-      'todate' => '',
-      'tz_handling' => 'none',
-    ),
-    'translatable' => 0,
-    'type' => 'date',
-  );
-
   // Exported field_base: 'field_datum'.
   $field_bases['field_datum'] = array(
     'active' => 1,
@@ -400,15 +368,14 @@ function rs_beliana_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'CC BY ' => ' CC BY Creative Commons Attribution („uvedenie autora“)',
-        'CC BY-ND ' => ' CC BY-ND Creative Commons Attribution-No-derivates („uvedenie autora – bez odvodeného obsahu“)',
-        'CC BY-NC ' => ' CC BY-NC Creative Commons Attribution-NonCommercial („uvedenie autora – nekomerčné použitie“)',
-        'CC BY-SA ' => ' CC BY-SA Creative Commons Attribution-ShareAlike („uvedenie autora – rovnaké šírenie“)',
-        'CC BY-NC-ND ' => ' CC BY-NC-ND Creative Commons Attribution-NonCommercial-No-derivates („uvedenie autora – nekomerčné použitie – bez odvodeného obsahu“)',
-        'CC BY-NC-SA ' => ' CC BY-NC-SA Creative Commons Attribution-NonCommercial-ShareAlike (“uvedenie autora – nekomerčné použitie – rovnaké šírenie”)',
+        'CC BY ' => ' CC BY Creative Commons Attribution (uvedenie autora)',
+        'CC BY-ND ' => ' CC BY-ND Creative Commons Attribution-No-derivates (uvedenie autora-bez odvodeného obsahu)',
+        'CC BY-NC ' => ' CC BY-NC Creative Commons Attribution-NonCommercial (uvedenie autora-nekomerčné použitie)',
+        'CC BY-SA ' => ' CC BY-SA Creative Commons Attribution-ShareAlike (uvedenie autora-rovnaké šírenie)',
+        'CC BY-NC-ND ' => ' CC BY-NC-ND Creative Commons Attribution-NonCommercial-No-derivates (uvedenie autora-nekomerčné použitie-bez odvodeného obsahu)',
+        'CC BY-NC-SA ' => ' CC BY-NC-SA Creative Commons Attribution-NonCommercial-ShareAlike (uvedenie autora-nekomerčné použitie-rovnaké šírenie)',
         'CC0 ' => ' CC0 (voľné dielo na základe rozhodnutia autora)',
-        'Public domain ' => ' Public domain (voľné dielo na základe rozhodnutia autora)',
-        'Iná VL ' => ' Iná verejná licencia',
+        'IVL' => 'Iná verejná licencia',
       ),
       'allowed_values_function' => '',
     ),
@@ -493,7 +460,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_nazov_diela',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'format' => array(
@@ -507,31 +474,6 @@ function rs_beliana_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_obrazok_na_zverejnenie_'.
-  $field_bases['field_obrazok_na_zverejnenie_'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_obrazok_na_zverejnenie_',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'image',
-    'settings' => array(
-      'default_image' => 0,
-      'uri_scheme' => 'public',
-    ),
-    'translatable' => 0,
-    'type' => 'image',
   );
 
   // Exported field_base: 'field_obrazok_navrh_'.
@@ -811,7 +753,8 @@ function rs_beliana_fields_field_default_field_bases() {
       'allowed_values' => array(
         'Vyplatiť' => 'Heslo vypracuje autor, vyplatiť',
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
-        'Konzultant' => 'Heslo vypracuje konzultant',
+        'Konzultant' => 'Heslo vypracuje konzultant, vyplatiť',
+        'Konzultant-vyplatené' => 'Heslo vypracuje konzultant, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracuje redaktor',
       ),
       'allowed_values_function' => '',
@@ -840,11 +783,12 @@ function rs_beliana_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'Zatiaľ neurčený' => 'Zatiaľ neurčený',
-        'Vlastná ilustrácia' => ' Vlastná ilustrácia EnÚ',
-        'Public domain' => ' Voľné dielo, 70 (50) rokov od smrti autora',
-        'CC licencia' => ' CC alebo voľné dielo, rozhodnutím autora',
-        'Získané na základe zmluvy' => 'Autorské dielo (na základe zmluvy alebo súhlasu)',
+        'Vlastná ilustrácia' => 'Vlastná ilustrácia EnÚ',
+        'Public domain' => 'Voľné dielo alebo 70 (50) rokov od smrti autora',
+        'CC licencia' => 'Creative Commons alebo iná verejná licencia',
+        'Autorské dielo' => 'Autorské dielo (na základe zmluvy alebo súhlasu)',
         'Muzeálny objekt' => 'Muzeálny objekt (na základe zmluvy alebo súhlasu)',
+        'Iná licencia' => 'Logo, erb, zástava',
       ),
       'allowed_values_function' => '',
     ),
