@@ -1020,6 +1020,9 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_vyplatit',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1483,6 +1486,9 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_vyplatit',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1600,6 +1606,9 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_vyplatit',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -3130,6 +3139,8 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_vyplatit',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
