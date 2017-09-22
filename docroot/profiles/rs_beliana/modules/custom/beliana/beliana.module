@@ -157,21 +157,25 @@ function beliana_field_formatter_view($entity_type, $entity, $field, $instance, 
  */
 function beliana_views_pre_render(&$view) {
   if ($view->name == 'v_etky_hesl_' && $view->current_display == 'page') {
+    $exposed_data = $view->exposed_data['taxonomy_entity_index_tid_depth'];
 
     foreach ($view->result as $r => $result) {
       $group = array();
+      $entity = $result->_field_data['nid']['entity'];
 
-      if (!empty($result->_field_data['nid']['entity']->field_lexikalna_skupina)) {
-        foreach ($result->_field_data['nid']['entity']->field_lexikalna_skupina[LANGUAGE_NONE] as $field) {
+      if (!empty($entity->field_lexikalna_skupina)) {
+        foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $field) {
           $group[] = $field['tid'];
         }
       }
 
-      $diff = array_intersect(array_keys($view->exposed_data['taxonomy_entity_index_tid_depth']), $group);
+      if (!empty($exposed_data)) {
+        $diff = array_intersect(array_keys($exposed_data), $group);
 
-      if (empty($diff)) {
-        //filter nodes by current lexikalna skupina (taxonomy revision show all workbench versions)
-        unset($view->result[$r]);
+        if (empty($diff)) {
+          //filter nodes by current lexikalna skupina (taxonomy revision show all workbench versions)
+          unset($view->result[$r]);
+        }
       }
     }
   }
@@ -401,7 +405,7 @@ function beliana_merge(&$entity, $context = array()) {
           $top_parent = $parent;
         }
       }
-      
+
       // store the top most parent (editor name) to field_redaktori_zluceneho
       $found = FALSE;
       if (isset($master->field_redaktori_zluceneho[LANGUAGE_NONE])) {
@@ -508,7 +512,7 @@ function beliana_node_presave($node) {
   // Load user which is author of the node.
   $author = user_load($node->uid);
   setlocale(LC_COLLATE, 'sk_SK.utf8');
-  
+
   // fix field_na_zoradenie if necessary
   //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
   if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
