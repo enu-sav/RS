@@ -11,7 +11,7 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $export = array();
 
   $environment = new stdClass();
-  $environment->disabled = FALSE; /* Edit this to true to make a default environment disabled initially */
+  $environment->disabled = TRUE; /* Edit this to true to make a default environment disabled initially */
   $environment->api_version = 1;
   $environment->machine = 'default_environment';
   $environment->name = 'DEV';

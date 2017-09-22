@@ -81,7 +81,7 @@ config.disableNativeSpellChecker = false;
 config.browserContextMenuOnCtrl = true;
 config.specialChars = [ 
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
-[\'–\', \'stredná pomlčka: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
+[\'–\', \'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
 [\'-\', \'spojovník: v zložených slovách bez medzier (Rakúsko-Uhorsko, bielo-modrý).\'],
 [\'➔\', \'odkaz\'],
 [\'*\',\'hviezdička\'],
@@ -99,7 +99,7 @@ config.specialChars = [
 [\'·\', \'krát\'],
 [\'×\', \'krát\'],
 [\'±\', \'plus minus\'],
-[\'–\',\'znamienko mínus\'],
+[\'−\',\'znamienko mínus, Alt +2212\'],
 [\'>\', \'znak väčší  \'], \'≥\',
 [\'<\', \'znak menší\'], \'≤\', 
 [\'‰\', \'Promile\'],
@@ -323,7 +323,7 @@ config.disableNativeSpellChecker = false;
 config.browserContextMenuOnCtrl = true;
 config.specialChars = [ 
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
-[\'–\', \'stredná pomlčka: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
+[\'–\', \'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
 [\'-\', \'spojovník: v zložených slovách bez medzier (Rakúsko-Uhorsko, bielo-modrý).\'],
 [\'➔\', \'odkaz\'],
 [\'*\',\'hviezdička\'],
@@ -341,7 +341,7 @@ config.specialChars = [
 [\'·\', \'krát\'],
 [\'×\', \'krát\'],
 [\'±\', \'plus minus\'],
-[\'–\',\'znamienko mínus\'],
+[\'−\',\'znamienko mínus, Alt +2212\'],
 [\'>\', \'znak väčší  \'],\'≥\',
 [\'<\', \'znak menší\'],\'≤\',
 [\'‰\', \'Promile\'],
