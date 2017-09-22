@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Module file for beliana module.
@@ -52,7 +53,7 @@ function beliana_menu_alter(&$items) {
   /* get rid of the create/forum item in the menu */
   /* not a good idea - blocks the possibility to create topics */
   //if (isset($items['node/add/forum'])) {
-    //unset($items['node/add/forum']);
+  //unset($items['node/add/forum']);
   //}
 }
 
@@ -65,15 +66,93 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   if (isset($data['tabs'][0]['output'])) {
     foreach ($data['tabs'][0]['output'] as $i => $tab) {
       if (in_array($tab['#link']['path'], array(
-        'admin/tasks',
-        'admin/index',
-      ))) {
+            'admin/tasks',
+            'admin/index',
+          ))) {
         unset($data['tabs'][0]['output'][$i]);
       }
     }
   }
 }
 
+/**
+ * Implements hook_field_formatter_info().
+ *
+ * @inheritdoc
+ */
+function beliana_field_formatter_info() {
+  return array(
+    'beliana_external_image' => array(
+      'label' => t('External image'),
+      'field types' => array('url'),
+      'settings' => array(
+        'size' => 'medium'
+      )
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function beliana_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  module_load_include('module', 'image');
+
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $element = array();
+
+  $element['size'] = array(
+    '#type' => 'select',
+    '#title' => t('Image style'),
+    '#default_value' => $settings['size'],
+  );
+
+  foreach (image_styles() as $key => $style) {
+    $element['size']['#options'][$key] = $style['label'];
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function beliana_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $styles = image_styles();
+
+  return t('Image style: @size', array('@size' => $styles[$settings['size']]['label']));
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ *
+ * @inheritdoc
+ */
+function beliana_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  if ($display['type'] == 'beliana_external_image') {
+    $width = 100;
+    $styles = image_styles();
+
+    foreach ($styles[$settings['size']]['effects'] as $effect) {
+      if ($effect['name'] == 'image_scale') {
+        $width = $effect['data']['width'];
+      }
+    }
+
+    foreach ($items as $delta => $item) {
+      $element[$delta] = array('#markup' => '<img src="' . $item['value'] . '" width="' . $width . '" />');
+    }
+  }
+
+  return $element;
+}
 
 /**
  * Menu callback for `admin/group-list` path.
@@ -89,27 +168,28 @@ function beliana_group_list() {
   $output = '';
   foreach ($terms as $term) {
     // The list seems to be sorted according to the hierarchy, so print items with depth==0 as H1 headers
-    if($term->depth == 0){
-        $output .= '<h1>' . $term->name . '</h1>';
-    } else {
-        //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
-        $output .= '<strong>' . $term->name . '</strong>';
-        $output .= '<ul>';
-        foreach ($users as $user) {
-          if (isset($user->workbench_access[$term->tid])) {
-            $output .= 
-		'<li>' 
-		. $user->name . ', ' 
-		. $user->field_meno['und'][0][value] . ', ' 
-		. $user->field_priezvisko['und'][0][value] . ', ' 
-		. $user->field_autorska_zmluva['und'][0][value] . ', ' 
-		. $user->mail //. ', '
-		//. $term->name
-		. '</li>'; }
+    if ($term->depth == 0) {
+      $output .= '<h1>' . $term->name . '</h1>';
+    }
+    else {
+      //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
+      $output .= '<strong>' . $term->name . '</strong>';
+      $output .= '<ul>';
+      foreach ($users as $user) {
+        if (isset($user->workbench_access[$term->tid])) {
+          $output .= '<li>'
+              . $user->name . ', '
+              . $user->field_meno['und'][0][value] . ', '
+              . $user->field_priezvisko['und'][0][value] . ', '
+              . $user->field_autorska_zmluva['und'][0][value] . ', '
+              . $user->mail //. ', '
+              //. $term->name
+              . '</li>';
         }
-        //$output .= '</ul><br><br>';
-        $output .= '</ul>';
       }
+      //$output .= '</ul><br><br>';
+      $output .= '</ul>';
+    }
   }
   return $output;
 }
@@ -202,7 +282,6 @@ function beliana_assign_author_validate($form, &$form_state) {
  */
 function beliana_assign_author_submit($form, $form_state) {
   return _beliana_submit_assign_user_form($form_state, 'u_autora');
-
 }
 
 /**
@@ -233,7 +312,6 @@ function beliana_assign_corrector_form($form, &$form_state) {
  */
 function beliana_assign_corrector_validate($form, &$form_state) {
   _beliana_validate_assign_user_form($form_state);
-
 }
 
 /**
@@ -392,13 +470,13 @@ function beliana_node_presave($node) {
   $author = user_load($node->uid);
   setlocale(LC_COLLATE, 'sk_SK.utf8');
 
- 
+
   // fix field_na_zoradenie if necessary
-  if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
+  if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
     $transliterated = _beliana_remove_accents($node->title);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
-    $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated,0,50);
+    $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
 
   // set field_taxsubor using the value of field_na_zoradenie 
@@ -409,19 +487,17 @@ function beliana_node_presave($node) {
     if (strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
-     }
-   }
+    }
+  }
 
   // New nodes don't have any state.
   if (isset($node->workbench_moderation['current']->state) && isset($node->workbench_moderation_state_new)) {
-    if (($node->workbench_moderation['current']->state === 'na_jazykovu_korekturu'
-      && $node->workbench_moderation_state_new === '1_korektura')
+    if (($node->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $node->workbench_moderation_state_new === '1_korektura')
     ) {
       $node->field_lexikalna_skupina['und'][0] = array_shift($node->field_spravit_1_korekturu['und']);
     }
 
-    if ($node->workbench_moderation['current']->state === '1_korektura'
-      && $node->workbench_moderation_state_new === 'u_vyst_redaktora_3'
+    if ($node->workbench_moderation['current']->state === '1_korektura' && $node->workbench_moderation_state_new === 'u_vyst_redaktora_3'
     ) {
       if (!empty($node->field_spravit_1_korekturu['und'])) {
         $node->workbench_moderation_state_new = '1_korektura';
@@ -445,14 +521,10 @@ function beliana_node_presave($node) {
 
   // Editor has to change author from 'import' to something else.
   // If node is assigned to 'import', we need to forbid change of state.
-  if ($author->name === 'import'
-    && isset($node->workbench_moderation_state_new)
-    && isset($node->workbench_moderation['current']->state)
-    && $node->workbench_moderation['current']->state === 'zaradene'
-    && in_array($node->workbench_moderation_state_new, array(
-      'u_autora',
-      'needs_review',
-    ))
+  if ($author->name === 'import' && isset($node->workbench_moderation_state_new) && isset($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state === 'zaradene' && in_array($node->workbench_moderation_state_new, array(
+        'u_autora',
+        'needs_review',
+      ))
   ) {
     $node->workbench_moderation_state_new = 'zaradene';
     drupal_set_message($node->title . ': Pred zmenou stavu treba heslo priradiť autorovi.', 'error');
@@ -469,8 +541,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   if ('workbench_moderation_moderate_form' === $form_id) {
     // If user is 'nepriradený' and state is `zaradene`,
     // we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene'
-      && $form['node']['#value']->uid == 719
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && $form['node']['#value']->uid == 719
     ) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, array('needs_review', 'u_autora'))) {
@@ -518,15 +589,15 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     }
 
     // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
-    if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])){
-        drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
-        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+    if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
+      drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+      $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
     }
 
     // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
-    if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])){
-        drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
-        $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
+    if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
+      drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
+      $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
     }
 
     if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_3') {
@@ -552,7 +623,6 @@ function _beliana_assign_user_form() {
   );
   return $form;
 }
-
 
 /**
  * Helper function for user autocomplete form validation.
@@ -609,7 +679,6 @@ function _beliana_assign_user(&$node, $context) {
     workbench_moderation_moderate($node, $context['status']);
   }
 }
-
 
 /**
  * Helper function removing accents.

@@ -38,6 +38,24 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_obrazok_odkaz'.
+  $field_bases['field_obrazok_odkaz'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_obrazok_odkaz',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'url',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'url',
+  );
+
   // Exported field_base: 'field_subor_ilustracie'.
   $field_bases['field_subor_ilustracie'] = array(
     'active' => 1,

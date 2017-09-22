@@ -2726,10 +2726,24 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
   $handler->display->display_options['fields']['section']['field'] = 'section';
   $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Obrázok (návrh/náhľad) */
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['id'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
+    'image_style' => 'thumbnail',
+    'image_link' => '',
+  );
+  /* Pole: Obsah: Súbory ilustrácie */
+  $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['table'] = 'field_data_field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['field'] = 'field_subor_ilustracie';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_subor_ilustracie']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -9595,10 +9609,22 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
     'image_style' => 'thumbnail',
     'image_link' => '',
+  );
+  /* Pole: Obsah: Obrázok - odkaz (návrh/náhľad) */
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['id'] = 'field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['table'] = 'field_data_field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['field'] = 'field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['empty'] = '[field_obrazok_navrh_]';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['type'] = 'beliana_external_image';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['settings'] = array(
+    'size' => 'thumbnail',
   );
   /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
