@@ -119,7 +119,7 @@ function rs_beliana_media_strongarm() {
       'filesize' => '1',
       'quota' => '0',
       'tuquota' => '0',
-      'extensions' => 'gif png jpg jpeg',
+      'extensions' => 'gif png jpg jpeg svg',
       'dimensions' => '0',
       'filenum' => '0',
       'directories' => array(
