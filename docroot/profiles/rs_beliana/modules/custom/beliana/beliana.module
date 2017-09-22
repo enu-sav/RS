@@ -96,8 +96,6 @@ function beliana_field_formatter_info() {
  * Implements hook_field_formatter_settings_form().
  */
 function beliana_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
-  module_load_include('module', 'image');
-
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
 
@@ -152,6 +150,31 @@ function beliana_field_formatter_view($entity_type, $entity, $field, $instance, 
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function beliana_views_pre_render(&$view) {
+  if ($view->name == 'v_etky_hesl_' && $view->current_display == 'page') {
+
+    foreach ($view->result as $r => $result) {
+      $group = array();
+
+      if (!empty($result->_field_data['nid']['entity']->field_lexikalna_skupina)) {
+        foreach ($result->_field_data['nid']['entity']->field_lexikalna_skupina[LANGUAGE_NONE] as $field) {
+          $group[] = $field['tid'];
+        }
+      }
+
+      $diff = array_intersect(array_keys($view->exposed_data['taxonomy_entity_index_tid_depth']), $group);
+
+      if (empty($diff)) {
+        //filter nodes by current lexikalna skupina (taxonomy revision show all workbench versions)
+        unset($view->result[$r]);
+      }
+    }
+  }
 }
 
 /**
