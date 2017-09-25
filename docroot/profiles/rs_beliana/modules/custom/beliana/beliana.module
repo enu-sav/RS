@@ -568,8 +568,10 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Add custom submit handler.
-    $form['#submit'][] = 'beliana_workflow_reaction';
+    $form['#submit'][] = 'beliana_workflow_reaction';    
   }
+  
+  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
 }
 
 /**
