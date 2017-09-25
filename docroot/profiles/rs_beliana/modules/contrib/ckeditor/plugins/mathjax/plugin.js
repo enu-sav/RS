@@ -111,7 +111,9 @@
                 },
 
                 downcast: function (el) {
-                    el.children[ 0 ].replaceWith(new CKEDITOR.htmlParser.text(CKEDITOR.tools.htmlEncode(this.data.math)));
+                    if (el.children.length > 0) {
+                        el.children[ 0 ].replaceWith(new CKEDITOR.htmlParser.text(CKEDITOR.tools.htmlEncode(this.data.math)));
+                    }
                     // Remove style display:inline-block.
                     var attrs = el.attributes;
                     attrs.style = attrs.style.replace(/display:\s?inline-block;?\s?/, '');
