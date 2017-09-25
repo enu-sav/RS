@@ -141,11 +141,19 @@ function ckeditor_ckeditor_plugin() {
         $buttons = array();
         if (preg_match_all($pattern, $source, $matches)) {
           foreach ($matches[1] as $i => $button_name) {
+            // Check for icon in button definition (legacy method)
             if (preg_match('#(icon)[\s]*\:[\s]*([^\,\n]*)#', $matches[2][$i], $matches2)) {
               $buttons[$button_name] = array();
               $buttons[$button_name]['label'] = $button_name;
               $matches2[2] = str_replace(array('this.path', '+', '\'', '"'), array('', '', '', ''), $matches2[2]);
               $buttons[$button_name]['icon'] = trim($matches2[2]);
+            }
+            else {
+              // Otherwise we assume the icon is being stored in the icons
+              // folder using the lowercased button name as the filename.
+              $buttons[$button_name] = array();
+              $buttons[$button_name]['label'] = $button_name;
+              $buttons[$button_name]['icon'] = 'icons/' . strtolower($button_name) . '.png';
             }
           }
         }
@@ -183,11 +191,19 @@ function ckeditor_ckeditor_plugin() {
         $buttons = array();
         if (preg_match_all($pattern, $source, $matches)) {
           foreach ($matches[1] as $i => $button_name) {
+            // Check for icon in button definition (legacy method)
             if (preg_match('#(icon)[\s]*\:[\s]*([^\,\n]*)#', $matches[2][$i], $matches2)) {
               $buttons[$button_name] = array();
               $buttons[$button_name]['label'] = $button_name;
               $matches2[2] = str_replace(array('this.path', '+', '\'', '"'), array('', '', '', ''), $matches2[2]);
               $buttons[$button_name]['icon'] = trim($matches2[2]);
+            }
+            else {
+              // Otherwise we assume the icon is being stored in the icons
+              // folder using the lowercased button name as the filename.
+              $buttons[$button_name] = array();
+              $buttons[$button_name]['label'] = $button_name;
+              $buttons[$button_name]['icon'] = 'icons/' . strtolower($button_name) . '.png';
             }
           }
         }
@@ -228,37 +244,6 @@ function ckeditor_ckeditor_plugin() {
     if (isset($plugins['drupalbreaks']['buttons']['DrupalPageBreak']) && !module_exists('paging') && !module_exists('pagebreak')) {
       unset($plugins['drupalbreaks']['buttons']['DrupalPageBreak']);
     }
-  }
-
- // Set icons for the LITE plugin
-  // In LITE icons are not added in  plugin.js, thus the code above fails to add the correctly
-  if (isset($plugins['lite'])) {
-    $plugins['lite']['default'] = 't';
-    $plugins['lite']['buttons'] = array();
-    $plugins['lite']['buttons']['lite-acceptall']=array(
-        'label' => 'Accept all changes',
-        'icon' => 'icons/lite-acceptall.png',
-    );
-    $plugins['lite']['buttons']['lite-rejectall']=array(
-        'label' => 'Reject all changes',
-        'icon' => 'icons/lite-rejectall.png',
-    );
-    $plugins['lite']['buttons']['lite-acceptone']=array(
-        'label' => t('Accept change'),
-        'icon' => 'icons/lite-acceptone.png',
-    );
-    $plugins['lite']['buttons']['lite-rejectone']=array(
-        'label' => t('Reject change'),
-        'icon' => 'icons/lite-rejectone.png',
-    );
-    $plugins['lite']['buttons']['lite-toggleshow']=array(
-        'label' => t('Show/hide tracked changes'),
-        'icon' => 'icons/lite-toggleshow.png',
-    );
-    $plugins['lite']['buttons']['lite-toggletracking']=array(
-        'label' => t('Start/stop tracking changes'),
-        'icon' => 'icons/lite-toggletracking.png',
-    );
   }
 
   return $plugins;
