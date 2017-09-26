@@ -6,31 +6,37 @@
 (function ($, Drupal) {
     Drupal.behaviors.belianaEditor = {
         attach: function (context, settings) {
+            var body = $(document.body);
+            var offset = 0;
+
+            $(window).on('keydown', function (e) {
+                if (body.hasClass('editor-focus') && (e.keyCode == '34' || e.keyCode == '33' || !e.hasOwnProperty('keyCode'))) {
+                    Drupal.behaviors.belianaEditor.setOffset(null, offset);
+                }
+            });
+
             CKEDITOR.on('instanceReady', function (event) {
-                var body = $(document.body);
-                var height = $(window).height() - 181;
                 var editor = event.editor;
+                var height = $(window).height() - 181;
+
+                offset = $("#" + editor.name).parent().offset().top - 60;
 
                 Drupal.behaviors.belianaEditor.setHeight(editor, height);
 
                 editor.on('focus', function () {
                     body.addClass('editor-focus');
                     body.css('overflow', 'hidden');
+
                     Drupal.behaviors.belianaEditor.setHeight(editor, height);
-                    $('html, body').animate({scrollTop: $("#" + editor.name).parent().offset().top - 60}, 'fast');
+                    Drupal.behaviors.belianaEditor.setOffset(editor, offset);
                 });
 
                 editor.on('blur', function () {
                     body.removeClass('editor-focus');
                     body.css('overflow', 'auto');
+
                     Drupal.behaviors.belianaEditor.setHeight(editor, height);
                 });
-
-//                editor.on('beforePaste', function (e) {
-//                    setTimeout(function () {
-//                        console.log(e.data);
-//                    }, 50);
-//                });
             });
         },
         setHeight: function (editor, height) {
@@ -39,6 +45,9 @@
                     $('#' + editor.name).parent().find('.cke_contents').height(height);
                 }, 50);
             }
+        },
+        setOffset: function (editor, offset) {
+            $('html, body').animate({scrollTop: offset}, 'fast');
         }
     };
 
