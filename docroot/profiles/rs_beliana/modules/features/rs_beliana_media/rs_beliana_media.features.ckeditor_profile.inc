@@ -68,7 +68,6 @@ config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
-config.height = 500;
 // in general do not convert to html entities
 config.entities = false;
 // convert some characters (<>&) to html entities
@@ -310,7 +309,6 @@ config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
-config.height = 500;
 // in general do not convert to html entities
 config.entities = false;
 // convert some characters (<>&) to html entities
