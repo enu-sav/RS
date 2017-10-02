@@ -2953,10 +2953,23 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['relationship'] = 'nid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
     'image_style' => 'thumbnail',
     'image_link' => '',
+  );
+  /* Pole: Obsah: Obrázok - odkaz (návrh/náhľad) */
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['id'] = 'field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['table'] = 'field_data_field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['field'] = 'field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['empty'] = '[field_obrazok_navrh_]';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['type'] = 'beliana_external_image';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['settings'] = array(
+    'size' => 'thumbnail',
+    'link' => '0',
   );
   /* Pole: Obsah: Súbory ilustrácie */
   $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
@@ -5513,10 +5526,23 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['relationship'] = 'nid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_navrh_']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
     'image_style' => 'thumbnail',
     'image_link' => '',
+  );
+  /* Pole: Obsah: Obrázok - odkaz (návrh/náhľad) */
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['id'] = 'field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['table'] = 'field_data_field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['field'] = 'field_obrazok_odkaz';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (náhľad)';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['empty'] = '[field_obrazok_navrh_]';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['type'] = 'beliana_external_image';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['settings'] = array(
+    'size' => 'thumbnail',
+    'link' => '0',
   );
   /* Pole: Obsah: Súbory ilustrácie */
   $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
@@ -6330,6 +6356,7 @@ function rs_beliana_views_views_default_views() {
     t('Ilustrácie (R)'),
     t('IlustracieR'),
     t('Obrázok (náhľad)'),
+    t('[field_obrazok_navrh_]'),
     t('Súbory ilustrácie'),
     t('Všetky moje heslá'),
     t('Všetky heslá súvisiace s používateľom'),
@@ -11150,6 +11177,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_odkaz']['type'] = 'beliana_external_image';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['settings'] = array(
     'size' => 'thumbnail',
+    'link' => '0',
   );
   /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
@@ -11420,6 +11448,7 @@ function rs_beliana_views_views_default_views() {
     t('Vyhľadať ilustrácie'),
     t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.'),
     t('Obrázok (náhľad)'),
+    t('[field_obrazok_navrh_]'),
     t('Text k ilustrácii'),
     t('Súbory ilustrácie'),
   );

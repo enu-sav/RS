@@ -86,7 +86,8 @@ function beliana_field_formatter_info() {
       'label' => t('External image'),
       'field types' => array('url'),
       'settings' => array(
-        'size' => 'medium'
+        'size' => 'medium',
+        'link' => 0
       )
     ),
   );
@@ -107,6 +108,13 @@ function beliana_field_formatter_settings_form($field, $instance, $view_mode, $f
     '#default_value' => $settings['size'],
   );
 
+  $element['link'] = array(
+    '#type' => 'select',
+    '#title' => t('Link'),
+    '#default_value' => $settings['link'],
+    '#options' => array(t('No'), t('Yes')),
+  );
+
   foreach (image_styles() as $key => $style) {
     $element['size']['#options'][$key] = $style['label'];
   }
@@ -120,9 +128,11 @@ function beliana_field_formatter_settings_form($field, $instance, $view_mode, $f
 function beliana_field_formatter_settings_summary($field, $instance, $view_mode) {
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
-  $styles = image_styles();
 
-  return t('Image style: @size', array('@size' => $styles[$settings['size']]['label']));
+  $styles = image_styles();
+  $options = array(t('No'), t('Yes'));
+
+  return t('Image style: @size, Link: @link', array('@size' => $styles[$settings['size']]['label'], '@link' => $options[$settings['link']]));
 }
 
 /**
@@ -145,7 +155,12 @@ function beliana_field_formatter_view($entity_type, $entity, $field, $instance, 
     }
 
     foreach ($items as $delta => $item) {
-      $element[$delta] = array('#markup' => '<img src="' . $item['value'] . '" width="' . $width . '" />');
+      $img = '<img src="' . $item['value'] . '" width="' . $width . '" />';
+
+      $element[$delta] = array('#markup' => $img);
+      if ($settings['link'] > 0) {
+        $element[$delta]['#markup'] = l($img, $item['value'], array('html' => TRUE, 'external' => TRUE));
+      }
     }
   }
 
@@ -557,21 +572,22 @@ function beliana_node_presave($node) {
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
-  if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && $form['node']['#value']->uid == 719
-    ) {
-      foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, array('needs_review', 'u_autora'))) {
-          unset($form['state']['#options'][$k]);
+  if (isset($form['node']['#value'])) {
+    if ($form_id === 'workbench_moderation_moderate_form') {
+      if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && $form['node']['#value']->uid == 719) {
+        foreach ($form['state']['#options'] as $k => $v) {
+          if (in_array($k, array('needs_review', 'u_autora'))) {
+            unset($form['state']['#options'][$k]);
+          }
         }
       }
+
+      // Add custom submit handler.
+      $form['#submit'][] = 'beliana_workflow_reaction';
     }
 
-    // Add custom submit handler.
-    $form['#submit'][] = 'beliana_workflow_reaction';    
+    $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
   }
-  
-  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
 }
 
 /**

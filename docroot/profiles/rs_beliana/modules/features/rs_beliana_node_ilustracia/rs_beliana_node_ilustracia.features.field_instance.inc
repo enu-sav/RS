@@ -741,15 +741,17 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'beliana',
         'settings' => array(
+          'link' => 1,
           'size' => 'medium',
         ),
         'type' => 'beliana_external_image',
-        'weight' => 1,
+        'weight' => 3,
       ),
       'export' => array(
         'label' => 'inline',
         'module' => 'beliana',
         'settings' => array(
+          'link' => 0,
           'size' => 'thumbnail',
         ),
         'type' => 'beliana_external_image',
@@ -765,6 +767,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'beliana',
         'settings' => array(
+          'link' => 0,
           'size' => 'medium',
         ),
         'type' => 'beliana_external_image',
