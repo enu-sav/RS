@@ -572,22 +572,26 @@ function beliana_node_presave($node) {
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
-  if (isset($form['node']['#value'])) {
-    if ($form_id === 'workbench_moderation_moderate_form') {
-      if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && $form['node']['#value']->uid == 719) {
-        foreach ($form['state']['#options'] as $k => $v) {
-          if (in_array($k, array('needs_review', 'u_autora'))) {
-            unset($form['state']['#options'][$k]);
-          }
+  if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && $form['node']['#value']->uid == 719) {
+      foreach ($form['state']['#options'] as $k => $v) {
+        if (in_array($k, array('needs_review', 'u_autora'))) {
+          unset($form['state']['#options'][$k]);
         }
       }
-
-      // Add custom submit handler.
-      $form['#submit'][] = 'beliana_workflow_reaction';
     }
 
-    $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
+    // Add custom submit handler.
+    $form['#submit'][] = 'beliana_workflow_reaction';
   }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ * @inheritdoc
+ */
+function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
 }
 
 /**
