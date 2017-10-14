@@ -22,7 +22,7 @@ function rs_beliana_sync_ui_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Publikovať na web';
+  $handler->display->display_options['title'] = 'Zverejniť Heslo';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'viac';
   $handler->display->display_options['access']['type'] = 'none';
@@ -61,9 +61,9 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
@@ -71,6 +71,7 @@ function rs_beliana_sync_ui_views_default_views() {
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
     ),
@@ -120,16 +121,6 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Stav */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
@@ -138,22 +129,25 @@ function rs_beliana_sync_ui_views_default_views() {
     'na_zalomenie' => 'na_zalomenie',
   );
 
-  /* Display: Publikovať na web */
-  $handler = $view->new_display('page', 'Publikovať na web', 'page');
+  /* Display: Zverejniť Heslo */
+  $handler = $view->new_display('page', 'Zverejniť Heslo', 'page');
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     16 => '16',
   );
-  $handler->display->display_options['path'] = 'admin/beliana/sync-to-web';
+  $handler->display->display_options['path'] = 'zverejnit-heslo';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Publikovať na web';
+  $handler->display->display_options['menu']['title'] = 'Zverejniť - Heslo';
+  $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Publikované na webe */
-  $handler = $view->new_display('page', 'Publikované na webe', 'page_1');
+  /* Display: Zverejnené na webe */
+  $handler = $view->new_display('page', 'Zverejnené na webe', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Publikované na webe';
+  $handler->display->display_options['title'] = 'Zverejnené na webe';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -267,16 +261,6 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Beliana sync: The Unix timestamp of last sync. */
   $handler->display->display_options['filters']['updated']['id'] = 'updated';
   $handler->display->display_options['filters']['updated']['table'] = 'beliana_sync';
@@ -395,16 +379,56 @@ function rs_beliana_sync_ui_views_default_views() {
     22 => 0,
     23 => 0,
   );
-  $handler->display->display_options['path'] = 'admin/beliana/synced-with-web';
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['path'] = 'zverejnene-na-webe';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Publikované';
+  $handler->display->display_options['menu']['title'] = 'Zverejnené';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['sync_to_web'] = array(
     t('Master'),
-    t('Publikovať na web'),
+    t('Zverejniť Heslo'),
     t('viac'),
     t('Použiť'),
     t('Reset'),
@@ -426,11 +450,12 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Dátum aktualizácie'),
     t('Posledná synchronizácia'),
     t('Ešte nebola'),
-    t('Publikované na webe'),
+    t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total'),
     t('Stav'),
     t('Súbor'),
     t('Lexikálna skupina'),
+    t('Typ'),
   );
   $export['sync_to_web'] = $view;
 
