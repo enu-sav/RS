@@ -98,8 +98,15 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
-        'settings' => array(),
-        'type' => 'date_plain',
+        'settings' => array(
+          'format_type' => 'short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
         'weight' => 7,
       ),
       'lite_display' => array(
@@ -147,6 +154,130 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       ),
       'type' => 'date_text',
       'weight' => 6,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-heslo-field_datum_aktualizacie'.
+  $field_instances['node-heslo-field_datum_aktualizacie'] = array(
+    'bundle' => 'heslo',
+    'deleted' => 0,
+    'description' => 'Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 17,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_aktualizacie',
+    'label' => 'Dátum aktualizácie',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 13,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-heslo-field_datum_prveho_zverejnenia'.
+  $field_instances['node-heslo-field_datum_prveho_zverejnenia'] = array(
+    'bundle' => 'heslo',
+    'deleted' => 0,
+    'description' => 'Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 18,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_prveho_zverejnenia',
+    'label' => 'Dátum prvého zverejnenia',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -462,7 +593,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 15,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -475,7 +606,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
@@ -509,7 +640,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 17,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -555,7 +686,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 16,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -808,7 +939,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -858,7 +989,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -940,7 +1071,10 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Atribúty');
   t('Atribúty sú pomôcka pri vyhľadávaní obsahu alebo kontrole hesiel.');
   t('Comment');
+  t('Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe');
   t('Dátum');
+  t('Dátum aktualizácie');
+  t('Dátum prvého zverejnenia');
   t('Erráta');
   t('Ilustrácie');
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
@@ -961,6 +1095,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Text určený pre autora redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text môžno zmazať.');
   t('Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ');
   t('Vyplatenie odmeny');
+  t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte dátum súvisiaci s heslom: prvá hodnota je dátum alebo začiatok udalosti alebo dátum narodenia, druhá hodnota je dátum konca udalosti alebo dátum úmrtia. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorí sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
   t('Zlúčené do');
