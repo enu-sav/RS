@@ -117,6 +117,9 @@ function rs_beliana_node_importovane_heslo_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'lite_display' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
