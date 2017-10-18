@@ -34,6 +34,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'zaradene',
       'name' => 'navrhnute_zaradene',
     ),
+    'ilustracia_na_zverejnenie:ilustracia_u_vyst_redaktora_5' => array(
+      'from_name' => 'ilustracia_na_zverejnenie',
+      'to_name' => 'ilustracia_u_vyst_redaktora_5',
+      'name' => 'il_na_zverejnenie-il_u_vr_5',
+    ),
     'ilustracia_u_grafika:ilustracia_u_redaktora' => array(
       'from_name' => 'ilustracia_u_grafika',
       'to_name' => 'ilustracia_u_redaktora',
@@ -48,6 +53,36 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'ilustracia_u_redaktora',
       'to_name' => 'ilustracia_u_grafika',
       'name' => 'il_u_redaktora-u_grafika',
+    ),
+    'ilustracia_u_redaktora:ilustracia_u_vyst_redaktora_5' => array(
+      'from_name' => 'ilustracia_u_redaktora',
+      'to_name' => 'ilustracia_u_vyst_redaktora_5',
+      'name' => 'il_uredaktora-u_vr_5',
+    ),
+    'ilustracia_u_vyst_redaktora_5:ilustracia_na_zverejnenie' => array(
+      'from_name' => 'ilustracia_u_vyst_redaktora_5',
+      'to_name' => 'ilustracia_na_zverejnenie',
+      'name' => 'il_u_vr_5-na_zverejnenie',
+    ),
+    'importovane:importovane_u_jr2' => array(
+      'from_name' => 'importovane',
+      'to_name' => 'importovane_u_jr2',
+      'name' => 'importovane-importovane_u_JR2',
+    ),
+    'importovane_na_zalomenie:importovane' => array(
+      'from_name' => 'importovane_na_zalomenie',
+      'to_name' => 'importovane',
+      'name' => 'importovane_na_zalomenie-importovane',
+    ),
+    'importovane_u_jr2:importovane' => array(
+      'from_name' => 'importovane_u_jr2',
+      'to_name' => 'importovane',
+      'name' => 'importovane_u_jr2-importovane',
+    ),
+    'importovane_u_jr2:importovane_na_zalomenie' => array(
+      'from_name' => 'importovane_u_jr2',
+      'to_name' => 'importovane_na_zalomenie',
+      'name' => 'importovane_u_jr2-importovane_na_zalomenie',
     ),
     'len_vyplatit:zaradene' => array(
       'from_name' => 'len_vyplatit',
@@ -123,6 +158,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'u_autora',
       'to_name' => 'needs_review',
       'name' => 'u_autora-u_redaktora',
+    ),
+    'u_jaz_redaktora_2:na_zalomenie' => array(
+      'from_name' => 'u_jaz_redaktora_2',
+      'to_name' => 'na_zalomenie',
+      'name' => 'u_jaz_redaktora2-na_zverejnenie',
     ),
     'u_jaz_redaktora_2:u_v_st_redaktora_5' => array(
       'from_name' => 'u_jaz_redaktora_2',

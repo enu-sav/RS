@@ -51,11 +51,35 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 10,
     ),
+    'ilustracia_u_vyst_redaktora_5' => array(
+      'name' => 'ilustracia_u_vyst_redaktora_5',
+      'label' => 'Ilustrácia u výst. redaktora 5',
+      'description' => 'Ilustrácia u výstupného redaktora 5',
+      'weight' => 10,
+    ),
     'importovane' => array(
       'name' => 'importovane',
       'label' => 'Importované',
       'description' => 'Importované heslo (zo súboru)',
       'weight' => -10,
+    ),
+    'importovane_na_zalomenie' => array(
+      'name' => 'importovane_na_zalomenie',
+      'label' => 'Importované na zalomenie',
+      'description' => 'Importovane heslo pripravene na zalomenie, VRX moze este vratit',
+      'weight' => -8,
+    ),
+    'importovane_u_jr2' => array(
+      'name' => 'importovane_u_jr2',
+      'label' => 'Importované u JR2',
+      'description' => 'Jazyková redakcia importovaného hesla',
+      'weight' => -9,
+    ),
+    'len_vyplatit' => array(
+      'name' => 'len_vyplatit',
+      'label' => 'Len vyplatiť',
+      'description' => 'Heslo bolo vypracované, ale text sa nepoužije. Treba vyplatiť',
+      'weight' => 10,
     ),
     'na_jazykovu_korekturu' => array(
       'name' => 'na_jazykovu_korekturu',
