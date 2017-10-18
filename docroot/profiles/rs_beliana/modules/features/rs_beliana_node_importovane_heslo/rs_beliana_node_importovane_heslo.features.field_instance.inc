@@ -86,7 +86,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -101,7 +101,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -153,6 +153,68 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-importovane_heslo-field_datum_aktualizacie'.
+  $field_instances['node-importovane_heslo-field_datum_aktualizacie'] = array(
+    'bundle' => 'importovane_heslo',
+    'deleted' => 0,
+    'description' => 'Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 10,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_aktualizacie',
+    'label' => 'Dátum aktualizácie',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 3,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-importovane_heslo-field_errta'.
   $field_instances['node-importovane_heslo-field_errta'] = array(
     'bundle' => 'importovane_heslo',
@@ -195,7 +257,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -413,7 +475,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -457,7 +519,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -588,6 +650,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Atribúty sú pomôcka pri vyhľadávaní obsahu alebo kontrole hesiel.');
   t('Comment');
   t('Dátum');
+  t('Dátum aktualizácie');
   t('Erráta');
   t('Ilustrácie');
   t('Komentár/inštrukcie');
@@ -601,6 +664,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
   t('Text určený pre autora, redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
   t('Vyberte lexikálnu skupinu najnižšej úrovne (nemá podúrovne a vždy má v texte zátvorky).');
+  t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
 
   return $field_instances;
 }
