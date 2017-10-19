@@ -69,20 +69,25 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'importovane_u_jr2',
       'name' => 'importovane-importovane_u_JR2',
     ),
-    'importovane_na_zalomenie:importovane' => array(
-      'from_name' => 'importovane_na_zalomenie',
-      'to_name' => 'importovane',
-      'name' => 'importovane_na_zalomenie-importovane',
-    ),
     'importovane_u_jr2:importovane' => array(
       'from_name' => 'importovane_u_jr2',
       'to_name' => 'importovane',
       'name' => 'importovane_u_jr2-importovane',
     ),
-    'importovane_u_jr2:importovane_na_zalomenie' => array(
+    'importovane_u_jr2:importovane_u_vr' => array(
       'from_name' => 'importovane_u_jr2',
-      'to_name' => 'importovane_na_zalomenie',
-      'name' => 'importovane_u_jr2-importovane_na_zalomenie',
+      'to_name' => 'importovane_u_vr',
+      'name' => 'importovane_u_JR2-importovane_U_VR',
+    ),
+    'importovane_u_vr:importovane' => array(
+      'from_name' => 'importovane_u_vr',
+      'to_name' => 'importovane',
+      'name' => 'importovane_u_vr-importovane',
+    ),
+    'importovane_u_vr:na_zalomenie' => array(
+      'from_name' => 'importovane_u_vr',
+      'to_name' => 'na_zalomenie',
+      'name' => 'importovane_u_vr-na_zalomenie',
     ),
     'len_vyplatit:zaradene' => array(
       'from_name' => 'len_vyplatit',
@@ -93,11 +98,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'na_jazykovu_korekturu',
       'to_name' => '1_korektura',
       'name' => 'u_jaz_redaktora1-1_korektura',
-    ),
-    'na_zalomenie:u_v_st_redaktora_5' => array(
-      'from_name' => 'na_zalomenie',
-      'to_name' => 'u_v_st_redaktora_5',
-      'name' => 'na_zalomenie-u_vyst_redaktora5',
     ),
     'na_zverejnenie:needs_review' => array(
       'from_name' => 'na_zverejnenie',
