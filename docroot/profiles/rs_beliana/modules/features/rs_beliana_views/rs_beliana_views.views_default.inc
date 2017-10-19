@@ -13415,8 +13415,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Odoslať na zverejnenie */
-  $handler = $view->new_display('page', 'Odoslať na zverejnenie', 'page_3');
+  /* Display: Odoslať na zverejnenie (R) */
+  $handler = $view->new_display('page', 'Odoslať na zverejnenie (R)', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Odoslať na zverejnenie';
   $handler->display->display_options['defaults']['access'] = FALSE;
@@ -14064,10 +14064,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Zverejniť importované */
-  $handler = $view->new_display('page', 'Zverejniť importované', 'page_5');
+  /* Display: Odoslať na zverejnenie (VR) */
+  $handler = $view->new_display('page', 'Odoslať na zverejnenie (VR)', 'page_5');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Zverejniť importované';
+  $handler->display->display_options['title'] = 'Odoslať importované heslo na zverejnenie';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -14094,7 +14094,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::rs_beliana_sync_ui_sync' => array(
+    'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -14305,7 +14305,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
-    'importovane_na_zalomenie' => 'importovane_na_zalomenie',
+    'importovane_u_vr' => 'importovane_u_vr',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
@@ -14364,9 +14364,9 @@ function rs_beliana_views_views_default_views() {
     22 => 0,
     23 => 0,
   );
-  $handler->display->display_options['path'] = 'zverejnit-importovane';
+  $handler->display->display_options['path'] = 'odoslat-na-zverejnenie-vr';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Zverejniť - Importované';
+  $handler->display->display_options['menu']['title'] = 'Odoslať na zverejnenie (VR)';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -14416,12 +14416,14 @@ function rs_beliana_views_views_default_views() {
     t('Záznam z pôvodného GH'),
     t('Všetky heslá - prehľad (G)'),
     t('Upravil niektorú verziu'),
+    t('Odoslať na zverejnenie (R)'),
     t('Odoslať na zverejnenie'),
     t('Odosielanie skontrolovaných importovaných hesiel na zverejnenie. Pred odoslaním hesiel treba:  skontrolovať <strong>správnosť odkazov</strong>, odstrániť zabudnuté nesprávne odkazové šípky (—>), skontrolovať odstránenie <strong>skratiek</strong>. Odosielať, len ak heslo videli všetci príslušní redaktori - inak iba pridať svoju značku do poznámky, ak tam už nie je. Ak zjavne chýba niektorá lexikálna skupina, treba ju pridať alebo upozorniť príslušného redaktora.'),
     t('Komentár/inštrukcie'),
     t('Jazyková redakcia - importované'),
     t('Jazyková kontrola a odosielanie importovaných hesiel na zverejnenie. V prípade potreby heslo možno otvoriť na úpravu kliknutím pravým tlačidlom myši na názov hesla a výberom možnosti "Otvoriť v novom okne (alebo záložke)". Heslo takto možno aj vrátiť  do stavu "Importované", v ktorom ho môže skontrolovať redaktor.'),
-    t('Zverejniť importované'),
+    t('Odoslať na zverejnenie (VR)'),
+    t('Odoslať importované heslo na zverejnenie'),
     t('Kontrola a zverejňovanie importovaných hesiel. V prípade potreby heslo možno otvoriť na úpravu kliknutím pravým tlačidlom myši na názov hesla a výberom možnosti "Otvoriť v novom okne (alebo záložke)". Heslo takto možno aj vrátiť  do stavu "Importované", v ktorom ho môže skontrolovať redaktor.'),
   );
   $export['vsetky_hesla_detaily'] = $view;

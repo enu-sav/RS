@@ -276,7 +276,6 @@ features[user_permission][] = moderate content from ilustracia_u_redaktora to _i
 features[user_permission][] = moderate content from ilustracia_u_redaktora to ilustracia_u_grafika
 features[user_permission][] = moderate content from len_vyplatit to zaradene
 features[user_permission][] = moderate content from na_jazykovu_korekturu to 1_korektura
-features[user_permission][] = moderate content from na_zalomenie to u_v_st_redaktora_5
 features[user_permission][] = moderate content from na_zverejnenie to needs_review
 features[user_permission][] = moderate content from na_zverejnenie to u_vyst_redaktora_2
 features[user_permission][] = moderate content from navrhnute_na_vyradenie to len_vyplatit
