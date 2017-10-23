@@ -231,7 +231,7 @@ function beliana_sync_sync($nid, &$context) {
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       'dates' => $dates,
-      'info_published' => _extract_published_info($node).". Aktualizované "._form_date2().".",
+      'info_published' => _extract_published_info($node)._extract_updated_info($node),
     ];
 
     // Use POST for creating new items and PATCH for updating existing items.
@@ -274,6 +274,12 @@ function beliana_sync_sync($nid, &$context) {
       '@ilu_title' => $ilu_node->title,
     ], WATCHDOG_INFO);
     $context['results']['success']++;
+
+    // save the date of first publication to web here
+    if (!isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
+      $node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'] = date("Y/m/d - H:i");
+      node_save($node);
+    }
   }
 }
 
@@ -503,8 +509,13 @@ function _extract_license_information($node) {
   return $license_information;
 }
 
+/*
+*  extract information regarding the date of first publishing.
+*  Different for the 'Importovane heslo' and 'Heslo' types  
+*/
 function _extract_published_info($node) {
-  // key is a first string in the next band 
+  // Set the publishing date according to the article name
+  // the key in the $bands array is a first string in the next band 
   $bands = array (
     "bell" => "Vydané v auguste 1999",
     "czzzz" => "Vydané v júli 2001",
@@ -518,7 +529,7 @@ function _extract_published_info($node) {
 
   setlocale(LC_COLLATE, 'sk_SK.utf8');
   if ( $node->type ==  'importovane_heslo' ){
-    // get name of article collection, specified in node->field_taxsubor 
+    // get name of article, specified in node->field_taxsubor 
     $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
     $collections = taxonomy_get_tree($vocabulary->vid);
     foreach ($collections as $term) {
@@ -538,20 +549,32 @@ function _extract_published_info($node) {
         break;
       }
     }
-  } else {
-    // needs to remember the publication date in node field
-    $publishedinfo = "Vydané "._form_date6(); 
+  } else { // the Heslo type
+    // if already published, the 'field_datum_prveho_zverejnenia' is set 
+    // the field is set elsewhere, after a successfull transfer to web
+    if (isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
+      $publishedinfo = " Vydané " .  _form_date2($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value']);
+    } else {
+      $publishedinfo = " Vydané " .  _form_date2(date("d.m.Y"));
+    }
   }
-  return $publishedinfo;
+  return $publishedinfo . ".";
 }
 
+function _extract_updated_info($node) {
+  if (isset($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value'])) {
+    return " Aktualizované " .  _form_date2($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value']) . ".";
+  } else {
+    return("");
+  }
+}
 
 /*
  * replaces month abbrevoation with inflected full name in genitive 
  */
-function _form_date2() {
+function _form_date2($utime) {
   setlocale(LC_TIME, 'sk_SK.utf8');
-  $fdate = strftime("%e. %b %Y");
+  $fdate = strftime("%e. %b %Y", strtotime($utime));
   $fdate = str_replace("jan","januára",$fdate);
   $fdate = str_replace("feb","februára",$fdate);
   $fdate = str_replace("mar","marca",$fdate);
