@@ -280,7 +280,8 @@ function beliana_action_info() {
     ),
     'beliana_assign_author' => array(
       'type' => 'entity',
-      'label' => t('Určiť autora a priradiť autorovi'),
+      //'label' => t('Určiť autora a priradiť autorovi'),
+      'label' => t('Specify author and assign to author'),
       'configurable' => TRUE,
       'triggers' => array('any'),
       'behavior' => array('create_property'),
@@ -289,8 +290,39 @@ function beliana_action_info() {
     ),
     'beliana_assign_corrector' => array(
       'type' => 'entity',
-      'label' => t('Určiť autora a priradiť redaktorovi'),
+      //'label' => t('Určiť autora a priradiť redaktorovi'),
+      'label' => t('Specify author and assign to editor'),
       'configurable' => TRUE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
+    'importovane_publish_editor' => array(
+      'type' => 'entity',
+      //'label' => t('Odoslať na zverejnenie'),
+      'label' => t('Mark for publishing (editor)'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
+    'importovane_publish_senior_editor' => array(
+      'type' => 'entity',
+      //'label' => t('Odoslať na zverejnenie (VR)'),
+      'label' => t('Mark for publishing (senior editor)'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
+    'importovane_publish_proofreader' => array(
+      'type' => 'entity',
+      //'label' => t('Odoslať na zverejnenie (JR)'),
+      'label' => t('Mark for publishing (proofreader)'),
+      'configurable' => FALSE,
       'triggers' => array('any'),
       'behavior' => array('create_property'),
       'vbo_configurable' => FALSE,
@@ -298,7 +330,8 @@ function beliana_action_info() {
     ),
     'update_dates' => array(
       'type' => 'entity',
-      'label' => t('Aktualizovať dátumy'),
+      //'label' => t('Aktualizovať dátumy'),
+      'label' => t('Update dates'),
       'configurable' => FALSE,
       'triggers' => array('any'),
       'behavior' => array('create_property'),
@@ -306,6 +339,45 @@ function beliana_action_info() {
       'pass rows' => TRUE,
     ),
   );
+}
+
+/**
+ * Callback for 'importovane_publish_editor' action.
+ *
+ * changes workflow status to 'importovane_u_jr2'
+ *
+ * @inheritdoc
+ */
+function importovane_publish_editor(&$node, $context) {
+  if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane') {
+    workbench_moderation_moderate($node, "importovane_u_jr2");
+  }
+}
+
+/**
+ * Callback for 'importovane_publish_proofreader' action.
+ *
+ * changes workflow status to 'importovane_u_vr'
+ *
+ * @inheritdoc
+ */
+function importovane_publish_proofreader(&$node, $context) {
+  if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane_u_jr2') {
+    workbench_moderation_moderate($node, "importovane_u_vr");
+  }
+}
+
+/**
+ * Callback for 'importovane_publish_senior_editor' action.
+ *
+ * changes workflow status to 'na_zalomenie'
+ *
+ * @inheritdoc
+ */
+function importovane_publish_senior_editor(&$node, $context) {
+  if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane_u_vr') {
+    workbench_moderation_moderate($node, "na_zalomenie");
+  }
 }
 
 /**
