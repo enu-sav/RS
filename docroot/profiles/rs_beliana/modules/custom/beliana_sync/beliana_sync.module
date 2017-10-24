@@ -240,7 +240,9 @@ function beliana_sync_sync($nid, &$context) {
       ->condition('local', $nid)
       ->execute()
       ->fetchCol(0);
-    if (!empty($remote_id)) {
+    // if not empty and not equal to '0' 
+    // '0' have postponed pure link articles with unresolved link, not yet transfered to web, but already published
+    if (!empty($remote_id) && $remote_id[0] != '0') {
       $remote_id = reset($remote_id);
       $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
       db_update('beliana_sync')
@@ -249,17 +251,40 @@ function beliana_sync_sync($nid, &$context) {
         ->execute();
     }
     else {
-      $response = $client->request('POST', '/rs/api', ['body' => json_encode($remote_node_object)]);
-      // If new node was created on remote, insert its nid to beliana_sync table.
-      if ($response->getStatusCode() === 201) {
-        $remote_id = (int) json_decode($response->getBody());
-        db_insert('beliana_sync')
-          ->fields([
-            'local' => $nid,
-            'remote' => $remote_id,
-            'updated' => time()
-          ])
+      // postpone transfer of articles which are pure link articles with unresolved link
+      // list them in the beliana_sync table, so that they will be transferred to web automatically 
+      // as soon as the target is published
+
+      // first delete synchronization info for the earlier postponed articles
+      if (!empty($remote_id) && $remote_id[0] == '0') {
+        db_delete('beliana_sync')
+          ->condition('local', $nid)
           ->execute();
+      }	
+
+      // the articles to be postponed contain neither the '—' character, nor the '<a >' tag
+      if (!(strpos($body, '—') == false && strpos($body, '<a ') == false)) {
+        $response = $client->request('POST', '/rs/api', ['body' => json_encode($remote_node_object)]);
+        // If new node was created on remote, insert its nid to beliana_sync table.
+        if ($response->getStatusCode() === 201) {
+          $remote_id = (int) json_decode($response->getBody());
+          db_insert('beliana_sync')
+            ->fields([
+              'local' => $nid,
+              'remote' => $remote_id,
+              'updated' => time()
+            ])
+            ->execute();
+        }
+      } else {
+          // insert the postponed articles into the table of synchronized articles, but with id '0'
+          db_insert('beliana_sync')
+            ->fields([
+              'local' => $nid,
+              'remote' => 0,
+              'updated' => time()
+            ])
+            ->execute();
       }
     }
     // Change workbench status for node and attached illustrations.
