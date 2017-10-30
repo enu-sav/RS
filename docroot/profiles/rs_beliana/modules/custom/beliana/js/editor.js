@@ -17,26 +17,42 @@
 
             CKEDITOR.on('instanceReady', function (event) {
                 var editor = event.editor;
-                var height = $(window).height() - 181;
+//                var height = $(window).height() - 181;
 
-                offset = $("#" + editor.name).parent().offset().top - 60;
+//                offset = $("#" + editor.name).parent().offset().top - 60;
 
-                Drupal.behaviors.belianaEditor.setHeight(editor, height);
+//                Drupal.behaviors.belianaEditor.setHeight(editor, height);
 
                 editor.on('focus', function () {
                     body.addClass('editor-focus');
                     body.css('overflow', 'hidden');
 
-                    Drupal.behaviors.belianaEditor.setHeight(editor, height);
-                    Drupal.behaviors.belianaEditor.setOffset(editor, offset);
+//                    Drupal.behaviors.belianaEditor.setHeight(editor, height);
+//                    Drupal.behaviors.belianaEditor.setOffset(editor, offset);
+                });
+
+                editor.on('mouseenter', function () {
+                    body.addClass('editor-focus');
+                    body.css('overflow', 'hidden');
+
+//                    Drupal.behaviors.belianaEditor.setHeight(editor, height);
+//                    Drupal.behaviors.belianaEditor.setOffset(editor, offset);
                 });
 
                 editor.on('blur', function () {
                     body.removeClass('editor-focus');
                     body.css('overflow', 'auto');
 
-                    Drupal.behaviors.belianaEditor.setHeight(editor, height);
+//                    Drupal.behaviors.belianaEditor.setHeight(editor, height);
                 });
+
+                editor.on('mouseleave', function () {
+                    body.removeClass('editor-focus');
+                    body.css('overflow', 'auto');
+
+//                    Drupal.behaviors.belianaEditor.setHeight(editor, height);
+                });
+
             });
         },
         setHeight: function (editor, height) {

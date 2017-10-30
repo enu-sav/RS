@@ -170,6 +170,7 @@ function beliana_field_formatter_view($entity_type, $entity, $field, $instance, 
 /**
  * Implements hook_views_pre_render().
  */
+/*
 function beliana_views_pre_render(&$view) {
   if ($view->name == 'v_etky_hesl_' && $view->current_display == 'page') {
     $exposed_data = $view->exposed_data['taxonomy_entity_index_tid_depth'];
@@ -195,6 +196,7 @@ function beliana_views_pre_render(&$view) {
     }
   }
 }
+*/
 
 /**
  * Menu callback for `admin/group-list` path.
@@ -704,9 +706,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_form_BASE_FORM_ID_alter().
  * @inheritdoc
  */
-function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
-  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
-}
+//function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
+//  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
+//}
 
 /**
  * Callback function for `workbench_moderation_moderate_form` submit.
