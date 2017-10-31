@@ -60,7 +60,6 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Obsah';
   $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'nid';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 0;
@@ -128,6 +127,15 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
     'na_zalomenie' => 'na_zalomenie',
+  );
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
 
   /* Display: Zverejniť na web */
