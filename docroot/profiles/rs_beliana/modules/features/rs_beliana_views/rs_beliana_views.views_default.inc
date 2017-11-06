@@ -15081,29 +15081,40 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
-  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
-  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
-  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_label'] = 'ddddd';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Obsah: Text k ilustrácii (field_popis) */
+  $handler->display->display_options['filters']['field_popis_value']['id'] = 'field_popis_value';
+  $handler->display->display_options['filters']['field_popis_value']['table'] = 'field_data_field_popis';
+  $handler->display->display_options['filters']['field_popis_value']['field'] = 'field_popis_value';
+  $handler->display->display_options['filters']['field_popis_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_popis_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_popis_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_popis_value']['expose']['operator_id'] = 'field_popis_value_op';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['label'] = 'Text k ilustrácii';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_popis_value']['expose']['operator'] = 'field_popis_value_op';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['identifier'] = 'field_popis_value';
+  $handler->display->display_options['filters']['field_popis_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     5 => 0,
-    7 => 0,
     4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
     6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
     3 => 0,
-    8 => 0,
     9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
   );
   /* Filter criterion: Obsah: Author uid */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
