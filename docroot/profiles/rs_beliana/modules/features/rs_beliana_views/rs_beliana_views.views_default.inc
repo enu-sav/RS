@@ -8234,6 +8234,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Odkaz na entitu: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['id'] = 'reverse_field_ilustracia_node';
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Feeds item: Item GUID */
   $handler->display->display_options['fields']['guid']['id'] = 'guid';
@@ -8319,12 +8324,16 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_nazov_diela']['table'] = 'field_data_field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['field'] = 'field_nazov_diela';
   $handler->display->display_options['fields']['field_nazov_diela']['label'] = 'nazov_diela';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
-  $handler->display->display_options['fields']['field_d_tum_prevzatia']['id'] = 'field_d_tum_prevzatia';
-  $handler->display->display_options['fields']['field_d_tum_prevzatia']['table'] = 'field_data_field_d_tum_prevzatia';
-  $handler->display->display_options['fields']['field_d_tum_prevzatia']['field'] = 'field_d_tum_prevzatia';
-  $handler->display->display_options['fields']['field_d_tum_prevzatia']['label'] = 'datum_prevzatia';
-  $handler->display->display_options['fields']['field_d_tum_prevzatia']['alter']['strip_tags'] = TRUE;
+  /* Pole: Obsah: Meno autora diela */
+  $handler->display->display_options['fields']['field_meno_autora_diela']['id'] = 'field_meno_autora_diela';
+  $handler->display->display_options['fields']['field_meno_autora_diela']['table'] = 'field_data_field_meno_autora_diela';
+  $handler->display->display_options['fields']['field_meno_autora_diela']['field'] = 'field_meno_autora_diela';
+  $handler->display->display_options['fields']['field_meno_autora_diela']['label'] = 'autor_diela';
+  /* Pole: Obsah: Meno autora snímky diela */
+  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['id'] = 'field_meno_autora_snimky_diela';
+  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['table'] = 'field_data_field_meno_autora_snimky_diela';
+  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['field'] = 'field_meno_autora_snimky_diela';
+  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['label'] = 'autor_foto';
   /* Pole: Obsah: Inštitúcia */
   $handler->display->display_options['fields']['field_institucia']['id'] = 'field_institucia';
   $handler->display->display_options['fields']['field_institucia']['table'] = 'field_data_field_institucia';
@@ -8369,6 +8378,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['label'] = 'alias';
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['relationship'] = 'reverse_field_ilustracia_node';
+  $handler->display->display_options['fields']['nid_1']['label'] = 'nid_hesla';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
@@ -8390,6 +8405,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -8407,7 +8423,11 @@ function rs_beliana_views_views_default_views() {
     18 => 0,
     3 => 0,
     9 => 0,
-    17 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
   );
   /* Filter criterion: Obsah: Body (body) */
   $handler->display->display_options['filters']['body_value']['id'] = 'body_value';
@@ -9132,6 +9152,7 @@ function rs_beliana_views_views_default_views() {
     t('Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index)'),
     t('Export ilustrácie'),
     t('Export ilustácie - dáta'),
+    t('Obsah referencing Obsah from field_ilustracia'),
     t('nid'),
     t('popis'),
     t('nazverejnenie'),
@@ -9140,7 +9161,8 @@ function rs_beliana_views_views_default_views() {
     t('povod_ilustracie'),
     t('licencia'),
     t('nazov_diela'),
-    t('datum_prevzatia'),
+    t('autor_diela'),
+    t('autor_foto'),
     t('institucia'),
     t('drzitel_prav'),
     t('URL_licencie'),
@@ -9148,6 +9170,7 @@ function rs_beliana_views_views_default_views() {
     t('URL_diela'),
     t('jazyk'),
     t('sk'),
+    t('nid_hesla'),
     t('Text'),
     t('Export heslo GH'),
     t('Exportovať heslo GH'),
@@ -12810,6 +12833,39 @@ function rs_beliana_views_views_default_views() {
     21 => 0,
     22 => 0,
   );
+  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Ilustrácie';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad';
@@ -13644,6 +13700,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    4 => '4',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
@@ -15194,10 +15251,10 @@ function rs_beliana_views_views_default_views() {
     t(' Upravil niektorú verziu '),
     t('Komentár'),
     t('Všetky heslá - prehľad'),
+    t('Ilustrácie'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
-    t('Ilustrácie'),
     t('Lexikálna skupina (field_lexikalna_skupina)'),
     t('Záznam z pôvodného GH'),
     t('Všetky heslá - prehľad (G)'),
