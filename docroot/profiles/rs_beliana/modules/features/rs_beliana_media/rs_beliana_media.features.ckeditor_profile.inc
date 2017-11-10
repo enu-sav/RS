@@ -14,7 +14,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'Replace\',\'Find\'],
+    [\'Source\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
@@ -160,6 +160,18 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
+          'belianapaste' => array(
+            'name' => 'belianapaste',
+            'desc' => 'Plugin file: belianapaste',
+            'path' => '%plugin_dir%belianapaste/',
+            'buttons' => array(
+              'BelianaPaste' => array(
+                'label' => 'BelianaPaste',
+                'icon' => 'icons/belianapaste.png',
+              ),
+            ),
+            'default' => 'f',
+          ),
           'counter' => array(
             'name' => 'counter',
             'desc' => 'Plugin to count symbols, symbols without blanks and words',
@@ -187,7 +199,7 @@ config.specialChars = [
               'lite-acceptall' => array(
                 'label' => 'Accept all changes',
                 'icon' => 'icons/lite-acceptall.png',
-              ),
+          ),
               'lite-rejectall' => array(
                 'label' => 'Reject all changes',
                 'icon' => 'icons/lite-rejectall.png',
@@ -258,7 +270,7 @@ config.specialChars = [
         'ss' => 2,
         'toolbar' => '[
     [\'Source\'],
-    [\'Cut\',\'Copy\',\'Paste\',\'PasteText\',\'PasteFromWord\',\'Replace\',\'Find\'],
+    [\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
@@ -399,6 +411,18 @@ config.specialChars = [
             'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
             'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
             'buttons' => FALSE,
+            'default' => 'f',
+          ),
+          'belianapaste' => array(
+            'name' => 'belianapaste',
+            'desc' => 'Plugin file: belianapaste',
+            'path' => '%plugin_dir%belianapaste/',
+            'buttons' => array(
+              'BelianaPaste' => array(
+                'label' => 'BelianaPaste',
+                'icon' => 'icons/belianapaste.png',
+              ),
+            ),
             'default' => 'f',
           ),
           'counter' => array(
