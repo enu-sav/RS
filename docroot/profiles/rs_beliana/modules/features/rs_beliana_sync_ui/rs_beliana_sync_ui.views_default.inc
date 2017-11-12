@@ -129,6 +129,15 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'na_zalomenie' => 'na_zalomenie',
   );
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
 
   /* Display: Zverejniť na web */
   $handler = $view->new_display('page', 'Zverejniť na web', 'page');
@@ -137,7 +146,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    16 => '16',
+    3 => '3',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';

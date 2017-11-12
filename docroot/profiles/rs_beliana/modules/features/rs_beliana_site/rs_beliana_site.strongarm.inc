@@ -181,7 +181,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'page_cache_maximum_age';
-  $strongarm->value = '3600';
+  $strongarm->value = '60';
   $export['page_cache_maximum_age'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -202,7 +202,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'preprocess_js';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['preprocess_js'] = $strongarm;
 
   $strongarm = new stdClass();

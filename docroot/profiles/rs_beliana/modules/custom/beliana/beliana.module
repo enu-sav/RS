@@ -168,35 +168,6 @@ function beliana_field_formatter_view($entity_type, $entity, $field, $instance, 
 }
 
 /**
- * Implements hook_views_pre_render().
- */
-function beliana_views_pre_render(&$view) {
-  if ($view->name == 'v_etky_hesl_' && $view->current_display == 'page') {
-    $exposed_data = $view->exposed_data['taxonomy_entity_index_tid_depth'];
-
-    foreach ($view->result as $r => $result) {
-      $group = array();
-      $entity = $result->_field_data['nid']['entity'];
-
-      if (!empty($entity->field_lexikalna_skupina)) {
-        foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $field) {
-          $group[] = $field['tid'];
-        }
-      }
-
-      if (!empty($exposed_data)) {
-        $diff = array_intersect(array_keys($exposed_data), $group);
-
-        if (empty($diff)) {
-          //filter nodes by current lexikalna skupina (taxonomy revision show all workbench versions)
-          unset($view->result[$r]);
-        }
-      }
-    }
-  }
-}
-
-/**
  * Menu callback for `admin/group-list` path.
  *
  * We are printing users grouped by terms assigned to users.
@@ -704,9 +675,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_form_BASE_FORM_ID_alter().
  * @inheritdoc
  */
-function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
-  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
-}
+//function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
+//  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
+//}
 
 /**
  * Callback function for `workbench_moderation_moderate_form` submit.

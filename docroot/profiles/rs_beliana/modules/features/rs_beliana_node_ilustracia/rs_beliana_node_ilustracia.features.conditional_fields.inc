@@ -2108,10 +2108,12 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 3,
-      'value_form' => 'CC licencia',
+      'value_form' => NULL,
       'values' => array(
         0 => 'Public domain',
         1 => 'CC licencia',
+        2 => 'Autorské dielo',
+        3 => 'Muzeálny objekt',
       ),
       'value' => array(),
     ),
@@ -2249,7 +2251,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        17 => array(
+        25 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2355,7 +2357,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        17 => array(
+        25 => array(
           1 => 1,
           3 => 0,
         ),
@@ -2378,10 +2380,12 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => 3,
-      'value_form' => 'CC licencia',
+      'value_form' => NULL,
       'values' => array(
         0 => 'Public domain',
         1 => 'CC licencia',
+        2 => 'Autorské dielo',
+        3 => 'Muzeálny objekt',
       ),
       'value' => array(),
     ),

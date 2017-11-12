@@ -54,7 +54,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => 'Bez modifikácie',
-        1 => 'Modifilované',
+        1 => 'Modifikované',
       ),
       'allowed_values_function' => '',
     ),
