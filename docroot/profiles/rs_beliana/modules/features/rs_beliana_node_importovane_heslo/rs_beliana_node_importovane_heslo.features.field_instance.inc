@@ -95,7 +95,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   $field_instances['node-importovane_heslo-field_datum'] = array(
     'bundle' => 'importovane_heslo',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla. Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -649,6 +649,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Atribúty');
   t('Atribúty sú pomôcka pri vyhľadávaní obsahu alebo kontrole hesiel.');
   t('Comment');
+  t('Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla. Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Dátum');
   t('Dátum aktualizácie');
   t('Erráta');

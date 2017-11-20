@@ -93,7 +93,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   $field_instances['node-heslo-field_datum'] = array(
     'bundle' => 'heslo',
     'deleted' => 0,
-    'description' => 'Zadajte dátum súvisiaci s heslom: prvá hodnota je dátum alebo začiatok udalosti alebo dátum narodenia, druhá hodnota je dátum konca udalosti alebo dátum úmrtia. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.',
+    'description' => 'Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla. Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -149,6 +149,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'input_format' => 'd.m.Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -1071,6 +1072,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Atribúty');
   t('Atribúty sú pomôcka pri vyhľadávaní obsahu alebo kontrole hesiel.');
   t('Comment');
+  t('Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla. Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe');
   t('Dátum');
   t('Dátum aktualizácie');
@@ -1096,7 +1098,6 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ');
   t('Vyplatenie odmeny');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
-  t('Zadajte dátum súvisiaci s heslom: prvá hodnota je dátum alebo začiatok udalosti alebo dátum narodenia, druhá hodnota je dátum konca udalosti alebo dátum úmrtia. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorí sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
   t('Zlúčené do');
   t('Zlúčené z');
