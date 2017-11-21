@@ -12182,6 +12182,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
   $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
   $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Kritéria zoradenia: Obsah: Na zoradenie (field_na_zoradenie) */
+  $handler->display->display_options['sorts']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
+  $handler->display->display_options['sorts']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['sorts']['field_na_zoradenie_value']['field'] = 'field_na_zoradenie_value';
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
   $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
@@ -14042,6 +14046,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    7 => '7',
     12 => '12',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
