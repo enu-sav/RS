@@ -218,9 +218,11 @@ function beliana_sync_sync($nid, &$context) {
 
   if (!$skip) {
     $dates = [];
-    foreach ($node->field_datum['und'] as $item) {
-      $only_date = date('Y-m-d', strtotime($item['value']));
-      $dates[] = $only_date;
+    if (isset($node->field_datum[LANGUAGE_NONE])) {
+      foreach ($node->field_datum['und'] as $item) {
+        $only_date = date('Y-m-d', strtotime($item['value']));
+        $dates[] = $only_date;
+      }
     }
 
     // Load node and form object to be sent over.
@@ -244,7 +246,7 @@ function beliana_sync_sync($nid, &$context) {
     // '0' have postponed pure link articles with unresolved link, not yet transfered to web, but already published
     if (!empty($remote_id) && $remote_id[0] != '0') {
       $remote_id = reset($remote_id);
-      $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
+      $response = $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
       db_update('beliana_sync')
         ->fields(['updated' => time()])
         ->condition('local', $nid)
@@ -434,21 +436,47 @@ function _extract_image(array $images) {
 function _extract_license($node) {
   $formatted_license = '';
   $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
+  //license names ('Creative Commons ...') must be exactly the same as in the 'Licencie' taxonomy in the web version 
   switch ($raw_license) {
     case 'Vlastná ilustrácia':
-      $formatted_license = 'CC BY-SA';
+      $formatted_license = 'Creative Commons BY-SA';
       break;
     case 'Public domain':
-      $formatted_license = 'Public domain';
+      $formatted_license = 'Voľné dielo';
       break;
     case 'CC licencia':
-      $formatted_license = $node->field_licencia1[LANGUAGE_NONE][0]['value'];
+      switch ($node->field_licencia1[LANGUAGE_NONE][0]['value']) {
+      case 'CC BY-ND':
+        $formatted_license = 'Creative Commons BY-ND';
+        break;
+      case 'CC BY-NC':
+        $formatted_license = 'Creative Commons BY-NC';
+        break;
+      case 'CC BY-SA':
+        $formatted_license = 'Creative Commons BY-SA';
+        break;
+      case 'CC BY-NC-ND':
+        $formatted_license = 'Creative Commons BY-NC-ND';
+        break;
+      case 'CC BY-NC-SA':
+        $formatted_license = 'Creative Commons BY-NC-SA';
+        break;
+      case 'CC BY':
+        $formatted_license = 'Creative Commons BY';
+        break;
+      case 'IVL':
+        $formatted_license = 'Iná verejná licencia';
+        break;
+      case 'CC0':
+        $formatted_license = 'Creative Commons CC0';
+        break;
+      }
       break;
     case 'Získané na základe zmluvy':
-      $formatted_license = 'Autorské dielo';
-      break;
     case 'Muzeálny objekt':
-      $formatted_license = 'Muzeálny objekt';
+    case 'Autorské dielo':
+    case 'Iná licencia':
+      $formatted_license = 'Všetky práva vyhradené';
       break;
   }
   return $formatted_license;
