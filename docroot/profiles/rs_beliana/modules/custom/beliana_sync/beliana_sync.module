@@ -212,6 +212,20 @@ function beliana_sync_sync($nid, &$context) {
           'license' => $license,
           'license_info' => _extract_license_information($ilu_node),
         ];
+        if( isset($ilu_node->field_meno_autora_diela[LANGUAGE_NONE]) )
+          $illustrations[0]['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE]) ) 
+          $illustrations[0]['meno_autora_snimky_diela'] = $ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_nazov_diela[LANGUAGE_NONE]) ) 
+          $illustrations[0]['nazov_diela'] = $ilu_node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) ) 
+          $illustrations[0]['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_url_diela_l[LANGUAGE_NONE]) ) 
+          $illustrations[0]['url_diela_l'] = $ilu_node->field_url_diela_l[LANGUAGE_NONE][0]['url'];
+        if( isset($ilu_node->field_url_autora_diela_l[LANGUAGE_NONE]) ) 
+          $illustrations[0]['url_autora_diela_l'] = $ilu_node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'];
+        if( isset($ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE]) ) 
+          $illustrations[0]['url_textu_licencie_l'] = $ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'];
       }
     }
   }
@@ -298,7 +312,7 @@ function beliana_sync_sync($nid, &$context) {
     }
     watchdog('sync', 'Heslo "@title" bolo úspešne prenesené.', [
       '@title' => $node->title,
-      '@ilu_title' => $ilu_node->title,
+      //'@ilu_title' => $ilu_node->title,
     ], WATCHDOG_INFO);
     $context['results']['success']++;
 
