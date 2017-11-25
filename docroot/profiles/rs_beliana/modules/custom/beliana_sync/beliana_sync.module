@@ -210,7 +210,6 @@ function beliana_sync_sync($nid, &$context) {
           'title' => $ilu_node->title,
           'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
           'license' => $license,
-          'license_info' => _extract_license_information($ilu_node),
         ];
         if( isset($ilu_node->field_meno_autora_diela[LANGUAGE_NONE]) )
           $illustrations[0]['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
@@ -494,86 +493,6 @@ function _extract_license($node) {
       break;
   }
   return $formatted_license;
-}
-
-function _extract_license_information($node) {
-  $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
-  $local_license_information = [];
-  switch ($raw_license) {
-    case 'Vlastná ilustrácia':
-      $local_license_information[] = '<strong>Autor: </strong>' . (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value']) ? $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] . ', ' : '') . 'Encyklopedický ústav SAV';
-      break;
-    case 'Public domain':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_url_diela_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL diela: </strong>' . $node->field_url_diela_l[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-    case 'CC licencia':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_modifikovane[LANGUAGE_NONE][0]['value'])) {
-        if ($node->field_modifikovane[LANGUAGE_NONE][0]['value'] == 1) {
-          $modified_value = 'Modifikované';
-        }
-        else {
-          $modified_value = 'Nemodifikované';
-        }
-        $local_license_information[] = '<strong>Modifikované: </strong>' . $modified_value;
-      }
-      if (!empty($node->field_d_tum_prevzatia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Dátum prevzatia: </strong>' . date('d.M.Y', strtotime($node->field_d_tum_prevzatia[LANGUAGE_NONE][0]['value']));
-      }
-      if (!empty($node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL textu licencie: </strong>' . $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_url_autora_diela_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL autora diela: </strong>' . $node->field_url_autora_diela_l[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_url_diela_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL diela: </strong>' . $node->field_url_diela_l[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-    case 'Získané na základe zmluvy':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_drzitel_prav[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Držiteľ práv: </strong>' . $node->field_drzitel_prav[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-    case 'Muzeálny objekt':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-  }
-  $license_information = implode('<br>', $local_license_information);
-  return $license_information;
 }
 
 /*
