@@ -153,6 +153,7 @@ function beliana_sync_sync($nid, &$context) {
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
+    //$skip = FALSE;
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
       // Check if illustration has image attached.
       if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE])) {
@@ -185,6 +186,18 @@ function beliana_sync_sync($nid, &$context) {
         $context['results']['error']++;
         $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá určený typ ilustrácie.';
         watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá určený typ ilustrácie.', [
+          '@title' => $node->title,
+          '@ilu_title' => $ilu_node->title,
+        ], WATCHDOG_ERROR);
+        $skip = TRUE;
+        break;
+      }
+      // Check if alternative text is correct
+      $plen = strlen($ilu_node->field_popis['und'][0]['value'])>130;
+      if (!isset($ilu_node->alternativny_text['und']) && $plen && !$skip) {
+        $context['results']['error']++;
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože popis ilustrácie <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> je dlhší ako 130 znakov ale ilustrácia nemá určený Alternatívny text.';
+        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože popis ilustrácie "@ilu_title" je dlhší ako 130 znakov ale ilustrácia nemá určený Alternatívny text.', [
           '@title' => $node->title,
           '@ilu_title' => $ilu_node->title,
         ], WATCHDOG_ERROR);
@@ -225,10 +238,17 @@ function beliana_sync_sync($nid, &$context) {
           $illustrations[0]['url_autora_diela_l'] = $ilu_node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'];
         if( isset($ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE]) ) 
           $illustrations[0]['url_textu_licencie_l'] = $ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'];
+
+        if( isset($ilu_node->field_alternativny_text[LANGUAGE_NONE]) ) { 
+          $illustrations[0]['alternativny_text'] = $ilu_node->field_alternativny_text[LANGUAGE_NONE][0]['value'];
+        } else {
+          // remove eventual formatting (only strong and em are eventually still here), copy just 125 characters
+          $atext = preg_replace('/<[^>]*>/', '',  $ilu_node->field_popis[LANGUAGE_NONE][0]['value']);
+          $illustrations[0]['alternativny_text'] = substr($atext, 0, 125);
+        }
       }
     }
   }
-
   if (!$skip) {
     $dates = [];
     if (isset($node->field_datum[LANGUAGE_NONE])) {
@@ -248,7 +268,6 @@ function beliana_sync_sync($nid, &$context) {
       'dates' => $dates,
       'info_published' => _extract_published_info($node)._extract_updated_info($node),
     ];
-
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
       ->fields('s', ['remote'])
@@ -290,6 +309,7 @@ function beliana_sync_sync($nid, &$context) {
               'updated' => time()
             ])
             ->execute();
+        } else {
         }
       } else {
           // insert the postponed articles into the table of synchronized articles, but with id '0'
