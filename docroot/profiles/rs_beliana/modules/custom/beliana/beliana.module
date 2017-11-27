@@ -675,9 +675,12 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_form_BASE_FORM_ID_alter().
  * @inheritdoc
  */
-//function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
-//  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
-//}
+function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  
+  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';  
+  drupal_add_js(array('beliana' => array('current_user' => array('id' => $user->uid,'name' => $user->name))), array('type' =>'setting'));
+}
 
 /**
  * Callback function for `workbench_moderation_moderate_form` submit.
