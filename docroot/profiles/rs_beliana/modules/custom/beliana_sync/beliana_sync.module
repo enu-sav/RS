@@ -154,7 +154,9 @@ function beliana_sync_sync($nid, &$context) {
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
+dpm($ilu_node);
     // if there are images, but 'field_pouzit' (use) is not set, break processing
+    // this is a very rare situation
     $auxsub = isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
     $auxobr = isset($ilu_node->field_obrazok_navrh_[LANGUAGE_NONE]);
     $auxodk = isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE]);
@@ -165,23 +167,24 @@ function beliana_sync_sync($nid, &$context) {
     //if( (isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or 
        //isset($ilu_node->field_obrazok_navrh[LANGUAGE_NONE]) or
        //isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) and 
-       //!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+       //!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) left curly brace here
       $context['results']['error']++;
-      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá nastavený spôsob použitia.';
+      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> nemá nastavený spôsob použitia.';
       watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá nastavený spôsob použitia.', [
         '@title' => $node->title,
         '@ilu_title' => $ilu_node->title,
       ], WATCHDOG_ERROR);
       $skip = TRUE;
+      break;
     }
 
     // not executed if field_pouzit is not set
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
       // Check if illustration has image attached.
-      if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) && !$skip) {
+      if (!(isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) && !$skip) {
         $context['results']['error']++;
-        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" neobsahuje priloženú ilustráciu.';
-        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" neobsahuje priloženú ilustráciu.', [
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> nemá priložený súbor a ani určený odkaz.';
+        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" súbor a ani určený odkaz.', [
           '@title' => $node->title,
           '@ilu_title' => $ilu_node->title,
         ], WATCHDOG_ERROR);
@@ -195,7 +198,7 @@ function beliana_sync_sync($nid, &$context) {
         ]) && !$skip
       ) {
         $context['results']['error']++;
-        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nenachádza v stave "Ilustrácia na zverejnenie".';
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> sa nenachádza v stave "Ilustrácia na zverejnenie".';
         watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" sa nenachádza v stave "Ilustrácia na zverejnenie".', [
           '@title' => $node->title,
           '@ilu_title' => $ilu_node->title,
@@ -206,7 +209,7 @@ function beliana_sync_sync($nid, &$context) {
       // Check if illustration has correct license.
       if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený') && !$skip) {
         $context['results']['error']++;
-        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá určený typ ilustrácie.';
+        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> nemá určený typ ilustrácie.';
         watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá určený typ ilustrácie.', [
           '@title' => $node->title,
           '@ilu_title' => $ilu_node->title,
@@ -227,11 +230,16 @@ function beliana_sync_sync($nid, &$context) {
         break;
       }
       if (!$skip) {
-        $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+        // we synchronize linked image, if it is specified
+        if (isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) {
+          $image_url_web = $ilu_node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'];
+        } else {
+          $image_url_local = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+        }
         $license = _extract_license($ilu_node);
         if (empty($license)) {
           $context['results']['error']++;
-          $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" má neplatný typ ilustrácie.';
+          $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> má neplatný typ ilustrácie.';
           watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" má neplatný typ ilustrácie.', [
             '@title' => $node->title,
             '@ilu_title' => $ilu_node->title,
@@ -241,11 +249,16 @@ function beliana_sync_sync($nid, &$context) {
         }
         $illustrations[] = [
           'nid' => $ilu_node->nid,
-          'uri' => $image_url,
+          //'uri' => $image_url_local,
           'title' => $ilu_node->title,
           'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
           'license' => $license,
         ];
+dpm($illustrations);
+        if( isset($image_url_local) )
+          $illustrations[0]['uri'] = $image_url_local;
+        if( isset($image_url_web) )
+          $illustrations[0]['uri'] = $image_url_web;
         if( isset($ilu_node->field_meno_autora_diela[LANGUAGE_NONE]) )
           $illustrations[0]['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
         if( isset($ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE]) ) 
@@ -271,6 +284,7 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
   }
+dpm("1");
   if (!$skip) {
     $dates = [];
     if (isset($node->field_datum[LANGUAGE_NONE])) {
@@ -280,6 +294,7 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
 
+dpm("2");
     // Load node and form object to be sent over.
     $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
     $remote_node_object = [
@@ -290,6 +305,7 @@ function beliana_sync_sync($nid, &$context) {
       'dates' => $dates,
       'info_published' => _extract_published_info($node)._extract_updated_info($node),
     ];
+dpm("3");
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
       ->fields('s', ['remote'])
@@ -299,14 +315,15 @@ function beliana_sync_sync($nid, &$context) {
     // if not empty and not equal to '0' 
     // '0' have postponed pure link articles with unresolved link, not yet transfered to web, but already published
     if (!empty($remote_id) && $remote_id[0] != '0') {
+dpm("4a");
       $remote_id = reset($remote_id);
       $response = $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
       db_update('beliana_sync')
         ->fields(['updated' => time()])
         ->condition('local', $nid)
         ->execute();
-    }
-    else {
+    } else {
+dpm("4b");
       // postpone transfer of articles which are pure link articles with unresolved link
       // list them in the beliana_sync table, so that they will be transferred to web automatically 
       // as soon as the target is published
@@ -344,6 +361,7 @@ function beliana_sync_sync($nid, &$context) {
             ->execute();
       }
     }
+dpm("5");
     // Change workbench status for node and attached illustrations.
     workbench_moderation_moderate($node, 'publikovane_na_webe');
     foreach ($illustrations as $illustration) {
