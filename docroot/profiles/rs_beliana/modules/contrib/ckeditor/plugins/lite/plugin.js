@@ -451,7 +451,7 @@
 
                 icons: "lite-acceptall,lite-acceptone,lite-rejectall,lite-rejectone,lite-toggleshow,lite-toggletracking", // %REMOVE_LINE_CORE%
                 hidpi: true,
-                lang: ["en", "de", "fr"],
+                lang: ["en", "de", "fr", "sk"],
 
                 _scriptsLoaded: null, // not false, which means we're loading
 
