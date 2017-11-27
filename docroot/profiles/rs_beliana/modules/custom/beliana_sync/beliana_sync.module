@@ -150,13 +150,35 @@ function beliana_sync_sync($nid, &$context) {
   $generic_node = node_load($nid);
   $node = workbench_moderation_node_current_load($generic_node);
   $illustrations = [];
+  $skip = FALSE;
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
-    //$skip = FALSE;
+    // if there are images, but 'field_pouzit' (use) is not set, break processing
+    $auxsub = isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+    $auxobr = isset($ilu_node->field_obrazok_navrh_[LANGUAGE_NONE]);
+    $auxodk = isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE]);
+    $auxpou = !isset($ilu_node->field_pouzit[LANGUAGE_NONE]);
+    // this works
+    if(($auxsub or $auxobr or $auxodk) and $auxpou) {
+    // this does not work. Looks like magic
+    //if( (isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or 
+       //isset($ilu_node->field_obrazok_navrh[LANGUAGE_NONE]) or
+       //isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) and 
+       //!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+      $context['results']['error']++;
+      $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá nastavený spôsob použitia.';
+      watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá nastavený spôsob použitia.', [
+        '@title' => $node->title,
+        '@ilu_title' => $ilu_node->title,
+      ], WATCHDOG_ERROR);
+      $skip = TRUE;
+    }
+
+    // not executed if field_pouzit is not set
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
       // Check if illustration has image attached.
-      if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE])) {
+      if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) && !$skip) {
         $context['results']['error']++;
         $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" neobsahuje priloženú ilustráciu.';
         watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" neobsahuje priloženú ilustráciu.', [
