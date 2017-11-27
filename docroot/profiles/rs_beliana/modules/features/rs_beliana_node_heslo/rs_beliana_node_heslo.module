@@ -12,14 +12,14 @@ include_once 'rs_beliana_node_heslo.features.inc';
 function rs_beliana_node_heslo_menu() {
   $items = array();
 
-  $items['node/%node/content'] = array(
-    'title' => t('Edit content'),
-    'type' => MENU_LOCAL_TASK,
-    'page callback' => 'drupal_get_form',
-    'access callback' => 'rs_beliana_node_heslo_content_access',
-    'page arguments' => array('rs_beliana_node_heslo_content_edit_form', 1),    
-    'access arguments' => array(1),
-  );
+//  $items['node/%node/content'] = array(
+//    'title' => t('Edit content'),
+//    'type' => MENU_LOCAL_TASK,
+//    'page callback' => 'drupal_get_form',
+//    'access callback' => 'rs_beliana_node_heslo_content_access',
+//    'page arguments' => array('rs_beliana_node_heslo_content_edit_form', 1),    
+//    'access arguments' => array(1),
+//  );
 
   return $items;
 }
