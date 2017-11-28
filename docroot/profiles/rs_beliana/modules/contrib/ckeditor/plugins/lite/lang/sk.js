@@ -1,6 +1,6 @@
-﻿CKEDITOR.plugins.setLang( 'lite', 'en', {
-	TOGGLE_TRACKING: "Toggle Tracking Changes",
-	TOGGLE_SHOW: "Toggle Tracking Changes",
+CKEDITOR.plugins.setLang( 'lite', 'sk', {
+	TOGGLE_TRACKING: "Zapnúť/Vypnúť zaznamenávanie zmien",
+	TOGGLE_SHOW: "Zapnúť/Vypnúť zaznamenávanie zmien",
 	ACCEPT_ALL: "Prijať všetky zmeny",
 	REJECT_ALL: "Odmietnuť všetky zmeny",
 	ACCEPT_ONE: "Prijať zmenu",

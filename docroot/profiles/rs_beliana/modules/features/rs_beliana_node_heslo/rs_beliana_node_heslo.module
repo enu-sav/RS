@@ -1,7 +1,71 @@
 <?php
+
 /**
  * @file
  * Code for the Redakčný systém Beliana Heslo feature.
  */
-
 include_once 'rs_beliana_node_heslo.features.inc';
+
+/**
+ * Implement hook_menu()
+ */
+function rs_beliana_node_heslo_menu() {
+  $items = array();
+
+//  $items['node/%node/content'] = array(
+//    'title' => t('Edit content'),
+//    'type' => MENU_LOCAL_TASK,
+//    'page callback' => 'drupal_get_form',
+//    'access callback' => 'rs_beliana_node_heslo_content_access',
+//    'page arguments' => array('rs_beliana_node_heslo_content_edit_form', 1),    
+//    'access arguments' => array(1),
+//  );
+
+  return $items;
+}
+
+/**
+ * Function to get access for edit "heslo" content
+ */
+function rs_beliana_node_heslo_content_access($node) {
+  if (in_array($node->type, array('heslo', 'importovane_heslo')) && (user_access('edit own ' . $node->type . ' content') || user_access('edit any ' . $node->type . ' content'))) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Function to edit "heslo" content only
+ */
+function rs_beliana_node_heslo_content_edit_form($form, &$form_state, $node) {
+  module_load_include('inc', 'field_ui', 'field_ui.admin');
+
+  $field = field_info_field('field_text_hesla');
+  $instance = field_info_instance('node', 'field_text_hesla', $node->type);
+
+  $form += field_ui_default_value_widget($field, $instance, $form, $form_state);
+  $form['field_text_hesla'][LANGUAGE_NONE][0]['#default_value'] = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+
+  $form['actions'] = array(
+    '#type' => 'actions'
+  );
+
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+
+  return $form;
+}
+
+/**
+ * Submit function for edit "heslo" content form
+ */
+function rs_beliana_node_heslo_content_edit_form_submit(&$form, &$form_state) {
+  $node = $form_state['build_info']['args'][0];
+  $node->field_text_hesla = $form_state['values']['field_text_hesla'];
+
+  node_save($node);
+  drupal_goto('node/' . $node->nid);
+}
