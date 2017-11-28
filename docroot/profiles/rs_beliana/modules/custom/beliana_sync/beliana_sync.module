@@ -131,7 +131,7 @@ function il_error($node, $ilu_node, $msg) {
     '@title' => $node->title,
     '@ilu_title' => $ilu_node->title,
   ], WATCHDOG_ERROR);
-  return 'Chyba prenosu hesla "' . $node->title . '": ilustrácia <a href="' . $ilu_node->path[alias] .'">' . $ilu_node->title . '</a> ' . $msg . '.';
+  return 'Chyba prenosu hesla <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> ' . $msg . '.';
 }
 
 function beliana_sync_sync($nid, &$context) {
