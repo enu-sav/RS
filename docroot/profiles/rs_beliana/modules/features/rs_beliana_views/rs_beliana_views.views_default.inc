@@ -8239,6 +8239,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['id'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['label'] = 'Obsah referencing Obsah from field_ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Feeds item: Item GUID */
   $handler->display->display_options['fields']['guid']['id'] = 'guid';
@@ -14663,6 +14664,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    9 => '9',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -14825,6 +14827,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Názov';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '[title] / [nid]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
@@ -15212,6 +15215,72 @@ function rs_beliana_views_views_default_views() {
     22 => 0,
     23 => 0,
   );
+  /* Filter criterion: Obsah: Typ ilustrácie (field_zdroj_ilustracie) */
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['id'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['table'] = 'field_data_field_zdroj_ilustracie';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['field'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator_id'] = 'field_zdroj_ilustracie_value_op';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['label'] = 'Typ ilustrácie';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator'] = 'field_zdroj_ilustracie_value_op';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['identifier'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['reduce_duplicates'] = TRUE;
+  /* Filter criterion: Obsah: Typ CC licencie (field_licencia1) */
+  $handler->display->display_options['filters']['field_licencia1_value_1']['id'] = 'field_licencia1_value_1';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['table'] = 'field_data_field_licencia1';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['field'] = 'field_licencia1_value';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_licencia1_value_1']['expose']['operator_id'] = 'field_licencia1_value_1_op';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['expose']['label'] = 'Typ CC licencie';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['expose']['operator'] = 'field_licencia1_value_1_op';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['expose']['identifier'] = 'field_licencia1_value_1';
+  $handler->display->display_options['filters']['field_licencia1_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['field_licencia1_value_1']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
@@ -15295,6 +15364,7 @@ function rs_beliana_views_views_default_views() {
 '),
     t('URL autora diela, autora snímky diela alebo inštitúcie'),
     t('Ilustráciu vytvoril'),
+    t('Typ ilustrácie'),
   );
   $export['vsetky_hesla_detaily'] = $view;
 

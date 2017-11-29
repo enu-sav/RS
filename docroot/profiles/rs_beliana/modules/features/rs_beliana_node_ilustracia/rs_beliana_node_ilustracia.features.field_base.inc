@@ -10,6 +10,30 @@
 function rs_beliana_node_ilustracia_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_alternativny_text'.
+  $field_bases['field_alternativny_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_alternativny_text',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 125,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_meno_autora_snimky_diela'.
   $field_bases['field_meno_autora_snimky_diela'] = array(
     'active' => 1,
@@ -18,7 +42,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_meno_autora_snimky_diela',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -42,7 +66,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_modifikovane',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -114,7 +138,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_url_autora_diela_l',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(),
     'locked' => 0,
@@ -146,7 +170,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_url_diela_l',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(),
     'locked' => 0,
@@ -178,7 +202,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_url_textu_licencie_l',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(),
     'locked' => 0,

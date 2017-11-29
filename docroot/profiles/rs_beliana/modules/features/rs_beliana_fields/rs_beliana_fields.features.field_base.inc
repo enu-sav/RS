@@ -140,7 +140,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_drzitel_prav',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -251,7 +251,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_institucia',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -357,7 +357,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_licencia1',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -368,13 +368,13 @@ function rs_beliana_fields_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'CC BY ' => ' CC BY Creative Commons Attribution (uvedenie autora)',
-        'CC BY-ND ' => ' CC BY-ND Creative Commons Attribution-No-derivates (uvedenie autora-bez odvodeného obsahu)',
-        'CC BY-NC ' => ' CC BY-NC Creative Commons Attribution-NonCommercial (uvedenie autora-nekomerčné použitie)',
-        'CC BY-SA ' => ' CC BY-SA Creative Commons Attribution-ShareAlike (uvedenie autora-rovnaké šírenie)',
-        'CC BY-NC-ND ' => ' CC BY-NC-ND Creative Commons Attribution-NonCommercial-No-derivates (uvedenie autora-nekomerčné použitie-bez odvodeného obsahu)',
-        'CC BY-NC-SA ' => ' CC BY-NC-SA Creative Commons Attribution-NonCommercial-ShareAlike (uvedenie autora-nekomerčné použitie-rovnaké šírenie)',
-        'CC0 ' => ' CC0 (voľné dielo na základe rozhodnutia autora)',
+        'CC BY' => 'CC BY Creative Commons Attribution (uvedenie autora)',
+        'CC BY-ND' => 'CC BY-ND Creative Commons Attribution-No-derivates (uvedenie autora-bez odvodeného obsahu)',
+        'CC BY-NC' => 'CC BY-NC Creative Commons Attribution-NonCommercial (uvedenie autora-nekomerčné použitie)',
+        'CC BY-SA' => 'CC BY-SA Creative Commons Attribution-ShareAlike (uvedenie autora-rovnaké šírenie)',
+        'CC BY-NC-ND' => 'CC BY-NC-ND Creative Commons Attribution-NonCommercial-No-derivates (uvedenie autora-nekomerčné použitie-bez odvodeného obsahu)',
+        'CC BY-NC-SA' => 'CC BY-NC-SA Creative Commons Attribution-NonCommercial-ShareAlike (uvedenie autora-nekomerčné použitie-rovnaké šírenie)',
+        'CC0' => 'CC0 (voľné dielo na základe rozhodnutia autora)',
         'IVL' => 'Iná verejná licencia',
       ),
       'allowed_values_function' => '',
@@ -412,7 +412,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_meno_autora_diela',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -460,7 +460,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_nazov_diela',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -531,7 +531,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_pouzit',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -771,7 +771,7 @@ function rs_beliana_fields_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_zdroj_ilustracie',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
