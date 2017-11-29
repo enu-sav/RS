@@ -205,7 +205,7 @@ function beliana_sync_sync($nid, &$context) {
       // Check if illustration has correct license.
       if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený') && !$skip) {
         $context['results']['error']++;
-        $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá určený neplatný typ ilustrácie');
+        $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá určený platný typ ilustrácie');
         $skip = TRUE;
         break;
       }
