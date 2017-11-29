@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_media.features.ckeditor_profile.inc
@@ -14,11 +15,11 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
+    [\'Sourcedialog\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\'],
     [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
 ]',
         'expand' => 't',
@@ -153,13 +154,6 @@ config.specialChars = [
 ];
  ',
         'loadPlugins' => array(
-          'autogrow' => array(
-            'name' => 'autogrow',
-            'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
-            'buttons' => FALSE,
-            'default' => 'f',
-          ),
           'belianapaste' => array(
             'name' => 'belianapaste',
             'desc' => 'Plugin file: belianapaste',
@@ -170,13 +164,6 @@ config.specialChars = [
                 'icon' => 'icons/belianapaste.png',
               ),
             ),
-            'default' => 'f',
-          ),
-          'counter' => array(
-            'name' => 'counter',
-            'desc' => 'Plugin to count symbols, symbols without blanks and words',
-            'path' => '%plugin_dir%counter/',
-            'buttons' => FALSE,
             'default' => 'f',
           ),
           'drupalbreaks' => array(
@@ -199,7 +186,7 @@ config.specialChars = [
               'lite-acceptall' => array(
                 'label' => 'Accept all changes',
                 'icon' => 'icons/lite-acceptall.png',
-          ),
+              ),
               'lite-rejectall' => array(
                 'label' => 'Reject all changes',
                 'icon' => 'icons/lite-rejectall.png',
@@ -225,12 +212,19 @@ config.specialChars = [
           ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'desc' => 'Plugin file: mathjax',
             'path' => '%plugin_dir%mathjax/',
+            'buttons' => FALSE,
+            'default' => 'f',
+          ),
+          'sourcedialog' => array(
+            'name' => 'sourcedialog',
+            'desc' => 'Plugin file: sourcedialog',
+            'path' => '%plugin_dir%sourcedialog/',
             'buttons' => array(
-              'Mathjax' => array(
-                'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulas',
+              'Sourcedialog' => array(
+                'label' => 'Sourcedialog',
+                'icon' => 'icons/sourcedialog.png',
               ),
             ),
             'default' => 'f',
@@ -269,12 +263,12 @@ config.specialChars = [
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\'],
+    [\'Sourcedialog\'],
     [\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\']
+    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -406,13 +400,6 @@ config.specialChars = [
 \'Ũ\', \'Ų\', \'Ŵ\', \'Ŷ\', \'Ÿ\', \'Ý\', \'Ź\', \'Ż\', \'Ž\'
 ];',
         'loadPlugins' => array(
-          'autogrow' => array(
-            'name' => 'autogrow',
-            'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
-            'buttons' => FALSE,
-            'default' => 'f',
-          ),
           'belianapaste' => array(
             'name' => 'belianapaste',
             'desc' => 'Plugin file: belianapaste',
@@ -423,13 +410,6 @@ config.specialChars = [
                 'icon' => 'icons/belianapaste.png',
               ),
             ),
-            'default' => 'f',
-          ),
-          'counter' => array(
-            'name' => 'counter',
-            'desc' => 'Plugin to count symbols, symbols without blanks and words',
-            'path' => '%plugin_dir%counter/',
-            'buttons' => FALSE,
             'default' => 'f',
           ),
           'drupalbreaks' => array(
@@ -446,12 +426,19 @@ config.specialChars = [
           ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'desc' => 'Plugin file: mathjax',
             'path' => '%plugin_dir%mathjax/',
+            'buttons' => FALSE,
+            'default' => 'f',
+          ),
+          'sourcedialog' => array(
+            'name' => 'sourcedialog',
+            'desc' => 'Plugin file: sourcedialog',
+            'path' => '%plugin_dir%sourcedialog/',
             'buttons' => array(
-              'Mathjax' => array(
-                'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulas',
+              'Sourcedialog' => array(
+                'label' => 'Sourcedialog',
+                'icon' => 'icons/sourcedialog.png',
               ),
             ),
             'default' => 'f',
