@@ -292,6 +292,10 @@ function beliana_sync_sync($nid, &$context) {
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       'dates' => $dates,
       'info_published' => _extract_published_info($node)._extract_updated_info($node),
+      //'category' => ["geografia;afrika","geografia;európa","fyzika"],
+      //'category' => ["asdf;ghjk;pqr"],
+      //'category' => ["asdf1;ghjk;pqr"],
+      'category' => _extract_category_info($node),
     ];
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
@@ -308,6 +312,8 @@ function beliana_sync_sync($nid, &$context) {
         ->fields(['updated' => time()])
         ->condition('local', $nid)
         ->execute();
+      //if ($response->getStatusCode() !== 200)
+        //dpm($response->getStatusCode(),"PATCH failed");
     } else {
       // postpone transfer of articles which are pure link articles with unresolved link
       // list them in the beliana_sync table, so that they will be transferred to web automatically 
@@ -333,7 +339,8 @@ function beliana_sync_sync($nid, &$context) {
               'updated' => time()
             ])
             ->execute();
-        } else {
+        //} else {
+        //dpm($response->getStatusCode(),"POST failed");
         }
       } else {
           // insert the postponed articles into the table of synchronized articles, but with id '0'
@@ -476,6 +483,15 @@ function beliana_sync_sync_finished($success, $results, $operations) {
     drupal_set_message($message, 'error');
   }
   return '';
+}
+
+function _extract_category_info($node) {
+  $taglist = [];
+  foreach($node->field_lexikalna_skupina["und"] as $ls) {
+    $term = taxonomy_term_load($ls['tid']);
+    $taglist[] = $term->field_taglist['und'][0]['value'];
+  }
+  return $taglist;
 }
 
 // select image in the order svg, png, jpg
