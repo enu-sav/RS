@@ -125,6 +125,15 @@ function beliana_sync_process_links($nid, $text, $replace = FALSE) {
   }
 }
 
+// display error message
+function il_error($node, $ilu_node, $msg) {
+  watchdog('sync', 'Chyba prenosu hesla "@title": ilustrácia "@ilu_title" ' . $msg, [
+    '@title' => $node->title,
+    '@ilu_title' => $ilu_node->title,
+  ], WATCHDOG_ERROR);
+  return 'Chyba prenosu hesla <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> ' . $msg . '.';
+}
+
 function beliana_sync_sync($nid, &$context) {
   $skip = FALSE;
   // Make sure to only initialize the results the first time.
@@ -150,77 +159,128 @@ function beliana_sync_sync($nid, &$context) {
   $generic_node = node_load($nid);
   $node = workbench_moderation_node_current_load($generic_node);
   $illustrations = [];
+  $skip = FALSE;
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
+    // if there are images, but 'field_pouzit' (use) is not set, break processing
+    // this is a very rare situation
+    $auxsub = isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+    $auxobr = isset($ilu_node->field_obrazok_navrh_[LANGUAGE_NONE]);
+    $auxodk = isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE]);
+    $auxpou = !isset($ilu_node->field_pouzit[LANGUAGE_NONE]);
+    // this works
+    if(($auxsub or $auxobr or $auxodk) and $auxpou) {
+    // this does not work. Looks like magic
+    //if( (isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or 
+       //isset($ilu_node->field_obrazok_navrh[LANGUAGE_NONE]) or
+       //isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) and 
+       //!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) left curly brace here
+      $context['results']['error']++;
+      $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá nastavený spôsob použitia');
+      $skip = TRUE;
+      break;
+    }
+
+    // not executed if field_pouzit is not set
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
       // Check if illustration has image attached.
-      if (!isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE])) {
+      if (!(isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) && !$skip) {
         $context['results']['error']++;
-        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" neobsahuje priloženú ilustráciu.';
-        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" neobsahuje priloženú ilustráciu.', [
-          '@title' => $node->title,
-          '@ilu_title' => $ilu_node->title,
-        ], WATCHDOG_ERROR);
+        $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá priložený súbor a ani určený odkaz');
         $skip = TRUE;
         break;
       }
       // Check if illustration is in correct WB status.
       if (!in_array($ilu_node->workbench_moderation['current']->state, [
-          'na_zalomenie',
+          'ilustracia_na_zverejnenie',
           'publikovane_na_webe',
         ]) && !$skip
       ) {
         $context['results']['error']++;
-        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" sa nenachádza v stave "Na zalomenie".';
-        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" sa nenachádza v stave "Na zalomenie".', [
-          '@title' => $node->title,
-          '@ilu_title' => $ilu_node->title,
-        ], WATCHDOG_ERROR);
+        $context['results']['messages'][] = il_error($node, $ilu_node, 'sa nenachádza v stave "Ilustrácia na zverejnenie"');
         $skip = TRUE;
         break;
       }
       // Check if illustration has correct license.
       if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený') && !$skip) {
         $context['results']['error']++;
-        $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" nemá určený typ ilustrácie.';
-        watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" nemá určený typ ilustrácie.', [
-          '@title' => $node->title,
-          '@ilu_title' => $ilu_node->title,
-        ], WATCHDOG_ERROR);
+        $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá určený platný typ ilustrácie');
+        $skip = TRUE;
+        break;
+      }
+      // Check if alternative text is correct
+      $plen = strlen($ilu_node->field_popis['und'][0]['value'])>130;
+      if (!isset($ilu_node->field_alternativny_text['und']) && $plen && !$skip) {
+        $context['results']['error']++;
+        $context['results']['messages'][] = il_error($node, $ilu_node, 'má popis dlhší ako 130 znakov a nemá určený Alternatívny text.');
         $skip = TRUE;
         break;
       }
       if (!$skip) {
-        $image_url = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+        // we synchronize linked image, if it is specified
+        if (isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) {
+          $image_url_web = $ilu_node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'];
+        } else {
+          $image_url_local = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+          if (is_null($image_url_local)) {
+            $context['results']['error']++;
+            $context['results']['messages'][] = il_error($node, $ilu_node, "nemá priradenú ilustráciu vhodného typu (svg, png, jpg)");
+            $skip = TRUE;
+            break;
+          }
+        }
+
         $license = _extract_license($ilu_node);
         if (empty($license)) {
           $context['results']['error']++;
-          $context['results']['messages'][] = 'Heslo "' . $node->title . '" sa nepodarilo preniesť, pretože ilustrácia "' . $ilu_node->title . '" má neplatný typ ilustrácie.';
-          watchdog('sync', 'Heslo "@title" sa nepodarilo preniesť, pretože ilustrácia "@ilu_title" má neplatný typ ilustrácie.', [
-            '@title' => $node->title,
-            '@ilu_title' => $ilu_node->title,
-          ], WATCHDOG_ERROR);
+          $context['results']['messages'][] = il_error($node, $ilu_node, 'má neplatný typ ilustrácie');
           $skip = TRUE;
           break;
         }
         $illustrations[] = [
           'nid' => $ilu_node->nid,
-          'uri' => $image_url,
+          //'uri' => $image_url_local,
           'title' => $ilu_node->title,
           'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
           'license' => $license,
-          'license_info' => _extract_license_information($ilu_node),
         ];
+        if( isset($image_url_local) )
+          $illustrations[0]['image_url_local'] = $image_url_local;
+        if( isset($image_url_web) )
+          $illustrations[0]['image_url_web'] = $image_url_web;
+        if( isset($ilu_node->field_meno_autora_diela[LANGUAGE_NONE]) )
+          $illustrations[0]['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE]) ) 
+          $illustrations[0]['meno_autora_snimky_diela'] = $ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_nazov_diela[LANGUAGE_NONE]) ) 
+          $illustrations[0]['nazov_diela'] = $ilu_node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) ) 
+          $illustrations[0]['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
+        if( isset($ilu_node->field_url_diela_l[LANGUAGE_NONE]) ) 
+          $illustrations[0]['url_diela_l'] = $ilu_node->field_url_diela_l[LANGUAGE_NONE][0]['url'];
+        if( isset($ilu_node->field_url_autora_diela_l[LANGUAGE_NONE]) ) 
+          $illustrations[0]['url_autora_diela_l'] = $ilu_node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'];
+        if( isset($ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE]) ) 
+          $illustrations[0]['url_textu_licencie_l'] = $ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'];
+
+        if( isset($ilu_node->field_alternativny_text[LANGUAGE_NONE]) ) { 
+          $illustrations[0]['alternativny_text'] = $ilu_node->field_alternativny_text[LANGUAGE_NONE][0]['value'];
+        } else {
+          // remove eventual formatting (only strong and em are eventually still here), copy just 125 characters
+          $atext = preg_replace('/<[^>]*>/', '',  $ilu_node->field_popis[LANGUAGE_NONE][0]['value']);
+          $illustrations[0]['alternativny_text'] = substr($atext, 0, 125);
+        }
       }
     }
   }
-
   if (!$skip) {
     $dates = [];
-    foreach ($node->field_datum['und'] as $item) {
-      $only_date = date('Y-m-d', strtotime($item['value']));
-      $dates[] = $only_date;
+    if (isset($node->field_datum[LANGUAGE_NONE])) {
+      foreach ($node->field_datum['und'] as $item) {
+        $only_date = date('Y-m-d', strtotime($item['value']));
+        $dates[] = $only_date;
+      }
     }
 
     // Load node and form object to be sent over.
@@ -232,8 +292,11 @@ function beliana_sync_sync($nid, &$context) {
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       'dates' => $dates,
       'info_published' => _extract_published_info($node)._extract_updated_info($node),
+      //'category' => ["geografia;afrika","geografia;európa","fyzika"],
+      //'category' => ["asdf;ghjk;pqr"],
+      //'category' => ["asdf1;ghjk;pqr"],
+      'category' => _extract_category_info($node),
     ];
-
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
       ->fields('s', ['remote'])
@@ -244,13 +307,14 @@ function beliana_sync_sync($nid, &$context) {
     // '0' have postponed pure link articles with unresolved link, not yet transfered to web, but already published
     if (!empty($remote_id) && $remote_id[0] != '0') {
       $remote_id = reset($remote_id);
-      $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
+      $response = $client->request('PATCH', '/rs/api/' . $remote_id, ['body' => json_encode($remote_node_object)]);
       db_update('beliana_sync')
         ->fields(['updated' => time()])
         ->condition('local', $nid)
         ->execute();
-    }
-    else {
+      //if ($response->getStatusCode() !== 200)
+        //dpm($response->getStatusCode(),"PATCH failed");
+    } else {
       // postpone transfer of articles which are pure link articles with unresolved link
       // list them in the beliana_sync table, so that they will be transferred to web automatically 
       // as soon as the target is published
@@ -275,6 +339,8 @@ function beliana_sync_sync($nid, &$context) {
               'updated' => time()
             ])
             ->execute();
+        //} else {
+        //dpm($response->getStatusCode(),"POST failed");
         }
       } else {
           // insert the postponed articles into the table of synchronized articles, but with id '0'
@@ -296,7 +362,6 @@ function beliana_sync_sync($nid, &$context) {
     }
     watchdog('sync', 'Heslo "@title" bolo úspešne prenesené.', [
       '@title' => $node->title,
-      '@ilu_title' => $ilu_node->title,
     ], WATCHDOG_INFO);
     $context['results']['success']++;
 
@@ -420,118 +485,82 @@ function beliana_sync_sync_finished($success, $results, $operations) {
   return '';
 }
 
+function _extract_category_info($node) {
+  $taglist = [];
+  foreach($node->field_lexikalna_skupina["und"] as $ls) {
+    $term = taxonomy_term_load($ls['tid']);
+    $taglist[] = $term->field_taglist['und'][0]['value'];
+  }
+  return $taglist;
+}
+
+// select image in the order svg, png, jpg
 function _extract_image(array $images) {
-  $uri = '';
   foreach ($images as $image) {
-    if (strpos($image['filemime'], 'svg') || (empty($uri))) {
-      $uri = $image['uri'];
+    if (strpos($image['filemime'], 'svg')) {
+      return file_create_url($image['uri']);
     }
   }
-
-  return file_create_url($uri);
+  foreach ($images as $image) {
+    if (strpos($image['filemime'], 'png')) {
+      return file_create_url($image['uri']);
+    }
+  }
+  foreach ($images as $image) {
+    if (strpos($image['filemime'], 'jpeg')) {
+      return file_create_url($image['uri']);
+    }
+  }
+  return NULL;
 }
 
 function _extract_license($node) {
   $formatted_license = '';
   $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
+  //license names ('Creative Commons ...') must be exactly the same as in the 'Licencie' taxonomy in the web version 
   switch ($raw_license) {
     case 'Vlastná ilustrácia':
-      $formatted_license = 'CC BY-SA';
+      $formatted_license = 'Creative Commons BY-SA';
       break;
     case 'Public domain':
-      $formatted_license = 'Public domain';
+      $formatted_license = 'Voľné dielo';
       break;
     case 'CC licencia':
-      $formatted_license = $node->field_licencia1[LANGUAGE_NONE][0]['value'];
+      switch ($node->field_licencia1[LANGUAGE_NONE][0]['value']) {
+      case 'CC BY-ND':
+        $formatted_license = 'Creative Commons BY-ND';
+        break;
+      case 'CC BY-NC':
+        $formatted_license = 'Creative Commons BY-NC';
+        break;
+      case 'CC BY-SA':
+        $formatted_license = 'Creative Commons BY-SA';
+        break;
+      case 'CC BY-NC-ND':
+        $formatted_license = 'Creative Commons BY-NC-ND';
+        break;
+      case 'CC BY-NC-SA':
+        $formatted_license = 'Creative Commons BY-NC-SA';
+        break;
+      case 'CC BY':
+        $formatted_license = 'Creative Commons BY';
+        break;
+      case 'IVL':
+        $formatted_license = 'Iná verejná licencia';
+        break;
+      case 'CC0':
+        $formatted_license = 'Creative Commons CC0';
+        break;
+      }
       break;
     case 'Získané na základe zmluvy':
-      $formatted_license = 'Autorské dielo';
-      break;
     case 'Muzeálny objekt':
-      $formatted_license = 'Muzeálny objekt';
+    case 'Autorské dielo':
+    case 'Iná licencia':
+      $formatted_license = 'Všetky práva vyhradené';
       break;
   }
   return $formatted_license;
-}
-
-function _extract_license_information($node) {
-  $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
-  $local_license_information = [];
-  switch ($raw_license) {
-    case 'Vlastná ilustrácia':
-      $local_license_information[] = '<strong>Autor: </strong>' . (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value']) ? $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] . ', ' : '') . 'Encyklopedický ústav SAV';
-      break;
-    case 'Public domain':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_url_diela_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL diela: </strong>' . $node->field_url_diela_l[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-    case 'CC licencia':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_modifikovane[LANGUAGE_NONE][0]['value'])) {
-        if ($node->field_modifikovane[LANGUAGE_NONE][0]['value'] == 1) {
-          $modified_value = 'Modifikované';
-        }
-        else {
-          $modified_value = 'Nemodifikované';
-        }
-        $local_license_information[] = '<strong>Modifikované: </strong>' . $modified_value;
-      }
-      if (!empty($node->field_d_tum_prevzatia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Dátum prevzatia: </strong>' . date('d.M.Y', strtotime($node->field_d_tum_prevzatia[LANGUAGE_NONE][0]['value']));
-      }
-      if (!empty($node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL textu licencie: </strong>' . $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_url_autora_diela_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL autora diela: </strong>' . $node->field_url_autora_diela_l[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_url_diela_l[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>URL diela: </strong>' . $node->field_url_diela_l[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-    case 'Získané na základe zmluvy':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_drzitel_prav[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Držiteľ práv: </strong>' . $node->field_drzitel_prav[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-    case 'Muzeálny objekt':
-      if (!empty($node->field_nazov_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Názov diela: </strong>' . $node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Autor: </strong>' . $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-      }
-      if (!empty($node->field_institucia[LANGUAGE_NONE][0]['value'])) {
-        $local_license_information[] = '<strong>Inštitúcia: </strong>' . $node->field_institucia[LANGUAGE_NONE][0]['value'];
-      }
-      break;
-  }
-  $license_information = implode('<br>', $local_license_information);
-  return $license_information;
 }
 
 /*
