@@ -32,6 +32,7 @@ function rs_beliana_views_views_default_views() {
     10 => '10',
     6 => '6',
     13 => '13',
+    19 => '19',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -8239,7 +8240,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['id'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['label'] = 'Obsah referencing Obsah from field_ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Feeds item: Item GUID */
   $handler->display->display_options['fields']['guid']['id'] = 'guid';
@@ -14827,7 +14827,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Názov';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '[title] / [nid]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
