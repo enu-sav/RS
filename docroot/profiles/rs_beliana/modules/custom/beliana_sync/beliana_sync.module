@@ -134,6 +134,13 @@ function il_error($node, $ilu_node, $msg) {
   return 'Chyba prenosu hesla <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> ' . $msg . '.';
 }
 
+// eventual fixes in article text 
+function modify_body_text($text)
+{
+  $text = str_replace("➔","→",$text);
+  return $text;
+}
+
 function beliana_sync_sync($nid, &$context) {
   $skip = FALSE;
   // Make sure to only initialize the results the first time.
@@ -287,7 +294,7 @@ function beliana_sync_sync($nid, &$context) {
     $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
     $remote_node_object = [
       'title' => $node->title,
-      'body' => $body,
+      'body' => modify_body_text($body),
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       'dates' => $dates,
