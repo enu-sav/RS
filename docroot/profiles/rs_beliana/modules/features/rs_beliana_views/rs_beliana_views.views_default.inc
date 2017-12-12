@@ -32,6 +32,7 @@ function rs_beliana_views_views_default_views() {
     10 => '10',
     6 => '6',
     13 => '13',
+    19 => '19',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -14931,6 +14932,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_nazov_diela']['label'] = 'Názov diela / URL diela';
   $handler->display->display_options['fields']['field_nazov_diela']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_nazov_diela']['alter']['text'] = '[field_nazov_diela] / [field_url_diela_l]';
+  $handler->display->display_options['fields']['field_nazov_diela']['empty'] = '- / [field_url_diela_l]';
   /* Pole: Obsah: Inštitúcia */
   $handler->display->display_options['fields']['field_institucia']['id'] = 'field_institucia';
   $handler->display->display_options['fields']['field_institucia']['table'] = 'field_data_field_institucia';
@@ -14939,9 +14941,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['id'] = 'field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['table'] = 'field_data_field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['field'] = 'field_meno_autora_snimky_diela';
-  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['label'] = 'Meno autora snímky diela / URL';
-  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['alter']['text'] = '
-';
+  $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['alter']['alter_text'] = TRUE;
   /* Pole: Obsah: URL autora diela alebo inštitúcie */
   $handler->display->display_options['fields']['field_url_autora_diela_l']['id'] = 'field_url_autora_diela_l';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['table'] = 'field_data_field_url_autora_diela_l';
@@ -15358,10 +15358,9 @@ function rs_beliana_views_views_default_views() {
     t('URL diela'),
     t('Názov diela / URL diela'),
     t('[field_nazov_diela] / [field_url_diela_l]'),
+    t('- / [field_url_diela_l]'),
     t('Inštitúcia'),
-    t('Meno autora snímky diela / URL'),
-    t('
-'),
+    t('Meno autora snímky diela'),
     t('URL autora diela, autora snímky diela alebo inštitúcie'),
     t('Ilustráciu vytvoril'),
     t('Typ ilustrácie'),

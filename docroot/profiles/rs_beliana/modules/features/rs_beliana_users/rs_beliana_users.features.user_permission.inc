@@ -150,15 +150,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'access rules debug'.
-  $permissions['access rules debug'] = array(
-    'name' => 'access rules debug',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'rules',
-  );
-
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -460,15 +451,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: 'administer rules'.
-  $permissions['administer rules'] = array(
-    'name' => 'administer rules',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'rules',
   );
 
   // Exported permission: 'administer search'.
@@ -854,15 +836,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'bypass rules access'.
-  $permissions['bypass rules access'] = array(
-    'name' => 'bypass rules access',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'rules',
   );
 
   // Exported permission: 'bypass workbench moderation'.
@@ -1598,6 +1571,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -1862,6 +1836,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -3674,6 +3649,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -3917,6 +3893,7 @@ function rs_beliana_users_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
