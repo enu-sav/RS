@@ -37,15 +37,6 @@ function rs_beliana_site_user_default_permissions() {
     'module' => 'better_formats',
   );
 
-  // Exported permission: 'show format selection for rules_config'.
-  $permissions['show format selection for rules_config'] = array(
-    'name' => 'show format selection for rules_config',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'better_formats',
-  );
-
   // Exported permission: 'show format selection for taxonomy_term'.
   $permissions['show format selection for taxonomy_term'] = array(
     'name' => 'show format selection for taxonomy_term',

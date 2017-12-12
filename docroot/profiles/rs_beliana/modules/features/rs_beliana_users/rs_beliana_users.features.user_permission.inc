@@ -150,15 +150,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'access rules debug'.
-  $permissions['access rules debug'] = array(
-    'name' => 'access rules debug',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'rules',
-  );
-
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -460,15 +451,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: 'administer rules'.
-  $permissions['administer rules'] = array(
-    'name' => 'administer rules',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'rules',
   );
 
   // Exported permission: 'administer search'.
@@ -854,15 +836,6 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'bypass rules access'.
-  $permissions['bypass rules access'] = array(
-    'name' => 'bypass rules access',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'rules',
   );
 
   // Exported permission: 'bypass workbench moderation'.

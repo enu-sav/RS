@@ -22,7 +22,6 @@ features[features_api][] = api:2
 features[user_permission][] = show format selection for comment
 features[user_permission][] = show format selection for node
 features[user_permission][] = show format selection for privatemsg_message
-features[user_permission][] = show format selection for rules_config
 features[user_permission][] = show format selection for taxonomy_term
 features[user_permission][] = show format selection for user
 features[user_permission][] = show format tips
