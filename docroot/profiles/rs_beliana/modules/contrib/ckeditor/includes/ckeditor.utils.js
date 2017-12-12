@@ -133,15 +133,13 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
     if (CKEDITOR.loadFullCore) {
       CKEDITOR.on('loaded', function() {
         textarea_settings = Drupal.ckeditorLoadPlugins(textarea_settings);
-        //Drupal.ckeditorInstance = CKEDITOR.replace(textarea_id, textarea_settings);
-        Drupal.ckeditorInstance = CKEDITOR.inline(textarea_id);
+        Drupal.ckeditorInstance = CKEDITOR.replace(textarea_id, textarea_settings);
       });
       CKEDITOR.loadFullCore();
     }
     else {
       textarea_settings = Drupal.ckeditorLoadPlugins(textarea_settings);
-//      Drupal.ckeditorInstance = CKEDITOR.replace(textarea_id, textarea_settings);
-      Drupal.ckeditorInstance = CKEDITOR.inline(textarea_id, textarea_settings);
+      Drupal.ckeditorInstance = CKEDITOR.replace(textarea_id, textarea_settings);
     }
   }
 
