@@ -1598,6 +1598,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -1862,6 +1863,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
@@ -3674,6 +3676,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
