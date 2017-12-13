@@ -37,15 +37,3 @@
 .filter-guidelines {
     display: none;
 }
-
-.field-name-field-text-hesla .form-item label{
-    background: #E1E2DC;
-    padding: 10px 15px;
-    margin: 0;
-}
-.field-name-field-text-hesla .form-item .form-textarea-wrapper .cke_textarea_inline{
-    padding: 5px 7px;
-    border: 1px solid #ddd;
-    background: #fff;
-    color: #333;
-}
