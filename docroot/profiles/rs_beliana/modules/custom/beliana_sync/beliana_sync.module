@@ -138,6 +138,12 @@ function il_error($node, $ilu_node, $msg) {
 function modify_body_text($text)
 {
   $text = str_replace("➔","→",$text);
+  // remove text highlighted (from <span> tag)
+  $text = preg_replace(
+	'/ style="background-color:#[a-fA-F0-9]{1,6}"/',
+	"",
+	$text
+        );
   return $text;
 }
 
@@ -252,31 +258,32 @@ function beliana_sync_sync($nid, &$context) {
           'description' => $ilu_node->field_popis[LANGUAGE_NONE][0]['value'],
           'license' => $license,
         ];
+        $ix = count($illustrations) - 1;	// index of the last item
         if( isset($image_url_local) )
-          $illustrations[0]['image_url_local'] = $image_url_local;
+          $illustrations[$ix]['image_url_local'] = $image_url_local;
         if( isset($image_url_web) )
-          $illustrations[0]['image_url_web'] = $image_url_web;
+          $illustrations[$ix]['image_url_web'] = $image_url_web;
         if( isset($ilu_node->field_meno_autora_diela[LANGUAGE_NONE]) )
-          $illustrations[0]['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
+          $illustrations[$ix]['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
         if( isset($ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE]) ) 
-          $illustrations[0]['meno_autora_snimky_diela'] = $ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'];
+          $illustrations[$ix]['meno_autora_snimky_diela'] = $ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'];
         if( isset($ilu_node->field_nazov_diela[LANGUAGE_NONE]) ) 
-          $illustrations[0]['nazov_diela'] = $ilu_node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
+          $illustrations[$ix]['nazov_diela'] = $ilu_node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
         if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) ) 
-          $illustrations[0]['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
+          $illustrations[$ix]['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
         if( isset($ilu_node->field_url_diela_l[LANGUAGE_NONE]) ) 
-          $illustrations[0]['url_diela_l'] = $ilu_node->field_url_diela_l[LANGUAGE_NONE][0]['url'];
+          $illustrations[$ix]['url_diela_l'] = $ilu_node->field_url_diela_l[LANGUAGE_NONE][0]['url'];
         if( isset($ilu_node->field_url_autora_diela_l[LANGUAGE_NONE]) ) 
-          $illustrations[0]['url_autora_diela_l'] = $ilu_node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'];
+          $illustrations[$ix]['url_autora_diela_l'] = $ilu_node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'];
         if( isset($ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE]) ) 
-          $illustrations[0]['url_textu_licencie_l'] = $ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'];
+          $illustrations[$ix]['url_textu_licencie_l'] = $ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'];
 
         if( isset($ilu_node->field_alternativny_text[LANGUAGE_NONE]) ) { 
-          $illustrations[0]['alternativny_text'] = $ilu_node->field_alternativny_text[LANGUAGE_NONE][0]['value'];
+          $illustrations[$ix]['alternativny_text'] = $ilu_node->field_alternativny_text[LANGUAGE_NONE][0]['value'];
         } else {
           // remove eventual formatting (only strong and em are eventually still here), copy just 125 characters
           $atext = preg_replace('/<[^>]*>/', '',  $ilu_node->field_popis[LANGUAGE_NONE][0]['value']);
-          $illustrations[0]['alternativny_text'] = substr($atext, 0, 125);
+          $illustrations[$ix]['alternativny_text'] = substr($atext, 0, 125);
         }
       }
     }
