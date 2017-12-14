@@ -138,6 +138,12 @@ function il_error($node, $ilu_node, $msg) {
 function modify_body_text($text)
 {
   $text = str_replace("➔","→",$text);
+  // remove text highlighted (from <span> tag)
+  $text = preg_replace(
+	'/ style="background-color:#[a-fA-F0-9]{1,6}"/',
+	"",
+	$text
+        );
   return $text;
 }
 
