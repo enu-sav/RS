@@ -8240,7 +8240,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['id'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['label'] = 'Obsah referencing Obsah from field_ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Feeds item: Item GUID */
   $handler->display->display_options['fields']['guid']['id'] = 'guid';
@@ -11665,6 +11664,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'field_obrazok_navrh_' => 'field_obrazok_navrh_',
+    'field_obrazok_odkaz' => 'field_obrazok_odkaz',
     'field_popis' => 'field_popis',
     'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
     'state' => 'state',
@@ -11680,6 +11680,13 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_obrazok_navrh_' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_obrazok_odkaz' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -11734,7 +11741,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
-  $handler->display->display_options['fields']['field_obrazok_navrh_']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
     'image_style' => 'thumbnail',
@@ -11744,13 +11750,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_odkaz']['id'] = 'field_obrazok_odkaz';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['table'] = 'field_data_field_obrazok_odkaz';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['field'] = 'field_obrazok_odkaz';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (náhľad)';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['empty'] = '[field_obrazok_navrh_]';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (odkaz)';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['type'] = 'beliana_external_image';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['settings'] = array(
     'size' => 'thumbnail',
-    'link' => '0',
+    'link' => '1',
   );
   /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
@@ -12021,7 +12025,7 @@ function rs_beliana_views_views_default_views() {
     t('Vyhľadať ilustrácie'),
     t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.'),
     t('Obrázok (náhľad)'),
-    t('[field_obrazok_navrh_]'),
+    t('Obrázok (odkaz)'),
     t('Text k ilustrácii'),
     t('Súbory ilustrácie'),
   );
@@ -14828,7 +14832,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Názov';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '[title] / [nid]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
