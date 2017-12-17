@@ -135,15 +135,34 @@ function il_error($node, $ilu_node, $msg) {
 }
 
 // eventual fixes in article text 
+// nonbreakable space: " "
 function modify_body_text($text)
 {
   $text = str_replace("➔","→",$text);
+  $text = str_replace(" "," ",$text);	// remove nonbreakable spaces
+  // multiple spaces 
+  $text = preg_replace('/(  +)/', ' ', $text);
   // remove text highlighted (from <span> tag)
   $text = preg_replace(
 	'/ style="background-color:#[a-fA-F0-9]{1,6}"/',
 	"",
-	$text
+	$text 
         );
+  // &nbsp within numbers
+  $text = preg_replace( '/([0-9]) ([0-9])/', "$1&nbsp;$2", $text);
+  $text = preg_replace( '/([0-9]) · ([0-9])/', "$1&nbsp;·&nbsp;$2", $text);
+  $text = preg_replace( '/([0-9]) x ([0-9])/', "$1&nbsp;x&nbsp;$2", $text);
+  $text = preg_replace( '/([0-9]) × ([0-9])/', "$1&nbsp;×&nbsp;$2", $text);
+  // &nbsp with Slovak single letter words
+  $text = preg_replace( '/ ([ikosuvzKOSUVZ]) /', " $1&nbsp;", $text);
+  // &nbsp with numbers and physical units
+  $text = preg_replace( '/([0-9]) ([th%glm][ <,.;])/', "$1&nbsp;$2", $text);
+  $text = preg_replace( '/([0-9]) ‰/', "$1&nbsp;‰", $text);
+  $text = preg_replace( '/([0-9]) ([cnμmk][glm][ <,.;])/', "$1&nbsp;$2", $text);
+  $text = preg_replace( '/([0-9]) μ([gm][ <,.;])/', "$1&nbsp;μ$2", $text);
+  $text = preg_replace( '/([0-9]) (°[CF])/', "$1&nbsp;$2", $text);
+  $text = preg_replace( '/(sup>) ([gs][ ,.;] )/', "$1&nbsp;$2", $text);
+  $text = preg_replace( '/([0-9]) ([kM]eV)/', "$1&nbsp;$2", $text);
   return $text;
 }
 
@@ -299,9 +318,10 @@ function beliana_sync_sync($nid, &$context) {
 
     // Load node and form object to be sent over.
     $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
+    $body = modify_body_text($body);
     $remote_node_object = [
       'title' => $node->title,
-      'body' => modify_body_text($body),
+      'body' => $body,
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       'dates' => $dates,
