@@ -288,8 +288,12 @@ function beliana_sync_sync($nid, &$context) {
           $illustrations[$ix]['meno_autora_snimky_diela'] = $ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'];
         if( isset($ilu_node->field_nazov_diela[LANGUAGE_NONE]) ) 
           $illustrations[$ix]['nazov_diela'] = $ilu_node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
-        if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) ) 
-          $illustrations[$ix]['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
+        if( $ilu_node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Vlastná ilustrácia' ) {
+          $illustrations[$ix]['institucia'] = "Encyklopedický ústav SAV";
+        } else {  
+          if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) ) 
+            $illustrations[$ix]['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
+        }
         if( isset($ilu_node->field_url_diela_l[LANGUAGE_NONE]) ) 
           $illustrations[$ix]['url_diela_l'] = $ilu_node->field_url_diela_l[LANGUAGE_NONE][0]['url'];
         if( isset($ilu_node->field_url_autora_diela_l[LANGUAGE_NONE]) ) 
