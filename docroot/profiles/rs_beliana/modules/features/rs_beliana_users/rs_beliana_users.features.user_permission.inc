@@ -1096,18 +1096,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_url_diela_l'.
-  $permissions['create field_url_diela_l'] = array(
-    'name' => 'create field_url_diela_l',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-      'iredaktor' => 'iredaktor',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'create field_url_textu_licencie_l'.
   $permissions['create field_url_textu_licencie_l'] = array(
     'name' => 'create field_url_textu_licencie_l',
@@ -1708,18 +1696,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit field_url_diela_l'.
-  $permissions['edit field_url_diela_l'] = array(
-    'name' => 'edit field_url_diela_l',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-      'iredaktor' => 'iredaktor',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit field_url_textu_licencie_l'.
   $permissions['edit field_url_textu_licencie_l'] = array(
     'name' => 'edit field_url_textu_licencie_l',
@@ -1964,18 +1940,6 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit own field_url_autora_diela_l'.
   $permissions['edit own field_url_autora_diela_l'] = array(
     'name' => 'edit own field_url_autora_diela_l',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-      'iredaktor' => 'iredaktor',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit own field_url_diela_l'.
-  $permissions['edit own field_url_diela_l'] = array(
-    'name' => 'edit own field_url_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
@@ -3488,18 +3452,6 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_url_diela_l'.
-  $permissions['view field_url_diela_l'] = array(
-    'name' => 'view field_url_diela_l',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-      'iredaktor' => 'iredaktor',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view field_url_textu_licencie_l'.
   $permissions['view field_url_textu_licencie_l'] = array(
     'name' => 'view field_url_textu_licencie_l',
@@ -3777,18 +3729,6 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'view own field_url_autora_diela_l'.
   $permissions['view own field_url_autora_diela_l'] = array(
     'name' => 'view own field_url_autora_diela_l',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-      'iredaktor' => 'iredaktor',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_url_diela_l'.
-  $permissions['view own field_url_diela_l'] = array(
-    'name' => 'view own field_url_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',

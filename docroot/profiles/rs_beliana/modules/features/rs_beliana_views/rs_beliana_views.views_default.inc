@@ -8240,7 +8240,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['id'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['label'] = 'Obsah referencing Obsah from field_ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Feeds item: Item GUID */
   $handler->display->display_options['fields']['guid']['id'] = 'guid';
@@ -11665,6 +11664,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'field_obrazok_navrh_' => 'field_obrazok_navrh_',
+    'field_obrazok_odkaz' => 'field_obrazok_odkaz',
     'field_popis' => 'field_popis',
     'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
     'state' => 'state',
@@ -11680,6 +11680,13 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_obrazok_navrh_' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_obrazok_odkaz' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -11734,7 +11741,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_navrh_']['table'] = 'field_data_field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['field'] = 'field_obrazok_navrh_';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['label'] = 'Obrázok (náhľad)';
-  $handler->display->display_options['fields']['field_obrazok_navrh_']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_obrazok_navrh_']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_obrazok_navrh_']['settings'] = array(
     'image_style' => 'thumbnail',
@@ -11744,13 +11750,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_obrazok_odkaz']['id'] = 'field_obrazok_odkaz';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['table'] = 'field_data_field_obrazok_odkaz';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['field'] = 'field_obrazok_odkaz';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (náhľad)';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['empty'] = '[field_obrazok_navrh_]';
+  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Obrázok (odkaz)';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['type'] = 'beliana_external_image';
   $handler->display->display_options['fields']['field_obrazok_odkaz']['settings'] = array(
     'size' => 'thumbnail',
-    'link' => '0',
+    'link' => '1',
   );
   /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
@@ -12021,7 +12025,7 @@ function rs_beliana_views_views_default_views() {
     t('Vyhľadať ilustrácie'),
     t(' V tomto náhľade sa zobrazujú všetky ilustrácie Beliany.'),
     t('Obrázok (náhľad)'),
-    t('[field_obrazok_navrh_]'),
+    t('Obrázok (odkaz)'),
     t('Text k ilustrácii'),
     t('Súbory ilustrácie'),
   );
@@ -14674,6 +14678,8 @@ function rs_beliana_views_views_default_views() {
     'title' => 'title',
     'field_obrazok_navrh_' => 'field_obrazok_navrh_',
     'field_obrazok_odkaz' => 'field_obrazok_odkaz',
+    'title_1' => 'title_1',
+    'field_popis' => 'field_popis',
     'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
     'field_licencia1' => 'field_licencia1',
     'field_zdroj_ilustracie' => 'field_zdroj_ilustracie',
@@ -14714,6 +14720,20 @@ function rs_beliana_views_views_default_views() {
     ),
     'field_obrazok_odkaz' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_popis' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -14818,6 +14838,19 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Content revision: Používateľ */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Vzťah: Obsah: Autor */
+  $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
+  $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
+  /* Vzťah: Odkaz na entitu: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['id'] = 'reverse_field_ilustracia_node';
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Content revision: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -14828,7 +14861,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Názov';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '[title] / [nid]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
@@ -14854,6 +14886,12 @@ function rs_beliana_views_views_default_views() {
     'size' => 'thumbnail',
     'link' => '1',
   );
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'reverse_field_ilustracia_node';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Heslo';
   /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
@@ -15343,9 +15381,11 @@ function rs_beliana_views_views_default_views() {
     t('Odoslať importované heslo na zverejnenie'),
     t('Kontrola a zverejňovanie importovaných hesiel. V prípade potreby heslo možno otvoriť na úpravu kliknutím pravým tlačidlom myši na názov hesla a výberom možnosti "Otvoriť v novom okne (alebo záložke)". Heslo takto možno aj vrátiť  do stavu "Importované", v ktorom ho môže skontrolovať redaktor.'),
     t('Všetky ilustrácie - prehľad'),
+    t('Obsah referencing Obsah from field_ilustracia'),
     t('[title] / [nid]'),
     t('Náhľad'),
     t('Odkaz'),
+    t('Heslo'),
     t('Text k ilustrácii'),
     t('Typ CC licencie'),
     t('-'),

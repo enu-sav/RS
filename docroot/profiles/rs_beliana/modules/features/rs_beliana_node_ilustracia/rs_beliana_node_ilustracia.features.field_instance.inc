@@ -832,7 +832,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke.',
+    'description' => '<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba ja pole <em>URL diela</em>',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1484,7 +1484,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke.');
+  t('<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba ja pole <em>URL diela</em>');
   t('Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak voľba typu ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. <br />
 "Muzeálny objekt": trojrozmerné dielo (socha, objekt) umiestnené v múzeu, galérii, chráme a podobne. <br />
 "Vlastná ilustrácia EnÚ": ilustrácia, ktorú vytvoril zamestnanec EnÚ alebo bola vytvorená na objednávku EnÚ <br />
