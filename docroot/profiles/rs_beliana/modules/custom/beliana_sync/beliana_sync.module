@@ -125,13 +125,21 @@ function beliana_sync_process_links($nid, $text, $replace = FALSE) {
   }
 }
 
-// display error message
+// display error message (illustration)
 function il_error($node, $ilu_node, $msg) {
   watchdog('sync', 'Chyba prenosu hesla "@title": ilustrácia "@ilu_title" ' . $msg, [
     '@title' => $node->title,
     '@ilu_title' => $ilu_node->title,
   ], WATCHDOG_ERROR);
   return 'Chyba prenosu hesla <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> ' . $msg . '.';
+}
+
+// display error message (article)
+function art_error($node, $msg) {
+  watchdog('sync', 'Chyba prenosu hesla "@title" ' . $msg, [
+    '@title' => $node->title,
+  ], WATCHDOG_ERROR);
+  return 'Chyba prenosu. V hesle <a href ="' . $node->path['source'] . '">' . $node->title . '</a> ' . $msg . '.';
 }
 
 // eventual fixes in article text 
@@ -209,6 +217,16 @@ function beliana_sync_sync($nid, &$context) {
   $node = workbench_moderation_node_current_load($generic_node);
   $illustrations = [];
   $skip = FALSE;
+  
+  // check article text
+  $text_hesla = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  // are LITE changes still present?
+  if (strpos($text_hesla,"ice-ins") or strpos($text_hesla, "ice-del")){
+    $context['results']['error']++;
+    $context['results']['messages'][] = art_error($node, 'sú uložené LITE zmeny');
+    $skip = TRUE;
+    return;
+  }
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
@@ -328,6 +346,7 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
   }
+  // the article has passed the checks, so publish it
   if (!$skip) {
     $dates = [];
     if (isset($node->field_datum[LANGUAGE_NONE])) {
