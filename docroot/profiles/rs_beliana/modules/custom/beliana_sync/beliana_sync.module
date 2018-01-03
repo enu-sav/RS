@@ -163,6 +163,23 @@ function modify_body_text($text)
   $text = preg_replace( '/([0-9]) (°[CF])/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/(sup>) ([gs][ ,.;] )/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/([0-9]) ([kM]eV)/', "$1&nbsp;$2", $text);
+
+  // table formatting
+  //<td colspan="2" style="width:1141px">
+  $text = preg_replace( '/<td colspan="([0-9]*)" [^>]*>/', '<td colspan="$1">', $text);
+  $text = preg_replace( '/<th colspan="([0-9]*)" [^>]*>/', '<th colspan="$1">', $text);
+  //<td style="width:958px">
+  $text = preg_replace( '/<td style="width:[0-9]*px">/', '<td>', $text);
+  //<table align="left" border="1" cellpadding="0" cellspacing="1" style="height:599px; width:1149px">
+  //$text = preg_replace( '/<table [^>]*>/', '<table style="width:100%">', $text);
+  $text = preg_replace( '/<table [^>]*>/', '<table>', $text);
+  // remove <p> in tables
+  // <td> <p>Sir Henry Milton Taylor</p> </td>
+  $text = preg_replace( '/<td>\s+<p>/', '<td>', $text);
+  $text = preg_replace( '*</p>\s+</td>*', '</td>', $text);
+
+  // remove meaningless span
+  $text = preg_replace( '%<span>([^<]*)</span>%', '$1', $text);
   return $text;
 }
 
