@@ -26,7 +26,6 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'Redaktor' => 'Redaktor',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -37,7 +36,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access all views'] = array(
     'name' => 'access all views',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'views',
@@ -47,7 +45,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access comments'] = array(
     'name' => 'access comments',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -58,7 +55,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -69,7 +65,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access content overview'] = array(
     'name' => 'access content overview',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -79,7 +74,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access contextual links'] = array(
     'name' => 'access contextual links',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'contextual',
@@ -89,7 +83,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access dashboard'] = array(
     'name' => 'access dashboard',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'dashboard',
@@ -144,7 +137,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access private fields'] = array(
     'name' => 'access private fields',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -154,7 +146,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -164,7 +155,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access site reports'] = array(
     'name' => 'access site reports',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -174,7 +164,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -189,7 +178,6 @@ function rs_beliana_users_user_default_permissions() {
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'iredaktor' => 'iredaktor',
@@ -211,7 +199,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'iredaktor' => 'iredaktor',
@@ -223,7 +210,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer actions'] = array(
     'name' => 'administer actions',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -233,7 +219,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer blocks'] = array(
     'name' => 'administer blocks',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'block',
@@ -243,7 +228,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer ckeditor'] = array(
     'name' => 'administer ckeditor',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'ckeditor',
@@ -253,7 +237,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'comment',
@@ -263,7 +246,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer content types'] = array(
     'name' => 'administer content types',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -309,7 +291,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer feeds'] = array(
     'name' => 'administer feeds',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'feeds',
@@ -319,7 +300,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer feeds_tamper'] = array(
     'name' => 'administer feeds_tamper',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'feeds_tamper',
@@ -329,7 +309,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer field permissions'] = array(
     'name' => 'administer field permissions',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -339,7 +318,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'filter',
@@ -349,7 +327,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer image styles'] = array(
     'name' => 'administer image styles',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'image',
@@ -368,7 +345,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer languages'] = array(
     'name' => 'administer languages',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'locale',
@@ -387,7 +363,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'menu',
@@ -397,7 +372,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer module filter'] = array(
     'name' => 'administer module filter',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'module_filter',
@@ -407,7 +381,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer modules'] = array(
     'name' => 'administer modules',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -417,7 +390,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -427,7 +399,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer password policies'] = array(
     'name' => 'administer password policies',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'password_policy',
@@ -437,7 +408,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer pathauto'] = array(
     'name' => 'administer pathauto',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'pathauto',
@@ -447,7 +417,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer permissions'] = array(
     'name' => 'administer permissions',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
@@ -457,7 +426,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer search'] = array(
     'name' => 'administer search',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'search',
@@ -467,7 +435,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer sharedemail'] = array(
     'name' => 'administer sharedemail',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'sharedemail',
@@ -477,7 +444,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer simplify'] = array(
     'name' => 'administer simplify',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'simplify',
@@ -487,7 +453,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer site configuration'] = array(
     'name' => 'administer site configuration',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -497,7 +462,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer software updates'] = array(
     'name' => 'administer software updates',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -507,7 +471,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer taxonomy'] = array(
     'name' => 'administer taxonomy',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'taxonomy',
@@ -517,7 +480,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer themes'] = array(
     'name' => 'administer themes',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -527,7 +489,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer url aliases'] = array(
     'name' => 'administer url aliases',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'path',
@@ -537,7 +498,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer users'] = array(
     'name' => 'administer users',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
@@ -547,7 +507,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer uuid'] = array(
     'name' => 'administer uuid',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'uuid',
@@ -557,7 +516,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer views'] = array(
     'name' => 'administer views',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'views',
@@ -567,7 +525,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer workbench'] = array(
     'name' => 'administer workbench',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench',
@@ -577,7 +534,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer workbench access'] = array(
     'name' => 'administer workbench access',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_access',
@@ -587,7 +543,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['administer workbench moderation'] = array(
     'name' => 'administer workbench moderation',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -606,7 +561,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['assign workbench access'] = array(
     'name' => 'assign workbench access',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_access',
@@ -616,7 +570,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['batch update workbench access'] = array(
     'name' => 'batch update workbench access',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_access',
@@ -626,7 +579,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['block IP addresses'] = array(
     'name' => 'block IP addresses',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'system',
@@ -832,7 +784,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -842,7 +793,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['bypass workbench moderation'] = array(
     'name' => 'bypass workbench moderation',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -852,7 +802,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['cancel account'] = array(
     'name' => 'cancel account',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
@@ -862,7 +811,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['change own username'] = array(
     'name' => 'change own username',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
@@ -871,18 +819,14 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'clear bb feeds'.
   $permissions['clear bb feeds'] = array(
     'name' => 'clear bb feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: 'clear beliana_importovanie_gh feeds'.
   $permissions['clear beliana_importovanie_gh feeds'] = array(
     'name' => 'clear beliana_importovanie_gh feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -896,9 +840,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'clear import_pou_vate_ov_beliany feeds'.
   $permissions['clear import_pou_vate_ov_beliany feeds'] = array(
     'name' => 'clear import_pou_vate_ov_beliany feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -906,7 +848,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['create article content'] = array(
     'name' => 'create article content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -916,7 +857,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['create field_atributy'] = array(
     'name' => 'create field_atributy',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -959,7 +899,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
     ),
@@ -1078,9 +1017,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'create field_text_z_gh'.
   $permissions['create field_text_z_gh'] = array(
     'name' => 'create field_text_z_gh',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1165,7 +1102,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1180,7 +1116,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
@@ -1191,7 +1126,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['create importovane_heslo content'] = array(
     'name' => 'create importovane_heslo content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
@@ -1211,7 +1145,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['create page content'] = array(
     'name' => 'create page content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1241,7 +1174,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -1252,7 +1184,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['customize ckeditor'] = array(
     'name' => 'customize ckeditor',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'ckeditor',
@@ -1262,7 +1193,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete any article content'] = array(
     'name' => 'delete any article content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1272,7 +1202,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete any heslo content'] = array(
     'name' => 'delete any heslo content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1282,7 +1211,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete any ilustracia content'] = array(
     'name' => 'delete any ilustracia content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1291,9 +1219,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'delete any importovane_heslo content'.
   $permissions['delete any importovane_heslo content'] = array(
     'name' => 'delete any importovane_heslo content',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1310,7 +1236,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1320,7 +1245,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete own article content'] = array(
     'name' => 'delete own article content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1330,7 +1254,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete own heslo content'] = array(
     'name' => 'delete own heslo content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1340,7 +1263,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete own ilustracia content'] = array(
     'name' => 'delete own ilustracia content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1349,9 +1271,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'delete own importovane_heslo content'.
   $permissions['delete own importovane_heslo content'] = array(
     'name' => 'delete own importovane_heslo content',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1368,7 +1288,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete own page content'] = array(
     'name' => 'delete own page content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1387,7 +1306,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete revisions'] = array(
     'name' => 'delete revisions',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1397,7 +1315,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete terms in lexikalne_skupiny'] = array(
     'name' => 'delete terms in lexikalne_skupiny',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'taxonomy',
@@ -1406,9 +1323,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'delete terms in subory'.
   $permissions['delete terms in subory'] = array(
     'name' => 'delete terms in subory',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
@@ -1416,7 +1331,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['delete terms in tags'] = array(
     'name' => 'delete terms in tags',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'taxonomy',
@@ -1435,7 +1349,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit any article content'] = array(
     'name' => 'edit any article content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1456,7 +1369,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1470,7 +1382,6 @@ function rs_beliana_users_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
@@ -1492,7 +1403,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
@@ -1513,7 +1423,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1523,7 +1432,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit field_atributy'] = array(
     'name' => 'edit field_atributy',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1560,7 +1468,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1678,9 +1585,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit field_text_z_gh'.
   $permissions['edit field_text_z_gh'] = array(
     'name' => 'edit field_text_z_gh',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1756,7 +1661,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -1766,7 +1670,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -1777,7 +1680,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit own field_atributy'] = array(
     'name' => 'edit own field_atributy',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1813,7 +1715,6 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1931,9 +1832,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit own field_text_z_gh'.
   $permissions['edit own field_text_z_gh'] = array(
     'name' => 'edit own field_text_z_gh',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -2023,7 +1922,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
@@ -2034,7 +1932,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit own importovane_heslo content'] = array(
     'name' => 'edit own importovane_heslo content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
@@ -2054,7 +1951,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit own page content'] = array(
     'name' => 'edit own page content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -2103,7 +1999,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit revisions in any state'] = array(
     'name' => 'edit revisions in any state',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_state_access',
@@ -2349,7 +2244,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit terms in lexikalne_skupiny'] = array(
     'name' => 'edit terms in lexikalne_skupiny',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'taxonomy',
@@ -2358,9 +2252,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'edit terms in subory'.
   $permissions['edit terms in subory'] = array(
     'name' => 'edit terms in subory',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
@@ -2368,7 +2260,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['edit terms in tags'] = array(
     'name' => 'edit terms in tags',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'taxonomy',
@@ -2400,7 +2291,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['force password change'] = array(
     'name' => 'force password change',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'password_policy',
@@ -2418,18 +2308,14 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'import bb feeds'.
   $permissions['import bb feeds'] = array(
     'name' => 'import bb feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: 'import beliana_importovanie_gh feeds'.
   $permissions['import beliana_importovanie_gh feeds'] = array(
     'name' => 'import beliana_importovanie_gh feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -2443,9 +2329,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'import import_pou_vate_ov_beliany feeds'.
   $permissions['import import_pou_vate_ov_beliany feeds'] = array(
     'name' => 'import import_pou_vate_ov_beliany feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -2463,7 +2347,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from 1_korektura to u_vyst_redaktora_3',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2544,7 +2427,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from na_jazykovu_korekturu to 1_korektura',
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2555,7 +2437,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from na_zverejnenie to needs_review',
     'roles' => array(
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2566,7 +2447,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from na_zverejnenie to u_vyst_redaktora_2',
     'roles' => array(
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2604,7 +2484,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from needs_review to na_zverejnenie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2615,7 +2494,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from needs_review to u_autora',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2666,7 +2544,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from u_autora to needs_review',
     'roles' => array(
       'Autor' => 'Autor',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2677,7 +2554,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5',
     'roles' => array(
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2697,7 +2573,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from u_v_st_redaktora_5 to na_zalomenie',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2708,7 +2583,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2 to na_jazykovu_korekturu',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2719,7 +2593,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2 to na_zverejnenie',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2738,7 +2611,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_2 to ukoncenezluene'] = array(
     'name' => 'moderate content from u_vyst_redaktora_2 to ukoncenezluene',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2758,7 +2630,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra',
     'roles' => array(
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2768,7 +2639,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2787,7 +2657,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2806,7 +2675,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3'] = array(
     'name' => 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2817,7 +2685,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from vyradene to zaradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2826,9 +2693,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'moderate content from zaradene to draft'.
   $permissions['moderate content from zaradene to draft'] = array(
     'name' => 'moderate content from zaradene to draft',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
@@ -2855,7 +2720,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from zaradene to u_autora',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2875,7 +2739,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -2885,7 +2748,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'pathauto',
@@ -2895,7 +2757,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -2943,7 +2804,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -2953,7 +2813,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['search content'] = array(
     'name' => 'search content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'search',
@@ -2963,7 +2822,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['select account cancellation method'] = array(
     'name' => 'select account cancellation method',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'user',
@@ -2982,7 +2840,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['show warning text'] = array(
     'name' => 'show warning text',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'sharedemail',
@@ -2992,7 +2849,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3002,18 +2858,14 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'tamper bb'.
   $permissions['tamper bb'] = array(
     'name' => 'tamper bb',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds_tamper',
   );
 
   // Exported permission: 'tamper beliana_importovanie_gh'.
   $permissions['tamper beliana_importovanie_gh'] = array(
     'name' => 'tamper beliana_importovanie_gh',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds_tamper',
   );
 
@@ -3027,9 +2879,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'tamper import_pou_vate_ov_beliany'.
   $permissions['tamper import_pou_vate_ov_beliany'] = array(
     'name' => 'tamper import_pou_vate_ov_beliany',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds_tamper',
   );
 
@@ -3037,7 +2887,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['translate interface'] = array(
     'name' => 'translate interface',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'locale',
@@ -3047,7 +2896,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['unblock expired accounts'] = array(
     'name' => 'unblock expired accounts',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'password_policy',
@@ -3056,18 +2904,14 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'unlock bb feeds'.
   $permissions['unlock bb feeds'] = array(
     'name' => 'unlock bb feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
   // Exported permission: 'unlock beliana_importovanie_gh feeds'.
   $permissions['unlock beliana_importovanie_gh feeds'] = array(
     'name' => 'unlock beliana_importovanie_gh feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -3081,9 +2925,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'unlock import_pou_vate_ov_beliany feeds'.
   $permissions['unlock import_pou_vate_ov_beliany feeds'] = array(
     'name' => 'unlock import_pou_vate_ov_beliany feeds',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'feeds',
   );
 
@@ -3091,7 +2933,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'search',
@@ -3100,9 +2941,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'use ctools import'.
   $permissions['use ctools import'] = array(
     'name' => 'use ctools import',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'ctools',
   );
 
@@ -3110,7 +2949,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3133,7 +2971,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
@@ -3158,7 +2995,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -3171,7 +3007,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -3191,7 +3026,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'iredaktor' => 'iredaktor',
@@ -3203,7 +3037,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view any unpublished article content'] = array(
     'name' => 'view any unpublished article content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'view_unpublished',
@@ -3213,7 +3046,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view any unpublished content'] = array(
     'name' => 'view any unpublished content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'view_unpublished',
@@ -3223,7 +3055,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view any unpublished heslo content'] = array(
     'name' => 'view any unpublished heslo content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3243,7 +3074,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view any unpublished importovane_heslo content'] = array(
     'name' => 'view any unpublished importovane_heslo content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3261,7 +3091,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view any unpublished page content'] = array(
     'name' => 'view any unpublished page content',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3272,7 +3101,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view field_atributy'] = array(
     'name' => 'view field_atributy',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3309,7 +3137,6 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3433,7 +3260,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view field_text_z_gh'] = array(
     'name' => 'view field_text_z_gh',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3517,7 +3343,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view hidden fields'] = array(
     'name' => 'view hidden fields',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'simplify',
@@ -3533,7 +3358,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'iredaktor' => 'iredaktor',
@@ -3554,7 +3378,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'iredaktor' => 'iredaktor',
@@ -3566,7 +3389,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view own field_atributy'] = array(
     'name' => 'view own field_atributy',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -3602,7 +3424,6 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -3720,9 +3541,7 @@ function rs_beliana_users_user_default_permissions() {
   // Exported permission: 'view own field_text_z_gh'.
   $permissions['view own field_text_z_gh'] = array(
     'name' => 'view own field_text_z_gh',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -3815,7 +3634,6 @@ function rs_beliana_users_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
@@ -3837,7 +3655,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
@@ -3859,7 +3676,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
@@ -3871,7 +3687,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view the administration theme'] = array(
     'name' => 'view the administration theme',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -3904,7 +3719,6 @@ function rs_beliana_users_user_default_permissions() {
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'iredaktor' => 'iredaktor',
@@ -3916,7 +3730,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view workbench taxonomy pages'] = array(
     'name' => 'view workbench taxonomy pages',
     'roles' => array(
-      'admin' => 'admin',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_access',
