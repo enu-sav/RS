@@ -442,7 +442,6 @@ features[user_role][] = Výstupný redaktor 2HP
 features[user_role][] = Výstupný redaktor 3
 features[user_role][] = Výstupný redaktor 4
 features[user_role][] = Výstupný redaktor 5
-features[user_role][] = admin
 features[user_role][] = administrátor
 features[user_role][] = iredaktor
 features[variable][] = adminimal_admin_menu_core-toolbar-disabled

@@ -125,13 +125,21 @@ function beliana_sync_process_links($nid, $text, $replace = FALSE) {
   }
 }
 
-// display error message
+// display error message (illustration)
 function il_error($node, $ilu_node, $msg) {
   watchdog('sync', 'Chyba prenosu hesla "@title": ilustrácia "@ilu_title" ' . $msg, [
     '@title' => $node->title,
     '@ilu_title' => $ilu_node->title,
   ], WATCHDOG_ERROR);
   return 'Chyba prenosu hesla <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> ' . $msg . '.';
+}
+
+// display error message (article)
+function art_error($node, $msg) {
+  watchdog('sync', 'Chyba prenosu hesla "@title" ' . $msg, [
+    '@title' => $node->title,
+  ], WATCHDOG_ERROR);
+  return 'Chyba prenosu. V hesle <a href ="' . $node->path['source'] . '">' . $node->title . '</a> ' . $msg . '.';
 }
 
 // eventual fixes in article text 
@@ -163,6 +171,23 @@ function modify_body_text($text)
   $text = preg_replace( '/([0-9]) (°[CF])/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/(sup>) ([gs][ ,.;] )/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/([0-9]) ([kM]eV)/', "$1&nbsp;$2", $text);
+
+  // table formatting
+  //<td colspan="2" style="width:1141px">
+  $text = preg_replace( '/<td colspan="([0-9]*)" [^>]*>/', '<td colspan="$1">', $text);
+  $text = preg_replace( '/<th colspan="([0-9]*)" [^>]*>/', '<th colspan="$1">', $text);
+  //<td style="width:958px">
+  $text = preg_replace( '/<td style="width:[0-9]*px">/', '<td>', $text);
+  //<table align="left" border="1" cellpadding="0" cellspacing="1" style="height:599px; width:1149px">
+  //$text = preg_replace( '/<table [^>]*>/', '<table style="width:100%">', $text);
+  $text = preg_replace( '/<table [^>]*>/', '<table>', $text);
+  // remove <p> in tables
+  // <td> <p>Sir Henry Milton Taylor</p> </td>
+  $text = preg_replace( '/<td>\s+<p>/', '<td>', $text);
+  $text = preg_replace( '*</p>\s+</td>*', '</td>', $text);
+
+  // remove meaningless span
+  $text = preg_replace( '%<span>([^<]*)</span>%', '$1', $text);
   return $text;
 }
 
@@ -192,6 +217,19 @@ function beliana_sync_sync($nid, &$context) {
   $node = workbench_moderation_node_current_load($generic_node);
   $illustrations = [];
   $skip = FALSE;
+  
+  // _check_links defined in beliana/beliana.module
+  if (!_check_links($node)) {
+    $skip = TRUE;
+  }
+  // check article text
+  $text_hesla = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  // are LITE changes still present?
+  if (strpos($text_hesla,"ice-ins") or strpos($text_hesla, "ice-del")){
+    $context['results']['messages'][] = art_error($node, 'sú uložené LITE zmeny');
+    $skip = TRUE;
+  }
+
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
@@ -208,68 +246,56 @@ function beliana_sync_sync($nid, &$context) {
        //isset($ilu_node->field_obrazok_navrh[LANGUAGE_NONE]) or
        //isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) and 
        //!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) left curly brace here
-      $context['results']['error']++;
       $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá nastavený spôsob použitia');
       $skip = TRUE;
-      break;
     }
 
-    // not executed if field_pouzit is not set
+    // not executed if field_pouzit is not set appropriately (i.e. illustration should not be displayed on web)
     if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
       // Check if illustration has image attached.
-      if (!(isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) && !$skip) {
-        $context['results']['error']++;
+      if (!(isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]) or isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE]))) {
         $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá priložený súbor a ani určený odkaz');
         $skip = TRUE;
-        break;
       }
       // Check if illustration is in correct WB status.
       if (!in_array($ilu_node->workbench_moderation['current']->state, [
           'ilustracia_na_zverejnenie',
           'publikovane_na_webe',
-        ]) && !$skip
-      ) {
-        $context['results']['error']++;
+          ])) {
         $context['results']['messages'][] = il_error($node, $ilu_node, 'sa nenachádza v stave "Ilustrácia na zverejnenie"');
         $skip = TRUE;
-        break;
       }
       // Check if illustration has correct license.
-      if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený') && !$skip) {
-        $context['results']['error']++;
+      if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený')) {
         $context['results']['messages'][] = il_error($node, $ilu_node, 'nemá určený platný typ ilustrácie');
         $skip = TRUE;
-        break;
       }
       // Check if alternative text is correct
       $plen = strlen($ilu_node->field_popis['und'][0]['value'])>130;
-      if (!isset($ilu_node->field_alternativny_text['und']) && $plen && !$skip) {
-        $context['results']['error']++;
+      if (!isset($ilu_node->field_alternativny_text['und']) && $plen) {
         $context['results']['messages'][] = il_error($node, $ilu_node, 'má popis dlhší ako 130 znakov a nemá určený Alternatívny text.');
         $skip = TRUE;
-        break;
       }
-      if (!$skip) {
-        // we synchronize linked image, if it is specified
-        if (isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) {
-          $image_url_web = $ilu_node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'];
-        } else {
-          $image_url_local = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
-          if (is_null($image_url_local)) {
-            $context['results']['error']++;
-            $context['results']['messages'][] = il_error($node, $ilu_node, "nemá priradenú ilustráciu vhodného typu (svg, png, jpg)");
-            $skip = TRUE;
-            break;
-          }
-        }
 
-        $license = _extract_license($ilu_node);
-        if (empty($license)) {
-          $context['results']['error']++;
-          $context['results']['messages'][] = il_error($node, $ilu_node, 'má neplatný typ ilustrácie');
+      // we synchronize linked image, if it is specified
+      if (isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE])) {
+        $image_url_web = $ilu_node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'];
+      } else {
+        $image_url_local = _extract_image($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+        if (is_null($image_url_local)) {
+          $context['results']['messages'][] = il_error($node, $ilu_node, "nemá priradenú ilustráciu vhodného typu (svg, png, jpg)");
           $skip = TRUE;
-          break;
         }
+      }
+
+      $license = _extract_license($ilu_node);
+      if (empty($license)) {
+        $context['results']['messages'][] = il_error($node, $ilu_node, 'má nesprávne určený typ licencie');
+        $skip = TRUE;
+      }
+
+      // if everything is OK, prepare stuctrures for the current illustration
+      if (!$skip) {
         $illustrations[] = [
           'nid' => $ilu_node->nid,
           //'uri' => $image_url_local,
@@ -311,7 +337,14 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
   }
-  if (!$skip) {
+
+  // if something went wrong, return now
+  if($skip) {
+    $context['results']['error']++;
+    return;
+  }
+
+  // publish everything now
     $dates = [];
     if (isset($node->field_datum[LANGUAGE_NONE])) {
       foreach ($node->field_datum['und'] as $item) {
@@ -408,7 +441,6 @@ function beliana_sync_sync($nid, &$context) {
       $node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'] = date("Y/m/d - H:i");
       node_save($node);
     }
-  }
 }
 
 function _display_on_web($values) {

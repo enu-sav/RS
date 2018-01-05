@@ -88,12 +88,6 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 12,
   );
 
-  // Exported role: admin.
-  $roles['admin'] = array(
-    'name' => 'admin',
-    'weight' => 16,
-  );
-
   // Exported role: administrátor.
   $roles['administrátor'] = array(
     'name' => 'administrátor',

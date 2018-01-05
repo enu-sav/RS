@@ -321,7 +321,9 @@ function beliana_action_info() {
  */
 function importovane_publish_editor(&$node, $context) {
   if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane') {
-    workbench_moderation_moderate($node, "importovane_u_jr2");
+    if (_check_links($node)) {
+      workbench_moderation_moderate($node, "importovane_u_jr2");
+    }
   }
 }
 
@@ -334,7 +336,9 @@ function importovane_publish_editor(&$node, $context) {
  */
 function importovane_publish_proofreader(&$node, $context) {
   if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane_u_jr2') {
-    workbench_moderation_moderate($node, "importovane_u_vr");
+    if (_check_links($node)) {
+      workbench_moderation_moderate($node, "importovane_u_vr");
+    }
   }
 }
 
@@ -347,7 +351,9 @@ function importovane_publish_proofreader(&$node, $context) {
  */
 function importovane_publish_senior_editor(&$node, $context) {
   if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane_u_vr') {
-    workbench_moderation_moderate($node, "na_zalomenie");
+    if (_check_links($node)) {
+      workbench_moderation_moderate($node, "na_zalomenie");
+    }
   }
 }
 
@@ -644,6 +650,27 @@ function beliana_node_presave($node) {
     $node->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
   }
 
+  // find links pointing to articles in Ukončené/Zlúčené (ukoncenezluene) state and replace them
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($node->field_text_hesla[LANGUAGE_NONE][0]['value'], 'HTML-ENTITIES', 'UTF-8'));
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  foreach ($links as $item){
+    $target = substr($item->getAttribute('href'), 1); // we do not need the leading slash /
+    $path = drupal_get_normal_path($target);
+    $parts = explode("/",$path);
+    if ($parts[0] === 'node' ) {
+      $lnode = node_load($parts[1]); // the linked node
+      if($lnode->workbench_moderation['current']->state == 'ukoncenezluene'){
+        // $znode: the node $lnode is merged to
+        $znode = node_load($lnode->field_zlucene_do[LANGUAGE_NONE][0]['target_id']);
+        $newpath = $znode->path['alias'];
+        // replace including the closing '"' to make the replacement string unique
+        $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace($target.'"', $newpath.'"', $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+        watchdog('aktualizovany odkaz', 'Heslo "'.$node->title.'": aktualizovaný odkaz na zlúčené heslo (z <a href="/'.$target.'">'.$target.'</a> na <a href="/'.$newpath.'">'.$newpath.'</a>)');
+      }
+    }
+  } 
 }
 
 /**
@@ -689,9 +716,10 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
-  //if (isset($values['node']->workbench_moderation['current']->state) && count($values['node']->field_zlucene_z['und']) > 0) {
-  if (isset($values['node']->workbench_moderation['current']->state) && isset($values['node']->field_zlucene_z['und'])) {
+  if (!isset($values['node']->workbench_moderation['current']->state)) return;
 
+  // item is merged from other items
+  if (isset($values['node']->field_zlucene_z['und'])) {
     // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
     if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura'))
       _start_korektura($values);
@@ -714,7 +742,56 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     else // korekt_ra: version with only one editor selected
       _run_2_korektura_single($values);
     node_save($values['node']);
+  } elseif ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
+    if (!_check_links($values['node'])) {
+      drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
+      $values['node']->workbench_moderation_state_new = $values['node']->workbench_moderation['current']->state;
+      node_save($values['node']);
+    }
   }
+}
+
+
+/**
+ * Extract links from node and check their validity
+ *
+ * @param $nid
+ */
+function _check_links(&$node) {
+  // Extract links from field_text_hesla.
+  $nid = $node->nid;
+  $text = $node->field_text_hesla['und'][0]['value'];
+  $retvalue= true;
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  if (!empty($links)) {
+    for ($i = 0; $i < $links->length; $i++) {
+      $item = $links->item($i);
+      $target = $item->getAttribute('href');
+      // no external lins allowed
+      if (url_is_external($target)) {
+        drupal_set_message('Chybný odkaz v hesle <a href="/'.$node->path['alias'].'">'.$node->title.'</a>: "'. $item->nodeValue . '"', 'error');
+        $retvalue= false;
+      } else {
+        if (preg_match('?^/heslo/[^/]*?',$target)) {
+          // form OK, check if it exists
+          // Get non-alias path, so we can get nid from it.
+          $path = drupal_get_normal_path(substr($target, 1));
+          if (substr($path, 0, 4) !== 'node' ) {
+            drupal_set_message('Chybný odkaz v hesle <a href="/'.$node->path['alias'].'">'.$node->title.'</a>: "'. $item->nodeValue . '" (odkazované heslo neexistuje)', 'error');
+            $retvalue= false;
+          }
+        } else {
+          // not in the form '/heslo/alias'
+          drupal_set_message('Chybný odkaz v hesle <a href="/'.$node->path['alias'].'">'.$node->title.'</a>: "'. $item->nodeValue . '"', 'error');
+          $retvalue= false;
+        }
+      }
+    }
+  }
+  return $retvalue;
 }
 
 /**
