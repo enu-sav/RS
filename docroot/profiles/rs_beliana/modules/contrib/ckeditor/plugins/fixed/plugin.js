@@ -16,7 +16,7 @@ CKEDITOR.plugins.add('fixed', {
     window.addEventListener('scroll', function () {
       var content = document.getElementsByClassName('cke_contents').item(0);
       var toolbar = document.getElementsByClassName('cke_top').item(0);
-      var admin = document.getElementsByClassName('admin-menu-site-rs-enu-sav').item(0);
+      var admin = document.getElementById('admin-menu');
       var editor = document.getElementsByClassName('cke').item(0);
       var inner = document.getElementsByClassName('cke_inner').item(0);
       var scrollvalue = document.documentElement.scrollTop > document.body.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
