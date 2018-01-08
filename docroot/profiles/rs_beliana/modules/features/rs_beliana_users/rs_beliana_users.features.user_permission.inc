@@ -2738,7 +2738,6 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['moderate content from zlucene to na_jazykovu_korekturu'] = array(
     'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
