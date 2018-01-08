@@ -64,7 +64,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
 config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
 // keep autosaved stuff for 14 days
 config.autosave_NotOlderThen = 20160;
-config.autoGrow_maxHeight = 500;
+//config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
@@ -191,6 +191,13 @@ config.specialChars = [
             ),
             'default' => 't',
           ),
+          'fixed' => array(
+            'name' => 'fixed',
+            'desc' => 'Plugin file: fixed',
+            'path' => '%plugin_dir%fixed/',
+            'buttons' => FALSE,
+            'default' => 'f',
+          ),
           'lite' => array(
             'name' => 'lite',
             'desc' => 'Plugin file: lite',
@@ -225,7 +232,7 @@ config.specialChars = [
           ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'desc' => 'Plugin file: mathjax',
             'path' => '%plugin_dir%mathjax/',
             'buttons' => array(
               'Mathjax' => array(
@@ -317,7 +324,7 @@ config.specialChars = [
         'js_conf' => '// na https stránke je požadovaný https pristup na cdn
 // must be placed before the  config.autosave line (and maybe others)
 config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
-config.autoGrow_maxHeight = 500;
+//config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
@@ -444,9 +451,16 @@ config.specialChars = [
             ),
             'default' => 't',
           ),
+          'fixed' => array(
+            'name' => 'fixed',
+            'desc' => 'Plugin file: fixed',
+            'path' => '%plugin_dir%fixed/',
+            'buttons' => FALSE,
+            'default' => 'f',
+          ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'desc' => 'Plugin file: mathjax',
             'path' => '%plugin_dir%mathjax/',
             'buttons' => array(
               'Mathjax' => array(
