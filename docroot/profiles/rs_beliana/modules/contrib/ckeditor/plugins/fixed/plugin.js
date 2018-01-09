@@ -14,6 +14,7 @@
 CKEDITOR.plugins.add('fixed', {
   init: function (editor) {
     window.addEventListener('scroll', function () {
+      var calculatedOffset = 95;
       var content = document.getElementsByClassName('cke_contents').item(0);
       var toolbar = document.getElementsByClassName('cke_top').item(0);
       var admin = document.getElementById('admin-menu');
@@ -22,24 +23,25 @@ CKEDITOR.plugins.add('fixed', {
       var scrollvalue = document.documentElement.scrollTop > document.body.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
 
       toolbar.style.width = content.offsetWidth + "px";
-      toolbar.style.top = admin.offsetHeight + "px";
+      toolbar.style.top = "0px";
       toolbar.style.left = "0px";
       toolbar.style.right = "0px";
       toolbar.style.margin = "0 auto";
       toolbar.style.boxSizing = "border-box";
 
-      if (toolbar.offsetTop <= scrollvalue) {
+      if (toolbar.offsetTop + calculatedOffset <= scrollvalue) {
         toolbar.style.position = "fixed";
-        content.style.paddingTop = toolbar.offsetHeight + "px";
+        toolbar.style.top = admin.offsetHeight + "px";
+        content.style.paddingTop = toolbar.offsetHeight + "px";        
       }
 
-      if (editor.offsetTop > scrollvalue && (editor.offsetTop + editor.offsetHeight) >= (scrollvalue + toolbar.offsetHeight)) {
+      if (editor.offsetTop + calculatedOffset > scrollvalue && (editor.offsetTop + editor.offsetHeight) >= (scrollvalue + toolbar.offsetHeight)) {
         toolbar.style.top = "0px";
         toolbar.style.position = "relative";
         content.style.paddingTop = "0px";
       }
 
-      if ((editor.offsetTop + editor.offsetHeight) < (scrollvalue + toolbar.offsetHeight)) {
+      if ((editor.offsetTop + editor.offsetHeight) + calculatedOffset < (scrollvalue + toolbar.offsetHeight)) {
         toolbar.style.position = "absolute";
         toolbar.style.top = "calc(100% - " + toolbar.offsetHeight + "px)";
         inner.style.position = "relative";
