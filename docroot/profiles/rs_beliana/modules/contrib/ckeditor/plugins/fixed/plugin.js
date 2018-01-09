@@ -14,6 +14,14 @@
 CKEDITOR.plugins.add('fixed', {
   init: function (editor) {
     window.addEventListener('scroll', function () {
+      calculatePosition();
+    }, false);
+
+    window.addEventListener('resize', function () {
+      calculatePosition();
+    }, false);
+
+    function calculatePosition() {
       var calculatedOffset = 95;
       var content = document.getElementsByClassName('cke_contents').item(0);
       var toolbar = document.getElementsByClassName('cke_top').item(0);
@@ -32,7 +40,7 @@ CKEDITOR.plugins.add('fixed', {
       if (toolbar.offsetTop + calculatedOffset <= scrollvalue) {
         toolbar.style.position = "fixed";
         toolbar.style.top = admin.offsetHeight + "px";
-        content.style.paddingTop = toolbar.offsetHeight + "px";        
+        content.style.paddingTop = toolbar.offsetHeight + "px";
       }
 
       if (editor.offsetTop + calculatedOffset > scrollvalue && (editor.offsetTop + editor.offsetHeight) >= (scrollvalue + toolbar.offsetHeight)) {
@@ -46,6 +54,6 @@ CKEDITOR.plugins.add('fixed', {
         toolbar.style.top = "calc(100% - " + toolbar.offsetHeight + "px)";
         inner.style.position = "relative";
       }
-    }, false);
+    }
   }
 });
