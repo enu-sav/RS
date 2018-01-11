@@ -236,14 +236,7 @@ function beliana_sync_sync($nid, &$context) {
       $ilu_generic_node = node_load($illustration['target_id']);
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
 
-      // if there are images, but 'field_pouzit' (use) is not set, break processing
-      // this is a very rare situation
-      $auxsub = isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
-      $auxobr = isset($ilu_node->field_obrazok_navrh_[LANGUAGE_NONE]);
-      $auxodk = isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE]);
-      $auxpou = !isset($ilu_node->field_pouzit[LANGUAGE_NONE]);
-      if(($auxsub or $auxobr or $auxodk) and $auxpou) {
-        il_error($node, $ilu_node, 'nemá nastavený spôsob použitia', 'sync');
+      if (!_check_field_pouzit($node, $ilu_node, 'sync')) {
         $skip = TRUE;
       }
 
@@ -755,4 +748,21 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
     $ill_data['alternativny_text'] = substr($atext, 0, 125);
   }
 return $ill_data;
+}
+
+/*
+ * if there are images, but 'field_pouzit' (use) is not set, break processing
+ * this is a very rare situation
+*/
+function _check_field_pouzit(&$node, &$ilu_node, $category)
+{
+  $auxsub = isset($ilu_node->field_subor_ilustracie[LANGUAGE_NONE]);
+  $auxobr = isset($ilu_node->field_obrazok_navrh_[LANGUAGE_NONE]);
+  $auxodk = isset($ilu_node->field_obrazok_odkaz[LANGUAGE_NONE]);
+  $auxpou = !isset($ilu_node->field_pouzit[LANGUAGE_NONE]);
+  if(($auxsub or $auxobr or $auxodk) and $auxpou) {
+    il_error($node, $ilu_node, 'nemá nastavený spôsob použitia', $category);
+    return false;
+  }
+  return true;
 }
