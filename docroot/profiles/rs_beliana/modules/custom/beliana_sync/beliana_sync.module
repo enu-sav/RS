@@ -304,7 +304,7 @@ function beliana_sync_sync($nid, &$context) {
         ->fields(['updated' => time()])
         ->condition('local', $nid)
         ->execute();
-      //if ($response->getStatusCode() !== 200)
+      //if ($response->getStatuscode() !== 200)
         //dpm($response->getStatusCode(),"PATCH failed");
     } else {
       // postpone transfer of articles which are pure link articles with unresolved link
@@ -662,6 +662,7 @@ function _form_date6() {
  */
 function  _check_illustration_web(&$node, &$ilu_node, $category)
 {
+  $skip=false;
   // check illustration text
   $text_il = $ilu_node->field_popis[LANGUAGE_NONE][0]['value'];
   // are LITE changes still present?
@@ -714,7 +715,7 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
     $skip = TRUE;
   }
 
-  // returm if something failed
+  // return if something failed
   if ($skip)  return null;
 
   // collect illustration data

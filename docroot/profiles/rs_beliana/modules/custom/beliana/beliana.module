@@ -321,7 +321,15 @@ function beliana_action_info() {
  */
 function importovane_publish_editor(&$node, $context) {
   if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane') {
-    if (_check_links($node)) {
+    $skip = false;
+    if (!_check_links($node)) {
+      $skip = true;
+    }
+    $il_states = ['ilustracia_na_zverejnenie', 'publikovane_na_webe', 'ilustracia_u_vyst_redaktora_5'];
+    if (!check_ill_at_node_transition($node, $il_states, 'zmena stavu')) {
+      $skip = true; 
+    }
+    if (!$skip){
       workbench_moderation_moderate($node, "importovane_u_jr2");
     }
   }
@@ -748,9 +756,23 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   } 
 
   // check types heslo and importovane_heslo
+  // check links
   if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
     // Check link correctness
     if (!_check_links($values['node'])) {
+      drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
+    }
+  } 
+
+  // check illustration state on transition of 'importovane_heslo' to state 'importovane_u_jr2'
+  if ($values['node']->type === 'importovane_heslo' and $new_state == 'importovane_u_jr2') {
+    $skip = false;
+    $il_states = [ 'ilustracia_na_zverejnenie', 'publikovane_na_webe', 'ilustracia_u_vyst_redaktora_5'];
+    $skip = !check_ill_at_node_transition($values['node'], $il_states, 'zmena stavu');
+    if ($skip) {
       drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
@@ -786,6 +808,38 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
 }
 
+/*
+ * return true if OK
+ */
+function check_ill_at_node_transition(&$node, $il_states, $category)
+{
+  $skip = false;
+  if (isset($node->field_ilustracia[LANGUAGE_NONE])) {
+    foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
+      $ilu_generic_node = node_load($illustration['target_id']);
+    $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
+
+      if (!_check_field_pouzit($node, $ilu_node, 'zmena stavu')) {
+        $skip = TRUE;
+      }
+
+      // ignore illustrations, which are not intended for web
+      if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+        $illustration_data = _check_illustration_web($node, $ilu_node, 'zmena stavu');
+        if (is_null($illustration_data)) {
+          $skip = TRUE;
+        }
+      }
+
+      // Check if illustration is in correct WB status.
+      if (!in_array($ilu_node->workbench_moderation['current']->state, $il_states)) {
+        il_error($node, $ilu_node, 'nie je v stave "Ilustrácia u výst. redaktora 5"', 'zmena stavu');
+        $skip = TRUE;
+      }
+    }
+  }
+  return !$skip;
+}
 
 /**
  * Extract links from node and check their validity
