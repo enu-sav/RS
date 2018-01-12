@@ -718,37 +718,72 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
   if (!isset($values['node']->workbench_moderation['current']->state)) return;
 
+  $new_state = $values['state'];
+  $cur_state = $values['node']->workbench_moderation['current']->state;
+
   // item is merged from other items
   if (isset($values['node']->field_zlucene_z['und'])) {
     // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
-    if (($values['node']->workbench_moderation['current']->state === 'na_jazykovu_korekturu' && $values['state'] === '1_korektura'))
+    if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
       _start_korektura($values);
 
     // transition 1_korektura >> u_vyst_redaktora_3 
-    if ($values['node']->workbench_moderation['current']->state === '1_korektura' && $values['state'] === 'u_vyst_redaktora_3')
+    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3')
       _transition_korektura($values, "1_korektura");
-
 
     $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
     if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
       // starting 'korektura': copy editor names to field_spravit_1_korekturu
-      if (($values['node']->workbench_moderation['current']->state === 'u_vyst_redaktora_3' && $values['state'] === '2_korekt_ra'))
+      if (($cur_state === 'u_vyst_redaktora_3' && $new_state === '2_korekt_ra'))
         _start_korektura($values);
 
       // transition 2_korekt_ra >> u_vyst_redaktora_4 
-      if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_4')
+      if ($cur_state === '2_korekt_ra' && $new_state === 'u_vyst_redaktora_4')
         _transition_korektura($values, "2_korekt_ra");
     }
     else // korekt_ra: version with only one editor selected
       _run_2_korektura_single($values);
     node_save($values['node']);
-  } elseif ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
+    return;
+  } 
+
+  // check types heslo and importovane_heslo
+  if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
+    // Check link correctness
     if (!_check_links($values['node'])) {
       drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
-      $values['node']->workbench_moderation_state_new = $values['node']->workbench_moderation['current']->state;
+      $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
+      return;
+    }
+  } 
+  
+  // check illustrations
+  if ($values['node']->type === 'ilustracia') {
+    $skip = FALSE;
+    if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5'){
+        $ilu_node = $values['node'];
+ 
+        if (!_check_field_pouzit($ilu_node, $ilu_node, 'zmena stavu')) {
+          $skip = TRUE;
+        }
+
+        // ignore illustrations, which are not intended for web
+        if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+          if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'zmena stavu'))) {
+            $skip = TRUE;
+          }
+        }
+    }
+    // a problem with illustration, keep the current state
+    if ($skip) {
+      drupal_set_message('<strong>Stav ilustrácie nebol zmenený</strong>', 'error');
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
     }
   }
+
 }
 
 
