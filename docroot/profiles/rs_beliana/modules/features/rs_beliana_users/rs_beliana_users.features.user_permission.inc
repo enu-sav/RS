@@ -879,6 +879,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_institucia',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -910,6 +911,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_licencia1',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -922,6 +924,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_meno_autora_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -934,6 +937,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_meno_autora_snimky_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -970,6 +974,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_nazov_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -982,6 +987,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_pouzit',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1026,6 +1032,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_url_autora_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1063,6 +1070,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_zdroj_ilustracie',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1454,6 +1462,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_institucia',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1478,6 +1487,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_licencia1',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1490,6 +1500,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_meno_autora_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1502,6 +1513,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_meno_autora_snimky_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1538,6 +1550,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_nazov_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1550,6 +1563,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_pouzit',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1594,6 +1608,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_url_autora_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1631,6 +1646,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_zdroj_ilustracie',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1702,6 +1718,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_institucia',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1725,6 +1742,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_licencia1',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1737,6 +1755,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_meno_autora_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1749,6 +1768,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_meno_autora_snimky_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1785,6 +1805,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_nazov_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1797,6 +1818,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_pouzit',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1841,6 +1863,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_url_autora_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -1878,6 +1901,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit own field_zdroj_ilustracie',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3123,6 +3147,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_institucia',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3147,6 +3172,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_licencia1',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3159,6 +3185,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_meno_autora_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3171,6 +3198,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_meno_autora_snimky_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3207,6 +3235,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_nazov_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3219,6 +3248,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_pouzit',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3270,6 +3300,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_url_autora_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3310,6 +3341,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_zdroj_ilustracie',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3410,6 +3442,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_institucia',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3433,6 +3466,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_licencia1',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3445,6 +3479,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_meno_autora_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3457,6 +3492,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_meno_autora_snimky_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3493,6 +3529,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_nazov_diela',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3505,6 +3542,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_pouzit',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3549,6 +3587,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_url_autora_diela_l',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
@@ -3585,6 +3624,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view own field_zdroj_ilustracie',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'iredaktor' => 'iredaktor',
