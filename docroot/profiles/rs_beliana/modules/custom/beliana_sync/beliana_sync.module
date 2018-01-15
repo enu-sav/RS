@@ -658,6 +658,10 @@ function _form_date6() {
 
 /*
  * check correctness of an illustration
+ * $category values:
+ * 'sync': execute test only during synchronization to web
+ * 'state change': execute test in general state change
+ * 'state change ge': execute test on state change from graphics editor to editor 
  * return: illustration data or null
  */
 function  _check_illustration_web(&$node, &$ilu_node, $category)
@@ -706,8 +710,11 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
     if (empty($license)) {
       il_error($node, $ilu_node, 'nesprávne určený typ licencie', $category);
       $skip = TRUE;
+    } else if ($category == "state change ge" and $license == 'Iná verejná licencia' and !isset($ilu_node['url_textu_licencie_l']){
+      il_error($node, $ilu_node, 'ak je zvolená "Iná verejná licencia", pole "URL textu licencie" musí byť vyplnené"', $category);
+      $skip = TRUE;
     }
-  }
+  } 
   // Check if alternative text is correct
   $plen = strlen($ilu_node->field_popis['und'][0]['value'])>130;
   if (!isset($ilu_node->field_alternativny_text['und']) && $plen) {
