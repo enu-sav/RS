@@ -769,6 +769,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
   // check illustration state on transition of 'importovane_heslo' to state 'importovane_u_jr2'
   if ($values['node']->type === 'importovane_heslo' and $new_state == 'importovane_u_jr2') {
+    dpm($values['node']);
     $skip = false;
     $il_states = [ 'ilustracia_na_zverejnenie', 'publikovane_na_webe', 'ilustracia_u_vyst_redaktora_5'];
     $skip = !check_ill_at_node_transition($values['node'], $il_states, 'zmena stavu');
@@ -785,6 +786,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     $skip = FALSE;
     if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5'){
         $ilu_node = $values['node'];
+
+        if (!_check_ilu_attached($ilu_node, 'zmena stavu')) {
+          $skip = TRUE;
+        }
  
         if (!_check_field_pouzit($ilu_node, $ilu_node, 'zmena stavu')) {
           $skip = TRUE;
@@ -806,6 +811,24 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     }
   }
 
+}
+
+function _check_ilu_attached(&$ilu_node, $category) 
+{
+  //dpm($ilu_node);
+  $query = new EntityFieldQuery();
+  $query
+    ->entityCondition('entity_type', "node")
+    ->fieldCondition('field_ilustracia', 'target_id', $ilu_node->nid,"=");
+  $result = $query->execute();
+  //dpm($result,"result");
+  if(isset($result['node'])) {
+    //dpm($result['node'],"node1");
+    return true;
+  } else {
+    il_error($ilu_node, $ilu_node, 'nie je priradená k žiadnemu heslu', $category);
+    return false;
+  }
 }
 
 /*
