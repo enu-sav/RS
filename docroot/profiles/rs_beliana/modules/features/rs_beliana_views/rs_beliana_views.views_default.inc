@@ -12811,6 +12811,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'ilustracia' => 'ilustracia',
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -12837,11 +12838,11 @@ function rs_beliana_views_views_default_views() {
     18 => 0,
     3 => 0,
     9 => 0,
-    25 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Workbench Moderation: Stav */
@@ -15465,6 +15466,42 @@ function rs_beliana_views_views_default_views() {
     23 => 0,
   );
   $handler->display->display_options['filters']['field_licencia1_value_1']['reduce_duplicates'] = TRUE;
+  /* Filter criterion: Obsah: Použiť (field_pouzit) */
+  $handler->display->display_options['filters']['field_pouzit_value']['id'] = 'field_pouzit_value';
+  $handler->display->display_options['filters']['field_pouzit_value']['table'] = 'field_data_field_pouzit';
+  $handler->display->display_options['filters']['field_pouzit_value']['field'] = 'field_pouzit_value';
+  $handler->display->display_options['filters']['field_pouzit_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['operator_id'] = 'field_pouzit_value_op';
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['label'] = 'Použiť';
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['operator'] = 'field_pouzit_value_op';
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['identifier'] = 'field_pouzit_value';
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_pouzit_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['field_pouzit_value']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
