@@ -131,14 +131,14 @@ function il_error($node, $ilu_node, $msg, $category) {
     watchdog($category, 'Chyba v ilustrácii "@ilu_title": ' . $msg, [
       '@ilu_title' => $ilu_node->title,
     ], WATCHDOG_NOTICE);
-    $msg = 'Chyba v ilustrácii <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    $msg = 'Chyba v ilustrácii <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
     drupal_set_message($msg, 'error');
   } else {
     watchdog($category, 'Chyba v hesle "@title": ilustrácia "@ilu_title:" ' . $msg, [
       '@title' => $node->title,
       '@ilu_title' => $ilu_node->title,
     ], WATCHDOG_NOTICE);
-    $msg = 'Chyba v hesle <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
     drupal_set_message($msg, 'error');
   }
 }
@@ -148,7 +148,7 @@ function art_error($node, $msg, $category) {
   watchdog($category, 'Chyba v hesle "@title" ' . $msg, [
     '@title' => $node->title,
   ], WATCHDOG_NOTICE);
-  $msg = 'Chyba v hesle <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
+  $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
   drupal_set_message($msg, 'error');
 }
 
