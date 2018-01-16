@@ -225,7 +225,7 @@ function beliana_sync_sync($nid, &$context) {
   ]);
   $generic_node = node_load($nid);
   $node = workbench_moderation_node_current_load($generic_node);
-  $illustrations = [];
+  $illustrations = [];	// list of illustrations to be published on web
   $skip = FALSE;
   
   // _check_links defined in beliana/beliana.module
@@ -244,12 +244,12 @@ function beliana_sync_sync($nid, &$context) {
       $ilu_generic_node = node_load($illustration['target_id']);
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
 
-      if (!_check_field_pouzit($node, $ilu_node, 'sync')) {
-        $skip = TRUE;
-      }
+      //if (!_check_field_pouzit($node, $ilu_node, 'sync')) {
+        //$skip = TRUE;
+      //}
 
-      // ignore illustrations, which are not intended for web
-      if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+      // add illustration to the list, ignore it, if it is not intended for web
+      if (il_display_on_web($ilu_node)) {
         $illustration_data = _check_illustration_web($node, $ilu_node, 'sync');
         if (is_null($illustration_data)) {
           $skip = TRUE;
@@ -364,13 +364,30 @@ function beliana_sync_sync($nid, &$context) {
     }
 }
 
-function _display_on_web($values) {
-  foreach ($values as $value) {
+// check if illustration should go to web
+function il_display_on_web(&$ilu_node) 
+{
+  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) 
+    return false;
+  foreach ($ilu_node->field_pouzit[LANGUAGE_NONE] as $value) {
     if ($value['value'] === 'Zobrazit_na_webe') {
-      return TRUE;
+      return true;
     }
   }
-  return FALSE;
+  return false;
+}
+
+// check if illustration should be printed
+function il_print(&$ilu_node) 
+{
+  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) 
+    return false;
+  foreach ($ilu_node->field_pouzit[LANGUAGE_NONE] as $value) {
+    if ($value['value'] === 'Zaradit_do_tlace') {
+      return true;
+    }
+  }
+  return false;
 }
 
 function get_order($source, $source_links) {
