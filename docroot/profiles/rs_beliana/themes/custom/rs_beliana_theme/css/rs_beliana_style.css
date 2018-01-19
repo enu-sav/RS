@@ -22,8 +22,8 @@
 
 .page-node-add .form-actions input,
 .page-node-edit .form-actions input {
-  margin-bottom: 0px;
-  font-size: 1.2em;
+  margin-bottom: 0px !important;
+  font-size: 1.2em !important;
 }
 
 .adminimal-frontend table td,
