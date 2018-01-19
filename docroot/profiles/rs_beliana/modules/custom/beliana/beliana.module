@@ -325,7 +325,7 @@ function importovane_publish_editor(&$node, $context) {
     if (!_check_links($node)) {
       $skip = true;
     }
-    $ok_states = ['ilustracia_na_zverejnenie', 'publikovane_na_webe', 'ilustracia_u_vyst_redaktora_5'];
+    $ok_states = ['ilustracia_u_vyst_redaktora_5'];
     if (!check_ill_at_node_transition($node, $ok_states, 'state change')) {
       $skip = true; 
     }
@@ -769,9 +769,8 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
   // check illustration state on transition of 'importovane_heslo' to state 'importovane_u_jr2'
   if ($values['node']->type === 'importovane_heslo' and $new_state == 'importovane_u_jr2') {
-    dpm($values['node']);
     $skip = false;
-    $ok_states = [ 'ilustracia_na_zverejnenie', 'publikovane_na_webe', 'ilustracia_u_vyst_redaktora_5'];
+    $ok_states = ['ilustracia_u_vyst_redaktora_5'];
     $skip = !check_ill_at_node_transition($values['node'], $ok_states, 'state change');
     if ($skip) {
       drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
@@ -791,12 +790,12 @@ function beliana_workflow_reaction(&$form, &$form_state) {
           $skip = TRUE;
         }
  
-        if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
-          $skip = TRUE;
-        }
+        //if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
+          //$skip = TRUE;
+        //}
 
         // ignore illustrations, which are not intended for web
-        if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+        if (il_display_on_web($ilu_node)) {
           if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
             $skip = TRUE;
           }
@@ -833,6 +832,7 @@ function _check_ilu_attached(&$ilu_node, $category)
 }
 
 /*
+ * $ok_states: list of required illustration states 
  * return true if OK
  */
 function check_ill_at_node_transition(&$node, $ok_states, $category)
@@ -843,23 +843,24 @@ function check_ill_at_node_transition(&$node, $ok_states, $category)
       $ilu_generic_node = node_load($illustration['target_id']);
     $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
 
-      if (!_check_field_pouzit($node, $ilu_node, 'state change')) {
-        $skip = TRUE;
-      }
+      //if (!_check_field_pouzit($node, $ilu_node, 'state change')) {
+        //$skip = TRUE;
+      //}
 
-      // ignore illustrations, which are not intended for web
-      if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+      // check illustrations, which are intended for web
+      if (il_display_on_web($ilu_node)) {
         $illustration_data = _check_illustration_web($node, $ilu_node, 'state change');
         if (is_null($illustration_data)) {
           $skip = TRUE;
         }
+
+        // Check if illustration is in correct WB status.
+        if (!in_array($ilu_node->workbench_moderation['current']->state, $ok_states)) {
+          il_error($node, $ilu_node, 'má byť zverejnená na webe, ale nie je v žiadnom z požadovaných stavov: ['. implode(", ",$ok_states) . ']', 'state change');
+          $skip = TRUE;
+        }
       }
 
-      // Check if illustration is in correct WB status.
-      if (!in_array($ilu_node->workbench_moderation['current']->state, $ok_states)) {
-        il_error($node, $ilu_node, 'nie je v stave "Ilustrácia u výst. redaktora 5"', 'state change');
-        $skip = TRUE;
-      }
     }
   }
   return !$skip;
