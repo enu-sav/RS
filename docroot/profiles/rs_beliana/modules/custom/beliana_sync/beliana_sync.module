@@ -131,14 +131,14 @@ function il_error($node, $ilu_node, $msg, $category) {
     watchdog($category, 'Chyba v ilustrácii "@ilu_title": ' . $msg, [
       '@ilu_title' => $ilu_node->title,
     ], WATCHDOG_NOTICE);
-    $msg = 'Chyba v ilustrácii <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    $msg = 'Chyba v ilustrácii <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
     drupal_set_message($msg, 'error');
   } else {
     watchdog($category, 'Chyba v hesle "@title": ilustrácia "@ilu_title:" ' . $msg, [
       '@title' => $node->title,
       '@ilu_title' => $ilu_node->title,
     ], WATCHDOG_NOTICE);
-    $msg = 'Chyba v hesle <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
     drupal_set_message($msg, 'error');
   }
 }
@@ -148,7 +148,7 @@ function art_error($node, $msg, $category) {
   watchdog($category, 'Chyba v hesle "@title" ' . $msg, [
     '@title' => $node->title,
   ], WATCHDOG_NOTICE);
-  $msg = 'Chyba v hesle <a href ="' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
+  $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
   drupal_set_message($msg, 'error');
 }
 
@@ -225,7 +225,7 @@ function beliana_sync_sync($nid, &$context) {
   ]);
   $generic_node = node_load($nid);
   $node = workbench_moderation_node_current_load($generic_node);
-  $illustrations = [];
+  $illustrations = [];	// list of illustrations to be published on web
   $skip = FALSE;
   
   // _check_links defined in beliana/beliana.module
@@ -244,12 +244,12 @@ function beliana_sync_sync($nid, &$context) {
       $ilu_generic_node = node_load($illustration['target_id']);
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
 
-      if (!_check_field_pouzit($node, $ilu_node, 'sync')) {
-        $skip = TRUE;
-      }
+      //if (!_check_field_pouzit($node, $ilu_node, 'sync')) {
+        //$skip = TRUE;
+      //}
 
-      // ignore illustrations, which are not intended for web
-      if (_display_on_web($ilu_node->field_pouzit[LANGUAGE_NONE])) {
+      // add illustration to the list, ignore it, if it is not intended for web
+      if (il_display_on_web($ilu_node)) {
         $illustration_data = _check_illustration_web($node, $ilu_node, 'sync');
         if (is_null($illustration_data)) {
           $skip = TRUE;
@@ -364,13 +364,30 @@ function beliana_sync_sync($nid, &$context) {
     }
 }
 
-function _display_on_web($values) {
-  foreach ($values as $value) {
+// check if illustration should go to web
+function il_display_on_web(&$ilu_node) 
+{
+  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) 
+    return false;
+  foreach ($ilu_node->field_pouzit[LANGUAGE_NONE] as $value) {
     if ($value['value'] === 'Zobrazit_na_webe') {
-      return TRUE;
+      return true;
     }
   }
-  return FALSE;
+  return false;
+}
+
+// check if illustration should be printed
+function il_print(&$ilu_node) 
+{
+  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) 
+    return false;
+  foreach ($ilu_node->field_pouzit[LANGUAGE_NONE] as $value) {
+    if ($value['value'] === 'Zaradit_do_tlace') {
+      return true;
+    }
+  }
+  return false;
 }
 
 function get_order($source, $source_links) {
@@ -658,6 +675,10 @@ function _form_date6() {
 
 /*
  * check correctness of an illustration
+ * $category values:
+ * 'sync': execute test only during synchronization to web
+ * 'state change': execute test in general state change
+ * 'state change ge': execute test on state change from graphics editor to editor 
  * return: illustration data or null
  */
 function  _check_illustration_web(&$node, &$ilu_node, $category)
@@ -697,6 +718,7 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
     il_error($node, $ilu_node, 'sa nenachádza v stave "Ilustrácia na zverejnenie"', $category);
     $skip = TRUE;
   }
+
   // Check if illustration has correct license.
   if ((!isset($ilu_node->field_zdroj_ilustracie['und']) || $ilu_node->field_zdroj_ilustracie['und'][0]['value'] === 'Zatiaľ neurčený')) {
     il_error($node, $ilu_node, 'nie je určený platný typ ilustrácie', $category);
@@ -706,8 +728,12 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
     if (empty($license)) {
       il_error($node, $ilu_node, 'nesprávne určený typ licencie', $category);
       $skip = TRUE;
+    } else if ($category == "state change ge" and $license == 'Iná verejná licencia' and !isset($ilu_node['url_textu_licencie_l'])){
+      il_error($node, $ilu_node, 'ak je zvolená "Iná verejná licencia", pole "URL textu licencie" musí byť vyplnené"', $category);
+      $skip = TRUE;
     }
-  }
+  } 
+
   // Check if alternative text is correct
   $plen = strlen($ilu_node->field_popis['und'][0]['value'])>130;
   if (!isset($ilu_node->field_alternativny_text['und']) && $plen) {
