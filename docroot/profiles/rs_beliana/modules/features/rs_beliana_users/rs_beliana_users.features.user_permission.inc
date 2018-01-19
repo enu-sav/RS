@@ -3261,7 +3261,14 @@ function rs_beliana_users_user_default_permissions() {
   $permissions['view field_na_zoradenie'] = array(
     'name' => 'view field_na_zoradenie',
     'roles' => array(
+      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
