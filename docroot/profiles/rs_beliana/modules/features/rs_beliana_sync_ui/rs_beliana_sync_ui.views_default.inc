@@ -590,6 +590,13 @@ function rs_beliana_sync_ui_views_default_views() {
     'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'na_zalomenie' => 'na_zalomenie',
+  );
   $handler->display->display_options['path'] = 'zverejnit-na-web';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejniť na web';
@@ -946,6 +953,13 @@ function rs_beliana_sync_ui_views_default_views() {
     23 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'publikovane_na_webe' => 'publikovane_na_webe',
+  );
   $handler->display->display_options['path'] = 'zverejnene-na-webe';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejnené';

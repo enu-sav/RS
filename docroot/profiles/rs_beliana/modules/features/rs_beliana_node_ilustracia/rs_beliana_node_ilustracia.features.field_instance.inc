@@ -832,7 +832,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba ja pole <em>URL diela</em>',
+    'description' => '<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba aj pole <em>URL diela</em>',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1013,7 +1013,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_pouzit',
     'label' => 'Použiť',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1211,7 +1211,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte odkaz (URL) na stránku, odkiaľ  bolo dielo prevzaté.',
+    'description' => 'Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1488,7 +1488,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba ja pole <em>URL diela</em>');
+  t('<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba aj pole <em>URL diela</em>');
   t('Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak voľba typu ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. <br />
 "Muzeálny objekt": trojrozmerné dielo (socha, objekt) umiestnené v múzeu, galérii, chráme a podobne. <br />
 "Vlastná ilustrácia EnÚ": ilustrácia, ktorú vytvoril zamestnanec EnÚ alebo bola vytvorená na objednávku EnÚ <br />
@@ -1527,7 +1527,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte meno autora fotografickej snímky trojrozmerného diela (objekt, socha, stavba). ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté');
-  t('Uveďte odkaz (URL) na stránku, odkiaľ  bolo dielo prevzaté.');
+  t('Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
   t('Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
