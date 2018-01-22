@@ -1,0 +1,18 @@
+diff --git a/docroot/profiles/rs_beliana/modules/contrib/workbench_access/workbench_access.module b/docroot/profiles/rs_beliana/modules/contrib/workbench_access/workbench_access.module
+index c0f7e5f..8526098 100644
+--- a/docroot/profiles/rs_beliana/modules/contrib/workbench_access/workbench_access.module
++++ b/docroot/profiles/rs_beliana/modules/contrib/workbench_access/workbench_access.module
+@@ -456,6 +456,13 @@ function workbench_access_check($op, $type, $access_ids, $account_access) {
+       }
+     }
+   }
++  
++  foreach (module_implements('workbench_access_check') as $module) {
++    if(module_invoke($module, 'workbench_access_check', $op, $type, $access_ids, $account_access)){
++      return TRUE;
++    }
++  }
++  
+   return FALSE;
+ }
+

@@ -456,6 +456,13 @@ function workbench_access_check($op, $type, $access_ids, $account_access) {
       }
     }
   }
+  
+  foreach (module_implements('workbench_access_check') as $module) {
+    if(module_invoke($module, 'workbench_access_check', $op, $type, $access_ids, $account_access)){
+      return TRUE;
+    }
+  }
+  
   return FALSE;
 }
 
