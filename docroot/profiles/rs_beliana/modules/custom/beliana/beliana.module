@@ -78,7 +78,7 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
 function beliana_workbench_access_check($op, $type, $access_ids, $account_access) {
   global $user;
 
-  if ($op == 'view' && user_has_role(4, $user)) {
+  if ($op == 'view') {
     return TRUE;
   }
 }
