@@ -625,10 +625,29 @@ function beliana_node_presave($node) {
 
   // fix field_na_zoradenie if necessary
   //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
-  if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
-    $transliterated = _beliana_remove_accents($node->title);
+  $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']); 
+  if (!$rebuild_sort) {
+    // are there funny characters in sort string (field_na_zoradenie)?
+    $rebuild_sort = preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value']);
+    //is there comma in title by not '_' in sort string (field_na_zoradenie)? - fixes missing '_' between surname and name
+    $rebuild_sort = $rebuild_sort || 
+      (strpos($node->title, ",") and // comma in title
+      !strpos($node->field_na_zoradenie['und'][0]['value'], "_") and // no "_" in sort string
+      !preg_match("/^[0-9]/",$node->title) and // not starting with number (in chemistry, like 1,3-butadien)
+      $node->type == 'importovane_heslo' // only 'importovane_heslo' 'heslo' is sorted in a different way
+      ); 
+  }
+  //if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
+  if ($rebuild_sort) {
+    $transliterated = preg_replace( "/\(^ad-|al-|af |d’ |d’|de |da |z |ze |del |\)./", '', $node->title);
+    $transliterated = _beliana_remove_accents($transliterated);
+    $transliterated = str_replace(",","_",$transliterated);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
+    $transliterated = str_replace("Š","š",$transliterated); // not changed by strtolower
+    $transliterated = str_replace("Č","č",$transliterated);
+    $transliterated = str_replace("Ž","ž",$transliterated);
+    //dpm($transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
 
@@ -1084,6 +1103,8 @@ function _beliana_remove_accents($text) {
     'Ü' => 'U',
     'Ý' => 'Y',
     'à' => 'a',
+    'æ' => 'ae',
+    'Æ' => 'ae',
     'á' => 'a',
     'â' => 'a',
     'ã' => 'a',
@@ -1888,16 +1909,6 @@ function _beliana_remove_accents($text) {
     'ｘ' => 'x',
     'ｙ' => 'y',
     'ｚ' => 'z',
-    '1' => 'a',
-    '2' => 'b',
-    '3' => 'c',
-    '4' => 'd',
-    '5' => 'e',
-    '6' => 'f',
-    '7' => 'g',
-    '8' => 'h',
-    '9' => 'i',
-    '0' => 'j',
   );
   return strtr($text, $trans);
 }

@@ -735,9 +735,10 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
   } 
 
   // Check if alternative text is correct
-  $plen = strlen($ilu_node->field_popis['und'][0]['value'])>130;
+  $atext = _beliana_remove_accents(preg_replace('/<[^>]*>/', '',  $ilu_node->field_popis[LANGUAGE_NONE][0]['value']));
+  $plen = strlen($atext)>122;
   if (!isset($ilu_node->field_alternativny_text['und']) && $plen) {
-    il_error($node, $ilu_node, 'popis je dlhší ako 130 znakov a nie je vložený Alternatívny text.', $category);
+    il_error($node, $ilu_node, 'popis je dlhší ako 120 znakov a nie je vložený Alternatívny text.', $category);
     $skip = TRUE;
   }
 
