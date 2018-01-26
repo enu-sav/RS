@@ -5,7 +5,6 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = menu
 dependencies[] = node
-dependencies[] = rs_beliana_fields
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = view_unpublished

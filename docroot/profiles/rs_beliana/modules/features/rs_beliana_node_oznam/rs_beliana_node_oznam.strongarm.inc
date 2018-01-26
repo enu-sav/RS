@@ -176,5 +176,19 @@ function rs_beliana_node_oznam_strongarm() {
   $strongarm->value = 'Uložiť a pridať polia';
   $export['save_continue_oznam'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_oznam';
+  $strongarm->value = 1;
+  $export['workbench_access_node_type_oznam'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_oznam';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_oznam'] = $strongarm;
+
   return $export;
 }

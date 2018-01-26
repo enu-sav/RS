@@ -13,27 +13,6 @@ function rs_beliana_users_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'adminimal_admin_menu_core-toolbar-disabled';
-  $strongarm->value = TRUE;
-  $export['adminimal_admin_menu_core-toolbar-disabled'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'adminimal_admin_menu_jquery';
-  $strongarm->value = 0;
-  $export['adminimal_admin_menu_jquery'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'adminimal_admin_menu_slicknav';
-  $strongarm->value = 0;
-  $export['adminimal_admin_menu_slicknav'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'anonymous';
   $strongarm->value = 'Anonymný';
   $export['anonymous'] = $strongarm;
@@ -66,61 +45,6 @@ function rs_beliana_users_strongarm() {
     ),
   );
   $export['field_bundle_settings_user__user'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'language_negotiation_language';
-  $strongarm->value = array(
-    'locale-user' => array(
-      'callbacks' => array(
-        'language' => 'locale_language_from_user',
-      ),
-      'file' => 'includes/locale.inc',
-    ),
-    'language-default' => array(
-      'callbacks' => array(
-        'language' => 'language_from_default',
-      ),
-    ),
-  );
-  $export['language_negotiation_language'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'language_negotiation_language_content';
-  $strongarm->value = array(
-    'locale-interface' => array(
-      'callbacks' => array(
-        'language' => 'locale_language_from_interface',
-      ),
-      'file' => 'includes/locale.inc',
-    ),
-  );
-  $export['language_negotiation_language_content'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'language_negotiation_language_url';
-  $strongarm->value = array(
-    'locale-url' => array(
-      'callbacks' => array(
-        'language' => 'locale_language_from_url',
-        'switcher' => 'locale_language_switcher_url',
-        'url_rewrite' => 'locale_language_url_rewrite_url',
-      ),
-      'file' => 'includes/locale.inc',
-    ),
-    'locale-url-fallback' => array(
-      'callbacks' => array(
-        'language' => 'locale_language_url_fallback',
-      ),
-      'file' => 'includes/locale.inc',
-    ),
-  );
-  $export['language_negotiation_language_url'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -181,34 +105,6 @@ Please go to [password-policy:password-edit-url] to change your password.';
   $strongarm->name = 'password_policy_warning_subject';
   $strongarm->value = 'Password expiration warning for [user:name] at [site:name]';
   $export['password_policy_warning_subject'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'smtp_allowhtml';
-  $strongarm->value = 0;
-  $export['smtp_allowhtml'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'smtp_debugging';
-  $strongarm->value = 1;
-  $export['smtp_debugging'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'smtp_previous_mail_system';
-  $strongarm->value = 'DefaultMailSystem';
-  $export['smtp_previous_mail_system'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'smtp_queue';
-  $strongarm->value = 0;
-  $export['smtp_queue'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -192,5 +192,19 @@ function rs_beliana_node_importovane_heslo_strongarm() {
   $strongarm->value = 'Save and add fields';
   $export['save_continue_importovane_heslo'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_importovane_heslo';
+  $strongarm->value = 0;
+  $export['workbench_access_node_type_importovane_heslo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_importovane_heslo';
+  $strongarm->value = 'importovane';
+  $export['workbench_moderation_default_state_importovane_heslo'] = $strongarm;
+
   return $export;
 }
