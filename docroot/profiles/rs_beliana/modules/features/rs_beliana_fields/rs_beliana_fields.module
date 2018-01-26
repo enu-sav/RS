@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Redakčný systém Beliana Polia feature.
- */
-
-include_once 'rs_beliana_fields.features.inc';

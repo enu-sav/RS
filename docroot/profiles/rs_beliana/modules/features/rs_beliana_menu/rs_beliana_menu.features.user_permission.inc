@@ -10,96 +10,41 @@
 function rs_beliana_menu_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'administer ckeditor_lite'.
-  $permissions['administer ckeditor_lite'] = array(
-    'name' => 'administer ckeditor_lite',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor_lite',
-  );
-
-  // Exported permission: 'allow disabling privatemsg'.
-  $permissions['allow disabling privatemsg'] = array(
-    'name' => 'allow disabling privatemsg',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'privatemsg',
-  );
-
-  // Exported permission: 'ckeditor_lite highlight changes'.
-  $permissions['ckeditor_lite highlight changes'] = array(
-    'name' => 'ckeditor_lite highlight changes',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor_lite',
-  );
-
-  // Exported permission: 'delete privatemsg'.
-  $permissions['delete privatemsg'] = array(
-    'name' => 'delete privatemsg',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'privatemsg',
-  );
-
-  // Exported permission: 'read all private messages'.
-  $permissions['read all private messages'] = array(
-    'name' => 'read all private messages',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'privatemsg',
-  );
-
-  // Exported permission: 'read privatemsg'.
-  $permissions['read privatemsg'] = array(
-    'name' => 'read privatemsg',
+  // Exported permission: 'access administration menu'.
+  $permissions['access administration menu'] = array(
+    'name' => 'access administration menu',
     'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
-    'module' => 'privatemsg',
+    'module' => 'admin_menu',
   );
 
-  // Exported permission: 'reply only privatemsg'.
-  $permissions['reply only privatemsg'] = array(
-    'name' => 'reply only privatemsg',
+  // Exported permission: 'administer menu'.
+  $permissions['administer menu'] = array(
+    'name' => 'administer menu',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
-    'module' => 'privatemsg',
+    'module' => 'menu',
   );
 
-  // Exported permission: 'select text format for privatemsg'.
-  $permissions['select text format for privatemsg'] = array(
-    'name' => 'select text format for privatemsg',
+  // Exported permission: 'display drupal links'.
+  $permissions['display drupal links'] = array(
+    'name' => 'display drupal links',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
-    'module' => 'privatemsg',
+    'module' => 'admin_menu',
   );
 
-  // Exported permission: 'use tokens in privatemsg'.
-  $permissions['use tokens in privatemsg'] = array(
-    'name' => 'use tokens in privatemsg',
+  // Exported permission: 'flush caches'.
+  $permissions['flush caches'] = array(
+    'name' => 'flush caches',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
-    'module' => 'privatemsg',
-  );
-
-  // Exported permission: 'write privatemsg'.
-  $permissions['write privatemsg'] = array(
-    'name' => 'write privatemsg',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'privatemsg',
+    'module' => 'admin_menu',
   );
 
   return $permissions;

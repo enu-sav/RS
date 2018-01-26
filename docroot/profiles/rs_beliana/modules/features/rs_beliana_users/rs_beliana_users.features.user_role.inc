@@ -40,6 +40,12 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 17,
   );
 
+  // Exported role: Oznamy.
+  $roles['Oznamy'] = array(
+    'name' => 'Oznamy',
+    'weight' => 18,
+  );
+
   // Exported role: Redaktor.
   $roles['Redaktor'] = array(
     'name' => 'Redaktor',
@@ -88,10 +94,28 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 12,
   );
 
+  // Exported role: Zlúčené-odkazy.
+  $roles['Zlúčené-odkazy'] = array(
+    'name' => 'Zlúčené-odkazy',
+    'weight' => 21,
+  );
+
   // Exported role: administrátor.
   $roles['administrátor'] = array(
     'name' => 'administrátor',
     'weight' => 14,
+  );
+
+  // Exported role: chRedaktor.
+  $roles['chRedaktor'] = array(
+    'name' => 'chRedaktor',
+    'weight' => 19,
+  );
+
+  // Exported role: garant.
+  $roles['garant'] = array(
+    'name' => 'garant',
+    'weight' => 20,
   );
 
   // Exported role: iredaktor.
