@@ -64,7 +64,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
 config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
 // keep autosaved stuff for 14 days
 config.autosave_NotOlderThen = 20160;
-config.autoGrow_maxHeight = 500;
+//config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
@@ -94,6 +94,7 @@ config.specialChars = [
 [\'°\', \'stupeň (4°C)  ale uhol  90°    1°18’ (spolu bez medzier)\'],
 [\'‘\', \'minúta  \'],
 [\'“\', \'sekunda\'],
+[\'′\', \'prime\'],
 [\'@\', \'zavináč\'],
 [\'·\', \'krát\'],
 [\'×\', \'krát\'],
@@ -191,6 +192,13 @@ config.specialChars = [
               ),
             ),
             'default' => 't',
+          ),
+          'fixed' => array(
+            'name' => 'fixed',
+            'desc' => 'Plugin file: fixed',
+            'path' => '%plugin_dir%fixed/',
+            'buttons' => FALSE,
+            'default' => 'f',
           ),
           'lite' => array(
             'name' => 'lite',
@@ -318,7 +326,7 @@ config.specialChars = [
         'js_conf' => '// na https stránke je požadovaný https pristup na cdn
 // must be placed before the  config.autosave line (and maybe others)
 config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
-config.autoGrow_maxHeight = 500;
+//config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;
 config.autoGrow_onStartup = true;
@@ -348,6 +356,7 @@ config.specialChars = [
 [\'°\', \'stupeň (4°C)  ale uhol  90°    1°18’ (spolu bez medzier)\'],
 [\'‘\', \'minúta  \'],
 [\'“\', \'sekunda\'],
+[\'′\', \'prime\'],
 [\'@\', \'zavináč\'],
 [\'·\', \'krát\'],
 [\'×\', \'krát\'],
@@ -445,6 +454,13 @@ config.specialChars = [
               ),
             ),
             'default' => 't',
+          ),
+          'fixed' => array(
+            'name' => 'fixed',
+            'desc' => 'Plugin file: fixed',
+            'path' => '%plugin_dir%fixed/',
+            'buttons' => FALSE,
+            'default' => 'f',
           ),
           'mathjax' => array(
             'name' => 'mathjax',

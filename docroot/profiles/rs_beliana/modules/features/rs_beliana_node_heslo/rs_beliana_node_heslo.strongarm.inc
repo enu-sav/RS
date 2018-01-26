@@ -192,5 +192,33 @@ function rs_beliana_node_heslo_strongarm() {
   $strongarm->value = 'Save and add fields';
   $export['save_continue_heslo'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_gheslo';
+  $strongarm->value = 1;
+  $export['workbench_access_node_type_gheslo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_heslo';
+  $strongarm->value = 1;
+  $export['workbench_access_node_type_heslo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_gheslo';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_gheslo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_heslo';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_heslo'] = $strongarm;
+
   return $export;
 }
