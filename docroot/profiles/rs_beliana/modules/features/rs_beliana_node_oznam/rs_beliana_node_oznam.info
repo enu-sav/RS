@@ -11,6 +11,7 @@ dependencies[] = text
 dependencies[] = view_unpublished
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[field_instance][] = comment-comment_node_oznam-comment_body
 features[field_instance][] = node-oznam-body
 features[node][] = oznam
 features[user_permission][] = create oznam content

@@ -48,6 +48,13 @@ function rs_beliana_workbench_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_access_node_type_osobnost';
+  $strongarm->value = 1;
+  $export['workbench_access_node_type_osobnost'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_taxonomy';
   $strongarm->value = array(
     'lexikalne_skupiny' => 'lexikalne_skupiny',
@@ -55,6 +62,13 @@ function rs_beliana_workbench_strongarm() {
     'tags' => 0,
   );
   $export['workbench_access_taxonomy'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'workbench_moderation_default_state_osobnost';
+  $strongarm->value = 'draft';
+  $export['workbench_moderation_default_state_osobnost'] = $strongarm;
 
   return $export;
 }

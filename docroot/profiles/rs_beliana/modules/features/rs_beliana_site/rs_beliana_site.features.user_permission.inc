@@ -22,6 +22,15 @@ function rs_beliana_site_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'access ckeditor link'.
+  $permissions['access ckeditor link'] = array(
+    'name' => 'access ckeditor link',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'ckeditor_link',
+  );
+
   // Exported permission: 'access comments'.
   $permissions['access comments'] = array(
     'name' => 'access comments',
@@ -114,6 +123,15 @@ function rs_beliana_site_user_default_permissions() {
     'module' => 'flood_unblock',
   );
 
+  // Exported permission: 'access private fields'.
+  $permissions['access private fields'] = array(
+    'name' => 'access private fields',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -157,6 +175,15 @@ function rs_beliana_site_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'ckeditor',
+  );
+
+  // Exported permission: 'administer ckeditor link'.
+  $permissions['administer ckeditor link'] = array(
+    'name' => 'administer ckeditor link',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'ckeditor_link',
   );
 
   // Exported permission: 'administer comments'.
@@ -220,6 +247,15 @@ function rs_beliana_site_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'administer fields'.
+  $permissions['administer fields'] = array(
+    'name' => 'administer fields',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field',
   );
 
   // Exported permission: 'administer filters'.

@@ -269,6 +269,16 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_jazykovu_korekturu',
       'name' => 'zlucene-u_jaz_redaktora1',
     ),
+    'zlucene:zlucene_odkazy' => array(
+      'from_name' => 'zlucene',
+      'to_name' => 'zlucene_odkazy',
+      'name' => 'zlucene_zlucene-odkazy',
+    ),
+    'zlucene_odkazy:na_jazykovu_korekturu' => array(
+      'from_name' => 'zlucene_odkazy',
+      'to_name' => 'na_jazykovu_korekturu',
+      'name' => 'zlucene_odkazy-u_jaz_redaktora1',
+    ),
   );
   return $items;
 }
