@@ -46,6 +46,11 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* Päta: Globálny: Výsledný súhrn */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
   /* No results behavior: Globálny: Nefiltrovaný text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
@@ -109,6 +114,15 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['updated']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['updated']['date_format'] = 'short';
   $handler->display->display_options['fields']['updated']['second_date_format'] = 'privatemsg_current_day';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   /* Kritéria zoradenia: Obsah: Na zoradenie (field_na_zoradenie) */
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
@@ -270,81 +284,6 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Hromadné operácie: Obsah */
-  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::rs_beliana_sync_ui_sync' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-  );
-  /* Pole: Obsah: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Pole: Content revision: Názov */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Pole: Obsah: Lexikálna skupina */
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
-  /* Pole: Content revision: Dátum aktualizácie */
-  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['timestamp']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['timestamp']['date_format'] = 'short';
-  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'privatemsg_current_day';
-  /* Pole: Beliana sync: The Unix timestamp of last sync. */
-  $handler->display->display_options['fields']['updated']['id'] = 'updated';
-  $handler->display->display_options['fields']['updated']['table'] = 'beliana_sync';
-  $handler->display->display_options['fields']['updated']['field'] = 'updated';
-  $handler->display->display_options['fields']['updated']['label'] = 'Posledná synchronizácia';
-  $handler->display->display_options['fields']['updated']['empty'] = 'Ešte nebola';
-  $handler->display->display_options['fields']['updated']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['updated']['date_format'] = 'short';
-  $handler->display->display_options['fields']['updated']['second_date_format'] = 'privatemsg_current_day';
-  /* Pole: Obsah: Text hesla */
-  $handler->display->display_options['fields']['field_text_hesla_1']['id'] = 'field_text_hesla_1';
-  $handler->display->display_options['fields']['field_text_hesla_1']['table'] = 'field_data_field_text_hesla';
-  $handler->display->display_options['fields']['field_text_hesla_1']['field'] = 'field_text_hesla';
-  $handler->display->display_options['fields']['field_text_hesla_1']['relationship'] = 'nid';
-  /* Pole: Obsah: Ilustrácie */
-  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -597,6 +536,40 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'na_zalomenie' => 'na_zalomenie',
   );
+  /* Filter criterion: Obsah: Na zoradenie (field_na_zoradenie) */
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['field'] = 'field_na_zoradenie_value';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['operator_id'] = 'field_na_zoradenie_value_op';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['label'] = 'Na zoradenie';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['operator'] = 'field_na_zoradenie_value_op';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['identifier'] = 'field_na_zoradenie_value';
+  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'zverejnit-na-web';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejniť na web';
@@ -713,6 +686,15 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -983,6 +965,7 @@ function rs_beliana_sync_ui_views_default_views() {
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
     t('posledná »'),
+    t('Zobrazenie po @per_page položkách, @start - @end z @total'),
     t('Žiadne heslá na publikovanie nie sú momentálne dostupné.'),
     t('Uzol'),
     t('Obsah'),
@@ -991,12 +974,13 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Dátum aktualizácie'),
     t('Posledná synchronizácia'),
     t('Ešte nebola'),
+    t('Ilustrácie'),
     t('Typ'),
     t('Lexikálna skupina'),
     t('Zverejniť na web'),
     t('Text hesla'),
-    t('Ilustrácie'),
     t('Komentár'),
+    t('Na zoradenie'),
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total'),
     t('Stav'),

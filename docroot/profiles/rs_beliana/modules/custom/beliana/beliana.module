@@ -75,6 +75,14 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   }
 }
 
+function beliana_workbench_access_check($op, $type, $access_ids, $account_access) {
+  global $user;
+
+  if ($op == 'view') {
+    return TRUE;
+  }
+}
+
 /**
  * Implements hook_field_formatter_info().
  *
@@ -327,9 +335,9 @@ function importovane_publish_editor(&$node, $context) {
     }
     $ok_states = ['ilustracia_u_vyst_redaktora_5'];
     if (!check_ill_at_node_transition($node, $ok_states, 'state change')) {
-      $skip = true; 
+      $skip = true;
     }
-    if (!$skip){
+    if (!$skip) {
       workbench_moderation_moderate($node, "importovane_u_jr2");
     }
   }
@@ -443,7 +451,6 @@ function beliana_assign_corrector(&$node, $context) {
   _beliana_assign_user($node, $context);
 }
 
-
 /**
  * Callback function for `update_dates` action.
  *
@@ -456,7 +463,7 @@ function update_dates(&$entity, $context = array()) {
     // get dates from article text
     $dates = get_header_dates($entity->field_text_hesla[LANGUAGE_NONE][0]['value']);
     if (count($dates) > 0) {
-    for ($i=0; $i < count($dates); $i++){
+      for ($i = 0; $i < count($dates); $i++) {
         // set the field
         $entity->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
       }
@@ -618,10 +625,29 @@ function beliana_node_presave($node) {
 
   // fix field_na_zoradenie if necessary
   //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
-  if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
-    $transliterated = _beliana_remove_accents($node->title);
+  $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']); 
+  if (!$rebuild_sort) {
+    // are there funny characters in sort string (field_na_zoradenie)?
+    $rebuild_sort = preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value']);
+    //is there comma in title by not '_' in sort string (field_na_zoradenie)? - fixes missing '_' between surname and name
+    $rebuild_sort = $rebuild_sort || 
+      (strpos($node->title, ",") and // comma in title
+      !strpos($node->field_na_zoradenie['und'][0]['value'], "_") and // no "_" in sort string
+      !preg_match("/^[0-9]/",$node->title) and // not starting with number (in chemistry, like 1,3-butadien)
+      $node->type == 'importovane_heslo' // only 'importovane_heslo' 'heslo' is sorted in a different way
+      ); 
+  }
+  //if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
+  if ($rebuild_sort) {
+    $transliterated = preg_replace( "/\(^ad-|al-|af |d’ |d’|de |da |z |ze |del |\)./", '', $node->title);
+    $transliterated = _beliana_remove_accents($transliterated);
+    $transliterated = str_replace(",","_",$transliterated);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
+    $transliterated = str_replace("Š","š",$transliterated); // not changed by strtolower
+    $transliterated = str_replace("Č","č",$transliterated);
+    $transliterated = str_replace("Ž","ž",$transliterated);
+    //dpm($transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
 
@@ -638,7 +664,7 @@ function beliana_node_presave($node) {
   }
 
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
-     return;
+    return;
   }
 
   // Editor has to change author from 'import' to something else.
@@ -654,7 +680,7 @@ function beliana_node_presave($node) {
 
   // update field_datum according to the text
   $dates = get_header_dates($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
-  for ($i=0; $i < count($dates); $i++){
+  for ($i = 0; $i < count($dates); $i++) {
     $node->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
   }
 
@@ -663,22 +689,22 @@ function beliana_node_presave($node) {
   $dom->loadHTML(mb_convert_encoding($node->field_text_hesla[LANGUAGE_NONE][0]['value'], 'HTML-ENTITIES', 'UTF-8'));
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
-  foreach ($links as $item){
+  foreach ($links as $item) {
     $target = substr($item->getAttribute('href'), 1); // we do not need the leading slash /
     $path = drupal_get_normal_path($target);
-    $parts = explode("/",$path);
-    if ($parts[0] === 'node' ) {
+    $parts = explode("/", $path);
+    if ($parts[0] === 'node') {
       $lnode = node_load($parts[1]); // the linked node
-      if($lnode->workbench_moderation['current']->state == 'ukoncenezluene'){
+      if ($lnode->workbench_moderation['current']->state == 'ukoncenezluene') {
         // $znode: the node $lnode is merged to
         $znode = node_load($lnode->field_zlucene_do[LANGUAGE_NONE][0]['target_id']);
         $newpath = $znode->path['alias'];
         // replace including the closing '"' to make the replacement string unique
-        $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace($target.'"', $newpath.'"', $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
-        watchdog('aktualizovany odkaz', 'Heslo "'.$node->title.'": aktualizovaný odkaz na zlúčené heslo (z <a href="/'.$target.'">'.$target.'</a> na <a href="/'.$newpath.'">'.$newpath.'</a>)');
+        $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace($target . '"', $newpath . '"', $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+        watchdog('aktualizovany odkaz', 'Heslo "' . $node->title . '": aktualizovaný odkaz na zlúčené heslo (z <a href="/' . $target . '">' . $target . '</a> na <a href="/' . $newpath . '">' . $newpath . '</a>)');
       }
     }
-  } 
+  }
 }
 
 /**
@@ -712,9 +738,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
  */
 function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  
-  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';  
-  drupal_add_js(array('beliana' => array('current_user' => array('id' => $user->uid,'name' => $user->name))), array('type' =>'setting'));
+
+  $form['#attached']['js'][] = drupal_get_path('module', 'beliana') . '/js/editor.js';
+  drupal_add_js(array('beliana' => array('current_user' => array('id' => $user->uid, 'name' => $user->name))), array('type' => 'setting'));
 }
 
 /**
@@ -724,7 +750,8 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
   $values = $form_state['values'];
-  if (!isset($values['node']->workbench_moderation['current']->state)) return;
+  if (!isset($values['node']->workbench_moderation['current']->state))
+    return;
 
   $new_state = $values['state'];
   $cur_state = $values['node']->workbench_moderation['current']->state;
@@ -753,7 +780,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       _run_2_korektura_single($values);
     node_save($values['node']);
     return;
-  } 
+  }
 
   // check types heslo and importovane_heslo
   // check links
@@ -765,7 +792,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       node_save($values['node']);
       return;
     }
-  } 
+  }
 
   // check illustration state on transition of 'importovane_heslo' to state 'importovane_u_jr2'
   if ($values['node']->type === 'importovane_heslo' and $new_state == 'importovane_u_jr2') {
@@ -778,28 +805,27 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       node_save($values['node']);
       return;
     }
-  } 
-  
+  }
+
   // check illustrations
   if ($values['node']->type === 'ilustracia') {
     $skip = FALSE;
-    if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5'){
-        $ilu_node = $values['node'];
+    if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5') {
+      $ilu_node = $values['node'];
 
-        if (!_check_ilu_attached($ilu_node, 'state change')) {
+      if (!_check_ilu_attached($ilu_node, 'state change')) {
+        $skip = TRUE;
+      }
+
+      //if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
+      //$skip = TRUE;
+      //}
+      // ignore illustrations, which are not intended for web
+      if (il_display_on_web($ilu_node)) {
+        if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
           $skip = TRUE;
         }
- 
-        //if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
-          //$skip = TRUE;
-        //}
-
-        // ignore illustrations, which are not intended for web
-        if (il_display_on_web($ilu_node)) {
-          if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
-            $skip = TRUE;
-          }
-        }
+      }
     }
 
     // a problem with illustration, keep the current state
@@ -810,22 +836,21 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       return;
     }
   }
-
 }
 
-function _check_ilu_attached(&$ilu_node, $category) 
-{
+function _check_ilu_attached(&$ilu_node, $category) {
   //dpm($ilu_node);
   $query = new EntityFieldQuery();
   $query
-    ->entityCondition('entity_type', "node")
-    ->fieldCondition('field_ilustracia', 'target_id', $ilu_node->nid,"=");
+      ->entityCondition('entity_type', "node")
+      ->fieldCondition('field_ilustracia', 'target_id', $ilu_node->nid, "=");
   $result = $query->execute();
   //dpm($result,"result");
-  if(isset($result['node'])) {
+  if (isset($result['node'])) {
     //dpm($result['node'],"node1");
     return true;
-  } else {
+  }
+  else {
     il_error($ilu_node, $ilu_node, 'nie je priradená k žiadnemu heslu', $category);
     return false;
   }
@@ -835,18 +860,17 @@ function _check_ilu_attached(&$ilu_node, $category)
  * $ok_states: list of required illustration states 
  * return true if OK
  */
-function check_ill_at_node_transition(&$node, $ok_states, $category)
-{
+
+function check_ill_at_node_transition(&$node, $ok_states, $category) {
   $skip = false;
   if (isset($node->field_ilustracia[LANGUAGE_NONE])) {
     foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
       $ilu_generic_node = node_load($illustration['target_id']);
-    $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
+      $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
 
       //if (!_check_field_pouzit($node, $ilu_node, 'state change')) {
-        //$skip = TRUE;
+      //$skip = TRUE;
       //}
-
       // check illustrations, which are intended for web
       if (il_display_on_web($ilu_node)) {
         $illustration_data = _check_illustration_web($node, $ilu_node, 'state change');
@@ -856,11 +880,10 @@ function check_ill_at_node_transition(&$node, $ok_states, $category)
 
         // Check if illustration is in correct WB status.
         if (!in_array($ilu_node->workbench_moderation['current']->state, $ok_states)) {
-          il_error($node, $ilu_node, 'má byť zverejnená na webe, ale nie je v žiadnom z požadovaných stavov: ['. implode(", ",$ok_states) . ']', 'state change');
+          il_error($node, $ilu_node, 'má byť zverejnená na webe, ale nie je v žiadnom z požadovaných stavov: [' . implode(", ", $ok_states) . ']', 'state change');
           $skip = TRUE;
         }
       }
-
     }
   }
   return !$skip;
@@ -875,7 +898,7 @@ function _check_links(&$node) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   $text = $node->field_text_hesla['und'][0]['value'];
-  $retvalue= true;
+  $retvalue = true;
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
   /** @var \DOMElement[] $links */
@@ -886,21 +909,23 @@ function _check_links(&$node) {
       $target = $item->getAttribute('href');
       // no external lins allowed
       if (url_is_external($target)) {
-        drupal_set_message('Chybný odkaz v hesle <a href="/'.$node->path['alias'].'">'.$node->title.'</a>: "'. $item->nodeValue . '"', 'error');
-        $retvalue= false;
-      } else {
-        if (preg_match('?^/heslo/[^/]*?',$target)) {
+        drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '"', 'error');
+        $retvalue = false;
+      }
+      else {
+        if (preg_match('?^/heslo/[^/]*?', $target)) {
           // form OK, check if it exists
           // Get non-alias path, so we can get nid from it.
           $path = drupal_get_normal_path(substr($target, 1));
-          if (substr($path, 0, 4) !== 'node' ) {
-            drupal_set_message('Chybný odkaz v hesle <a href="/'.$node->path['alias'].'">'.$node->title.'</a>: "'. $item->nodeValue . '" (odkazované heslo neexistuje)', 'error');
-            $retvalue= false;
+          if (substr($path, 0, 4) !== 'node') {
+            drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkazované heslo neexistuje)', 'error');
+            $retvalue = false;
           }
-        } else {
+        }
+        else {
           // not in the form '/heslo/alias'
-          drupal_set_message('Chybný odkaz v hesle <a href="/'.$node->path['alias'].'">'.$node->title.'</a>: "'. $item->nodeValue . '"', 'error');
-          $retvalue= false;
+          drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '"', 'error');
+          $retvalue = false;
         }
       }
     }
@@ -1078,6 +1103,8 @@ function _beliana_remove_accents($text) {
     'Ü' => 'U',
     'Ý' => 'Y',
     'à' => 'a',
+    'æ' => 'ae',
+    'Æ' => 'ae',
     'á' => 'a',
     'â' => 'a',
     'ã' => 'a',
@@ -1882,16 +1909,6 @@ function _beliana_remove_accents($text) {
     'ｘ' => 'x',
     'ｙ' => 'y',
     'ｚ' => 'z',
-    '1' => 'a',
-    '2' => 'b',
-    '3' => 'c',
-    '4' => 'd',
-    '5' => 'e',
-    '6' => 'f',
-    '7' => 'g',
-    '8' => 'h',
-    '9' => 'i',
-    '0' => 'j',
   );
   return strtr($text, $trans);
 }
@@ -1906,25 +1923,26 @@ function _beliana_remove_accents($text) {
  *   Array of dates to be stored in field_datum, may be empty
  */
 function get_header_dates($text) {
-  $dates=array();
+  $dates = array();
 
   # ignore pure reference articles  (they do not contain em dash "—")
   $exploded = explode("—", $text);
-  if(count($exploded) > 1){
+  if (count($exploded) > 1) {
     $header = $exploded[0];
     # find all dates in header
-    $pattern ="/([0-9]+. [0-9a]+. [0-9]+)/";
+    $pattern = "/([0-9]+. [0-9a]+. [0-9]+)/";
     preg_match_all($pattern, $header, $matches);
 
     # convert dates to importable form and save them to 'dates'
-    foreach($matches[0] as $mt) {
-      sscanf($mt,"%d. %d. %d",$d,$m,$y);
-      if($y > 999) { # drupal does not like dates prior to 1000
-        $odate=sprintf("%d-%02d-%02dT00:00:00",$y,$m,$d);
-        array_push($dates,$odate);
+    foreach ($matches[0] as $mt) {
+      sscanf($mt, "%d. %d. %d", $d, $m, $y);
+      if ($y > 999) { # drupal does not like dates prior to 1000
+        $odate = sprintf("%d-%02d-%02dT00:00:00", $y, $m, $d);
+        array_push($dates, $odate);
       }
     }
   }
   return $dates;
 }
+
 # vim: ai ts=2 sts=2 et sw=2 ft=php
