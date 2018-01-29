@@ -195,6 +195,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Heslo vytvorené zlúčením',
       'weight' => 8,
     ),
+    'zlucene_odkazy' => array(
+      'name' => 'zlucene_odkazy',
+      'label' => 'Zlúčené-odkazy',
+      'description' => 'Kontrola odkazov na vytvorené zlúčené heslo v iných heslách',
+      'weight' => 9,
+    ),
   );
   return $items;
 }

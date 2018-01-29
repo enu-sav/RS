@@ -308,6 +308,13 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'block view revisions in zlucene_odkazy state'.
+  $permissions['block view revisions in zlucene_odkazy state'] = array(
+    'name' => 'block view revisions in zlucene_odkazy state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'bypass workbench moderation'.
   $permissions['bypass workbench moderation'] = array(
     'name' => 'bypass workbench moderation',
@@ -614,6 +621,13 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
     ),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'edit revisions in zlucene_odkazy state'.
+  $permissions['edit revisions in zlucene_odkazy state'] = array(
+    'name' => 'edit revisions in zlucene_odkazy state',
+    'roles' => array(),
     'module' => 'workbench_state_access',
   );
 
@@ -1096,6 +1110,24 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from zlucene to na_jazykovu_korekturu'.
   $permissions['moderate content from zlucene to na_jazykovu_korekturu'] = array(
     'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from zlucene to zlucene_odkazy'.
+  $permissions['moderate content from zlucene to zlucene_odkazy'] = array(
+    'name' => 'moderate content from zlucene to zlucene_odkazy',
+    'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from zlucene_odkazy to na_jazykovu_korekturu'.
+  $permissions['moderate content from zlucene_odkazy to na_jazykovu_korekturu'] = array(
+    'name' => 'moderate content from zlucene_odkazy to na_jazykovu_korekturu',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
