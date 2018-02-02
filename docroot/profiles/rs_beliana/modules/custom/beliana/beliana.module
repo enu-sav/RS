@@ -917,9 +917,19 @@ function _check_links(&$node) {
           // form OK, check if it exists
           // Get non-alias path, so we can get nid from it.
           $path = drupal_get_normal_path(substr($target, 1));
-          if (substr($path, 0, 4) !== 'node') {
+          $parts = explode("/", $path);
+          if ($parts[0] !== 'node') {
             drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkazované heslo neexistuje)', 'error');
             $retvalue = false;
+          } else {
+            $generic_node = node_load($parts[1]);
+            $auxnode = workbench_moderation_node_current_load($generic_node);
+            // linked article must be a normal one, not a pure reference article (i.e. must contain the "—" character)
+            if (strpos($auxnode->field_text_hesla[LANGUAGE_NONE][0]['value'], "—") === false and 
+                strpos($auxnode->field_text_hesla[LANGUAGE_NONE][0]['value'], "➔") !== false) {
+              drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkaz na odkazové alebo nesprávne formátované heslo (chýba "—" )', 'error');
+              $retvalue = false;
+            }
           }
         }
         else {
