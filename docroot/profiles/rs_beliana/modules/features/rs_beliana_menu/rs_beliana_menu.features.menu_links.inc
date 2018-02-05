@@ -87,125 +87,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => 10,
     'customized' => 1,
   );
-  // Exported menu link: management_archivovan:archivovane.
-  $menu_links['management_archivovan:archivovane'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'archivovane',
-    'router_path' => 'archivovane',
-    'link_title' => 'Archivované',
-    'options' => array(
-      'identifier' => 'management_archivovan:archivovane',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_export-heslo-gh:export-heslo-gh.
-  $menu_links['management_export-heslo-gh:export-heslo-gh'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export-heslo-gh',
-    'router_path' => 'export-heslo-gh',
-    'link_title' => 'Export heslo GH',
-    'options' => array(
-      'identifier' => 'management_export-heslo-gh:export-heslo-gh',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_export-ilustrcia:export-ilustracia.
-  $menu_links['management_export-ilustrcia:export-ilustracia'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export-ilustracia',
-    'router_path' => 'export-ilustracia',
-    'link_title' => 'Export ilustrácia',
-    'options' => array(
-      'identifier' => 'management_export-ilustrcia:export-ilustracia',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_export-vydan:export-vydane.
-  $menu_links['management_export-vydan:export-vydane'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export-vydane',
-    'router_path' => 'export-vydane',
-    'link_title' => 'Export vydané',
-    'options' => array(
-      'identifier' => 'management_export-vydan:export-vydane',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_exportova-a-tlai-multi:export-multi.
-  $menu_links['management_exportova-a-tlai-multi:export-multi'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export-multi',
-    'router_path' => 'export-multi',
-    'link_title' => 'Exportovať a tlačiť-multi',
-    'options' => array(
-      'identifier' => 'management_exportova-a-tlai-multi:export-multi',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_exportova-a-tlai:export.
-  $menu_links['management_exportova-a-tlai:export'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export',
-    'router_path' => 'export',
-    'link_title' => 'Exportovať a tlačiť',
-    'options' => array(
-      'identifier' => 'management_exportova-a-tlai:export',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_exportova-sadzba:export-na-sadzbu.
-  $menu_links['management_exportova-sadzba:export-na-sadzbu'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'export-na-sadzbu',
-    'router_path' => 'export-na-sadzbu',
-    'link_title' => 'Exportovať (sadzba)',
-    'options' => array(
-      'identifier' => 'management_exportova-sadzba:export-na-sadzbu',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
   // Exported menu link: management_ilustrcie-g:admin/beliana/Ilustracie-g.
   $menu_links['management_ilustrcie-g:admin/beliana/Ilustracie-g'] = array(
     'menu_name' => 'management',
@@ -247,23 +128,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => -33,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
-  // Exported menu link: management_jazykov-redakcia---importovan:jazykova-redakcia-importovane.
-  $menu_links['management_jazykov-redakcia---importovan:jazykova-redakcia-importovane'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'jazykova-redakcia-importovane',
-    'router_path' => 'jazykova-redakcia-importovane',
-    'link_title' => 'Jazyková redakcia - importované',
-    'options' => array(
-      'identifier' => 'management_jazykov-redakcia---importovan:jazykova-redakcia-importovane',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
   );
   // Exported menu link: management_jazykov-redakcia-1:admin/beliana/jaz-redakcia-1.
   $menu_links['management_jazykov-redakcia-1:admin/beliana/jaz-redakcia-1'] = array(
@@ -537,40 +401,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_odosla-na-zverejnenie-vr:odoslat-na-zverejnenie-vr.
-  $menu_links['management_odosla-na-zverejnenie-vr:odoslat-na-zverejnenie-vr'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'odoslat-na-zverejnenie-vr',
-    'router_path' => 'odoslat-na-zverejnenie-vr',
-    'link_title' => 'Odoslať na zverejnenie (VR)',
-    'options' => array(
-      'identifier' => 'management_odosla-na-zverejnenie-vr:odoslat-na-zverejnenie-vr',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_odosla-na-zverejnenie:odoslat-na-zverejnenie-r.
-  $menu_links['management_odosla-na-zverejnenie:odoslat-na-zverejnenie-r'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'odoslat-na-zverejnenie-r',
-    'router_path' => 'odoslat-na-zverejnenie-r',
-    'link_title' => 'Odoslať na zverejnenie',
-    'options' => array(
-      'identifier' => 'management_odosla-na-zverejnenie:odoslat-na-zverejnenie-r',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
   // Exported menu link: management_odovzdan-hesl:admin/beliana/odovzdane.
   $menu_links['management_odovzdan-hesl:admin/beliana/odovzdane'] = array(
     'menu_name' => 'management',
@@ -592,91 +422,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_opravi-importovan:opravit-importovane.
-  $menu_links['management_opravi-importovan:opravit-importovane'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'opravit-importovane',
-    'router_path' => 'opravit-importovane',
-    'link_title' => 'Opraviť importované',
-    'options' => array(
-      'identifier' => 'management_opravi-importovan:opravit-importovane',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_opravi-ls-1-heslo:opravit-ls1.
-  $menu_links['management_opravi-ls-1-heslo:opravit-ls1'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'opravit-ls1',
-    'router_path' => 'opravit-ls1',
-    'link_title' => 'Opraviť LS 1 heslo',
-    'options' => array(
-      'identifier' => 'management_opravi-ls-1-heslo:opravit-ls1',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_opravi-ls-3-hesla:opravit-ls3.
-  $menu_links['management_opravi-ls-3-hesla:opravit-ls3'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'opravit-ls3',
-    'router_path' => 'opravit-ls3',
-    'link_title' => 'Opraviť LS 3 hesla',
-    'options' => array(
-      'identifier' => 'management_opravi-ls-3-hesla:opravit-ls3',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_opravi-text-1-heslo:opravit-text1.
-  $menu_links['management_opravi-text-1-heslo:opravit-text1'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'opravit-text1',
-    'router_path' => 'opravit-text1',
-    'link_title' => 'Opraviť text 1 heslo',
-    'options' => array(
-      'identifier' => 'management_opravi-text-1-heslo:opravit-text1',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_opravi-text-3-hesla:opravit-text3.
-  $menu_links['management_opravi-text-3-hesla:opravit-text3'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'opravit-text3',
-    'router_path' => 'opravit-text3',
-    'link_title' => 'Opraviť text 3 hesla',
-    'options' => array(
-      'identifier' => 'management_opravi-text-3-hesla:opravit-text3',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
   // Exported menu link: management_oznam:node/add/odkaz.
   $menu_links['management_oznam:node/add/odkaz'] = array(
     'menu_name' => 'management',
@@ -697,57 +442,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
     'parent_identifier' => 'management_vytvori:node/add',
-  );
-  // Exported menu link: management_prehad-g:vsetky-prehlad-g.
-  $menu_links['management_prehad-g:vsetky-prehlad-g'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'vsetky-prehlad-g',
-    'router_path' => 'vsetky-prehlad-g',
-    'link_title' => 'Prehľad (G)',
-    'options' => array(
-      'identifier' => 'management_prehad-g:vsetky-prehlad-g',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_prehad-ilustrcie:vsetky-ilustracie-prehlad.
-  $menu_links['management_prehad-ilustrcie:vsetky-ilustracie-prehlad'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'vsetky-ilustracie-prehlad',
-    'router_path' => 'vsetky-ilustracie-prehlad',
-    'link_title' => 'Prehľad ilustrácie',
-    'options' => array(
-      'identifier' => 'management_prehad-ilustrcie:vsetky-ilustracie-prehlad',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_prehad:vsetky-prehlad.
-  $menu_links['management_prehad:vsetky-prehlad'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'vsetky-prehlad',
-    'router_path' => 'vsetky-prehlad',
-    'link_title' => 'Prehľad',
-    'options' => array(
-      'identifier' => 'management_prehad:vsetky-prehlad',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
   );
   // Exported menu link: management_priradi-autora:admin/beliana/priradit-autora.
   $menu_links['management_priradi-autora:admin/beliana/priradit-autora'] = array(
@@ -997,75 +691,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_zverejnen:zverejnene-na-webe.
-  $menu_links['management_zverejnen:zverejnene-na-webe'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'zverejnene-na-webe',
-    'router_path' => 'zverejnene-na-webe',
-    'link_title' => 'Zverejnené',
-    'options' => array(
-      'identifier' => 'management_zverejnen:zverejnene-na-webe',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: management_zverejni-na-web:zverejnit-na-web.
-  $menu_links['management_zverejni-na-web:zverejnit-na-web'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'zverejnit-na-web',
-    'router_path' => 'zverejnit-na-web',
-    'link_title' => 'Zverejniť na web',
-    'options' => array(
-      'identifier' => 'management_zverejni-na-web:zverejnit-na-web',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: navigation_:sync-test.
-  $menu_links['navigation_:sync-test'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'sync-test',
-    'router_path' => 'sync-test',
-    'link_title' => '',
-    'options' => array(
-      'identifier' => 'navigation_:sync-test',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
-  // Exported menu link: navigation_archivovan-knin:node/add/archivovane-knizne.
-  $menu_links['navigation_archivovan-knin:node/add/archivovane-knizne'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'node/add/archivovane-knizne',
-    'router_path' => 'node/add/archivovane-knizne',
-    'link_title' => 'Archivované knižné',
-    'options' => array(
-      'identifier' => 'navigation_archivovan-knin:node/add/archivovane-knizne',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-    'parent_identifier' => 'navigation_vytvori:node/add',
-  );
   // Exported menu link: navigation_article:node/add/article.
   $menu_links['navigation_article:node/add/article'] = array(
     'menu_name' => 'navigation',
@@ -1125,23 +750,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
   );
-  // Exported menu link: navigation_compose-tips:filter/tips.
-  $menu_links['navigation_compose-tips:filter/tips'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'filter/tips',
-    'router_path' => 'filter/tips',
-    'link_title' => 'Compose tips',
-    'options' => array(
-      'identifier' => 'navigation_compose-tips:filter/tips',
-    ),
-    'module' => 'system',
-    'hidden' => 1,
-    'external' => 0,
-    'has_children' => 1,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
   // Exported menu link: navigation_diskusn-tma:node/add/forum.
   $menu_links['navigation_diskusn-tma:node/add/forum'] = array(
     'menu_name' => 'navigation',
@@ -1162,23 +770,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 1,
     'parent_identifier' => 'navigation_vytvori:node/add',
-  );
-  // Exported menu link: navigation_forums:forum.
-  $menu_links['navigation_forums:forum'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'forum',
-    'router_path' => 'forum',
-    'link_title' => 'Forums',
-    'options' => array(
-      'identifier' => 'navigation_forums:forum',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 1,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
   );
   // Exported menu link: navigation_glossary:glossary.
   $menu_links['navigation_glossary:glossary'] = array(
@@ -1277,24 +868,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'navigation_vytvori:node/add',
   );
-  // Exported menu link: navigation_oznam:node/add/oznam.
-  $menu_links['navigation_oznam:node/add/oznam'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'node/add/oznam',
-    'router_path' => 'node/add/oznam',
-    'link_title' => 'Oznam',
-    'options' => array(
-      'identifier' => 'navigation_oznam:node/add/oznam',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-    'parent_identifier' => 'navigation_vytvori:node/add',
-  );
   // Exported menu link: navigation_recent-posts:tracker.
   $menu_links['navigation_recent-posts:tracker'] = array(
     'menu_name' => 'navigation',
@@ -1311,23 +884,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => 0,
     'customized' => 1,
-  );
-  // Exported menu link: navigation_search:search.
-  $menu_links['navigation_search:search'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'search',
-    'router_path' => 'search',
-    'link_title' => 'Search',
-    'options' => array(
-      'identifier' => 'navigation_search:search',
-    ),
-    'module' => 'system',
-    'hidden' => 1,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
   );
   // Exported menu link: navigation_tlai:admin/beliana/print.
   $menu_links['navigation_tlai:admin/beliana/print'] = array(
@@ -1387,20 +943,10 @@ function rs_beliana_menu_menu_default_menu_links() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Archivované');
-  t('Archivované knižné');
   t('Article');
   t('Basic page');
   t('Beliana');
-  t('Compose tips');
   t('Diskusná téma');
-  t('Export heslo GH');
-  t('Export ilustrácia');
-  t('Export vydané');
-  t('Exportovať (sadzba)');
-  t('Exportovať a tlačiť');
-  t('Exportovať a tlačiť-multi');
-  t('Forums');
   t('Glossary');
   t('Heslo');
   t('Home');
@@ -1409,7 +955,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Ilustrácie (R)');
   t('Import');
   t('Importované heslo');
-  t('Jazyková redakcia - importované');
   t('Jazyková redakcia 1');
   t('Jazyková redakcia 2');
   t('Korektúra 1');
@@ -1424,23 +969,12 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Na posúdenie (VR5)');
   t('Navrhnuté');
   t('Nepriradené heslá');
-  t('Odoslať na zverejnenie');
-  t('Odoslať na zverejnenie (VR)');
   t('Odovzdané heslá');
-  t('Opraviť LS 1 heslo');
-  t('Opraviť LS 3 hesla');
-  t('Opraviť importované');
-  t('Opraviť text 1 heslo');
-  t('Opraviť text 3 hesla');
   t('Oznam');
-  t('Prehľad');
-  t('Prehľad (G)');
-  t('Prehľad ilustrácie');
   t('Priradiť autora');
   t('Recent posts');
   t('Redakčný systém');
   t('Rozpracované heslá');
-  t('Search');
   t('Správy');
   t('Tlačiť');
   t('Vyhľadať heslá');
@@ -1451,8 +985,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Všetky moje ilustrácie');
   t('Zlúčené');
   t('Zlúčiť');
-  t('Zverejnené');
-  t('Zverejniť na web');
 
   return $menu_links;
 }
