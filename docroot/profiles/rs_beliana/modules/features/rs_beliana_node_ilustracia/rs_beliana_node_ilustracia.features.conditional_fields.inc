@@ -1880,7 +1880,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_modifikovane',
-    'dependee' => 'field_licencia1',
+    'dependee' => 'field_zdroj_ilustracie',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -2008,13 +2008,6 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        25 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
         20 => array(
           1 => 1,
           2 => 2,
@@ -2037,6 +2030,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           4 => 0,
         ),
         23 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        26 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -2114,10 +2114,6 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        25 => array(
-          1 => 1,
-          3 => 0,
-        ),
         20 => array(
           1 => 1,
           3 => 0,
@@ -2134,15 +2130,20 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        26 => array(
+          1 => 1,
+          3 => 0,
+        ),
       ),
       'selector' => '',
-      'values_set' => 3,
-      'value_form' => NULL,
-      'values' => array(
-        0 => 'CC BY-ND',
-        1 => 'CC BY-NC-ND',
+      'values_set' => 1,
+      'value_form' => 'CC licencia',
+      'value' => array(
+        0 => array(
+          'value' => 'CC licencia',
+        ),
       ),
-      'value' => array(),
+      'values' => array(),
     ),
   );
 
