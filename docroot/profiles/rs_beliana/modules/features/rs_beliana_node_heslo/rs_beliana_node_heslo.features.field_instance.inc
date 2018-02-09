@@ -575,6 +575,75 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_pouzite_zdroje'.
+  $field_instances['node-heslo-field_pouzite_zdroje'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pouzite_zdroje',
+    'label' => 'Použité zdroje',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 0,
+          'full_html' => 'full_html',
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 21,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-field_povodne_lexikalne_skupiny'.
   $field_instances['node-heslo-field_povodne_lexikalne_skupiny'] = array(
     'bundle' => 'heslo',
@@ -1108,6 +1177,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
   t('Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.');
+  t('Použité zdroje');
   t('Povodne lexikalne skupiny');
   t('Pôvodný text hesla v generálnom heslári pred importovaním z XLS súborov. XLS tabuľka heslára mala 8 stĺpcov ZODAD, HESLO, P_R, L_S, AUT, IL, POZN a POZN 2 . Obsah stĺpcov je uvedený v zátvorke, POZN a POZN2 sú spojené.
 ');
@@ -1117,6 +1187,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Text hesla');
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
   t('Text určený pre autora redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
+  t('Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).');
   t('Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ');
   t('Vyplatenie odmeny');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
