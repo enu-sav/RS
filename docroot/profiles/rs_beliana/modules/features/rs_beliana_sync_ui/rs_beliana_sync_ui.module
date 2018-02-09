@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
  * Code for the RS Beliana Sync UI feature.
  */
-
 include_once 'rs_beliana_sync_ui.features.inc';
 
 /**
@@ -75,7 +75,6 @@ function rs_beliana_sync_ui_prepare_queue($form, &$form_state) {
   beliana_sync_prepare_queue($source);
 }
 
-
 /**
  * Implements hook_form_alter().
  */
@@ -98,6 +97,23 @@ function rs_beliana_sync_ui_form_alter(&$form, array $form_state, $form_id) {
 function rs_beliana_sync_ui_node_form_sync($form, &$form_state) {
   $source = [$form_state['values']['nid']];
   beliana_sync_prepare_queue($source);
+}
+
+/**
+ * Implementation of hook_views_handlers() to register all of the basic handlers
+ * views uses.
+ */
+function rs_beliana_sync_ui_views_handlers() {
+  return [
+    'info' => [
+      'path' => drupal_get_path('module', 'rs_beliana_sync_ui'),
+    ],
+    'handlers' => [
+      'views_handler_field_text_hesla' => [
+        'parent' => 'views_handler_field',
+      ],
+    ],
+  ];
 }
 
 /**
@@ -130,6 +146,13 @@ function rs_beliana_sync_ui_views_data() {
       'filter' => [
         'id' => 'date',
         'handler' => 'views_handler_filter_date',
+      ],
+    ],
+    'text_hesla' => [
+      'title' => t('Text Hesla'),
+      'help' => t('Get referenced "Text Hesla".'),
+      'field' => [
+        'handler' => 'views_handler_field_text_hesla',
       ],
     ],
   ];
