@@ -401,6 +401,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_vyst_redaktora_5 state',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'iredaktor' => 'iredaktor',
     ),
     'module' => 'workbench_state_access',
   );
