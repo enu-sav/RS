@@ -15,15 +15,17 @@
         }
       });
 
-      CKEDITOR.on('instanceCreated', function (event) {        
-        event.editor.on('configLoaded', function () {   
-          
+      CKEDITOR.on('instanceCreated', function (event) {
+        event.editor.on('configLoaded', function () {
           CKEDITOR.config.lite = {
-            userId: settings.beliana.current_user.id,
-            userName: settings.beliana.current_user.name,
             isTracking: true,
             tooltipTemplate: "<b>%a</b> %t (%u)",
           };
+
+          if (settings.hasOwnProperty('beliana')) {
+            CKEDITOR.config.lite.userId = settings.beliana.current_user.id;
+            CKEDITOR.config.lite.userName = settings.beliana.current_user.name;
+          }
         });
       });
 
