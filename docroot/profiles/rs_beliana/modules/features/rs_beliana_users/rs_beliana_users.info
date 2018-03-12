@@ -57,6 +57,7 @@ features[user_role][] = Zlúčené-odkazy
 features[user_role][] = administrátor
 features[user_role][] = chRedaktor
 features[user_role][] = garant
+features[user_role][] = ig-redaktor
 features[user_role][] = iredaktor
 features[variable][] = anonymous
 features[variable][] = field_bundle_settings_user__user

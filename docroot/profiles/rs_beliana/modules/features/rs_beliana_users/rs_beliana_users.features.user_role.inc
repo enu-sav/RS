@@ -118,6 +118,12 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 20,
   );
 
+  // Exported role: ig-redaktor.
+  $roles['ig-redaktor'] = array(
+    'name' => 'ig-redaktor',
+    'weight' => 3,
+  );
+
   // Exported role: iredaktor.
   $roles['iredaktor'] = array(
     'name' => 'iredaktor',
