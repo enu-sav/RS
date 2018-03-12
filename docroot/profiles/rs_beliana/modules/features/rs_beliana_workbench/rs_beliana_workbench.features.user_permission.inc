@@ -383,6 +383,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_grafika state',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -392,6 +393,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_redaktora state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -401,7 +403,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_vyst_redaktora_5 state',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'iredaktor' => 'iredaktor',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -500,7 +502,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in nova_ilustracia state'] = array(
     'name' => 'edit revisions in nova_ilustracia state',
     'roles' => array(
-      'iredaktor' => 'iredaktor',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );

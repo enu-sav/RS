@@ -6,4 +6,5 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = sync_to_web
 features_exclude[dependencies][ctools] = ctools
+files[] = views/views_handler_field_text_hesla.inc
 project path = profiles/rs_beliana/modules/features
