@@ -714,6 +714,7 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
   if ($category == 'sync' and !in_array($ilu_node->workbench_moderation['current']->state, [
       'ilustracia_na_zverejnenie',
       'publikovane_na_webe',
+      'ilustracia_u_vyst_redaktora_5',
       ])) {
     il_error($node, $ilu_node, 'sa nenachádza v stave "Ilustrácia na zverejnenie"', $category);
     $skip = TRUE;
