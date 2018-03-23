@@ -8651,7 +8651,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_url_autora_diela_l']['label'] = 'URL_autora';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['type'] = 'link_absolute';
-  /* Pole: Obsah: URL diela */
+  /* Pole: Obsah: URL stránky s obrázkom a údajmi k dielu */
   $handler->display->display_options['fields']['field_url_diela_l']['id'] = 'field_url_diela_l';
   $handler->display->display_options['fields']['field_url_diela_l']['table'] = 'field_data_field_url_diela_l';
   $handler->display->display_options['fields']['field_url_diela_l']['field'] = 'field_url_diela_l';
@@ -10486,6 +10486,46 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'importovane' => 'importovane',
+    'importovane_u_jr2' => 'importovane_u_jr2',
+    'importovane_u_vr' => 'importovane_u_vr',
+  );
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'opravit-text1';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Opraviť text 1 heslo';
@@ -10505,7 +10545,7 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -10625,6 +10665,9 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
     10 => 0,
@@ -10636,12 +10679,14 @@ function rs_beliana_views_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
   );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
   $handler->display->display_options['filters']['field_taxsubor_tid']['hierarchy'] = 1;
@@ -10739,6 +10784,47 @@ function rs_beliana_views_views_default_views() {
     17 => 0,
     20 => 0,
   );
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'importovane' => 'importovane',
+    'importovane_u_jr2' => 'importovane_u_jr2',
+    'importovane_u_vr' => 'importovane_u_vr',
+    'na_zalomenie' => 'na_zalomenie',
+  );
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'opravit-text3';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Opraviť text 3 hesla';
@@ -11039,6 +11125,7 @@ function rs_beliana_views_views_default_views() {
     t('Opraviť text hesla 1'),
     t('Upravte text a potom uložte kliknutím na "Uložiť" vľavo dolu. Ak treba, na ďalšie heslá prejdete kliknutím na odkaz "nasledujúca". '),
     t('Komentár/inštrukcie'),
+    t('Stav'),
     t('Opraviť text hesla 3'),
     t('Opraviť LS 3'),
     t('Opraviť lexikálnu skupinu 3'),
@@ -15401,6 +15488,7 @@ function rs_beliana_views_views_default_views() {
         'display_values' => array(
           'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',
           'ilustracia::field_zdroj_ilustracie' => 'ilustracia::field_zdroj_ilustracie',
+          'ilustracia::field_lexikalna_skupina_il' => 'ilustracia::field_lexikalna_skupina_il',
           'ilustracia::field_licencia1' => 'ilustracia::field_licencia1',
         ),
       ),
@@ -15524,7 +15612,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_meno_autora_diela']['id'] = 'field_meno_autora_diela';
   $handler->display->display_options['fields']['field_meno_autora_diela']['table'] = 'field_data_field_meno_autora_diela';
   $handler->display->display_options['fields']['field_meno_autora_diela']['field'] = 'field_meno_autora_diela';
-  /* Pole: Obsah: URL diela */
+  /* Pole: Obsah: URL stránky s obrázkom a údajmi k dielu */
   $handler->display->display_options['fields']['field_url_diela_l']['id'] = 'field_url_diela_l';
   $handler->display->display_options['fields']['field_url_diela_l']['table'] = 'field_data_field_url_diela_l';
   $handler->display->display_options['fields']['field_url_diela_l']['field'] = 'field_url_diela_l';
@@ -16750,7 +16838,7 @@ function rs_beliana_views_views_default_views() {
     t('Naposledy upravil / autor'),
     t('[name] / [name_1]'),
     t('Súbory ilustrácie'),
-    t('URL diela'),
+    t('URL stránky s obrázkom a údajmi k dielu'),
     t('-'),
     t('Názov diela / URL diela'),
     t('[field_nazov_diela] / [field_url_diela_l]'),
