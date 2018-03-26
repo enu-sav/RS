@@ -317,6 +317,15 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ),
+    'check_path_attributes' => array(
+      'type' => 'entity',
+      'label' => t('Check link'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
   );
 }
 
@@ -459,7 +468,7 @@ function beliana_assign_corrector(&$node, $context) {
  * @see beliana_action_info
  */
 function update_dates(&$entity, $context = array()) {
-  if ($entity->type == "heslo" || $entity->type == 'importovane_heslo') {
+  if ($entity->type == 'heslo' || $entity->type == 'importovane_heslo') {
     // get dates from article text
     $dates = get_header_dates($entity->field_text_hesla[LANGUAGE_NONE][0]['value']);
     if (count($dates) > 0) {
@@ -467,6 +476,27 @@ function update_dates(&$entity, $context = array()) {
         // set the field
         $entity->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
       }
+      node_save($entity);
+    }
+  }
+}
+
+/**
+ * Callback function for `check_path_attributes` action.
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function check_path_attributes(&$entity, $context = array()) {
+  if ($entity->type == 'heslo' || $entity->type == 'importovane_heslo') {
+    $alias = drupal_get_path_alias('node/' . $entity->nid);
+
+    if (strpos($alias, '_') === 0) {
+      
+    }
+    else {
+      $entity->field_atributy = array(LANGUAGE_NONE => array(array('value' => 'odkazOK')));
       node_save($entity);
     }
   }
@@ -625,28 +655,28 @@ function beliana_node_presave($node) {
 
   // fix field_na_zoradenie if necessary
   //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
-  $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']); 
+  $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
   if (!$rebuild_sort) {
     // are there funny characters in sort string (field_na_zoradenie)?
     $rebuild_sort = preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value']);
     //is there comma in title by not '_' in sort string (field_na_zoradenie)? - fixes missing '_' between surname and name
-    $rebuild_sort = $rebuild_sort || 
-      (strpos($node->title, ",") and // comma in title
-      !strpos($node->field_na_zoradenie['und'][0]['value'], "_") and // no "_" in sort string
-      !preg_match("/^[0-9]/",$node->title) and // not starting with number (in chemistry, like 1,3-butadien)
-      $node->type == 'importovane_heslo' // only 'importovane_heslo' 'heslo' is sorted in a different way
-      ); 
+    $rebuild_sort = $rebuild_sort ||
+        (strpos($node->title, ",") and // comma in title
+        ! strpos($node->field_na_zoradenie['und'][0]['value'], "_") and // no "_" in sort string
+        ! preg_match("/^[0-9]/", $node->title) and // not starting with number (in chemistry, like 1,3-butadien)
+        $node->type == 'importovane_heslo' // only 'importovane_heslo' 'heslo' is sorted in a different way
+        );
   }
   //if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
   if ($rebuild_sort) {
-    $transliterated = preg_replace( "/\(^ad-|al-|af |d’ |d’|de |da |z |ze |del |\)./", '', $node->title);
+    $transliterated = preg_replace("/\(^ad-|al-|af |d’ |d’|de |da |z |ze |del |\)./", '', $node->title);
     $transliterated = _beliana_remove_accents($transliterated);
-    $transliterated = str_replace(",","_",$transliterated);
+    $transliterated = str_replace(",", "_", $transliterated);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
     $transliterated = strtolower($transliterated);
-    $transliterated = str_replace("Š","š",$transliterated); // not changed by strtolower
-    $transliterated = str_replace("Č","č",$transliterated);
-    $transliterated = str_replace("Ž","ž",$transliterated);
+    $transliterated = str_replace("Š", "š", $transliterated); // not changed by strtolower
+    $transliterated = str_replace("Č", "č", $transliterated);
+    $transliterated = str_replace("Ž", "ž", $transliterated);
     //dpm($transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
@@ -921,11 +951,12 @@ function _check_links(&$node) {
           if ($parts[0] !== 'node') {
             drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkazované heslo neexistuje)', 'error');
             $retvalue = false;
-          } else {
+          }
+          else {
             $generic_node = node_load($parts[1]);
             $auxnode = workbench_moderation_node_current_load($generic_node);
             // linked article must be a normal one, not a pure reference article (i.e. must contain the "—" character)
-            if (strpos($auxnode->field_text_hesla[LANGUAGE_NONE][0]['value'], "—") === false and 
+            if (strpos($auxnode->field_text_hesla[LANGUAGE_NONE][0]['value'], "—") === false and
                 strpos($auxnode->field_text_hesla[LANGUAGE_NONE][0]['value'], "➔") !== false) {
               drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkaz na odkazové alebo nesprávne formátované heslo (chýba "—" )', 'error');
               $retvalue = false;
