@@ -492,10 +492,7 @@ function check_path_attributes(&$entity, $context = array()) {
   if ($entity->type == 'heslo' || $entity->type == 'importovane_heslo') {
     $alias = drupal_get_path_alias('node/' . $entity->nid);
 
-    if (strpos($alias, '_') === 0) {
-      
-    }
-    else {
+    if (strpos($alias, '_') === false) {
       $entity->field_atributy = array(LANGUAGE_NONE => array(array('value' => 'odkazOK')));
       node_save($entity);
     }
