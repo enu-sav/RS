@@ -6594,7 +6594,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Zaškrtnite odkazové heslá, ktoré môžu byť zverejnené, a kliknite na XXX.
+  $handler->display->display_options['header']['area']['content'] = 'Zaškrtnite odkazové heslá, ktoré môžu byť zverejnené, a kliknite na <em>Odoslať odkazové heslo na zverejnenie</em>.
 Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do poľa Text hesla vložte "/heslo/a" (bez úvodzoviek)
 <b>Upozornenie</b>: Treba skontrolovať, či odkazované heslo nie je náhodou odkazové
 <b>Upozornenie</b>: Ak má byť heslo zlúčené, tak sa na zverejnenie neodošle';
@@ -6619,14 +6619,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::check_path_attributes' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -6675,6 +6667,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'trim_length' => '80',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
@@ -6766,6 +6762,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
   $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_text_hesla_value']['value'] = '➔';
+  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value_1']['id'] = 'field_text_hesla_value_1';
   $handler->display->display_options['filters']['field_text_hesla_value_1']['table'] = 'field_data_field_text_hesla';
@@ -6773,12 +6770,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_text_hesla_value_1']['relationship'] = 'nid';
   $handler->display->display_options['filters']['field_text_hesla_value_1']['operator'] = 'not';
   $handler->display->display_options['filters']['field_text_hesla_value_1']['value'] = '—';
+  $handler->display->display_options['filters']['field_text_hesla_value_1']['group'] = 1;
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value_2']['id'] = 'field_text_hesla_value_2';
   $handler->display->display_options['filters']['field_text_hesla_value_2']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['filters']['field_text_hesla_value_2']['field'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value_2']['relationship'] = 'nid';
   $handler->display->display_options['filters']['field_text_hesla_value_2']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_text_hesla_value_2']['group'] = 1;
   $handler->display->display_options['filters']['field_text_hesla_value_2']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_text_hesla_value_2']['expose']['operator_id'] = 'field_text_hesla_value_2_op';
   $handler->display->display_options['filters']['field_text_hesla_value_2']['expose']['label'] = 'Text hesla';
@@ -6809,6 +6808,21 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     23 => 0,
     26 => 0,
   );
+  /* Filter criterion: Obsah: Atribúty (field_atributy) */
+  $handler->display->display_options['filters']['field_atributy_value_1']['id'] = 'field_atributy_value_1';
+  $handler->display->display_options['filters']['field_atributy_value_1']['table'] = 'field_data_field_atributy';
+  $handler->display->display_options['filters']['field_atributy_value_1']['field'] = 'field_atributy_value';
+  $handler->display->display_options['filters']['field_atributy_value_1']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_atributy_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_atributy_value_1']['group'] = 2;
+  /* Filter criterion: Obsah: Atribúty (field_atributy) */
+  $handler->display->display_options['filters']['field_atributy_value']['id'] = 'field_atributy_value';
+  $handler->display->display_options['filters']['field_atributy_value']['table'] = 'field_data_field_atributy';
+  $handler->display->display_options['filters']['field_atributy_value']['field'] = 'field_atributy_value';
+  $handler->display->display_options['filters']['field_atributy_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_atributy_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_atributy_value']['value'] = 'odkazOK';
+  $handler->display->display_options['filters']['field_atributy_value']['group'] = 2;
   $handler->display->display_options['path'] = 'admin/beliana/zverejnit-odkazove';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Zverejniť odkazové';
@@ -6959,7 +6973,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Zlúčené-odkazy'),
     t('Zverejniť odkazové'),
     t('Zverejniť odkazové heslo'),
-    t('Zaškrtnite odkazové heslá, ktoré môžu byť zverejnené, a kliknite na XXX.
+    t('Zaškrtnite odkazové heslá, ktoré môžu byť zverejnené, a kliknite na <em>Odoslať odkazové heslo na zverejnenie</em>.
 Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do poľa Text hesla vložte "/heslo/a" (bez úvodzoviek)
 <b>Upozornenie</b>: Treba skontrolovať, či odkazované heslo nie je náhodou odkazové
 <b>Upozornenie</b>: Ak má byť heslo zlúčené, tak sa na zverejnenie neodošle'),
