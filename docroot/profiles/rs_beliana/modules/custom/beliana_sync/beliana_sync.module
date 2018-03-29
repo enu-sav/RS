@@ -576,17 +576,19 @@ function _extract_license($node) {
 *  Different for the 'Importovane heslo' and 'Heslo' types  
 */
 function _extract_published_info($node) {
+  $label = 'Zverejnené';
+  
   // Set the publishing date according to the article name
   // the key in the $bands array is a first string in the next band 
   $bands = array (
-    "bell" => "Vydané v auguste 1999",
-    "czzzz" => "Vydané v júli 2001",
-    "eh" => "Vydané v máji 2003",
-    "galb" => "Vydané v júli 2005",
-    "his" => "Vydané vo februári 2008",
-    "in" => "Vydané v apríli 2010",
-    "kam" => "Vydané v novembri 2013",
-    "koks" => "Vydané v marci 2017",
+    "bell" => "$label v auguste 1999",
+    "czzzz" => "$label v júli 2001",
+    "eh" => "$label v máji 2003",
+    "galb" => "$label v júli 2005",
+    "his" => "$label vo februári 2008",
+    "in" => "$label v apríli 2010",
+    "kam" => "$label v novembri 2013",
+    "koks" => "$label v marci 2017",
   );
 
   setlocale(LC_COLLATE, 'sk_SK.utf8');
@@ -615,9 +617,9 @@ function _extract_published_info($node) {
     // if already published, the 'field_datum_prveho_zverejnenia' is set 
     // the field is set elsewhere, after a successfull transfer to web
     if (isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
-      $publishedinfo = " Vydané " .  _form_date2($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value']);
+      $publishedinfo = " $label " .  _form_date2($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value']);
     } else {
-      $publishedinfo = " Vydané " .  _form_date2(date("d.m.Y"));
+      $publishedinfo = " $label " .  _form_date2(date("d.m.Y"));
     }
   }
   return $publishedinfo . ".";
