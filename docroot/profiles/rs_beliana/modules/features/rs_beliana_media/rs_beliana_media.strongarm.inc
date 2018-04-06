@@ -129,7 +129,7 @@ function rs_beliana_media_strongarm() {
           'browse' => 1,
           'upload' => 1,
           'thumb' => 1,
-          'delete' => 0,
+          'delete' => 1,
           'resize' => 0,
         ),
       ),
