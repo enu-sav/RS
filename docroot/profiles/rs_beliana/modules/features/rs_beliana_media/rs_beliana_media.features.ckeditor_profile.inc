@@ -208,7 +208,7 @@ config.specialChars = [
               'lite-acceptall' => array(
                 'label' => 'Accept all changes',
                 'icon' => 'icons/lite-acceptall.png',
-          ),
+              ),
               'lite-rejectall' => array(
                 'label' => 'Reject all changes',
                 'icon' => 'icons/lite-rejectall.png',
