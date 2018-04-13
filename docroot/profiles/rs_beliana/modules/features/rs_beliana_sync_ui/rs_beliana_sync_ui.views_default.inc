@@ -636,6 +636,41 @@ function rs_beliana_sync_ui_views_default_views() {
     23 => 0,
     26 => 0,
   );
+  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Ilustrácie';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'zverejnit-na-web';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejniť na web';
