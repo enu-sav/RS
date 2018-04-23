@@ -280,6 +280,7 @@
         // Display triggering element.
         $triggering_element.fadeIn(settings.display.animationSpeed);
         $triggering_element.css('display','inline-block');
+        $triggering_element.trigger('change');
       }
     });
   }

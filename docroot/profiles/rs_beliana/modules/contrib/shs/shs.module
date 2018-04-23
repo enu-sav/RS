@@ -420,7 +420,7 @@ function shs_field_widget_form(&$form, &$form_state, $field, $instance, $langcod
     $allowed_values = reset($field['settings']['allowed_values']);
     $vocabulary_names = empty($allowed_values['vocabulary']) ? FALSE : $allowed_values['vocabulary'];
   }
-  if (empty($vocabulary_names) && 'views' !== $field['settings']['handler']) {
+  if (empty($vocabulary_names) && (empty($field['settings']['handler']) || ('views' !== $field['settings']['handler']))) {
     // No vocabulary selected yet.
     return array();
   }
