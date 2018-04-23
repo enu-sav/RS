@@ -11515,6 +11515,9 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
     10 => 0,
@@ -11526,11 +11529,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['label'] = 'Súbor (field_taxsubor)';
   $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['identifier'] = 'field_taxsubor_tid';
@@ -11745,11 +11749,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['description'] = ' ';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
     10 => 0,
@@ -11761,11 +11767,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['label'] = 'Súbor (field_taxsubor)';
   $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['identifier'] = 'field_taxsubor_tid';
@@ -12476,11 +12483,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['description'] = ' ';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
     10 => 0,
@@ -12492,11 +12501,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    17 => 0,
     20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['label'] = 'Súbor (field_taxsubor)';
   $handler->display->display_options['filters']['field_taxsubor_tid']['group_info']['identifier'] = 'field_taxsubor_tid';
