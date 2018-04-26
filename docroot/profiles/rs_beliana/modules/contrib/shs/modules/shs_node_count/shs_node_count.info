@@ -3,9 +3,9 @@ core = 7.x
 description = Extends 'Simple hierarchical select' with "node count" functionality.
 dependencies[] = shs
 
-; Information added by Drupal.org packaging script on 2016-07-26
-version = "7.x-1.6+73-dev"
+; Information added by Drupal.org packaging script on 2018-03-06
+version = "7.x-1.7"
 core = "7.x"
 project = "shs"
-datestamp = "1469518440"
+datestamp = "1520313188"
 
