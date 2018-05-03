@@ -31,7 +31,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'draft',
       'label' => 'Navrhnuté',
       'description' => 'Heslo navrhnuté na zaradenie do B., musí byť odsúhlasené správcom GH',
-      'weight' => -5,
+      'weight' => -4,
     ),
     'ilustracia_na_zverejnenie' => array(
       'name' => 'ilustracia_na_zverejnenie',
@@ -97,19 +97,19 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'na_zverejnenie',
       'label' => 'U výst. redaktora 1',
       'description' => 'Heslo odoslané na posúdenie výstupnému redaktorovi 1',
-      'weight' => 0,
+      'weight' => 1,
     ),
     'navrhnute_na_vyradenie' => array(
       'name' => 'navrhnute_na_vyradenie',
       'label' => 'Navrhnuté na zmenu',
       'description' => 'Heslo navrhnuté na vyradenie alebo zmenu názvu al LS',
-      'weight' => -4,
+      'weight' => -3,
     ),
     'needs_review' => array(
       'name' => 'needs_review',
       'label' => 'U redaktora',
       'description' => 'Heslo odoslané na posúdenie redaktorovi, pracuje s ním redaktor',
-      'weight' => -1,
+      'weight' => 0,
     ),
     'nova_ilustracia' => array(
       'name' => 'nova_ilustracia',
@@ -121,7 +121,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'publikovane_na_webe',
       'label' => 'Zverejnené na webe',
       'description' => 'Finálny stav hesla po akcii "Zverejniť na webe"',
-      'weight' => 5,
+      'weight' => -6,
     ),
     'published' => array(
       'name' => 'published',
@@ -133,7 +133,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'u_autora',
       'label' => 'U autora',
       'description' => 'Na vypracovanie autorom,  pred odoslaním redaktorovi',
-      'weight' => -2,
+      'weight' => -1,
     ),
     'u_jaz_redaktora_2' => array(
       'name' => 'u_jaz_redaktora_2',
@@ -151,25 +151,25 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'u_v_st_redaktora_5',
       'label' => 'U výst. redaktora 5',
       'description' => 'Na spracovanie u výst. redaktora 5',
-      'weight' => 4,
+      'weight' => 5,
     ),
     'u_vyst_redaktora_2' => array(
       'name' => 'u_vyst_redaktora_2',
       'label' => 'U výst. redaktora 2',
       'description' => 'Na spracovanie u výst. redaktora 2',
-      'weight' => 1,
+      'weight' => 2,
     ),
     'u_vyst_redaktora_3' => array(
       'name' => 'u_vyst_redaktora_3',
       'label' => 'U výst. redaktora 3',
       'description' => 'Na spracovanie u výst. redaktora 3',
-      'weight' => 2,
+      'weight' => 3,
     ),
     'u_vyst_redaktora_4' => array(
       'name' => 'u_vyst_redaktora_4',
       'label' => 'U výst. redaktora 4',
       'description' => 'Na spracovanie u výst. redaktora 4',
-      'weight' => 3,
+      'weight' => 4,
     ),
     'ukoncenezluene' => array(
       'name' => 'ukoncenezluene',
@@ -187,7 +187,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'zaradene',
       'label' => 'Zaradené',
       'description' => 'Zaradené do B., môže byť priradené autorovi na vypracovanie',
-      'weight' => -3,
+      'weight' => -2,
     ),
     'zlucene' => array(
       'name' => 'zlucene',
