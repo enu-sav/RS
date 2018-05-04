@@ -1,0 +1,71 @@
+diff --git a/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.module b/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.module
+index c28261b..cb148a9 100644
+--- a/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.module
++++ b/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.module
+@@ -936,7 +936,7 @@ function workbench_moderation_form_node_form_alter(&$form, $form_state) {
+     $moderation_state = $form['#node']->workbench_moderation['current']->state;
+   }
+   else {
+-    $moderation_state = workbench_moderation_state_none();
++    $moderation_state = variable_get('workbench_moderation_default_state_' . $form['type']['#value'], workbench_moderation_state_none());
+   }
+ 
+   // Store the current moderation state
+@@ -971,9 +971,8 @@ function workbench_moderation_form_node_form_alter(&$form, $form_state) {
+       '#access' => $states ? TRUE: FALSE,
+     );
+ 
+-    // If the user has access to the pre-set default state, make it the default
+-    // here.  Otherwise, don't set a default in this case.
+-    $default_state = variable_get('workbench_moderation_default_state_' . $form['type']['#value']);
++    // Make current moderation state the default state, so that the state is not changed unintentionally
++    $default_state = $moderation_state;
+     if ($default_state && array_key_exists($default_state, $states)) {
+       $form['revision_information']['workbench_moderation_state_new']['#default_value'] = $default_state;
+     }
+@@ -2023,13 +2022,6 @@ function workbench_moderation_messages($context, $node = NULL) {
+         'message' => $link,
+       );
+     }
+-    else {
+-      // New content.
+-      $info_block_messages[] = array(
+-        'label' => t('New content'),
+-        'message' => t('Your draft will be placed in moderation.'),
+-      );
+-    }
+   }
+ 
+   // Send the info block array to a static variable.
+diff --git a/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.node.inc b/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.node.inc
+index 9afba98..2e44a27 100644
+--- a/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.node.inc
++++ b/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.node.inc
+@@ -256,14 +256,6 @@ function workbench_moderation_node_history_view($node) {
+     $rows[] = $row;
+   }
+ 
+-  // If this page is being re-loaded as a result of the revision form being
+-  // submitted, it is not until this point that we can accurately check
+-  // if the moderation state is published or not.
+-  // Alert if there is no live node
+-  if (!isset($node->workbench_moderation['published'])) {
+-    drupal_set_message(t('Currently there is no published revision of this node.'), 'warning');
+-  }
+-
+   // Set the table header.
+   $header = array(t('Revision'), t('Title'), t('Date'), t('Revision actions'), t('Moderation actions'));
+ 
+diff --git a/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.views.inc b/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.views.inc
+index f6814bb..590b7ab 100644
+--- a/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.views.inc
++++ b/docroot/profiles/rs_beliana/modules/contrib/workbench_moderation/workbench_moderation.views.inc
+@@ -80,7 +80,7 @@ function workbench_moderation_views_data() {
+       'handler' => 'workbench_moderation_handler_filter_state',
+     ),
+     'field' => array(
+-      'handler' => 'views_handler_field',
++      'handler' => 'workbench_moderation_handler_field_state',
+       'click sortable' => TRUE,
+     ),
+     'sort' => array(

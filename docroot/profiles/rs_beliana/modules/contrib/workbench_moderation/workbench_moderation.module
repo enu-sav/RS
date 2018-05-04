@@ -936,7 +936,7 @@ function workbench_moderation_form_node_form_alter(&$form, $form_state) {
     $moderation_state = $form['#node']->workbench_moderation['current']->state;
   }
   else {
-    $moderation_state = workbench_moderation_state_none();
+    $moderation_state = variable_get('workbench_moderation_default_state_' . $form['type']['#value'], workbench_moderation_state_none());
   }
 
   // Store the current moderation state
@@ -971,9 +971,8 @@ function workbench_moderation_form_node_form_alter(&$form, $form_state) {
       '#access' => $states ? TRUE: FALSE,
     );
 
-    // If the user has access to the pre-set default state, make it the default
-    // here.  Otherwise, don't set a default in this case.
-    $default_state = variable_get('workbench_moderation_default_state_' . $form['type']['#value']);
+    // Make current moderation state the default state, so that the state is not changed unintentionally
+    $default_state = $moderation_state;
     if ($default_state && array_key_exists($default_state, $states)) {
       $form['revision_information']['workbench_moderation_state_new']['#default_value'] = $default_state;
     }
@@ -2021,13 +2020,6 @@ function workbench_moderation_messages($context, $node = NULL) {
       $info_block_messages[] = array(
         'label' => t('Actions'),
         'message' => $link,
-      );
-    }
-    else {
-      // New content.
-      $info_block_messages[] = array(
-        'label' => t('New content'),
-        'message' => t('Your draft will be placed in moderation.'),
       );
     }
   }
