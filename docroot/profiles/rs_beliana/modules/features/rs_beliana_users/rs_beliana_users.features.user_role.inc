@@ -130,5 +130,11 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 2,
   );
 
+  // Exported role: zRedaktor.
+  $roles['zRedaktor'] = array(
+    'name' => 'zRedaktor',
+    'weight' => 22,
+  );
+
   return $roles;
 }

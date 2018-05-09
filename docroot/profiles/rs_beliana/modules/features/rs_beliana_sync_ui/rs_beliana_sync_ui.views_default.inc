@@ -601,7 +601,42 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
     'na_zalomenie' => 'na_zalomenie',
+    'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
   );
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['required'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    28 => 0,
+  );
+  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Na zoradenie (field_na_zoradenie) */
   $handler->display->display_options['filters']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['filters']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
@@ -647,6 +682,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
   $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -670,6 +706,7 @@ function rs_beliana_sync_ui_views_default_views() {
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['path'] = 'zverejnit-na-web';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -782,11 +819,6 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['updated']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['updated']['date_format'] = 'short';
   $handler->display->display_options['fields']['updated']['second_date_format'] = 'privatemsg_current_day';
-  /* Pole: Workbench Moderation: Stav */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -1072,10 +1104,10 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Text hesla'),
     t('Ilustrácie'),
     t('Komentár'),
+    t('Stav'),
     t('Na zoradenie'),
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total'),
-    t('Stav'),
     t('Súbor'),
   );
   $export['sync_to_web'] = $view;
