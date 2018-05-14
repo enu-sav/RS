@@ -96,7 +96,9 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'create field_text_z_gh'.
   $permissions['create field_text_z_gh'] = array(
     'name' => 'create field_text_z_gh',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -288,7 +290,9 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'edit field_text_z_gh'.
   $permissions['edit field_text_z_gh'] = array(
     'name' => 'edit field_text_z_gh',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -402,7 +406,9 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'edit own field_text_z_gh'.
   $permissions['edit own field_text_z_gh'] = array(
     'name' => 'edit own field_text_z_gh',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -697,7 +703,9 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view own field_text_z_gh'.
   $permissions['view own field_text_z_gh'] = array(
     'name' => 'view own field_text_z_gh',
-    'roles' => array(),
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 

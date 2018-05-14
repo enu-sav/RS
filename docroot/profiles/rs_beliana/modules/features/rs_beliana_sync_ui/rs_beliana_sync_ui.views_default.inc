@@ -367,7 +367,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['term_node_tid_depth']['group'] = 1;
   $handler->display->display_options['filters']['term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['term_node_tid_depth']['expose']['operator_id'] = 'term_node_tid_depth_op';
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['label'] = 'Súbor';
   $handler->display->display_options['filters']['term_node_tid_depth']['expose']['operator'] = 'term_node_tid_depth_op';
   $handler->display->display_options['filters']['term_node_tid_depth']['expose']['identifier'] = 'term_node_tid_depth';
   $handler->display->display_options['filters']['term_node_tid_depth']['expose']['remember'] = TRUE;
@@ -375,6 +375,9 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
     10 => 0,
@@ -386,14 +389,13 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['term_node_tid_depth']['type'] = 'select';
   $handler->display->display_options['filters']['term_node_tid_depth']['vocabulary'] = 'subory';
@@ -1103,12 +1105,12 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Zverejniť na web'),
     t('Text hesla'),
     t('Ilustrácie'),
+    t('Súbor'),
     t('Komentár'),
     t('Stav'),
     t('Na zoradenie'),
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total'),
-    t('Súbor'),
   );
   $export['sync_to_web'] = $view;
 

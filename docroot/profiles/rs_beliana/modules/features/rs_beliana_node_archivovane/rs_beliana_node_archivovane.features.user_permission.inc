@@ -48,7 +48,9 @@ function rs_beliana_node_archivovane_user_default_permissions() {
   // Exported permission: 'view any unpublished archivovane_knizne content'.
   $permissions['view any unpublished archivovane_knizne content'] = array(
     'name' => 'view any unpublished archivovane_knizne content',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'view_unpublished',
   );
 
