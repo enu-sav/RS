@@ -162,10 +162,9 @@ function modify_body_text($text)
   $text = preg_replace('/(  +)/', ' ', $text);
   // remove text highlighted (from <span> tag)
   $text = preg_replace(
-	'/ style="background-color:#[a-fA-F0-9]{1,6}"/',
-	"",
-	$text 
-        );
+      // '/ style="background-color:#[a-fA-F0-9]{1,6}"/',
+      '/ style="background-color:[^"]*"/', "", $text
+  );
   // &nbsp within numbers
   $text = preg_replace( '/([0-9]) ([0-9])/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/([0-9]) · ([0-9])/', "$1&nbsp;·&nbsp;$2", $text);
