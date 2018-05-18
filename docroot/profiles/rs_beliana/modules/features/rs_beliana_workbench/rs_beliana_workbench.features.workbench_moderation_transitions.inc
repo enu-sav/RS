@@ -154,6 +154,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'ilustracia_u_redaktora',
       'name' => 'il_nova_u_redaktora',
     ),
+    'publikovane_na_webe:zverejnene_oprava' => array(
+      'from_name' => 'publikovane_na_webe',
+      'to_name' => 'zverejnene_oprava',
+      'name' => 'zverejnene_na_webe-zverejnene_oprava',
+    ),
     'u_autora:needs_review' => array(
       'from_name' => 'u_autora',
       'to_name' => 'needs_review',
@@ -278,6 +283,26 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'zlucene_odkazy',
       'to_name' => 'na_jazykovu_korekturu',
       'name' => 'zlucene_odkazy-u_jaz_redaktora1',
+    ),
+    'zverejnene_oprava:na_opakovane_zverejnenie' => array(
+      'from_name' => 'zverejnene_oprava',
+      'to_name' => 'na_opakovane_zverejnenie',
+      'name' => 'zverejnene_oprava-na_opakovane_zverejnenie',
+    ),
+    'zverejnene_oprava:zverejnene_vratene' => array(
+      'from_name' => 'zverejnene_oprava',
+      'to_name' => 'zverejnene_vratene',
+      'name' => 'zverejnene_oprava-zverejnene_vratene',
+    ),
+    'zverejnene_vratene:na_opakovane_zverejnenie' => array(
+      'from_name' => 'zverejnene_vratene',
+      'to_name' => 'na_opakovane_zverejnenie',
+      'name' => 'zverejnene_vratene-na_opakovane_zverejnenie',
+    ),
+    'zverejnene_vratene:zverejnene_oprava' => array(
+      'from_name' => 'zverejnene_vratene',
+      'to_name' => 'zverejnene_oprava',
+      'name' => 'zverejnene_vratene-zverejnene_oprava',
     ),
   );
   return $items;

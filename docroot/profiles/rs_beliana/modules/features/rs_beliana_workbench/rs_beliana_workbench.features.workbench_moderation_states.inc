@@ -75,6 +75,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Importovane heslo u VR na kontrolu pred zverejnenim',
       'weight' => -8,
     ),
+    'importovane_vyradene' => array(
+      'name' => 'importovane_vyradene',
+      'label' => 'Importované - vyradené',
+      'description' => 'Importované heslá, ktoré nebudú zverejneé na webe',
+      'weight' => -2,
+    ),
     'len_vyplatit' => array(
       'name' => 'len_vyplatit',
       'label' => 'Len vyplatiť',
@@ -86,6 +92,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'U jaz. redaktora 1',
       'description' => 'Heslo odoslané na  1. jazykovú korektúru, pracuje s ním jazykový redaktor 1',
       'weight' => 9,
+    ),
+    'na_opakovane_zverejnenie' => array(
+      'name' => 'na_opakovane_zverejnenie',
+      'label' => 'Na opakované zverejnenie',
+      'description' => 'Na opakované odoslanie zverejneného hesla po úprave na web',
+      'weight' => -3,
     ),
     'na_zalomenie' => array(
       'name' => 'na_zalomenie',
@@ -200,6 +212,18 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Zlúčené-odkazy',
       'description' => 'Kontrola odkazov na vytvorené zlúčené heslo v iných heslách',
       'weight' => 10,
+    ),
+    'zverejnene_oprava' => array(
+      'name' => 'zverejnene_oprava',
+      'label' => 'Zverejnené – oprava',
+      'description' => 'Oprava zverejneneho hesla rolou zRedaktor',
+      'weight' => -5,
+    ),
+    'zverejnene_vratene' => array(
+      'name' => 'zverejnene_vratene',
+      'label' => 'Zverejnené – vrátené',
+      'description' => 'Zverejnené heslo vrátené redaktorovi na úpravu',
+      'weight' => -4,
     ),
   );
   return $items;

@@ -415,6 +415,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
@@ -435,6 +436,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -443,6 +445,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in importovane_u_vr state'] = array(
     'name' => 'edit revisions in importovane_u_vr state',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
     ),
     'module' => 'workbench_state_access',
@@ -467,7 +470,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'edit revisions in na_zalomenie state'.
   $permissions['edit revisions in na_zalomenie state'] = array(
     'name' => 'edit revisions in na_zalomenie state',
-    'roles' => array(),
+    'roles' => array(
+      'Komentátor' => 'Komentátor',
+    ),
     'module' => 'workbench_state_access',
   );
 
@@ -510,7 +515,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'edit revisions in publikovane_na_webe state'.
   $permissions['edit revisions in publikovane_na_webe state'] = array(
     'name' => 'edit revisions in publikovane_na_webe state',
-    'roles' => array(),
+    'roles' => array(
+      'Komentátor' => 'Komentátor',
+    ),
     'module' => 'workbench_state_access',
   );
 

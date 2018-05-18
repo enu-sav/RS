@@ -34,6 +34,12 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 9,
   );
 
+  // Exported role: Komentátor.
+  $roles['Komentátor'] = array(
+    'name' => 'Komentátor',
+    'weight' => 23,
+  );
+
   // Exported role: Konzultant.
   $roles['Konzultant'] = array(
     'name' => 'Konzultant',
