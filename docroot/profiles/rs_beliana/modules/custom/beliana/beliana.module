@@ -1966,7 +1966,9 @@ function get_header_dates($text) {
   # ignore pure reference articles  (they do not contain em dash "—")
   $exploded = explode("—", $text);
   if (count($exploded) > 1) {
-    $header = $exploded[0];
+    // $header = $exploded[0];
+    // remove tags first
+    $header = preg_replace('/<[^>]*>/', '', $exploded[0]);
     # find all dates in header
     $pattern = "/([0-9]+. [0-9a]+. [0-9]+)/";
     preg_match_all($pattern, $header, $matches);
