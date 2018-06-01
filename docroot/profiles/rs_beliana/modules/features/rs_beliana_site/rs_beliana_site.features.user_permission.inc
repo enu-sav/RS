@@ -713,7 +713,6 @@ function rs_beliana_site_user_default_permissions() {
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
-      'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'filter',

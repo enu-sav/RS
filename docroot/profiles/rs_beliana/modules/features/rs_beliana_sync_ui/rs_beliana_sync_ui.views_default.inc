@@ -275,6 +275,15 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Workbench Moderation: Uzol */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  /* Vzťah: Odkaz na entitu: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['table'] = 'field_revision_field_ilustracia';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Hromadné operácie: Obsah */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -319,34 +328,52 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina']['relationship'] = 'nid';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
-  /* Pole: Content revision: Dátum aktualizácie */
-  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['timestamp']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['timestamp']['date_format'] = 'short';
-  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'privatemsg_current_day';
   /* Pole: Beliana sync: The Unix timestamp of last sync. */
   $handler->display->display_options['fields']['updated']['id'] = 'updated';
   $handler->display->display_options['fields']['updated']['table'] = 'beliana_sync';
   $handler->display->display_options['fields']['updated']['field'] = 'updated';
-  $handler->display->display_options['fields']['updated']['label'] = 'Posledná synchronizácia';
+  $handler->display->display_options['fields']['updated']['label'] = 'Synchronizácia';
+  $handler->display->display_options['fields']['updated']['exclude'] = TRUE;
   $handler->display->display_options['fields']['updated']['empty'] = 'Ešte nebola';
   $handler->display->display_options['fields']['updated']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['updated']['date_format'] = 'short';
   $handler->display->display_options['fields']['updated']['second_date_format'] = 'privatemsg_current_day';
+  /* Pole: Content revision: Dátum aktualizácie */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['timestamp']['alter']['text'] = '[timestamp] / [updated]';
+  $handler->display->display_options['fields']['timestamp']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'short';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'privatemsg_current_day';
+  /* Pole: Obsah: Komentár/inštrukcie */
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['relationship'] = 'nid';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla_1']['id'] = 'field_text_hesla_1';
   $handler->display->display_options['fields']['field_text_hesla_1']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla_1']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla_1']['relationship'] = 'nid';
+  /* Pole: Obsah: Použiť */
+  $handler->display->display_options['fields']['field_pouzit']['id'] = 'field_pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['table'] = 'field_data_field_pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['field'] = 'field_pouzit';
+  $handler->display->display_options['fields']['field_pouzit']['relationship'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['fields']['field_pouzit']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_pouzit']['delta_offset'] = '0';
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_ilustracia']['alter']['text'] = '[field_ilustracia] / [field_pouzit] ';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 0,
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
@@ -1103,8 +1130,13 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Typ'),
     t('Lexikálna skupina'),
     t('Zverejniť na web'),
+    t('Obsah entity referenced from field_ilustracia'),
+    t('Synchronizácia'),
+    t('[timestamp] / [updated]'),
+    t('Komentár/inštrukcie'),
     t('Text hesla'),
     t('Ilustrácie'),
+    t('[field_ilustracia] / [field_pouzit] '),
     t('Súbor'),
     t('Komentár'),
     t('Stav'),

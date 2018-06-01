@@ -161,6 +161,7 @@ features[workbench_moderation_states][] = 1_korektura
 features[workbench_moderation_states][] = 2_korekt_ra
 features[workbench_moderation_states][] = _ilustr_cia_u_autora
 features[workbench_moderation_states][] = draft
+features[workbench_moderation_states][] = ilustracia_na_webe
 features[workbench_moderation_states][] = ilustracia_na_zverejnenie
 features[workbench_moderation_states][] = ilustracia_u_grafika
 features[workbench_moderation_states][] = ilustracia_u_redaktora

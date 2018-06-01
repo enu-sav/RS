@@ -515,7 +515,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_meno_autora_snimky_diela',
-    'label' => 'Meno autora snímky diela',
+    'label' => 'Meno autora snímky',
     'required' => 0,
     'settings' => array(
       'better_formats' => array(
@@ -1578,7 +1578,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
   t('Meno autora diela');
-  t('Meno autora snímky diela');
+  t('Meno autora snímky');
   t('Modifikované');
   t('Na zoradenie');
   t('Názov');

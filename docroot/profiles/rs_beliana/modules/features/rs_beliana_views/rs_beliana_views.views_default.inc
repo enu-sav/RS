@@ -6292,6 +6292,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
     'nova_ilustracia' => 'nova_ilustracia',
+    'ilustracia_na_webe' => 'ilustracia_na_webe',
     '_ilustr_cia_u_autora' => '_ilustr_cia_u_autora',
     'ilustracia_u_grafika' => 'ilustracia_u_grafika',
     'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
@@ -6391,6 +6392,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state_1']['field'] = 'state';
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'nova_ilustracia' => 'nova_ilustracia',
+    'ilustracia_na_webe' => 'ilustracia_na_webe',
     '_ilustr_cia_u_autora' => '_ilustr_cia_u_autora',
     'ilustracia_u_grafika' => 'ilustracia_u_grafika',
     'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
@@ -6406,9 +6408,13 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -6417,14 +6423,13 @@ function rs_beliana_views_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    25 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
+    26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/beliana/Ilustracie-vr';
@@ -8876,7 +8881,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_meno_autora_diela']['table'] = 'field_data_field_meno_autora_diela';
   $handler->display->display_options['fields']['field_meno_autora_diela']['field'] = 'field_meno_autora_diela';
   $handler->display->display_options['fields']['field_meno_autora_diela']['label'] = 'autor_diela';
-  /* Pole: Obsah: Meno autora snímky diela */
+  /* Pole: Obsah: Meno autora snímky */
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['id'] = 'field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['table'] = 'field_data_field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['field'] = 'field_meno_autora_snimky_diela';
@@ -12631,8 +12636,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
-    'publikovane_na_webe' => 'publikovane_na_webe',
     'nova_ilustracia' => 'nova_ilustracia',
+    'ilustracia_na_webe' => 'ilustracia_na_webe',
     '_ilustr_cia_u_autora' => '_ilustr_cia_u_autora',
     'ilustracia_u_grafika' => 'ilustracia_u_grafika',
     'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
@@ -12649,9 +12654,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -12660,14 +12669,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Názov */
@@ -16116,7 +16124,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_institucia']['id'] = 'field_institucia';
   $handler->display->display_options['fields']['field_institucia']['table'] = 'field_data_field_institucia';
   $handler->display->display_options['fields']['field_institucia']['field'] = 'field_institucia';
-  /* Pole: Obsah: Meno autora snímky diela */
+  /* Pole: Obsah: Meno autora snímky */
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['id'] = 'field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['table'] = 'field_data_field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['field'] = 'field_meno_autora_snimky_diela';
@@ -16256,6 +16264,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['state']['value'] = array(
     'publikovane_na_webe' => 'publikovane_na_webe',
     'nova_ilustracia' => 'nova_ilustracia',
+    'ilustracia_na_webe' => 'ilustracia_na_webe',
     '_ilustr_cia_u_autora' => '_ilustr_cia_u_autora',
     'ilustracia_u_grafika' => 'ilustracia_u_grafika',
     'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
@@ -16274,10 +16283,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     1 => 0,
     9 => 0,
     27 => 0,
+    29 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -16603,20 +16613,23 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     26 => 0,
   );
   $handler->display->display_options['filters']['field_pouzit_value']['reduce_duplicates'] = TRUE;
-  /* Filter criterion: Obsah: Meno autora snímky diela (field_meno_autora_snimky_diela) */
+  /* Filter criterion: Obsah: Meno autora snímky (field_meno_autora_snimky_diela) */
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['id'] = 'field_meno_autora_snimky_diela_value';
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['table'] = 'field_data_field_meno_autora_snimky_diela';
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['field'] = 'field_meno_autora_snimky_diela_value';
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['group'] = 1;
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['operator_id'] = 'field_meno_autora_snimky_diela_value_op';
-  $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['label'] = 'Meno autora snímky diela';
+  $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['label'] = 'Meno autora snímky';
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['operator'] = 'field_meno_autora_snimky_diela_value_op';
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['identifier'] = 'field_meno_autora_snimky_diela_value';
   $handler->display->display_options['filters']['field_meno_autora_snimky_diela_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    27 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
     10 => 0,
@@ -16628,14 +16641,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
+    29 => 0,
   );
   /* Filter criterion: Obsah: Obrázok (návrh/náhľad) (field_obrazok_navrh_:fid) */
   $handler->display->display_options['filters']['field_obrazok_navrh__fid']['id'] = 'field_obrazok_navrh__fid';
@@ -18248,7 +18261,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('[field_nazov_diela] / [field_url_diela_l]'),
     t('- / [field_url_diela_l]'),
     t('Inštitúcia'),
-    t('Meno autora snímky diela'),
+    t('Meno autora snímky'),
     t('URL autora, autora snímky, inštitúcie'),
     t('Stav ilustrácie'),
     t('Stav hesla'),

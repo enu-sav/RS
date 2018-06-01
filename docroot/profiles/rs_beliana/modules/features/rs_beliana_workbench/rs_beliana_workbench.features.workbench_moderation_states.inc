@@ -23,7 +23,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     ),
     '_ilustr_cia_u_autora' => array(
       'name' => '_ilustr_cia_u_autora',
-      'label' => ' Ilustrácia u autora',
+      'label' => 'Ilustrácia u autora',
       'description' => ' Ilustrácia u autora',
       'weight' => 10,
     ),
@@ -32,6 +32,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Navrhnuté',
       'description' => 'Heslo navrhnuté na zaradenie do B., musí byť odsúhlasené správcom GH',
       'weight' => -1,
+    ),
+    'ilustracia_na_webe' => array(
+      'name' => 'ilustracia_na_webe',
+      'label' => 'Ilustrácia na webe',
+      'description' => 'Ilustrácie je publikovaná na webe',
+      'weight' => 10,
     ),
     'ilustracia_na_zverejnenie' => array(
       'name' => 'ilustracia_na_zverejnenie',

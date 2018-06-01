@@ -52,6 +52,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
+      'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',

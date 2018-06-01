@@ -425,6 +425,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'garant' => 'garant',
+      'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'workbench_state_access',
@@ -437,6 +438,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Komentátor' => 'Komentátor',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -447,6 +449,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Komentátor' => 'Komentátor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -472,6 +475,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in na_zalomenie state',
     'roles' => array(
       'Komentátor' => 'Komentátor',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -727,6 +731,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -909,6 +914,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'workbench_moderation',
   );
