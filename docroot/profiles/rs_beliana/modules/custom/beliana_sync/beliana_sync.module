@@ -345,11 +345,11 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
     // Change workbench status for node and attached illustrations.
-    workbench_moderation_moderate($node, 'publikovane_na_webe');
+    workbench_moderation_moderate($node, 'ilustracia_na_webe');
     foreach ($illustrations as $illustration) {
       $ilu_generic_node = node_load($illustration['nid']);
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
-      workbench_moderation_moderate($ilu_node, 'publikovane_na_webe');
+      workbench_moderation_moderate($ilu_node, 'ilustracia_na_webe');
     }
     watchdog('sync', 'Heslo "@title" bolo úspešne prenesené.', [
       '@title' => $node->title,
