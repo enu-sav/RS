@@ -345,7 +345,7 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
     // Change workbench status for node and attached illustrations.
-    workbench_moderation_moderate($node, 'ilustracia_na_webe');
+    workbench_moderation_moderate($node, 'publikovane_na_webe');
     foreach ($illustrations as $illustration) {
       $ilu_generic_node = node_load($illustration['nid']);
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
@@ -714,7 +714,7 @@ function  _check_illustration_web(&$node, &$ilu_node, $category)
   // Check if illustration is in correct WB status.
   if ($category == 'sync' and !in_array($ilu_node->workbench_moderation['current']->state, [
       'ilustracia_na_zverejnenie',
-      'publikovane_na_webe',
+      'ilustracia_na_webe',
       'ilustracia_u_vyst_redaktora_5',
       ])) {
     il_error($node, $ilu_node, 'sa nenachádza v stave "Ilustrácia na zverejnenie"', $category);
