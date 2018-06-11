@@ -14,6 +14,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_atributy'] = array(
     'name' => 'create field_atributy',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -277,6 +278,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_atributy'] = array(
     'name' => 'edit field_atributy',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -455,6 +457,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_atributy'] = array(
     'name' => 'edit own field_atributy',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -853,6 +856,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_atributy'] = array(
     'name' => 'view own field_atributy',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',

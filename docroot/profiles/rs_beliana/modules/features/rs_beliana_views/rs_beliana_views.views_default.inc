@@ -11846,6 +11846,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'zverejnene_oprava' => 'zverejnene_oprava',
     'zverejnene_vratene' => 'zverejnene_vratene',
     'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+    'pozdr_an_' => 'pozdr_an_',
     'draft' => 'draft',
     'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
     'zaradene' => 'zaradene',
@@ -11856,13 +11857,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
     'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
     'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
     'zlucene' => 'zlucene',
     '1_korektura' => '1_korektura',
     '2_korekt_ra' => '2_korekt_ra',
     'u_konzultanta' => 'u_konzultanta',
     'zlucene_odkazy' => 'zlucene_odkazy',
     'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
@@ -11877,10 +11878,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     1 => 0,
     9 => 0,
     27 => 0,
+    29 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -13505,11 +13507,17 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
+    'all' => 'all',
     'importovane' => 'importovane',
     'importovane_u_jr2' => 'importovane_u_jr2',
     'importovane_u_vr' => 'importovane_u_vr',
     'na_zalomenie' => 'na_zalomenie',
     'publikovane_na_webe' => 'publikovane_na_webe',
+    'zverejnene_oprava' => 'zverejnene_oprava',
+    'zverejnene_vratene' => 'zverejnene_vratene',
+    'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+    'importovane_vyradene' => 'importovane_vyradene',
+    'pozdr_an_' => 'pozdr_an_',
     'draft' => 'draft',
     'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
     'zaradene' => 'zaradene',
@@ -13520,13 +13528,24 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
     'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
     'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
-    'u_konzultanta' => 'u_konzultanta',
     'zlucene' => 'zlucene',
+    'vyradene' => 'vyradene',
+    'published' => 'published',
     '1_korektura' => '1_korektura',
     '2_korekt_ra' => '2_korekt_ra',
+    'len_vyplatit' => 'len_vyplatit',
+    'u_konzultanta' => 'u_konzultanta',
+    'ukoncenezluene' => 'ukoncenezluene',
     'zlucene_odkazy' => 'zlucene_odkazy',
+    'nova_ilustracia' => 'nova_ilustracia',
+    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
+    'ilustracia_na_webe' => 'ilustracia_na_webe',
+    '_ilustr_cia_u_autora' => '_ilustr_cia_u_autora',
+    'ilustracia_u_grafika' => 'ilustracia_u_grafika',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
+    'ilustracia_u_redaktora' => 'ilustracia_u_redaktora',
+    'ilustracia_na_zverejnenie' => 'ilustracia_na_zverejnenie',
+    'ilustracia_u_vyst_redaktora_5' => 'ilustracia_u_vyst_redaktora_5',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
@@ -13540,10 +13559,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     1 => 0,
     9 => 0,
     27 => 0,
+    29 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -13558,6 +13578,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Názov */
@@ -13624,6 +13645,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'ilustracia' => 'ilustracia',
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -13638,10 +13660,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     1 => 0,
     9 => 0,
     27 => 0,
+    29 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -13656,6 +13679,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Workbench Moderation: Aktuálny */
@@ -13856,6 +13880,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'heslo' => 'heslo',
+    'ilustracia' => 'ilustracia',
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 1;
@@ -14273,6 +14298,43 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     17 => 0,
     20 => 0,
   );
+  /* Filter criterion: Obsah: Author uid */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'node';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['group'] = 1;
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Autor hesla';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    28 => 0,
+  );
   /* Filter criterion: Obsah: User has a revision */
   $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
   $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
@@ -14383,40 +14445,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['operator'] = 'field_na_zoradenie_value_op';
   $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['identifier'] = 'field_na_zoradenie_value';
   $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-  );
-  /* Filter criterion: Obsah: Meno autora diela (field_meno_autora_diela) */
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['id'] = 'field_meno_autora_diela_value';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['table'] = 'field_data_field_meno_autora_diela';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['field'] = 'field_meno_autora_diela_value';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['expose']['operator_id'] = 'field_meno_autora_diela_value_op';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['expose']['label'] = 'Meno autora diela';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['expose']['operator'] = 'field_meno_autora_diela_value_op';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['expose']['identifier'] = 'field_meno_autora_diela_value';
-  $handler->display->display_options['filters']['field_meno_autora_diela_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     5 => 0,
@@ -17534,6 +17562,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'na_zalomenie' => 'na_zalomenie',
     'publikovane_na_webe' => 'publikovane_na_webe',
     'draft' => 'draft',
+    'pozdr_an_' => 'pozdr_an_',
     'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
     'zaradene' => 'zaradene',
     'u_autora' => 'u_autora',
@@ -17544,13 +17573,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
     'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
     'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
-    'u_konzultanta' => 'u_konzultanta',
     'zlucene' => 'zlucene',
     '1_korektura' => '1_korektura',
     '2_korekt_ra' => '2_korekt_ra',
     'len_vyplatit' => 'len_vyplatit',
+    'u_konzultanta' => 'u_konzultanta',
     'zlucene_odkazy' => 'zlucene_odkazy',
+    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
     'ilustracia_u_vyst_redaktora_5' => 'ilustracia_u_vyst_redaktora_5',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
@@ -17566,10 +17595,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     1 => 0,
     9 => 0,
     27 => 0,
+    29 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -17584,6 +17614,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Názov */
@@ -17887,7 +17918,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['type_1']['group'] = 1;
   $handler->display->display_options['path'] = 'vsetky-prehlad-r';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Prehľad';
+  $handler->display->display_options['menu']['title'] = 'Prehľad (R)';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -18226,8 +18257,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Operácia'),
     t('Vybrať operáciu'),
     t('Lexikálna skupina (field_lexikalna_skupina)'),
+    t('Autor hesla'),
     t('Záznam z pôvodného GH'),
-    t('Meno autora diela'),
     t('Všetky heslá - prehľad (G)'),
     t('Upravil niektorú verziu'),
     t('Odoslať na zverejnenie (R)'),
@@ -18255,6 +18286,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Naposledy upravil / autor'),
     t('[name] / [name_1]'),
     t('Súbory ilustrácie'),
+    t('Meno autora diela'),
     t('URL stránky s obrázkom a údajmi k dielu'),
     t('-'),
     t('Názov diela / URL diela'),

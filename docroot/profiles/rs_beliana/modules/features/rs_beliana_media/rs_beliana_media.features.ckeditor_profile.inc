@@ -85,6 +85,7 @@ config.specialChars = [
 [\'➔\', \'odkaz\'],
 [\'*\',\'hviezdička\'],
 [\'†\', \'krížik\'],
+[\'…\', \'elipsa\'],
 [\'[\', \'hranatá zátvorka (v etymológii), aj znamienko v mape znakov\'],
 [\']\', \'hranatá zátvorka (v etymológii), aj znamienko v mape znakov\'],
 [\'>\', \'etymológia [gr. > lat.] = s medzerou\'],
@@ -131,6 +132,8 @@ config.specialChars = [
 ["∪", "zjednotenie množín (Alt+222A)"],
 ["∁", "doplnok množiny (Alt+2201)"],
 ["●", "čierna bodka"],
+[\'—\', \'dlhá slabika\'],
+[\'◡\', \'krátka slabika\'],
 \'α\', \'β\', \'γ\', \'δ\', \'ε\', \'ζ\', \'η\', \'θ\', \'ι\', \'κ\', \'λ\', \'μ\', \'ν\', \'ξ\', \'ο\', \'π\', \'ρ\', \'σ\', \'τ\', \'υ\', \'φ\', \'χ\', \'ψ\', \'ω\',
 \'Α\', \'Β\', \'Γ\', \'Δ\', \'Ε\', \'Ζ\', \'Η\', \'Θ\', \'Ι\', \'Κ\', \'Λ\', \'Μ\', \'Ν\', \'Ξ\', \'Ο\', \'Π\', \'Ρ\', \'Σ\', \'Τ\', \'Υ\', \'Φ\', \'Χ\', \'Ψ\', \'Ω\',
 \'à\', \'á\', \'â\', \'ã\', \'ä\', \'ā\', \'ą\', \'ă\', \'å\', \'æ\', 
@@ -204,44 +207,14 @@ config.specialChars = [
             'name' => 'lite',
             'desc' => 'Plugin file: lite',
             'path' => '%plugin_dir%lite/',
-            'buttons' => array(
-              'lite-acceptall' => array(
-                'label' => 'Accept all changes',
-                'icon' => 'icons/lite-acceptall.png',
-              ),
-              'lite-rejectall' => array(
-                'label' => 'Reject all changes',
-                'icon' => 'icons/lite-rejectall.png',
-              ),
-              'lite-acceptone' => array(
-                'label' => 'Accept change',
-                'icon' => 'icons/lite-acceptone.png',
-              ),
-              'lite-rejectone' => array(
-                'label' => 'Reject change',
-                'icon' => 'icons/lite-rejectone.png',
-              ),
-              'lite-toggleshow' => array(
-                'label' => 'Show/hide tracked changes',
-                'icon' => 'icons/lite-toggleshow.png',
-              ),
-              'lite-toggletracking' => array(
-                'label' => 'Start/stop tracking changes',
-                'icon' => 'icons/lite-toggletracking.png',
-              ),
-            ),
-            'default' => 't',
+            'buttons' => FALSE,
+            'default' => 'f',
           ),
           'mathjax' => array(
             'name' => 'mathjax',
             'desc' => 'Plugin file: mathjax',
             'path' => '%plugin_dir%mathjax/',
-            'buttons' => array(
-              'Mathjax' => array(
-                'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulas',
-              ),
-            ),
+            'buttons' => FALSE,
             'default' => 'f',
           ),
           'tableresize' => array(
@@ -347,6 +320,7 @@ config.specialChars = [
 [\'➔\', \'odkaz\'],
 [\'*\',\'hviezdička\'],
 [\'†\', \'krížik\'],
+[\'…\', \'elipsa\'],
 [\'[\', \'hranatá zátvorka (v etymológii), aj znamienko v mape znakov\'],
 [\']\', \'hranatá zátvorka (v etymológii), aj znamienko v mape znakov\'],
 [\'>\', \'etymológia [gr. > lat.] = s medzerou\'],
@@ -369,7 +343,6 @@ config.specialChars = [
 [\'&\', \'and\'],
 [\'©\', \'Copyright\'],
 [\'§\', \'paragraf\'],
-[\'±\', \'plus minus\'],
 [\'µ\',\'mikro\'],
 [\'Ω\',\'Ohm\'],
 [\'∞\',\'nekonečno\'],
@@ -394,6 +367,8 @@ config.specialChars = [
 ["∪", "zjednotenie množín (Alt+222A)"],
 ["∁", "doplnok množiny (Alt+2201)"],
 ["●", "čierna bodka"],
+[\'—\', \'dlhá slabika\'],
+[\'◡\', \'krátka slabika\'],
 \'α\', \'β\', \'γ\', \'δ\', \'ε\', \'ζ\', \'η\', \'θ\', \'ι\', \'κ\', \'λ\', \'μ\', \'ν\', \'ξ\', \'ο\', \'π\', \'ρ\', \'σ\', \'τ\', \'υ\', \'φ\', \'χ\', \'ψ\', \'ω\',
 \'Α\', \'Β\', \'Γ\', \'Δ\', \'Ε\', \'Ζ\', \'Η\', \'Θ\', \'Ι\', \'Κ\', \'Λ\', \'Μ\', \'Ν\', \'Ξ\', \'Ο\', \'Π\', \'Ρ\', \'Σ\', \'Τ\', \'Υ\', \'Φ\', \'Χ\', \'Ψ\', \'Ω\',
 \'à\', \'á\', \'â\', \'ã\', \'ä\', \'ā\', \'ą\', \'ă\', \'å\', \'æ\', 
@@ -466,12 +441,7 @@ config.specialChars = [
             'name' => 'mathjax',
             'desc' => 'Plugin file: mathjax',
             'path' => '%plugin_dir%mathjax/',
-            'buttons' => array(
-              'Mathjax' => array(
-                'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulas',
-              ),
-            ),
+            'buttons' => FALSE,
             'default' => 'f',
           ),
           'tableresize' => array(
