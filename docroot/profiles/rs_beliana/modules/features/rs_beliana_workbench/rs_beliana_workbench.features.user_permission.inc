@@ -850,6 +850,15 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora'.
+  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora'] = array(
+    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora',
+    'roles' => array(
+      'ig-redaktor' => 'ig-redaktor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from importovane to importovane_u_jr2'.
   $permissions['moderate content from importovane to importovane_u_jr2'] = array(
     'name' => 'moderate content from importovane to importovane_u_jr2',

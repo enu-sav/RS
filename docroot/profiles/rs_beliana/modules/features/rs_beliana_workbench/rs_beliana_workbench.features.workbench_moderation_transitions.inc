@@ -69,6 +69,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'ilustracia_na_zverejnenie',
       'name' => 'il_u_vr_5-na_zverejnenie',
     ),
+    'ilustracia_u_vyst_redaktora_5:ilustracia_u_redaktora' => array(
+      'from_name' => 'ilustracia_u_vyst_redaktora_5',
+      'to_name' => 'ilustracia_u_redaktora',
+      'name' => 'il_u_vr_5-il_u_redaktora',
+    ),
     'importovane:importovane_u_jr2' => array(
       'from_name' => 'importovane',
       'to_name' => 'importovane_u_jr2',
