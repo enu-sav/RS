@@ -180,13 +180,23 @@ function modify_body_text($text)
   $text = preg_replace( '/([0-9]) (°[CF])/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/(sup>) ([gs][ ,.;] )/', "$1&nbsp;$2", $text);
   $text = preg_replace( '/([0-9]) ([kM]eV)/', "$1&nbsp;$2", $text);
-
+  // remove alignment (ignored anyway)
+  //<th class="rtecenter" colspan="9">
+  //<th class="rteleft" colspan="3">
+  $text = str_replace( ' class="rtecenter"', '', $text);
+  $text = str_replace( ' class="rteleft"', '', $text);
+  
+  // removed anyway
+  $text = str_replace( ' scope="col"', '', $text);
   // table formatting
   //<td colspan="2" style="width:1141px">
-  $text = preg_replace( '/<td colspan="([0-9]*)" [^>]*>/', '<td colspan="$1">', $text);
-  $text = preg_replace( '/<th colspan="([0-9]*)" [^>]*>/', '<th colspan="$1">', $text);
+  $text = preg_replace( '/<t([dh]) colspan="([0-9]*)" style[^>]*>/', '<t$1 colspan="$2">', $text);
+  //<td rowspan="3" style="width:130px">
+  $text = preg_replace( '/<t([dh]) rowspan="([0-9]*)" style[^>]*>/', '<t$1 rowspan="$2">', $text);
   //<td style="width:958px">
-  $text = preg_replace( '/<td style="width:[0-9]*px">/', '<td>', $text);
+  //<td style="width:545px">
+  //<td style="width: 546.29px;">
+  $text = preg_replace( '/<t([dh]) style[^>]*>/', '<t$1>', $text);
   //<table align="left" border="1" cellpadding="0" cellspacing="1" style="height:599px; width:1149px">
   //$text = preg_replace( '/<table [^>]*>/', '<table style="width:100%">', $text);
   $text = preg_replace( '/<table [^>]*>/', '<table>', $text);
