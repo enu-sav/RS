@@ -1,4 +1,5 @@
 <?php
+# vim: ai ts=2 sts=2 et sw=2 ft=php
 
 /**
  * @file
@@ -651,7 +652,6 @@ function beliana_node_presave($node) {
   setlocale(LC_COLLATE, 'sk_SK.utf8');
 
   // fix field_na_zoradenie if necessary
-  //if ($node->field_na_zoradenie['und'][0]['value'] == '' || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])){
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
   if (!$rebuild_sort) {
     // are there funny characters in sort string (field_na_zoradenie)?
@@ -664,7 +664,6 @@ function beliana_node_presave($node) {
         $node->type == 'importovane_heslo' // only 'importovane_heslo' 'heslo' is sorted in a different way
         );
   }
-  //if (!isset($node->field_na_zoradenie['und'][0]['value']) || preg_match('/[^a-zA-ZŠšČčŽž_0-9]/', $node->field_na_zoradenie['und'][0]['value'])) {
   if ($rebuild_sort) {
     $transliterated = preg_replace("/\(^ad-|al-|af |d’ |d’|de |da |z |ze |del |\)./", '', $node->title);
     $transliterated = _beliana_remove_accents($transliterated);
@@ -732,6 +731,8 @@ function beliana_node_presave($node) {
       }
     }
   }
+
+  $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = beliana_clean_tags($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
 }
 
 /**
@@ -1985,4 +1986,58 @@ function get_header_dates($text) {
   return $dates;
 }
 
-# vim: ai ts=2 sts=2 et sw=2 ft=php
+function beliana_clean_tags($text)
+{
+
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+  $xpath = new DOMXPath($dom);
+
+  // remove tags completely: <ins>, <span>, ....
+  $rmtags=array(
+  '//ins[not(@*)]',
+  '//span[not(@*)]',
+  '//span[@style="background-color:null"]',
+  '//span[@style="background-color:#ffffff"]',
+  '//span[@style="background-color:white"]',
+  '//td/p',
+  );
+  foreach ($rmtags as $tag) {
+  //_remove_node($xpath, $tag);
+  // Move all tag node content to its parent node just before it.
+  foreach ($xpath->query($tag) as $node) {
+    while ($node->hasChildNodes()) {
+      $child = $node->removeChild($node->firstChild);
+      $node->parentNode->insertBefore($child, $node);
+    }
+    // Remove the tag node.
+    $node->parentNode->removeChild($node);
+    }
+  }
+
+  // remove tag attributes
+  $cltags=array(
+    array("a","style"),
+    array("a","target"),
+    array("td","style"),
+    array("th","class"),
+    array("table","border"),
+    array("table","cellspacing"),
+    array("table","cellpadding"),
+    array("table","style"),
+  );
+  foreach ($cltags as $cltag) {
+    $tagstring = "//".$cltag[0]."[@".$cltag[1]."]";
+    foreach ($xpath->query($tagstring) as $tag) {
+      $sNode = $tag->getAttributeNode( $cltag[1] );
+      $tag->removeAttributeNode( $sNode );
+    }
+  }
+
+  $fragment = '';
+  foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $chnode) {
+    $fragment .= $dom->saveHtml($chnode);
+  }
+  dpm("cleanup");
+  return $fragment;
+}
