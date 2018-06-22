@@ -647,8 +647,13 @@ function beliana_merge(&$entity, $context = array()) {
  * @inheritdoc
  */
 function beliana_node_presave($node) {
-  setlocale(LC_COLLATE, 'sk_SK.utf8');
+  # do not execute in the case of workbench moderation state transitions
+  # execute only on node saving
+  if ($node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
+    return;
+  }
 
+  setlocale(LC_COLLATE, 'sk_SK.utf8');
   // fix field_na_zoradenie if necessary
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
   if (!$rebuild_sort) {
@@ -671,7 +676,6 @@ function beliana_node_presave($node) {
     $transliterated = str_replace("Š", "š", $transliterated); // not changed by strtolower
     $transliterated = str_replace("Č", "č", $transliterated);
     $transliterated = str_replace("Ž", "ž", $transliterated);
-    //dpm($transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
 
@@ -854,15 +858,12 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 }
 
 function _check_ilu_attached(&$ilu_node, $category) {
-  //dpm($ilu_node);
   $query = new EntityFieldQuery();
   $query
       ->entityCondition('entity_type', "node")
       ->fieldCondition('field_ilustracia', 'target_id', $ilu_node->nid, "=");
   $result = $query->execute();
-  //dpm($result,"result");
   if (isset($result['node'])) {
-    //dpm($result['node'],"node1");
     return true;
   }
   else {
