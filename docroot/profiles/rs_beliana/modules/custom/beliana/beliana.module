@@ -693,17 +693,6 @@ function beliana_node_presave($node) {
     return;
   }
 
-  // Editor has to change author from 'import' to something else.
-  // If node is assigned to 'import', we need to forbid change of state.
-  if ($author->name === 'import' && isset($node->workbench_moderation_state_new) && isset($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state === 'zaradene' && in_array($node->workbench_moderation_state_new, array(
-        'u_autora',
-        'needs_review',
-      ))
-  ) {
-    $node->workbench_moderation_state_new = 'zaradene';
-    drupal_set_message($node->title . ': Pred zmenou stavu treba heslo priradiť autorovi.', 'error');
-  }
-
   // update field_datum according to the text
   $dates = get_header_dates($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
   for ($i = 0; $i < count($dates); $i++) {
@@ -2038,6 +2027,5 @@ function beliana_clean_tags($text)
   foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $chnode) {
     $fragment .= $dom->saveHtml($chnode);
   }
-  dpm("cleanup");
   return $fragment;
 }
