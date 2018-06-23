@@ -2041,5 +2041,7 @@ function beliana_clean_tags($text)
   foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $chnode) {
     $fragment .= $dom->saveHtml($chnode);
   }
+  //fix a problem caused somewhere above (<br> is later replaced by a pair of  <br /> tags)
+  $fragment = str_replace("<br>", "<br />", $fragment);
   return $fragment;
 }
