@@ -1989,6 +1989,7 @@ function get_header_dates($text) {
   return $dates;
 }
 
+// delete unnecessary tags on node save
 function beliana_clean_tags($text)
 {
 
