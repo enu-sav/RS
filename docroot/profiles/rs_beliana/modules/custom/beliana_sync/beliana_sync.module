@@ -157,7 +157,12 @@ function art_error($node, $msg, $category) {
 // nonbreakable space: " "
 function modify_body_text($text)
 {
+  // arrow ➔ for both web and print
   $text = str_replace("➔","→",$text);
+  // arrow ⬈ only for print
+  $text = str_replace(" ⬈ "," ",$text);
+  $text = str_replace(" ⬈"," ",$text);
+  $text = str_replace("⬈ "," ",$text);
   $text = str_replace(" "," ",$text);	// remove nonbreakable spaces
   // multiple spaces 
   $text = preg_replace('/(  +)/', ' ', $text);
