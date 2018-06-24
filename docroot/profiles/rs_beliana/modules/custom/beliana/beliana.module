@@ -726,6 +726,10 @@ function beliana_node_presave($node) {
   // remove unnecessary tags
   $html = beliana_clean_tags($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
 
+  //remove formatted space
+  $html = str_replace("<em> </em>", " ", $html);
+  $html = str_replace("<strong> </strong>", " ", $html);
+
   // remove empty lines at start and end
 
   // CKeditor inserts as empty line "<p> </p>" with non-breakable space 
