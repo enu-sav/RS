@@ -1056,8 +1056,16 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from u_jaz_redaktora_2 to na_zalomenie'.
   $permissions['moderate content from u_jaz_redaktora_2 to na_zalomenie'] = array(
     'name' => 'moderate content from u_jaz_redaktora_2 to na_zalomenie',
+    'roles' => array(),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5'.
+  $permissions['moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5'] = array(
+    'name' => 'moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5',
     'roles' => array(
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
   );
