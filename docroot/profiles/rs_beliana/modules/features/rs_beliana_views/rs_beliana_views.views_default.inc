@@ -17405,6 +17405,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     27 => '27',
+    7 => '7',
+    12 => '12',
     4 => '4',
     10 => '10',
     6 => '6',
