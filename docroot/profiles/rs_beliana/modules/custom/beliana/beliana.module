@@ -473,6 +473,11 @@ function update_dates(&$entity, $context = array()) {
     // get dates from article text
     $dates = get_header_dates($entity->field_text_hesla[LANGUAGE_NONE][0]['value']);
     if (count($dates) > 0) {
+      // unset date fields first
+      for ($i = 2; $i >= 0; $i--) {
+        if( isset($entity->field_datum[LANGUAGE_NONE][$i]['value']))
+          unset($entity->field_datum[LANGUAGE_NONE][$i]['value']);
+      }
       for ($i = 0; $i < count($dates); $i++) {
         // set the field
         $entity->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
@@ -697,8 +702,15 @@ function beliana_node_presave($node) {
 
   // update field_datum according to the text
   $dates = get_header_dates($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
-  for ($i = 0; $i < count($dates); $i++) {
-    $node->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
+  if (count($dates) > 0) {
+    // unset date fields first
+    for ($i = 2; $i >= 0; $i--) {
+      if( isset($node->field_datum[LANGUAGE_NONE][$i]['value']))
+        unset($node->field_datum[LANGUAGE_NONE][$i]['value']);
+    }
+    for ($i = 0; $i < count($dates); $i++) {
+      $node->field_datum[LANGUAGE_NONE][$i]['value'] = $dates[$i];
+    }
   }
 
   // find links pointing to articles in Ukončené/Zlúčené (ukoncenezluene) state and replace them
@@ -1980,7 +1992,7 @@ function get_header_dates($text) {
     // remove tags first
     $header = preg_replace('/<[^>]*>/', '', $exploded[0]);
     # find all dates in header
-    $pattern = "/([0-9]+. [0-9a]+. [0-9]+)/";
+    $pattern = "/ (\d{1,2}. \d{1,2}. \d{4} )/";
     preg_match_all($pattern, $header, $matches);
 
     # convert dates to importable form and save them to 'dates'
@@ -1998,7 +2010,6 @@ function get_header_dates($text) {
 // delete unnecessary tags on node save
 function beliana_clean_tags($text)
 {
-
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
   $xpath = new DOMXPath($dom);
