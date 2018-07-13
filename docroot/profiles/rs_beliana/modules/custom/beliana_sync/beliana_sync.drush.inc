@@ -97,7 +97,7 @@ function _drush_beliana_sync_extract_links_prepare($nid) {
   if ($node === FALSE) {
     return FALSE;
   }
-  beliana_sync_process_links($node->nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+  beliana_sync_process_links($node);
   return TRUE;
 }
 

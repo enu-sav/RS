@@ -31,7 +31,7 @@ function beliana_sync_menu() {
 function beliana_sync_node_insert($node) {
   if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
     // Extract links.
-    beliana_sync_process_links($node->nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+    beliana_sync_process_links($node);
   }
 }
 
@@ -49,7 +49,7 @@ function beliana_sync_node_update($node) {
       ->condition('origin', $node->nid)
       ->execute();
     // Extract links.
-    beliana_sync_process_links($node->nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+    beliana_sync_process_links($node);
   }
 }
 
@@ -58,10 +58,30 @@ function beliana_sync_node_update($node) {
  *
  * @param $nid
  */
-function beliana_sync_process_links($nid, $text, $replace = FALSE) {
+function beliana_sync_process_links($node, $replace = FALSE) {
   // Extract links from field_text_hesla.
+  $nid = $node->nid;
+  $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  $internalErrorsState = libxml_use_internal_errors(true); 
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+
+  // handle errors locally
+  $errors = libxml_get_errors();
+  if ($errors) {
+    # clear errors and restore error loging status
+    foreach ($errors as $error) {
+      html_error($node, $error, "Chyba HTML syntaxe (links)"); 
+    }
+    libxml_clear_errors();
+    libxml_use_internal_errors($internalErrorsState);   
+    # return unchanged text
+    return null;
+  }
+  # clear errors and restore error loging status
+  libxml_clear_errors();
+  libxml_use_internal_errors($internalErrorsState); 
+
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
   if (!empty($links)) {
@@ -151,6 +171,13 @@ function art_error($node, $msg, $category) {
   ], WATCHDOG_NOTICE);
   $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
   drupal_set_message($msg, 'error');
+}
+
+// prepare and display error message in the case of html syntax error
+function html_error($node, $error, $shortmsg)
+{
+  $msg = $shortmsg .": ". $error->message . "(" . "riadok " . $error->line . ", znak " . $error->column . ")";
+  art_error($node, $msg, 'htmlerror');
 }
 
 // eventual fixes in article text 
@@ -249,11 +276,18 @@ function beliana_sync_sync($nid, &$context) {
     }
   }
 
+  # remove links to not yet published articles
+  $body = beliana_sync_process_links($node, true);
+  # if failed owing to html syntax error
+  if (!$body) $skip = true;
+
   // if something went wrong, return now
   if($skip) {
     $context['results']['error']++;
     return;
   }
+
+  $body = modify_body_text($body);
 
   // publish everything now
     $dates = [];
@@ -263,9 +297,7 @@ function beliana_sync_sync($nid, &$context) {
         $dates[] = $only_date;
       }
     }
-    // Load node and form object to be sent over.
-    $body = beliana_sync_process_links($nid, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], TRUE);
-    $body = modify_body_text($body);
+    // form object to be sent over.
     $remote_node_object = [
       'title' => $node->title,
       'body' => $body,
@@ -800,8 +832,26 @@ function _check_field_pouzit(&$node, &$ilu_node, $category)
 function _beliana_sync_clean_tags($text)
 {
 
+  $internalErrorsState = libxml_use_internal_errors(true); 
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+
+  // handle errors locally
+  $errors = libxml_get_errors();
+  if ($errors) {
+    # clear errors and restore error loging status
+    foreach ($errors as $error) {
+      html_error($node, $error, "Chyba HTML syntaxe (clean sync)"); 
+    }
+    libxml_clear_errors();
+    libxml_use_internal_errors($internalErrorsState);   
+    # return unchanged text
+    return null;
+  }
+  # clear errors and restore error loging status
+  libxml_clear_errors();
+  libxml_use_internal_errors($internalErrorsState); 
+
   $xpath = new DOMXPath($dom);
 
   // remove tag attributes
