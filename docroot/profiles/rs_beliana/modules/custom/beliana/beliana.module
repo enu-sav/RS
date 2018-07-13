@@ -2022,13 +2022,7 @@ function beliana_clean_tags($node)
   if ($errors) {
     # clear errors and restore error loging status
     foreach ($errors as $error) {
-      //select a piece of the problem text
-      $lines = explode("\n", $text);
-      $start = max( 0, $error->column - 10); 
-      $count = min(20, strlen($lines[$error->line-1]) - $start);
-      $errtext = htmlentities(substr($lines[$error->line-1], $start, $count));
-      $msg = "Chyba HTML syntaxe: " . $error->message . "(" . "riadok " . $error->line . ", stĺpec " . $error->column . ": '<strong>" . $errtext . "</strong>')";
-      art_error($node, $msg, 'htmlerror');
+      html_error($node, $error, "Chyba HTML syntaxe (clean save)"); 
     }
     libxml_clear_errors();
     libxml_use_internal_errors($internalErrorsState);   
