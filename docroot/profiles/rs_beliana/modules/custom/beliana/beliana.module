@@ -660,6 +660,11 @@ function beliana_node_presave($node) {
         $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
     return;
   }
+
+  # do not execute if node has just been created
+  if (isset($node->is_new) and $node->is_new === True) 
+	return;
+
   setlocale(LC_COLLATE, 'sk_SK.utf8');
   // fix field_na_zoradenie if necessary
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
