@@ -97,7 +97,7 @@ function _drush_beliana_sync_extract_links_prepare($nid) {
   if ($node === FALSE) {
     return FALSE;
   }
-  beliana_sync_process_links($node);
+  _beliana_sync_process_links($node);
   return TRUE;
 }
 
