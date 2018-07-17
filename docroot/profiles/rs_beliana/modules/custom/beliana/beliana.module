@@ -582,10 +582,10 @@ function beliana_merge(&$entity, $context = array()) {
     else {
       // special requirement: in merging put GEO articles in front of others
       if ($top_parent->tid === "390") {  // "390" is Lubica Krajcovicova, editor of GEO articles. 
-        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'] . "</p><br><p>" . $master->field_text_hesla[LANGUAGE_NONE][0]['value'];
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'] . "<p>&nbsp;/p>" . $master->field_text_hesla[LANGUAGE_NONE][0]['value'];
       }
       else {
-        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "</p><br><p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "<p>&nbsp;br></p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
       }
     }
 
