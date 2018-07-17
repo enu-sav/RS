@@ -70,6 +70,8 @@ function _beliana_sync_process_links($node, $replace = FALSE) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  // do not continue if text is empty
+  if ( $text === "" ) return;
   $internalErrorsState = libxml_use_internal_errors(true); 
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
