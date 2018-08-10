@@ -643,6 +643,11 @@ function _menu_check_access(&$item, $map) {
     if ($callback == 'user_access') {
       $item['access'] = (count($arguments) == 1) ? user_access($arguments[0]) : user_access($arguments[0], $arguments[1]);
     }
+    // There must be exactly one argument (node) in diff_node_revision_access, but sometimes there is none
+    // as the reason is elsewhere, work this around here, so that log is not populated with garbage
+    elseif ($callback == 'diff_node_revision_access') {
+      $item['access'] = (count($arguments) == 1) ? diff_node_revision_access($arguments[0]) : false;
+    }
     elseif (function_exists($callback)) {
       $item['access'] = call_user_func_array($callback, $arguments);
     }
