@@ -136,6 +136,12 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 2,
   );
 
+  // Exported role: iredaktor-jaz.
+  $roles['iredaktor-jaz'] = array(
+    'name' => 'iredaktor-jaz',
+    'weight' => 2,
+  );
+
   // Exported role: zRedaktor.
   $roles['zRedaktor'] = array(
     'name' => 'zRedaktor',

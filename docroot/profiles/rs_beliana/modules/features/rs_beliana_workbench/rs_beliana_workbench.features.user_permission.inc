@@ -490,6 +490,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Komentátor' => 'Komentátor',
       'ig-redaktor' => 'ig-redaktor',
+      'iredaktor-jaz' => 'iredaktor-jaz',
     ),
     'module' => 'workbench_state_access',
   );
@@ -874,6 +875,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'iredaktor-jaz' => 'iredaktor-jaz',
     ),
     'module' => 'workbench_moderation',
   );
@@ -884,6 +886,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'iredaktor-jaz' => 'iredaktor-jaz',
     ),
     'module' => 'workbench_moderation',
   );
