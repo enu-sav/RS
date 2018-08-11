@@ -776,8 +776,9 @@ function beliana_node_presave($node) {
  */
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   // log information about opening nodes for editing
+  // if $form['title']['#default_value'] is empty (node just ceated), do not log anything
   $nf_pos = strpos($form_id, "_node_form");
-  if ( ! ($nf_pos === false)){
+  if ( ! ($nf_pos === false) && isset($form['title']['#default_value'])){
     watchdog('obsah', '@type: otvorené na úpravu @title.', [
       '@type' => substr($form_id, 0, $nf_pos),
       '@title' => $form['title']['#default_value'],
