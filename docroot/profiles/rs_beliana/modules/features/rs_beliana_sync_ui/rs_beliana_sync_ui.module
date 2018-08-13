@@ -75,25 +75,6 @@ function rs_beliana_sync_ui_prepare_queue($form, &$form_state) {
   beliana_sync_prepare_queue($source);
 }
 
-/**
- * Implements hook_form_alter().
- */
-function rs_beliana_sync_ui_form_alter(&$form, array $form_state, $form_id) {
-  if (in_array($form_id, ['heslo_node_form', 'importovane_heslo_node_form'])) {
-    if ($form['#node']->workbench_moderation['current']->state === 'na_zalomenie') {
-      $form['actions']['sync'] = [
-        '#type' => 'submit',
-        '#access' => TRUE,
-        '#value' => 'Publikovať vo webovej verzii',
-        '#weight' => 150,
-        '#submit' => [
-          'rs_beliana_sync_ui_node_form_sync',
-        ],
-      ];
-    }
-  }
-}
-
 function rs_beliana_sync_ui_node_form_sync($form, &$form_state) {
   $source = [$form_state['values']['nid']];
   beliana_sync_prepare_queue($source);
