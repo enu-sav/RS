@@ -472,6 +472,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
   $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title_field_value']['operator'] = 'starts';
   $handler->display->display_options['filters']['title_field_value']['group'] = 1;
   $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
@@ -483,9 +484,14 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -494,20 +500,20 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
   $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
@@ -519,9 +525,14 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -530,20 +541,20 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['table'] = 'field_data_field_komentar_instrukcie';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['field'] = 'field_komentar_instrukcie_value';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['group'] = 1;
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator_id'] = 'field_komentar_instrukcie_value_op';
@@ -555,9 +566,14 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -566,14 +582,13 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -946,6 +961,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
   $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title_field_value']['operator'] = 'starts';
   $handler->display->display_options['filters']['title_field_value']['group'] = 1;
   $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
@@ -953,12 +969,18 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
   $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -967,20 +989,20 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    25 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
+    26 => 0,
+    28 => 0,
   );
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
   $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
@@ -992,9 +1014,14 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -1003,20 +1030,20 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['table'] = 'field_data_field_komentar_instrukcie';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['field'] = 'field_komentar_instrukcie_value';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['group'] = 1;
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator_id'] = 'field_komentar_instrukcie_value_op';
@@ -1028,9 +1055,14 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -1039,14 +1071,13 @@ function rs_beliana_sync_ui_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
