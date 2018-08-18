@@ -265,6 +265,9 @@ function beliana_sync_sync($nid, &$context) {
     art_error($node, 'v texte sú uložené LITE zmeny', 'sync');
     $skip = TRUE;
   }
+  if (!_check_alternative_text_markers($node)) {
+    $skip = TRUE;
+  }
   if (isset($node->field_ilustracia[LANGUAGE_NONE]) ) {
     foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
       $ilu_generic_node = node_load($illustration['target_id']);
