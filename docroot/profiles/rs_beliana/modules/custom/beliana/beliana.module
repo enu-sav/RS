@@ -853,10 +853,16 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   }
 
   // check types heslo and importovane_heslo
-  // check links
   if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
     // Check link correctness
     if (!_check_links($values['node'])) {
+      drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
+    }
+    // Check link correctness
+    if (!_check_alternative_text_markers($values['node'])) {
       drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
@@ -954,6 +960,50 @@ function check_ill_at_node_transition(&$node, $ok_states, $category) {
     }
   }
   return !$skip;
+}
+
+/**
+ * check validity of used alternative text markers
+ * correct marked text:  ▶[KkWw][^▶]*◀
+ *
+ * @param $nid
+ */
+function _check_alternative_text_markers(&$node) {
+  // Extract links from field_text_hesla.
+  $nid = $node->nid;
+  $text = $node->field_text_hesla['und'][0]['value'];
+  // do not check validity if LITE changes are stored
+  if (strpos($text,"ice-ins") or strpos($text, "ice-del")){
+    return true;
+  }
+  $retvalue = true;
+  $hlink =  'Chybný alternatívny text v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: ';
+  $pattern = "/(▶[^◀]*▶)/";
+  if ( preg_match_all($pattern, $text, $matches) ){
+    drupal_set_message($hlink . 'opakovaný začiatok (... ▶ ... ▶ ...)', 'error');
+    $retvalue = false;
+  }
+  $pattern = "/(◀[^▶]*◀)/";
+  if ( preg_match_all($pattern, $text, $matches) ){
+    drupal_set_message($hlink . 'opakované ukončenie (... ◀ ... ◀ ...)', 'error');
+    $retvalue = false;
+  }
+  $pattern = "/(▶[^kKwW])/";
+  if ( preg_match_all($pattern, $text, $matches) ){
+    drupal_set_message($hlink . 'použité "'.$matches[0][0] . '" namiesto "▶K" alebo "▶W"', 'error');
+    $retvalue = false;
+  }
+  $pattern = "/(▶[^◀]*$)/";
+  if ( preg_match_all($pattern, $text, $matches) ){
+    drupal_set_message($hlink . 'chýba ukončenie ◀', 'error');
+    $retvalue = false;
+  }
+  $pattern = "/(^[^▶]*◀)/";
+  if ( preg_match_all($pattern, $text, $matches) ){
+    drupal_set_message($hlink . 'chýba začiatok "▶K" alebo "▶W"', 'error');
+    $retvalue = false;
+  }
+  return $retvalue;
 }
 
 /**
