@@ -8288,7 +8288,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_text_hesla']['label'] = 'text';
   $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_hesla']['type'] = 'text_plain';
-  /* Pole: Obsah: Dátum */
+  /* Pole: Obsah: Dátum výročia */
   $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
   $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
   $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
@@ -9411,7 +9411,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_text_z_gh']['table'] = 'field_data_field_text_z_gh';
   $handler->display->display_options['fields']['field_text_z_gh']['field'] = 'field_text_z_gh';
   $handler->display->display_options['fields']['field_text_z_gh']['label'] = 'povodnyZaznamZGH';
-  /* Pole: Obsah: Dátum */
+  /* Pole: Obsah: Dátum výročia */
   $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
   $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
   $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
@@ -16852,12 +16852,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     23 => 0,
     26 => 0,
   );
-  /* Filter criterion: Workbench Moderation: Aktuálny */
-  $handler->display->display_options['filters']['is_current_1']['id'] = 'is_current_1';
-  $handler->display->display_options['filters']['is_current_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current_1']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current_1']['relationship'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['filters']['is_current_1']['value'] = '1';
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
