@@ -327,6 +327,17 @@ function beliana_sync_sync($nid, &$context) {
       //'category' => ["asdf1;ghjk;pqr"],
       'category' => _extract_category_info($node),
     ];
+    // add table, if the field is defined and if there really is a table in it
+    if (isset($node->field_table[LANGUAGE_NONE]) and !(strpos($node->field_table[LANGUAGE_NONE][0]['value'], 'table') === False)) {
+      $remote_node_object['table'] = array(
+         $node->field_table[LANGUAGE_NONE][0]['value'],
+         (isset($node->field_table_weight[LANGUAGE_NONE])) ?  $node->field_table_weight[LANGUAGE_NONE][0]['value'] : 0
+      );
+    } else {
+      // delete the table on the web side, if it exists there
+      $remote_node_object['table'] = array(Null, 0);
+    }
+
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
       ->fields('s', ['remote'])
