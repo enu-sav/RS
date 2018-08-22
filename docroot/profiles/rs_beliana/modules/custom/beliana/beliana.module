@@ -1194,7 +1194,19 @@ function _beliana_submit_assign_user_form($form_state, $state) {
 function _beliana_assign_user(&$node, $context) {
   $user = user_load_by_name($context['user']);
   if ($user !== FALSE) {
-    if (!isset($user->workbench_access[reset($node->workbench_access)])) {
+    // create array of node's categories
+    $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
+    $node_taxo=array();
+    foreach($parents_all as $val){
+      $node_taxo[] = $val->tid;
+    }
+    // create array of user's categories
+    $user_taxo=array();
+    foreach($user->workbench_access as $key => $val){
+      $user_taxo[] = $key;
+    }
+    // return if intersection is empty
+    if (empty(array_intersect($node_taxo, $user_taxo))) {
       drupal_set_message($node->title . ' sa nepodarilo priradiť autorovi, pretože nemá zodpovedajúcu lexikálnu skupinu.', 'error');
       return FALSE;
     }
