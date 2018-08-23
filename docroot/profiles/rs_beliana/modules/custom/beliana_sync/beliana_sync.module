@@ -515,7 +515,8 @@ function beliana_sync_prepare_queue($source) {
   $back_links_queue = get_order($back_links, $back_links_links);
   $sync_queue = array_merge($sync_queue, $back_links_queue);
 
-  foreach ($sync_queue as $item) {
+  // synchronize just the unique items from the queue
+  foreach (array_unique($sync_queue) as $item) {
     $operations[] = [
       'beliana_sync_sync',
       [$item],
