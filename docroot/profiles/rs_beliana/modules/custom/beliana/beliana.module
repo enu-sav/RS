@@ -839,13 +839,26 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
   // check type heslo
   if ($values['node']->type === 'heslo') {
-    $text = $values['node']->field_text_hesla['und'][0]['value'];
     // do not change state to na_opakovane_zverejnenie or na_zalomenie if LITE changes exist
-    if (($new_state === "na_opakovane_zverejnenie" or $new_state === "na_zalomenie") and (strpos($text,"ice-ins") or strpos($text, "ice-del"))){
-      drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . '</a> nebol zmenený, lebo v texte sú uložené LITE zmeny', 'error');
-      $values['node']->workbench_moderation_state_new = $cur_state;
-      node_save($values['node']);
-      return;
+    if ($new_state === "na_opakovane_zverejnenie" or $new_state === "na_zalomenie") {
+      $fail = False;
+      $text = $values['node']->field_text_hesla['und'][0]['value'];
+      if (strpos($text,"ice-ins") or strpos($text, "ice-del")){
+        $fail = True;
+        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . '</a> nebol zmenený, lebo v jeho texte sú uložené LITE zmeny', 'error');
+      }
+      if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
+        $texttab = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
+        if (strpos($texttab,"ice-ins") or strpos($texttab, "ice-del")){
+          $fail = True;
+          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo v poli 'Tabuľka pre geografické heslá' sú uložené LITE zmeny", 'error');
+        }
+      }
+      if ($fail) {
+        $values['node']->workbench_moderation_state_new = $cur_state;
+        node_save($values['node']);
+        return;
+      }
     }
   }
 
