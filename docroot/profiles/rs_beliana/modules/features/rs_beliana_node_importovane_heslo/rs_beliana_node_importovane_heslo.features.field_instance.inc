@@ -332,7 +332,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -571,6 +571,128 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-importovane_heslo-field_table'.
+  $field_instances['node-importovane_heslo-field_table'] = array(
+    'bundle' => 'importovane_heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Vložte tabuľku so základnými údajmi o štátoch ap.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_table',
+    'label' => 'Tabuľka pre geografické heslá',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 0,
+          'full_html' => 'full_html',
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 13,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-importovane_heslo-field_table_weight'.
+  $field_instances['node-importovane_heslo-field_table_weight'] = array(
+    'bundle' => 'importovane_heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 13,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_table_weight',
+    'label' => 'Pozícia tabuľky pre geografické heslá',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 14,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-importovane_heslo-field_taxsubor'.
   $field_instances['node-importovane_heslo-field_taxsubor'] = array(
     'bundle' => 'importovane_heslo',
@@ -752,11 +874,15 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Názov súboru sa doplní automaticky na základe názvu hesla');
   t('Opravy, ktoré sa majú uviesť vo zväzku Erráta. Opravy uveďte formou "pôvodné >> opravené;", napríklad "King of Blue >> Kind of Blue;", a to vždy na samostatný riadok a na koniec dajte znak ;. Ak sú zmeny rozsiahle (napr. heslo je celkom prepísané), uveďte len "rozsiahle zmeny".');
   t('Použité zdroje');
+  t('Pozícia tabuľky pre geografické heslá');
+  t('Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)');
   t('Súbor');
+  t('Tabuľka pre geografické heslá');
   t('Text hesla');
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
   t('Text určený pre autora, redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
   t('Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).');
+  t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyberte lexikálnu skupinu najnižšej úrovne (nemá podúrovne a vždy má v texte zátvorky).');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
 
