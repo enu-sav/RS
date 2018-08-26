@@ -269,6 +269,9 @@ function beliana_sync_sync($nid, &$context) {
     art_error($node, 'v texte sú uložené LITE zmeny', 'sync');
     $skip = TRUE;
   }
+  if (!_check_alternative_text_markers($node, $text_hesla, "v hesle")) {
+    $skip = TRUE;
+  }
   // are LITE changes still present in table?
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $text_table = $node->field_table[LANGUAGE_NONE][0]['value'];
@@ -276,10 +279,11 @@ function beliana_sync_sync($nid, &$context) {
       art_error($node, 'v tabuľke sú uložené LITE zmeny', 'sync');
       $skip = TRUE;
     }
+    if (!_check_alternative_text_markers($node, $text_table, "v tabuľke pre geografické údaje hesla")) {
+      $skip = TRUE;
+    }
   }
-  if (!_check_alternative_text_markers($node)) {
-    $skip = TRUE;
-  }
+
   if (isset($node->field_ilustracia[LANGUAGE_NONE]) ) {
     foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
       $ilu_generic_node = node_load($illustration['target_id']);
@@ -322,6 +326,7 @@ function beliana_sync_sync($nid, &$context) {
         $dates[] = $only_date;
       }
     }
+
     // form object to be sent over.
     $remote_node_object = [
       'title' => $node->title,
