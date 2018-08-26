@@ -263,17 +263,19 @@ function beliana_sync_sync($nid, &$context) {
     $skip = TRUE;
   }
   // check article text
-  $text_hesla = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   // are LITE changes still present?
+  $text_hesla = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   if (strpos($text_hesla,"ice-ins") or strpos($text_hesla, "ice-del")){
     art_error($node, 'v texte sú uložené LITE zmeny', 'sync');
     $skip = TRUE;
   }
-  $text_table = $node->field_table[LANGUAGE_NONE][0]['value'];
-  // are LITE changes still present?
-  if (strpos($text_table,"ice-ins") or strpos($text_table, "ice-del")){
-    art_error($node, 'v tabuľke sú uložené LITE zmeny', 'sync');
-    $skip = TRUE;
+  // are LITE changes still present in table?
+  if (isset($node->field_table[LANGUAGE_NONE][0])) {
+    $text_table = $node->field_table[LANGUAGE_NONE][0]['value'];
+    if (strpos($text_table,"ice-ins") or strpos($text_table, "ice-del")){
+      art_error($node, 'v tabuľke sú uložené LITE zmeny', 'sync');
+      $skip = TRUE;
+    }
   }
   if (!_check_alternative_text_markers($node)) {
     $skip = TRUE;
