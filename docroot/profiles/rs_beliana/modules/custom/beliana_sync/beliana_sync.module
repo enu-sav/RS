@@ -195,8 +195,8 @@ function html_error($node, $error, $shortmsg)
 function modify_body_text($text)
 {
   // remove alternative text
-  $text = preg_replace('/▶[kK][^◀]*◀/', '', $text);
-  $text = preg_replace('/▶[wW]([^◀]*)◀/', '\1', $text);
+  $text = preg_replace('/(*UTF8)▶[kK][^◀]*◀/', '', $text);
+  $text = preg_replace('/(*UTF8)▶[wW]([^◀]*)◀/', '\1', $text);
 
   // arrow ➔ for both web and print
   $text = str_replace("➔","→",$text);
