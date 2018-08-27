@@ -148,7 +148,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 6,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -332,7 +332,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 6,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -497,7 +497,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -635,7 +635,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 13,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -688,7 +688,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 14,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );

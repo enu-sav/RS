@@ -176,7 +176,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 6,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -837,11 +837,11 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Vložte tabuľku so základnými údajmi o štátoch ap.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 20,
+        'weight' => 0,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -893,7 +893,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 23,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -906,7 +906,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -915,7 +915,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 21,
+        'weight' => 0,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -946,7 +946,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 25,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -1131,7 +1131,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
