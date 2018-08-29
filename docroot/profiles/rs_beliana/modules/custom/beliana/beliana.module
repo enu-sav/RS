@@ -1,4 +1,5 @@
 <?php
+
 # vim: ai ts=2 sts=2 et sw=2 ft=php
 
 /**
@@ -475,7 +476,7 @@ function update_dates(&$entity, $context = array()) {
     if (count($dates) > 0) {
       // unset date fields first
       for ($i = 2; $i >= 0; $i--) {
-        if( isset($entity->field_datum[LANGUAGE_NONE][$i]['value']))
+        if (isset($entity->field_datum[LANGUAGE_NONE][$i]['value']))
           unset($entity->field_datum[LANGUAGE_NONE][$i]['value']);
       }
       for ($i = 0; $i < count($dates); $i++) {
@@ -655,9 +656,9 @@ function beliana_node_presave($node) {
   # do not execute in the case of workbench moderation state transitions
   # execute only on node saving
   # on node creation $node->workbench_moderation does not exist
-  if (isset($node->workbench_moderation_state_new)  and 
-        isset($node->workbench_moderation) and 
-        $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
+  if (isset($node->workbench_moderation_state_new) and
+      isset($node->workbench_moderation) and
+      $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
     return;
   }
 
@@ -700,8 +701,8 @@ function beliana_node_presave($node) {
   }
 
   # do not continue if node has just been created
-  if (isset($node->is_new) and $node->is_new === True) 
-	return;
+  if (isset($node->is_new) and $node->is_new === True)
+    return;
 
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
     return;
@@ -712,7 +713,7 @@ function beliana_node_presave($node) {
   if (count($dates) > 0) {
     // unset date fields first
     for ($i = 2; $i >= 0; $i--) {
-      if( isset($node->field_datum[LANGUAGE_NONE][$i]['value']))
+      if (isset($node->field_datum[LANGUAGE_NONE][$i]['value']))
         unset($node->field_datum[LANGUAGE_NONE][$i]['value']);
     }
     for ($i = 0; $i < count($dates); $i++) {
@@ -752,6 +753,37 @@ function beliana_node_presave($node) {
 }
 
 /**
+ * Implements hook_views_pre_render().
+ */
+function beliana_views_pre_render($view) {
+  $affected_views = array(
+    'sync_to_web' => 'node_workbench_moderation_node_history_nid',
+    'vsetky_hesla_detaily' => 'nid',
+  );
+
+  if (in_array($view->name, array_keys($affected_views))) {
+    $unique_nids = [];
+    $new_results = [];
+
+    // Loop through results and filter out duplicate results.
+    foreach ($view->result as $index => $result) {
+      $data = $result->_field_data;
+
+      if (isset($data[$affected_views[$view->name]])) {
+        $node = $data[$affected_views[$view->name]]['entity'];
+
+        if (!in_array($node->nid, $unique_nids)) {
+          $unique_nids[] = $node->nid;
+          $new_results[] = $result;
+        }
+      }
+    }
+
+    $view->result = $new_results;
+  }
+}
+
+/**
  * Implements hook_form_alter().
  * If user has role 'redaktor' and state is `zaradene`,
  * we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
@@ -763,11 +795,11 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   // log information about opening nodes for editing
   // if $form['title']['#default_value'] is empty (node just ceated), do not log anything
   $nf_pos = strpos($form_id, "_node_form");
-  if ( ! ($nf_pos === false) && isset($form['title']['#default_value'])){
+  if (!($nf_pos === false) && isset($form['title']['#default_value'])) {
     watchdog('content', '@type: otvorené na úpravu @title.', [
       '@type' => substr($form_id, 0, $nf_pos),
       '@title' => $form['title']['#default_value'],
-    ], WATCHDOG_NOTICE);
+        ], WATCHDOG_NOTICE);
   }
 
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
@@ -843,13 +875,13 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     if ($new_state === "na_opakovane_zverejnenie" or $new_state === "na_zalomenie") {
       $fail = False;
       $text = $values['node']->field_text_hesla['und'][0]['value'];
-      if (strpos($text,"ice-ins") or strpos($text, "ice-del")){
+      if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
         $fail = True;
         drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . '</a> nebol zmenený, lebo v jeho texte sú uložené LITE zmeny', 'error');
       }
       if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
         $texttab = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
-        if (strpos($texttab,"ice-ins") or strpos($texttab, "ice-del")){
+        if (strpos($texttab, "ice-ins") or strpos($texttab, "ice-del")) {
           $fail = True;
           drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo v poli 'Tabuľka pre geografické heslá' sú uložené LITE zmeny", 'error');
         }
@@ -870,17 +902,13 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       $skip = True;
     }
     // Check alternative text marker correctness in article body
-    if (!_check_alternative_text_markers($values['node'],
-         $values['node']->field_text_hesla['und'][0]['value'],
-         "v hesle")) {
+    if (!_check_alternative_text_markers($values['node'], $values['node']->field_text_hesla['und'][0]['value'], "v hesle")) {
       $skip = True;
     }
     // Check alternative text marker correctness in article table
     if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
       $text_table = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
-      if (!_check_alternative_text_markers($values['node'], 
-           $text_table, 
-           "v tabuľke pre geografické údaje hesla")) {
+      if (!_check_alternative_text_markers($values['node'], $text_table, "v tabuľke pre geografické údaje hesla")) {
         $skip = TRUE;
       }
     }
@@ -994,33 +1022,33 @@ function _check_alternative_text_markers(&$node, $text, $where) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   // do not check validity if LITE changes are stored
-  if (strpos($text,"ice-ins") or strpos($text, "ice-del")){
+  if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
     return true;
   }
   $retvalue = true;
-  $hlink =  'Chybný alternatívny text '.$where.' <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: ';
+  $hlink = 'Chybný alternatívny text ' . $where . ' <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: ';
   $pattern = "/(*UTF8)(▶[^◀]*▶)/";
-  if ( preg_match_all($pattern, $text, $matches) ){
+  if (preg_match_all($pattern, $text, $matches)) {
     drupal_set_message($hlink . 'opakovaný začiatok (... ▶ ... ▶ ...)', 'error');
     $retvalue = false;
   }
   $pattern = "/(*UTF8)(◀[^▶]*◀)/";
-  if ( preg_match_all($pattern, $text, $matches) ){
+  if (preg_match_all($pattern, $text, $matches)) {
     drupal_set_message($hlink . 'opakované ukončenie (... ◀ ... ◀ ...)', 'error');
     $retvalue = false;
   }
   $pattern = "/(*UTF8)(▶[^kKwW])/";
-  if ( preg_match_all($pattern, $text, $matches) ){
-    drupal_set_message($hlink . 'použité "'.$matches[0][0] . '" namiesto "▶K" alebo "▶W"', 'error');
+  if (preg_match_all($pattern, $text, $matches)) {
+    drupal_set_message($hlink . 'použité "' . $matches[0][0] . '" namiesto "▶K" alebo "▶W"', 'error');
     $retvalue = false;
   }
   $pattern = "/(*UTF8)(▶[^◀]*$)/";
-  if ( preg_match_all($pattern, $text, $matches) ){
+  if (preg_match_all($pattern, $text, $matches)) {
     drupal_set_message($hlink . 'chýba ukončenie ◀', 'error');
     $retvalue = false;
   }
   $pattern = "/(*UTF8)^[^▶]*◀/";
-  if ( preg_match_all($pattern, $text, $matches) ){
+  if (preg_match_all($pattern, $text, $matches)) {
     drupal_set_message($hlink . 'chýba začiatok "▶K" alebo "▶W"', 'error');
     $retvalue = false;
   }
@@ -1205,13 +1233,13 @@ function _beliana_assign_user(&$node, $context) {
   if ($user !== FALSE) {
     // create array of node's categories
     $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
-    $node_taxo=array();
-    foreach($parents_all as $val){
+    $node_taxo = array();
+    foreach ($parents_all as $val) {
       $node_taxo[] = $val->tid;
     }
     // create array of user's categories
-    $user_taxo=array();
-    foreach($user->workbench_access as $key => $val){
+    $user_taxo = array();
+    foreach ($user->workbench_access as $key => $val) {
       $user_taxo[] = $key;
     }
     // return if intersection is empty
@@ -2109,9 +2137,8 @@ function get_header_dates($text) {
 }
 
 // delete unnecessary tags from node text
-function beliana_clean_tags($node, $text, $where)
-{ 
-  $internalErrorsState = libxml_use_internal_errors(true); 
+function beliana_clean_tags($node, $text, $where) {
+  $internalErrorsState = libxml_use_internal_errors(true);
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
 
@@ -2120,57 +2147,57 @@ function beliana_clean_tags($node, $text, $where)
   if ($errors) {
     # clear errors and restore error loging status
     foreach ($errors as $error) {
-      html_error($node, $error, "Chyba HTML syntaxe v poli '".$where."' (clean save)"); 
+      html_error($node, $error, "Chyba HTML syntaxe v poli '" . $where . "' (clean save)");
     }
     libxml_clear_errors();
-    libxml_use_internal_errors($internalErrorsState);   
+    libxml_use_internal_errors($internalErrorsState);
     # return unchanged text
     return $text;
   }
   # clear errors and restore error loging status
   libxml_clear_errors();
-  libxml_use_internal_errors($internalErrorsState); 
+  libxml_use_internal_errors($internalErrorsState);
 
   $xpath = new DOMXPath($dom);
 
   // remove tags completely: <ins>, <span>, ....
-  $rmtags=array(
-  '//ins[not(@*)]',
-  '//span[not(@*)]',
-  '//span[@style="background-color:null"]',
-  '//span[@style="background-color:#ffffff"]',
-  '//span[@style="background-color:white"]',
-  '//td/p',
+  $rmtags = array(
+    '//ins[not(@*)]',
+    '//span[not(@*)]',
+    '//span[@style="background-color:null"]',
+    '//span[@style="background-color:#ffffff"]',
+    '//span[@style="background-color:white"]',
+    '//td/p',
   );
   foreach ($rmtags as $tag) {
-  //_remove_node($xpath, $tag);
-  // Move all tag node content to its parent node just before it.
-  foreach ($xpath->query($tag) as $textnode) {
-    while ($textnode->hasChildNodes()) {
-      $child = $textnode->removeChild($textnode->firstChild);
-      $textnode->parentNode->insertBefore($child, $textnode);
-    }
-    // Remove the tag node.
-    $textnode->parentNode->removeChild($textnode);
+    //_remove_node($xpath, $tag);
+    // Move all tag node content to its parent node just before it.
+    foreach ($xpath->query($tag) as $textnode) {
+      while ($textnode->hasChildNodes()) {
+        $child = $textnode->removeChild($textnode->firstChild);
+        $textnode->parentNode->insertBefore($child, $textnode);
+      }
+      // Remove the tag node.
+      $textnode->parentNode->removeChild($textnode);
     }
   }
 
   // remove tag attributes
-  $cltags=array(
-    array("a","style"),
-    array("a","target"),
-    array("td","style"),
-    array("th","class"),
-    array("table","border"),
-    array("table","cellspacing"),
-    array("table","cellpadding"),
-    array("table","style"),
+  $cltags = array(
+    array("a", "style"),
+    array("a", "target"),
+    array("td", "style"),
+    array("th", "class"),
+    array("table", "border"),
+    array("table", "cellspacing"),
+    array("table", "cellpadding"),
+    array("table", "style"),
   );
   foreach ($cltags as $cltag) {
-    $tagstring = "//".$cltag[0]."[@".$cltag[1]."]";
+    $tagstring = "//" . $cltag[0] . "[@" . $cltag[1] . "]";
     foreach ($xpath->query($tagstring) as $tag) {
-      $sNode = $tag->getAttributeNode( $cltag[1] );
-      $tag->removeAttributeNode( $sNode );
+      $sNode = $tag->getAttributeNode($cltag[1]);
+      $tag->removeAttributeNode($sNode);
     }
   }
 
@@ -2188,7 +2215,6 @@ function beliana_clean_tags($node, $text, $where)
   $fragment = str_replace("<strong> </strong>", " ", $fragment);
 
   // remove empty lines at start and end
-
   // CKeditor inserts as empty line "<p> </p>" with non-breakable space 
   // nonbreakable space: " " here
   $fragment = preg_replace('#^(<p> </p>[\r\n]*)*#', '', $fragment);
