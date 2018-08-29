@@ -1368,6 +1368,55 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
+        9 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        30 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        31 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        27 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        29 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
         5 => array(
           1 => 1,
           2 => 2,
@@ -1376,13 +1425,6 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           4 => 0,
         ),
         4 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        10 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1445,21 +1487,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        18 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
         3 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        9 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1495,6 +1523,13 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           4 => 0,
         ),
         26 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        28 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -1516,15 +1551,39 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        9 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        30 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        31 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        27 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        29 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        18 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        10 => array(
+          1 => 1,
+          3 => 0,
+        ),
         5 => array(
           1 => 1,
           3 => 0,
         ),
         4 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        10 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1560,15 +1619,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        18 => array(
-          1 => 1,
-          3 => 0,
-        ),
         3 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        9 => array(
           1 => 1,
           3 => 0,
         ),
@@ -1592,6 +1643,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
+        28 => array(
+          1 => 1,
+          3 => 0,
+        ),
       ),
       'selector' => '',
       'values_set' => 3,
@@ -1601,6 +1656,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
         1 => 'Public domain',
         2 => 'CC licencia',
         3 => 'Muzeálny objekt',
+        4 => 'Autorské dielo',
       ),
       'value' => array(),
     ),
