@@ -47,8 +47,8 @@ function beliana_sync_node_update($node) {
   # execute only on node saving
   # on node creation $node->workbench_moderation does not exist
   if (isset($node->workbench_moderation_state_new)  and 
-        isset($node->workbench_moderation) and 
-        $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
+        isset($node->workbench_moderation_state_current) and 
+        $node->workbench_moderation_state_current != $node->workbench_moderation_state_new) {
     return;
   }
   if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
