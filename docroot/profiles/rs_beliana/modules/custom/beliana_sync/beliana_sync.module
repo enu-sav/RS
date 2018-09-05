@@ -305,13 +305,16 @@ function beliana_sync_sync($nid, &$context) {
     }
   }
 
+  // if something went wrong, return now
+  if($skip) {
+    $context['results']['error']++;
+    return;
+  }
+
   # remove links to not yet published articles
   $body = _beliana_sync_process_links($node, true);
   # if failed owing to html syntax error
-  if (!$body) $skip = true;
-
-  // if something went wrong, return now
-  if($skip) {
+  if (!$body) { 
     $context['results']['error']++;
     return;
   }
