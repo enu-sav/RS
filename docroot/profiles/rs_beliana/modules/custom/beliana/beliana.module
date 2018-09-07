@@ -753,9 +753,9 @@ function beliana_node_presave($node) {
 }
 
 /**
- * Implements hook_views_pre_render().
+ * Implements hook_views_post_execute().
  */
-function beliana_views_pre_render($view) {
+function beliana_views_post_execute(&$view) {
   $affected_views = array(
     'sync_to_web' => 'node_workbench_moderation_node_history_nid',
     'vsetky_hesla_detaily' => 'nid',
