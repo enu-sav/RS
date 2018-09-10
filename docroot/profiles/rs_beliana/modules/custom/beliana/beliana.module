@@ -781,8 +781,10 @@ function beliana_views_post_execute(&$view) {
 
     $view->result = $new_results;
 
-//    $view->query->pager->total_items = count($new_results);
-//    $view->query->pager->update_page_info();
+    if ($view->query->pager->total_items < 50) {
+      $view->query->pager->total_items = count($new_results);
+      $view->query->pager->update_page_info();
+    }
   }
 }
 
