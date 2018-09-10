@@ -761,26 +761,29 @@ function beliana_views_post_execute(&$view) {
     'vsetky_hesla_detaily' => 'nid',
   );
 
-//  if (in_array($view->name, array_keys($affected_views))) {
-//    $unique_nids = [];
-//    $new_results = [];
-//
-//    // Loop through results and filter out duplicate results.
-//    foreach ($view->result as $index => $result) {
-//      $data = $result->_field_data;
-//
-//      if (isset($data[$affected_views[$view->name]])) {
-//        $node = $data[$affected_views[$view->name]]['entity'];
-//
-//        if (!in_array($node->nid, $unique_nids)) {
-//          $unique_nids[] = $node->nid;
-//          $new_results[] = $result;
-//        }
-//      }
-//    }
-//
-//    $view->result = $new_results;
-//  }
+  if (in_array($view->name, array_keys($affected_views))) {
+    $unique_nids = [];
+    $new_results = [];
+
+    // Loop through results and filter out duplicate results.
+    foreach ($view->result as $index => $result) {
+      $data = $result->_field_data;
+
+      if (isset($data[$affected_views[$view->name]])) {
+        $node = $data[$affected_views[$view->name]]['entity'];
+
+        if (!in_array($node->nid, $unique_nids)) {
+          $unique_nids[] = $node->nid;
+          $new_results[] = $result;
+        }
+      }
+    }
+
+    $view->result = $new_results;
+
+//    $view->query->pager->total_items = count($new_results);
+//    $view->query->pager->update_page_info();
+  }
 }
 
 /**
