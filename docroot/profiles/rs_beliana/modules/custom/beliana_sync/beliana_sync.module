@@ -66,6 +66,80 @@ function beliana_sync_node_update($node) {
  *
  * @param $nid
  */
+function _beliana_sync_replace_links($node) {
+  // Extract links from field_text_hesla.
+  $nid = $node->nid;
+  $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  // do not continue if text is empty
+  if ( $text === "" ) return;
+  $internalErrorsState = libxml_use_internal_errors(true); 
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+
+  // handle errors locally
+  $errors = libxml_get_errors();
+  if ($errors) {
+    # clear errors and restore error loging status
+    foreach ($errors as $error) {
+      html_error($node, $error, "Chyba HTML syntaxe (links)"); 
+    }
+    libxml_clear_errors();
+    libxml_use_internal_errors($internalErrorsState);   
+    # return unchanged text
+    return null;
+  }
+  # clear errors and restore error loging status
+  libxml_clear_errors();
+  libxml_use_internal_errors($internalErrorsState); 
+
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  if (!empty($links)) {
+    for ($i = $links->length - 1; $i >= 0; $i--) {
+      $item = $links->item($i);
+      $target = $item->getAttribute('href');
+      if (!url_is_external($target)) {
+        // Get rid of leading slash.
+        if ($target[0] === '/') {
+          $target = substr($target, 1);
+        }
+        // Get non-alias path, so we can get nid from it.
+        $path = drupal_get_normal_path($target);
+        $path_elements = explode('/', $path);
+        // If alias belong to node, then insert record into beliana_links table.
+
+          $remote_id = db_select('beliana_sync', 's')
+            ->fields('s', ['remote'])
+            ->condition('local', $path_elements[1])
+            ->execute()
+            ->fetchCol(0);
+          if (!empty($remote_id)) {
+            // If was synced, then replace href to remote site.
+            $remote_id = reset($remote_id);
+            $item->setAttribute('href', '/node/' . $remote_id);
+          }
+          else {
+            // If not synced, then remove link completely.
+            $lnkText = $item->textContent;
+            $newTxtNode = $dom->createTextNode($lnkText);
+            $item->parentNode->replaceChild($newTxtNode, $item);
+          }
+      }
+    }
+  }
+
+    $fragment = '';
+    foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
+      $fragment .= $dom->saveHtml($node);
+    }
+    return $fragment;
+}
+
+/**
+ * Extract links from node and insert them into beliana_links table.
+ *
+ * @param $nid
+ */
 function _beliana_sync_process_links($node, $replace = FALSE) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
@@ -107,7 +181,7 @@ function _beliana_sync_process_links($node, $replace = FALSE) {
         $path = drupal_get_normal_path($target);
         $path_elements = explode('/', $path);
         // If alias belong to node, then insert record into beliana_links table.
-        if ($path_elements[0] === 'node' && is_numeric($path_elements[1]) && !$replace) {
+        if ($path_elements[0] === 'node' && is_numeric($path_elements[1])) {
           $link = db_select('beliana_links', 'l')
             ->fields('l', ['origin'])
             ->condition('origin', $nid)
@@ -125,34 +199,8 @@ function _beliana_sync_process_links($node, $replace = FALSE) {
           }
         }
 
-        if ($replace) {
-          $remote_id = db_select('beliana_sync', 's')
-            ->fields('s', ['remote'])
-            ->condition('local', $path_elements[1])
-            ->execute()
-            ->fetchCol(0);
-          if (!empty($remote_id)) {
-            // If was synced, then replace href to remote site.
-            $remote_id = reset($remote_id);
-            $item->setAttribute('href', '/node/' . $remote_id);
-          }
-          else {
-            // If not synced, then remove link completely.
-            $lnkText = $item->textContent;
-            $newTxtNode = $dom->createTextNode($lnkText);
-            $item->parentNode->replaceChild($newTxtNode, $item);
-          }
-        }
       }
     }
-  }
-
-  if ($replace) {
-    $fragment = '';
-    foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
-      $fragment .= $dom->saveHtml($node);
-    }
-    return $fragment;
   }
 }
 
@@ -312,7 +360,7 @@ function beliana_sync_sync($nid, &$context) {
   }
 
   # remove links to not yet published articles
-  $body = _beliana_sync_process_links($node, true);
+  $body = _beliana_sync_replace_links($node);
   # if failed owing to html syntax error
   if (!$body) { 
     $context['results']['error']++;
