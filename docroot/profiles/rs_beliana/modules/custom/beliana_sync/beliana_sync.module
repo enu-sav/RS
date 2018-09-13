@@ -22,32 +22,6 @@ function beliana_sync_menu() {
 }
 
 /**
- * Implements hook_node_update().
- *
- * We are extracting links from `Heslo` nodes.
- *
- * {@inheritdoc}
- */
-function beliana_sync_node_update($node) {
-  # do not execute in the case of workbench moderation state transitions
-  # execute only on node saving
-  # on node creation $node->workbench_moderation does not exist
-  if (isset($node->workbench_moderation_state_new)  and 
-        isset($node->workbench_moderation_state_current) and 
-        $node->workbench_moderation_state_current != $node->workbench_moderation_state_new) {
-    return;
-  }
-  if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
-    // Remove links to old node.
-    db_delete('beliana_links')
-      ->condition('origin', $node->nid)
-      ->execute();
-    // Extract links.
-    _beliana_sync_process_links($node);
-  }
-}
-
-/**
  * Extract links from node and insert them into beliana_links table.
  *
  * @param $nid
