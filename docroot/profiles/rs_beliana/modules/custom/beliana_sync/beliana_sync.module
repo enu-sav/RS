@@ -26,31 +26,10 @@ function beliana_sync_menu() {
  *
  * @param $nid
  */
-function _beliana_sync_replace_links($node) {
+function beliana_sync_remove_links($node) {
   // Extract links from field_text_hesla.
-  $nid = $node->nid;
-  $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
-  // do not continue if text is empty
-  if ( $text === "" ) return;
-  $internalErrorsState = libxml_use_internal_errors(true); 
-  $dom = new \DOMDocument();
-  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
-
-  // handle errors locally
-  $errors = libxml_get_errors();
-  if ($errors) {
-    # clear errors and restore error loging status
-    foreach ($errors as $error) {
-      html_error($node, $error, "Chyba HTML syntaxe (links)"); 
-    }
-    libxml_clear_errors();
-    libxml_use_internal_errors($internalErrorsState);   
-    # return unchanged text
-    return null;
-  }
-  # clear errors and restore error loging status
-  libxml_clear_errors();
-  libxml_use_internal_errors($internalErrorsState); 
+  $dom = beliana_get_dom($node, $text, "Text hesla (beliana_process_links)");
+  if (!$dom) return $text;
 
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
@@ -251,7 +230,7 @@ function beliana_sync_sync($nid, &$context) {
   }
 
   # remove links to not yet published articles
-  $body = _beliana_sync_replace_links($node);
+  $body = beliana_sync_remove_links($node);
   # if failed owing to html syntax error
   if (!$body) { 
     $context['results']['error']++;
@@ -820,26 +799,8 @@ function _check_field_pouzit(&$node, &$ilu_node, $category)
 // remove unnecessary and unwanted tags in synchronization
 function _beliana_sync_clean_tags($text)
 {
-
-  $internalErrorsState = libxml_use_internal_errors(true); 
-  $dom = new \DOMDocument();
-  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
-
-  // handle errors locally
-  $errors = libxml_get_errors();
-  if ($errors) {
-    # clear errors and restore error loging status
-    foreach ($errors as $error) {
-      html_error($node, $error, "Chyba HTML syntaxe (clean sync)"); 
-    }
-    libxml_clear_errors();
-    libxml_use_internal_errors($internalErrorsState);   
-    # return unchanged text
-    return null;
-  }
-  # clear errors and restore error loging status
-  libxml_clear_errors();
-  libxml_use_internal_errors($internalErrorsState); 
+  $dom = beliana_get_dom($node, $text, $where);
+  if (!$dom) return $text;
 
   $xpath = new DOMXPath($dom);
 
