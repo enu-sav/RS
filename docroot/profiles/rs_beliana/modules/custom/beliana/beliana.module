@@ -2229,7 +2229,7 @@ function beliana_clean_tags($node, $text, $where) {
  *
  * @param $nid
  */
-function beliana_process_links($node, $replace = FALSE) {
+function beliana_process_links($node) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   db_delete('beliana_links')
