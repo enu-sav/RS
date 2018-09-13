@@ -752,10 +752,6 @@ function beliana_node_presave($node) {
   }
 
   #update the link table
-  db_delete('beliana_links')
-      ->condition('origin', $node->nid)
-      ->execute();
-  // Extract links.
   beliana_process_links($node);
 }
 
@@ -2243,6 +2239,10 @@ function beliana_clean_tags($node, $text, $where) {
 function beliana_process_links($node, $replace = FALSE) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
+  db_delete('beliana_links')
+      ->condition('origin', $nid)
+      ->execute();
+  // Extract links.
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   // do not continue if text is empty
   if ( $text === "" ) return;
