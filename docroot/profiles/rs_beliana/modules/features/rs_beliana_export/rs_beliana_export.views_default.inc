@@ -58,6 +58,11 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['label'] = '';
   $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Tabuľka pre geografické heslá */
+  $handler->display->display_options['fields']['field_table']['id'] = 'field_table';
+  $handler->display->display_options['fields']['field_table']['table'] = 'field_data_field_table';
+  $handler->display->display_options['fields']['field_table']['field'] = 'field_table';
+  $handler->display->display_options['fields']['field_table']['label'] = '';
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
