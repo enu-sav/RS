@@ -760,7 +760,7 @@ function beliana_node_presave($node) {
   }
 
   #update the link table
-  beliana_process_links($node);
+  _beliana_process_links($node);
 }
 
 /**
@@ -2240,10 +2240,11 @@ function beliana_clean_tags($node, $text, $where) {
 
 /**
  * Extract links from node and insert them into beliana_links table.
+ * name "beliana_process_links" is not OK, it is called in unexpected situations with funny arguments
  *
  * @param $nid
  */
-function beliana_process_links($node) {
+function _beliana_process_links($node) {
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   db_delete('beliana_links')
