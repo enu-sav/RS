@@ -459,11 +459,15 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
     // Change workbench status for node and attached illustrations.
-    workbench_moderation_moderate($node, 'publikovane_na_webe');
+    if ($node->workbench_moderation['current']->state != "publikovane_na_webe") {
+      workbench_moderation_moderate($node, 'publikovane_na_webe');
+    }
     foreach ($illustrations as $illustration) {
       $ilu_generic_node = node_load($illustration['nid']);
       $ilu_node = workbench_moderation_node_current_load($ilu_generic_node);
-      workbench_moderation_moderate($ilu_node, 'ilustracia_na_webe');
+      if ($ilu_node->workbench_moderation['current']->state != "ilustracia_na_webe") {
+        workbench_moderation_moderate($ilu_node, 'ilustracia_na_webe');
+      }
     }
     watchdog('sync', 'Heslo "@title" bolo úspešne prenesené.', [
       '@title' => $node->title,
@@ -471,7 +475,8 @@ function beliana_sync_sync($nid, &$context) {
     $context['results']['success']++;
 
     // save the date of first publication to web here
-    if (!isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
+    // field_datum_prveho_zverejnenia exists only in heslo
+    if ($node->type === 'heslo' and !isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
       $node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'] = date("Y/m/d - H:i");
       node_save($node);
     }
