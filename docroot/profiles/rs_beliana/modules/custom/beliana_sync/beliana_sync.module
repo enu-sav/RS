@@ -22,20 +22,6 @@ function beliana_sync_menu() {
 }
 
 /**
- * Implements hook_node_insert().
- *
- * We are extracting links from `Heslo` nodes.
- *
- * {@inheritdoc}
- */
-function beliana_sync_node_insert($node) {
-  if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
-    // Extract links.
-    _beliana_sync_process_links($node);
-  }
-}
-
-/**
  * Implements hook_node_update().
  *
  * We are extracting links from `Heslo` nodes.
