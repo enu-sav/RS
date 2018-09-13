@@ -1066,6 +1066,11 @@ function _check_alternative_text_markers(&$node, $text, $where) {
     drupal_set_message($hlink . 'chýba začiatok "▶K" alebo "▶W"', 'error');
     $retvalue = false;
   }
+  $pattern = "/(*UTF8) ◀/";
+  if (preg_match_all($pattern, $text, $matches)) {
+    drupal_set_message($hlink . 'pred znakom ◀ nesmie byť medzera', 'error');
+    $retvalue = false;
+  }
   // check correctness of tags inside the alternatives
   // catches only closing tags 
   $pattern = "/(*UTF8)▶[^◀▶]*◀/";
