@@ -750,6 +750,13 @@ function beliana_node_presave($node) {
     $html = beliana_clean_tags($node, $node->field_table[LANGUAGE_NONE][0]['value'], "Tabuľka pre geografické heslá");
     $node->field_table[LANGUAGE_NONE][0]['value'] = $html;
   }
+
+  #update the link table
+  db_delete('beliana_links')
+      ->condition('origin', $node->nid)
+      ->execute();
+  // Extract links.
+  _beliana_sync_process_links($node);
 }
 
 /**
