@@ -28,7 +28,8 @@ function beliana_sync_menu() {
  */
 function beliana_sync_remove_links($node) {
   // Extract links from field_text_hesla.
-  $dom = beliana_get_dom($node, $text, "Text hesla (beliana_process_links)");
+  $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  $dom = beliana_get_dom($node, $text, "Text hesla (beliana_sync_remove_links)");
   if (!$dom) return $text;
 
   /** @var \DOMElement[] $links */
