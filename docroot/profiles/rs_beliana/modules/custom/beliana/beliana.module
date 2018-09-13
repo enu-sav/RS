@@ -744,7 +744,7 @@ function beliana_node_presave($node) {
   }
 
   // remove unnecessary tags
-  $html = beliana_clean_tags($node, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], "Text hesla");
+  $html = beliana_clean_tags($node, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], "Text hesla (beliana_node_presave)");
   $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = $html;
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $html = beliana_clean_tags($node, $node->field_table[LANGUAGE_NONE][0]['value'], "Tabuľka pre geografické heslá");
@@ -2141,28 +2141,10 @@ function get_header_dates($text) {
 
 // delete unnecessary tags from node text
 function beliana_clean_tags($node, $text, $where) {
-  $internalErrorsState = libxml_use_internal_errors(true);
-  $dom = new \DOMDocument();
-  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
-
-  // handle errors locally
-  $errors = libxml_get_errors();
-  if ($errors) {
-    # clear errors and restore error loging status
-    foreach ($errors as $error) {
-      html_error($node, $error, "Chyba HTML syntaxe v poli '" . $where . "' (clean save)");
-    }
-    libxml_clear_errors();
-    libxml_use_internal_errors($internalErrorsState);
-    # return unchanged text
-    return $text;
-  }
-  # clear errors and restore error loging status
-  libxml_clear_errors();
-  libxml_use_internal_errors($internalErrorsState);
+  $dom = beliana_get_dom($node, $text, $where);
+  if (!$dom) return $text;
 
   $xpath = new DOMXPath($dom);
-
   // remove tags completely: <ins>, <span>, ....
   $rmtags = array(
     '//ins[not(@*)]',
@@ -2245,26 +2227,9 @@ function beliana_process_links($node, $replace = FALSE) {
   // Extract links.
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   // do not continue if text is empty
-  if ( $text === "" ) return;
-  $internalErrorsState = libxml_use_internal_errors(true); 
-  $dom = new \DOMDocument();
-  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
-
-  // handle errors locally
-  $errors = libxml_get_errors();
-  if ($errors) {
-    # clear errors and restore error loging status
-    foreach ($errors as $error) {
-      html_error($node, $error, "Chyba HTML syntaxe (links)"); 
-    }
-    libxml_clear_errors();
-    libxml_use_internal_errors($internalErrorsState);   
-    # return unchanged text
-    return null;
-  }
-  # clear errors and restore error loging status
-  libxml_clear_errors();
-  libxml_use_internal_errors($internalErrorsState); 
+  if ( $text === "" ) return "";
+  $dom = beliana_get_dom($node, $text, "Text hesla (beliana_process_links)");
+  if (!$dom) return $text;
 
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
@@ -2302,4 +2267,39 @@ function beliana_process_links($node, $replace = FALSE) {
       }
     }
   }
+}
+
+/**
+ * Helper function for representing node text as DOM
+ *
+ * @param $node
+ *   node the next 'text' argument relates to (may be article node, but the text may be related to illustration)
+ * @param string $text
+ *   node text area to be represented
+ * @param string $where
+ *   some text for an error message
+ *
+ * @return 
+ *   null or $dom
+ */
+function beliana_get_dom($node, $text, $where) {
+  $internalErrorsState = libxml_use_internal_errors(true);
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+
+  // handle errors locally
+  $errors = libxml_get_errors();
+  if ($errors) {
+    # clear errors and restore error loging status
+    foreach ($errors as $error) {
+      html_error($node, $error, "Chyba HTML syntaxe v poli '" . $where);
+    }
+    libxml_clear_errors();
+    libxml_use_internal_errors($internalErrorsState);
+    return null;
+  }
+  # clear errors and restore error loging status
+  libxml_clear_errors();
+  libxml_use_internal_errors($internalErrorsState);
+  return $dom;
 }
