@@ -1076,7 +1076,7 @@ function _check_alternative_text_markers(&$node, $text, $where) {
   $pattern = "/(*UTF8)▶[^◀▶]*◀/";
   if (preg_match_all($pattern, $text, $matches)) {
     foreach ($matches[0] as $match) {
-      $dom = beliana_get_dom($node, $match, $where);
+      $dom = beliana_get_dom($node, $match);
       preg_match_all("/(*UTF8)(<[^\/])/", $match, $matchesopen);
       preg_match_all("/(*UTF8)(<\/)/", $match, $matchesclose);
       if (!$dom or count($matchesopen[0]) != count($matchesclose[0])) {
@@ -2314,8 +2314,9 @@ function _beliana_process_links($node) {
  *
  * @return 
  *   null or $dom
+ *   no error message if $where == Null
  */
-function beliana_get_dom($node, $text, $where) {
+function beliana_get_dom($node, $text, $where=Null) {
   $internalErrorsState = libxml_use_internal_errors(true);
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
@@ -2324,8 +2325,10 @@ function beliana_get_dom($node, $text, $where) {
   $errors = libxml_get_errors();
   if ($errors) {
     # clear errors and restore error loging status
-    foreach ($errors as $error) {
-      html_error($node, $error, "Chyba HTML syntaxe v poli '" . $where);
+    if ($where){
+      foreach ($errors as $error) {
+        html_error($node, $error, "Chyba HTML syntaxe v poli '" . $where);
+      }
     }
     libxml_clear_errors();
     libxml_use_internal_errors($internalErrorsState);
