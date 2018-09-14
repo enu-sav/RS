@@ -27,6 +27,7 @@ function beliana_sync_menu() {
  * @param $nid
  */
 function _beliana_sync_remove_links($node) {
+  //dpm("_beliana_sync_remove_links");
   // Extract links from field_text_hesla.
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   $dom = beliana_get_dom($node, $text, "Text hesla (_beliana_sync_remove_links)");
@@ -152,6 +153,7 @@ function modify_body_text($node, $text)
 }
 
 function beliana_sync_sync($nid, &$context) {
+  //dpm("beliana_sync_sync");
   $skip = FALSE;
   // Make sure to only initialize the results the first time.
   if (!isset($context['results']['success'])) {
@@ -801,6 +803,7 @@ function _check_field_pouzit(&$node, &$ilu_node, $category)
 // remove unnecessary and unwanted tags in synchronization
 function _beliana_sync_clean_tags($node, $text)
 {
+  //dpm("_beliana_sync_clean_tags");
   $dom = beliana_get_dom($node, $text);
   if (!$dom) return $text;
 

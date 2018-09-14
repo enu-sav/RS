@@ -669,6 +669,7 @@ function beliana_node_presave($node) {
       $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
     return;
   }
+  //dpm("beliana_node_presave");
 
   setlocale(LC_COLLATE, 'sk_SK.utf8');
   // fix field_na_zoradenie if necessary
@@ -850,6 +851,7 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
  * @inheritdoc
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
+  //dpm("beliana_workflow_reaction");
   $values = $form_state['values'];
   if (!isset($values['node']->workbench_moderation['current']->state))
     return;
@@ -2252,6 +2254,7 @@ function beliana_clean_tags($node, $text, $where) {
  * @param $nid
  */
 function _beliana_process_links($node) {
+  //dpm("_beliana_process_links");
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   db_delete('beliana_links')
