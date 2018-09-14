@@ -111,7 +111,7 @@ function html_error($node, $error, $shortmsg)
 
 // eventual fixes in article text 
 // nonbreakable space: " "
-function modify_body_text($text)
+function modify_body_text($node, $text)
 {
   // remove alternative text
   $text = preg_replace('/(*UTF8)  *▶[kK][^◀]*◀([.,;])/', '\1', $text);
@@ -148,7 +148,7 @@ function modify_body_text($text)
   $text = str_replace( ' class="rtecenter"', '', $text);
   $text = str_replace( ' class="rteleft"', '', $text);
   
-  return _beliana_sync_clean_tags($text);
+  return _beliana_sync_clean_tags($node, $text);
 }
 
 function beliana_sync_sync($nid, &$context) {
@@ -239,7 +239,7 @@ function beliana_sync_sync($nid, &$context) {
     return;
   }
 
-  $body = modify_body_text($body);
+  $body = modify_body_text($node, $body);
 
   // publish everything now
     $dates = [];
@@ -266,7 +266,7 @@ function beliana_sync_sync($nid, &$context) {
     // add table, if the field is defined and if there really is a table in it
     if (isset($node->field_table[LANGUAGE_NONE]) and !(strpos($node->field_table[LANGUAGE_NONE][0]['value'], 'table') === False)) {
       $remote_node_object['table'] = array(
-         modify_body_text($node->field_table[LANGUAGE_NONE][0]['value']),
+         modify_body_text($node, $node->field_table[LANGUAGE_NONE][0]['value']),
          (isset($node->field_table_weight[LANGUAGE_NONE])) ?  $node->field_table_weight[LANGUAGE_NONE][0]['value'] : 0
       );
     } else {
@@ -799,9 +799,9 @@ function _check_field_pouzit(&$node, &$ilu_node, $category)
 }
 
 // remove unnecessary and unwanted tags in synchronization
-function _beliana_sync_clean_tags($text)
+function _beliana_sync_clean_tags($node, $text)
 {
-  $dom = beliana_get_dom($node, $text, $where);
+  $dom = beliana_get_dom($node, $text);
   if (!$dom) return $text;
 
   $xpath = new DOMXPath($dom);
