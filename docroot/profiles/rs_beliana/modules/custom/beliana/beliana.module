@@ -1077,7 +1077,9 @@ function _check_alternative_text_markers(&$node, $text, $where) {
   if (preg_match_all($pattern, $text, $matches)) {
     foreach ($matches[0] as $match) {
       $dom = beliana_get_dom($node, $match, $where);
-      if (!$dom) {
+      preg_match_all("/(*UTF8)(<[^\/])/", $match, $matchesopen);
+      preg_match_all("/(*UTF8)(<\/)/", $match, $matchesclose);
+      if (!$dom or count($matchesopen[0]) != count($matchesclose[0])) {
         $match = str_replace("<","&lt;", $match);
         $match = str_replace(">","&gt;", $match);
         drupal_set_message($hlink . 'formátovanie presahuje hranice alternatívneho textu: "'.$match.'"', 'error');
