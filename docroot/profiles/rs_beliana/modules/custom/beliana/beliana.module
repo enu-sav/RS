@@ -762,6 +762,7 @@ function beliana_views_post_execute(&$view) {
   );
 
   if (in_array($view->name, array_keys($affected_views))) {
+    $old_count = count($view->result);
     $unique_nids = array();
     $new_results = array();
 
@@ -776,11 +777,11 @@ function beliana_views_post_execute(&$view) {
     }
 
     $view->result = $new_results;
-    $count = count($new_results);
-
-    if ($view->query->pager->total_items > $count && $count < 50) {
-      $view->total_rows = $count;
-      $view->query->pager->total_items = $count;
+    $new_count = count($new_results);
+    
+    if ($old_count > $new_count && $view->query->pager->total_items < 50) {
+      $view->total_rows = $new_count;
+      $view->query->pager->total_items = $new_count;
       $view->query->pager->update_page_info();
     }
   }
