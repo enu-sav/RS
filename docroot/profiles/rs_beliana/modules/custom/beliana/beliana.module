@@ -328,6 +328,15 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ),
+    'update_author_payment_data' => array(
+      'type' => 'entity',
+      'label' => t('Update author payment data'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
   );
 }
 
@@ -494,6 +503,65 @@ function update_dates(&$entity, $context = array()) {
       node_save($entity);
     }
   }
+}
+
+/**
+ * Callback function for `update_author_payment_data` action.
+ * Find the first transition needs_review -> na_zalomenie, get the number of characters and set relevant fields
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function update_author_payment_data(&$entity, $context = array()) {
+  if ($entity->type != 'heslo') return;
+  if (!isset($entity->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]) ){
+    $tlen = _get_authors_text_length($entity);
+    if ($tlen) { 
+      $entity->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
+      node_save($entity);
+    }
+  }
+}
+
+/**
+ * Find the first transition needs_review -> na_zalomenie and return text length
+ *
+ */
+function _get_authors_text_length(&$node) {
+  if ($node->type != 'heslo') return null;
+
+  // get the array of transitions needs_review -> na_zalomenie
+  $transitions = db_select('workbench_moderation_node_history', 'w')
+    ->fields('w')	// all fields
+    ->condition('from_state', 'needs_review') 	// u redaktora state
+    ->condition('state', 'na_zverejnenie') 	// u vr1 state
+    ->condition('nid', $node->nid) 	// u vr1 state
+    ->execute()
+    ->fetchAll();
+  if (empty($transitions)) return null;
+  // get vid of the oldest transition
+  $tstamp = $transitions[0]->stamp;
+  $vid = $transitions[0]->vid;
+  foreach ($transitions as $tr) {
+    if ($tr->stamp < $tstamp ) {
+      $tstamp = $tr->stamp;
+      $vid = $tr->vid;
+    }
+  }
+
+  // load the $vid revision
+  $revision = entity_revision_load('node', $vid);
+  // remove tags and clean the text
+  $text = strip_tags(str_replace('<', ' <', $revision->field_text_hesla[LANGUAGE_NONE][0]['value']));
+  $text = preg_replace('/\n|\r|\t/m', ' ', $text);
+  $text = str_replace('&nbsp;', ' ', $text);
+  $text = str_replace("\xc2\xa0", ' ', $text);
+  $text = trim(preg_replace('/\s\s+/', ' ', $text));
+  $tlen = drupal_strlen($text);
+
+  return $tlen;
+  
 }
 
 /**
@@ -758,6 +826,14 @@ function beliana_node_presave($node) {
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $html = beliana_clean_tags($node, $node->field_table[LANGUAGE_NONE][0]['value'], "Tabuľka pre geografické heslá");
     $node->field_table[LANGUAGE_NONE][0]['value'] = $html;
+  }
+
+  # update author's text lenght field
+  if (!isset($node->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]) ){
+    $tlen = _get_authors_text_length($node);
+    if ($tlen) { 
+      $node->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
+    }
   }
 
   #update the link table
