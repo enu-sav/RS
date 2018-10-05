@@ -519,6 +519,7 @@ function update_author_payment_data(&$entity, $context = array()) {
     $tlen = _get_authors_text_length($entity);
     if ($tlen) { 
       $entity->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
+      $entity->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
       node_save($entity);
     }
   }
@@ -833,6 +834,7 @@ function beliana_node_presave($node) {
     $tlen = _get_authors_text_length($node);
     if ($tlen) { 
       $node->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
+      $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     }
   }
 
