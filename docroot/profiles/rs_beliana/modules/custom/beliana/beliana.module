@@ -979,11 +979,27 @@ function beliana_workflow_reaction(&$form, &$form_state) {
           drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo v poli 'Tabuľka pre geografické heslá' sú uložené LITE zmeny", 'error');
         }
       }
-      if ($fail) {
-        $values['node']->workbench_moderation_state_new = $cur_state;
-        node_save($values['node']);
-        return;
+    }
+    // check if payment information is stored
+    if (!isset($values['node']->field_zlucene_z[LANGUAGE_NONE][0]) and (       // only unmerged articles
+         ($cur_state === "needs_review" and  $new_state === "na_zverejnenie") or  // u redaktora state u vr1 state transition
+         ($cur_state === "1_korektura" and  $new_state === "u_vyst_redaktora_3") or
+         ($cur_state === "2_korekt_ra" and  $new_state === "u_vyst_redaktora_4")
+       )) {
+      if (!isset($values['node']->field_vyplatit[LANGUAGE_NONE][0])) {
+        $fail = True;
+        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
+      } elseif ($values['node']->field_vyplatit[LANGUAGE_NONE][0]['value'] === "Vyplatiť")  {
+        if (!isset($values['node']->field_podiel_autora[LANGUAGE_NONE][0])) {
+          $fail = True;
+          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Podiel autora'", 'error');
+        }
       }
+    }
+    if ($fail) {
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
     }
   }
 
