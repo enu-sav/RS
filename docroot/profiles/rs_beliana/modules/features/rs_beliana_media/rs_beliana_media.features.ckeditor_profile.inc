@@ -86,7 +86,7 @@ config.specialChars = [
 [\'⬈\', \'šípka len v knihe\'],
 [\' ▶K\', \'alternatívny text do knihy, začiatok\'],
 [\' ▶W\', \'alternatívny text na web, začiatok\'],
-[\' ◀\', \'alternatívny text, koniec\'],
+[\'◀\', \'alternatívny text, koniec\'],
 [\'*\',\'hviezdička\'],
 [\'†\', \'krížik\'],
 [\'…\', \'elipsa\'],

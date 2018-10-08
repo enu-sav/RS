@@ -98,6 +98,38 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_datum_autorovho_textu'.
+  $field_bases['field_datum_autorovho_textu'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_datum_autorovho_textu',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
   // Exported field_base: 'field_datum_prveho_zverejnenia'.
   $field_bases['field_datum_prveho_zverejnenia'] = array(
     'active' => 1,
@@ -128,6 +160,24 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_dlzka_autorovho_textu'.
+  $field_bases['field_dlzka_autorovho_textu'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_dlzka_autorovho_textu',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_errta'.
@@ -266,6 +316,38 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_podiel_autora'.
+  $field_bases['field_podiel_autora'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_podiel_autora',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'heslo napísal redaktor sám',
+        20 => 'menej ako 20 %',
+        40 => '20 – 40 %',
+        60 => '40 – 60 %',
+        80 => '60 – 80 %',
+        100 => 'viac ako 80 %',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_pouzite_zdroje'.
   $field_bases['field_pouzite_zdroje'] = array(
     'active' => 1,
@@ -378,46 +460,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_table'.
-  $field_bases['field_table'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_table',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
-  // Exported field_base: 'field_table_weight'.
-  $field_bases['field_table_weight'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_table_weight',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'number_integer',
-  );
-
   // Exported field_base: 'field_taxsubor'.
   $field_bases['field_taxsubor'] = array(
     'active' => 1,
@@ -511,11 +553,10 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Vyplatiť' => 'Heslo vypracuje autor, vyplatiť',
+        'Vyplatiť' => 'Heslo vypracoval autor alebo konzultant, vyplatiť',
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
-        'Konzultant' => 'Heslo vypracuje konzultant, vyplatiť',
-        'Konzultant-vyplatené' => 'Heslo vypracuje konzultant, už bolo vyplatené',
-        'Redaktor' => 'Heslo vypracuje redaktor',
+        'Redaktor' => 'Heslo vypracoval redaktor',
+        'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
       ),
       'allowed_values_function' => '',
     ),
