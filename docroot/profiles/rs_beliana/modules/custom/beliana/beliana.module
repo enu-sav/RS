@@ -8,6 +8,16 @@
  */
 
 /**
+ * Implements hook_views_api().
+ */
+function beliana_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'beliana') . '/views',
+  );
+}
+
+/**
  * Implements hook_menu().
  *
  * @inheritdoc
@@ -778,7 +788,7 @@ function beliana_views_post_execute(&$view) {
 
     $view->result = $new_results;
     $new_count = count($new_results);
-    
+
     if ($old_count > $new_count && $view->query->pager->total_items < 50) {
       $view->total_rows = $new_count;
       $view->query->pager->total_items = $new_count;
