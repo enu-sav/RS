@@ -10307,31 +10307,21 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     26 => 0,
     29 => 0,
   );
+  $handler->display->display_options['filters']['author_date_month']['group_info']['label'] = 'Author Date Filter (Month)';
+  $handler->display->display_options['filters']['author_date_month']['group_info']['identifier'] = 'author_date_month';
+  $handler->display->display_options['filters']['author_date_month']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['author_date_month']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
   /* Filter criterion: Beliana: Author Date Filter (Year) */
   $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
   $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
   $handler->display->display_options['filters']['author_date_year']['value'] = array(
     2018 => '2018',
-    2017 => '2017',
-    2016 => '2016',
-    2015 => '2015',
-    2014 => '2014',
-    2013 => '2013',
-    2012 => '2012',
-    2011 => '2011',
-    2010 => '2010',
-    2009 => '2009',
-    2008 => '2008',
-    2007 => '2007',
-    2006 => '2006',
-    2005 => '2005',
-    2004 => '2004',
-    2003 => '2003',
-    2002 => '2002',
-    2001 => '2001',
-    2000 => '2000',
-    1999 => '1999',
+    2019 => '2019',
   );
   $handler->display->display_options['filters']['author_date_year']['group'] = 1;
   $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
@@ -10366,6 +10356,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     23 => 0,
     26 => 0,
     29 => 0,
+  );
+  $handler->display->display_options['filters']['author_date_year']['group_info']['label'] = 'Author Date Filter (Year)';
+  $handler->display->display_options['filters']['author_date_year']['group_info']['identifier'] = 'author_date_year';
+  $handler->display->display_options['filters']['author_date_year']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['author_date_year']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
   );
   /* Filter criterion: Obsah: Dátum autorovho textu (field_datum_autorovho_textu) */
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
@@ -10469,6 +10467,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
   $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
@@ -10856,6 +10858,112 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       ),
     ),
   );
+  /* Filter criterion: Beliana: Author Date Filter (Month) */
+  $handler->display->display_options['filters']['author_date_month']['id'] = 'author_date_month';
+  $handler->display->display_options['filters']['author_date_month']['table'] = 'node';
+  $handler->display->display_options['filters']['author_date_month']['field'] = 'author_date_month';
+  $handler->display->display_options['filters']['author_date_month']['value'] = array(
+    1 => '1',
+    2 => '2',
+    3 => '3',
+    4 => '4',
+    5 => '5',
+    6 => '6',
+    7 => '7',
+    8 => '8',
+    9 => '9',
+    10 => '10',
+    11 => '11',
+    12 => '12',
+  );
+  $handler->display->display_options['filters']['author_date_month']['group'] = 1;
+  $handler->display->display_options['filters']['author_date_month']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['author_date_month']['expose']['operator_id'] = 'author_date_month_op';
+  $handler->display->display_options['filters']['author_date_month']['expose']['label'] = 'Mesiac';
+  $handler->display->display_options['filters']['author_date_month']['expose']['operator'] = 'author_date_month_op';
+  $handler->display->display_options['filters']['author_date_month']['expose']['identifier'] = 'month';
+  $handler->display->display_options['filters']['author_date_month']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    28 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    29 => 0,
+  );
+  /* Filter criterion: Beliana: Author Date Filter (Year) */
+  $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
+  $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
+  $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
+  $handler->display->display_options['filters']['author_date_year']['value'] = array(
+    2018 => '2018',
+    2019 => '2019',
+  );
+  $handler->display->display_options['filters']['author_date_year']['group'] = 1;
+  $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
+  $handler->display->display_options['filters']['author_date_year']['expose']['label'] = 'Rok';
+  $handler->display->display_options['filters']['author_date_year']['expose']['operator'] = 'author_date_year_op';
+  $handler->display->display_options['filters']['author_date_year']['expose']['identifier'] = 'year';
+  $handler->display->display_options['filters']['author_date_year']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    28 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    29 => 0,
+  );
+  /* Filter criterion: Obsah: Dátum autorovho textu (field_datum_autorovho_textu) */
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['field'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['group'] = 2;
+  /* Filter criterion: Obsah: Dátum autorovho textu (field_datum_autorovho_textu) */
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['id'] = 'field_datum_autorovho_textu_value_1';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['field'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['group'] = 2;
   $handler->display->display_options['path'] = 'export_autori.csv';
   $handler->display->display_options['displays'] = array(
     'page_3' => 'page_3',
@@ -10952,7 +11060,9 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Kategórie používateľov'),
     t('Používatelia'),
     t('Mesiac'),
+    t('Author Date Filter (Month)'),
     t('Rok'),
+    t('Author Date Filter (Year)'),
     t('Export autori - dáta'),
     t('Vyplatenie odmeny (field_vyplatit)'),
   );

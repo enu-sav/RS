@@ -17,15 +17,11 @@ class beliana_handler_filter_author_date_year extends views_handler_filter_in_op
   function construct() {
     parent::construct();
 
-    $option_years = array();
-    $current_year = date('Y');
 
-    for ($i = 0; $i < 20; $i++) {
-      $year = $current_year - $i;
-      $option_years[$year] = $year;
-    }
-
-    $this->value_options = $option_years;
+    $this->value_options = array(
+      2018 => '2018',
+      2019 => '2019'
+    );
   }
 
   function op_simple() {
