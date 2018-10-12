@@ -180,6 +180,24 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
+  // Exported field_base: 'field_dlzka_autorovho_textu_zad'.
+  $field_bases['field_dlzka_autorovho_textu_zad'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_dlzka_autorovho_textu_zad',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
   // Exported field_base: 'field_errta'.
   $field_bases['field_errta'] = array(
     'active' => 1,

@@ -74,6 +74,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_dlzka_autorovho_textu_zad'.
+  $permissions['create field_dlzka_autorovho_textu_zad'] = array(
+    'name' => 'create field_dlzka_autorovho_textu_zad',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_errta'.
   $permissions['create field_errta'] = array(
     'name' => 'create field_errta',
@@ -364,6 +374,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_dlzka_autorovho_textu_zad'.
+  $permissions['edit field_dlzka_autorovho_textu_zad'] = array(
+    'name' => 'edit field_dlzka_autorovho_textu_zad',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_errta'.
   $permissions['edit field_errta'] = array(
     'name' => 'edit field_errta',
@@ -564,6 +584,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_dlzka_autorovho_textu'] = array(
     'name' => 'edit own field_dlzka_autorovho_textu',
     'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_dlzka_autorovho_textu_zad'.
+  $permissions['edit own field_dlzka_autorovho_textu_zad'] = array(
+    'name' => 'edit own field_dlzka_autorovho_textu_zad',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -812,6 +842,22 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_dlzka_autorovho_textu_zad'.
+  $permissions['view field_dlzka_autorovho_textu_zad'] = array(
+    'name' => 'view field_dlzka_autorovho_textu_zad',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_errta'.
   $permissions['view field_errta'] = array(
     'name' => 'view field_errta',
@@ -1017,6 +1063,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_dlzka_autorovho_textu'] = array(
     'name' => 'view own field_dlzka_autorovho_textu',
     'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_dlzka_autorovho_textu_zad'.
+  $permissions['view own field_dlzka_autorovho_textu_zad'] = array(
+    'name' => 'view own field_dlzka_autorovho_textu_zad',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',

@@ -401,7 +401,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_dlzka_autorovho_textu',
-    'label' => 'Dĺžka autorovho textu',
+    'label' => 'Dĺžka autorovho textu (pri odosielaní)',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -416,6 +416,59 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 22,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-heslo-field_dlzka_autorovho_textu_zad'.
+  $field_instances['node-heslo-field_dlzka_autorovho_textu_zad'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Podiel autora</em>. Ak je pole <em>Podiel autora</em> vyplnené, tak tu zadaná hodnota má pri výpočte autorskej odmeny prednosť.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 23,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_dlzka_autorovho_textu_zad',
+    'label' => 'Dĺžka autorom odovzdaného textu',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -741,7 +794,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná.',
+    'description' => 'Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1519,7 +1572,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Dátum autorovho textu');
   t('Dátum prvého zverejnenia');
   t('Dátum výročia');
-  t('Dĺžka autorovho textu');
+  t('Dĺžka autorom odovzdaného textu');
+  t('Dĺžka autorovho textu (pri odosielaní)');
   t('Erráta');
   t('Ilustrácie');
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
@@ -1550,7 +1604,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Vypĺňané programovo');
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
-  t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná.');
+  t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
+  t('Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Podiel autora</em>. Ak je pole <em>Podiel autora</em> vyplnené, tak tu zadaná hodnota má pri výpočte autorskej odmeny prednosť.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorí sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
   t('Zlúčené do');
   t('Zlúčené z');
