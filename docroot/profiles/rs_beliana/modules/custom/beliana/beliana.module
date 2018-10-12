@@ -1002,9 +1002,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
         $fail = True;
         drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
       } elseif ($values['node']->field_vyplatit[LANGUAGE_NONE][0]['value'] === "Vyplatiť")  {
-        if (!isset($values['node']->field_podiel_autora[LANGUAGE_NONE][0])) {
+        if (!isset($values['node']->field_podiel_autora[LANGUAGE_NONE][0]) and !isset($values['node']->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0])) {
           $fail = True;
-          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Podiel autora'", 'error');
+          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo jedno z polí 'Podiel autora' alebo 'Dĺžka autorom odovzdaného textu' musí byť vyplnené", 'error');
         }
       }
     }
