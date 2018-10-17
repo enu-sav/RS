@@ -906,9 +906,20 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         ], WATCHDOG_NOTICE);
   }
 
+  global $user;
+  // disable author text fields, if already set
+  if ($form_id == "heslo_node_form" and !in_array("administrátor", $user->roles)) { // $form: node 
+    if (isset($form['field_vyplatit']) and $form['field_vyplatit'][LANGUAGE_NONE]['#default_value'] ){
+      $form['field_vyplatit']['#disabled']= TRUE;
+    }
+    if (isset($form['field_dlzka_autorovho_textu_zad']) and strlen($form['field_dlzka_autorovho_textu_zad'][LANGUAGE_NONE][0]['value']['#default_value']) > 0 ){
+      $form['field_dlzka_autorovho_textu_zad']['#disabled']= TRUE;
+    }
+//dpm($form,"form");
+  }  
+
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
-  global $user;
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && in_array("Redaktor", $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
