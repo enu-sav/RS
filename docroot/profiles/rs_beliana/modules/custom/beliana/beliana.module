@@ -529,7 +529,6 @@ function update_author_payment_data(&$entity, $context = array()) {
     $tlen = _get_authors_text_length($entity);
     if ($tlen) { 
       $entity->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
-      $entity->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
       node_save($entity);
     }
   }
@@ -839,12 +838,22 @@ function beliana_node_presave($node) {
     $node->field_table[LANGUAGE_NONE][0]['value'] = $html;
   }
 
-  # update author's text lenght field
-  if (!isset($node->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]) ){
-    $tlen = _get_authors_text_length($node);
-    if ($tlen) { 
-      $node->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
-      $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+  # save date when the author's text length was saved, update the lenght if it is equal to 0
+  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+    // set the date, so that we know it and the size is never changed again
+    $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+    // if  field_dlzka_autorovho_textu_zad is set to 0, fill the value automatically
+    if ($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0) {
+      $text = strip_tags(str_replace('<', ' <', $node->field_text_hesla[LANGUAGE_NONE][0]['value']));
+      $text = preg_replace('/\n|\r|\t/m', ' ', $text);
+      $text = str_replace('&nbsp;', ' ', $text);
+      $text = str_replace("\xc2\xa0", ' ', $text);
+      $text = trim(preg_replace('/\s\s+/', ' ', $text));
+      $tlen = drupal_strlen($text);
+      $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] = $tlen;
+      $node->log = $node->log . ", automaticky určená dĺžka autorovho textu";
+    } else {
+      $node->log = $node->log . ", ručne vložená dĺžka autorovho textu";
     }
   }
 
@@ -907,16 +916,33 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   }
 
   global $user;
-  // disable author text fields, if already set
-  if ($form_id == "heslo_node_form" and !in_array("administrátor", $user->roles)) { // $form: node 
-    if (isset($form['field_vyplatit']) and $form['field_vyplatit'][LANGUAGE_NONE]['#default_value'] ){
-      $form['field_vyplatit']['#disabled']= TRUE;
+  // disable but show fields related to author's text, if already set
+  if ($form_id == "heslo_node_form") {
+    if (!in_array("administrátor", $user->roles)) { // $form: node 
+      if (isset($form['field_vyplatit']) and $form['field_vyplatit'][LANGUAGE_NONE]['#default_value'] ){
+        $form['field_vyplatit']['#disabled']= TRUE;
+      }
+      if (isset($form['field_dlzka_autorovho_textu_zad']) and strlen($form['field_dlzka_autorovho_textu_zad'][LANGUAGE_NONE][0]['value']['#default_value']) > 0 ){
+        $form['field_dlzka_autorovho_textu_zad']['#disabled'] = TRUE;
+      }
+      // hide field_datum_autorovho_textu
+      if (isset($form['field_datum_autorovho_textu'])) {
+        $form['field_datum_autorovho_textu']['#access'] = FALSE;
+      }
     }
-    if (isset($form['field_dlzka_autorovho_textu_zad']) and strlen($form['field_dlzka_autorovho_textu_zad'][LANGUAGE_NONE][0]['value']['#default_value']) > 0 ){
-      $form['field_dlzka_autorovho_textu_zad']['#disabled']= TRUE;
+    #do not ever show these for merged (zlucene) articles (i. e. field_zlucene_z is nonempty)
+    if (isset($form['field_zlucene_z'][LANGUAGE_NONE][0]['target_id']['#default_value']) and strlen($form['field_zlucene_z'][LANGUAGE_NONE][0]['target_id']['#default_value']) > 0) {
+      if (isset($form['field_vyplatit'])) {
+        $form['field_vyplatit']['#access']= FALSE;
+      }
+      if (isset($form['field_datum_autorovho_textu'])) {
+        $form['field_datum_autorovho_textu']['#access'] = FALSE;
+      }
+      if (isset($form['field_dlzka_autorovho_textu_zad'])) {
+        $form['field_dlzka_autorovho_textu_zad']['#access'] = FALSE;
+      }
     }
-//dpm($form,"form");
-  }  
+  }
 
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
@@ -1013,9 +1039,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
         $fail = True;
         drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
       } elseif ($values['node']->field_vyplatit[LANGUAGE_NONE][0]['value'] === "Vyplatiť")  {
-        if (!isset($values['node']->field_podiel_autora[LANGUAGE_NONE][0]) and !isset($values['node']->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0])) {
+        if (!isset($values['node']->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0])) {
           $fail = True;
-          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo jedno z polí 'Podiel autora' alebo 'Dĺžka autorom odovzdaného textu' musí byť vyplnené", 'error');
+          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo pole 'Dĺžka textu na vyplatenie' musí byť vyplnené", 'error');
         }
       }
     }
