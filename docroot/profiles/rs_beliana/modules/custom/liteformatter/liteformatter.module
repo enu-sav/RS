@@ -48,16 +48,20 @@ function liteformatter_field_formatter_view($entity_type, $entity, $field, $inst
 	CKEDITOR.on( 'instanceCreated', function( event ) {
 		var editor = event.editor, element = editor.element;
 		editor.on( 'configLoaded', function() {
-		  editor.config.extraPlugins = 'lite';
-			editor.config.removePlugins = 'find,flash,font,pastefromword,horizontalrule,scayt' +
+		  editor.config.extraPlugins = 'lite,wordcount,notification';
+			showParagraphs: false,
+		  editor.config.removePlugins = 'find,flash,font,pastefromword,horizontalrule,scayt' +
 				'forms,iframe,image,newpage,removeformat,' +
 				'smiley,specialchar,stylescombo,templates';
-	    editor.config.removeButtons = 'HorizontalRule,Anchor,Unlink,Undo,Redo,Copy,Paste,Cut,Strike,Underline,PasteText,SpellChecker,NumberedList,BulletedList,Indent,Outdent,Format,Blockquote,Scayt';
+	          editor.config.removeButtons = 'HorizontalRule,Anchor,Unlink,Undo,Redo,Copy,Paste,Cut,Strike,Underline,PasteText,SpellChecker,NumberedList,BulletedList,Indent,Outdent,Format,Blockquote,Scayt';
+		  editor.config.wordcount = {
+			showParagraphs: false,
+			showCharCount: true,
+			countSpacesAsChars: true
+		  };
 		});
 		editor.config.readOnly = true;
 		editor.config.title = false;
-    
-
 	});
 </script>";
   // the Show/Hide button
