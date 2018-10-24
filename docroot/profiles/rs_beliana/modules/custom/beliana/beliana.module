@@ -838,6 +838,12 @@ function beliana_node_presave($node) {
     $node->field_table[LANGUAGE_NONE][0]['value'] = $html;
   }
 
+  // unset field_dlzka_autorovho_textu_zad if field_vyplatit is not Vyplatiť 
+  // (setting it makes no sense, but is possible in the form)
+  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and  
+      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] !== "Vyplatiť") {
+        unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]);
+  }
   # save date when the author's text length was saved, update the lenght if it is equal to 0
   if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
     // set the date, so that we know it and the size is never changed again
