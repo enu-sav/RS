@@ -747,7 +747,6 @@ function beliana_node_presave($node) {
       $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
     return;
   }
-  //dpm("beliana_node_presave");
 
   setlocale(LC_COLLATE, 'sk_SK.utf8');
   // fix field_na_zoradenie if necessary
@@ -806,10 +805,14 @@ function beliana_node_presave($node) {
       }
       if (isset($node->field_modifikovane[LANGUAGE_NONE][0]) and $node->field_modifikovane[LANGUAGE_NONE][0]['value'] !== '1') {
         if (isset($node->field_popis_modifikacie[LANGUAGE_NONE][0])) {
-          dpm("Odstránený nepotrebný text v field_popis_modifikacie");
+          dpm("Odstránený nepotrebný text v field_popis_modifikacie (1)");
           unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
         }
       }
+      if (!isset($node->field_modifikovane[LANGUAGE_NONE][0]) and isset($node->field_popis_modifikacie[LANGUAGE_NONE][0])) {
+          dpm("Odstránený nepotrebný text v field_popis_modifikacie (2)");
+          unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
+        }
     }
     return;
   }
@@ -894,6 +897,7 @@ function beliana_views_post_execute(&$view) {
   $affected_views = array(
     'sync_to_web' => 'node_workbench_moderation_node_history_nid',
     'vsetky_hesla_detaily' => 'nid',
+    'export_na_import' => 'nid',
   );
 
   if (in_array($view->name, array_keys($affected_views))) {
@@ -1003,7 +1007,6 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
  * @inheritdoc
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
-  //dpm("beliana_workflow_reaction");
   $values = $form_state['values'];
   if (!isset($values['node']->workbench_moderation['current']->state))
     return;
@@ -2422,7 +2425,7 @@ function beliana_clean_tags($node, $text, $where) {
  * @param $nid
  */
 function _beliana_process_links($node) {
-  //dpm("_beliana_process_links");
+  dpm("_beliana_process_links", $node->title);
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   db_delete('beliana_links')
