@@ -425,7 +425,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Podiel autora</em>. Ak je pole <em>Podiel autora</em> vyplnené, tak tu zadaná hodnota má pri výpočte autorskej odmeny prednosť.',
+    'description' => 'Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -478,7 +478,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Opravy, ktoré sa majú uviesť vo zväzku Erráta. Opravy uveďte formou "pôvodné >> opravené;", napríklad "King of Blue >> Kind of Blue;", a to vždy na samostatný riadok a na koniec dajte znak ;. Ak sú zmeny rozsiahle (napr. heslo je celkom prepísané), uveďte len "rozsiahle zmeny".',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1580,6 +1580,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Lexikálna skupina');
   t('Na zoradenie');
   t('Názov');
+  t('Opravy, ktoré sa majú uviesť vo zväzku Erráta. Opravy uveďte formou "pôvodné >> opravené;", napríklad "King of Blue >> Kind of Blue;", a to vždy na samostatný riadok a na koniec dajte znak ;. Ak sú zmeny rozsiahle (napr. heslo je celkom prepísané), uveďte len "rozsiahle zmeny".');
   t('Podiel autora');
   t('Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
@@ -1605,7 +1606,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
-  t('Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Podiel autora</em>. Ak je pole <em>Podiel autora</em> vyplnené, tak tu zadaná hodnota má pri výpočte autorskej odmeny prednosť.');
+  t('Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorí sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
   t('Zlúčené do');
   t('Zlúčené z');

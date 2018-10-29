@@ -154,10 +154,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'create field_podiel_autora'.
   $permissions['create field_podiel_autora'] = array(
     'name' => 'create field_podiel_autora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -446,10 +443,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'edit field_podiel_autora'.
   $permissions['edit field_podiel_autora'] = array(
     'name' => 'edit field_podiel_autora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -661,10 +655,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'edit own field_podiel_autora'.
   $permissions['edit own field_podiel_autora'] = array(
     'name' => 'edit own field_podiel_autora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -912,17 +903,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view field_podiel_autora'.
   $permissions['view field_podiel_autora'] = array(
     'name' => 'view field_podiel_autora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1124,10 +1105,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view own field_podiel_autora'.
   $permissions['view own field_podiel_autora'] = array(
     'name' => 'view own field_podiel_autora',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
