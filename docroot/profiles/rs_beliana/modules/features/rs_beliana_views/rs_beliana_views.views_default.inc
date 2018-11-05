@@ -9678,21 +9678,27 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
+    'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'state' => 'state',
     'field_meno' => 'field_meno',
     'field_priezvisko' => 'field_priezvisko',
     'field_autorska_zmluva' => 'field_autorska_zmluva',
     'field_vyplatit' => 'field_vyplatit',
-    'field_dlzka_autorovho_textu' => 'field_dlzka_autorovho_textu',
+    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
-    'last_updated' => 'last_updated',
-    'field_podiel_autora' => 'field_podiel_autora',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -9738,7 +9744,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_dlzka_autorovho_textu' => array(
+    'field_dlzka_autorovho_textu_zad' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -9746,20 +9752,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'empty_column' => 0,
     ),
     'field_datum_autorovho_textu' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'last_updated' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_podiel_autora' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -9838,19 +9830,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
-  /* Pole: Obsah: Dĺžka autorovho textu */
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu']['id'] = 'field_dlzka_autorovho_textu';
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu']['table'] = 'field_data_field_dlzka_autorovho_textu';
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu']['field'] = 'field_dlzka_autorovho_textu';
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu']['settings'] = array(
+  /* Pole: Obsah: Dĺžka autorom odovzdaného textu */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Pole: Obsah: Podiel autora */
-  $handler->display->display_options['fields']['field_podiel_autora']['id'] = 'field_podiel_autora';
-  $handler->display->display_options['fields']['field_podiel_autora']['table'] = 'field_data_field_podiel_autora';
-  $handler->display->display_options['fields']['field_podiel_autora']['field'] = 'field_podiel_autora';
-  $handler->display->display_options['fields']['field_podiel_autora']['type'] = 'list_key';
   /* Pole: Obsah: Dátum autorovho textu */
   $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
   $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
@@ -10034,6 +10021,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'operator' => 'in',
       'value' => array(
         'draft' => 'draft',
+        'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
         'zaradene' => 'zaradene',
         'all' => 0,
         'importovane' => 0,
@@ -10046,7 +10034,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         'na_opakovane_zverejnenie' => 0,
         'importovane_vyradene' => 0,
         'pozdr_an_' => 0,
-        'navrhnute_na_vyradenie' => 0,
         'u_autora' => 0,
         'needs_review' => 0,
         'na_zverejnenie' => 0,
@@ -10075,12 +10062,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       ),
     ),
     2 => array(
-      'title' => 'V procese spracovania',
+      'title' => 'U VR1 a ďalej',
       'operator' => 'in',
       'value' => array(
-        'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
-        'u_autora' => 'u_autora',
-        'needs_review' => 'needs_review',
+        'na_zalomenie' => 'na_zalomenie',
+        'publikovane_na_webe' => 'publikovane_na_webe',
+        'zverejnene_oprava' => 'zverejnene_oprava',
+        'zverejnene_vratene' => 'zverejnene_vratene',
+        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
         'na_zverejnenie' => 'na_zverejnenie',
         'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
         'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
@@ -10088,27 +10077,25 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
         '1_korektura' => '1_korektura',
         '2_korekt_ra' => '2_korekt_ra',
+        'len_vyplatit' => 'len_vyplatit',
+        'ukoncenezluene' => 'ukoncenezluene',
         'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
         'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
         'all' => 0,
         'importovane' => 0,
         'importovane_u_jr2' => 0,
         'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
         'importovane_vyradene' => 0,
         'pozdr_an_' => 0,
         'draft' => 0,
+        'navrhnute_na_vyradenie' => 0,
         'zaradene' => 0,
+        'u_autora' => 0,
+        'needs_review' => 0,
         'zlucene' => 0,
         'vyradene' => 0,
         'published' => 0,
-        'len_vyplatit' => 0,
         'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
         'zlucene_odkazy' => 0,
         'nova_ilustracia' => 0,
         'ilustracia_na_webe' => 0,
@@ -10241,6 +10228,51 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         '2_korekt_ra' => 0,
         'len_vyplatit' => 0,
         'u_konzultanta' => 0,
+        'ukoncenezluene' => 0,
+        'zlucene_odkazy' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_redaktora_2' => 0,
+        'ilustracia_na_webe' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    6 => array(
+      'title' => 'U autora, U redaktora a U konzultanta',
+      'operator' => 'in',
+      'value' => array(
+        'u_autora' => 'u_autora',
+        'needs_review' => 'needs_review',
+        'u_konzultanta' => 'u_konzultanta',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_jr2' => 0,
+        'importovane_u_vr' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'zverejnene_vratene' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'importovane_vyradene' => 0,
+        'pozdr_an_' => 0,
+        'draft' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zaradene' => 0,
+        'na_zverejnenie' => 0,
+        'u_vyst_redaktora_2' => 0,
+        'u_vyst_redaktora_3' => 0,
+        'u_vyst_redaktora_4' => 0,
+        'u_v_st_redaktora_5' => 0,
+        'zlucene' => 0,
+        'vyradene' => 0,
+        'published' => 0,
+        '1_korektura' => 0,
+        '2_korekt_ra' => 0,
+        'len_vyplatit' => 0,
         'ukoncenezluene' => 0,
         'zlucene_odkazy' => 0,
         'nova_ilustracia' => 0,
@@ -10426,6 +10458,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['text'] = 'https://rs.beliana.sav.sk/node/[nid]';
   /* Pole: Termín taxonómie: Názov */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
@@ -10466,6 +10504,28 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
+  /* Pole: Obsah: Dĺžka autorom odovzdaného textu */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Pole: Obsah: Dátum autorovho textu */
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['field'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['label'] = 'Dátum záznamu dĺžky';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['settings'] = array(
+    'format_type' => 'privatemsg_years',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -10637,6 +10697,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'operator' => 'in',
       'value' => array(
         'draft' => 'draft',
+        'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
         'zaradene' => 'zaradene',
         'all' => 0,
         'importovane' => 0,
@@ -10649,7 +10710,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         'na_opakovane_zverejnenie' => 0,
         'importovane_vyradene' => 0,
         'pozdr_an_' => 0,
-        'navrhnute_na_vyradenie' => 0,
         'u_autora' => 0,
         'needs_review' => 0,
         'na_zverejnenie' => 0,
@@ -10678,12 +10738,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       ),
     ),
     2 => array(
-      'title' => 'V procese spracovania',
+      'title' => 'U VR1 a ďalej',
       'operator' => 'in',
       'value' => array(
-        'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
-        'u_autora' => 'u_autora',
-        'needs_review' => 'needs_review',
+        'na_zalomenie' => 'na_zalomenie',
+        'publikovane_na_webe' => 'publikovane_na_webe',
+        'zverejnene_oprava' => 'zverejnene_oprava',
+        'zverejnene_vratene' => 'zverejnene_vratene',
+        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
         'na_zverejnenie' => 'na_zverejnenie',
         'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
         'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
@@ -10691,27 +10753,25 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
         '1_korektura' => '1_korektura',
         '2_korekt_ra' => '2_korekt_ra',
+        'len_vyplatit' => 'len_vyplatit',
+        'ukoncenezluene' => 'ukoncenezluene',
         'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
         'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
         'all' => 0,
         'importovane' => 0,
         'importovane_u_jr2' => 0,
         'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
         'importovane_vyradene' => 0,
         'pozdr_an_' => 0,
         'draft' => 0,
+        'navrhnute_na_vyradenie' => 0,
         'zaradene' => 0,
+        'u_autora' => 0,
+        'needs_review' => 0,
         'zlucene' => 0,
         'vyradene' => 0,
         'published' => 0,
-        'len_vyplatit' => 0,
         'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
         'zlucene_odkazy' => 0,
         'nova_ilustracia' => 0,
         'ilustracia_na_webe' => 0,
@@ -10844,6 +10904,51 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         '2_korekt_ra' => 0,
         'len_vyplatit' => 0,
         'u_konzultanta' => 0,
+        'ukoncenezluene' => 0,
+        'zlucene_odkazy' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_redaktora_2' => 0,
+        'ilustracia_na_webe' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    6 => array(
+      'title' => 'U autora, U redaktora a U konzultanta',
+      'operator' => 'in',
+      'value' => array(
+        'u_autora' => 'u_autora',
+        'needs_review' => 'needs_review',
+        'u_konzultanta' => 'u_konzultanta',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_jr2' => 0,
+        'importovane_u_vr' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'zverejnene_vratene' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'importovane_vyradene' => 0,
+        'pozdr_an_' => 0,
+        'draft' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zaradene' => 0,
+        'na_zverejnenie' => 0,
+        'u_vyst_redaktora_2' => 0,
+        'u_vyst_redaktora_3' => 0,
+        'u_vyst_redaktora_4' => 0,
+        'u_v_st_redaktora_5' => 0,
+        'zlucene' => 0,
+        'vyradene' => 0,
+        'published' => 0,
+        '1_korektura' => 0,
+        '2_korekt_ra' => 0,
+        'len_vyplatit' => 0,
         'ukoncenezluene' => 0,
         'zlucene_odkazy' => 0,
         'nova_ilustracia' => 0,
@@ -11054,8 +11159,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Priezvisko'),
     t('Autorská zmluva'),
     t('Vyplatenie odmeny'),
-    t('Dĺžka autorovho textu'),
-    t('Podiel autora'),
+    t('Dĺžka autorom odovzdaného textu'),
     t('Dátum autorovho textu'),
     t('Kategórie používateľov'),
     t('Používatelia'),
@@ -11064,6 +11168,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Rok'),
     t('Author Date Filter (Year)'),
     t('Export autori - dáta'),
+    t('https://rs.beliana.sav.sk/node/[nid]'),
+    t('Dátum záznamu dĺžky'),
     t('Vyplatenie odmeny (field_vyplatit)'),
   );
   $export['export_na_import'] = $view;

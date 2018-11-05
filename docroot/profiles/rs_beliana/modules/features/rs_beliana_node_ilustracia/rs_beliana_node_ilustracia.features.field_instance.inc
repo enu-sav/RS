@@ -164,7 +164,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -241,7 +241,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -390,7 +390,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_licencia1',
     'label' => 'Typ CC licencie',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -399,7 +399,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -475,7 +475,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -550,7 +550,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -592,7 +592,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_modifikovane',
     'label' => 'Modifikované',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -601,7 +601,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -675,7 +675,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 100,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -751,7 +751,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -846,12 +846,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
       'export' => array(
         'label' => 'inline',
-        'module' => 'beliana',
-        'settings' => array(
-          'link' => 0,
-          'size' => 'thumbnail',
-        ),
-        'type' => 'beliana_external_image',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'lite_display' => array(
@@ -1005,7 +1001,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_popis_modifikacie',
     'label' => 'Popis modifikácie',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
@@ -1039,7 +1035,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -1276,7 +1272,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 22,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -1296,9 +1292,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 15,
       ),
       'export' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'link_plain',
         'weight' => 5,
       ),
       'lite_display' => array(
@@ -1347,7 +1344,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 23,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1389,7 +1386,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_url_textu_licencie_l',
     'label' => 'URL textu licencie',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'absolute_url' => 1,
       'attributes' => array(
@@ -1418,7 +1415,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 21,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
