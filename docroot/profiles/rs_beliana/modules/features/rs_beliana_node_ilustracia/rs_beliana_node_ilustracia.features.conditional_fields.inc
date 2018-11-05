@@ -2266,41 +2266,6 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_popis_modifikacie',
-    'dependee' => 'field_licencia1',
-    'options' => array(
-      'state' => 'visible',
-      'condition' => 'value',
-      'grouping' => 'AND',
-      'values_set' => 1,
-      'value' => array(),
-      'values' => array(),
-      'value_form' => array(),
-      'effect' => 'show',
-      'effect_options' => array(),
-      'element_view' => array(
-        1 => 1,
-        2 => 2,
-        5 => 0,
-        3 => 0,
-        4 => 0,
-      ),
-      'element_view_per_role' => 0,
-      'element_view_roles' => array(),
-      'element_edit' => array(
-        1 => 1,
-        2 => 0,
-        3 => 0,
-      ),
-      'element_edit_per_role' => 0,
-      'element_edit_roles' => array(),
-      'selector' => '',
-    ),
-  );
-
-  $items["node:ilustracia:9"] = array(
-    'entity' => 'node',
-    'bundle' => 'ilustracia',
-    'dependent' => 'field_popis_modifikacie',
     'dependee' => 'field_zdroj_ilustracie',
     'options' => array(
       'state' => 'visible',
@@ -2623,7 +2588,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:10"] = array(
+  $items["node:ilustracia:9"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_url_autora_diela_l',
@@ -2895,7 +2860,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:11"] = array(
+  $items["node:ilustracia:10"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_url_diela_l',
@@ -3167,7 +3132,7 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:ilustracia:12"] = array(
+  $items["node:ilustracia:11"] = array(
     'entity' => 'node',
     'bundle' => 'ilustracia',
     'dependent' => 'field_url_textu_licencie_l',
