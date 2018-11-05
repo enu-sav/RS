@@ -107,6 +107,20 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_popis_modifikacie'.
+  $permissions['create field_popis_modifikacie'] = array(
+    'name' => 'create field_popis_modifikacie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_pouzit'.
   $permissions['create field_pouzit'] = array(
     'name' => 'create field_pouzit',
@@ -337,6 +351,20 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_popis_modifikacie'.
+  $permissions['edit field_popis_modifikacie'] = array(
+    'name' => 'edit field_popis_modifikacie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_pouzit'.
   $permissions['edit field_pouzit'] = array(
     'name' => 'edit field_pouzit',
@@ -507,6 +535,20 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'edit own field_nazov_diela'.
   $permissions['edit own field_nazov_diela'] = array(
     'name' => 'edit own field_nazov_diela',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_popis_modifikacie'.
+  $permissions['edit own field_popis_modifikacie'] = array(
+    'name' => 'edit own field_popis_modifikacie',
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
@@ -724,6 +766,20 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_popis_modifikacie'.
+  $permissions['view field_popis_modifikacie'] = array(
+    'name' => 'view field_popis_modifikacie',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_pouzit'.
   $permissions['view field_pouzit'] = array(
     'name' => 'view field_pouzit',
@@ -894,6 +950,20 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'view own field_nazov_diela'.
   $permissions['view own field_nazov_diela'] = array(
     'name' => 'view own field_nazov_diela',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_popis_modifikacie'.
+  $permissions['view own field_popis_modifikacie'] = array(
+    'name' => 'view own field_popis_modifikacie',
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',

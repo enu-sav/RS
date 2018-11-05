@@ -324,7 +324,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_popis_modifikacie',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
