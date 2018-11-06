@@ -122,6 +122,8 @@ function modify_body_text($node, $text)
   // arrow ➔ for both web and print
   $text = str_replace("➔","→",$text);
   // arrow ⬈ only for print
+  $text = str_replace("(⬈ ","(",$text);
+  $text = str_replace("(⬈","(",$text);
   $text = str_replace(" ⬈ "," ",$text);
   $text = str_replace(" ⬈"," ",$text);
   $text = str_replace("⬈ "," ",$text);
