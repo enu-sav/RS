@@ -867,8 +867,10 @@ function beliana_node_presave($node) {
         dpm("Odstránená nepotrebná hodnota v field_dlzka_autorovho_textu_zad");
         unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]);
   }
-  # save date when the author's text length was saved, update the lenght if it is equal to 0
-  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+  // save date when the author's text length was saved, update the lenght if it is equal to 0
+  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and 
+    (!isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value']) or  
+     $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0) ) {
     // set the date, so that we know it and the size is never changed again
     $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     // if  field_dlzka_autorovho_textu_zad is set to 0, fill the value automatically
@@ -884,6 +886,11 @@ function beliana_node_presave($node) {
     } else {
       $node->log = $node->log . ", ručne vložená dĺžka autorovho textu";
     }
+  }
+  // save date when the author's text information was saved
+  if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+    $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+    $node->log = $node->log . ", vyplnené pole Vyplatiť";
   }
 
   #update the link table
