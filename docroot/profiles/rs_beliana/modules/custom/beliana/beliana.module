@@ -1049,9 +1049,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
   // check type heslo
   if ($values['node']->type === 'heslo') {
+    $fail = False;
     // do not change state to na_opakovane_zverejnenie or na_zalomenie if LITE changes exist
     if ($new_state === "na_opakovane_zverejnenie" or $new_state === "na_zalomenie") {
-      $fail = False;
       $text = $values['node']->field_text_hesla['und'][0]['value'];
       if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
         $fail = True;
