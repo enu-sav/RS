@@ -516,25 +516,6 @@ function update_dates(&$entity, $context = array()) {
 }
 
 /**
- * Callback function for `update_author_payment_data` action.
- * Find the first transition needs_review -> na_zalomenie, get the number of characters and set relevant fields
- *
- * @inheritdoc
- *
- * @see beliana_action_info
- */
-function update_author_payment_data(&$entity, $context = array()) {
-  if ($entity->type != 'heslo') return;
-  if (!isset($entity->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]) ){
-    $tlen = _get_authors_text_length($entity);
-    if ($tlen) { 
-      $entity->field_dlzka_autorovho_textu[LANGUAGE_NONE][0]['value'] = $tlen;
-      node_save($entity);
-    }
-  }
-}
-
-/**
  * Find the first transition needs_review -> na_zalomenie and return text length
  *
  */
