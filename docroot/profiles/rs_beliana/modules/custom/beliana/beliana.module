@@ -961,8 +961,26 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         $form['field_datum_autorovho_textu']['#access'] = FALSE;
       }
     }
+
     #do not ever show these for merged (zlucene) articles (i. e. field_zlucene_z is nonempty)
     if (isset($form['field_zlucene_z'][LANGUAGE_NONE][0]['target_id']['#default_value']) and strlen($form['field_zlucene_z'][LANGUAGE_NONE][0]['target_id']['#default_value']) > 0) {
+      if (isset($form['field_vyplatit'])) {
+        $form['field_vyplatit']['#access']= FALSE;
+      }
+      if (isset($form['field_datum_autorovho_textu'])) {
+        $form['field_datum_autorovho_textu']['#access'] = FALSE;
+      }
+      if (isset($form['field_dlzka_autorovho_textu_zad'])) {
+        $form['field_dlzka_autorovho_textu_zad']['#access'] = FALSE;
+      }
+    }
+
+    #do not show for nodes, for which the payment information was exported manually on 11.11.2018
+    #nodes were labeled by setting
+    #$entity->field_atributy[LANGUAGE_NONE][0]['value']="podklady na vyplatenie exportovane 11. 11. 2018";
+    #this text should not be deleted from field_atributy field should npot be used for any other purpose
+    if (isset($form['field_atributy'][LANGUAGE_NONE][0]['value']['#default_value']) and
+      strpos($form['field_atributy'][LANGUAGE_NONE][0]['value']['#default_value'], 'podklady na vyplatenie') !== False) {
       if (isset($form['field_vyplatit'])) {
         $form['field_vyplatit']['#access']= FALSE;
       }
