@@ -515,6 +515,19 @@ function update_dates(&$entity, $context = array()) {
   }
 }
 
+/* check if the node payment data for the node were exported on 11.11.2018
+   labeled by setting
+   $entity->field_atributy[LANGUAGE_NONE][0]['value']="podklady na vyplatenie exportovane 11. 11. 2018";
+   this text should not be deleted from the fieldfield_atributy field should npot be used for any other purpose
+*/
+function _manual_payment(&$node) {
+  if (isset ($node->field_atributy[LANGUAGE_NONE][0]['value']) and
+    strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'podklady na vyplatenie') !== False) {
+      return True;
+  }
+  return False;
+}
+
 /**
  * Find the first transition needs_review -> na_zalomenie and return text length
  *
@@ -522,7 +535,7 @@ function update_dates(&$entity, $context = array()) {
 function _get_authors_text_length(&$node) {
   if ($node->type != 'heslo') return null;
 
-  // get the array of transitions needs_review -> na_zalomenie
+  // get the array of transitions needs_review -> na_zalomenie (U redaktora -> U VR1)
   $transitions = db_select('workbench_moderation_node_history', 'w')
     ->fields('w')	// all fields
     ->condition('from_state', 'needs_review') 	// u redaktora state
@@ -1048,7 +1061,8 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     }
     // check if payment information is stored
     if (!isset($values['node']->field_zlucene_z[LANGUAGE_NONE][0]) and        // only unmerged articles
-         ($cur_state === "needs_review" and  $new_state === "na_zverejnenie")  // u redaktora state u vr1 state transition
+         ($cur_state === "needs_review" and  $new_state === "na_zverejnenie") and  // u redaktora state u vr1 state transition
+	 !_manual_payment($values['node']) 		// not paid manually on 11.11.2018
        ) {
       if (!isset($values['node']->field_vyplatit[LANGUAGE_NONE][0])) {
         $fail = True;
