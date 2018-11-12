@@ -979,8 +979,16 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     #nodes were labeled by setting
     #$entity->field_atributy[LANGUAGE_NONE][0]['value']="podklady na vyplatenie exportovane 11. 11. 2018";
     #this text should not be deleted from field_atributy field should npot be used for any other purpose
-    if (isset($form['field_atributy'][LANGUAGE_NONE][0]['value']['#default_value']) and
-      strpos($form['field_atributy'][LANGUAGE_NONE][0]['value']['#default_value'], 'podklady na vyplatenie') !== False) {
+    #do not show for nodes, for which were impported from files Kolembus-00 and Komunikator-00
+    if (
+      (isset($form['field_atributy'][LANGUAGE_NONE][0]['value']['#default_value']) and
+      strpos($form['field_atributy'][LANGUAGE_NONE][0]['value']['#default_value'], 'podklady na vyplatenie') !== False) or 
+      (isset($form['field_komentar_instrukcie'][LANGUAGE_NONE][0]['value']['#default_value']) and
+      strpos($form['field_komentar_instrukcie'][LANGUAGE_NONE][0]['value']['#default_value'], 'import Kolembus-00') !== False) or 
+      (isset($form['field_komentar_instrukcie'][LANGUAGE_NONE][0]['value']['#default_value']) and
+      strpos($form['field_komentar_instrukcie'][LANGUAGE_NONE][0]['value']['#default_value'], 'import Komunikator-00') !== False)
+      ) 
+    {
       if (isset($form['field_vyplatit'])) {
         $form['field_vyplatit']['#access']= FALSE;
       }
