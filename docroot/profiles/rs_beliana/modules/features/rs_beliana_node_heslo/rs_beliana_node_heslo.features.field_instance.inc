@@ -250,7 +250,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -261,7 +261,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 22,
+        'weight' => 24,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -278,7 +278,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_datum_autorovho_textu',
-    'label' => 'Dátum autorovho textu',
+    'label' => 'Dátum uloženia údajov pre vyplatenie',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -367,68 +367,15 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-heslo-field_dlzka_autorovho_textu'.
-  $field_instances['node-heslo-field_dlzka_autorovho_textu'] = array(
-    'bundle' => 'heslo',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Vypĺňané programovo',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 21,
-      ),
-      'lite_display' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_dlzka_autorovho_textu',
-    'label' => 'Dĺžka autorovho textu (pri odosielaní)',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 22,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-heslo-field_dlzka_autorovho_textu_zad'.
   $field_instances['node-heslo-field_dlzka_autorovho_textu_zad'] = array(
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny.',
+    'description' => 'Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -454,11 +401,11 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_dlzka_autorovho_textu_zad',
-    'label' => 'Dĺžka autorom odovzdaného textu',
-    'required' => 0,
+    'label' => 'Počet znakov na vyplatenie',
+    'required' => 1,
     'settings' => array(
       'max' => '',
-      'min' => '',
+      'min' => 0,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -785,50 +732,6 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 2,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-heslo-field_podiel_autora'.
-  $field_instances['node-heslo-field_podiel_autora'] = array(
-    'bundle' => 'heslo',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 20,
-      ),
-      'lite_display' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_podiel_autora',
-    'label' => 'Podiel autora',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -1353,13 +1256,16 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zvoľte spôsob vypracovania hesla. <strong>Voľba N/A je neplatná.</strong>',
+    'description' => 'Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
+Pri odosielanú hesla VR1 však pole musí byť vyplnené.<br /> 
+Po uložení hesla voľbu nemožno zmeniť.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
+        'type' => 'list_default',
+        'weight' => 22,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1569,11 +1475,9 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla (nesmú byť zafarbené). Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe');
   t('Dátum aktualizácie');
-  t('Dátum autorovho textu');
   t('Dátum prvého zverejnenia');
+  t('Dátum uloženia údajov pre vyplatenie');
   t('Dátum výročia');
-  t('Dĺžka autorom odovzdaného textu');
-  t('Dĺžka autorovho textu (pri odosielaní)');
   t('Erráta');
   t('Ilustrácie');
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
@@ -1581,7 +1485,6 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Na zoradenie');
   t('Názov');
   t('Opravy, ktoré sa majú uviesť vo zväzku Erráta. Opravy uveďte formou "pôvodné >> opravené;", napríklad "King of Blue >> Kind of Blue;", a to vždy na samostatný riadok a na koniec dajte znak ;. Ak sú zmeny rozsiahle (napr. heslo je celkom prepísané), uveďte len "rozsiahle zmeny".');
-  t('Podiel autora');
   t('Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
   t('Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.');
@@ -1589,6 +1492,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Povodne lexikalne skupiny');
   t('Pozícia tabuľky pre geografické heslá');
   t('Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)');
+  t('Počet znakov na vyplatenie');
   t('Pôvodný text hesla v generálnom heslári pred importovaním z XLS súborov. XLS tabuľka heslára mala 8 stĺpcov ZODAD, HESLO, P_R, L_S, AUT, IL, POZN a POZN 2 . Obsah stĺpcov je uvedený v zátvorke, POZN a POZN2 sú spojené.
 ');
   t('Redaktori zlúčeného hesla');
@@ -1602,16 +1506,16 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   t('Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ');
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyplatenie odmeny');
-  t('Vypĺňané programovo');
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
-  t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
-  t('Zadajte počet znakov textu, ktorý autor odovzdal. Zadaná hodnota sa použije pri výpočte autorskej odmeny.');
+  t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorí sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
   t('Zlúčené do');
   t('Zlúčené z');
   t('Zo zoznamu vyberte názov súboru, do ktorého má byť heslo zaradené. Názov súboru je daný názvom svojho posledného hesla.');
-  t('Zvoľte spôsob vypracovania hesla. <strong>Voľba N/A je neplatná.</strong>');
+  t('Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
+Pri odosielanú hesla VR1 však pole musí byť vyplnené.<br /> 
+Po uložení hesla voľbu nemožno zmeniť.');
   t('Záznam z pôvodného GH');
 
   return $field_instances;
