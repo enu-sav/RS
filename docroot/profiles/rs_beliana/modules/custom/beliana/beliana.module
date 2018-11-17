@@ -882,22 +882,22 @@ function beliana_node_presave($node) {
       // remove inappropriate setting of field_licencia1 if licence type is not 'CC licencia' (possible in the form)
       if (isset($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]) and $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] !== 'CC licencia') {
         if (isset($node->field_licencia1[LANGUAGE_NONE][0])) {
-          dpm("Odstránená nepotrebná hodnota v field_licencia1 (typ CC licencie)");
+          #dpm("Odstránená nepotrebná hodnota v field_licencia1 (typ CC licencie)");
           unset($node->field_licencia1[LANGUAGE_NONE][0]);
         }
         if (isset($node->field_modifikovane[LANGUAGE_NONE][0])) {
-          dpm("Odstránená nepotrebná hodnota v field_modifikovane");
+          #dpm("Odstránená nepotrebná hodnota v field_modifikovane");
           unset($node->field_modifikovane[LANGUAGE_NONE][0]);
         }
       }
       if (isset($node->field_modifikovane[LANGUAGE_NONE][0]) and $node->field_modifikovane[LANGUAGE_NONE][0]['value'] !== '1') {
         if (isset($node->field_popis_modifikacie[LANGUAGE_NONE][0])) {
-          dpm("Odstránený nepotrebný text v field_popis_modifikacie (1)");
+          #dpm("Odstránený nepotrebný text v field_popis_modifikacie (1)");
           unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
         }
       }
       if (!isset($node->field_modifikovane[LANGUAGE_NONE][0]) and isset($node->field_popis_modifikacie[LANGUAGE_NONE][0])) {
-          dpm("Odstránený nepotrebný text v field_popis_modifikacie (2)");
+          #dpm("Odstránený nepotrebný text v field_popis_modifikacie (2)");
           unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
         }
     }
@@ -951,7 +951,7 @@ function beliana_node_presave($node) {
   // (setting it makes no sense, but is possible in the form)
   if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and  
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] !== "Vyplatiť") {
-        dpm("Odstránená nepotrebná hodnota v field_dlzka_autorovho_textu_zad");
+        #dpm("Odstránená nepotrebná hodnota v field_dlzka_autorovho_textu_zad");
         unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]);
   }
   // save date when the author's text length was saved, update the lenght if it is equal to 0
@@ -2515,7 +2515,7 @@ function beliana_clean_tags($node, $text, $where) {
  * @param $nid
  */
 function _beliana_process_links($node) {
-  dpm("_beliana_process_links", $node->title);
+  #dpm("_beliana_process_links", $node->title);
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   db_delete('beliana_links')

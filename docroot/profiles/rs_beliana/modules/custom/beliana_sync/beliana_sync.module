@@ -27,7 +27,7 @@ function beliana_sync_menu() {
  * @param $nid
  */
 function _beliana_sync_remove_links($node) {
-  dpm("_beliana_sync_remove_links", $node->title." (".$node->nid.")");
+  #dpm("_beliana_sync_remove_links", $node->title." (".$node->nid.")");
   // Extract links from field_text_hesla.
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   $dom = beliana_get_dom($node, $text, "Text hesla (_beliana_sync_remove_links)");
@@ -178,7 +178,7 @@ function beliana_sync_sync($nid, &$context) {
   ]);
   $generic_node = node_load($nid);
   $node = workbench_moderation_node_current_load($generic_node);
-  dpm("beliana_sync_sync", $node->title." (".$node->nid.")");
+  #dpm("beliana_sync_sync", $node->title." (".$node->nid.")");
   $illustrations = [];	// list of illustrations to be published on web
   $skip = FALSE;
   
@@ -805,7 +805,7 @@ function _check_field_pouzit(&$node, &$ilu_node, $category)
 // remove unnecessary and unwanted tags in synchronization
 function _beliana_sync_clean_tags($node, $text)
 {
-  dpm("_beliana_sync_clean_tags", $node->title." (".$node->nid.")");
+  #dpm("_beliana_sync_clean_tags", $node->title." (".$node->nid.")");
   $dom = beliana_get_dom($node, $text);
   if (!$dom) return $text;
 
