@@ -340,10 +340,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
   /* Kritéria zoradenia: Obsah: Na zoradenie (field_na_zoradenie) */
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
@@ -560,6 +556,7 @@ function rs_beliana_views_views_default_views() {
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -716,10 +713,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Používateľ: Aktuálny */
@@ -947,10 +951,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['state']['alter']['text'] = '<div>[state]</div><div>[workbench_moderation_history_link]</div>';
   $handler->display->display_options['fields']['state']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
   /* Pole: Obsah: Dátum aktualizácie */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -961,6 +961,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['changed']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Používateľ: Aktuálny */
@@ -1360,10 +1371,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
   $handler->display->display_options['fields']['section']['field'] = 'section';
   $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -1539,6 +1557,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -1700,6 +1729,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -1885,6 +1925,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -2041,6 +2092,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
   $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -2977,10 +3039,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
   $handler->display->display_options['fields']['section']['field'] = 'section';
   $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Kritéria zoradenia: Workbench Moderation: Stav */
   $handler->display->display_options['sorts']['state']['id'] = 'state';
@@ -3903,6 +3972,49 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['fields']['name_1']['table'] = 'users';
+  $handler->display->display_options['fields']['name_1']['field'] = 'name';
+  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
+  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
+  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Pole: Workbench Access: Lexikálna skupina */
+  $handler->display->display_options['fields']['section']['id'] = 'section';
+  $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
+  $handler->display->display_options['fields']['section']['field'] = 'section';
+  $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -4663,10 +4775,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
   $handler->display->display_options['fields']['section']['field'] = 'section';
   $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Kritéria zoradenia: Workbench Moderation: Stav */
   $handler->display->display_options['sorts']['state']['id'] = 'state';
@@ -4888,10 +5007,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
   $handler->display->display_options['fields']['section']['field'] = 'section';
   $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -6939,7 +7065,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Autor'),
     t('Lex. skupina'),
     t('Stav'),
-    t('Správa záznamu'),
     t('Typ'),
     t('Needs review R'),
     t('Na posúdenie (R)'),
@@ -6993,6 +7118,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
 <strong>Upozornenie</strong>: Ak počas úpravy kliknete na inú možnosť (napr. Odkazujúce heslá), na úpravu sa vrátite stlačením šípky doľava prehliadača a nie opätovne na Upraviť. Inak sa neuložené zmeny stratia. '),
     t('Needs review VR2'),
     t('Na posúdenie VR2'),
+    t('Správa záznamu'),
     t('Needs review VR3'),
     t('Na posúdenie VR3'),
     t(' ⚫ Ak chcete heslo upraviť: Na riadku hesla kliknite na jeho názov s odkazom a potom na Upraviť. Spravte potrebné úpravy a kliknite na Uložiť
