@@ -1050,7 +1050,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from u_autora to needs_review'] = array(
     'name' => 'moderate content from u_autora to needs_review',
     'roles' => array(
-      'Autor' => 'Autor',
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
@@ -1201,13 +1201,6 @@ function rs_beliana_workbench_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
     ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from zaradene to draft'.
-  $permissions['moderate content from zaradene to draft'] = array(
-    'name' => 'moderate content from zaradene to draft',
-    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
