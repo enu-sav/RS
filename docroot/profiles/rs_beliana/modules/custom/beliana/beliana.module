@@ -212,12 +212,14 @@ function beliana_group_list() {
         if (isset($user->workbench_access[$term->tid])) {
           $output .= '<li>'
               . $user->name . ', '
-              . $user->field_meno['und'][0][value] . ', '
-              . $user->field_priezvisko['und'][0][value] . ', '
-              . $user->field_autorska_zmluva['und'][0][value] . ', '
-              . $user->mail //. ', '
-              //. $term->name
-              . '</li>';
+              . $user->field_meno['und'][0]['value'] . ', '
+              . $user->field_priezvisko['und'][0]['value'] . ', ';
+          if (isset($user->field_autorska_zmluva['und'])) {
+            $output .= $user->mail . ', '
+              . $user->field_autorska_zmluva['und'][0]['value'] . '</li>';
+          } else {
+            $output .= $user->mail . '</li>';
+          }
         }
       }
       //$output .= '</ul><br><br>';
