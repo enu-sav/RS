@@ -574,6 +574,12 @@ function _display_payment_fields_form(&$form)
 
 function _display_payment_fields(&$node)
 {
+  #do not show the fields for new items
+  if (!isset($node->nid)) {
+#dpm("hideall (nove heslo)", "display_payment_fields");
+    return "hideall"; 
+  }
+
   #do not show the fields for merged (zlucene) articles (i. e. field_zlucene_z is nonempty)
   if (isset($node->field_zlucene_z[LANGUAGE_NONE][0])) {
 #dpm("hideall (merged)", "display_payment_fields");
