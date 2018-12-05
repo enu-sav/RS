@@ -254,11 +254,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'zaradene',
       'name' => 'vyradene-zaradene',
     ),
-    'zaradene:draft' => array(
-      'from_name' => 'zaradene',
-      'to_name' => 'draft',
-      'name' => 'zaradene-navrhute',
-    ),
     'zaradene:navrhnute_na_vyradenie' => array(
       'from_name' => 'zaradene',
       'to_name' => 'navrhnute_na_vyradenie',

@@ -1395,6 +1395,56 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_zverejnit_meno_autora'.
+  $field_instances['node-heslo-field_zverejnit_meno_autora'] = array(
+    'bundle' => 'heslo',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 25,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_zverejnit_meno_autora',
+    'label' => 'Zverejniť meno autora',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 24,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-title_field'.
   $field_instances['node-heslo-title_field'] = array(
     'bundle' => 'heslo',
@@ -1513,6 +1563,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Zlúčené do');
   t('Zlúčené z');
   t('Zo zoznamu vyberte názov súboru, do ktorého má byť heslo zaradené. Názov súboru je daný názvom svojho posledného hesla.');
+  t('Zverejniť meno autora');
   t('Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
 Pri odosielanú hesla VR1 však pole musí byť vyplnené.<br /> 
 Po uložení hesla voľbu nemožno zmeniť.');
