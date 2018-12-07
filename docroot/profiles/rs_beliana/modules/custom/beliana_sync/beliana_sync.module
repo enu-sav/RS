@@ -277,6 +277,11 @@ function beliana_sync_sync($nid, &$context) {
       // delete the table on the web side, if it exists there
       $remote_node_object['table'] = array(Null, 0);
     }
+    // add author's name, if necessary`
+    if (isset($node->field_zverejnit_meno_autora[LANGUAGE_NONE]) and $node->field_zverejnit_meno_autora[LANGUAGE_NONE][0]['value'] == "1") {
+      $user = user_load($node->uid);
+      $remote_node_object['menoautora'] = $user->field_priezvisko[LANGUAGE_NONE][0]['value'] . ", ". $user->field_meno[LANGUAGE_NONE][0]['value'][0] . ".";
+   }
 
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
