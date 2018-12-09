@@ -887,6 +887,8 @@ function beliana_node_presave($node) {
 
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
     if ($node->type == "ilustracia") {
+      $html = beliana_clean_tags($node, $node->field_popis[LANGUAGE_NONE][0]['value'], "PopiPopis ilustracie (beliana_node_presave)");
+      $node->field_popis[LANGUAGE_NONE][0]['value'] = $html;
       // remove inappropriate setting of field_licencia1 if licence type is not 'CC licencia' (possible in the form)
       if (isset($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]) and $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] !== 'CC licencia') {
         if (isset($node->field_licencia1[LANGUAGE_NONE][0])) {
