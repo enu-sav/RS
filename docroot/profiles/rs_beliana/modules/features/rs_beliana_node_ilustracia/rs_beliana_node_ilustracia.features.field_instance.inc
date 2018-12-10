@@ -1063,8 +1063,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
       'export' => array(
         'label' => 'inline',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'list_default',
         'weight' => 10,
       ),
       'lite_display' => array(
