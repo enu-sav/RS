@@ -30,6 +30,15 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_vyslo_knizne'.
+  $permissions['create field_vyslo_knizne'] = array(
+    'name' => 'create field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create importovane_heslo content'.
   $permissions['create importovane_heslo content'] = array(
     'name' => 'create importovane_heslo content',
@@ -110,6 +119,15 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_vyslo_knizne'.
+  $permissions['edit field_vyslo_knizne'] = array(
+    'name' => 'edit field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_table'.
   $permissions['edit own field_table'] = array(
     'name' => 'edit own field_table',
@@ -126,6 +144,15 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'roles' => array(
       'administrátor' => 'administrátor',
       'geoRedaktor' => 'geoRedaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_vyslo_knizne'.
+  $permissions['edit own field_vyslo_knizne'] = array(
+    'name' => 'edit own field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
   );
@@ -183,6 +210,16 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_vyslo_knizne'.
+  $permissions['view field_vyslo_knizne'] = array(
+    'name' => 'view field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_table'.
   $permissions['view own field_table'] = array(
     'name' => 'view own field_table',
@@ -200,6 +237,15 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_vyslo_knizne'.
+  $permissions['view own field_vyslo_knizne'] = array(
+    'name' => 'view own field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
   );

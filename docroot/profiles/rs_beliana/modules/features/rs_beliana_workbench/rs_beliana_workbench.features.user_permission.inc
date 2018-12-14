@@ -1050,7 +1050,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from u_autora to needs_review'] = array(
     'name' => 'moderate content from u_autora to needs_review',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
+      'Autor' => 'Autor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',

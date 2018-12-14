@@ -52,6 +52,11 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Päta: Globálny: Výsledný súhrn */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
@@ -86,28 +91,22 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
-    'draft' => 'draft',
-    'zaradene' => 'zaradene',
-    'needs_review' => 'needs_review',
+    'na_zalomenie' => 'na_zalomenie',
+    'publikovane_na_webe' => 'publikovane_na_webe',
+    'zverejnene_oprava' => 'zverejnene_oprava',
+    'zverejnene_vratene' => 'zverejnene_vratene',
+    'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+    'pozdr_an_' => 'pozdr_an_',
     'na_zverejnenie' => 'na_zverejnenie',
     'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
-    'zlucene' => 'zlucene',
-    'u_autora' => 'u_autora',
-    'zlucene_hp' => 'zlucene_hp',
-    'na_zalomenie' => 'na_zalomenie',
-    'na_trenovanie' => 'na_trenovanie',
-    'u_konzultanta' => 'u_konzultanta',
-    'publikovane_na_webe' => 'publikovane_na_webe',
-    'u_v_st_redaktora_2hp' => 'u_v_st_redaktora_2hp',
-    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-    'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
-    '1_korektura' => '1_korektura',
     'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
     'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
+    'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
+    'zlucene' => 'zlucene',
+    '1_korektura' => '1_korektura',
     '2_korekt_ra' => '2_korekt_ra',
     'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
-    'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-    'importovane' => 'importovane',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
@@ -119,9 +118,15 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -130,14 +135,13 @@ function rs_beliana_export_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    25 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
+    26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
@@ -316,6 +320,7 @@ function rs_beliana_export_views_default_views() {
     t('‹ predchádzajúca'),
     t('nasledujúca ›'),
     t('posledná »'),
+    t('Zobrazenie po @per_page položkách, @start - @end z @total'),
     t('Ilustrácie'),
     t('Stav'),
     t('Lexikálna skupina'),
