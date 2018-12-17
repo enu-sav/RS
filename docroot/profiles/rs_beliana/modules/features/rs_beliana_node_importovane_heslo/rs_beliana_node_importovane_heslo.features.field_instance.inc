@@ -749,7 +749,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',

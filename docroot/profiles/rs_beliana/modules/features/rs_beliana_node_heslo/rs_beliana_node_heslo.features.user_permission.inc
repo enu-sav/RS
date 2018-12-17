@@ -194,6 +194,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_vyslo_knizne'.
+  $permissions['create field_vyslo_knizne'] = array(
+    'name' => 'create field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_zlucene_do'.
   $permissions['create field_zlucene_do'] = array(
     'name' => 'create field_zlucene_do',
@@ -475,6 +484,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_vyslo_knizne'.
+  $permissions['edit field_vyslo_knizne'] = array(
+    'name' => 'edit field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_zlucene_do'.
   $permissions['edit field_zlucene_do'] = array(
     'name' => 'edit field_zlucene_do',
@@ -674,6 +692,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_vyplatit',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_vyslo_knizne'.
+  $permissions['edit own field_vyslo_knizne'] = array(
+    'name' => 'edit own field_vyslo_knizne',
+    'roles' => array(
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -932,6 +959,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_vyslo_knizne'.
+  $permissions['view field_vyslo_knizne'] = array(
+    'name' => 'view field_vyslo_knizne',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_zlucene_do'.
   $permissions['view field_zlucene_do'] = array(
     'name' => 'view field_zlucene_do',
@@ -1111,6 +1148,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view own field_vyplatit',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_vyslo_knizne'.
+  $permissions['view own field_vyslo_knizne'] = array(
+    'name' => 'view own field_vyslo_knizne',
+    'roles' => array(
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
