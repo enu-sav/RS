@@ -115,12 +115,14 @@ function html_error($node, $error, $shortmsg)
 function modify_body_text($node, $text)
 {
   // remove alternative text
+  $text = _beliana_sync_clean_tags($node, $text);
   $text = preg_replace('/(*UTF8)  *▶[kK][^◀]*◀([.,;])/', '\1', $text);
   $text = preg_replace('/(*UTF8)▶[kK][^◀]*◀/', '', $text);
   $text = preg_replace('/(*UTF8)▶[wW]([^◀]*)◀/', '\1', $text);
 
   // arrow ➔ for both web and print
-  $text = str_replace("➔","→",$text);
+  $text = str_replace("➔<","→ <",$text);
+  $text = str_replace("➔ ","→&nbsp;",$text);
   // arrow ⬈ only for print
   $text = str_replace("(⬈ ","(",$text);
   $text = str_replace("(⬈","(",$text);
@@ -150,8 +152,12 @@ function modify_body_text($node, $text)
   //<th class="rteleft" colspan="3">
   $text = str_replace( ' class="rtecenter"', '', $text);
   $text = str_replace( ' class="rteleft"', '', $text);
+  // prune spaces
+  $text = str_replace("  "," ",$text);
+  $text = str_replace("&nbsp; ","&nbsp;",$text);
+  $text = str_replace(" &nbsp;","&nbsp;",$text);
   
-  return _beliana_sync_clean_tags($node, $text);
+  return $text;
 }
 
 function beliana_sync_sync($nid, &$context) {
@@ -236,6 +242,7 @@ function beliana_sync_sync($nid, &$context) {
   }
 
   # remove links to not yet published articles
+  $body = str_replace("➔<","➔ <",$body);	// add space after arrow
   $body = _beliana_sync_remove_links($node);
   # if failed owing to html syntax error
   if (!$body) { 
