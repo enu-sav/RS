@@ -202,6 +202,13 @@ function beliana_sync_sync($nid, &$context) {
   if (!_check_alternative_text_markers($node, $text_hesla, "v hesle")) {
     $skip = TRUE;
   }
+
+  // issue a warning if text contains Česko-Slovensko or česko-slovenský 
+  if (strpos($text_hesla, "esko-Slovensk") or strpos($text_hesla, "esko-slovensk") ){
+    $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je uvedené <b>Česko-Slovensko</b> alebo <b>česko-slovenský</b> so spojovníkom. Skotrolujte, či je to tak správne.';
+    drupal_set_message($msg, 'warning');
+  }
+
   // are LITE changes still present in table?
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $text_table = $node->field_table[LANGUAGE_NONE][0]['value'];
