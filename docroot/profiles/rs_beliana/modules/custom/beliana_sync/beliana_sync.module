@@ -120,10 +120,15 @@ function modify_body_text($node, $text)
   $text = preg_replace('/(*UTF8)▶[kK][^◀]*◀/', '', $text);
   $text = preg_replace('/(*UTF8)▶[wW]([^◀]*)◀/', '\1', $text);
 
+  // space inside a tag
+  $text = preg_replace('/(<a[^>]*>) /', " $1", $text);
+  $text = str_replace("  "," ",$text);	// 2 spaces
   // arrow ➔ for both web and print
-  $text = str_replace("➔<","→ <",$text);
-  $text = str_replace("➔ ","→&nbsp;",$text);
+  $text = str_replace("➔","→",$text);	// all arrows
+  $text = preg_replace('/→([^ &])/', "→&nbsp;$1", $text); // arrow without space
+  $text = str_replace("→ ","→&nbsp;",$text); 	// arrow with space
   // arrow ⬈ only for print
+  $text = str_replace("( ⬈ ","(",$text);
   $text = str_replace("(⬈ ","(",$text);
   $text = str_replace("(⬈","(",$text);
   $text = str_replace(" ⬈ "," ",$text);
