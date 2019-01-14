@@ -12743,6 +12743,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'importovane' => 'importovane',
     'importovane_u_jr2' => 'importovane_u_jr2',
     'importovane_u_vr' => 'importovane_u_vr',
+    'publikovane_na_webe' => 'publikovane_na_webe',
   );
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
@@ -12754,11 +12755,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     2 => '2',
     1 => 0,
     9 => 0,
+    30 => 0,
+    31 => 0,
     27 => 0,
+    29 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -12773,6 +12777,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     22 => 0,
     23 => 0,
     26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'opravit-text1';
