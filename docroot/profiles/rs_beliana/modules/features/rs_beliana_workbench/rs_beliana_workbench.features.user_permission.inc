@@ -147,6 +147,13 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'block view revisions in ilustracia_u_vyst_redaktora_3 state'.
+  $permissions['block view revisions in ilustracia_u_vyst_redaktora_3 state'] = array(
+    'name' => 'block view revisions in ilustracia_u_vyst_redaktora_3 state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'block view revisions in ilustracia_u_vyst_redaktora_5 state'.
   $permissions['block view revisions in ilustracia_u_vyst_redaktora_5 state'] = array(
     'name' => 'block view revisions in ilustracia_u_vyst_redaktora_5 state',
@@ -445,6 +452,15 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'ig-redaktor' => 'ig-redaktor',
+    ),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'edit revisions in ilustracia_u_vyst_redaktora_3 state'.
+  $permissions['edit revisions in ilustracia_u_vyst_redaktora_3 state'] = array(
+    'name' => 'edit revisions in ilustracia_u_vyst_redaktora_3 state',
+    'roles' => array(
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
     ),
     'module' => 'workbench_state_access',
   );
@@ -842,9 +858,27 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5'.
+  $permissions['moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5'] = array(
+    'name' => 'moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5',
+    'roles' => array(
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie'.
   $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie'] = array(
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie',
+    'roles' => array(
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika'.
+  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika'] = array(
+    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
     ),
@@ -855,7 +889,17 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora'] = array(
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora',
     'roles' => array(
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'ig-redaktor' => 'ig-redaktor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3'.
+  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3'] = array(
+    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3',
+    'roles' => array(
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1201,6 +1245,13 @@ function rs_beliana_workbench_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
     ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from zaradene to draft'.
+  $permissions['moderate content from zaradene to draft'] = array(
+    'name' => 'moderate content from zaradene to draft',
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
