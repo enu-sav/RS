@@ -704,10 +704,13 @@ function _form_date6() {
 function  _check_illustration_web(&$node, &$ilu_node, $category)
 {
   // issue a warning if there is inline image in the text and the illustration should go to web
-  if (strpos($node->field_text_hesla[LANGUAGE_NONE][0]['value'], "<img ") ){
-    $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je vložený inline obrázok. Skotrolujte, či ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> naozaj má byť zverejnená na webe.';
-    drupal_set_message($msg, 'warning');
-  }
+
+  if ( $node->type ==  'importovane_heslo' or $node->type ==  'heslo' ){
+    if (strpos($node->field_text_hesla[LANGUAGE_NONE][0]['value'], "<img ") ){
+      $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je vložený inline obrázok. Skotrolujte, či ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong> naozaj má byť zverejnená na webe.';
+drupal_set_message($msg, 'warning');
+    }
+ }
   $skip=false;
   // check illustration text
   $text_il = $ilu_node->field_popis[LANGUAGE_NONE][0]['value'];
