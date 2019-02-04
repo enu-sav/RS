@@ -992,6 +992,12 @@ function beliana_node_presave($node) {
 
   #update the link table
   _beliana_process_links($node);
+  // to be used in logs for node save debugging
+  watchdog('content', '@type: updated @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+    '@type' => $node->type,
+    '@title' => $node->title
+      ], WATCHDOG_NOTICE);
+
 }
 
 /**
@@ -1035,6 +1041,7 @@ function beliana_views_post_execute(&$view) {
  * If user has role 'redaktor' and state is `zaradene`,
  * we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
  * This forces editor to use the view "Priradit autora" to assign article to and author
+  watchdog('content', '@type: updated @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
  *
  * @inheritdoc
  */
@@ -1043,7 +1050,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   // if $form['title']['#default_value'] is empty (node just ceated), do not log anything
   $nf_pos = strpos($form_id, "_node_form");
   if (!($nf_pos === false) && isset($form['title']['#default_value'])) {
-    watchdog('content', '@type: otvorené na úpravu @title.', [
+    watchdog('content', '@type: otvorené na úpravu @title. (open, ' . date("Y/m/d H:i:s") . ')', [
       '@type' => substr($form_id, 0, $nf_pos),
       '@title' => $form['title']['#default_value'],
         ], WATCHDOG_NOTICE);
