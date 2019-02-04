@@ -236,7 +236,8 @@ function workbench_moderation_node_history_view($node) {
           array(
             '%from_state' => workbench_moderation_state_label($moderation->from_state),
             '%to_state' => workbench_moderation_state_label($moderation->state),
-            '%date' => format_date($moderation->stamp, 'short'),
+            #'%date' => format_date($moderation->stamp, 'short'),
+            '%date' => date("Y/m/d H:i:s",$moderation->stamp),
             '!user' => theme('username', array('account' => $moderation)),
           )
         );
