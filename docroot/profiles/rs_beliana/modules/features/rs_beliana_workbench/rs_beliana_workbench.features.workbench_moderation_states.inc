@@ -57,6 +57,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 10,
     ),
+    'ilustracia_u_vyst_redaktora_3' => array(
+      'name' => 'ilustracia_u_vyst_redaktora_3',
+      'label' => 'Ilustrácia u výst. redaktora 3',
+      'description' => 'Ilustrácia u výstupného redaktora 3',
+      'weight' => 10,
+    ),
     'ilustracia_u_vyst_redaktora_5' => array(
       'name' => 'ilustracia_u_vyst_redaktora_5',
       'label' => 'Ilustrácia u výst. redaktora 5',

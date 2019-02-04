@@ -246,6 +246,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
