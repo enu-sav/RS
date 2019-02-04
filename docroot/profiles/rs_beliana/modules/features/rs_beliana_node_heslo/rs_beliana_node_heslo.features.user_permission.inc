@@ -821,6 +821,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
@@ -833,6 +834,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit title_field',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),
