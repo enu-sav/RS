@@ -62,6 +62,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'js_conf' => '// na https stránke je požadovaný https pristup na cdn
 // must be placed before the  config.autosave line (and maybe others)
 config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
+config.undoStackSize = 40;
 // keep autosaved stuff for 14 days
 config.autosave_NotOlderThen = 20160;
 //config.autoGrow_maxHeight = 500;
@@ -303,6 +304,7 @@ config.specialChars = [
         'js_conf' => '// na https stránke je požadovaný https pristup na cdn
 // must be placed before the  config.autosave line (and maybe others)
 config.mathJaxLib = \'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML\';
+config.undoStackSize = 40;
 //config.autoGrow_maxHeight = 500;
 config.autoGrow_minHeight = 50;
 config.autoGrow_bottomSpace = 10;

@@ -15405,6 +15405,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'importovane_vyradene' => 'importovane_vyradene',
     'vyradene' => 'vyradene',
+    'len_vyplatit' => 'len_vyplatit',
     'ukoncenezluene' => 'ukoncenezluene',
   );
   $handler->display->display_options['path'] = 'vyhladat';
@@ -16696,6 +16697,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'name_1' => 'name_1',
     'field_ilustracia' => 'field_ilustracia',
     'created' => 'created',
+    'field_datum_aktualizacie' => 'field_datum_aktualizacie',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -16772,6 +16774,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_datum_aktualizacie' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -16842,6 +16851,20 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'privatemsg_current_day';
+  /* Pole: Obsah: Dátum výročia */
+  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -17333,6 +17356,44 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_zlucene_z_target_id']['expose']['operator'] = 'field_zlucene_z_target_id_op';
   $handler->display->display_options['filters']['field_zlucene_z_target_id']['expose']['identifier'] = 'field_zlucene_z_target_id';
   $handler->display->display_options['filters']['field_zlucene_z_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    28 => 0,
+  );
+  /* Filter criterion: Obsah: Dátum výročia (field_datum) */
+  $handler->display->display_options['filters']['field_datum_value']['id'] = 'field_datum_value';
+  $handler->display->display_options['filters']['field_datum_value']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['filters']['field_datum_value']['field'] = 'field_datum_value';
+  $handler->display->display_options['filters']['field_datum_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_value']['expose']['operator_id'] = 'field_datum_value_op';
+  $handler->display->display_options['filters']['field_datum_value']['expose']['label'] = 'Dátum výročia';
+  $handler->display->display_options['filters']['field_datum_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_value']['expose']['operator'] = 'field_datum_value_op';
+  $handler->display->display_options['filters']['field_datum_value']['expose']['identifier'] = 'field_datum_value';
+  $handler->display->display_options['filters']['field_datum_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     9 => 0,
@@ -21895,6 +21956,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Všetky heslá - prehľad'),
     t('Ilustrácie'),
     t('Dátum vytvorenia'),
+    t('Dátum výročia'),
     t('Zlúčené z'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
