@@ -214,6 +214,18 @@ function beliana_sync_sync($nid, &$context) {
     drupal_set_message($msg, 'warning');
   }
 
+  // issue a warning if text contains {aA]gebrick
+  if (strpos($text_hesla, "lgebrick")){
+    $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je použité slovo <b>algebrický</b>.';
+    drupal_set_message($msg, 'warning');
+  }
+
+  // issue a warning if text contains unnecessay details about death
+  if (strpos($text_hesla, "(samovražda)") or strpos($text_hesla, "(zavraždený)") or strpos($text_hesla, "(zavraždená)") ){
+    $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je nevhodne uvedeneý <b>detail o úmrtí</b>.';
+    drupal_set_message($msg, 'warning');
+  }
+
   // are LITE changes still present in table?
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $text_table = $node->field_table[LANGUAGE_NONE][0]['value'];
