@@ -1188,29 +1188,31 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     }
   }
 
-  // check types heslo and importovane_heslo
-  if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
-    // Check link correctness
-    $skip = false;
-    if (!_check_links($values['node'])) {
-      $skip = True;
-    }
-    // Check alternative text marker correctness in article body
-    if (!_check_alternative_text_markers($values['node'], $values['node']->field_text_hesla['und'][0]['value'], "v hesle")) {
-      $skip = True;
-    }
-    // Check alternative text marker correctness in article table
-    if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
-      $text_table = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
-      if (!_check_alternative_text_markers($values['node'], $text_table, "v tabuľke pre geografické údaje hesla")) {
-        $skip = TRUE;
+  // check types heslo and importovane_heslo, ignore for authors
+  if ( !($cur_state === "u_autora" and $new_state === "needs_review")) {
+    if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
+      // Check link correctness
+      $skip = false;
+      if (!_check_links($values['node'])) {
+        $skip = True;
       }
-    }
-    if ($skip) {
-      drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
-      $values['node']->workbench_moderation_state_new = $cur_state;
-      node_save($values['node']);
-      return;
+      // Check alternative text marker correctness in article body
+      if (!_check_alternative_text_markers($values['node'], $values['node']->field_text_hesla['und'][0]['value'], "v hesle")) {
+        $skip = True;
+      }
+      // Check alternative text marker correctness in article table
+      if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
+        $text_table = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
+        if (!_check_alternative_text_markers($values['node'], $text_table, "v tabuľke pre geografické údaje hesla")) {
+          $skip = TRUE;
+        }
+      }
+      if ($skip) {
+        drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
+        $values['node']->workbench_moderation_state_new = $cur_state;
+        node_save($values['node']);
+        return;
+      }
     }
   }
 
