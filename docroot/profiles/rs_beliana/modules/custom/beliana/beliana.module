@@ -216,8 +216,9 @@ function beliana_group_list() {
               . $user->field_priezvisko['und'][0]['value'] . ', ';
           if (isset($user->field_autorska_zmluva['und'])) {
             $output .= $user->mail . ', '
-              . $user->field_autorska_zmluva['und'][0]['value'] . '</li>';
-          } else {
+                . $user->field_autorska_zmluva['und'][0]['value'] . '</li>';
+          }
+          else {
             $output .= $user->mail . '</li>';
           }
         }
@@ -517,79 +518,77 @@ function update_dates(&$entity, $context = array()) {
   }
 }
 
-/* 
-Check, if the node was sent to the needs_review state after 11.11.2018
-the node IS in the state needs_review (U redaktora) since only role Redaktor can edit the payment information
-find date (tstamp) of the latest of transitions na_zalomenie >> needs_review 
-compare tstamp with the date 11.11.2018 (reftime) (on that day payment data was manuall exported)
-if tstamp > refdate return True (do not display payment fields). We have manually exported payment data
-if tstamp < refdate return False (edit payment fields). We do not have payment data
-*/
-function has_vr_to_r_transition(&$node)
-{
+/*
+  Check, if the node was sent to the needs_review state after 11.11.2018
+  the node IS in the state needs_review (U redaktora) since only role Redaktor can edit the payment information
+  find date (tstamp) of the latest of transitions na_zalomenie >> needs_review
+  compare tstamp with the date 11.11.2018 (reftime) (on that day payment data was manuall exported)
+  if tstamp > refdate return True (do not display payment fields). We have manually exported payment data
+  if tstamp < refdate return False (edit payment fields). We do not have payment data
+ */
+
+function has_vr_to_r_transition(&$node) {
 
   // find transitions na_zverejnenie >> needs_review
-  $reftime=strtotime("11-11-2018");	// date of manual accounting data export
+  $reftime = strtotime("11-11-2018"); // date of manual accounting data export
   $transitions = db_select('workbench_moderation_node_history', 'w')
-    ->fields('w')	// all fields
-    ->condition('from_state', 'na_zverejnenie') // u vyst. redaktor 1 state
-    ->condition('state', 'needs_review') 	// u redaktora state
-    ->condition('nid', $node->nid)
-    ->execute()
-    ->fetchAll();
+      ->fields('w') // all fields
+      ->condition('from_state', 'na_zverejnenie') // u vyst. redaktor 1 state
+      ->condition('state', 'needs_review')  // u redaktora state
+      ->condition('nid', $node->nid)
+      ->execute()
+      ->fetchAll();
   // find the most recent transition
   $tstamp1 = 0;
   foreach ($transitions as $tr) {
-    if ($tr->stamp > $tstamp1 ) {	// find the most recent transition
+    if ($tr->stamp > $tstamp1) { // find the most recent transition
       $tstamp1 = $tr->stamp;
     }
   }
 
   // find transitions u_vyst_redaktora_2 >> needs_review
   $transitions = db_select('workbench_moderation_node_history', 'w')
-    ->fields('w')	// all fields
-    ->condition('from_state', 'u_vyst_redaktora_2') 	// u redaktora state
-    ->condition('state', 'needs_review') 	// u vr1 state
-    ->condition('nid', $node->nid) 	// u vr1 state
-    ->execute()
-    ->fetchAll();
+      ->fields('w') // all fields
+      ->condition('from_state', 'u_vyst_redaktora_2')  // u redaktora state
+      ->condition('state', 'needs_review')  // u vr1 state
+      ->condition('nid', $node->nid)  // u vr1 state
+      ->execute()
+      ->fetchAll();
   // find the most recent transition
   $tstamp2 = 0;
   if (!empty($transitions)) {
     foreach ($transitions as $tr) {
-      if ($tr->stamp > $tstamp2 ) {	// find the most recent transition
+      if ($tr->stamp > $tstamp2) { // find the most recent transition
         $tstamp2 = $tr->stamp;
       }
     }
   }
-  $tstamp = max($tstamp1,$tstamp2);
+  $tstamp = max($tstamp1, $tstamp2);
 #dpm(date("m.d.Y",$tstamp), date("m.d.Y",$reftime));
   return $tstamp > $reftime;
 }
 
 // check if field related to payment should be displayed, and if, then how (editable, noneditable)
 // return strings hideall enableall or showeditable
-function _display_payment_fields_form(&$form)
-{
+function _display_payment_fields_form(&$form) {
   return _display_payment_fields($form['#node']);
 }
 
-function _display_payment_fields(&$node)
-{
+function _display_payment_fields(&$node) {
   #do not show the fields for new items
   if (!isset($node->nid)) {
 #dpm("hideall (nove heslo)", "display_payment_fields");
-    return "hideall"; 
+    return "hideall";
   }
 
   #do not show the fields for merged (zlucene) articles (i. e. field_zlucene_z is nonempty)
   if (isset($node->field_zlucene_z[LANGUAGE_NONE][0])) {
 #dpm("hideall (merged)", "display_payment_fields");
-    return "hideall"; 
+    return "hideall";
   }
 
   global $user;
-  $curstate =  $node->workbench_moderation['current']->state;
+  $curstate = $node->workbench_moderation['current']->state;
 //dpm($user);
   // administrator has access to everything
   //if (0 and !in_array("administrátor", $user->roles)) { // comment out in testing 
@@ -600,30 +599,30 @@ function _display_payment_fields(&$node)
 
   // do not show in the case of nodes imported from files Kolembus-00* and Komunikator-00*
   if (
-    (isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) and
-    strpos($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'], 'import Kolembus-00') !== False)
-    or 
-    (isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) and
-    strpos($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'], 'import Komunikator-00') !== False)
-    ) {
+      (isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) and
+      strpos($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'], 'import Kolembus-00') !== False)
+      or ( isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) and
+      strpos($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'], 'import Komunikator-00') !== False)
+  ) {
 #dpm("hideall (import)", "display_payment_fields");
-    return "hideall"; 
-  } 
+    return "hideall";
+  }
 
   // if filled out, field_datum_autorovho_textu is set.  Just show, do not edit
-  if (isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])){
+  if (isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
 #dpm("showdisabled (filled out)", "display_payment_fields, field_datum_autorovho_textu is set");
     return("showdisabled");
   }
   //state of the node changed from vr1 or vr2 state to needs_review after 11.11.2018 
-  if (has_vr_to_r_transition($node) ){
+  if (has_vr_to_r_transition($node)) {
 #dpm("hideall (has transition)", "display_payment_fields");
     return("hideall");
   }
   if ($curstate === 'needs_review') {
 #dpm("showeditable (no transition, needs_review)", "display_payment_fields");
-  	return("showeditable");
-  } else {
+    return("showeditable");
+  }
+  else {
 #dpm("hideall (no transition, no needs_review)", "display_payment_fields");
     return("hideall");
   }
@@ -634,22 +633,24 @@ function _display_payment_fields(&$node)
  *
  */
 function _get_authors_text_length(&$node) {
-  if ($node->type != 'heslo') return null;
+  if ($node->type != 'heslo')
+    return null;
 
   // get the array of transitions needs_review -> na_zalomenie (U redaktora -> U VR1)
   $transitions = db_select('workbench_moderation_node_history', 'w')
-    ->fields('w')	// all fields
-    ->condition('from_state', 'needs_review') 	// u redaktora state
-    ->condition('state', 'na_zverejnenie') 	// u vr1 state
-    ->condition('nid', $node->nid) 	// u vr1 state
-    ->execute()
-    ->fetchAll();
-  if (empty($transitions)) return null;
+      ->fields('w') // all fields
+      ->condition('from_state', 'needs_review')  // u redaktora state
+      ->condition('state', 'na_zverejnenie')  // u vr1 state
+      ->condition('nid', $node->nid)  // u vr1 state
+      ->execute()
+      ->fetchAll();
+  if (empty($transitions))
+    return null;
   // get vid of the oldest transition
   $tstamp = $transitions[0]->stamp;
   $vid = $transitions[0]->vid;
   foreach ($transitions as $tr) {
-    if ($tr->stamp < $tstamp ) {
+    if ($tr->stamp < $tstamp) {
       $tstamp = $tr->stamp;
       $vid = $tr->vid;
     }
@@ -666,7 +667,6 @@ function _get_authors_text_length(&$node) {
   $tlen = drupal_strlen($text);
 
   return $tlen;
-  
 }
 
 /**
@@ -834,6 +834,13 @@ function beliana_merge(&$entity, $context = array()) {
  * @inheritdoc
  */
 function beliana_node_presave($node) {
+  // log $_POST and $_GET
+  $log_folder = 'public://logs/' . date('Ym');
+  file_prepare_directory($log_folder, FILE_CREATE_DIRECTORY);
+
+  error_log(date('Y-m-d H:s:i') . " - GET: \n" . serialize($_GET) . "\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
+  error_log(date('Y-m-d H:s:i') . " - POST: \n" . serialize($_POST) . "\n\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
+
   # do not execute in the case of workbench moderation state transitions
   # execute only on node saving
   # on node creation $node->workbench_moderation does not exist
@@ -907,9 +914,9 @@ function beliana_node_presave($node) {
         }
       }
       if (!isset($node->field_modifikovane[LANGUAGE_NONE][0]) and isset($node->field_popis_modifikacie[LANGUAGE_NONE][0])) {
-          #dpm("Odstránený nepotrebný text v field_popis_modifikacie (2)");
-          unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
-        }
+        #dpm("Odstránený nepotrebný text v field_popis_modifikacie (2)");
+        unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
+      }
     }
     return;
   }
@@ -959,15 +966,14 @@ function beliana_node_presave($node) {
 
   // unset field_dlzka_autorovho_textu_zad if field_vyplatit is not Vyplatiť 
   // (setting it makes no sense, but is possible in the form)
-  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and  
+  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] !== "Vyplatiť") {
-        #dpm("Odstránená nepotrebná hodnota v field_dlzka_autorovho_textu_zad");
-        unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]);
+    #dpm("Odstránená nepotrebná hodnota v field_dlzka_autorovho_textu_zad");
+    unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]);
   }
   // save date when the author's text length was saved, update the lenght if it is equal to 0
-  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and 
-    (!isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value']) or  
-     $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0) ) {
+  if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and ( !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value']) or
+      $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0)) {
     // set the date, so that we know it and the size is never changed again
     $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     // if  field_dlzka_autorovho_textu_zad is set to 0, fill the value automatically
@@ -980,12 +986,13 @@ function beliana_node_presave($node) {
       $tlen = drupal_strlen($text);
       $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] = $tlen;
       $node->log = $node->log . ", automaticky určená dĺžka autorovho textu";
-    } else {
+    }
+    else {
       $node->log = $node->log . ", ručne vložená dĺžka autorovho textu";
     }
   }
   // save date when the author's text information was saved
-  if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+  if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and ! isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
     $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     $node->log = $node->log . ", vyplnené pole Vyplatiť";
   }
@@ -993,11 +1000,10 @@ function beliana_node_presave($node) {
   #update the link table
   _beliana_process_links($node);
   // to be used in logs for node save debugging
-  watchdog('content', '@type: updated @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+  watchdog('content', '@type: updated @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s", $node->changed), [
     '@type' => $node->type,
     '@title' => $node->title
       ], WATCHDOG_NOTICE);
-
 }
 
 /**
@@ -1061,9 +1067,10 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == "heslo_node_form") {
     $display_payment = _display_payment_fields_form($form);
     //hideall, enableall, showdisabled, showeditable
-    if ($display_payment == "enableall"){
+    if ($display_payment == "enableall") {
       // no action necessary
-    } elseif ($display_payment == "hideall"){
+    }
+    elseif ($display_payment == "hideall") {
       if (isset($form['field_vyplatit'])) {
         $form['field_vyplatit']['#access'] = FALSE;
       }
@@ -1073,17 +1080,19 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['field_dlzka_autorovho_textu_zad'])) {
         $form['field_dlzka_autorovho_textu_zad']['#access'] = FALSE;
       }
-    } elseif ($display_payment == "showdisabled"){
-      if (isset($form['field_vyplatit']) ){
+    }
+    elseif ($display_payment == "showdisabled") {
+      if (isset($form['field_vyplatit'])) {
         $form['field_vyplatit']['#disabled'] = TRUE;
       }
-      if (isset($form['field_dlzka_autorovho_textu_zad']) ){
+      if (isset($form['field_dlzka_autorovho_textu_zad'])) {
         $form['field_dlzka_autorovho_textu_zad']['#disabled'] = TRUE;
       }
       if (isset($form['field_datum_autorovho_textu'])) {
         $form['field_datum_autorovho_textu']['#access'] = FALSE;
       }
-    } elseif ($display_payment == "showeditable"){
+    }
+    elseif ($display_payment == "showeditable") {
       if (isset($form['field_datum_autorovho_textu'])) {
         $form['field_datum_autorovho_textu']['#access'] = FALSE;
       }
@@ -1175,12 +1184,11 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       }
     }
     // check if payment information is stored
-    if (($cur_state === "needs_review" and  $new_state === "na_zverejnenie") and  // u redaktora state u vr1 state transition
-	 _display_payment_fields($values['node']) == "showeditable" )
-      {
-        $fail = True;
-        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
-      }
+    if (($cur_state === "needs_review" and $new_state === "na_zverejnenie") and  // u redaktora state u vr1 state transition
+        _display_payment_fields($values['node']) == "showeditable") {
+      $fail = True;
+      drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
+    }
     if ($fail) {
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
@@ -1189,7 +1197,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   }
 
   // check types heslo and importovane_heslo, ignore for authors
-  if ( !($cur_state === "u_autora" and $new_state === "needs_review")) {
+  if (!($cur_state === "u_autora" and $new_state === "needs_review")) {
     if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
       // Check link correctness
       $skip = false;
@@ -1362,9 +1370,9 @@ function _check_alternative_text_markers(&$node, $text, $where) {
       preg_match_all("/(*UTF8)(<[^\/])/", $match, $matchesopen);
       preg_match_all("/(*UTF8)(<\/)/", $match, $matchesclose);
       if (!$dom or count($matchesopen[0]) != count($matchesclose[0])) {
-        $match = str_replace("<","&lt;", $match);
-        $match = str_replace(">","&gt;", $match);
-        drupal_set_message($hlink . 'formátovanie presahuje hranice alternatívneho textu: "'.$match.'"', 'error');
+        $match = str_replace("<", "&lt;", $match);
+        $match = str_replace(">", "&gt;", $match);
+        drupal_set_message($hlink . 'formátovanie presahuje hranice alternatívneho textu: "' . $match . '"', 'error');
         $retvalue = false;
       }
     }
@@ -2456,7 +2464,8 @@ function get_header_dates($text) {
 // delete unnecessary tags from node text
 function beliana_clean_tags($node, $text, $where) {
   $dom = beliana_get_dom($node, $text, $where);
-  if (!$dom) return $text;
+  if (!$dom)
+    return $text;
 
   $xpath = new DOMXPath($dom);
   // remove tags completely: <ins>, <span>, ....
@@ -2543,9 +2552,11 @@ function _beliana_process_links($node) {
   // Extract links.
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   // do not continue if text is empty
-  if ( $text === "" ) return "";
+  if ($text === "")
+    return "";
   $dom = beliana_get_dom($node, $text, "Text hesla (beliana_process_links)");
-  if (!$dom) return $text;
+  if (!$dom)
+    return $text;
 
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
@@ -2564,22 +2575,21 @@ function _beliana_process_links($node) {
         // If alias belong to node, then insert record into beliana_links table.
         if ($path_elements[0] === 'node' && is_numeric($path_elements[1])) {
           $link = db_select('beliana_links', 'l')
-            ->fields('l', ['origin'])
-            ->condition('origin', $nid)
-            ->condition('target', $path_elements[1])
-            ->execute()
-            ->fetchCol(0);
+              ->fields('l', ['origin'])
+              ->condition('origin', $nid)
+              ->condition('target', $path_elements[1])
+              ->execute()
+              ->fetchCol(0);
           // We insert new item only if it already doesn't exist.
           if (empty($link)) {
             db_insert('beliana_links')
-              ->fields([
-                'origin' => $nid,
-                'target' => $path_elements[1],
-              ])
-              ->execute();
+                ->fields([
+                  'origin' => $nid,
+                  'target' => $path_elements[1],
+                ])
+                ->execute();
           }
         }
-
       }
     }
   }
@@ -2599,7 +2609,7 @@ function _beliana_process_links($node) {
  *   null or $dom
  *   no error message if $where == Null
  */
-function beliana_get_dom($node, $text, $where=Null) {
+function beliana_get_dom($node, $text, $where = Null) {
   $internalErrorsState = libxml_use_internal_errors(true);
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
@@ -2608,7 +2618,7 @@ function beliana_get_dom($node, $text, $where=Null) {
   $errors = libxml_get_errors();
   if ($errors) {
     # clear errors and restore error loging status
-    if ($where){
+    if ($where) {
       foreach ($errors as $error) {
         html_error($node, $error, "Chyba HTML syntaxe v poli '" . $where);
       }
