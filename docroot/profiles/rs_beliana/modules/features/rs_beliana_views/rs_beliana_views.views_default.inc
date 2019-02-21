@@ -4708,25 +4708,26 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state_1']['field'] = 'state';
   $handler->display->display_options['filters']['state_1']['value'] = array(
+    'na_zalomenie' => 'na_zalomenie',
+    'publikovane_na_webe' => 'publikovane_na_webe',
     'draft' => 'draft',
-    'vyradene' => 'vyradene',
+    'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
+    'zaradene' => 'zaradene',
+    'u_autora' => 'u_autora',
     'needs_review' => 'needs_review',
     'na_zverejnenie' => 'na_zverejnenie',
     'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
-    'zlucene' => 'zlucene',
-    'ukoncenezluene' => 'ukoncenezluene',
-    'u_autora' => 'u_autora',
-    'na_zalomenie' => 'na_zalomenie',
-    'u_konzultanta' => 'u_konzultanta',
-    'publikovane_na_webe' => 'publikovane_na_webe',
-    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-    'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
-    '1_korektura' => '1_korektura',
     'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
     'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
-    '2_korekt_ra' => '2_korekt_ra',
-    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
     'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
+    'zlucene' => 'zlucene',
+    'vyradene' => 'vyradene',
+    '1_korektura' => '1_korektura',
+    '2_korekt_ra' => '2_korekt_ra',
+    'u_konzultanta' => 'u_konzultanta',
+    'ukoncenezluene' => 'ukoncenezluene',
+    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
   );
   $handler->display->display_options['filters']['state_1']['group'] = 1;
   $handler->display->display_options['filters']['state_1']['exposed'] = TRUE;
@@ -4738,9 +4739,15 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
@@ -4749,14 +4756,13 @@ function rs_beliana_views_views_default_views() {
     14 => 0,
     15 => 0,
     16 => 0,
-    18 => 0,
     3 => 0,
-    9 => 0,
-    25 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
+    26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['state_1']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['state_1']['group_info']['label'] = 'Stav';
@@ -15010,6 +15016,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['label'] = '';
   $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Tabuľka pre geografické heslá */
+  $handler->display->display_options['fields']['field_table']['id'] = 'field_table';
+  $handler->display->display_options['fields']['field_table']['table'] = 'field_data_field_table';
+  $handler->display->display_options['fields']['field_table']['field'] = 'field_table';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
@@ -16130,6 +16140,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Vyhľadať'),
     t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
     t('Komentár/inštrukcie'),
+    t('Tabuľka pre geografické heslá'),
     t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
     t('Komentár obsahuje'),
     t('Komentár neobsahuje'),
@@ -20453,6 +20464,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     23 => 0,
     26 => 0,
   );
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current_1']['id'] = 'is_current_1';
+  $handler->display->display_options['filters']['is_current_1']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current_1']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current_1']['relationship'] = 'reverse_field_ilustracia_node';
+  $handler->display->display_options['filters']['is_current_1']['value'] = '1';
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
