@@ -927,6 +927,12 @@ function beliana_node_presave($node) {
     }
   }
 
+  // to be used in logs for node save debugging
+  watchdog('content', '@type: updated (1) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+    '@type' => $node->type,
+    '@title' => $node->title
+      ], WATCHDOG_NOTICE);
+
   // find links pointing to articles in Ukončené/Zlúčené (ukoncenezluene) state and replace them
   $dom = new \DOMDocument();
   $dom->loadHTML(mb_convert_encoding($node->field_text_hesla[LANGUAGE_NONE][0]['value'], 'HTML-ENTITIES', 'UTF-8'));
@@ -948,6 +954,12 @@ function beliana_node_presave($node) {
       }
     }
   }
+
+  // to be used in logs for node save debugging
+  watchdog('content', '@type: updated (2) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+    '@type' => $node->type,
+    '@title' => $node->title
+      ], WATCHDOG_NOTICE);
 
   // remove unnecessary tags
   $html = beliana_clean_tags($node, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], "Text hesla (beliana_node_presave)");
@@ -993,7 +1005,7 @@ function beliana_node_presave($node) {
   #update the link table
   _beliana_process_links($node);
   // to be used in logs for node save debugging
-  watchdog('content', '@type: updated @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+  watchdog('content', '@type: updated (3) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
     '@type' => $node->type,
     '@title' => $node->title
       ], WATCHDOG_NOTICE);
