@@ -838,8 +838,8 @@ function beliana_node_presave($node) {
   $log_folder = 'public://logs/' . date('Ym');
   file_prepare_directory($log_folder, FILE_CREATE_DIRECTORY);
 
-  error_log(date('Y-m-d H:s:i') . " - GET: \n" . serialize($_GET) . "\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
-  error_log(date('Y-m-d H:s:i') . " - POST: \n" . serialize($_POST) . "\n\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
+  error_log(date('Y-m-d H:i:s') . " - GET: \n" . serialize($_GET) . "\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
+  error_log(date('Y-m-d H:i:s') . " - POST: \n" . serialize($_POST) . "\n\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
 
   # do not execute in the case of workbench moderation state transitions
   # execute only on node saving
