@@ -279,8 +279,10 @@ function beliana_sync_sync($nid, &$context) {
     $dates = [];
     if (isset($node->field_datum[LANGUAGE_NONE])) {
       foreach ($node->field_datum['und'] as $item) {
-        $only_date = date('Y-m-d', strtotime($item['value']));
-        $dates[] = $only_date;
+        if ($item['value']) {
+          $only_date = date('Y-m-d', strtotime($item['value']));
+          $dates[] = $only_date;
+        }
       }
     }
 
@@ -290,13 +292,17 @@ function beliana_sync_sync($nid, &$context) {
       'body' => $body,
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
-      'dates' => $dates,
+      //'dates' => $dates,
       'info_published' => _extract_published_info($node)._extract_updated_info($node),
       //'category' => ["geografia;afrika","geografia;európa","fyzika"],
       //'category' => ["asdf;ghjk;pqr"],
       //'category' => ["asdf1;ghjk;pqr"],
       'category' => _extract_category_info($node),
     ];
+
+    if (isset($dates) and $dates){
+      $remote_node_object['dates'] = $dates;
+    }
     // add table, if the field is defined and if there really is a table in it
     if (isset($node->field_table[LANGUAGE_NONE]) and !(strpos($node->field_table[LANGUAGE_NONE][0]['value'], 'table') === False)) {
       $remote_node_object['table'] = array(
