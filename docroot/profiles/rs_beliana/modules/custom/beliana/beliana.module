@@ -8,6 +8,22 @@
  */
 
 /**
+ * Implements hook_init().
+ */
+function beliana_init() {
+  // log $_POST and $_GET
+  if (substr($_GET['q'], 0, 4) == 'node') {
+    $log_folder = 'public://logs/' . date('Ym');
+    file_prepare_directory($log_folder, FILE_CREATE_DIRECTORY);
+
+    error_log(date('Y-m-d H:i:s') . " - GET: \n" . serialize($_GET) . "\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
+    if (!empty($_POST)) {
+      error_log(date('Y-m-d H:i:s') . " - POST: \n" . serialize($_POST) . "\n\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
+    }
+  }
+}
+
+/**
  * Implements hook_views_api().
  */
 function beliana_views_api() {
@@ -834,13 +850,6 @@ function beliana_merge(&$entity, $context = array()) {
  * @inheritdoc
  */
 function beliana_node_presave($node) {
-  // log $_POST and $_GET
-  $log_folder = 'public://logs/' . date('Ym');
-  file_prepare_directory($log_folder, FILE_CREATE_DIRECTORY);
-
-  error_log(date('Y-m-d H:i:s') . " - GET: \n" . serialize($_GET) . "\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
-  error_log(date('Y-m-d H:i:s') . " - POST: \n" . serialize($_POST) . "\n\n", 3, drupal_realpath($log_folder . '/log-' . date('d') . '.txt'));
-
   # do not execute in the case of workbench moderation state transitions
   # execute only on node saving
   # on node creation $node->workbench_moderation does not exist
@@ -935,7 +944,7 @@ function beliana_node_presave($node) {
   }
 
   // to be used in logs for node save debugging
-  watchdog('content', '@type: updated (1) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+  watchdog('content', '@type: updated (1) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s", $node->changed), [
     '@type' => $node->type,
     '@title' => $node->title
       ], WATCHDOG_NOTICE);
@@ -963,7 +972,7 @@ function beliana_node_presave($node) {
   }
 
   // to be used in logs for node save debugging
-  watchdog('content', '@type: updated (2) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+  watchdog('content', '@type: updated (2) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s", $node->changed), [
     '@type' => $node->type,
     '@title' => $node->title
       ], WATCHDOG_NOTICE);
@@ -1012,7 +1021,7 @@ function beliana_node_presave($node) {
   #update the link table
   _beliana_process_links($node);
   // to be used in logs for node save debugging
-  watchdog('content', '@type: updated (3) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+  watchdog('content', '@type: updated (3) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s", $node->changed), [
     '@type' => $node->type,
     '@title' => $node->title
       ], WATCHDOG_NOTICE);
