@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Redakčný systém Beliana Archivované feature.
- */
-
-include_once 'rs_beliana_node_archivovane.features.inc';

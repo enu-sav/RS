@@ -93,6 +93,18 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_na_zoradenie'.
+  $permissions['create field_na_zoradenie'] = array(
+    'name' => 'create field_na_zoradenie',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_nazov_diela'.
   $permissions['create field_nazov_diela'] = array(
     'name' => 'create field_nazov_diela',
@@ -146,6 +158,13 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'create field_taxsubor'.
+  $permissions['create field_taxsubor'] = array(
+    'name' => 'create field_taxsubor',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -219,6 +238,27 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'create title_field'.
+  $permissions['create title_field'] = array(
+    'name' => 'create title_field',
+    'roles' => array(
+      'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+      'garant' => 'garant',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
   );
 
   // Exported permission: 'delete any ilustracia content'.
@@ -337,6 +377,18 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_na_zoradenie'.
+  $permissions['edit field_na_zoradenie'] = array(
+    'name' => 'edit field_na_zoradenie',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_nazov_diela'.
   $permissions['edit field_nazov_diela'] = array(
     'name' => 'edit field_nazov_diela',
@@ -390,6 +442,13 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_taxsubor'.
+  $permissions['edit field_taxsubor'] = array(
+    'name' => 'edit field_taxsubor',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -532,6 +591,18 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_na_zoradenie'.
+  $permissions['edit own field_na_zoradenie'] = array(
+    'name' => 'edit own field_na_zoradenie',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_nazov_diela'.
   $permissions['edit own field_nazov_diela'] = array(
     'name' => 'edit own field_nazov_diela',
@@ -585,6 +656,13 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_taxsubor'.
+  $permissions['edit own field_taxsubor'] = array(
+    'name' => 'edit own field_taxsubor',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -658,6 +736,32 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit own title_field'.
+  $permissions['edit own title_field'] = array(
+    'name' => 'edit own title_field',
+    'roles' => array(
+      'Grafik' => 'Grafik',
+      'Správca heslára' => 'Správca heslára',
+      'administrátor' => 'administrátor',
+      'ig-redaktor' => 'ig-redaktor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit title_field'.
+  $permissions['edit title_field'] = array(
+    'name' => 'edit title_field',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
   );
 
   // Exported permission: 'view any unpublished ilustracia content'.
@@ -752,6 +856,25 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_na_zoradenie'.
+  $permissions['view field_na_zoradenie'] = array(
+    'name' => 'view field_na_zoradenie',
+    'roles' => array(
+      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
+      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_nazov_diela'.
   $permissions['view field_nazov_diela'] = array(
     'name' => 'view field_nazov_diela',
@@ -804,6 +927,17 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'chRedaktor' => 'chRedaktor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_taxsubor'.
+  $permissions['view field_taxsubor'] = array(
+    'name' => 'view field_taxsubor',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -947,6 +1081,18 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view own field_na_zoradenie'.
+  $permissions['view own field_na_zoradenie'] = array(
+    'name' => 'view own field_na_zoradenie',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_nazov_diela'.
   $permissions['view own field_nazov_diela'] = array(
     'name' => 'view own field_nazov_diela',
@@ -1003,6 +1149,13 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view own field_taxsubor'.
+  $permissions['view own field_taxsubor'] = array(
+    'name' => 'view own field_taxsubor',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_url_autora_diela_l'.
   $permissions['view own field_url_autora_diela_l'] = array(
     'name' => 'view own field_url_autora_diela_l',
@@ -1055,6 +1208,30 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'chRedaktor' => 'chRedaktor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own title_field'.
+  $permissions['view own title_field'] = array(
+    'name' => 'view own title_field',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view title_field'.
+  $permissions['view title_field'] = array(
+    'name' => 'view title_field',
+    'roles' => array(
+      'Správca heslára' => 'Správca heslára',
+      'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );

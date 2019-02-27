@@ -62,23 +62,9 @@ function rs_beliana_seo_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'pathauto_node_heslo_pattern';
-  $strongarm->value = 'heslo/[node:title]';
-  $export['pathauto_node_heslo_pattern'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_ilustracia_pattern';
   $strongarm->value = 'ilustracia/[node:title]';
   $export['pathauto_node_ilustracia_pattern'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'pathauto_node_importovane_heslo_pattern';
-  $strongarm->value = 'heslo/[node:title]';
-  $export['pathauto_node_importovane_heslo_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
