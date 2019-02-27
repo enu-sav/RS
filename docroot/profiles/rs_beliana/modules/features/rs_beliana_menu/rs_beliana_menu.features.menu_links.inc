@@ -210,7 +210,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['navigation_diskusn-tma:node/add/forum'] = array(
     'menu_name' => 'navigation',
     'link_path' => 'node/add/forum',
-    'router_path' => 'node/add/forum',
+    'router_path' => 'node/add',
     'link_title' => 'Diskusná téma',
     'options' => array(
       'attributes' => array(
