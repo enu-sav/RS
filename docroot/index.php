@@ -29,7 +29,7 @@ if (substr($_GET['q'], 0, 4) == 'node') {
   $filename = drupal_realpath($log_folder . '/log-' . date('d') . '.txt');
   $log_prefix = date('Y-m-d H:i:s') . ' [' . $user->name . '] - ';
 
-  error_log($log_prefix . "GET: \n" . serialize($_GET) . "\n", 3, $filename);
+  error_log($log_prefix . "GET: " . serialize($_GET) . "\n", 3, $filename);
   if (!empty($_POST)) {
     error_log($log_prefix . "POST (" . $_GET['q'] . "): \n" . serialize($_POST) . "\n\n", 3, $filename);
   }
