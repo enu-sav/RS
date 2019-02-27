@@ -1,5 +1,0 @@
-name = LITE formatter
-description = "Add a formatter to display LITE changes"
-package = Fields
-core = 7.x
-files[] = liteformatter.module
