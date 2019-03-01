@@ -10,7 +10,6 @@
  * All Drupal code is released under the GNU General Public License.
  * See COPYRIGHT.txt and LICENSE.txt.
  */
-
 /**
  * Root directory of Drupal installation.
  */
@@ -22,16 +21,30 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 // log $_POST and $_GET
 if (substr($_GET['q'], 0, 4) == 'node') {
   global $user;
-  
+
   $log_folder = 'public://logs/' . date('Ym');
   file_prepare_directory($log_folder, FILE_CREATE_DIRECTORY);
 
   $filename = drupal_realpath($log_folder . '/log-' . date('d') . '.txt');
+
+  $log_suffix = '';
   $log_prefix = date('Y-m-d H:i:s') . ' [' . $user->name . '] - ';
 
-  error_log($log_prefix . "GET: " . serialize($_GET) . "\n", 3, $filename);
-  if (!empty($_POST)) {
-    error_log($log_prefix . "POST (" . $_GET['q'] . "): \n" . serialize($_POST) . "\n\n", 3, $filename);
+  if (empty($_POST)) {
+    error_log($log_prefix . 'GET' . $log_suffix . ': ' . serialize($_GET) . "\n", 3, $filename);
+  }
+  else {
+    if (isset($_POST['op'])) {
+      if ($_POST['op'] == 'Zobraziť aktuálne zmeny') {
+        $log_suffix = ' [PREVIEW] ';
+      }
+
+      if ($_POST['op'] == 'Uložiť') {
+        $log_suffix = ' [SAVE] ';
+      }
+    }
+
+    error_log($log_prefix . 'POST' . $log_suffix . '(' . $_GET['q'] . "): \n" . serialize($_POST) . "\n\n", 3, $filename);
   }
 }
 
