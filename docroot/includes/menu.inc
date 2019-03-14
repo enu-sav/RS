@@ -576,7 +576,8 @@ function _menu_load_objects(&$item, &$map) {
           // 'load arguments' in the hook_menu() entry, but they need
           // some processing. In this case the $function is the key to the
           // load_function array, and the value is the list of arguments.
-          list($function, $args) = each($function);
+          $args = current($function);
+          $function = key($function);
           $load_functions[$index] = $function;
 
           // Some arguments are placeholders for dynamic items to process.
@@ -642,11 +643,6 @@ function _menu_check_access(&$item, $map) {
     // callback, it is worth making a special case for it.
     if ($callback == 'user_access') {
       $item['access'] = (count($arguments) == 1) ? user_access($arguments[0]) : user_access($arguments[0], $arguments[1]);
-    }
-    // There must be exactly one argument (node) in diff_node_revision_access, but sometimes there is none
-    // as the reason is elsewhere, work this around here, so that log is not populated with garbage
-    elseif ($callback == 'diff_node_revision_access') {
-      $item['access'] = (count($arguments) == 1) ? diff_node_revision_access($arguments[0]) : false;
     }
     elseif (function_exists($callback)) {
       $item['access'] = call_user_func_array($callback, $arguments);
@@ -2407,7 +2403,8 @@ function menu_set_active_trail($new_trail = NULL) {
       // a stripped down menu tree containing the active trail only, in case
       // the given menu has not been built in this request yet.
       $tree = menu_tree_page_data($preferred_link['menu_name'], NULL, TRUE);
-      list($key, $curr) = each($tree);
+      $curr = current($tree);
+      next($tree);
     }
     // There is no link for the current path.
     else {
@@ -2437,7 +2434,8 @@ function menu_set_active_trail($new_trail = NULL) {
         }
         $tree = $curr['below'] ? $curr['below'] : array();
       }
-      list($key, $curr) = each($tree);
+      $curr = current($tree);
+      next($tree);
     }
     // Make sure the current page is in the trail to build the page title, by
     // appending either the preferred link or the menu router item for the
