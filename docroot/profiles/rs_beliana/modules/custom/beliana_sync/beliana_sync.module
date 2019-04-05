@@ -116,9 +116,7 @@ function modify_body_text($node, $text)
 {
   // remove alternative text
   $text = _beliana_sync_clean_tags($node, $text);
-  $text = preg_replace('/(*UTF8)  *▶[kK][^◀]*◀([.,;])/', '\1', $text);
-  $text = preg_replace('/(*UTF8)▶[kK][^◀]*◀/', '', $text);
-  $text = preg_replace('/(*UTF8)▶[wW]([^◀]*)◀/', '\1', $text);
+  $text = _remove_alternative_text($text);
 
   // space inside a tag
   $text = preg_replace('/(<a[^>]*>) /', " $1", $text);
@@ -782,6 +780,7 @@ drupal_set_message($msg, 'warning');
 
   //get cleaned illustration text
   $text_il = _beliana_sync_clean_tags($ilu_node, $ilu_node->field_popis[LANGUAGE_NONE][0]['value']);
+  $text_il = _remove_alternative_text($text_il);
 
   // Check if alternative text is correct
   $atext = _beliana_remove_accents(preg_replace('/<[^>]*>/', '',  $text_il));
@@ -906,3 +905,14 @@ function _beliana_sync_clean_tags($node, $text)
   }
   return $fragment;
 }
+
+// remove alternative text for book (▶K) and alternative text marks
+// to be used in article export to web
+function _remove_alternative_text($text)
+{
+  $text = preg_replace('/(*UTF8)  *▶[kK][^◀]*◀([.,;])/', '\1', $text);
+  $text = preg_replace('/(*UTF8)▶[kK][^◀]*◀/', '', $text);
+  $text = preg_replace('/(*UTF8)▶[wW]([^◀]*)◀/', '\1', $text);
+  return $text;
+}
+
