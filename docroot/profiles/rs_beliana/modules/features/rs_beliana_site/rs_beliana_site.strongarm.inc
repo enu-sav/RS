@@ -75,6 +75,41 @@ function rs_beliana_site_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'autosave_heslo';
+  $strongarm->value = 1;
+  $export['autosave_heslo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'autosave_hidden';
+  $strongarm->value = 1;
+  $export['autosave_hidden'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'autosave_ilustracia';
+  $strongarm->value = 1;
+  $export['autosave_ilustracia'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'autosave_importovane_heslo';
+  $strongarm->value = 1;
+  $export['autosave_importovane_heslo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'autosave_period';
+  $strongarm->value = '10';
+  $export['autosave_period'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'block_cache';
   $strongarm->value = FALSE;
   $export['block_cache'] = $strongarm;
