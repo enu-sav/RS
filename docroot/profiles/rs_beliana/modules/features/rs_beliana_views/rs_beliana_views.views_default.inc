@@ -16708,7 +16708,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'name_1' => 'name_1',
     'field_ilustracia' => 'field_ilustracia',
     'created' => 'created',
-    'field_datum_aktualizacie' => 'field_datum_aktualizacie',
+    'field_datum' => 'field_datum',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -16727,7 +16727,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'empty_column' => 0,
     ),
     'nid' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -16785,9 +16785,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_datum_aktualizacie' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
+    'field_datum' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -16796,6 +16794,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Výsledný súhrn */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';

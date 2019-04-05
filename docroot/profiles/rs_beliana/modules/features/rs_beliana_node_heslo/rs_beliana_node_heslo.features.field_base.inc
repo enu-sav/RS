@@ -561,7 +561,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Vyplatiť' => 'Heslo vypracoval autor alebo konzultant, vyplatiť',
+        'Vyplatiť' => 'Heslo vypracoval autor, vyplatiť',
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracoval redaktor',
         'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
