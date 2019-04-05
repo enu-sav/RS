@@ -850,8 +850,8 @@ function beliana_node_presave($node) {
     return;
   }
 
+  // set field_na_zoradenie if empty or fix it if necessary
   setlocale(LC_COLLATE, 'sk_SK.utf8');
-  // fix field_na_zoradenie if necessary
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
   if (!$rebuild_sort) {
     // are there funny characters in sort string (field_na_zoradenie)?
@@ -892,9 +892,10 @@ function beliana_node_presave($node) {
   if (isset($node->is_new) and $node->is_new === True)
     return;
 
+  // clean tags and remove unnecessary field values in type 'ilustracie'
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
     if ($node->type == "ilustracia") {
-      $html = beliana_clean_tags($node, $node->field_popis[LANGUAGE_NONE][0]['value'], "PopiPopis ilustracie (beliana_node_presave)");
+      $html = beliana_clean_tags($node, $node->field_popis[LANGUAGE_NONE][0]['value'], "Popis ilustracie (beliana_node_presave)");
       $node->field_popis[LANGUAGE_NONE][0]['value'] = $html;
       // remove inappropriate setting of field_licencia1 if licence type is not 'CC licencia' (possible in the form)
       if (isset($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]) and $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] !== 'CC licencia') {
@@ -976,17 +977,18 @@ function beliana_node_presave($node) {
     $node->field_table[LANGUAGE_NONE][0]['value'] = $html;
   }
 
-  // unset field_dlzka_autorovho_textu_zad if field_vyplatit is not Vyplatiť 
+  // store information about the author's text length (used for payments)
+  // first, unset field_dlzka_autorovho_textu_zad if field_vyplatit is not Vyplatiť 
   // (setting it makes no sense, but is possible in the form)
   if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] !== "Vyplatiť") {
     #dpm("Odstránená nepotrebná hodnota v field_dlzka_autorovho_textu_zad");
     unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]);
   }
-  // save date when the author's text length was saved, update the lenght if it is equal to 0
+  // Compute the lenght if value 0 was entered in field field_dlzka_autorovho_textu_zad.
   if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and ( !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value']) or
       $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0)) {
-    // set the date, so that we know it and the size is never changed again
+    // set the date (if set,  field field_dlzka_autorovho_textu_zad will never be changed again)
     $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     // if  field_dlzka_autorovho_textu_zad is set to 0, fill the value automatically
     if ($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0) {
@@ -997,13 +999,15 @@ function beliana_node_presave($node) {
       $text = trim(preg_replace('/\s\s+/', ' ', $text));
       $tlen = drupal_strlen($text);
       $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] = $tlen;
+      #log this event
       $node->log = $node->log . ", automaticky určená dĺžka autorovho textu";
     }
-    else {
+    else 
+    { # log if a value was entered manually
       $node->log = $node->log . ", ručne vložená dĺžka autorovho textu";
     }
   }
-  // save date when the author's text information was saved
+  // save date when the author's text information was saved. Used for monthly records
   if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and ! isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
     $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     $node->log = $node->log . ", vyplnené pole Vyplatiť";
@@ -1151,7 +1155,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   $new_state = $values['state'];
   $cur_state = $values['node']->workbench_moderation['current']->state;
 
-  // item is merged from other items
+  // ensure corect state transitions if article is merged from other articles
   if (isset($values['node']->field_zlucene_z['und'])) {
     // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
     if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
@@ -2473,7 +2477,20 @@ function get_header_dates($text) {
   return $dates;
 }
 
-// delete unnecessary tags from node text
+/**
+ * Delete unnecessary tags from node text
+ * these usually originate from pasting from Word and from highlighting text and undoing the highlights
+ *
+ * @param $node
+ *   node the next 'text' argument relates to (may be article node, but the text may be related to illustration)
+ * @param string $text
+ *   node text area to be represented
+ * @param string $where
+ *   some text for an error message
+ *
+ * @return 
+ *   cleaned $text or unchenged $text in case of an error (e.g. not valid html)
+ */
 function beliana_clean_tags($node, $text, $where) {
   $dom = beliana_get_dom($node, $text, $where);
   if (!$dom)
@@ -2534,7 +2551,7 @@ function beliana_clean_tags($node, $text, $where) {
   $fragment = str_replace("<strong> </strong>", " ", $fragment);
   $fragment = str_replace("<strong> </strong>", " ", $fragment);
 
-  // remove empty lines at start and end
+  // remove empty lines at start and at end
   // CKeditor inserts as empty line "<p> </p>" with non-breakable space 
   // nonbreakable space: " " here
   $fragment = preg_replace('#^(<p> </p>[\r\n]*)*#', '', $fragment);
@@ -2565,10 +2582,10 @@ function _beliana_process_links($node) {
   $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
   // do not continue if text is empty
   if ($text === "")
-    return "";
+    return;
   $dom = beliana_get_dom($node, $text, "Text hesla (beliana_process_links)");
   if (!$dom)
-    return $text;
+    return;
 
   /** @var \DOMElement[] $links */
   $links = $dom->getElementsByTagName('a');
