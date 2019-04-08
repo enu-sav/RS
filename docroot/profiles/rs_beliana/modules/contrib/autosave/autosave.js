@@ -8,37 +8,49 @@ Drupal.behaviors.autosave.attach = function (context, settings) {
 
   if ($('#autosave-status').size() == 0) {
    // Add a div for us to put messages in.
-    $('body').append('<div id="autosave-status"><span id="status"></span></div>');
+    $('body').append('<div id="autosave-status"></div>');
   }
 
   autosaveSettings = settings.autosave;
-
-  $('#' + autosaveSettings.formid).not('.autosave-processed').addClass('autosave-processed').autosave({
-    interval: autosaveSettings.period * 1000, // Time in ms
+  var $selector = $('input[name="form_id"][value="' + autosaveSettings.form_id + '"] ').parents('form').not('.autosave-processed');
+  $selector.addClass('autosave-processed').autosave({
+    // Autosave interval time in ms
+    interval: autosaveSettings.period * 1000, 
     url: autosaveSettings.url,
     setup: function (e, o) {
-      var ignoreLink, restoreLink, callbackPath;
-
-      // If there is a saved form for this user, let him know so he can reload it
-      // if desired.
+      // If there is a saved form for this user, let them know so it can be 
+      // reloaded if desired.
       if (autosaveSettings.savedTimestamp) {
         showingRestoreCommand = true;
 
-        ignoreLink = $('<a>').attr('href', '#').attr('title', Drupal.t('Ignore/Delete saved form')).html(Drupal.t('Ignore')).click(function (e) {
-          Drupal.behaviors.autosave.hideMessage();
-          return false;
-        });
-
-        callbackPath = Drupal.settings.basePath + 'autosave/restore/' + autosaveSettings.formid + '/' + autosaveSettings.savedTimestamp + '/' + autosaveSettings.formToken + '/' + autosaveSettings.theme;
-        restoreLink = $('<a>').attr('href', callbackPath).addClass('use-ajax').attr('title', Drupal.t('Restore saved form')).html(Drupal.t('Restore')).click(function (e) {
-          Drupal.behaviors.autosave.hideMessage();
-        });
-
-        Drupal.behaviors.autosave.displayMessage(Drupal.t('This form was autosaved on ' + autosaveSettings.savedDate), {
-          // Show the message for 30 seconds, or hide it when the user starts
-          // editing the form.
-          timeout: 30000,
-          extra: $('<span id="operations">').append(ignoreLink).append(restoreLink)
+        restoreCallback = function(html) {
+          Drupal.behaviors.autosave.displayMessage(html, {
+            timeout: autosaveSettings.timeout * 1000,
+          });
+          $('#autosave-status .ignore-link').click(function(e) {
+            showingRestoreCommand = false;
+            Drupal.behaviors.autosave.hideMessage();
+            // Remove the autosaved form from the database if settings 
+            // are such.
+            if (autosaveSettings.ignoreBehavior) {
+              var path = Drupal.settings.basePath + 'autosave/remove/' + autosaveSettings.form_id + '/' + autosaveSettings.savedTimestamp + '/' + autosaveSettings.form_token; 
+              $.post(path, autosaveSettings);
+            }
+            return false;
+          });
+          $('#autosave-status .restore-link').click(function(e) {
+            showingRestoreCommand = false;
+            Drupal.behaviors.autosave.hideMessage();
+          });
+          Drupal.attachBehaviors(document);
+        };
+        
+        // Markup for the restore popup
+        $.ajax({
+          type: "POST",
+          url: Drupal.settings.basePath + 'autosave/popup/autosave_restore_popup', 
+          data: autosaveSettings,
+          success: restoreCallback
         });
       }
 
@@ -51,8 +63,7 @@ Drupal.behaviors.autosave.attach = function (context, settings) {
           // Note: There seems to be a bug where after a form is restored,
           // everything works fine but tinyMCE keeps reporting an undefined
           // error internally.  As its code is compressed I have absolutely no
-          // way to debug this.  If you can figure it out, please file a patch.
-
+          // way to debug this. If you can figure it out, please file a patch.
           var triggers = Drupal.settings.wysiwyg.triggers;
           var id;
           var field;
@@ -64,21 +75,34 @@ Drupal.behaviors.autosave.attach = function (context, settings) {
       }
 
       // Wire up CKEditor to autosave.
-      // @todo This does not yet support CKEditor 4.
-      if (typeof(CKEDITOR) !== 'undefined') {
-        CKEDITOR.on('instanceReady', function (eventInfo) {
-          var editor = eventInfo.editor;
-          editor.on('saveSnapshot', function () {
-            editor.updateElement();
-          });
+      if (typeof(CKEDITOR) !== 'undefined'){
+        setInterval(function() {
+          var id;
+          for (id in CKEDITOR.instances) {
+            var instance = CKEDITOR.instances[id];
+            instance.updateElement();
+          }
+        }, autosaveSettings.period * 1000);
+      }
+    },
+    
+    save: function (e, o) {
+      var savedCallback = function(html) {
+        Drupal.behaviors.autosave.displayMessage(html,
+          { timeout: 3000 });
+      };
+      if (!autosaveSettings.hidden) {
+        $.ajax({
+          type: "POST",
+          url: Drupal.settings.basePath + 'autosave/popup/autosave_saved_popup', 
+          data: autosaveSettings,
+          success: savedCallback
         });
       }
-
     },
-    save: function (e, o) {
-      if (!autosaveSettings.hidden) {
-        Drupal.behaviors.autosave.displayMessage(Drupal.t('Form autosaved.'));
-      }
+    before: function () {
+      // Do not autosave the form while the Ignore/Restore popup is shown.
+      return !showingRestoreCommand;
     },
     dirty: function (e, o) {
       if (showingRestoreCommand) {
@@ -90,22 +114,21 @@ Drupal.behaviors.autosave.attach = function (context, settings) {
 
 Drupal.behaviors.autosave.hideMessage = function() {
   $('#autosave-status').fadeOut('slow');
+  // We have hidden the Ignore/Restore popup so we start autosaving the form.
+  showingRestoreCommand = false;
 };
 
 Drupal.behaviors.autosave.displayMessage = function(message, settings) {
   settings = settings || {};
-  settings.timeout = settings.timeout || 3000;
-  settings.extra = settings.extra || '';
-  //settings = $.extend({}, {timeout: 3000, extra: ''}, settings);
   var status = $('#autosave-status');
   status.empty().append('<span id="status">' + message + '</span>');
-  if (settings.extra) {
-    status.append(settings.extra);
-  }
+  status.empty().append(message);
   Drupal.attachBehaviors(status);
 
   $('#autosave-status').slideDown();
-  setTimeout(Drupal.behaviors.autosave.hideMessage, settings.timeout);
+  if (settings.timeout) {
+    setTimeout(Drupal.behaviors.autosave.hideMessage, settings.timeout);
+  }
 };
 
 })(jQuery);
