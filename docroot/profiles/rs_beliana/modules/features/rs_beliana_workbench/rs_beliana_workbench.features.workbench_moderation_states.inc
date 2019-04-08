@@ -189,6 +189,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Na spracovanie u výst. redaktora 2',
       'weight' => 6,
     ),
+    'u_vyst_redaktora_2x' => array(
+      'name' => 'u_vyst_redaktora_2x',
+      'label' => 'U výst. redaktora 2X',
+      'description' => 'Ilustrácia u výstupného redaktora 2x',
+      'weight' => 6,
+    ),
     'u_vyst_redaktora_3' => array(
       'name' => 'u_vyst_redaktora_3',
       'label' => 'U výst. redaktora 3',

@@ -1183,6 +1183,24 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from u_vyst_redaktora_2x to na_zverejnenie'.
+  $permissions['moderate content from u_vyst_redaktora_2x to na_zverejnenie'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_2x to na_zverejnenie',
+    'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2'.
+  $permissions['moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2',
+    'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra'.
   $permissions['moderate content from u_vyst_redaktora_3 to 2_korekt_ra'] = array(
     'name' => 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra',

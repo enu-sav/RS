@@ -234,6 +234,16 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'vyradene',
       'name' => 'u_vyst_redaktora2-na_vyradenie',
     ),
+    'u_vyst_redaktora_2x:na_zverejnenie' => array(
+      'from_name' => 'u_vyst_redaktora_2x',
+      'to_name' => 'na_zverejnenie',
+      'name' => 'u_vyst_redaktora2x-u_vyst_redaktora1',
+    ),
+    'u_vyst_redaktora_2x:u_vyst_redaktora_2' => array(
+      'from_name' => 'u_vyst_redaktora_2x',
+      'to_name' => 'u_vyst_redaktora_2',
+      'name' => 'u_vyst_redaktora2x-u_vyst_redaktora2',
+    ),
     'u_vyst_redaktora_3:2_korekt_ra' => array(
       'from_name' => 'u_vyst_redaktora_3',
       'to_name' => '2_korekt_ra',
