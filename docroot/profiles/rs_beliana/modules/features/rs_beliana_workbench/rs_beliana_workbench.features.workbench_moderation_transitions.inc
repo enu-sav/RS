@@ -197,7 +197,7 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
     'u_jaz_redaktora_2:u_v_st_redaktora_5' => array(
       'from_name' => 'u_jaz_redaktora_2',
       'to_name' => 'u_v_st_redaktora_5',
-      'name' => 'u_jaz_redaktora2-u_vyst_readaktora5',
+      'name' => 'u_jaz_redaktora2-u_vyst_redaktora5',
     ),
     'u_konzultanta:needs_review' => array(
       'from_name' => 'u_konzultanta',

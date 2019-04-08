@@ -14,7 +14,7 @@ function rs_beliana_node_ilustracia_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_ilustracia';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_ilustracia'] = $strongarm;
 
   $strongarm = new stdClass();
