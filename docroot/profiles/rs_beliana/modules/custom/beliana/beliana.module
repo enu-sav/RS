@@ -1169,7 +1169,6 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     // transition 1_korektura >> u_vyst_redaktora_3 
     if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
       _transition_korektura($values, "1_korektura");
-      _transition_vr2x($values);
     }
 
     $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
@@ -1487,6 +1486,7 @@ function _transition_korektura(&$values, $korektura) {
     $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
   }
   else {
+    _transition_vr2x($values);
     // we are done, restore the initial status
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
   }
