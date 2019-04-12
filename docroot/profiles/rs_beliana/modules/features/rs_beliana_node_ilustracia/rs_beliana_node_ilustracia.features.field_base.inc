@@ -10,28 +10,36 @@
 function rs_beliana_node_ilustracia_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_alternativny_text'.
-  $field_bases['field_alternativny_text'] = array(
+  // Exported field_base: 'field_datum_prevzatia'.
+  $field_bases['field_datum_prevzatia'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_alternativny_text',
+    'field_name' => 'field_datum_prevzatia',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'date',
     'settings' => array(
-      'max_length' => 125,
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 'hour',
+        'minute' => 'minute',
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'datetime',
   );
 
   // Exported field_base: 'field_drzitel_prav'.
@@ -305,7 +313,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_obrazok_navrh_',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'fid' => array(
@@ -322,22 +330,33 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_obrazok_odkaz'.
-  $field_bases['field_obrazok_odkaz'] = array(
+  // Exported field_base: 'field_odmena'.
+  $field_bases['field_odmena'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_obrazok_odkaz',
+    'field_name' => 'field_odmena',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
-    'indexes' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
     'locked' => 0,
-    'module' => 'url',
-    'settings' => array(),
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'bez_odmeny' => 'Bez nároku na odmenu',
+        's_odmenou' => 'Vyplatiť po zverejnení alebo použití v knihe',
+        'odmena_vyplatena' => 'Vyriešené v minulosti',
+      ),
+      'allowed_values_function' => '',
+    ),
     'translatable' => 0,
-    'type' => 'url',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_original'.
@@ -348,7 +367,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_original',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 1,
     ),
     'indexes' => array(
       'fid' => array(
@@ -438,6 +457,34 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_prenesene_do_rs'.
+  $field_bases['field_prenesene_do_rs'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_prenesene_do_rs',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'Nie',
+        1 => 'Áno',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_subor_ilustracie'.

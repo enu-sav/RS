@@ -14,7 +14,7 @@ function rs_beliana_node_ilustracia_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_ilustracia';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_ilustracia'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -200,14 +200,14 @@ function rs_beliana_node_ilustracia_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_node_type_ilustracia';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['workbench_access_node_type_ilustracia'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_moderation_default_state_ilustracia';
-  $strongarm->value = 'nova_ilustracia';
+  $strongarm->value = 'draft';
   $export['workbench_moderation_default_state_ilustracia'] = $strongarm;
 
   return $export;

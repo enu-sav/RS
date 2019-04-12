@@ -11,8 +11,8 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
   $items = array(
     'published' => array(
       'name' => 'published',
-      'label' => 'published',
-      'description' => 'nepoužívané',
+      'label' => 'Prevzatá ilustrácia',
+      'description' => 'Ilustrácia prevzatá do redakčného systému. Tam sa definitívne rozhodne, či aj bude použitá',
       'weight' => 10,
     ),
   );
