@@ -797,10 +797,24 @@ function beliana_merge(&$entity, $context = array()) {
         $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
       }
     }
+    
+    // Check if entity has moderation state history: u_vyst_redaktora_2x >> u_vyst_redaktora_2
+    $transitions = db_select('workbench_moderation_node_history', 'w')
+        ->fields('w')
+        ->condition('from_state', 'u_vyst_redaktora_2x')
+        ->condition('state', 'u_vyst_redaktora_2')
+        ->condition('nid', $entity->nid)
+        ->execute()
+        ->fetchAll();
+
+    // If master has state u_vyst_redaktora_2x, write to merged entity as attribute
+    if (!empty($transitions)) {
+      $master->field_atributy[LANGUAGE_NONE][0]['value'] = 'VR2X';
+    }
 
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
     node_save($master);
-
+    
     $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
     // Empty alias for original entity.
     //$entity->path['alias'] = '';
