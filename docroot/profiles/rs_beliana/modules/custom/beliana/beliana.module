@@ -797,12 +797,11 @@ function beliana_merge(&$entity, $context = array()) {
         $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
       }
     }
-    
+
     // Check if entity has moderation state history: u_vyst_redaktora_2x >> u_vyst_redaktora_2
     $transitions = db_select('workbench_moderation_node_history', 'w')
         ->fields('w')
-        ->condition('from_state', 'u_vyst_redaktora_2x')
-        ->condition('state', 'u_vyst_redaktora_2')
+        ->condition('state', 'u_vyst_redaktora_2x')
         ->condition('nid', $entity->nid)
         ->execute()
         ->fetchAll();
@@ -814,7 +813,7 @@ function beliana_merge(&$entity, $context = array()) {
 
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
     node_save($master);
-    
+
     $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
     // Empty alias for original entity.
     //$entity->path['alias'] = '';
@@ -1009,8 +1008,7 @@ function beliana_node_presave($node) {
       #log this event
       $node->log = $node->log . ", automaticky určená dĺžka autorovho textu";
     }
-    else 
-    { # log if a value was entered manually
+    else { # log if a value was entered manually
       $node->log = $node->log . ", ručne vložená dĺžka autorovho textu";
     }
   }
@@ -1483,6 +1481,29 @@ function _transition_korektura(&$values, $korektura) {
   else {
     // we are done, restore the initial status
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
+  }
+
+  // check if "heslo" was already seen by vr2x
+  $already_seen_by_vr2x = FALSE;
+  if (empty($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
+    $transitions = db_select('workbench_moderation_node_history', 'w')
+        ->fields('w')
+        ->condition('state', 'u_vyst_redaktora_2x')
+        ->condition('nid', $values['node']->nid)
+        ->execute()
+        ->fetchAll();
+
+    $already_seen_by_vr2x = !empty($transitions);
+  }
+  else {
+    if (!empty($values['node']->field_atributy[LANGUAGE_NONE])) {
+      $already_seen_by_vr2x = $values['node']->field_atributy[LANGUAGE_NONE][0]['value'] == 'VR2X';
+    }
+  }
+
+  // if seen, move to vr4
+  if ($already_seen_by_vr2x) {
+    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_4';
   }
 }
 
