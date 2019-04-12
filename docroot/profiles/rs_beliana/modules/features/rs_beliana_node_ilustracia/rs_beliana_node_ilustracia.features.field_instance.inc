@@ -118,6 +118,74 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-ilustracia-field_datum_zverejnenia'.
+  $field_instances['node-ilustracia-field_datum_zverejnenia'] = array(
+    'bundle' => 'ilustracia',
+    'deleted' => 0,
+    'description' => 'Dátum zverejnenia ilustrácie na webe alebo v knihe. Dopĺňané programovo, slúži na vyplácanie odmeny',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 24,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_zverejnenia',
+    'label' => 'Dátum zverejnenia',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 25,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-ilustracia-field_drzitel_prav'.
   $field_instances['node-ilustracia-field_drzitel_prav'] = array(
     'bundle' => 'ilustracia',
@@ -888,6 +956,56 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-ilustracia-field_odmena'.
+  $field_instances['node-ilustracia-field_odmena'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_odmena',
+    'label' => 'Odmena',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 24,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-ilustracia-field_popis'.
   $field_instances['node-ilustracia-field_popis'] = array(
     'bundle' => 'ilustracia',
@@ -1572,6 +1690,8 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.');
   t('Comment');
   t('Držiteľ práv');
+  t('Dátum zverejnenia');
+  t('Dátum zverejnenia ilustrácie na webe alebo v knihe. Dopĺňané programovo, slúži na vyplácanie odmeny');
   t('Inštitúcia');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
@@ -1583,6 +1703,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Názov diela');
   t('Obrázok (návrh/náhľad)');
   t('Obrázok - odkaz (návrh/náhľad)');
+  t('Odmena');
   t('Pokiaľ je zvolená hodnota "Iná verejná licencia" v poli "Typ CC licencie", veďte odkaz na text licencie, ktorá bola použitá na stránke diela.');
   t('Popis modifikácie');
   t('Použiť');

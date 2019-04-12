@@ -588,6 +588,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in needs_review state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'komentátor VR2' => 'komentátor VR2',
     ),
     'module' => 'workbench_state_access',
   );

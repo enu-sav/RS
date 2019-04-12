@@ -10,6 +10,15 @@
 function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'create field_datum_zverejnenia'.
+  $permissions['create field_datum_zverejnenia'] = array(
+    'name' => 'create field_datum_zverejnenia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_drzitel_prav'.
   $permissions['create field_drzitel_prav'] = array(
     'name' => 'create field_drzitel_prav',
@@ -255,6 +264,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit field_datum_zverejnenia'.
+  $permissions['edit field_datum_zverejnenia'] = array(
+    'name' => 'edit field_datum_zverejnenia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_drzitel_prav'.
   $permissions['edit field_drzitel_prav'] = array(
     'name' => 'edit field_drzitel_prav',
@@ -446,6 +464,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'chRedaktor' => 'chRedaktor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_datum_zverejnenia'.
+  $permissions['edit own field_datum_zverejnenia'] = array(
+    'name' => 'edit own field_datum_zverejnenia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
   );
@@ -670,6 +697,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'view_unpublished',
   );
 
+  // Exported permission: 'view field_datum_zverejnenia'.
+  $permissions['view field_datum_zverejnenia'] = array(
+    'name' => 'view field_datum_zverejnenia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_drzitel_prav'.
   $permissions['view field_drzitel_prav'] = array(
     'name' => 'view field_drzitel_prav',
@@ -861,6 +897,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'chRedaktor' => 'chRedaktor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_datum_zverejnenia'.
+  $permissions['view own field_datum_zverejnenia'] = array(
+    'name' => 'view own field_datum_zverejnenia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
   );
