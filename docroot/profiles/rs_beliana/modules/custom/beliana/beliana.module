@@ -1153,7 +1153,7 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
  * @inheritdoc
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
-  $values = $form_state['values'];
+  $values = $form_state['values'];  
   if (!isset($values['node']->workbench_moderation['current']->state))
     return;
 
@@ -1167,8 +1167,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       _start_korektura($values);
 
     // transition 1_korektura >> u_vyst_redaktora_3 
-    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3')
+    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
       _transition_korektura($values, "1_korektura");
+      _transition_vr2x($values);
+    }
 
     $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
     if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
@@ -1184,6 +1186,12 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       _run_2_korektura_single($values);
     node_save($values['node']);
     return;
+  }
+  
+  // transition 1_korektura >> u_vyst_redaktora_3 
+  if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
+    _transition_vr2x($values);
+    node_save($values['node']);
   }
 
   // check type heslo
@@ -1482,7 +1490,12 @@ function _transition_korektura(&$values, $korektura) {
     // we are done, restore the initial status
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
   }
+}
 
+/**
+ * Helper function: transition korektura >>  next state
+ */
+function _transition_vr2x(&$values) {
   // check if "heslo" was already seen by vr2x
   $already_seen_by_vr2x = FALSE;
   if (empty($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
@@ -1492,7 +1505,7 @@ function _transition_korektura(&$values, $korektura) {
         ->condition('nid', $values['node']->nid)
         ->execute()
         ->fetchAll();
-
+        
     $already_seen_by_vr2x = !empty($transitions);
   }
   else {
