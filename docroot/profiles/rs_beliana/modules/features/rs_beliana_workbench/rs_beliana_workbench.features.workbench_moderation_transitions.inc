@@ -134,6 +134,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_vyst_redaktora_2',
       'name' => 'u_vyst_redaktora1-u_vyst_redaktora2',
     ),
+    'na_zverejnenie:u_vyst_redaktora_2x' => array(
+      'from_name' => 'na_zverejnenie',
+      'to_name' => 'u_vyst_redaktora_2x',
+      'name' => 'u_vyst_redaktora1-u_vyst_redaktora2x',
+    ),
     'navrhnute_na_vyradenie:len_vyplatit' => array(
       'from_name' => 'navrhnute_na_vyradenie',
       'to_name' => 'len_vyplatit',
@@ -223,6 +228,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'u_vyst_redaktora_2',
       'to_name' => 'needs_review',
       'name' => 'u_vyst_redaktora2-u_redaktora',
+    ),
+    'u_vyst_redaktora_2:u_vyst_redaktora_2x' => array(
+      'from_name' => 'u_vyst_redaktora_2',
+      'to_name' => 'u_vyst_redaktora_2x',
+      'name' => 'u_vyst_redaktora2-u_vyst_redaktora2x',
     ),
     'u_vyst_redaktora_2:ukoncenezluene' => array(
       'from_name' => 'u_vyst_redaktora_2',

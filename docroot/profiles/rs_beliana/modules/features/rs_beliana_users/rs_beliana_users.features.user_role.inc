@@ -13,7 +13,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Autor.
   $roles['Autor'] = array(
     'name' => 'Autor',
-    'weight' => 10,
+    'weight' => 9,
   );
 
   // Exported role: Grafik.
@@ -25,13 +25,13 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Jazykový redaktor 1.
   $roles['Jazykový redaktor 1'] = array(
     'name' => 'Jazykový redaktor 1',
-    'weight' => 12,
+    'weight' => 11,
   );
 
   // Exported role: Jazykový redaktor 2.
   $roles['Jazykový redaktor 2'] = array(
     'name' => 'Jazykový redaktor 2',
-    'weight' => 13,
+    'weight' => 12,
   );
 
   // Exported role: Komentátor.
@@ -55,7 +55,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Redaktor.
   $roles['Redaktor'] = array(
     'name' => 'Redaktor',
-    'weight' => 11,
+    'weight' => 10,
   );
 
   // Exported role: Správca heslára.
@@ -67,18 +67,24 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Výstupný redaktor 1.
   $roles['Výstupný redaktor 1'] = array(
     'name' => 'Výstupný redaktor 1',
-    'weight' => 14,
+    'weight' => 13,
   );
 
   // Exported role: Výstupný redaktor 2.
   $roles['Výstupný redaktor 2'] = array(
     'name' => 'Výstupný redaktor 2',
-    'weight' => 15,
+    'weight' => 14,
   );
 
   // Exported role: Výstupný redaktor 2HP.
   $roles['Výstupný redaktor 2HP'] = array(
     'name' => 'Výstupný redaktor 2HP',
+    'weight' => 15,
+  );
+
+  // Exported role: Výstupný redaktor 2X.
+  $roles['Výstupný redaktor 2X'] = array(
+    'name' => 'Výstupný redaktor 2X',
     'weight' => 16,
   );
 

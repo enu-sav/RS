@@ -29,6 +29,7 @@ features[menu_links][] = management_my-workbench:admin/workbench
 features[menu_links][] = management_na-posdenie-r:admin/beliana/na-posudenie-r
 features[menu_links][] = management_na-posdenie-vr1:admin/beliana/na-posudenie-vr1
 features[menu_links][] = management_na-posdenie-vr2:admin/beliana/na-posudenie-vr2
+features[menu_links][] = management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x
 features[menu_links][] = management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3
 features[menu_links][] = management_na-posdenie-vr4:admin/beliana/na-posudenie-vr4
 features[menu_links][] = management_na-posdenie-vr5:admin/beliana/na-posudenie-vr5

@@ -771,6 +771,7 @@ function rs_beliana_sync_ui_views_default_views() {
     10 => '10',
     6 => '6',
     13 => '13',
+    32 => '32',
     14 => '14',
     15 => '15',
     16 => '16',

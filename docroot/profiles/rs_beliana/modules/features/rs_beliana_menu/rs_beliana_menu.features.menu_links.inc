@@ -104,7 +104,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -26,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -125,7 +125,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -33,
+    'weight' => -31,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -146,7 +146,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -48,
+    'weight' => -47,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -167,7 +167,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -47,
+    'weight' => -46,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -188,7 +188,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -38,
+    'weight' => -36,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -209,7 +209,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -37,
+    'weight' => -35,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -250,7 +250,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 1,
-    'weight' => -46,
+    'weight' => -45,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -271,7 +271,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -45,
+    'weight' => -44,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -292,7 +292,28 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -44,
+    'weight' => -43,
+    'customized' => 1,
+    'parent_identifier' => 'management_redakn-systm:admin/beliana',
+  );
+  // Exported menu link: management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x.
+  $menu_links['management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/beliana/na-posudenie-vr2x',
+    'router_path' => 'admin/beliana/na-posudenie-vr2x',
+    'link_title' => 'Na posúdenie (VR2X)',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -42,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -313,7 +334,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -43,
+    'weight' => -41,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -334,7 +355,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -42,
+    'weight' => -40,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -355,7 +376,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -41,
+    'weight' => -39,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -376,7 +397,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -31,
+    'weight' => -29,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -397,7 +418,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -32,
+    'weight' => -30,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -418,7 +439,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -39,
+    'weight' => -37,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -501,7 +522,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -40,
+    'weight' => -38,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -542,7 +563,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -34,
+    'weight' => -32,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -563,7 +584,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -25,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -624,7 +645,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -30,
+    'weight' => -28,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -645,7 +666,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -49,
+    'weight' => -48,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -666,7 +687,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -35,
+    'weight' => -33,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -687,7 +708,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -36,
+    'weight' => -34,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -964,6 +985,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Na posúdenie (R)');
   t('Na posúdenie (VR1)');
   t('Na posúdenie (VR2)');
+  t('Na posúdenie (VR2X)');
   t('Na posúdenie (VR3)');
   t('Na posúdenie (VR4)');
   t('Na posúdenie (VR5)');

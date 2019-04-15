@@ -588,7 +588,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in needs_review state',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'komentátor VR2' => 'komentátor VR2',
     ),
     'module' => 'workbench_state_access',
   );
@@ -993,6 +992,15 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from na_zverejnenie to u_vyst_redaktora_2x'.
+  $permissions['moderate content from na_zverejnenie to u_vyst_redaktora_2x'] = array(
+    'name' => 'moderate content from na_zverejnenie to u_vyst_redaktora_2x',
+    'roles' => array(
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from navrhnute_na_vyradenie to len_vyplatit'.
   $permissions['moderate content from navrhnute_na_vyradenie to len_vyplatit'] = array(
     'name' => 'moderate content from navrhnute_na_vyradenie to len_vyplatit',
@@ -1166,6 +1174,15 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
+  // Exported permission: 'moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x'.
+  $permissions['moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x'] = array(
+    'name' => 'moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x',
+    'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: 'moderate content from u_vyst_redaktora_2 to ukoncenezluene'.
   $permissions['moderate content from u_vyst_redaktora_2 to ukoncenezluene'] = array(
     'name' => 'moderate content from u_vyst_redaktora_2 to ukoncenezluene',
@@ -1189,6 +1206,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2x to na_zverejnenie',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
+      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1198,6 +1217,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
+      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
     ),
     'module' => 'workbench_moderation',
   );

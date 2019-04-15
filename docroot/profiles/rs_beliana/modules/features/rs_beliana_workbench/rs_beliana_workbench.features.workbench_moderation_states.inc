@@ -192,7 +192,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     'u_vyst_redaktora_2x' => array(
       'name' => 'u_vyst_redaktora_2x',
       'label' => 'U výst. redaktora 2X',
-      'description' => 'Ilustrácia u výstupného redaktora 2x',
+      'description' => 'Na spracovanie u výstupného redaktora 2x',
       'weight' => 6,
     ),
     'u_vyst_redaktora_3' => array(

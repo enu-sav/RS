@@ -33,6 +33,7 @@ function rs_beliana_views_views_default_views() {
     6 => '6',
     13 => '13',
     19 => '19',
+    32 => '32',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -1664,12 +1665,12 @@ function rs_beliana_views_views_default_views() {
   /* Display: Needs review VR2X */
   $handler = $view->new_display('page', 'Needs review VR2X', 'page_25');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Na posúdenie VR3';
+  $handler->display->display_options['title'] = 'Na posúdenie VR2X';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    14 => '14',
+    32 => '32',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -1899,9 +1900,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
   $handler->display->display_options['filters']['from_state']['value'] = array(
-    '1_korektura' => '1_korektura',
-    'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
-    '2_korekt_ra' => '2_korekt_ra',
+    'na_zverejnenie' => 'na_zverejnenie',
+    'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
   );
   $handler->display->display_options['filters']['from_state']['group'] = 1;
   $handler->display->display_options['filters']['from_state']['exposed'] = TRUE;
@@ -1913,21 +1913,31 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['from_state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    10 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
     13 => 0,
+    19 => 0,
+    32 => 0,
     14 => 0,
     15 => 0,
     16 => 0,
     3 => 0,
-    8 => 0,
-    9 => 0,
-    17 => 0,
-    18 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['from_state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Workbench Moderation: Stav */
@@ -2051,6 +2061,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Workbench Moderation: Prišlo zo stavu */
+  $handler->display->display_options['fields']['from_state']['id'] = 'from_state';
+  $handler->display->display_options['fields']['from_state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['from_state']['field'] = 'from_state';
+  $handler->display->display_options['fields']['from_state']['machine_name'] = 0;
   /* Pole: Obsah: Súbor */
   $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
   $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
@@ -6706,6 +6721,7 @@ function rs_beliana_views_views_default_views() {
     6 => '6',
     13 => '13',
     19 => '19',
+    32 => '32',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -6970,7 +6986,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    17 => '17',
     3 => '3',
     5 => '5',
     18 => '18',
@@ -6979,6 +6994,7 @@ function rs_beliana_views_views_default_views() {
     6 => '6',
     13 => '13',
     19 => '19',
+    32 => '32',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -8050,6 +8066,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     4 => '4',
     6 => '6',
     13 => '13',
+    32 => '32',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -9030,7 +9047,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
  ⚫ <b>Ak chcete heslo odoslať autorovi alebo výstupnému redaktorovi 2:</b> Na riadku hesla kliknite na jeho názov s odkazom, vyberte požadovaný stav a potom kliknite na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).
 <strong>Upozornenie</strong>: Ak počas úpravy kliknete na inú možnosť (napr. Odkazujúce heslá), na úpravu sa vrátite stlačením šípky doľava prehliadača a nie opätovne na Upraviť. Inak sa neuložené zmeny stratia. '),
     t('Needs review VR2X'),
-    t('Na posúdenie VR3'),
+    t('Na posúdenie VR2X'),
     t(' ⚫ Ak chcete heslo upraviť: Na riadku hesla kliknite na jeho názov s odkazom a potom na Upraviť. Spravte potrebné úpravy a kliknite na Uložiť
  ⚫ Ak chcete heslo odoslať na ďalšie spracovanie: Na riadku hesla kliknite na jeho názov s odkazom, zvoľte nasledujúci stav a potom kliknite na Zmeniť stav. Kliknite na Použiť (vpravo).
 <b>Voľba nasledujúceho stavu:</b>
@@ -9041,6 +9058,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Needs review VR2'),
     t('Na posúdenie VR2'),
     t('Needs review VR3'),
+    t('Na posúdenie VR3'),
     t('Needs review VR4'),
     t('Na posúdenie VR4'),
     t('Needs review VR5'),
@@ -21396,6 +21414,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     10 => '10',
     6 => '6',
     13 => '13',
+    32 => '32',
     14 => '14',
     15 => '15',
     16 => '16',
