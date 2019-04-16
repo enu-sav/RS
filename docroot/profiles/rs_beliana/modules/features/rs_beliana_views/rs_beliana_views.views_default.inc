@@ -33,7 +33,7 @@ function rs_beliana_views_views_default_views() {
     6 => '6',
     13 => '13',
     19 => '19',
-    32 => '32',
+    33 => '33',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -1670,7 +1670,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    32 => '32',
+    33 => '33',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -6721,7 +6721,7 @@ function rs_beliana_views_views_default_views() {
     6 => '6',
     13 => '13',
     19 => '19',
-    32 => '32',
+    33 => '33',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -6994,7 +6994,7 @@ function rs_beliana_views_views_default_views() {
     6 => '6',
     13 => '13',
     19 => '19',
-    32 => '32',
+    33 => '33',
     14 => '14',
     15 => '15',
     16 => '16',
@@ -21414,7 +21414,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     10 => '10',
     6 => '6',
     13 => '13',
-    32 => '32',
+    33 => '33',
     14 => '14',
     15 => '15',
     16 => '16',
