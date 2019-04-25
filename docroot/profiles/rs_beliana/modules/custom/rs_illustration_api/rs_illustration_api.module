@@ -1,0 +1,146 @@
+<?php
+
+/**
+ * @file
+ * Ilustration API main file.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function rs_illustration_api_menu() {
+  return [
+    'node/%node/publish-to-rs' => [
+      'title' => t('Publish to RS'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['rs_illustration_api_publish_form', 1],
+      'access callback' => 'rs_illustration_api_publish_access',
+      'access arguments' => array(1),
+      'type' => MENU_LOCAL_TASK,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_permission().
+ */
+function rs_illustration_api_permission() {
+  return array(
+    'publish ilustracia content' => array(
+      'title' => t('Publish Ilustracia to RS'),
+    )
+  );
+}
+
+function rs_illustration_api_publish_form($form, &$form_state, $node) {
+  $form['node'] = array(
+    '#type' => 'value',
+    '#value' => $node->nid
+  );
+
+  $form['actions'] = array(
+    '#type' => 'actions'
+  );
+
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Publish'),
+  );
+
+  return $form;
+}
+
+function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
+  if ($node = node_load($form_state['values']['node'])) {
+    $base_url = variable_get('rs_web_uri');
+
+    if (!empty($base_url)) {
+      $request_url = $base_url . '/api/ilustracia';
+
+      $user_data = array(
+        'username' => variable_get('rs_web_login'),
+        'password' => variable_get('rs_password_login'),
+      );
+
+      // LOGIN USER
+      $curl = curl_init($request_url . '/user/login');
+
+      curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+      curl_setopt($curl, CURLOPT_POST, 1);
+      curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($user_data));
+      curl_setopt($curl, CURLOPT_HEADER, FALSE);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+      $response = curl_exec($curl);
+      $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+      if ($http_code == 200) {
+        $logged_user = json_decode($response);
+      }
+      else {
+        $http_message = curl_error($curl);
+        drupal_set_message('Auth error: ' . $http_message, 'error');
+        exit();
+      }
+
+      $cookie_session = $logged_user->session_name . '=' . $logged_user->sessid;
+
+      // GET CSRF TOKEN
+      curl_setopt_array($curl, array(
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => $request_url . '/user/token',
+      ));
+
+      curl_setopt($curl, CURLOPT_COOKIE, "$cookie_session");
+
+      $ret = new stdClass;
+      $ret->response = curl_exec($curl);
+      $csrf_token = json_decode($ret->response)->token;
+
+      // CREATE NODE
+      $curl = curl_init($request_url . '/node');
+
+      $data = array(
+        'uid' => 1,
+        'type' => $node->type,
+        'title' => $node->title,
+        'field_lexikalna_skupina_il' => $node->field_lexikalna_skupina_il,
+        'field_popis' => $node->field_popis,
+        'field_zdroj_ilustracie' => $node->field_zdroj_ilustracie,
+      );
+
+      curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRF-Token: ' . $csrf_token));
+      curl_setopt($curl, CURLOPT_POST, 1);
+      curl_setopt($curl, CURLOPT_POSTFIELDS, drupal_json_encode($data));
+      curl_setopt($curl, CURLOPT_HEADER, FALSE);
+      curl_setopt($curl, CURLOPT_COOKIE, "$cookie_session");
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+      $response = curl_exec($curl);
+      $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+      if ($http_code == 200) {
+        $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
+        $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
+        node_save($node);
+
+        drupal_set_message('Ilustracia odoslana do RS');
+        drupal_goto('node/' . $node->nid);
+      }
+      else {
+        $http_message = curl_error($curl);
+        drupal_set_message('Creating error: ' . $http_message, 'error');
+      }
+    }
+  }
+}
+
+function rs_illustration_api_publish_access($node) {
+  if ($node->type == 'ilustracia' && $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] != 1 && user_access('publish ilustracia content')) {
+    return TRUE;
+  }
+
+  return FALSE;
+}

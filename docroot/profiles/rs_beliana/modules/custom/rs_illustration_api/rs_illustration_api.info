@@ -1,0 +1,5 @@
+name = RS Illustration API
+core = 7.x
+description = "Module providing interfaces and code for synchronisation with ilustration version"
+package = Beliana
+dependencies[] = rest_server

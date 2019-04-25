@@ -46,6 +46,7 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'access content',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
@@ -511,6 +512,15 @@ function rs_beliana_site_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: 'publish ilustracia content'.
+  $permissions['publish ilustracia content'] = array(
+    'name' => 'publish ilustracia content',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'rs_illustration_api',
   );
 
   // Exported permission: 'read all private messages'.
