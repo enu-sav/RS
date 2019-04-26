@@ -36,6 +36,13 @@ function rs_beliana_site_default_services_endpoint() {
     ),
   );
   $endpoint->resources = array(
+    'file' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'node' => array(
       'operations' => array(
         'create' => array(
