@@ -57,81 +57,33 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
     if (!empty($base_url)) {
       $request_url = $base_url . '/api/ilustracia';
 
-      $user_data = array(
-        'username' => variable_get('rs_web_login'),
-        'password' => variable_get('rs_password_login'),
-      );
+      if ($login = rs_illustration_api_rest_login($request_url)) {
+        $attachments = array();
 
-      // LOGIN USER
-      $curl = curl_init($request_url . '/user/login');
+        if (!empty($node->field_obrazok_navrh_[LANGUAGE_NONE])) {
+          foreach ($node->field_obrazok_navrh_[LANGUAGE_NONE] as $image) {
+            if ($file = rs_illustration_api_rest_file($request_url, $image, $login)) {
+              $attachments['field_obrazok_navrh_'][] = $file;
+            }
+          }
+        }
 
-      curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
-      curl_setopt($curl, CURLOPT_POST, 1);
-      curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($user_data));
-      curl_setopt($curl, CURLOPT_HEADER, FALSE);
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-      curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+        if (!empty($node->field_subor_ilustracie[LANGUAGE_NONE])) {
+          foreach ($node->field_subor_ilustracie[LANGUAGE_NONE] as $image) {
+            if ($file = rs_illustration_api_rest_file($request_url, $image, $login)) {
+              $attachments['field_subor_ilustracie'][] = $file;
+            }
+          }
+        }
 
-      $response = curl_exec($curl);
-      $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($response = rs_illustration_api_rest_node($request_url, $node, $attachments, $login)) {
+          $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
+          $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
+          node_save($node);
 
-      if ($http_code == 200) {
-        $logged_user = json_decode($response);
-      }
-      else {
-        $http_message = curl_error($curl);
-        drupal_set_message('Auth error: ' . $http_message, 'error');
-        exit();
-      }
-
-      $cookie_session = $logged_user->session_name . '=' . $logged_user->sessid;
-
-      // GET CSRF TOKEN
-      curl_setopt_array($curl, array(
-        CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => $request_url . '/user/token',
-      ));
-
-      curl_setopt($curl, CURLOPT_COOKIE, "$cookie_session");
-
-      $ret = new stdClass;
-      $ret->response = curl_exec($curl);
-      $csrf_token = json_decode($ret->response)->token;
-
-      // CREATE NODE
-      $curl = curl_init($request_url . '/node');
-
-      $data = array(
-        'uid' => 1,
-        'type' => $node->type,
-        'title' => $node->title,
-        'field_lexikalna_skupina_il' => $node->field_lexikalna_skupina_il,
-        'field_popis' => $node->field_popis,
-        'field_zdroj_ilustracie' => $node->field_zdroj_ilustracie,
-      );
-
-      curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRF-Token: ' . $csrf_token));
-      curl_setopt($curl, CURLOPT_POST, 1);
-      curl_setopt($curl, CURLOPT_POSTFIELDS, drupal_json_encode($data));
-      curl_setopt($curl, CURLOPT_HEADER, FALSE);
-      curl_setopt($curl, CURLOPT_COOKIE, "$cookie_session");
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-      curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
-
-      $response = curl_exec($curl);
-      $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-      if ($http_code == 200) {
-        $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
-        $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
-        node_save($node);
-
-        drupal_set_message('Ilustracia odoslana do RS');
-        drupal_goto('node/' . $node->nid);
-      }
-      else {
-        $http_message = curl_error($curl);
-        drupal_set_message('Creating error: ' . $http_message, 'error');
+          drupal_set_message('Ilustracia odoslana do RS');
+          drupal_goto('node/' . $node->nid);
+        }
       }
     }
   }
@@ -140,6 +92,138 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
 function rs_illustration_api_publish_access($node) {
   if ($node->type == 'ilustracia' && $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] != 1 && user_access('publish ilustracia content')) {
     return TRUE;
+  }
+
+  return FALSE;
+}
+
+/* ----- CURL HELPER CALLBACKS ----- */
+
+function rs_illustration_api_rest_login($base_url) {
+  $user_data = array(
+    'username' => variable_get('rs_web_login'),
+    'password' => variable_get('rs_password_login'),
+  );
+
+  $data = array();
+  $curl = curl_init($base_url . '/user/login');
+
+  // LOGIN USER
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($user_data));
+  curl_setopt($curl, CURLOPT_HEADER, FALSE);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+  $response = curl_exec($curl);
+  $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+  if ($http_code == 200) {
+    $logged_user = json_decode($response);
+  }
+  else {
+    $http_message = curl_error($curl);
+    drupal_set_message('Auth error: ' . $http_message, 'error');
+    return FALSE;
+  }
+
+  $data['session'] = $logged_user->session_name . '=' . $logged_user->sessid;
+
+  // GET CSRF TOKEN
+  curl_setopt_array($curl, array(
+    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_URL => $base_url . '/user/token',
+  ));
+
+  curl_setopt($curl, CURLOPT_COOKIE, $data['session'] . "");
+
+  $ret = new stdClass;
+  $ret->response = curl_exec($curl);
+  $data['token'] = json_decode($ret->response)->token;
+
+  return $data;
+}
+
+function rs_illustration_api_rest_file($base_url, $file, $login) {
+  $curl = curl_init($base_url . '/file');
+
+  $data = array(
+    'uri' => $file['uri'],
+    'filename' => $file['filename'],
+    'filepath' => drupal_realpath($file['uri']),
+    'file' => base64_encode(file_get_contents(file_create_url($file['uri']))),
+  );
+
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRF-Token: ' . $login['token']));
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+  curl_setopt($curl, CURLOPT_HEADER, FALSE);
+  curl_setopt($curl, CURLOPT_COOKIE, $login['session'] . "");
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+  $response = curl_exec($curl);
+  $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+  if ($http_code == 200) {
+    return json_decode($response);
+  }
+  else {
+    $http_message = curl_error($curl);
+    drupal_set_message('File creating error: ' . $http_message, 'error');
+  }
+
+  return FALSE;
+}
+
+function rs_illustration_api_rest_node($base_url, $node, $attachments, $login) {
+  $curl = curl_init($base_url . '/node');
+  $term = taxonomy_term_load($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['tid']);
+
+  $data = array(
+    'type' => $node->type,
+    'title' => $node->title,
+    'status' => $node->status,
+    'title_field[und][0][value]' => $node->title,
+    'field_popis[und][0][value]' => $node->field_popis[LANGUAGE_NONE][0]['value'],
+    'field_popis[und][0][format]' => $node->field_popis[LANGUAGE_NONE][0]['format'],
+    'field_lexikalna_skupina_il[und]' => $term->name,
+//    'field_zdroj_ilustracie[und][0][value]' => $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'],
+    'field_komentar_instrukcie[und][0][value]' => $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
+    'field_alternativny_text[und][0][value]' => $node->field_alternativny_text[LANGUAGE_NONE][0]['value'],
+    'field_obrazok_odkaz[und][0][value]' => $node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'],
+  );
+
+  if (!empty($attachments)) {
+    foreach ($attachments as $key => $files) {
+      foreach ($files as $file) {
+        $data[$key . '[und]'][] = array(
+          'fid' => $file->fid,
+          'status' => 1,
+          'display' => 1
+        );
+      }
+    }
+  }
+
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRF-Token: ' . $login['token']));
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+  curl_setopt($curl, CURLOPT_HEADER, FALSE);
+  curl_setopt($curl, CURLOPT_COOKIE, $login['session'] . "");
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+  $response = curl_exec($curl);
+  $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+  if ($http_code == 200) {
+    return json_decode($response);
+  }
+  else {
+    $http_message = curl_error($curl);
+    drupal_set_message('Node creating error: ' . $http_message, 'error');
   }
 
   return FALSE;
