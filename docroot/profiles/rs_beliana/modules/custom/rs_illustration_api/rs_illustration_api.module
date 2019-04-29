@@ -67,6 +67,14 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
             }
           }
         }
+        
+        if (!empty($node->field_original[LANGUAGE_NONE])) {
+          foreach ($node->field_original[LANGUAGE_NONE] as $image) {
+            if ($file = rs_illustration_api_rest_file($request_url, $image, $login)) {
+              $attachments['field_original'][] = $file;
+            }
+          }
+        }
 
         if (!empty($node->field_subor_ilustracie[LANGUAGE_NONE])) {
           foreach ($node->field_subor_ilustracie[LANGUAGE_NONE] as $image) {
@@ -75,7 +83,7 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
             }
           }
         }
-
+        
         if ($response = rs_illustration_api_rest_node($request_url, $node, $attachments, $login)) {
           $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
           $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
@@ -189,10 +197,25 @@ function rs_illustration_api_rest_node($base_url, $node, $attachments, $login) {
     'field_popis[und][0][value]' => $node->field_popis[LANGUAGE_NONE][0]['value'],
     'field_popis[und][0][format]' => $node->field_popis[LANGUAGE_NONE][0]['format'],
     'field_lexikalna_skupina_il[und]' => $term->name,
-//    'field_zdroj_ilustracie[und][0][value]' => $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'],
+    'field_zdroj_ilustracie[und]' => $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'],
     'field_komentar_instrukcie[und][0][value]' => $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
     'field_alternativny_text[und][0][value]' => $node->field_alternativny_text[LANGUAGE_NONE][0]['value'],
     'field_obrazok_odkaz[und][0][value]' => $node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'],
+    'field_drzitel_prav[und]' => $node->field_drzitel_prav[LANGUAGE_NONE][0]['value'],
+    'field_institucia[und][0][value]' => $node->field_institucia[LANGUAGE_NONE][0]['value'],
+    'field_komentar_instrukcie[und][0][value]' => $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
+    'field_licencia1[und]' => $node->field_licencia1[LANGUAGE_NONE][0]['value'],
+    'field_meno_autora_diela[und][0][value]' => $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'],
+    'field_meno_autora_snimky_diela[und][0][value]' => $node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'],
+    'field_modifikovane[und]' => $node->field_modifikovane[LANGUAGE_NONE][0]['value'],
+    'field_na_zoradenie[und][0][value]' => $node->field_na_zoradenie[LANGUAGE_NONE][0]['value'],
+    'field_nazov_diela[und][0][value]' => $node->field_nazov_diela[LANGUAGE_NONE][0]['value'],
+    'field_odmena[und]' => $node->field_odmena[LANGUAGE_NONE][0]['value'],
+    'field_popis_modifikacie[und][0][value]' => $node->field_popis_modifikacie[LANGUAGE_NONE][0]['value'],
+    'field_pouzit[und]' => $node->field_pouzit[LANGUAGE_NONE][0]['value'],
+    'field_url_autora_diela_l[und][0][url]' => $node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'],
+    'field_url_diela_l[und][0][url]' => $node->field_url_diela_l[LANGUAGE_NONE][0]['url'],
+    'field_url_textu_licencie_l[und][0][url]' => $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'],
   );
 
   if (!empty($attachments)) {
@@ -201,12 +224,12 @@ function rs_illustration_api_rest_node($base_url, $node, $attachments, $login) {
         $data[$key . '[und]'][] = array(
           'fid' => $file->fid,
           'status' => 1,
-          'display' => 1
+          'display' => 1,
         );
       }
     }
   }
-
+  
   curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRF-Token: ' . $login['token']));
   curl_setopt($curl, CURLOPT_POST, 1);
   curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
