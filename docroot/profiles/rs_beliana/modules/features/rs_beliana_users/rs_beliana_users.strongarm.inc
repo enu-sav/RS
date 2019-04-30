@@ -27,13 +27,6 @@ function rs_beliana_users_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'account_sync_servers';
-  $strongarm->value = 'http://ilustracie.enu.sav/';
-  $export['account_sync_servers'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'account_sync_uid1';
   $strongarm->value = 0;
   $export['account_sync_uid1'] = $strongarm;
