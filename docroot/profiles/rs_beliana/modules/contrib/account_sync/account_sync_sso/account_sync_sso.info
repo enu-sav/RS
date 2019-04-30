@@ -1,0 +1,12 @@
+name = Account Sync Single Signon
+description = Single signon addon for the account sync module.
+core = 7.x
+package = Other
+dependencies[] = account_sync
+
+; Information added by drupal.org packaging script on 2013-07-12
+version = "7.x-2.2"
+core = "7.x"
+project = "account_sync"
+datestamp = "1373667969"
+

@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * (un)install and update routines for account_sync.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function account_sync_uninstall() {
+  variable_del('account_sync_enabled');
+  variable_del('account_sync_in_enabled');
+  variable_del('account_sync_server_key');
+  variable_del('account_sync_servers');
+  variable_del('account_sync_create_users');
+  variable_del('account_sync_uid1');
+  variable_del('account_sync_match_roles');
+  variable_del('account_sync_ip_restriction');
+  variable_del('account_sync_ips');
+}

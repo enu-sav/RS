@@ -1,0 +1,138 @@
+<?php
+
+/**
+ * @file
+ * Contains the base module code and hooks for the account sync module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function account_sync_menu() {
+  $items = array();
+
+  $items['admin/config/people/account_sync'] = array(
+    'title' => 'Account sync',
+    'description' => 'Setup accounts to sync across multiple drupal sites.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('account_sync_settings'),
+    'access arguments' => array('administer account sync'),
+    'file' => 'account_sync.admin.inc',
+  );
+
+  $items['admin/config/people/account_sync/global'] = array(
+    'title' => 'Global settings',
+    'description' => 'Setup global settings to sync users.',
+    'access arguments' => array('administer account sync'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+
+  $items['admin/config/people/account_sync/sender'] = array(
+    'title' => 'Sender settings',
+    'description' => 'Settings for sending the account data to a remote server',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('account_sync_sender_settings'),
+    'access arguments' => array('administer account sync'),
+    'file' => 'account_sync.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+
+  $items['admin/config/people/account_sync/receiver'] = array(
+    'title' => 'Receiver settings',
+    'description' => 'Settings for receiving the account data from a remote server',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('account_sync_receiver_settings'),
+    'access arguments' => array('administer account sync'),
+    'file' => 'account_sync.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function account_sync_permission() {
+  return array(
+    'administer account sync' => array(
+      'title' => t('administer account sync'),
+      'description' => t('Administer account sync settings'),
+    ),
+    'sync account' => array(
+      'title' => t('sync account'),
+      'description' => t('Sync accounts in this role between sites'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_xmlrpc().
+ */
+function account_sync_xmlrpc() {
+  module_load_include('inc', 'account_sync', 'account_sync.receiver');
+  return array(
+    array(
+      'account_sync.updateUser',
+      'account_sync_update_user',
+      array('struct', 'string', 'string', 'struct', 'struct',
+        'string', 'struct'),
+      t('Update the given user account'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function account_sync_user_insert(&$edit, &$account, $category) {
+  module_load_include('inc', 'account_sync', 'account_sync.sender');
+  return account_sync_send_update('insert', $edit, $account, $category);
+}
+
+/**
+ * Implements hook_user_update().
+ */
+function account_sync_user_update(&$edit, &$account, $category) {
+  module_load_include('inc', 'account_sync', 'account_sync.sender');
+  return account_sync_send_update('update', $edit, $account, $category);
+}
+
+
+/**
+ * Allow modules to hook into hook_account_sync_servers($url, $account).
+ *
+ * It passes the server url and the given account for each server available
+ * for syncing. If any of the hooks return FALSE for a given server url or
+ * account then the account data will not be sent to that server.
+ */
+function account_sync_servers($account) {
+  $servers = array();
+  $all_servers = explode("\n", variable_get('account_sync_servers', ''));
+  // Strip out blank lines.
+  $all_servers = array_filter($all_servers);
+  foreach ($all_servers as $server) {
+    $results = module_invoke_all('account_sync_servers', $server, $account);
+    if (!in_array(FALSE, $results)) {
+      $servers[] = $server;
+    }
+  }
+  return $servers;
+}
+
+/**
+ * Find all roles that have the account sync permission.
+ *
+ * @return Array
+ *   an array of all roles that have the 'sync account' permission of
+ *   the form array($rid => $name, ...). If no roles have the sync account
+ *   permission then return FALSE.
+ */
+function account_sync_allowed_roles() {
+  $roles = db_query("SELECT r.rid, r.name FROM {role_permission} p LEFT JOIN {role} r ON r.rid = p.rid WHERE p.permission = 'sync account' AND r.rid <> :anonymous", array(':anonymous' => DRUPAL_ANONYMOUS_RID))->fetchAllAssoc('rid');
+  $roles = array_map(create_function('$a', 'return $a->name;'), $roles);
+  return empty($roles) ? FALSE : $roles;
+}

@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * @file
+ * Handle single sign-on functionality for the account sync module
+ *
+ * This module allows you to add a link from your site to another site
+ * connected via account_sync and allow them to seamlessly login to the
+ * other site at the same time.
+ *
+ * It does not yet do single signon in the traditional sense (and probably
+ * never will) as logging in on one site does not actually log the user in to
+ * any of the other sites. For that they need to click on a special link.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function account_sync_sso_menu() {
+  $items = array();
+
+  // Pass the username, timestamp, and hashed_pass
+  $items['sso/login/%/%/%'] = array(
+    'title' => 'Login',
+    'page callback' => 'account_sync_sso_login',
+    'page arguments' => array(2, 3, 4),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['sso/goto/%'] = array(
+    'title' => 'SSO Redirect',
+    'page callback' => 'account_sync_sso_goto',
+    'page arguments' => array(2),
+    'access arguments' => array('sync account'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Return a login url for the current user.
+ */
+function account_sync_sso_login_generate_url() {
+  global $user, $drupal_hash_salt;
+
+  // Save the original salt, and use our custom salt for the SSO.
+  $orig_salt = $drupal_hash_salt;
+  $drupal_hash_salt = variable_get('account_sync_server_key');
+
+  $timestamp = time();
+  $url = implode('/',
+    array(
+      'sso/login',
+      $user->name,
+      $timestamp,
+      user_pass_rehash(
+        $user->pass,
+        $timestamp,
+        variable_get('account_sync_server_key', '')
+      ),
+    )
+  );
+
+  $drupal_hash_salt = $orig_salt;
+  return $url;
+}
+
+/**
+ * Login the specified user.
+ */
+function account_sync_sso_login($username, $timestamp, $hashed_pass) {
+  global $user;
+
+  $target = account_sync_target_path(func_get_args(), 3);
+  if ($user->uid) {
+    // A user is already logged in, so ignore the attempt and go to the
+    // target url.
+    drupal_goto($target);
+  }
+
+  if ($account = account_sync_validate_login($username, $timestamp, $hashed_pass)) {
+    // All checks passed, so lets log in the user.
+    $user = $account;
+    watchdog('user', 'Account sync sso: Session opened for %name.', array('%name' => $user->name));
+    $user->login = time();
+    $query = db_update('users')
+      ->fields(array('login' => $user->login))
+      ->condition('name', $user->name)
+      ->condition('pass', $user->pass)
+      ->execute();
+
+    // Regenerate the session ID to prevent against session fixation attacks.
+    drupal_session_regenerate();
+    $edit = array();
+    user_module_invoke('user_login', $edit, $user);
+
+    drupal_goto($target);
+  }
+}
+
+/**
+ * Run validation / authentication on the login url.
+ */
+function account_sync_validate_login($username, $timestamp, $hashed_pass) {
+  global $drupal_hash_salt;
+
+  // Expiration of the timestamp, in seconds.
+  $delay = 120;
+  $now = time();
+  if ($now - 120 > $timestamp) {
+    watchdog('account_sync', 'Timestamp expired on login for %username', array('%username' => $username));
+    return drupal_access_denied();
+  }
+
+  $account = user_load_by_name($username);
+  if (!$account) {
+    watchdog('account_sync', 'Account %username does not exist', array('%username' => $username));
+    return drupal_access_denied();
+  }
+
+  $orig_salt = $drupal_hash_salt;
+  $drupal_hash_salt = variable_get('account_sync_server_key');
+  if (user_pass_rehash($account->pass, $timestamp, variable_get('account_sync_server_key', '')) != $hashed_pass) {
+    watchdog('account_sync', 'Password hash does not match for account %username', array('%username' => $username));
+    $drupal_hash_salt = $orig_salt;
+    return drupal_access_denied();
+  }
+  $drupal_hash_salt = $orig_salt;
+
+  if (!user_access('sync account', $account)) {
+    watchdog('account_sync', 'User %username does not have permission to use SSO', array('%username' => $username));
+    return drupal_access_denied();
+  }
+
+  return $account;
+}
+
+/**
+ * Redirect the user to the server they wish to login at.
+ */
+function account_sync_sso_goto($server) {
+  $url = account_sync_sso_login_generate_url();
+  if ($target_path = account_sync_target_path(func_get_args())) {
+    $target_path = '/' . $target_path;
+  }
+  drupal_goto('http://' . $server . '/' . $url . $target_path);
+}
+
+/**
+ * Generate a drupal path based on the given arguments.
+ */
+function account_sync_target_path($args, $count = 1) {
+  while ($count-- > 0) {
+    array_shift($args);
+  }
+
+  $target_path = implode('/', $args);
+  return $target_path;
+}

@@ -1,0 +1,20 @@
+
+This document describes a couple possible use cases for the account sync module.
+
+Aegir single sign-on:
+
+The original use case it was developed for was http://wedful.com. Wedful is a hosted webservice that allows couples to create their own wedding websites. The entire system is managed by Aegir and each wedding site can have it's own custom domain (e.g.: cherylandjessie.com). Anonymous users create a new site with Aegir. Aegir automatically creates an account for them and then provisions a new site. Some of the site management (such as paying) happens on the Aegir side of things, but other than this the users will stay within their own private wedding websites for the entire time.
+
+The first goal was to have users click a "pay for site now" button on their own website that would take them into aegir to their own site management control panel and then pay via ubercart. They shouldn't have to log in again for this. Basically each aegir client user  is sync'd to the user accounts on each of their client sites. This keeps passwords, usernames, emails, names, and any other account data in sync between aegir and their private wedding site.
+
+The second goal was to give users a "sign in" link from wedful.com. After creating a site, a user may not go back to their website for a couple weeks, and they might forget their domain name and how to log in. The "sign in" link on wedful.com lets the user sign in into their aegir account, and then automatically redirects them (and logs them in) to their personal website.
+
+
+Open Atrium:
+
+Another use case would be if you have a large set of open atrium installs with an admin group who have accounts across all atrium sites. Account sync will allow them to keep the same data on all sites and easily switch between them.
+
+
+Drupal shops with hosting:
+
+Any Drupal shops who also do hosting and maintenance for their clients will need to have the same accounts across all of their clients' sites so that they can log in to manage all of them. Account sync will let you have a role of admin users on all sites and trivially keep them all in sync.
