@@ -67,7 +67,7 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
             }
           }
         }
-        
+
         if (!empty($node->field_original[LANGUAGE_NONE])) {
           foreach ($node->field_original[LANGUAGE_NONE] as $image) {
             if ($file = rs_illustration_api_rest_file($request_url, $image, $login)) {
@@ -83,7 +83,7 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
             }
           }
         }
-        
+
         if ($response = rs_illustration_api_rest_node($request_url, $node, $attachments, $login)) {
           $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
           $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
@@ -159,7 +159,7 @@ function rs_illustration_api_rest_file($base_url, $file, $login) {
   $data = array(
     'uri' => $file['uri'],
     'filename' => $file['filename'],
-    'filepath' => drupal_realpath($file['uri']),
+    'filepath' => $file['uri'],
     'file' => base64_encode(file_get_contents(file_create_url($file['uri']))),
   );
 
@@ -199,8 +199,6 @@ function rs_illustration_api_rest_node($base_url, $node, $attachments, $login) {
     'field_lexikalna_skupina_il[und]' => $term->name,
     'field_zdroj_ilustracie[und]' => $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'],
     'field_komentar_instrukcie[und][0][value]' => $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
-    'field_alternativny_text[und][0][value]' => $node->field_alternativny_text[LANGUAGE_NONE][0]['value'],
-    'field_obrazok_odkaz[und][0][value]' => $node->field_obrazok_odkaz[LANGUAGE_NONE][0]['value'],
     'field_drzitel_prav[und]' => $node->field_drzitel_prav[LANGUAGE_NONE][0]['value'],
     'field_institucia[und][0][value]' => $node->field_institucia[LANGUAGE_NONE][0]['value'],
     'field_komentar_instrukcie[und][0][value]' => $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
@@ -219,17 +217,18 @@ function rs_illustration_api_rest_node($base_url, $node, $attachments, $login) {
   );
 
   if (!empty($attachments)) {
-    foreach ($attachments as $key => $files) {
-      foreach ($files as $file) {
-        $data[$key . '[und]'][] = array(
+    foreach ($attachments as $field => $files) {
+      foreach ($files as $key => $file) {
+        $data[$field . '[und]'][] = array(
           'fid' => $file->fid,
+          'uri' => $file->uri,
           'status' => 1,
           'display' => 1,
         );
       }
     }
   }
-  
+
   curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json', 'X-CSRF-Token: ' . $login['token']));
   curl_setopt($curl, CURLOPT_POST, 1);
   curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
