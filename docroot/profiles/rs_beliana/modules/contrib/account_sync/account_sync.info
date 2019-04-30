@@ -1,0 +1,11 @@
+name = Account Sync
+description = "Allows user account details to be synced across multiple sites."
+core = 7.x
+configure = admin/config/people/account_sync
+
+; Information added by drupal.org packaging script on 2013-07-12
+version = "7.x-2.2"
+core = "7.x"
+project = "account_sync"
+datestamp = "1373667969"
+

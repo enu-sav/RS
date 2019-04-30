@@ -1,0 +1,23 @@
+
+Major differences between account sync and bakery
+
+
+Both the Bakery module (http://drupal.org/project/bakery) and the account sync module have very similar goals (if not identical) but are handled in different ways.
+
+Single Sign-On:
+
+The biggest difference between the two is that Bakery is designed to have a master/slave style of setup, if the master is drupal.org, then all slave sites should be subdomains of drupal.org (e.g. groups.drupal.org or association.drupal.org). With this setup, Bakery allows you to share authentication cookies across drupal sites.
+
+The account sync module has a peer-peer setup rather than master/slave. The single signon component works across multiple domains and servers by using specially crafted URLs which contain login information.
+
+
+Account data synchronization:
+
+Both Bakery and account sync attempt to keep some account data in sync. If updating data that should be synchronized with Bakery then you must run the update from the master site. The account sync data can be updated seemlessly from any of the peer sites.
+
+
+Trust:
+
+If you plan on using the account sync module all peers must have complete trust in one another. If any site is compromised or has a malicious admin, then all accounts on all sites available for synchronization are at risk. This is because all sites are allowed to push updates to all other sites.
+
+With Bakery only the master site is allowed to push changes across to slave sites. This makes for a more secure setup and more flexibility when assigning permissions to the admins of slaves. If any of the slaves are compromised the overall security of the sites running bakery will be much higher than if a peer site in account sync is compromised.

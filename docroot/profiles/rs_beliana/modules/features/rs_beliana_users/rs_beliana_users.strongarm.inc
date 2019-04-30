@@ -13,6 +13,55 @@ function rs_beliana_users_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_create_users';
+  $strongarm->value = 1;
+  $export['account_sync_create_users'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_in_enabled';
+  $strongarm->value = 1;
+  $export['account_sync_in_enabled'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_ip_restriction';
+  $strongarm->value = '0';
+  $export['account_sync_ip_restriction'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_ips';
+  $strongarm->value = '';
+  $export['account_sync_ips'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_match_roles';
+  $strongarm->value = 1;
+  $export['account_sync_match_roles'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_server_key';
+  $strongarm->value = '2fafdb7fd01a7b6e4ffd9d9739bf5f1e';
+  $export['account_sync_server_key'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'account_sync_uid1';
+  $strongarm->value = 0;
+  $export['account_sync_uid1'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'anonymous';
   $strongarm->value = 'Anonymný';
   $export['anonymous'] = $strongarm;
