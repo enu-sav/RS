@@ -21,7 +21,7 @@ function rs_beliana_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'account_sync_in_enabled';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['account_sync_in_enabled'] = $strongarm;
 
   $strongarm = new stdClass();
