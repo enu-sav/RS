@@ -195,7 +195,7 @@ function rs_illustration_api_rest_node($base_url, $node, $attachments, $login) {
     'status' => $node->status,
     'title_field[und][0][value]' => $node->title,
     'field_popis[und][0][value]' => $node->field_popis[LANGUAGE_NONE][0]['value'],
-    'field_popis[und][0][format]' => $node->field_popis[LANGUAGE_NONE][0]['format'],
+    'field_popis[und][0][format]' => 'filtered_html',
     'field_lexikalna_skupina_il[und]' => $term->name,
     'field_zdroj_ilustracie[und]' => $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'],
     'field_komentar_instrukcie[und][0][value]' => $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
