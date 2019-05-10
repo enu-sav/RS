@@ -1153,7 +1153,7 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
  * @inheritdoc
  */
 function beliana_workflow_reaction(&$form, &$form_state) {
-  $values = $form_state['values'];  
+  $values = $form_state['values'];
   if (!isset($values['node']->workbench_moderation['current']->state))
     return;
 
@@ -1186,7 +1186,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     node_save($values['node']);
     return;
   }
-  
+
   // transition 1_korektura >> u_vyst_redaktora_3 
   if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
     _transition_vr2x($values);
@@ -1292,6 +1292,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
       return;
+    }
+    else {
+      $values['node']->field_datum_zverejnenia[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s');
+      node_save($values['node']);
     }
   }
 }
@@ -1505,7 +1509,7 @@ function _transition_vr2x(&$values) {
         ->condition('nid', $values['node']->nid)
         ->execute()
         ->fetchAll();
-        
+
     $already_seen_by_vr2x = !empty($transitions);
   }
   else {
