@@ -11811,7 +11811,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    17 => '17',
     3 => '3',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
@@ -16989,6 +16988,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     10 => '10',
+    34 => '34',
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
