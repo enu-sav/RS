@@ -16,6 +16,7 @@ function rs_beliana_users_user_default_permissions() {
     'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'user',
   );
@@ -34,6 +35,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'administer permissions',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'user',
   );
@@ -52,6 +54,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'user',
   );

@@ -78,6 +78,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'assign workbench access',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_access',
   );
@@ -297,6 +298,13 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'block view revisions in u_vyst_redaktora_2 state'.
   $permissions['block view revisions in u_vyst_redaktora_2 state'] = array(
     'name' => 'block view revisions in u_vyst_redaktora_2 state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'block view revisions in u_vyst_redaktora_2x state'.
+  $permissions['block view revisions in u_vyst_redaktora_2x state'] = array(
+    'name' => 'block view revisions in u_vyst_redaktora_2x state',
     'roles' => array(),
     'module' => 'workbench_state_access',
   );
@@ -669,6 +677,15 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'edit revisions in u_vyst_redaktora_2x state'.
+  $permissions['edit revisions in u_vyst_redaktora_2x state'] = array(
+    'name' => 'edit revisions in u_vyst_redaktora_2x state',
+    'roles' => array(
+      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
+    ),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'edit revisions in u_vyst_redaktora_3 state'.
   $permissions['edit revisions in u_vyst_redaktora_3 state'] = array(
     'name' => 'edit revisions in u_vyst_redaktora_3 state',
@@ -764,6 +781,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -771,7 +789,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from 2_korekt_ra to u_vyst_redaktora_3'.
   $permissions['moderate content from 2_korekt_ra to u_vyst_redaktora_3'] = array(
     'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_3',
-    'roles' => array(),
+    'roles' => array(
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -780,6 +800,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_4',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -789,6 +810,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from draft to vyradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -798,6 +820,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from draft to zaradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -807,6 +830,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_na_webe to ilustracia_u_vyst_redaktora_5',
     'roles' => array(
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -816,6 +840,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_na_zverejnenie to ilustracia_u_vyst_redaktora_5',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -825,6 +850,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_grafika to ilustracia_u_redaktora',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -834,6 +860,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -843,6 +870,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_redaktora to ilustracia_u_grafika',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -854,6 +882,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -863,6 +892,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5',
     'roles' => array(
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -872,6 +902,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -881,6 +912,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -891,6 +923,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -900,6 +933,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -909,6 +943,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from importovane to importovane_u_jr2',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -920,6 +955,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'iredaktor-jaz' => 'iredaktor-jaz',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -931,6 +967,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'iredaktor-jaz' => 'iredaktor-jaz',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -940,6 +977,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from importovane_u_vr to importovane',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -949,6 +987,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from importovane_u_vr to na_zalomenie',
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -958,6 +997,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from len_vyplatit to zaradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -968,6 +1008,16 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from na_jazykovu_korekturu to u_vyst_redaktora_2'.
+  $permissions['moderate content from na_jazykovu_korekturu to u_vyst_redaktora_2'] = array(
+    'name' => 'moderate content from na_jazykovu_korekturu to u_vyst_redaktora_2',
+    'roles' => array(
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -978,6 +1028,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -988,6 +1039,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -995,7 +1047,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from na_zverejnenie to u_vyst_redaktora_2x'.
   $permissions['moderate content from na_zverejnenie to u_vyst_redaktora_2x'] = array(
     'name' => 'moderate content from na_zverejnenie to u_vyst_redaktora_2x',
-    'roles' => array(),
+    'roles' => array(
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -1004,6 +1058,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from navrhnute_na_vyradenie to len_vyplatit',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1013,6 +1068,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from navrhnute_na_vyradenie to vyradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1022,6 +1078,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from navrhnute_na_vyradenie to zaradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1042,6 +1099,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1051,6 +1109,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from needs_review to u_konzultanta',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1060,6 +1119,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from nova_ilustracia to _ilustr_cia_u_autora',
     'roles' => array(
       'Autor' => 'Autor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1071,6 +1131,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1083,6 +1144,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1092,7 +1154,18 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from publikovane_na_webe to zverejnene_oprava',
     'roles' => array(
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
       'zRedaktor' => 'zRedaktor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from publikovane_na_webe to zverejnene_vratene'.
+  $permissions['moderate content from publikovane_na_webe to zverejnene_vratene'] = array(
+    'name' => 'moderate content from publikovane_na_webe to zverejnene_vratene',
+    'roles' => array(
+      'Komentátor' => 'Komentátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1103,6 +1176,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1110,7 +1184,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from u_jaz_redaktora_2 to na_zalomenie'.
   $permissions['moderate content from u_jaz_redaktora_2 to na_zalomenie'] = array(
     'name' => 'moderate content from u_jaz_redaktora_2 to na_zalomenie',
-    'roles' => array(),
+    'roles' => array(
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -1120,6 +1196,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1129,6 +1206,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_konzultanta to needs_review',
     'roles' => array(
       'Konzultant' => 'Konzultant',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1139,6 +1217,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1149,6 +1228,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1159,6 +1239,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1168,6 +1249,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2 to needs_review',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1177,6 +1259,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1186,6 +1269,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2 to ukoncenezluene',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1195,6 +1279,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2 to vyradene',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1204,6 +1289,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2x to na_zverejnenie',
     'roles' => array(
       'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1213,6 +1299,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2',
     'roles' => array(
       'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1223,6 +1310,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1232,6 +1320,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1241,6 +1330,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5',
     'roles' => array(
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1250,6 +1340,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1259,6 +1350,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2',
     'roles' => array(
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1268,6 +1360,16 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from ukoncenezluene to u_vyst_redaktora_2'.
+  $permissions['moderate content from ukoncenezluene to u_vyst_redaktora_2'] = array(
+    'name' => 'moderate content from ukoncenezluene to u_vyst_redaktora_2',
+    'roles' => array(
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1278,6 +1380,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1285,7 +1388,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from zaradene to draft'.
   $permissions['moderate content from zaradene to draft'] = array(
     'name' => 'moderate content from zaradene to draft',
-    'roles' => array(),
+    'roles' => array(
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -1294,6 +1399,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zaradene to navrhnute_na_vyradenie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1303,6 +1409,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zaradene to needs_review',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1313,6 +1420,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1322,6 +1430,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zaradene to vyradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1331,6 +1440,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1340,6 +1450,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zlucene to zlucene_odkazy',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1349,6 +1460,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zlucene_odkazy to na_jazykovu_korekturu',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1358,6 +1470,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zverejnene_oprava to na_opakovane_zverejnenie',
     'roles' => array(
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
       'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'workbench_moderation',
@@ -1367,6 +1480,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from zverejnene_oprava to zverejnene_vratene'] = array(
     'name' => 'moderate content from zverejnene_oprava to zverejnene_vratene',
     'roles' => array(
+      'useradmin' => 'useradmin',
       'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'workbench_moderation',
@@ -1377,6 +1491,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zverejnene_vratene to na_opakovane_zverejnenie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1384,7 +1499,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from zverejnene_vratene to zverejnene_oprava'.
   $permissions['moderate content from zverejnene_vratene to zverejnene_oprava'] = array(
     'name' => 'moderate content from zverejnene_vratene to zverejnene_oprava',
-    'roles' => array(),
+    'roles' => array(
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -1489,6 +1606,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
   );

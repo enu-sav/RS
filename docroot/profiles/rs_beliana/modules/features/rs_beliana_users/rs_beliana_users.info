@@ -63,6 +63,7 @@ features[user_role][] = geoRedaktor
 features[user_role][] = ig-redaktor
 features[user_role][] = iredaktor
 features[user_role][] = iredaktor-jaz
+features[user_role][] = useradmin
 features[user_role][] = zRedaktor
 features[variable][] = anonymous
 features[variable][] = field_bundle_settings_user__user

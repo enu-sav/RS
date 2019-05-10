@@ -54,6 +54,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
       'garant' => 'garant',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'node',
   );

@@ -124,6 +124,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => '1_korektura',
       'name' => 'u_jaz_redaktora1-1_korektura',
     ),
+    'na_jazykovu_korekturu:u_vyst_redaktora_2' => array(
+      'from_name' => 'na_jazykovu_korekturu',
+      'to_name' => 'u_vyst_redaktora_2',
+      'name' => 'u_jaz_redaktora1-u_vyst_redaktora2',
+    ),
     'na_zverejnenie:needs_review' => array(
       'from_name' => 'na_zverejnenie',
       'to_name' => 'needs_review',
@@ -188,6 +193,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'publikovane_na_webe',
       'to_name' => 'zverejnene_oprava',
       'name' => 'zverejnene_na_webe-zverejnene_oprava',
+    ),
+    'publikovane_na_webe:zverejnene_vratene' => array(
+      'from_name' => 'publikovane_na_webe',
+      'to_name' => 'zverejnene_vratene',
+      'name' => 'zverejnene_na_webe-zverejnene_vratene',
     ),
     'u_autora:needs_review' => array(
       'from_name' => 'u_autora',
@@ -283,6 +293,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'u_vyst_redaktora_4',
       'to_name' => 'u_vyst_redaktora_3',
       'name' => 'u_vyst_redaktora4-u_vyst_redaktora3',
+    ),
+    'ukoncenezluene:u_vyst_redaktora_2' => array(
+      'from_name' => 'ukoncenezluene',
+      'to_name' => 'u_vyst_redaktora_2',
+      'name' => 'ukoncene_zlucene-u_vyst_redaktora2',
     ),
     'vyradene:zaradene' => array(
       'from_name' => 'vyradene',
