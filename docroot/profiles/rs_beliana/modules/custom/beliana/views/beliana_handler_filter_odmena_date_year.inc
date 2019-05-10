@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Definition of beliana_handler_filter_author_date_year.
+ * Definition of beliana_handler_filter_odmena_date_year.
  */
 
 /**
@@ -12,7 +12,7 @@
  * from all of the other filter handlers used for dates, strings, lists, etc. Search for
  * *_handler_filter_* files to find them.
  */
-class beliana_handler_filter_author_date_year extends views_handler_filter_in_operator {
+class beliana_handler_filter_odmena_date_year extends views_handler_filter_in_operator {
 
   function construct() {
     parent::construct();
@@ -31,7 +31,7 @@ class beliana_handler_filter_author_date_year extends views_handler_filter_in_op
     }
 
     $this->ensure_my_table();
-    $field = "field_data_field_datum_autorovho_textu.field_datum_autorovho_textu_value";
+    $field = "field_data_field_datum_zverejnenia.field_datum_zverejnenia_value";
     $value = reset($this->value);
 
     // Adds a condition to filter for content created on a given month.

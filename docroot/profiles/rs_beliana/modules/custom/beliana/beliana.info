@@ -10,3 +10,5 @@ dependencies[] = views_bulk_operations
 
 files[] = views/beliana_handler_filter_author_date_month.inc
 files[] = views/beliana_handler_filter_author_date_year.inc
+files[] = views/beliana_handler_filter_odmena_date_month.inc
+files[] = views/beliana_handler_filter_odmena_date_year.inc
