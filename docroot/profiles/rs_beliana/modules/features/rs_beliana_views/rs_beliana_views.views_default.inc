@@ -11804,10 +11804,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['use_batch'] = 'batch';
   $handler->display->display_options['segment_size'] = '100';
 
-  /* Display: Export autori */
-  $handler = $view->new_display('page', 'Export autori', 'page_3');
+  /* Display: Vyplatiť heslá */
+  $handler = $view->new_display('page', 'Vyplatiť heslá', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Export autori';
+  $handler->display->display_options['title'] = 'Vyplatiť heslá';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -12550,18 +12550,18 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['field'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['group'] = 2;
-  $handler->display->display_options['path'] = 'export-autori';
+  $handler->display->display_options['path'] = 'vyplatit-hesla';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Export autori';
+  $handler->display->display_options['menu']['title'] = 'Vyplatiť heslá';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Export autori - dáta */
-  $handler = $view->new_display('views_data_export', 'Export autori - dáta', 'views_data_export_4');
+  /* Display: Vyplatiť heslá - dáta */
+  $handler = $view->new_display('views_data_export', 'Vyplatiť heslá - dáta', 'views_data_export_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Export autori';
+  $handler->display->display_options['title'] = 'Vyplatiť heslá';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
@@ -13210,7 +13210,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['field'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['group'] = 2;
-  $handler->display->display_options['path'] = 'export_autori.csv';
+  $handler->display->display_options['path'] = 'vyplatit_hesla.csv';
   $handler->display->display_options['displays'] = array(
     'page_3' => 'page_3',
     'default' => 0,
@@ -13222,10 +13222,12 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['use_batch'] = 'batch';
   $handler->display->display_options['segment_size'] = '100';
 
-  /* Display: Export vyplácanie */
-  $handler = $view->new_display('page', 'Export vyplácanie', 'page_4');
+  /* Display: Vyplatiť ilustrácie */
+  $handler = $view->new_display('page', 'Vyplatiť ilustrácie', 'page_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Export pre vyplácanie odmeny';
+  $handler->display->display_options['title'] = 'Vyplatiť ilustrácie';
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -13364,43 +13366,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
-  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['hierarchy'] = 1;
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
@@ -13512,18 +13477,18 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     26 => 0,
     29 => 0,
   );
-  $handler->display->display_options['path'] = 'export-vyplacanie';
+  $handler->display->display_options['path'] = 'vyplatit-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Export vyplácanie';
+  $handler->display->display_options['menu']['title'] = 'Vyplatiť ilustrácie';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Export vyplácanie - dáta */
-  $handler = $view->new_display('views_data_export', 'Export vyplácanie - dáta', 'views_data_export_5');
+  /* Display: Vyplatiť ilustrácie - dáta */
+  $handler = $view->new_display('views_data_export', 'Vyplatiť ilustrácie - dáta', 'views_data_export_5');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Export pre vyplácanie odmeny';
+  $handler->display->display_options['title'] = 'Vyplatiť ilustrácie';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
@@ -13555,7 +13520,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'nazov';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
@@ -13608,42 +13572,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['sorts']['field_datum_zverejnenia_value']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
-  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
@@ -14144,7 +14072,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     26 => 0,
     29 => 0,
   );
-  $handler->display->display_options['path'] = 'export_autori.csv';
+  $handler->display->display_options['path'] = 'vyplatit_ilustracie.csv';
   $handler->display->display_options['displays'] = array(
     'page_4' => 'page_4',
     'default' => 0,
@@ -14225,7 +14153,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('povodnyZaznamZGH'),
     t('nazovzorad'),
     t('vyplatenieOdmeny'),
-    t('Export autori'),
+    t('Vyplatiť heslá'),
     t('Prehľad hesiel podľa autorov. Zobrazujú sa len heslá, ktoré nevznikli zlučovaním.'),
     t('autor'),
     t('Nadradený'),
@@ -14243,17 +14171,16 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Author Date Filter (Month)'),
     t('Rok'),
     t('Author Date Filter (Year)'),
-    t('Export autori - dáta'),
+    t('Vyplatiť heslá - dáta'),
     t('https://rs.beliana.sav.sk/node/[nid]'),
     t('Dátum záznamu dĺžky'),
     t('Vyplatenie odmeny (field_vyplatit)'),
-    t('Export vyplácanie'),
-    t('Export pre vyplácanie odmeny'),
+    t('Vyplatiť ilustrácie'),
     t('Meno autora diela'),
     t('Meno autora snímky'),
     t('Odmena'),
     t('Dátum zverejnenia'),
-    t('Export vyplácanie - dáta'),
+    t('Vyplatiť ilustrácie - dáta'),
   );
   $export['export_na_import'] = $view;
 
