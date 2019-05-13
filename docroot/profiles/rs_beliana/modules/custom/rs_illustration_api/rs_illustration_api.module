@@ -87,6 +87,7 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
         if ($response = rs_illustration_api_rest_node($request_url, $node, $attachments, $login)) {
           $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
           $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
+          workbench_moderation_moderate($node, 'published');
           node_save($node);
 
           drupal_set_message('Ilustracia odoslana do RS');

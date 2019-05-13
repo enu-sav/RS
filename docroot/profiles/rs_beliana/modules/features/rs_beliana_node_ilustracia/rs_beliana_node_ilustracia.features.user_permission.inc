@@ -152,8 +152,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['create field_prenesene_do_rs'] = array(
     'name' => 'create field_prenesene_do_rs',
     'roles' => array(
-      'Grafik' => 'Grafik',
-      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -405,8 +403,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['edit field_prenesene_do_rs'] = array(
     'name' => 'edit field_prenesene_do_rs',
     'roles' => array(
-      'Grafik' => 'Grafik',
-      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -611,8 +607,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['edit own field_prenesene_do_rs'] = array(
     'name' => 'edit own field_prenesene_do_rs',
     'roles' => array(
-      'Grafik' => 'Grafik',
-      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
