@@ -2998,6 +2998,34 @@ function rs_beliana_views_views_default_views() {
     3 => 0,
     21 => 0,
   );
+  /* Filter criterion: Obsah: Prevzaté do RS (field_prenesene_do_rs) */
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['id'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['table'] = 'field_data_field_prenesene_do_rs';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['field'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['operator_id'] = 'field_prenesene_do_rs_value_op';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['label'] = 'Prevzaté do RS (field_prenesene_do_rs)';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['operator'] = 'field_prenesene_do_rs_value_op';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['identifier'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['group_info']['label'] = 'Prevzaté do RS';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['group_info']['identifier'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Áno',
+      'operator' => 'or',
+      'value' => array(
+        1 => '1',
+      ),
+    ),
+    2 => array(
+      'title' => 'Nie',
+      'operator' => 'not',
+      'value' => array(
+        1 => '1',
+      ),
+    ),
+  );
   $handler->display->display_options['path'] = 'vyhladat-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
@@ -3040,6 +3068,7 @@ function rs_beliana_views_views_default_views() {
     t('Lexikálna skupina (alt)'),
     t('Autor diela'),
     t('Autor snímky'),
+    t('Prevzaté do RS (field_prenesene_do_rs)'),
   );
   $export['v_etky_hesl_'] = $view;
 
@@ -4027,11 +4056,6 @@ function rs_beliana_views_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => 'file',
   );
-  /* Pole: Nefunkčný/chýbajúci ovládač */
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['id'] = 'field_obrazok_odkaz';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['table'] = 'field_data_field_obrazok_odkaz';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['field'] = 'field_obrazok_odkaz';
-  $handler->display->display_options['fields']['field_obrazok_odkaz']['label'] = 'Odkaz';
   /* Pole: Obsah: Komentár */
   $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
@@ -4642,6 +4666,43 @@ function rs_beliana_views_views_default_views() {
     23 => 0,
     26 => 0,
   );
+  /* Filter criterion: Obsah: Prevzaté do RS (field_prenesene_do_rs) */
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['id'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['table'] = 'field_data_field_prenesene_do_rs';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['field'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['operator_id'] = 'field_prenesene_do_rs_value_op';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['label'] = 'Prevzaté do RS';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['operator'] = 'field_prenesene_do_rs_value_op';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['identifier'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    3 => 0,
+    21 => 0,
+  );
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['group_info']['label'] = 'Prevzaté do RS';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['group_info']['identifier'] = 'field_prenesene_do_rs_value';
+  $handler->display->display_options['filters']['field_prenesene_do_rs_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Áno',
+      'operator' => 'or',
+      'value' => array(
+        1 => '1',
+      ),
+    ),
+    2 => array(
+      'title' => 'Nie',
+      'operator' => 'not',
+      'value' => array(
+        1 => '1',
+      ),
+    ),
+  );
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
@@ -4687,7 +4748,6 @@ function rs_beliana_views_views_default_views() {
     t('Obsah'),
     t('[title] / [nid]'),
     t('Náhľad'),
-    t('Odkaz'),
     t('Text k ilustrácii'),
     t('Typ CC licencie'),
     t('Typ ilustrácie / CC licencie'),
@@ -4711,6 +4771,7 @@ function rs_beliana_views_views_default_views() {
     t('Názov hesla'),
     t('Obrázok (návrh/náhľad)'),
     t('Komentár/inštrukcie'),
+    t('Prevzaté do RS'),
   );
   $export['vsetky_hesla_detaily'] = $view;
 
