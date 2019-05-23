@@ -518,7 +518,9 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['publish ilustracia content'] = array(
     'name' => 'publish ilustracia content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'Autor' => 'Autor',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
     ),
     'module' => 'rs_illustration_api',
   );
@@ -739,6 +741,7 @@ function rs_beliana_site_user_default_permissions() {
       'Autor' => 'Autor',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -750,6 +753,7 @@ function rs_beliana_site_user_default_permissions() {
       'Autor' => 'Autor',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
