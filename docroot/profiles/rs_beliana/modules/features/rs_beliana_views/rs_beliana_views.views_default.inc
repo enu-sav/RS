@@ -13961,18 +13961,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       ),
     ),
   );
-  /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['field'] = 'field_datum_autorovho_textu_value';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['group'] = 1;
-  /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['id'] = 'field_datum_autorovho_textu_value_1';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['table'] = 'field_data_field_datum_autorovho_textu';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['field'] = 'field_datum_autorovho_textu_value';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['group'] = 1;
   /* Filter criterion: Beliana: Odmena Date Filter (Month) */
   $handler->display->display_options['filters']['odmena_date_month']['id'] = 'odmena_date_month';
   $handler->display->display_options['filters']['odmena_date_month']['table'] = 'node';
@@ -21652,12 +21640,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     23 => 0,
     26 => 0,
   );
-  /* Filter criterion: Workbench Moderation: Aktuálny */
-  $handler->display->display_options['filters']['is_current_1']['id'] = 'is_current_1';
-  $handler->display->display_options['filters']['is_current_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current_1']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current_1']['relationship'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['filters']['is_current_1']['value'] = '1';
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
