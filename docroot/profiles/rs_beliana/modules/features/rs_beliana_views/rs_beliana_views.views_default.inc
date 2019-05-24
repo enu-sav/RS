@@ -13551,6 +13551,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_datum_zverejnenia']['id'] = 'field_datum_zverejnenia';
   $handler->display->display_options['fields']['field_datum_zverejnenia']['table'] = 'field_data_field_datum_zverejnenia';
   $handler->display->display_options['fields']['field_datum_zverejnenia']['field'] = 'field_datum_zverejnenia';
+  $handler->display->display_options['fields']['field_datum_zverejnenia']['alter']['text'] = '[field_datum_zverejnenia]';
+  $handler->display->display_options['fields']['field_datum_zverejnenia']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['field_datum_zverejnenia']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_datum_zverejnenia']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_datum_zverejnenia']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_datum_zverejnenia']['settings'] = array(
     'format_type' => 'short',
     'custom_date_format' => '',
@@ -14169,6 +14174,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Odmena'),
     t('Dátum zverejnenia'),
     t('Vyplatiť ilustrácie - dáta'),
+    t('[field_datum_zverejnenia]'),
   );
   $export['export_na_import'] = $view;
 
