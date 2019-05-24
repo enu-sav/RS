@@ -32,6 +32,17 @@ function rs_illustration_api_permission() {
   );
 }
 
+/**
+ * Implements hook_access().
+ */
+function rs_illustration_api_node_access($node, $op, $account) {
+  if ($op == 'update') {
+    if ($node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] == 1) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+}
+
 function rs_illustration_api_publish_form($form, &$form_state, $node) {
   $form['node'] = array(
     '#type' => 'value',
@@ -44,7 +55,7 @@ function rs_illustration_api_publish_form($form, &$form_state, $node) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Publish'),
+    '#value' => 'Preniesť do RS',
   );
 
   return $form;
