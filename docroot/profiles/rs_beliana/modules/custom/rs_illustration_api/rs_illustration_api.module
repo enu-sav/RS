@@ -36,8 +36,8 @@ function rs_illustration_api_permission() {
  * Implements hook_access().
  */
 function rs_illustration_api_node_access($node, $op, $account) {
-  if ($op == 'update') {
-    if ($node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] == 1) {
+  if ($op == 'update' && $node->type == 'ilustracia') {
+    if ($node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] == 1 && !in_array('administrator', array_values($account->roles))) {
       return NODE_ACCESS_DENY;
     }
   }
@@ -55,7 +55,7 @@ function rs_illustration_api_publish_form($form, &$form_state, $node) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => 'Preniesť do RS',
+    '#value' => t('Publish to RS'),
   );
 
   return $form;
