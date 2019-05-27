@@ -10,13 +10,35 @@ include_once 'rs_beliana_users.features.inc';
  * Implements hook_menu_alter().
  */
 function rs_beliana_users_menu_alter(&$items) {
-  $items['admin/config/development/generate/user']['access callback'] = 'rs_beliana_users_uadmin_access';
-  $items['admin/config/people/accounts']['access callback'] = 'rs_beliana_users_uadmin_access';
-  $items['admin/people/permissions']['access callback'] = 'rs_beliana_users_uadmin_access';
-  $items['admin/people/permissions/roles']['access callback'] = 'rs_beliana_users_uadmin_access';
+  $items['admin/config/development/generate/user']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
+  $items['admin/config/people/accounts']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
+  $items['admin/people/permissions']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
+  $items['admin/people/permissions/roles']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
+
+  $items['admin/structure/taxonomy_manager/voc']['access callback'] = 'rs_beliana_users_uadmin_access_allow';
+  $items['admin/structure/taxonomy_manager/voc/%taxonomy_vocabulary_machine_name']['access callback'] = 'rs_beliana_users_uadmin_access_allow_tm';
+  $items['admin/structure/taxonomy_manager/voc/%taxonomy_vocabulary_machine_name']['access arguments'] = array('administer taxonomy', 4);
 }
 
-function rs_beliana_users_uadmin_access($permission) {
+function rs_beliana_users_uadmin_access_allow($permission) {
+  global $user;
+
+  if (in_array('useradmin', array_values($user->roles))) {
+    return TRUE;
+  }
+
+  return user_access($permission);
+}
+
+function rs_beliana_users_uadmin_access_allow_tm($permission, $taxonomy) {
+  if ($taxonomy->machine_name == 'lexikalne_skupiny' && rs_beliana_users_uadmin_access_allow($permission)) {
+    return TRUE;
+  }
+
+  return user_access($permission);
+}
+
+function rs_beliana_users_uadmin_access_disallow($permission) {
   global $user;
 
   if (user_access($permission)) {
