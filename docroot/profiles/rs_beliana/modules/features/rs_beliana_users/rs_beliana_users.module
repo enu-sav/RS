@@ -1,7 +1,31 @@
 <?php
+
 /**
  * @file
  * Code for the Redakčný systém Beliana Používatelia feature.
  */
-
 include_once 'rs_beliana_users.features.inc';
+
+/**
+ * Implements hook_menu_alter().
+ */
+function rs_beliana_users_menu_alter(&$items) {
+  $items['admin/config/development/generate/user']['access callback'] = 'rs_beliana_users_uadmin_access';
+  $items['admin/config/people/accounts']['access callback'] = 'rs_beliana_users_uadmin_access';
+  $items['admin/people/permissions']['access callback'] = 'rs_beliana_users_uadmin_access';
+  $items['admin/people/permissions/roles']['access callback'] = 'rs_beliana_users_uadmin_access';
+}
+
+function rs_beliana_users_uadmin_access($permission) {
+  global $user;
+
+  if (user_access($permission)) {
+    if (in_array('useradmin', array_values($user->roles))) {
+      return FALSE;
+    }
+
+    return TRUE;
+  }
+
+  return FALSE;
+}
