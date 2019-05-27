@@ -81,7 +81,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Dátum prevzatia do RS',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -1203,7 +1203,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_subor_ilustracie'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => 'Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
+    'description' => 'Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> s rozlíšením vhodným pre web (šírka/výška max cca 1500). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
 ',
     'display' => array(
       'default' => array(
@@ -1705,7 +1705,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
-  t('Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
+  t('Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> s rozlíšením vhodným pre web (šírka/výška max cca 1500). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
 ');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
