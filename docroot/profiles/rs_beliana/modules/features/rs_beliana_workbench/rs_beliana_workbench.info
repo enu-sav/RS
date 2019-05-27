@@ -41,6 +41,7 @@ features[variable][] = workbench_access_label
 features[variable][] = workbench_access_node_type_osobnost
 features[variable][] = workbench_access_taxonomy
 features[variable][] = workbench_moderation_default_state_osobnost
+features[workbench_moderation_states][] = moved
 features[workbench_moderation_states][] = published
 features[workbench_moderation_transitions][] = ilustracia_na_webe:ilustracia_u_vyst_redaktora_5
 features[workbench_moderation_transitions][] = ilustracia_na_zverejnenie:ilustracia_u_vyst_redaktora_5

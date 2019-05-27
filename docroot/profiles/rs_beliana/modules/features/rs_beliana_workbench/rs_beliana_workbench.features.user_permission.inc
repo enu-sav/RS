@@ -101,6 +101,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_state_access',
   );
@@ -176,6 +177,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_state_access',
   );

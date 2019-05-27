@@ -32,6 +32,17 @@ function rs_illustration_api_permission() {
   );
 }
 
+/**
+ * Implements hook_access().
+ */
+function rs_illustration_api_node_access($node, $op, $account) {
+  if ($op == 'update' && $node->type == 'ilustracia') {
+    if ($node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] == 1 && !in_array('administrator', array_values($account->roles))) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+}
+
 function rs_illustration_api_publish_form($form, &$form_state, $node) {
   $form['node'] = array(
     '#type' => 'value',
@@ -44,7 +55,7 @@ function rs_illustration_api_publish_form($form, &$form_state, $node) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Publish'),
+    '#value' => t('Publish to RS'),
   );
 
   return $form;
@@ -87,7 +98,7 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
         if ($response = rs_illustration_api_rest_node($request_url, $node, $attachments, $login)) {
           $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
           $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
-          workbench_moderation_moderate($node, 'published');
+          workbench_moderation_moderate($node, 'moved');
           node_save($node);
 
           drupal_set_message('Ilustracia odoslana do RS');
