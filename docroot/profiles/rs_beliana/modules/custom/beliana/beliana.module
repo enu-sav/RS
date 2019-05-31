@@ -1161,7 +1161,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   $cur_state = $values['node']->workbench_moderation['current']->state;
 
   // ensure corect state transitions if article is merged from other articles
-  if (isset($values['node']->field_zlucene_z['und'])) {
+  if (isset($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
     // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
     if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
       _start_korektura($values);
@@ -1169,6 +1169,15 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     // transition 1_korektura >> u_vyst_redaktora_3 
     if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
       _transition_korektura($values, "1_korektura");
+    }
+
+    // merge links in zlucene >> u_jaz_redaktora_1
+    if ($cur_state === 'zlucene' && $new_state === 'na_jazykovu_korekturu') {
+      foreach ($values['node']->field_zlucene_z[LANGUAGE_NONE] as $item) {
+        if ($source = node_load($item['target_id'])) {
+          node_save($source);
+        }
+      }
     }
 
     $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
