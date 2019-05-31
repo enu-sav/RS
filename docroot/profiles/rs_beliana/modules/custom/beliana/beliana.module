@@ -1174,8 +1174,15 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     // merge links in zlucene >> u_jaz_redaktora_1
     if ($cur_state === 'zlucene' && $new_state === 'na_jazykovu_korekturu') {
       foreach ($values['node']->field_zlucene_z[LANGUAGE_NONE] as $item) {
-        if ($source = node_load($item['target_id'])) {
-          node_save($source);
+        $query = db_query('SELECT node.nid AS nid FROM {node} node INNER JOIN {search_node_links} links ON node.nid = links.sid WHERE links.nid = :nid', array(':nid' => $item['target_id']));
+        $result = $query->fetchAll();
+
+        if (!empty($result)) {
+          foreach ($result as $backlink) {
+            if ($source = node_load($backlink->nid)) {
+              node_save($source);
+            }
+          }
         }
       }
     }
