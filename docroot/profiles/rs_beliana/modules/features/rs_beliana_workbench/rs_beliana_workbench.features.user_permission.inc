@@ -1439,6 +1439,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from zlucene to na_jazykovu_korekturu'] = array(
     'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
     'roles' => array(
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -1449,7 +1450,6 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from zlucene to zlucene_odkazy'] = array(
     'name' => 'moderate content from zlucene to zlucene_odkazy',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',

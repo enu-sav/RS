@@ -1,6 +1,60 @@
-# Ignore configuration files that may contain sensitive information.
+# OS generated files #
+######################
+*~
+.DS_Store*
+ehthumbs.db
+Thumbs.db
+
+# IDE generated files #
+#######################
+.project
+.settings
+*.bbprojectd
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.swp
+*~.nib
+nbproject
+.komodotools
+.idea
+
+# Vagrant specific files #
+##########################
+.vagrant
+vagrant_ansible_inventory_*
+
+# Theme specific #
+##################
+# Ignore sass-cache files.
+*.sass-cache*
+
+# Node stuff #
+##############
+.grunt
+npm-debug.log
+node_modules
+
+# Platform.sh #
+###############
+.platform/local/
+
+# Other #
+#########
+# Ignore all .sql files
+*.sql
+*.mysql
+docker-compose.override.yml
+
+# Drupal #
+#########
 sites/*/settings*.php
 
-# Ignore paths that contain user-generated content.
+# Ignore Drupal's file directory
 sites/*/files
 sites/*/private
