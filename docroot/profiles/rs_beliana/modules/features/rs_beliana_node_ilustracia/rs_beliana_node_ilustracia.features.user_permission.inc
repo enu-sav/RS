@@ -260,6 +260,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'node',
   );
@@ -827,6 +828,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'chRedaktor' => 'chRedaktor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );

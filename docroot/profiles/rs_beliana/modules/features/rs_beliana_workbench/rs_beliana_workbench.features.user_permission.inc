@@ -515,6 +515,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Komentátor' => 'Komentátor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor-jaz' => 'iredaktor-jaz',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
   );
@@ -559,6 +560,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Komentátor' => 'Komentátor',
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
   );
@@ -569,6 +571,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Komentátor' => 'Komentátor',
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
   );
@@ -760,6 +763,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Komentátor' => 'Komentátor',
       'ig-redaktor' => 'ig-redaktor',
+      'useradmin' => 'useradmin',
       'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'workbench_state_access',
