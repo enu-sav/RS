@@ -1676,6 +1676,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
+    'field_na_zoradenie' => 'field_na_zoradenie',
     'title' => 'title',
     'field_taxsubor' => 'field_taxsubor',
     'name_1' => 'name_1',
@@ -1689,6 +1690,13 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['info'] = array(
     'nid' => array(
       'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_na_zoradenie' => array(
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -1775,6 +1783,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['relationship'] = 'nid';
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -9075,10 +9088,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
  ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5. 
  ⚫ <i>2. korektúra</i>: ak sa k zmenám od 1. korektúry musia vyjadriť redaktori. Heslo sa vráti naspäť. Pred odoslaním treba v hesle upraviť lexikálnu skupinu na meno toho redaktora, ktorý sa má v 2. korektúre k heslu vyjadriť.
  ⚫ <i>U výst. redaktora 4</i>: ak je potrebné vyjadrenie VR4. Heslo sa vráti naspäť.'),
+    t('Na zoradenie'),
     t('Správa záznamu'),
     t('Needs review VR2'),
     t('Na posúdenie VR2'),
-    t('Na zoradenie'),
     t('Needs review VR3'),
     t('Na posúdenie VR3'),
     t('Needs review VR4'),
