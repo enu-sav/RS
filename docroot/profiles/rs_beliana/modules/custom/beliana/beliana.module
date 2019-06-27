@@ -24,6 +24,22 @@ function beliana_views_api() {
  */
 function beliana_menu() {
   $items = array();
+
+  if ($feed_importer = feeds_importer_load('reimport_exp_il')) {
+    $items['importovat-ilustracie'] = array(
+      'title' => 'Import ilustrácia',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('feeds_import_form', $feed_importer),
+      'access callback' => 'feeds_access',
+      'access arguments' => array('import', $feed_importer),
+      'file' => 'feeds.pages.inc',
+      'file path' => drupal_get_path('module', 'feeds'),
+      'type' => MENU_NORMAL_ITEM,
+      'menu_name' => 'management',
+      'weight' => 5,
+    );
+  }
+
   $items['admin/users-list'] = array(
     'title' => 'Users list',
     'page callback' => 'beliana_users_list',

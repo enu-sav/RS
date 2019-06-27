@@ -45,6 +45,7 @@ features[user_role][] = Grafik
 features[user_role][] = Oznamy
 features[user_role][] = Redaktor
 features[user_role][] = administrátor
+features[user_role][] = iGrafik
 features[variable][] = account_sync_create_users
 features[variable][] = account_sync_in_enabled
 features[variable][] = account_sync_ip_restriction

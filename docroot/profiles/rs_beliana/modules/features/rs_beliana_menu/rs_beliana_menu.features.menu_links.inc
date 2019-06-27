@@ -67,6 +67,26 @@ function rs_beliana_menu_menu_default_menu_links() {
     'weight' => 10,
     'customized' => 1,
   );
+  // Exported menu link: management_jquery-update:admin/config/development/jquery_update.
+  $menu_links['management_jquery-update:admin/config/development/jquery_update'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/config/development/jquery_update',
+    'router_path' => 'admin/config/development/jquery_update',
+    'link_title' => 'jQuery update',
+    'options' => array(
+      'attributes' => array(
+        'title' => 'Configure settings related to the jQuery upgrade, the library path and compression.',
+      ),
+      'identifier' => 'management_jquery-update:admin/config/development/jquery_update',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 11,
+    'customized' => 1,
+  );
   // Exported menu link: management_my-workbench:admin/workbench.
   $menu_links['management_my-workbench:admin/workbench'] = array(
     'menu_name' => 'management',
@@ -85,6 +105,23 @@ function rs_beliana_menu_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,
+    'customized' => 1,
+  );
+  // Exported menu link: management_prehad-ilustrcie:vsetky-ilustracie-prehlad.
+  $menu_links['management_prehad-ilustrcie:vsetky-ilustracie-prehlad'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'vsetky-ilustracie-prehlad',
+    'router_path' => 'vsetky-ilustracie-prehlad',
+    'link_title' => 'Prehľad ilustrácie',
+    'options' => array(
+      'identifier' => 'management_prehad-ilustrcie:vsetky-ilustracie-prehlad',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 10,
     'customized' => 1,
   );
   // Exported menu link: management_redakn-systm:admin/beliana.
@@ -411,12 +448,14 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Importované heslo');
   t('Messages');
   t('My Workbench');
+  t('Prehľad ilustrácie');
   t('Recent posts');
   t('Redakčný systém');
   t('Správy');
   t('Tlačiť');
   t('Vyhľadať ilustrácie');
   t('Vytvoriť');
+  t('jQuery update');
 
   return $menu_links;
 }
