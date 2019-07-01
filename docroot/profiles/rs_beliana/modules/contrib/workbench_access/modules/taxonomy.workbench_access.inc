@@ -286,11 +286,7 @@ function workbench_access_taxonomy_autocomplete($field_name, $node_type, $tags_t
  */
 function workbench_access_taxonomy_autocomplete_validate($element, &$form_state) {
   global $user;
-  $field = $form_state['values'][$element['#field_name']];
-  if(!isset($field[$form_state['values']['language']])){
-    return;
-  }
-  $item = $field[$form_state['values']['language']];
+  $item = $form_state['values'][$element['#field_name']][$form_state['values']['language']];
   if (empty($item)) {
     return;
   }
