@@ -56,6 +56,7 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['access content overview'] = array(
     'name' => 'access content overview',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -521,6 +522,7 @@ function rs_beliana_site_user_default_permissions() {
       'Autor' => 'Autor',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'iGrafik' => 'iGrafik',
     ),
     'module' => 'rs_illustration_api',
   );
