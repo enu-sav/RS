@@ -29,20 +29,23 @@ function rs_beliana_site_default_services_endpoint() {
     ),
     'parsers' => array(
       'application/json' => TRUE,
-      'application/x-www-form-urlencoded' => FALSE,
+      'application/x-www-form-urlencoded' => TRUE,
       'application/xml' => FALSE,
       'multipart/form-data' => FALSE,
       'text/xml' => FALSE,
     ),
   );
   $endpoint->resources = array(
-    'node' => array(
-      'alias' => 'node',
+    'file' => array(
       'operations' => array(
-        'retrieve' => array(
+        'create' => array(
           'enabled' => '1',
         ),
-        'update' => array(
+      ),
+    ),
+    'node' => array(
+      'operations' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
@@ -52,8 +55,23 @@ function rs_beliana_site_default_services_endpoint() {
         ),
       ),
     ),
+    'user' => array(
+      'actions' => array(
+        'login' => array(
+          'enabled' => '1',
+          'settings' => array(
+            'services' => array(
+              'resource_api_version' => '1.0',
+            ),
+          ),
+        ),
+        'token' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
   );
-  $endpoint->debug = 1;
+  $endpoint->debug = 0;
   $export['ilustracia'] = $endpoint;
 
   return $export;
