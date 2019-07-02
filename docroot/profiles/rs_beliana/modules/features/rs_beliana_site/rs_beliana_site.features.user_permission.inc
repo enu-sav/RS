@@ -46,6 +46,7 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'access content',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
@@ -55,6 +56,7 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['access content overview'] = array(
     'name' => 'access content overview',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -513,6 +515,18 @@ function rs_beliana_site_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'publish ilustracia content'.
+  $permissions['publish ilustracia content'] = array(
+    'name' => 'publish ilustracia content',
+    'roles' => array(
+      'Autor' => 'Autor',
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'iGrafik' => 'iGrafik',
+    ),
+    'module' => 'rs_illustration_api',
+  );
+
   // Exported permission: 'read all private messages'.
   $permissions['read all private messages'] = array(
     'name' => 'read all private messages',
@@ -688,31 +702,8 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',
     'roles' => array(
-      'Autor' => 'Autor',
-      'Grafik' => 'Grafik',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Komentátor' => 'Komentátor',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'Zlúčené-odkazy' => 'Zlúčené-odkazy',
       'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-      'garant' => 'garant',
-      'geoRedaktor' => 'geoRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
-      'iredaktor-jaz' => 'iredaktor-jaz',
-      'useradmin' => 'useradmin',
-      'zRedaktor' => 'zRedaktor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'filter',
   );
@@ -721,24 +712,8 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['use text format full_html'] = array(
     'name' => 'use text format full_html',
     'roles' => array(
-      'Autor' => 'Autor',
-      'Grafik' => 'Grafik',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
-      'iredaktor' => 'iredaktor',
-      'useradmin' => 'useradmin',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'filter',
   );
@@ -766,14 +741,9 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'view own unpublished content',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
-      'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -783,21 +753,9 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'view revisions',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
-      'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
-      'useradmin' => 'useradmin',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
