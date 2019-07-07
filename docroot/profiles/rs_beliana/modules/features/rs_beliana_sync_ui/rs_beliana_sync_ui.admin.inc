@@ -9,7 +9,10 @@
  *
  */
 function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
-  $envs = ['beliana' => 'Beliana', 'rs' => 'RS'];
+  $envs = [
+    //'beliana' => 'Beliana',
+    'rs' => 'RS'
+  ];
 
   foreach ($envs as $key => $title) {
     $form[$key] = [
