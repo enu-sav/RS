@@ -8,6 +8,7 @@ dependencies[] = workbench_moderation
 dependencies[] = workbench_state_access
 dependencies[] = views_bulk_operations
 
+files[] = views/beliana_handler_field_ilustracia_nazov_pouzit.inc
 files[] = views/beliana_handler_filter_author_date_month.inc
 files[] = views/beliana_handler_filter_author_date_year.inc
 files[] = views/beliana_handler_filter_odmena_date_month.inc
