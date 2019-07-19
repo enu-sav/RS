@@ -18026,9 +18026,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'name_1' => 'name_1',
-    'field_ilustracia' => 'field_ilustracia',
+    'ilustracia_nazov_pouzit' => 'ilustracia_nazov_pouzit',
     'created' => 'created',
     'field_datum' => 'field_datum',
+    'field_datum_1' => 'field_datum_1',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -18093,7 +18094,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_ilustracia' => array(
+    'ilustracia_nazov_pouzit' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -18106,6 +18107,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'empty_column' => 0,
     ),
     'field_datum' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -18166,6 +18174,45 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Pole: Obsah: Dátum vytvorenia */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'privatemsg_current_day';
+  /* Pole: Obsah: Dátum výročia */
+  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_datum']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
+  /* Pole: Obsah: Dátum výročia */
+  $handler->display->display_options['fields']['field_datum_1']['id'] = 'field_datum_1';
+  $handler->display->display_options['fields']['field_datum_1']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['fields']['field_datum_1']['field'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_datum_1']['alter']['text'] = '[field_datum]';
+  $handler->display->display_options['fields']['field_datum_1']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['fields']['field_datum_1']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_datum_1']['delta_offset'] = '0';
   /* Pole: Používateľ: Názov */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -18191,27 +18238,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['table'] = 'node';
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['field'] = 'ilustracia_nazov_pouzit';
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['label'] = 'Ilustrácie';
-  /* Pole: Obsah: Dátum vytvorenia */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'short';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'privatemsg_current_day';
-  /* Pole: Obsah: Dátum výročia */
-  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
-  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
-  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
-  $handler->display->display_options['fields']['field_datum']['settings'] = array(
-    'format_type' => 'short',
-    'custom_date_format' => '',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
-  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -23357,9 +23383,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Komentár'),
     t('Všetky heslá - prehľad'),
     t('Ilustracia'),
-    t('Ilustrácie'),
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
+    t('[field_datum]'),
+    t('Ilustrácie'),
     t('Zlúčené z'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
