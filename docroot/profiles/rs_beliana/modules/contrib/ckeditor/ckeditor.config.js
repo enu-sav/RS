@@ -64,6 +64,9 @@ CKEDITOR.editorConfig = function(config) {
   if (this.element.$.rows > 0) {
     config.height = this.element.$.rows * 20 + 'px';
   }
+var flite = config.flite = config.flite || {};
+flite.userName = Drupal.settings.beliana.current_user.name;
+flite.userId = Drupal.settings.beliana.current_user.id;
 }
 
 /*
