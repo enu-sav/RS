@@ -19,7 +19,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
+    [\'flite-acceptall\',\'flite-rejectall\',\'flite-acceptone\',\'flite-rejectone\',\'flite-toggleshow\',\'flite-toggletracking\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -211,18 +211,48 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'lite' => array(
-            'name' => 'lite',
-            'desc' => 'Plugin file: lite',
-            'path' => '%plugin_dir%lite/',
-            'buttons' => FALSE,
-            'default' => 'f',
+          'flite' => array(
+            'name' => 'flite',
+            'desc' => 'Plugin file: flite',
+            'path' => '%plugin_dir%flite/',
+            'buttons' => array(
+              'flite-acceptall' => array(
+                'label' => 'Accept all changes',
+                'icon' => 'icons/flite-acceptall.png',
+              ),
+              'flite-rejectall' => array(
+                'label' => 'Reject all changes',
+                'icon' => 'icons/flite-rejectall.png',
+              ),
+              'flite-acceptone' => array(
+                'label' => 'Accept change',
+                'icon' => 'icons/flite-acceptone.png',
+              ),
+              'flite-rejectone' => array(
+                'label' => 'Reject change',
+                'icon' => 'icons/flite-rejectone.png',
+              ),
+              'flite-toggleshow' => array(
+                'label' => 'Show/hide tracked changes',
+                'icon' => 'icons/flite-toggleshow.png',
+              ),
+              'flite-toggletracking' => array(
+                'label' => 'Start/stop tracking changes',
+                'icon' => 'icons/flite-toggletracking.png',
+              ),
+            ),
+            'default' => 't',
           ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin file: mathjax',
-            'path' => '%plugin_dir%mathjax/',
-            'buttons' => FALSE,
+            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
+            'buttons' => array(
+              'Mathjax' => array(
+                'icon' => 'icons/mathjax.png',
+                'label' => 'Insert Mathematical Formulas',
+              ),
+            ),
             'default' => 'f',
           ),
           'tableresize' => array(
@@ -264,7 +294,8 @@ config.specialChars = [
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\']
+    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    [\'flite-acceptall\',\'flite-rejectall\',\'flite-acceptone\',\'flite-rejectone\',\'flite-toggleshow\',\'flite-toggletracking\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -449,13 +480,50 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'mathjax' => array(
-            'name' => 'mathjax',
-            'desc' => 'Plugin file: mathjax',
-            'path' => '%plugin_dir%mathjax/',
-            'buttons' => FALSE,
-            'default' => 'f',
+          'flite' => array(
+            'name' => 'flite',
+            'desc' => 'Plugin file: flite',
+            'path' => '%plugin_dir%flite/',
+            'buttons' => array(
+              'flite-acceptall' => array(
+                'label' => 'Accept all changes',
+                'icon' => 'icons/flite-acceptall.png',
+              ),
+              'flite-rejectall' => array(
+                'label' => 'Reject all changes',
+                'icon' => 'icons/flite-rejectall.png',
+              ),
+              'flite-acceptone' => array(
+                'label' => 'Accept change',
+                'icon' => 'icons/flite-acceptone.png',
+              ),
+              'flite-rejectone' => array(
+                'label' => 'Reject change',
+                'icon' => 'icons/flite-rejectone.png',
+              ),
+              'flite-toggleshow' => array(
+                'label' => 'Show/hide tracked changes',
+                'icon' => 'icons/flite-toggleshow.png',
+              ),
+              'flite-toggletracking' => array(
+                'label' => 'Start/stop tracking changes',
+                'icon' => 'icons/flite-toggletracking.png',
+              ),
+            ),
+            'default' => 't',
           ),
+            'mathjax' => array(
+                'name' => 'mathjax',
+                'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+                'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
+                'buttons' => array(
+                    'Mathjax' => array(
+                        'icon' => 'icons/mathjax.png',
+                        'label' => 'Insert Mathematical Formulas',
+                    ),
+                ),
+                'default' => 'f',
+            ),
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
