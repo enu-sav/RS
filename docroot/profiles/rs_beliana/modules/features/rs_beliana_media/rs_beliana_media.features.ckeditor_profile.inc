@@ -295,7 +295,7 @@ config.specialChars = [
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'flite-acceptall\',\'flite-rejectall\',\'flite-acceptone\',\'flite-rejectone\',\'flite-toggleshow\',\'flite-toggletracking\']
+    [\'Mathjax\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -480,50 +480,18 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'flite' => array(
-            'name' => 'flite',
-            'desc' => 'Plugin file: flite',
-            'path' => '%plugin_dir%flite/',
+          'mathjax' => array(
+            'name' => 'mathjax',
+            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
             'buttons' => array(
-              'flite-acceptall' => array(
-                'label' => 'Accept all changes',
-                'icon' => 'icons/flite-acceptall.png',
-              ),
-              'flite-rejectall' => array(
-                'label' => 'Reject all changes',
-                'icon' => 'icons/flite-rejectall.png',
-              ),
-              'flite-acceptone' => array(
-                'label' => 'Accept change',
-                'icon' => 'icons/flite-acceptone.png',
-              ),
-              'flite-rejectone' => array(
-                'label' => 'Reject change',
-                'icon' => 'icons/flite-rejectone.png',
-              ),
-              'flite-toggleshow' => array(
-                'label' => 'Show/hide tracked changes',
-                'icon' => 'icons/flite-toggleshow.png',
-              ),
-              'flite-toggletracking' => array(
-                'label' => 'Start/stop tracking changes',
-                'icon' => 'icons/flite-toggletracking.png',
+              'Mathjax' => array(
+                'icon' => 'icons/mathjax.png',
+                'label' => 'Insert Mathematical Formulas',
               ),
             ),
-            'default' => 't',
+            'default' => 'f',
           ),
-            'mathjax' => array(
-                'name' => 'mathjax',
-                'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-                'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
-                'buttons' => array(
-                    'Mathjax' => array(
-                        'icon' => 'icons/mathjax.png',
-                        'label' => 'Insert Mathematical Formulas',
-                    ),
-                ),
-                'default' => 'f',
-            ),
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
