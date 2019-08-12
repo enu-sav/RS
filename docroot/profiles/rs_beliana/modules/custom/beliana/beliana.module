@@ -1248,6 +1248,11 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       if (!_check_links($values['node'])) {
         $skip = True;
       }
+      if ($new_state === 'vyradene') {
+        if (!_check_transition_to_vyradene($values['node'])) {
+          $skip = True;
+        }
+      }
       // Check alternative text marker correctness in article body
       if (!_check_alternative_text_markers($values['node'], $values['node']->field_text_hesla['und'][0]['value'], "v hesle")) {
         $skip = True;
@@ -1426,6 +1431,22 @@ function _check_alternative_text_markers(&$node, $text, $where) {
     }
   }
   return $retvalue;
+}
+
+/**
+ * if article state should be changed to 'vyradene' (rejected), the must be no articles referencing to it
+ *
+ * @param $nid
+ */
+function _check_transition_to_vyradene(&$node) {
+  // get nodes linking to $node
+  $query = db_query('SELECT node.nid AS nid FROM {node} node INNER JOIN {search_node_links} links ON node.nid = links.sid WHERE links.nid = :nid', array(':nid' => $node->nid));
+  $result = $query->fetchAll();
+  if ($result){
+    drupal_set_message('Heslo <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> ' . 'nebolo presunuté so stavu Vyradené, lebo naň odkazujú iné heslá.', 'error');
+    return false;
+  }
+  return true;
 }
 
 /**
