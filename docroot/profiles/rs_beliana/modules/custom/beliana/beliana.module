@@ -1469,6 +1469,10 @@ function _check_links(&$node) {
                 strpos($auxnode->field_text_hesla[LANGUAGE_NONE][0]['value'], "➔") !== false) {
               drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkaz na odkazové alebo nesprávne formátované heslo (chýba "—" )', 'error');
               $retvalue = false;
+            // linked article must not be in 'vyradene' state
+            } elseif ($auxnode->workbench_moderation['current']->state === 'vyradene') {
+              drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '" (odkaz na vyradené heslo)', 'error');
+              $retvalue = false;
             }
           }
         }
