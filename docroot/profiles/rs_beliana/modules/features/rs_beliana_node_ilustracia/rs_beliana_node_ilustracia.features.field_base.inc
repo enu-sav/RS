@@ -363,7 +363,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_original',
     'field_permissions' => array(
-      'type' => 1,
+      'type' => 2,
     ),
     'indexes' => array(
       'fid' => array(
