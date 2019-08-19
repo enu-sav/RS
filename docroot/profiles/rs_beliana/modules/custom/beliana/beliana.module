@@ -1453,8 +1453,14 @@ function _check_transition_to_vyradene(&$node) {
  * Extract links from node and check their validity
  *
  * @param $nid
+
+ * @return true if OK or to be ignored
  */
 function _check_links(&$node) {
+  // do not check if $node is in the publikovane_na_webe state
+  if ($node->workbench_moderation['current']->state === 'publikovane_na_webe') {
+    return true;
+  }
   // Extract links from field_text_hesla.
   $nid = $node->nid;
   $text = $node->field_text_hesla['und'][0]['value'];
