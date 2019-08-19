@@ -1676,6 +1676,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
+    'field_na_zoradenie' => 'field_na_zoradenie',
     'title' => 'title',
     'field_taxsubor' => 'field_taxsubor',
     'name_1' => 'name_1',
@@ -1689,6 +1690,13 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['info'] = array(
     'nid' => array(
       'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_na_zoradenie' => array(
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -1775,6 +1783,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['relationship'] = 'nid';
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1975,7 +1988,9 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
+    'field_na_zoradenie' => 'field_na_zoradenie',
     'title' => 'title',
+    'from_state' => 'from_state',
     'field_taxsubor' => 'field_taxsubor',
     'name_1' => 'name_1',
     'section' => 'section',
@@ -1992,7 +2007,21 @@ function rs_beliana_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_na_zoradenie' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'from_state' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -2054,6 +2083,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['relationship'] = 'nid';
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -9054,6 +9088,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
  ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5. 
  ⚫ <i>2. korektúra</i>: ak sa k zmenám od 1. korektúry musia vyjadriť redaktori. Heslo sa vráti naspäť. Pred odoslaním treba v hesle upraviť lexikálnu skupinu na meno toho redaktora, ktorý sa má v 2. korektúre k heslu vyjadriť.
  ⚫ <i>U výst. redaktora 4</i>: ak je potrebné vyjadrenie VR4. Heslo sa vráti naspäť.'),
+    t('Na zoradenie'),
     t('Správa záznamu'),
     t('Needs review VR2'),
     t('Na posúdenie VR2'),
@@ -17991,9 +18026,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'name_1' => 'name_1',
-    'field_ilustracia' => 'field_ilustracia',
+    'ilustracia_nazov_pouzit' => 'ilustracia_nazov_pouzit',
     'created' => 'created',
     'field_datum' => 'field_datum',
+    'field_datum_1' => 'field_datum_1',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -18058,7 +18094,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_ilustracia' => array(
+    'ilustracia_nazov_pouzit' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -18075,6 +18111,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_datum_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -18085,6 +18128,20 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
   $handler->display->display_options['header']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Content revision: Používateľ */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Vzťah: Obsah: Autor */
+  $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
+  $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
+  /* Vzťah: Odkaz na entitu: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['label'] = 'Ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -18117,6 +18174,45 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Pole: Obsah: Dátum vytvorenia */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'privatemsg_current_day';
+  /* Pole: Obsah: Dátum výročia */
+  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_datum']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
+  /* Pole: Obsah: Dátum výročia */
+  $handler->display->display_options['fields']['field_datum_1']['id'] = 'field_datum_1';
+  $handler->display->display_options['fields']['field_datum_1']['table'] = 'field_data_field_datum';
+  $handler->display->display_options['fields']['field_datum_1']['field'] = 'field_datum';
+  $handler->display->display_options['fields']['field_datum_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_datum_1']['alter']['text'] = '[field_datum]';
+  $handler->display->display_options['fields']['field_datum_1']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['fields']['field_datum_1']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_datum_1']['delta_offset'] = '0';
   /* Pole: Používateľ: Názov */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -18137,34 +18233,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
   $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
   $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
-  /* Pole: Obsah: Ilustrácie */
-  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'link' => 1,
-  );
-  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  /* Pole: Obsah: Dátum vytvorenia */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['date_format'] = 'short';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'privatemsg_current_day';
-  /* Pole: Obsah: Dátum výročia */
-  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
-  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
-  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
-  $handler->display->display_options['fields']['field_datum']['settings'] = array(
-    'format_type' => 'short',
-    'custom_date_format' => '',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
-  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
+  /* Pole: Obsah: Ilustracia: Nazov/Pouzit */
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['id'] = 'ilustracia_nazov_pouzit';
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['table'] = 'node';
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['field'] = 'ilustracia_nazov_pouzit';
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['label'] = 'Ilustrácie';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -22971,6 +23044,20 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = 'Už zverejnené heslá vrátené na opravu. Požadovaná oprava je uvedená v komentári. Po oprave treba zmeniť stav na "Na opakované zverejnenie" ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Content revision: Používateľ */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Vzťah: Obsah: Autor */
+  $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
+  $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
+  /* Vzťah: Odkaz na entitu: Referenced Entity */
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['relationships']['field_ilustracia_target_id']['label'] = 'Ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -22992,15 +23079,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
-  /* Pole: Obsah: Ilustrácie */
-  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'link' => 1,
-  );
-  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
+  /* Pole: Obsah: Ilustracia: Nazov/Pouzit */
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['id'] = 'ilustracia_nazov_pouzit';
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['table'] = 'node';
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['field'] = 'ilustracia_nazov_pouzit';
+  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['label'] = 'Ilustrácie';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -23299,9 +23382,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t(' Upravil niektorú verziu '),
     t('Komentár'),
     t('Všetky heslá - prehľad'),
-    t('Ilustrácie'),
+    t('Ilustracia'),
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
+    t('[field_datum]'),
+    t('Ilustrácie'),
     t('Zlúčené z'),
     t('Všetky heslá - operácie'),
     t('Operácia'),

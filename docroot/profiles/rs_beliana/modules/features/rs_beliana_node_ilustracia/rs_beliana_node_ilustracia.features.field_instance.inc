@@ -1010,7 +1010,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_original'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1020,10 +1020,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'weight' => 25,
       ),
       'export' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'file_url_plain',
+        'weight' => 9,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1040,12 +1041,12 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_original',
-    'label' => 'Originál (rastrový obrázok s vysokým rozlíšením)',
+    'label' => 'Originál rastrového obrázka',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'ilustracia/original',
-      'file_extensions' => 'jpg jpeg tif tiff png',
+      'file_extensions' => 'jpg jpeg tif',
       'max_filesize' => '30 MB',
       'user_register_form' => FALSE,
     ),
@@ -1276,8 +1277,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_subor_ilustracie'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => 'Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
-',
+    'description' => '<b>Vložte súbory obrázka určeného na zverejnenie.</b> Rastrový obrázok treba vložiť vo formáte <b>jpg</b> (v rozlíšení pre web — cca 1500 x 1500 pixelov. Originál s väčším rozlíšením – ak je k dispozícii – vložte do poľa <i>Originál obrázka</i>). 
+Pokiaľ ide o vektorový obrázok, tak treba vložiť <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b>, <b>cdx</b>, <b>asy</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
+Nevkladať dva jpg obrázky alebo spolu jpg a png.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1734,6 +1736,9 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('<b>Vložte súbory obrázka určeného na zverejnenie.</b> Rastrový obrázok treba vložiť vo formáte <b>jpg</b> (v rozlíšení pre web — cca 1500 x 1500 pixelov. Originál s väčším rozlíšením – ak je k dispozícii – vložte do poľa <i>Originál obrázka</i>). 
+Pokiaľ ide o vektorový obrázok, tak treba vložiť <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b>, <b>cdx</b>, <b>asy</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
+Nevkladať dva jpg obrázky alebo spolu jpg a png.');
   t('<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba aj pole <em>URL stránky s obrázkom a údajmi k dielu</em>');
   t('Ak ide o trojrozmerné dielo (socha, objekt, stavba), ktoré je dostupné na verejnom priestranstve (socha v parku, budova v meste a pod.), tak voľba typu ilustrácie súvisí s fotografickou snímkou diela, nie dielom samotným. <br />
 "Muzeálny objekt": trojrozmerné dielo (socha, objekt) umiestnené v múzeu, galérii, chráme a podobne. <br />
@@ -1759,7 +1764,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Obrázok (návrh/náhľad)');
   t('Obrázok - odkaz (návrh/náhľad)');
   t('Odmena');
-  t('Originál (rastrový obrázok s vysokým rozlíšením)');
+  t('Originál rastrového obrázka');
   t('Pokiaľ je zvolená hodnota "Iná verejná licencia" v poli "Typ CC licencie", veďte odkaz na text licencie, ktorá bola použitá na stránke diela.');
   t('Popis modifikácie');
   t('Použiť');
@@ -1782,8 +1787,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.');
   t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
-  t('Vložte súbory obrázka určeného na zverejnenie. Pokiaľ ide o rastrový obrázok, tak vložiť treba <b>jpg</b> (pre webovú verziu) a <b>tif</b> (pre tlačenú verziu). Pokiaľ ide o vektorový obrázok, tak vložiť treba <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
-');
+  t('Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');

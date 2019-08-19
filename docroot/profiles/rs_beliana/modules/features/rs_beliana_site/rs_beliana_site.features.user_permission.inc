@@ -711,6 +711,7 @@ function rs_beliana_site_user_default_permissions() {
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
       'iredaktor-jaz' => 'iredaktor-jaz',
+      'useradmin' => 'useradmin',
       'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'filter',
@@ -737,6 +738,7 @@ function rs_beliana_site_user_default_permissions() {
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'filter',
   );
@@ -795,6 +797,7 @@ function rs_beliana_site_user_default_permissions() {
       'garant' => 'garant',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'node',
   );

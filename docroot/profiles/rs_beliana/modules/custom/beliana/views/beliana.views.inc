@@ -43,4 +43,12 @@ function beliana_views_data_alter(&$data) {
       'handler' => 'beliana_handler_filter_odmena_date_year',
     ),
   );
+
+  $data['node']['ilustracia_nazov_pouzit'] = array(
+    'title' => t('Ilustracia: Nazov/Pouzit'),
+    'help' => t('Build "pouzit" data from ilustracia reference'),
+    'field' => array(
+      'handler' => 'beliana_handler_field_ilustracia_nazov_pouzit',
+    ),
+  );
 }
