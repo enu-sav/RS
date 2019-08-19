@@ -67,6 +67,7 @@ CKEDITOR.editorConfig = function(config) {
 var flite = config.flite = config.flite || {};
 flite.userName = Drupal.settings.beliana.current_user.name;
 flite.userId = Drupal.settings.beliana.current_user.id;
+flite.ignoreContainers = true;
 }
 
 /*
