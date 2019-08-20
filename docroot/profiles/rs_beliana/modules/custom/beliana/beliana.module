@@ -25,14 +25,21 @@ function beliana_views_api() {
 function beliana_menu() {
   $items = array();
   $items['admin/users-list'] = array(
-    'title' => 'Users list',
+    'title' => t('Users list'),
     'page callback' => 'beliana_users_list',
     'access arguments' => array('bypass node access'),
   );
 
   $items['admin/group-list'] = array(
-    'title' => 'Group list',
+    'title' => t('Group list'),
     'page callback' => 'beliana_group_list',
+    'access arguments' => array('bypass node access'),
+  );
+
+  $items['admin/editor-list'] = array(
+    'title' => t('Editor list'),
+    'page callback' => 'beliana_editor_list',
+    'access callback' => 'beliana_editor_list_access',
     'access arguments' => array('bypass node access'),
   );
 
@@ -220,6 +227,80 @@ function beliana_group_list() {
           }
           else {
             $output .= $user->mail . '</li>';
+          }
+        }
+      }
+      //$output .= '</ul><br><br>';
+      $output .= '</ul>';
+    }
+  }
+  return $output;
+}
+
+/** 
+ * access callback for beliana_editor_list
+ */
+function beliana_editor_list_access() {
+  global $user;
+  // roles with allowed access
+  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", 
+                 "Výstupný redaktor 2", "Výstupný redaktor 2X", 
+                 "Výstupný redaktor 3", "Výstupný redaktor 4", "Výstupný redaktor 5");
+  foreach($roles as $role){
+    if (in_array($role, $user->roles)) return true;
+  }
+  return false;
+}
+
+/**
+ * Menu callback for `admin/editor-list` path.
+ *
+ * We are printing editor's taxonomy classes. Fo the current editor also his/her authors are listed
+ *
+ * @return string
+ *   HTML output of users.
+ */
+function beliana_editor_list() {
+  global $user;
+  $users = entity_load('user');
+  $terms = taxonomy_get_tree(2);
+  $output = '';
+  // get taxonomy access list of the current user (it is not part of the $user variable)
+  foreach ($users as $usr) {
+    if ($usr->uid == $user->uid) {
+       $user_wba = $usr->workbench_access;
+       break;
+    }
+  }
+  foreach ($terms as $term) {
+    // The list seems to be sorted according to the hierarchy, so print items with depth==0 as H1 headers
+    if ($term->depth == 0) {
+      $output .= '<h1>' . $term->name . '</h1>';
+    }
+    else {
+      //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
+      $output .= '<strong>' . $term->name . '</strong>';
+      $output .= '<ul>';
+      foreach ($users as $usr) {
+        if (isset($usr->workbench_access[$term->tid])) {
+          // we want to print only user in the role Redaktor and Author (but these only if $user has access rights)
+          if (in_array("Autor", $usr->roles)) {
+            if (!isset($user_wba[$term->tid])) continue; 
+          }
+          else {
+            continue;
+            if (!in_array("Redaktor", $usr->roles)) continue; 
+          }
+          $output .= '<li>'
+            . $usr->name . ', '
+            . $usr->field_meno['und'][0]['value'] . ', '
+            . $usr->field_priezvisko['und'][0]['value'] . ', ';
+          if (isset($usr->field_autorska_zmluva['und'])) {
+            $output .= $usr->mail . ', '
+              . $usr->field_autorska_zmluva['und'][0]['value'] . '</li>';
+          }
+          else {
+            $output .= $usr->mail . '</li>';
           }
         }
       }
