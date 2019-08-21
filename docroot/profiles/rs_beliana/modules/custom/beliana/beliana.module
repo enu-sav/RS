@@ -243,8 +243,8 @@ function beliana_group_list() {
 function beliana_editor_list_access() {
   global $user;
   // roles with allowed access
-  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", 
-                 "Výstupný redaktor 2", "Výstupný redaktor 2X", 
+  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", "administrátor", 
+                 "Výstupný redaktor 2", "Výstupný redaktor 2X", "useradmin", 
                  "Výstupný redaktor 3", "Výstupný redaktor 4", "Výstupný redaktor 5");
   foreach($roles as $role){
     if (in_array($role, $user->roles)) return true;
@@ -275,7 +275,7 @@ function beliana_editor_list() {
   foreach ($terms as $term) {
     // The list seems to be sorted according to the hierarchy, so print items with depth==0 as H1 headers
     if ($term->depth == 0) {
-      $output .= '<h1>' . $term->name . '</h1>';
+      $output .= '<br /><h1>' . $term->name . '</h1>';
     }
     else {
       //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
@@ -285,7 +285,10 @@ function beliana_editor_list() {
         if (isset($usr->workbench_access[$term->tid])) {
           // we want to print only user in the role Redaktor and Author (but these only if $user has access rights)
           if (in_array("Autor", $usr->roles)) {
-            if (!isset($user_wba[$term->tid])) continue; 
+            // administrator and useradmin should see all authors
+            if (!in_array("administrátor", $user->roles) && !in_array("useradmin", $user->roles)) {
+              if (!isset($user_wba[$term->tid])) continue; 
+            }
           }
           else {
             continue;
