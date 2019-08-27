@@ -6760,6 +6760,76 @@ function rs_beliana_views_views_default_views() {
     15 => '15',
     16 => '16',
   );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
+    'title' => 'title',
+    'name_1' => 'name_1',
+    'section' => 'section',
+    'state' => 'state',
+    'field_ilustracia' => 'field_ilustracia',
+    'field_vyplatit' => 'field_vyplatit',
+    'field_datum_vyplatenia' => 'field_datum_vyplatenia',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'section' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ilustracia' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_vyplatit' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_vyplatenia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -6817,6 +6887,16 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
+  /* Pole: Obsah: Vyplatenie odmeny */
+  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['relationship'] = 'nid';
+  /* Pole: Obsah: Dátum vyplatenia */
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['relationship'] = 'nid';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -7002,6 +7082,49 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  /* Filter criterion: Obsah: Vyplatenie odmeny (field_vyplatit) */
+  $handler->display->display_options['filters']['field_vyplatit_value']['id'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['filters']['field_vyplatit_value']['field'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_vyplatit_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator_id'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    32 => 0,
+    10 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    33 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    28 => 0,
+  );
+  $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['path'] = 'admin/beliana/all';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Všetky moje heslá';
@@ -9134,6 +9257,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Všetky moje heslá'),
     t('Všetky heslá súvisiace s používateľom'),
     t('Tu sú zobrazené všetky heslá, ktoré zodpovedajú lexikálnym skupinám používateľa a sú už v procese spracovávania. Použite filtre na zúženie výberu. '),
+    t('Vyplatenie odmeny'),
+    t('Dátum vyplatenia'),
     t('Nepriradené heslá'),
     t('Tu sú zobrazené všetky heslá, ktorým ešte nebol priradený autor (takéto heslá sú v stave <em>Zaradené</em>).
 <b>K textu hesla môžete pridať komentár, webový odkaz, prípadne aj celý text</b> (čo neskôr môže pomôcť autorovi):
