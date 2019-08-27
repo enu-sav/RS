@@ -162,6 +162,30 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_datum_vyplatenia'.
+  $field_bases['field_datum_vyplatenia'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_datum_vyplatenia',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_dlzka_autorovho_textu'.
   $field_bases['field_dlzka_autorovho_textu'] = array(
     'active' => 1,
