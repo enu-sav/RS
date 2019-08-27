@@ -984,7 +984,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view field_datum_vyplatenia'] = array(
     'name' => 'view field_datum_vyplatenia',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
