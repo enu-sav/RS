@@ -23167,6 +23167,9 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     3 => '3',
     4 => '4',
   );
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
   $handler->display->display_options['header']['area']['id'] = 'area';

@@ -38,6 +38,15 @@ function rs_beliana_forum_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create taxonomy_forums'.
+  $permissions['create taxonomy_forums'] = array(
+    'name' => 'create taxonomy_forums',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'delete any forum content'.
   $permissions['delete any forum content'] = array(
     'name' => 'delete any forum content',
@@ -77,6 +86,24 @@ function rs_beliana_forum_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own taxonomy_forums'.
+  $permissions['edit own taxonomy_forums'] = array(
+    'name' => 'edit own taxonomy_forums',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit taxonomy_forums'.
+  $permissions['edit taxonomy_forums'] = array(
+    'name' => 'edit taxonomy_forums',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view any unpublished forum content'.
   $permissions['view any unpublished forum content'] = array(
     'name' => 'view any unpublished forum content',
@@ -100,6 +127,24 @@ function rs_beliana_forum_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'advanced_forum',
+  );
+
+  // Exported permission: 'view own taxonomy_forums'.
+  $permissions['view own taxonomy_forums'] = array(
+    'name' => 'view own taxonomy_forums',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view taxonomy_forums'.
+  $permissions['view taxonomy_forums'] = array(
+    'name' => 'view taxonomy_forums',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
   );
 
   return $permissions;
