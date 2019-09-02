@@ -215,16 +215,18 @@ function rs_beliana_forum_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'taxonomy_forums',
     'label' => 'Fórum',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 31,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Translatables
