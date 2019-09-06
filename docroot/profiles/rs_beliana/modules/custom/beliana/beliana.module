@@ -434,6 +434,15 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ),
+    'prune_node_revisions' => array(
+      'type' => 'node',
+      'label' => t('Prune node revisions'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => false,
+    ),
   );
 }
 
@@ -767,6 +776,28 @@ function check_path_attributes(&$entity, $context = array()) {
     if (strpos($alias, '_') === false) {
       $entity->field_atributy = array(LANGUAGE_NONE => array(array('value' => 'odkazOK')));
       node_save($entity);
+    }
+  }
+}
+
+/**
+ * Callback function for `prune_node_revisions` action.
+ * Delete repeated revisions by the same editor, keeps the oldest and the newest revision
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function prune_node_revisions(&$node, $context = array()) {
+  if (!in_array($node->type, array('heslo', 'importovane_heslo', 'ilustracia'))) return; 
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  $cur_editor_name = array_values($revisions)[0]->name;
+  foreach (array_slice($revisions, 1, -1) as $revision) {
+    if ($revision->name == $cur_editor_name) {
+      node_revision_delete($revision->vid);
+    } else {
+      $cur_editor_name = $revision->name;
     }
   }
 }
