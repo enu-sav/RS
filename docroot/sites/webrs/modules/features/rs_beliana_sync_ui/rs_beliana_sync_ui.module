@@ -1,0 +1,142 @@
+<?php
+
+/**
+ * @file
+ * Code for the RS Beliana Sync UI feature.
+ */
+include_once 'rs_beliana_sync_ui.features.inc';
+
+/**
+ * Implements hook_permission().
+ */
+function rs_beliana_sync_ui_permission() {
+  return [
+    'administer beliana' => [
+      'title' => t('Administer Beliana'),
+      'description' => t('Access all Beliana configuration pages'),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_menu().
+ */
+function rs_beliana_sync_ui_menu() {
+  $menu_items = [];
+  $menu_items['admin/config/services/beliana-sync'] = [
+    'title' => t('Synchronisaton settings'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['rs_beliana_sync_ui_sync_settings_form'],
+    'access arguments' => ['administer beliana'],
+    'file' => 'rs_beliana_sync_ui.admin.inc',
+  ];
+  return $menu_items;
+}
+
+/**
+ * Implements hook_action_info().
+ */
+function rs_beliana_sync_ui_action_info() {
+  return [
+    'rs_beliana_sync_ui_sync' => [
+      'type' => 'entity',
+      'label' => t('Publikovať do webovej verzie'),
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['create_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
+  ];
+}
+
+/**
+ * Callback for `rs_beliana_sync_ui_sync` action.
+ *
+ * Note: This should be never called, because we are overriding submit action.
+ *
+ * {@inheritdoc}
+ */
+function rs_beliana_sync_ui_sync(&$node, $context) {
+  beliana_sync_sync($node, $context);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function rs_beliana_sync_ui_form_views_form_sync_to_web_page_alter(&$form, &$form_state) {
+  if ($form_state['step'] === 'views_bulk_operations_confirm_form') {
+    $form['actions']['submit']['#submit'] = ['rs_beliana_sync_ui_prepare_queue'];
+  }
+}
+
+function rs_beliana_sync_ui_prepare_queue($form, &$form_state) {
+  $source = $form_state['selection'];
+  beliana_sync_prepare_queue($source);
+}
+
+function rs_beliana_sync_ui_node_form_sync($form, &$form_state) {
+  $source = [$form_state['values']['nid']];
+  beliana_sync_prepare_queue($source);
+}
+
+/**
+ * Implementation of hook_views_handlers() to register all of the basic handlers
+ * views uses.
+ */
+function rs_beliana_sync_ui_views_handlers() {
+  return [
+    'info' => [
+      'path' => drupal_get_path('module', 'rs_beliana_sync_ui'),
+    ],
+    'handlers' => [
+      'views_handler_field_text_hesla' => [
+        'parent' => 'views_handler_field',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function rs_beliana_sync_ui_views_data() {
+  $data = [];
+  $data['beliana_sync'] = [
+    'table' => [
+      'group' => 'Beliana sync',
+      'provider' => 'beliana_sync',
+      'join' => [
+        'node' => [
+          'left_field' => 'nid',
+          'field' => 'local',
+        ],
+        'node_revision' => [
+          'left_field' => 'nid',
+          'field' => 'local',
+        ],
+      ],
+    ],
+    'updated' => [
+      'title' => t('The Unix timestamp of last sync.'),
+      'help' => t('The Unix timestamp of last sync.'),
+      'field' => [
+        'id' => 'date',
+        'handler' => 'views_handler_field_date',
+      ],
+      'filter' => [
+        'id' => 'date',
+        'handler' => 'views_handler_filter_date',
+      ],
+    ],
+    'text_hesla' => [
+      'title' => t('Text Hesla'),
+      'help' => t('Get referenced "Text Hesla".'),
+      'field' => [
+        'handler' => 'views_handler_field_text_hesla',
+      ],
+    ],
+  ];
+
+  return $data;
+}

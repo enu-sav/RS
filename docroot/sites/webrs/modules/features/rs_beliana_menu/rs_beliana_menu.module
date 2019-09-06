@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Redakčný systém Beliana Menu feature.
+ */
+
+include_once 'rs_beliana_menu.features.inc';
