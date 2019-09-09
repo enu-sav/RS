@@ -1,7 +1,183 @@
 <?php
+# vim: ai ts=2 sts=2 et sw=2 ft=php
 
 /**
  * @file
  * Module file for beliana_rs module.
  */
 
+
+/**
+ * Implements hook_action_info().
+ *
+ * @inheritdoc
+ */
+function beliana_rs_action_info() {
+  return array(
+    'beliana_merge' => array(
+      'type' => 'entity',
+      'label' => t('Merge'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
+  );
+}
+
+
+/**
+ * Callback function for `beliana_merge` action.
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function beliana_merge(&$entity, $context = array()) {
+  dpm($entity);
+  // If current entity is the first one,
+  // create new entity `Heslo` and store its nid into session.
+  if ($context['progress']['current'] === 1) {
+    $master = new stdClass();
+    $master->type = 'heslo';
+    node_object_prepare($master);
+    $master->title = $entity->title;
+    $master->field_text_hesla = array(
+      LANGUAGE_NONE => array(
+        array(
+          'value' => '',
+          'format' => 'filtered_html',
+        ),
+      ),
+    );
+    $master->field_taxsubor = $entity->field_taxsubor;
+    $master->language = 'sk';
+    node_save($master);
+    $_SESSION['master'] = $master->nid;
+  }
+
+  // Load master entity from session.
+  $master = node_load($_SESSION['master']);
+
+  // If master entity found, copy fields from current entity into it.
+  if ($master != FALSE) {
+    // Merge field_lexikalna_skupina.
+    foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $ls) {
+      // find the top most parent (set to editor name) 
+      $parents = taxonomy_get_parents_all($ls['tid']);
+      foreach ($parents as $parent) {
+        if (count(taxonomy_get_parents_all($parent->tid)) == 1) {
+          $top_parent = $parent;
+        }
+      }
+
+      // store the top most parent (editor name) to field_redaktori_zluceneho
+      $found = FALSE;
+      if (isset($master->field_redaktori_zluceneho[LANGUAGE_NONE])) {
+        foreach ($master->field_redaktori_zluceneho[LANGUAGE_NONE] as $tid) {
+          if ($tid['tid'] === $top_parent->tid) {
+            $found = TRUE;
+          }
+        }
+      }
+      if (!$found) {
+        $master->field_redaktori_zluceneho[LANGUAGE_NONE][]['tid'] = $top_parent->tid;
+      }
+      // We want to preserve the original taxonomy values in further processing.
+      $master->field_povodne_lexikalne_skupiny[LANGUAGE_NONE][]['tid'] = $ls;
+    }
+
+    // Merge field_komentar_instrukcie, use "\n" as separator.
+    if (isset($entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) || empty($master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'])) {
+        $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
+      }
+    }
+
+    // Merge field_text_hesla, use "</p>\n<p>" as separator.
+    if (!isset($master->field_text_hesla[LANGUAGE_NONE][0]['value']) || empty($master->field_text_hesla[LANGUAGE_NONE][0]['value'])) {
+      $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      // special requirement: in merging put GEO articles in front of others
+      if ($top_parent->tid === "390") {  // "390" is Lubica Krajcovicova, editor of GEO articles. 
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'] . "<p>&nbsp;/p>" . $master->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_text_hesla[LANGUAGE_NONE][0]['value'] .= "<p>&nbsp;</p>" . $entity->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      }
+    }
+
+    // Merge field_text_z_gh, use "\n" as separator.
+    if (isset($entity->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_text_z_gh[LANGUAGE_NONE][0]['value']) || empty($master->field_text_z_gh[LANGUAGE_NONE][0]['value'])) {
+        $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] = $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_text_z_gh[LANGUAGE_NONE][0]['value'] .= "\n" . $entity->field_text_z_gh[LANGUAGE_NONE][0]['value'];
+      }
+    }
+
+    // Merge field_ilustracia.
+    if (!empty($entity->field_ilustracia)) {
+      foreach ($entity->field_ilustracia[LANGUAGE_NONE] as $img) {
+        $master->field_ilustracia[LANGUAGE_NONE][] = $img;
+      }
+    }
+
+    // Merge field_atributy, use "\n" as separator.
+    if (isset($entity->field_atributy[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_atributy[LANGUAGE_NONE][0]['value']) || empty($master->field_atributy[LANGUAGE_NONE][0]['value'])) {
+        $master->field_atributy[LANGUAGE_NONE][0]['value'] = $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_atributy[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_atributy[LANGUAGE_NONE][0]['value'];
+      }
+    }
+
+    // Check if entity has moderation state history: u_vyst_redaktora_2x >> u_vyst_redaktora_2
+    $transitions = db_select('workbench_moderation_node_history', 'w')
+        ->fields('w')
+        ->condition('state', 'u_vyst_redaktora_2x')
+        ->condition('nid', $entity->nid)
+        ->execute()
+        ->fetchAll();
+
+    // If master has state u_vyst_redaktora_2x, write to merged entity as attribute
+    if (!empty($transitions)) {
+      $master->field_atributy[LANGUAGE_NONE][0]['value'] = 'VR2X';
+    }
+
+    $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
+    node_save($master);
+
+    $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
+    // Empty alias for original entity.
+    //$entity->path['alias'] = '';
+    // Set automatic alias creation to FALSE.
+    //$entity->path['pathauto'] = FALSE;
+    node_save($entity);
+    workbench_moderation_moderate($entity, 'ukoncenezluene');
+  }
+
+  // If current entity is the last, make workflow transition.
+  if ($context['progress']['current'] === $context['progress']['total']) {
+    $master = node_load($_SESSION['master']);
+    // Reset fields.
+    $master->field_vyplatit = NULL;
+    $master->field_errta = NULL;
+    $master->field_datum = NULL;
+    // Set automatic alias creation to FALSE.
+    $master->path['pathauto'] = FALSE;
+    // Set field_lexikalna_skupina to `Zlúčené heslo`.
+    $term = array_shift(taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny'));
+    $master->field_lexikalna_skupina[LANGUAGE_NONE][]['tid'] = $term->tid;
+    node_save($master);
+    workbench_moderation_moderate($master, 'zlucene');
+    $_SESSION['master'] = NULL;
+  }
+}
