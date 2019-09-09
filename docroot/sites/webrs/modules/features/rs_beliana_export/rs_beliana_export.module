@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the RS Beliana Export feature.
+ */
+
+include_once 'rs_beliana_export.features.inc';

@@ -1,0 +1,6 @@
+name = RSW Beliana Theme
+description = Minimalist administration theme.
+core = 7.x
+base theme = rs_beliana_theme
+
+stylesheets[all][] = "css/override.css"
