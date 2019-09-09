@@ -1,0 +1,4 @@
+name = Beliana RSW
+core = 7.x
+package = Beliana
+dependencies[] = beliana
