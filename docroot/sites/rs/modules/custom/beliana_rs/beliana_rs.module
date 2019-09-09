@@ -179,3 +179,14 @@ function beliana_merge(&$entity, $context = array()) {
     $_SESSION['master'] = NULL;
   }
 }
+
+/**
+ * Extract links from node and insert them into beliana_links table.
+ * name "beliana_process_links" is not OK, it is called in unexpected situations with funny arguments
+ *
+ * @param $nid
+ */
+function _beliana_process_links($node) {
+  // no action required in the beliana_rs module
+  //dpm("_beliana_process_links beliana-rs");
+}
