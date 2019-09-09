@@ -1,6 +1,7 @@
 name = RS Beliana Sync UI
 core = 7.x
 package = Beliana
+dependencies[] = beliana_rsw
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2

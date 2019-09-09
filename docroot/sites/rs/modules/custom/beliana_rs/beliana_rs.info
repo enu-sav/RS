@@ -1,0 +1,4 @@
+name = Beliana RS
+core = 7.x
+package = Beliana
+dependencies[] = beliana
