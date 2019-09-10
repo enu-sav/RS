@@ -82,3 +82,10 @@ function modify_links_merged(&$node) {
 function create_article_opposite(&$node) {
 }
 
+/*
+ * Handle special transitions in the web workflow
+ */
+function handle_special_transitions(&$values) {
+  // nothing special yer
+}
+

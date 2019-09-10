@@ -1080,55 +1080,8 @@ function beliana_workflow_reaction(&$form, &$form_state) {
 
   $new_state = $values['state'];
   $cur_state = $values['node']->workbench_moderation['current']->state;
-
-  // ensure corect state transitions if article is merged from other articles
-  if (isset($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
-    // starting '1_korektura:' copy editor names to field_spravit_1_korekturu
-    if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
-      _start_korektura($values);
-
-    // transition 1_korektura >> u_vyst_redaktora_3 
-    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
-      _transition_korektura($values, "1_korektura");
-    }
-
-    // merge links in zlucene >> u_jaz_redaktora_1
-    if ($cur_state === 'zlucene' && $new_state === 'na_jazykovu_korekturu') {
-      foreach ($values['node']->field_zlucene_z[LANGUAGE_NONE] as $item) {
-        $query = db_query('SELECT node.nid AS nid FROM {node} node INNER JOIN {search_node_links} links ON node.nid = links.sid WHERE links.nid = :nid', array(':nid' => $item['target_id']));
-        $result = $query->fetchAll();
-
-        if (!empty($result)) {
-          foreach ($result as $backlink) {
-            if ($source = node_load($backlink->nid)) {
-              node_save($source);
-            }
-          }
-        }
-      }
-    }
-
-    $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
-    if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
-      // starting 'korektura': copy editor names to field_spravit_1_korekturu
-      if (($cur_state === 'u_vyst_redaktora_3' && $new_state === '2_korekt_ra'))
-        _start_korektura($values);
-
-      // transition 2_korekt_ra >> u_vyst_redaktora_4 
-      if ($cur_state === '2_korekt_ra' && $new_state === 'u_vyst_redaktora_4')
-        _transition_korektura($values, "2_korekt_ra");
-    }
-    else // korekt_ra: version with only one editor selected
-      _run_2_korektura_single($values);
-    node_save($values['node']);
-    return;
-  }
-
-  // transition 1_korektura >> u_vyst_redaktora_3 
-  if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
-    _transition_vr2x($values);
-    node_save($values['node']);
-  }
+  
+  handle_special_transitions($values);
 
   // check type heslo
   if ($values['node']->type === 'heslo') {
@@ -1433,93 +1386,6 @@ function _check_links(&$node) {
     }
   }
   return $retvalue;
-}
-
-/**
- * Helper function: start 'korektura'
- */
-function _start_korektura(&$values) {
-  // copy editor names to field_spravit_1_korekturu
-  foreach ($values['node']->field_redaktori_zluceneho['und'] as $redaktor)
-    $values['node']->field_spravit_1_korekturu['und'][]['tid'] = $redaktor['tid'];
-  // take the next editor
-  $values['node']->field_lexikalna_skupina['und'] = array();
-  $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
-}
-
-/**
- * Helper function: transition korektura >>  next state
- */
-function _transition_korektura(&$values, $korektura) {
-  if (!empty($values['node']->field_spravit_1_korekturu['und'])) {
-    // return back to '$korektura'
-    $values['node']->workbench_moderation_state_new = $korektura;
-    // take the next editor
-    $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
-  }
-  else {
-    _transition_vr2x($values);
-    // we are done, restore the initial status
-    $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
-  }
-}
-
-/**
- * Helper function: transition korektura >>  next state
- */
-function _transition_vr2x(&$values) {
-  // check if "heslo" was already seen by vr2x
-  $already_seen_by_vr2x = FALSE;
-  if (empty($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
-    $transitions = db_select('workbench_moderation_node_history', 'w')
-        ->fields('w')
-        ->condition('state', 'u_vyst_redaktora_2x')
-        ->condition('nid', $values['node']->nid)
-        ->execute()
-        ->fetchAll();
-
-    $already_seen_by_vr2x = !empty($transitions);
-  }
-  else {
-    if (!empty($values['node']->field_atributy[LANGUAGE_NONE])) {
-      $already_seen_by_vr2x = $values['node']->field_atributy[LANGUAGE_NONE][0]['value'] == 'VR2X';
-    }
-  }
-
-  // if seen, move to vr4
-  if ($already_seen_by_vr2x) {
-    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_4';
-  }
-}
-
-/**
- * Helper function: transition to 2_korekt_ra
- */
-function _run_2_korektura_single(&$values) {
-  if ($values['state'] === '2_korekt_ra') {
-    if (count($values['node']->field_lexikalna_skupina['und']) != 1) {
-      //MS drupal_set_message('Ako lexikálnu skupinu zadajte meno požadovaného redaktora.', 'error');
-      drupal_set_message('Heslo je zlúčené a má viacero lexikálnych skupín. Pri odosielaní na 2. korektúru však heslo môže mať len jednu lexikálnu skupinu.', 'error');
-      drupal_set_message('Lexikálne skupiny upravte, heslo uložte a potom odošlite na 2. korektúru ešte raz. Po návrate z 2. korektúry sa lexikálne skupiny vrátia do pôvodného stavu.', 'error');
-      $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-    }
-  }
-
-  // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
-  if ($values['state'] === 'u_vyst_redaktora_4' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
-    drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U výstupného redaktora 4. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
-    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-  }
-
-  // If node is prepared by Vystupny redaktor 3 for the 2_korekt_ra state, but erroneously sent to other state
-  if ($values['state'] === 'u_jaz_redaktora_2' && count($values['node']->field_lexikalna_skupina['und']) != count($values['node']->field_povodne_lexikalne_skupiny['und'])) {
-    drupal_set_message('Heslo ste pravdepodobne chceli odoslať na 2. korektúru, zvolili ste však stav U jazykového redaktora 2. Zvoľte 2. korektúru a odošlite ešte raz.', 'error');
-    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_3';
-  }
-
-  if ($values['node']->workbench_moderation['current']->state === '2_korekt_ra' && $values['state'] === 'u_vyst_redaktora_3') {
-    $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
-  }
 }
 
 /**
