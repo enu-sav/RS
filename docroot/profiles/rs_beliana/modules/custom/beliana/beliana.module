@@ -847,12 +847,13 @@ function beliana_node_presave($node) {
   }
 
   # do not continue if node has just been created
-  if (isset($node->is_new) and $node->is_new === True)
+  if (isset($node->is_new) and $node->is_new === True) {
     if ($node->type == "heslo") {
       # create node in the 'other' (book or web) system
       create_article_opposite($node);
     }
     return;
+  }
 
   // clean tags and remove unnecessary field values in type 'ilustracie'
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
@@ -903,27 +904,8 @@ function beliana_node_presave($node) {
     '@title' => $node->title
       ], WATCHDOG_NOTICE);
 
-  // find links pointing to articles in Ukončené/Zlúčené (ukoncenezluene) state and replace them
-  $dom = new \DOMDocument();
-  $dom->loadHTML(mb_convert_encoding($node->field_text_hesla[LANGUAGE_NONE][0]['value'], 'HTML-ENTITIES', 'UTF-8'));
-  /** @var \DOMElement[] $links */
-  $links = $dom->getElementsByTagName('a');
-  foreach ($links as $item) {
-    $target = substr($item->getAttribute('href'), 1); // we do not need the leading slash /
-    $path = drupal_get_normal_path($target);
-    $parts = explode("/", $path);
-    if ($parts[0] === 'node') {
-      $lnode = node_load($parts[1]); // the linked node
-      if ($lnode->workbench_moderation['current']->state == 'ukoncenezluene') {
-        // $znode: the node $lnode is merged to
-        $znode = node_load($lnode->field_zlucene_do[LANGUAGE_NONE][0]['target_id']);
-        $newpath = $znode->path['alias'];
-        // replace including the closing '"' to make the replacement string unique
-        $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace($target . '"', $newpath . '"', $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
-        watchdog('aktualizovany odkaz', 'Heslo "' . $node->title . '": aktualizovaný odkaz na zlúčené heslo (z <a href="/' . $target . '">' . $target . '</a> na <a href="/' . $newpath . '">' . $newpath . '</a>)');
-      }
-    }
-  }
+  // modify links due to article merging
+  modify_links_merged($node);
 
   // to be used in logs for node save debugging
   watchdog('content', '@type: updated (2) @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s", $node->changed), [
@@ -1399,7 +1381,7 @@ function _check_transition_to_vyradene(&$node) {
   $query = db_query('SELECT node.nid AS nid FROM {node} node INNER JOIN {search_node_links} links ON node.nid = links.sid WHERE links.nid = :nid', array(':nid' => $node->nid));
   $result = $query->fetchAll();
   if ($result){
-    drupal_set_message('Heslo <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> ' . 'nebolo presunuté so stavu Vyradené, lebo naň odkazujú iné heslá.', 'error');
+    drupal_set_message('Heslo <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> ' . 'nebolo presunuté do stavu Vyradené, lebo naň odkazujú iné heslá.', 'error');
     return false;
   }
   return true;

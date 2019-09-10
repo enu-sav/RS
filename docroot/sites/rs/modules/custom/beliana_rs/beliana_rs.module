@@ -191,6 +191,34 @@ function _beliana_process_links(&$node) {
   //dpm("_beliana_process_links beliana-rs");
 }
 
+
+/*
+ * modify links in text due to article merging
+ * find links pointing to articles in Ukončené/Zlúčené (ukoncenezluene) state and replace them
+ */
+function modify_links_merged(&$node) {
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($node->field_text_hesla[LANGUAGE_NONE][0]['value'], 'HTML-ENTITIES', 'UTF-8'));
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  foreach ($links as $item) {
+    $target = substr($item->getAttribute('href'), 1); // we do not need the leading slash /
+    $path = drupal_get_normal_path($target);
+    $parts = explode("/", $path);
+    if ($parts[0] === 'node') {
+      $lnode = node_load($parts[1]); // the linked node
+      if ($lnode->workbench_moderation['current']->state == 'ukoncenezluene') {
+        // $znode: the node $lnode is merged to
+        $znode = node_load($lnode->field_zlucene_do[LANGUAGE_NONE][0]['target_id']);
+        $newpath = $znode->path['alias'];
+        // replace including the closing '"' to make the replacement string unique
+        $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace($target . '"', $newpath . '"', $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+        watchdog('aktualizovany odkaz', 'Heslo "' . $node->title . '": aktualizovaný odkaz na zlúčené heslo (z <a href="/' . $target . '">' . $target . '</a> na <a href="/' . $newpath . '">' . $newpath . '</a>)');
+      }
+    }
+  }
+}
+
 /*
  * Create remote node (Heslo only) in the web editorial system
  * sets current nid in the remote_nid field of the remote node

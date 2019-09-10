@@ -1,4 +1,5 @@
 <?php
+# vim: ai ts=2 sts=2 et sw=2 ft=php
 
 /**
  * @file
@@ -62,6 +63,13 @@ function _beliana_process_links($node) {
       }
     }
   }
+}
+
+/*
+ * modify links in text due to article merging
+ */
+function modify_links_merged(&$node) {
+// currently no code here
 }
 
 /*
