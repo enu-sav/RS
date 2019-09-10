@@ -63,3 +63,14 @@ function _beliana_process_links($node) {
     }
   }
 }
+
+/*
+ * Create remote node (Heslo only) in the book editorial system
+ * sets current nid in the remote_nid field of the remote node
+ * sets nid of the remote node in the remote_nid of the current node
+ * sets fields title_field, field_lexikalna_skupina and field_text_hesla od the remote node
+ * sets remote node alias to be the same as alias of the current node
+ */
+function create_article_opposite(&$node) {
+}
+

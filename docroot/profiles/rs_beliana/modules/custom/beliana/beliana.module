@@ -848,6 +848,10 @@ function beliana_node_presave($node) {
 
   # do not continue if node has just been created
   if (isset($node->is_new) and $node->is_new === True)
+    if ($node->type == "heslo") {
+      # create node in the 'other' (book or web) system
+      create_article_opposite($node);
+    }
     return;
 
   // clean tags and remove unnecessary field values in type 'ilustracie'
