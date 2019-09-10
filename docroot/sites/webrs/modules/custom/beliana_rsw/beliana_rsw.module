@@ -12,7 +12,7 @@
  *
  * @param $nid
  */
-function _beliana_process_links($node) {
+function _beliana_process_links(&$node) {
   #dpm("_beliana_process_links", $node->title);
   // Extract links from field_text_hesla.
   $nid = $node->nid;
