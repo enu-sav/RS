@@ -1,7 +1,91 @@
 <?php
+# vim: ai ts=2 sts=2 et sw=2 ft=php
 
 /**
  * @file
  * Module file for beliana_rsw module.
  */
+
+/**
+ * Extract links from node and insert them into beliana_links table.
+ * name "beliana_process_links" is not OK, it is called in unexpected situations with funny arguments
+ *
+ * @param $nid
+ */
+function _beliana_process_links(&$node) {
+  #dpm("_beliana_process_links", $node->title);
+  // Extract links from field_text_hesla.
+  $nid = $node->nid;
+  db_delete('beliana_links')
+      ->condition('origin', $nid)
+      ->execute();
+  // Extract links.
+  $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  // do not continue if text is empty
+  if ($text === "")
+    return;
+  $dom = beliana_get_dom($node, $text, "Text hesla (beliana_process_links)");
+  if (!$dom)
+    return;
+
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  if (!empty($links)) {
+    for ($i = $links->length - 1; $i >= 0; $i--) {
+      $item = $links->item($i);
+      $target = $item->getAttribute('href');
+      if (!url_is_external($target)) {
+        // Get rid of leading slash.
+        if ($target[0] === '/') {
+          $target = substr($target, 1);
+        }
+        // Get non-alias path, so we can get nid from it.
+        $path = drupal_get_normal_path($target);
+        $path_elements = explode('/', $path);
+        // If alias belong to node, then insert record into beliana_links table.
+        if ($path_elements[0] === 'node' && is_numeric($path_elements[1])) {
+          $link = db_select('beliana_links', 'l')
+              ->fields('l', ['origin'])
+              ->condition('origin', $nid)
+              ->condition('target', $path_elements[1])
+              ->execute()
+              ->fetchCol(0);
+          // We insert new item only if it already doesn't exist.
+          if (empty($link)) {
+            db_insert('beliana_links')
+                ->fields([
+                  'origin' => $nid,
+                  'target' => $path_elements[1],
+                ])
+                ->execute();
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+ * modify links in text due to article merging
+ */
+function modify_links_merged(&$node) {
+// currently no code here
+}
+
+/*
+ * Create remote node (Heslo only) in the book editorial system
+ * sets current nid in the remote_nid field of the remote node
+ * sets nid of the remote node in the remote_nid of the current node
+ * sets fields title_field, field_lexikalna_skupina and field_text_hesla od the remote node
+ * sets remote node alias to be the same as alias of the current node
+ */
+function create_article_opposite(&$node) {
+}
+
+/*
+ * Handle special transitions in the web workflow
+ */
+function handle_special_transitions(&$values) {
+  // nothing special yer
+}
 
