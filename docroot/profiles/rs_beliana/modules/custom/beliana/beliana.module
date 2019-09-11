@@ -352,36 +352,6 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ),
-    'importovane_publish_editor' => array(
-      'type' => 'entity',
-      //'label' => t('Odoslať na zverejnenie'),
-      'label' => t('Mark for publishing (editor)'),
-      'configurable' => FALSE,
-      'triggers' => array('any'),
-      'behavior' => array('create_property'),
-      'vbo_configurable' => FALSE,
-      'pass rows' => TRUE,
-    ),
-    'importovane_publish_senior_editor' => array(
-      'type' => 'entity',
-      //'label' => t('Odoslať na zverejnenie (VR)'),
-      'label' => t('Mark for publishing (senior editor)'),
-      'configurable' => FALSE,
-      'triggers' => array('any'),
-      'behavior' => array('create_property'),
-      'vbo_configurable' => FALSE,
-      'pass rows' => TRUE,
-    ),
-    'importovane_publish_proofreader' => array(
-      'type' => 'entity',
-      //'label' => t('Odoslať na zverejnenie (JR)'),
-      'label' => t('Mark for publishing (proofreader)'),
-      'configurable' => FALSE,
-      'triggers' => array('any'),
-      'behavior' => array('create_property'),
-      'vbo_configurable' => FALSE,
-      'pass rows' => TRUE,
-    ),
     'update_dates' => array(
       'type' => 'entity',
       //'label' => t('Aktualizovať dátumy'),
@@ -420,67 +390,6 @@ function beliana_action_info() {
       'pass rows' => false,
     ),
   );
-}
-
-/**
- * Callback for 'importovane_publish_editor' action.
- *
- * changes workflow status to 'importovane_u_jr2'
- *
- * @inheritdoc
- */
-function importovane_publish_editor(&$node, $context) {
-  if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane') {
-    $skip = false;
-    if (!_check_links($node)) {
-      $skip = true;
-    }
-    $ok_states = ['ilustracia_u_vyst_redaktora_5'];
-    if (!check_ill_at_node_transition($node, $ok_states, 'state change')) {
-      $skip = true;
-    }
-    if (!$skip) {
-      workbench_moderation_moderate($node, "importovane_u_jr2");
-    }
-  }
-}
-
-/**
- * Callback for 'importovane_publish_proofreader' action.
- *
- * changes workflow status to 'importovane_u_vr'
- *
- * @inheritdoc
- */
-function importovane_publish_proofreader(&$node, $context) {
-  if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane_u_jr2') {
-    if (_check_links($node)) {
-      workbench_moderation_moderate($node, "importovane_u_vr");
-    }
-  }
-}
-
-/**
- * Callback for 'importovane_publish_senior_editor' action.
- *
- * changes workflow status to 'na_zalomenie'
- *
- * @inheritdoc
- */
-function importovane_publish_senior_editor(&$node, $context) {
-  if ($node->type == 'importovane_heslo' && $node->workbench_moderation['current']->state === 'importovane_u_vr') {
-    $skip = false;
-    if (!_check_links($node)) {
-      $skip = true;
-    }
-    $ok_states = ['ilustracia_u_vyst_redaktora_5'];
-    if (!check_ill_at_node_transition($node, $ok_states, 'state change')) {
-      $skip = true;
-    }
-    if (!$skip) {
-      workbench_moderation_moderate($node, "na_zalomenie");
-    }
-  }
 }
 
 /**
