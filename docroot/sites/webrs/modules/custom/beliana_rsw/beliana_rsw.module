@@ -11,7 +11,7 @@
  *
  * @inheritdoc
  */
-function beliana_action_info() {
+function beliana_rsw_action_info() {
   return array(
     'importovane_publish_editor' => array(
       'type' => 'entity',
