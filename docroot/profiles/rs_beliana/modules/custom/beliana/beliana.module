@@ -237,21 +237,6 @@ function beliana_group_list() {
   return $output;
 }
 
-/** 
- * access callback for beliana_editor_list
- */
-function beliana_editor_list_access() {
-  global $user;
-  // roles with allowed access
-  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", "administrátor", 
-                 "Výstupný redaktor 2", "Výstupný redaktor 2X", "useradmin", 
-                 "Výstupný redaktor 3", "Výstupný redaktor 4", "Výstupný redaktor 5");
-  foreach($roles as $role){
-    if (in_array($role, $user->roles)) return true;
-  }
-  return false;
-}
-
 /**
  * Menu callback for `admin/editor-list` path.
  *
@@ -578,6 +563,7 @@ function beliana_assign_corrector(&$node, $context) {
 
 /**
  * Callback function for `update_dates` action.
+ * Extracts dates from an article header, usually date of birth and death of a person
  *
  * @inheritdoc
  *
@@ -1069,7 +1055,9 @@ function beliana_form_node_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Callback function for `workbench_moderation_moderate_form` submit.
+ * Callback function for `workbench_moderation_moderate_form` submit, called after initiation of a state transition.
+ * 1. Implements special transition requirements (mainly merged articles) 
+ * 2. Performs various state and node type dependent checks at node state transition. If a check fails, state transition is not allowed 
  *
  * @inheritdoc
  */

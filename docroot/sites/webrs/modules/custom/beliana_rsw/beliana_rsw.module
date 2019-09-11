@@ -89,3 +89,17 @@ function handle_special_transitions(&$values) {
   // nothing special yer
 }
 
+
+/** 
+ * access callback for beliana_editor_list
+ * to be updated according to appropriate roles
+ */
+function beliana_editor_list_access() {
+  global $user;
+  // roles with allowed access
+  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", "administrátor", "useradmin"); 
+  foreach($roles as $role){
+    if (in_array($role, $user->roles)) return true;
+  }
+  return false;
+}

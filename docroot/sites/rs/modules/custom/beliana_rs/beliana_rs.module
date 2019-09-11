@@ -372,3 +372,20 @@ function _run_2_korektura_single(&$values) {
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
   }
 }
+
+
+/** 
+ * access callback for beliana_editor_list
+ * to be updated according to appropriate roles
+ */
+function beliana_editor_list_access() {
+  global $user;
+  // roles with allowed access
+  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", "administrátor", 
+                 "Výstupný redaktor 2", "Výstupný redaktor 2X", "useradmin", 
+                 "Výstupný redaktor 3", "Výstupný redaktor 4", "Výstupný redaktor 5");
+  foreach($roles as $role){
+    if (in_array($role, $user->roles)) return true;
+  }
+  return false;
+}
