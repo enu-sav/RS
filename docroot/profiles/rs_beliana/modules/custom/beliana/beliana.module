@@ -881,16 +881,13 @@ function beliana_views_post_execute(&$view) {
 
 /**
  * Implements hook_form_alter().
- * If user has role 'redaktor' and state is `zaradene`,
- * we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
- * This forces editor to use the view "Priradit autora" to assign article to and author
-  watchdog('content', '@type: updated @title. (' . (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
+ * Various modifications of several forms
  *
  * @inheritdoc
  */
 function beliana_form_alter(&$form, &$form_state, $form_id) {
   // log information about opening nodes for editing
-  // if $form['title']['#default_value'] is empty (node just ceated), do not log anything
+  // if $form['title']['#default_value'] is empty (node just created), do not log anything
   $nf_pos = strpos($form_id, "_node_form");
   if (!($nf_pos === false) && isset($form['title']['#default_value'])) {
     watchdog('content', '@type: otvorené na úpravu @title. (open, ' . date("Y/m/d H:i:s") . ')', [
@@ -900,7 +897,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   }
 
   global $user;
-  // disable but show fields related to author's text, if already set
+  // in the 'heslo' editing form disable but show fields related to author's text, if already set
+  // since this information can be entered by an editor just once (cannot be modified later)
   if ($form_id == "heslo_node_form") {
     $display_payment = _display_payment_fields_form($form);
     //hideall, enableall, showdisabled, showeditable
@@ -936,7 +934,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
-  //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
+  // If user has role 'redaktor' and state is `zaradene`, we remove option 'u_autora' and 'u redaktora' (needs_review) from possible next states.
+  // This forces editor to use the view "Priradit autora" to assign article to and author
+  // Applies to 'workbench_moderation_moderate_form', the form displaying a node 'view' 
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && in_array("Redaktor", $user->roles)) {
