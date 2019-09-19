@@ -54,7 +54,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 27,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -129,7 +129,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -199,7 +199,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 17,
+        'weight' => 12,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -261,7 +261,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 24,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -323,7 +323,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 18,
+        'weight' => 13,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -379,7 +379,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 27,
+        'weight' => 22,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -453,7 +453,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 21,
+        'weight' => 16,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -506,7 +506,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 23,
+        'weight' => 18,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -553,7 +553,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 23,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -679,7 +679,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -749,7 +749,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -801,7 +801,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'title_style' => '',
         ),
         'type' => 'title_linked',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -870,7 +870,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 20,
+        'weight' => 15,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -914,7 +914,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 19,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -982,7 +982,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 25,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1029,7 +1029,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 16,
+        'weight' => 11,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1064,6 +1064,53 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_remote_id'.
+  $field_instances['node-heslo-field_remote_id'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 29,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_remote_id',
+    'label' => 'Remote ID',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 28,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-field_spravit_1_korekturu'.
   $field_instances['node-heslo-field_spravit_1_korekturu'] = array(
     'bundle' => 'heslo',
@@ -1075,7 +1122,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 28,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1196,7 +1243,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1244,7 +1291,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1289,7 +1336,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'liteformatter',
         'settings' => array(),
         'type' => 'liteformatter_formatter',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1431,7 +1478,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 22,
+        'weight' => 17,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1475,7 +1522,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 26,
+        'weight' => 21,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1518,7 +1565,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 24,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1569,7 +1616,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1621,7 +1668,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 25,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1666,7 +1713,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 26,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1759,6 +1806,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Pôvodný text hesla v generálnom heslári pred importovaním z XLS súborov. XLS tabuľka heslára mala 8 stĺpcov ZODAD, HESLO, P_R, L_S, AUT, IL, POZN a POZN 2 . Obsah stĺpcov je uvedený v zátvorke, POZN a POZN2 sú spojené.
 ');
   t('Redaktori zlúčeného hesla');
+  t('Remote ID');
   t('Spravit korekturu');
   t('Súbor');
   t('Tabuľka pre geografické heslá');

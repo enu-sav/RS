@@ -2481,3 +2481,100 @@ function beliana_get_dom($node, $text, $where = Null) {
   libxml_use_internal_errors($internalErrorsState);
   return $dom;
 }
+
+/* ----- CURL HELPER CALLBACKS ----- */
+
+function beliana_api_rest_login($request_url) {
+  $user_data = [
+    'username' => variable_get('rs_api_login'),
+    'password' => variable_get('rs_api_password'),
+  ];
+
+  $data = [];
+  $curl = curl_init($request_url . '/user/login');
+
+  // LOGIN USER
+  curl_setopt($curl, CURLOPT_HTTPHEADER, ['Accept: application/json']);
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($user_data));
+  curl_setopt($curl, CURLOPT_HEADER, FALSE);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+  $response = curl_exec($curl);
+  $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+  if ($http_code == 200) {
+    $logged_user = json_decode($response);
+  }
+  else {
+    $http_message = curl_error($curl);
+    drupal_set_message('Auth error: ' . $http_message, 'error');
+    return FALSE;
+  }
+
+  $data['session'] = $logged_user->session_name . '=' . $logged_user->sessid;
+
+  // GET CSRF TOKEN
+  curl_setopt_array($curl, [
+    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_URL => $request_url . '/user/token',
+  ]);
+
+  curl_setopt($curl, CURLOPT_COOKIE, $data['session'] . "");
+
+  $ret = new stdClass;
+  $ret->response = curl_exec($curl);
+  $data['token'] = json_decode($ret->response)->token;
+
+  return $data;
+}
+
+function beliana_api_rest_node($node, $site) {
+  global $user;
+
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/heslo';
+
+  if ($login = beliana_api_rest_login($request_url)) {
+    $curl = curl_init($request_url . '/node');
+    $term = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
+    $comment = $site == 'rsw' ? 'knižnom' : 'webovom';
+
+    $data = [
+      'type' => $node->type,
+      'title' => $node->title,
+      'status' => $node->status,
+      'title_field[und][0][value]' => $node->title,
+      'field_text_hesla[und][0][value]' => $node->field_text_hesla[LANGUAGE_NONE][0]['value'],
+      'field_text_hesla[und][0][format]' => 'filtered_html',
+      'field_lexikalna_skupina[und]' => $term->name,
+      'field_komentar_instrukcie[und][0][value]' => 'Vytvorené v ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
+      'field_remote_id[und][0][value]' => $node->nid,
+    ];
+
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+      'Accept: application/json',
+      'X-CSRF-Token: ' . $login['token'],
+    ]);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($curl, CURLOPT_HEADER, FALSE);
+    curl_setopt($curl, CURLOPT_COOKIE, $login['session'] . "");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+    $response = curl_exec($curl);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    if ($http_code == 200) {
+      return json_decode($response);
+    }
+    else {
+      $http_message = curl_error($curl);
+      drupal_set_message('Node creating error: ' . $http_message, 'error');
+    }
+  }
+
+  return FALSE;
+}

@@ -69,3 +69,10 @@ function rs_beliana_node_heslo_content_edit_form_submit(&$form, &$form_state) {
   node_save($node);
   drupal_goto('node/' . $node->nid);
 }
+
+/**
+ * Implements hook_node_insert().
+ */
+function rs_beliana_node_heslo_node_insert($node) {
+  beliana_api_rest_node($node, 'rs');
+}
