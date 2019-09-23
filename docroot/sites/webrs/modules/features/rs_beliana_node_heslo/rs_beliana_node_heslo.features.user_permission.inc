@@ -185,6 +185,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_remote_id'.
+  $permissions['create field_remote_id'] = array(
+    'name' => 'create field_remote_id',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_spravit_1_korekturu'.
   $permissions['create field_spravit_1_korekturu'] = array(
     'name' => 'create field_spravit_1_korekturu',
@@ -523,6 +532,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_remote_id'.
+  $permissions['edit field_remote_id'] = array(
+    'name' => 'edit field_remote_id',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_spravit_1_korekturu'.
   $permissions['edit field_spravit_1_korekturu'] = array(
     'name' => 'edit field_spravit_1_korekturu',
@@ -788,6 +806,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'edit own field_redaktori_zluceneho'.
   $permissions['edit own field_redaktori_zluceneho'] = array(
     'name' => 'edit own field_redaktori_zluceneho',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_remote_id'.
+  $permissions['edit own field_remote_id'] = array(
+    'name' => 'edit own field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -1093,6 +1120,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_remote_id'.
+  $permissions['view field_remote_id'] = array(
+    'name' => 'view field_remote_id',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_spravit_1_korekturu'.
   $permissions['view field_spravit_1_korekturu'] = array(
     'name' => 'view field_spravit_1_korekturu',
@@ -1351,6 +1387,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view own field_redaktori_zluceneho'.
   $permissions['view own field_redaktori_zluceneho'] = array(
     'name' => 'view own field_redaktori_zluceneho',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_remote_id'.
+  $permissions['view own field_remote_id'] = array(
+    'name' => 'view own field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),

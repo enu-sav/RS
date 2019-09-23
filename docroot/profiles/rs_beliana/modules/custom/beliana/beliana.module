@@ -2542,7 +2542,7 @@ function beliana_api_rest_node($node, $site) {
   if ($login = beliana_api_rest_login($request_url)) {
     $curl = curl_init($request_url . '/node');
     $term = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
-    $comment = $site == 'rsw' ? 'knižnom' : 'webovom';
+    $comment = $site == 'rsw' ? 'v knižnom' : 'vo webovom';
 
     $data = [
       'type' => $node->type,
@@ -2552,7 +2552,7 @@ function beliana_api_rest_node($node, $site) {
       'field_text_hesla[und][0][value]' => $node->field_text_hesla[LANGUAGE_NONE][0]['value'],
       'field_text_hesla[und][0][format]' => 'filtered_html',
       'field_lexikalna_skupina[und]' => $term->name,
-      'field_komentar_instrukcie[und][0][value]' => 'Vytvorené v ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
+      'field_komentar_instrukcie[und][0][value]' => 'Vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
       'field_remote_id[und][0][value]' => $node->nid,
     ];
 
