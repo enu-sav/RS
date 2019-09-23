@@ -70,10 +70,11 @@ function rs_beliana_node_heslo_content_edit_form_submit(&$form, &$form_state) {
   drupal_goto('node/' . $node->nid);
 }
 
-
 /**
- * Implements hook_node_insert().
+ * Implements hook_node_postinsert().
  */
-function rs_beliana_node_heslo_node_insert($node) {
-  beliana_api_rest_node($node, 'rsw');
+function rs_beliana_node_heslo_node_postinsert($node) {
+  if (empty($node->field_remote_id[LANGUAGE_NONE][0]['value'])) {
+    beliana_api_rest_node($node, 'rsw');
+  }
 }
