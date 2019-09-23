@@ -9,16 +9,26 @@
  * Implements hook_menu().
  */
 function rs_illustration_api_menu() {
-  return [
-    'node/%node/publish-to-rs' => [
-      'title' => t('Publish to RS'),
+  $items = array();
+
+  $envs = array(
+    'rs' => 'RS',
+    'rsw' => 'RSW'
+  );
+
+  foreach ($envs as $key => $title) {
+    $items['node/%node/publish-to-' . $key] = array(
+      'title callback' => 'rs_illustration_api_publish_title',
+      'title arguments' => array(1, $title),
       'page callback' => 'drupal_get_form',
-      'page arguments' => ['rs_illustration_api_publish_form', 1],
+      'page arguments' => array('rs_illustration_api_publish_form', 1, $key),
       'access callback' => 'rs_illustration_api_publish_access',
-      'access arguments' => array(1),
+      'access arguments' => array(1, $key),
       'type' => MENU_LOCAL_TASK,
-    ],
-  ];
+    );
+  }
+
+  return $items;
 }
 
 /**
@@ -27,8 +37,8 @@ function rs_illustration_api_menu() {
 function rs_illustration_api_permission() {
   return array(
     'publish ilustracia content' => array(
-      'title' => t('Publish Ilustracia to RS'),
-    )
+      'title' => t('Publish Ilustracia to RS/WEBRS'),
+    ),
   );
 }
 
@@ -37,16 +47,25 @@ function rs_illustration_api_permission() {
  */
 function rs_illustration_api_node_access($node, $op, $account) {
   if ($op == 'update' && $node->type == 'ilustracia') {
-    if ($node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] == 1 && !in_array('administrator', array_values($account->roles))) {
+    if (($node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] == 1 || $node->field_prenesene_do_rsw[LANGUAGE_NONE][0]['value'] == 1) && !in_array('administrator', array_values($account->roles))) {
       return NODE_ACCESS_DENY;
     }
   }
 }
 
-function rs_illustration_api_publish_form($form, &$form_state, $node) {
+function rs_illustration_api_publish_title($node, $env) {
+  return t('Publish to @env', ['@env' => $env]);
+}
+
+function rs_illustration_api_publish_form($form, &$form_state, $node, $env) {
   $form['node'] = array(
     '#type' => 'value',
-    '#value' => $node->nid
+    '#value' => $node->nid,
+  );
+
+  $form['env'] = array(
+    '#type' => 'value',
+    '#value' => $env
   );
 
   $form['actions'] = array(
@@ -55,7 +74,7 @@ function rs_illustration_api_publish_form($form, &$form_state, $node) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Publish to RS'),
+    '#value' => t('Publish to @env', ['@env' => strtoupper($env)]),
   );
 
   return $form;
@@ -63,12 +82,13 @@ function rs_illustration_api_publish_form($form, &$form_state, $node) {
 
 function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
   if ($node = node_load($form_state['values']['node'])) {
-    $base_url = variable_get('rs_web_uri');
+    $env = $form_state['values']['env'];
+    $base_url = variable_get($env . '_web_uri');
 
     if (!empty($base_url)) {
       $request_url = $base_url . '/api/ilustracia';
 
-      if ($login = rs_illustration_api_rest_login($request_url)) {
+      if ($login = rs_illustration_api_rest_login($request_url, $env)) {
         $attachments = array();
 
         if (!empty($node->field_obrazok_navrh_[LANGUAGE_NONE])) {
@@ -96,12 +116,18 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
         }
 
         if ($response = rs_illustration_api_rest_node($request_url, $node, $attachments, $login)) {
-          $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
-          $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] = 1;
+          if ($env == 'rsw') {
+            $node->field_datum_prevzatia_rsw[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
+          }
+          else {
+            $node->field_datum_prevzatia[LANGUAGE_NONE][0]['value'] = REQUEST_TIME;
+          }
+
+          $node->{"field_prenesene_do_$env"}[LANGUAGE_NONE][0]['value'] = 1;
           workbench_moderation_moderate($node, 'moved');
           node_save($node);
 
-          drupal_set_message('Ilustracia odoslana do RS');
+          drupal_set_message('Ilustracia odoslana do @env', ['@env' => strtoupper($env)]);
           drupal_goto('node/' . $node->nid);
         }
       }
@@ -109,8 +135,8 @@ function rs_illustration_api_publish_form_submit(&$form, &$form_state) {
   }
 }
 
-function rs_illustration_api_publish_access($node) {
-  if ($node->type == 'ilustracia' && $node->field_prenesene_do_rs[LANGUAGE_NONE][0]['value'] != 1 && user_access('publish ilustracia content')) {
+function rs_illustration_api_publish_access($node, $env) {
+  if ($node->type == 'ilustracia' && $node->{"field_prenesene_do_$env"}[LANGUAGE_NONE][0]['value'] != 1 && user_access('publish ilustracia content')) {
     return TRUE;
   }
 
@@ -119,10 +145,10 @@ function rs_illustration_api_publish_access($node) {
 
 /* ----- CURL HELPER CALLBACKS ----- */
 
-function rs_illustration_api_rest_login($base_url) {
+function rs_illustration_api_rest_login($base_url, $env) {
   $user_data = array(
-    'username' => variable_get('rs_web_login'),
-    'password' => variable_get('rs_password_login'),
+    'username' => variable_get($env . '_web_login'),
+    'password' => variable_get($env . '_password_login'),
   );
 
   $data = array();

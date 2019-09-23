@@ -61,7 +61,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 21,
+        'weight' => 19,
       ),
       'export' => array(
         'label' => 'above',
@@ -78,10 +78,72 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_datum_prevzatia',
-    'label' => 'Dátum prevzatia do RS',
+    'label' => 'Dátum prevzatia do RS (kniha)',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_select',
+      'weight' => 26,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-ilustracia-field_datum_prevzatia_rsw'.
+  $field_instances['node-ilustracia-field_datum_prevzatia_rsw'] = array(
+    'bundle' => 'ilustracia',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 21,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_prevzatia_rsw',
+    'label' => 'Dátum prevzatia do RS (web)',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -117,7 +179,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 16,
+        'weight' => 15,
       ),
       'export' => array(
         'label' => 'above',
@@ -151,7 +213,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -168,7 +230,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'export' => array(
         'label' => 'above',
@@ -228,7 +290,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -245,7 +307,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 17,
+        'weight' => 16,
       ),
       'export' => array(
         'label' => 'above',
@@ -321,7 +383,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'export' => array(
         'label' => 'inline',
@@ -374,7 +436,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'export' => array(
         'label' => 'inline',
@@ -408,7 +470,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -425,7 +487,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'export' => array(
         'label' => 'above',
@@ -484,7 +546,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -501,7 +563,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'export' => array(
         'label' => 'above',
@@ -559,7 +621,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -580,7 +642,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 14,
       ),
       'export' => array(
         'label' => 'inline',
@@ -614,7 +676,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -688,7 +750,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 100,
       ),
       'type' => 'text_textfield',
-      'weight' => 25,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -705,7 +767,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'export' => array(
         'label' => 'above',
@@ -764,7 +826,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -783,7 +845,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'image_style' => 'medium',
         ),
         'type' => 'image',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'export' => array(
         'label' => 'inline',
@@ -835,7 +897,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -852,7 +914,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 20,
+        'weight' => 18,
       ),
       'export' => array(
         'label' => 'above',
@@ -879,7 +941,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -933,7 +995,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 10,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -950,7 +1012,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1027,7 +1089,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 19,
+        'weight' => 17,
       ),
       'export' => array(
         'label' => 'above',
@@ -1085,7 +1147,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -1109,7 +1171,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1144,7 +1206,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -1165,7 +1227,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'above',
@@ -1182,7 +1244,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_prenesene_do_rs',
-    'label' => 'Prevzaté do RS',
+    'label' => 'Prevzaté do RS (kniha)',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1194,7 +1256,53 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 9,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-ilustracia-field_prenesene_do_rsw'.
+  $field_instances['node-ilustracia-field_prenesene_do_rsw'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 27,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_prenesene_do_rsw',
+    'label' => 'Prevzaté do RS (web)',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1252,7 +1360,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 9,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -1268,7 +1376,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 26,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1318,7 +1426,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 13,
+        'weight' => 12,
       ),
       'export' => array(
         'label' => 'above',
@@ -1372,7 +1480,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 23,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1389,7 +1497,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 14,
+        'weight' => 13,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1444,7 +1552,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 24,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -1461,7 +1569,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'export' => array(
         'label' => 'above',
@@ -1515,7 +1623,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 22,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -1540,7 +1648,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1574,7 +1682,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -1668,7 +1776,8 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.');
   t('Comment');
   t('Držiteľ práv');
-  t('Dátum prevzatia do RS');
+  t('Dátum prevzatia do RS (kniha)');
+  t('Dátum prevzatia do RS (web)');
   t('Dátum prevzatia do redakčného systému, vkladané automaticky počas preberania.');
   t('Inštitúcia');
   t('Komentár');
@@ -1685,7 +1794,8 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Pokiaľ je zvolená hodnota "Iná verejná licencia" v poli "Typ CC licencie", veďte odkaz na text licencie, ktorá bola použitá na stránke diela.');
   t('Popis modifikácie');
   t('Použiť');
-  t('Prevzaté do RS');
+  t('Prevzaté do RS (kniha)');
+  t('Prevzaté do RS (web)');
   t('Stručne uveďte popis úpravy, napr, "upravený kontrast", "odstránené nežiaduce objekty" a podobne');
   t('Súbor');
   t('Súbory ilustrácie');

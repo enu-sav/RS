@@ -42,6 +42,38 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'type' => 'datestamp',
   );
 
+  // Exported field_base: 'field_datum_prevzatia_rsw'.
+  $field_bases['field_datum_prevzatia_rsw'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_datum_prevzatia_rsw',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 'hour',
+        'minute' => 'minute',
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => 'UTC',
+      'todate' => '',
+      'tz_handling' => 'site',
+    ),
+    'translatable' => 0,
+    'type' => 'datestamp',
+  );
+
   // Exported field_base: 'field_drzitel_prav'.
   $field_bases['field_drzitel_prav'] = array(
     'active' => 1,
@@ -480,6 +512,34 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
       'allowed_values' => array(
         0 => 'Nie',
         1 => 'Áno',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_prenesene_do_rsw'.
+  $field_bases['field_prenesene_do_rsw'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_prenesene_do_rsw',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
       ),
       'allowed_values_function' => '',
     ),

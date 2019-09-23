@@ -19,6 +19,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_datum_prevzatia_rsw'.
+  $permissions['create field_datum_prevzatia_rsw'] = array(
+    'name' => 'create field_datum_prevzatia_rsw',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_drzitel_prav'.
   $permissions['create field_drzitel_prav'] = array(
     'name' => 'create field_drzitel_prav',
@@ -157,6 +166,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_prenesene_do_rsw'.
+  $permissions['create field_prenesene_do_rsw'] = array(
+    'name' => 'create field_prenesene_do_rsw',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_subor_ilustracie'.
   $permissions['create field_subor_ilustracie'] = array(
     'name' => 'create field_subor_ilustracie',
@@ -275,6 +293,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'edit field_datum_prevzatia'.
   $permissions['edit field_datum_prevzatia'] = array(
     'name' => 'edit field_datum_prevzatia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_datum_prevzatia_rsw'.
+  $permissions['edit field_datum_prevzatia_rsw'] = array(
+    'name' => 'edit field_datum_prevzatia_rsw',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -409,6 +436,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_prenesene_do_rsw'.
+  $permissions['edit field_prenesene_do_rsw'] = array(
+    'name' => 'edit field_prenesene_do_rsw',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_subor_ilustracie'.
   $permissions['edit field_subor_ilustracie'] = array(
     'name' => 'edit field_subor_ilustracie',
@@ -469,6 +505,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'edit own field_datum_prevzatia'.
   $permissions['edit own field_datum_prevzatia'] = array(
     'name' => 'edit own field_datum_prevzatia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_datum_prevzatia_rsw'.
+  $permissions['edit own field_datum_prevzatia_rsw'] = array(
+    'name' => 'edit own field_datum_prevzatia_rsw',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -613,6 +658,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_prenesene_do_rsw'.
+  $permissions['edit own field_prenesene_do_rsw'] = array(
+    'name' => 'edit own field_prenesene_do_rsw',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_subor_ilustracie'.
   $permissions['edit own field_subor_ilustracie'] = array(
     'name' => 'edit own field_subor_ilustracie',
@@ -720,6 +774,16 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'view field_datum_prevzatia'.
   $permissions['view field_datum_prevzatia'] = array(
     'name' => 'view field_datum_prevzatia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_datum_prevzatia_rsw'.
+  $permissions['view field_datum_prevzatia_rsw'] = array(
+    'name' => 'view field_datum_prevzatia_rsw',
     'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
@@ -867,6 +931,16 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_prenesene_do_rsw'.
+  $permissions['view field_prenesene_do_rsw'] = array(
+    'name' => 'view field_prenesene_do_rsw',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_subor_ilustracie'.
   $permissions['view field_subor_ilustracie'] = array(
     'name' => 'view field_subor_ilustracie',
@@ -936,6 +1010,15 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'view own field_datum_prevzatia'.
   $permissions['view own field_datum_prevzatia'] = array(
     'name' => 'view own field_datum_prevzatia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_datum_prevzatia_rsw'.
+  $permissions['view own field_datum_prevzatia_rsw'] = array(
+    'name' => 'view own field_datum_prevzatia_rsw',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -1065,6 +1148,16 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'view own field_prenesene_do_rs'.
   $permissions['view own field_prenesene_do_rs'] = array(
     'name' => 'view own field_prenesene_do_rs',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_prenesene_do_rsw'.
+  $permissions['view own field_prenesene_do_rsw'] = array(
+    'name' => 'view own field_prenesene_do_rsw',
     'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
