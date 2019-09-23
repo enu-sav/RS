@@ -246,36 +246,5 @@ function ckeditor_ckeditor_plugin() {
     }
   }
 
-  // Set icons for the FLITE plugin
-  // In FLITE icons are not added in plugin.js, thus the code above fails to add the correctly
-  if (isset($plugins['flite'])) {
-    $plugins['flite']['default'] = 't';
-    $plugins['flite']['buttons'] = array();
-    $plugins['flite']['buttons']['flite-acceptall']=array(
-        'label' => 'Accept all changes',
-        'icon' => 'icons/flite-acceptall.png',
-    );
-    $plugins['flite']['buttons']['flite-rejectall']=array(
-        'label' => 'Reject all changes',
-        'icon' => 'icons/flite-rejectall.png',
-    );
-    $plugins['flite']['buttons']['flite-acceptone']=array(
-        'label' => t('Accept change'),
-        'icon' => 'icons/flite-acceptone.png',
-    );
-    $plugins['flite']['buttons']['flite-rejectone']=array(
-        'label' => t('Reject change'),
-        'icon' => 'icons/flite-rejectone.png',
-    );
-    $plugins['flite']['buttons']['flite-toggleshow']=array(
-        'label' => t('Show/hide tracked changes'),
-        'icon' => 'icons/flite-toggleshow.png',
-    );
-    $plugins['flite']['buttons']['flite-toggletracking']=array(
-        'label' => t('Start/stop tracking changes'),
-        'icon' => 'icons/flite-toggletracking.png',
-    );
-  }
-
   return $plugins;
 }
