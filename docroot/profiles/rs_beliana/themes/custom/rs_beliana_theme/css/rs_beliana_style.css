@@ -37,11 +37,3 @@
 .filter-guidelines {
   display: none;
 }
-
-.ice-del {
-  display: none;
-}
-
-.ICE-Tracking .ice-del {
-  display: inline;
-}
