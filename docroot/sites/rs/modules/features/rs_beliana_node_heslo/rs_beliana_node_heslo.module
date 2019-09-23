@@ -75,6 +75,9 @@ function rs_beliana_node_heslo_content_edit_form_submit(&$form, &$form_state) {
  */
 function rs_beliana_node_heslo_node_postinsert($node) {
   if (empty($node->field_remote_id[LANGUAGE_NONE][0]['value'])) {
-    beliana_api_rest_node($node, 'rs');
+    if ($response = beliana_api_rest_node($node, 'rs')) {
+      $node->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
+      node_save($node);
+    }
   }
 }
