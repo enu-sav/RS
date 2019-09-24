@@ -1,0 +1,13 @@
+diff --git a/hook_post_action.module b/hook_post_action.module
+index 62c2a6c..fdc46a7 100644
+--- a/hook_post_action.module
++++ b/hook_post_action.module
+@@ -53,7 +53,7 @@ function _hook_post_action_post_save($entity_info) {
+   $entity = $entity_info['entity'];
+   $type = $entity_info['type'];
+   $op = $entity_info['operation'];
+-  $original = $entity_info['original'];
++  $original = array_key_exists('original',$entity_info) ? $entity_info['original'] : NULL;
+   $entity_is_saved = FALSE;
+   $new_entity = NULL;
+ 
