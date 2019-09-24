@@ -49,7 +49,7 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     '#default_value' => variable_get('rs_api_login'),
   ];
 
-  $form['rs']['beliana_password_login'] = [
+  $form['rs']['rs_api_password'] = [
     '#type' => 'password',
     '#title' => t('Password'),
     '#default_value' => variable_get('rs_api_password'),
