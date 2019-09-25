@@ -2505,7 +2505,7 @@ function beliana_api_rest_login($request_url) {
   }
   else {
     $http_message = curl_error($curl);
-    drupal_set_message('Auth error: ' . $http_message, 'error');
+    watchdog('error', 'Auth error in node synchronization (' . $request_url . ') ' . $http_message);
     return FALSE;
   }
 
@@ -2571,11 +2571,14 @@ function beliana_api_rest_node($node, $site) {
     $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
     if ($http_code == 200) {
-      return json_decode($response);
+      $response = json_decode($response);
+      watchdog('sync', 'Created remote node <a href="' . $base_url . '/node/' . $response->nid . '">' . $node->title . '</a>');
+      return $response;
     }
     else {
       $http_message = curl_error($curl);
-      drupal_set_message('Node creating error: ' . $http_message, 'error');
+      #drupal_set_message('Node creating error: ' . $http_message, 'error');
+      watchdog('error', 'Error creating remote node (' . $node->title . '): ' . $http_message);
     }
   }
 
