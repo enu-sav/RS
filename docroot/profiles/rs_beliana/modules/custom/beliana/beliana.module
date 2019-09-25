@@ -2542,7 +2542,7 @@ function beliana_api_rest_node($node, $site) {
   if ($login = beliana_api_rest_login($request_url)) {
     $curl = curl_init($request_url . '/node');
     $term = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
-    $comment = $site == 'rsw' ? 'v knižnom' : 'vo webovom';
+    $comment = $site == 'rsw' ? 'vo webovom' : 'v knižnom'; 
 
     $data = [
       'type' => $node->type,
