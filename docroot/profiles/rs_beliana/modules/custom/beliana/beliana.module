@@ -94,6 +94,32 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   }
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function beliana_form_heslo_node_form_alter(&$form, &$form_state) {
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/heslo';
+
+  // Check connection to opposite REST server
+  if ($login = beliana_api_rest_login($request_url)) {
+
+  }
+  else {
+    $form['title']['#disabled'] = TRUE;
+
+    foreach ($form as $key => $field) {
+      if (strpos($key, 'field_') === 0) {
+        $form[$key][LANGUAGE_NONE]['#disabled'] = TRUE;
+      }
+    }
+
+    hide($form['actions']);
+
+    drupal_set_message(t('Unable to connect <strong>@site</strong> REST API. Check <a href="/admin/config/services/beliana-sync" target="_blank">configuration</a>', ['@site' => $base_url]), 'error');
+  }
+}
+
 function beliana_workbench_access_check($op, $type, $access_ids, $account_access) {
   global $user;
 
@@ -2577,7 +2603,6 @@ function beliana_api_rest_node($node, $site) {
     }
     else {
       $http_message = curl_error($curl);
-      #drupal_set_message('Node creating error: ' . $http_message, 'error');
       watchdog('error', 'Error creating remote node (' . $node->title . '): ' . $http_message);
     }
   }
