@@ -12,13 +12,13 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
   $envs = [
     //'beliana' => 'Beliana',
     'rs' => 'RS',
-    'rsw' => 'WEBRS'
+    'rsw' => 'WEBRS',
   ];
 
   foreach ($envs as $key => $title) {
     $form[$key] = [
       '#type' => 'fieldset',
-      '#title' => $title
+      '#title' => $title,
     ];
 
     $form[$key][$key . '_web_uri'] = [
@@ -30,11 +30,13 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     $form[$key][$key . '_web_login'] = [
       '#type' => 'textfield',
       '#title' => t('User name'),
+      '#default_value' => variable_get($key . '_web_login'),
     ];
 
-    $form[$key][$key . '_password_login'] = [
-      '#type' => 'password',
+    $form[$key][$key . '_web_password'] = [
+      '#type' => 'textfield',
       '#title' => t('Password'),
+      '#default_value' => str_repeat('*', strlen(variable_get($key . '_web_password'))),
     ];
   }
 

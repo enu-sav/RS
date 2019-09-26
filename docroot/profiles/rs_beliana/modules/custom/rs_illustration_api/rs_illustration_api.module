@@ -148,7 +148,7 @@ function rs_illustration_api_publish_access($node, $env) {
 function rs_illustration_api_rest_login($base_url, $env) {
   $user_data = array(
     'username' => variable_get($env . '_web_login'),
-    'password' => variable_get($env . '_password_login'),
+    'password' => variable_get($env . '_web_password'),
   );
 
   $data = array();

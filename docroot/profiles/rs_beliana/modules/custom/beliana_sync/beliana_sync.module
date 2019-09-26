@@ -162,13 +162,13 @@ function beliana_sync_sync($nid, &$context) {
     $context['results']['success'] = $context['results']['error'] = 0;
   }
   // Calculate Authorization header.
-  $login = variable_get('beliana_web_login');
-  $pass = variable_get('beliana_password_login');
+  $login = variable_get('rsw_web_login');
+  $pass = variable_get('rsw_web_password');
   $auth_header = 'Basic ' . base64_encode($login . ':' . $pass);
 
   // Create client object.
   $client = new Client([
-    'base_uri' => variable_get('beliana_web_uri'),
+    'base_uri' => variable_get('rsw_web_uri'),
     'headers' => [
       'Content-Type' => 'application/json',
       'Accept' => 'application/json',
