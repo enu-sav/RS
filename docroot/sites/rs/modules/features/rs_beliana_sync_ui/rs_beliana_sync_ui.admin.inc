@@ -28,7 +28,7 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     '#default_value' => variable_get('beliana_web_login'),
   ];
 
-  $form['web']['beliana_password_login'] = [
+  $form['web']['beliana_web_password'] = [
     '#type' => 'password',
     '#title' => t('Password'),
     '#default_value' => variable_get('beliana_web_password'),

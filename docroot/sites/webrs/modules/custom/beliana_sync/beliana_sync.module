@@ -172,7 +172,7 @@ function beliana_sync_sync($nid, &$context) {
   }
   // Calculate Authorization header.
   $login = variable_get('beliana_web_login');
-  $pass = variable_get('beliana_password_login');
+  $pass = variable_get('beliana_web_password');
   $auth_header = 'Basic ' . base64_encode($login . ':' . $pass);
 
   // Create client object.
