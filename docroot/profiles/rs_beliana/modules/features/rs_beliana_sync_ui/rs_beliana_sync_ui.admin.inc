@@ -34,9 +34,9 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     ];
 
     $form[$key][$key . '_web_password'] = [
-      '#type' => 'textfield',
+      '#type' => 'password',
       '#title' => t('Password'),
-      '#default_value' => str_repeat('*', strlen(variable_get($key . '_web_password'))),
+      '#default_value' => variable_get($key . '_web_password'),
     ];
   }
 
