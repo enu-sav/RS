@@ -77,7 +77,7 @@ function rs_beliana_node_heslo_node_postinsert($node) {
   switch ($node->type) {
     case 'heslo':
       if (empty($node->field_remote_id[LANGUAGE_NONE][0]['value'])) {
-        if ($response = beliana_api_rest_node($node, 'rsw')) {
+        if ($response = beliana_api_rest_node($node, 'rsw', "Nové heslo:")) {
           $node->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
           node_save($node);
         }
