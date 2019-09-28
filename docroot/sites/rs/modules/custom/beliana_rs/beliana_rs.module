@@ -172,10 +172,15 @@ function beliana_merge(&$entity, $context = array()) {
     // Set automatic alias creation to FALSE.
     $master->path['pathauto'] = FALSE;
     // Set field_lexikalna_skupina to `Zlúčené heslo`.
-    $term = array_shift(taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny'));
+    $term = taxonomy_get_term_by_name('Zlúčené heslo', 'lexikalne_skupiny');
+    $term = array_shift($term);
     $master->field_lexikalna_skupina[LANGUAGE_NONE][]['tid'] = $term->tid;
-    node_save($master);
     workbench_moderation_moderate($master, 'zlucene');
+    # Synchtonize to the web editorial system
+    if ($response = beliana_api_rest_node($master, 'rs')) {
+      $master->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
+    }
+    node_save($master);
     $_SESSION['master'] = NULL;
   }
 }
