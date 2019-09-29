@@ -2562,7 +2562,7 @@ function beliana_api_rest_login($request_url) {
  * $which_article: "Nové heslo:" or "Zlúčené heslo:"
  * $attribute: if set, field_attibuty of the remote node is set to this value (used to set "Zlucene heslo" in article merging"
  */
-function beliana_api_rest_node($node, $site, $which_article, $attribute=null) {
+function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) {
   global $user;
 
   $base_url = variable_get('rs_api_uri');
@@ -2570,8 +2570,7 @@ function beliana_api_rest_node($node, $site, $which_article, $attribute=null) {
 
   if ($login = beliana_api_rest_login($request_url)) {
     $curl = curl_init($request_url . '/node');
-    $term = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
-    $comment = $site == 'rsw' ? 'vo webovom' : 'v knižnom'; 
+    $comment = $site == 'rsw' ? 'vo webovom' : 'v knižnom';
 
     $data = [
       'type' => $node->type,
@@ -2580,12 +2579,21 @@ function beliana_api_rest_node($node, $site, $which_article, $attribute=null) {
       'title_field[und][0][value]' => $node->title,
       'field_text_hesla[und][0][value]' => $node->field_text_hesla[LANGUAGE_NONE][0]['value'],
       'field_text_hesla[und][0][format]' => 'filtered_html',
-      'field_lexikalna_skupina[und]' => $term->name,
       'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
       'field_remote_id[und][0][value]' => $node->nid,
     ];
-    if ( $attribute ) {
-      $data['field_atributy'][und][0][value] = $attribute;
+
+    $terms = array();
+    if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
+      foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $delta => $value) {
+        $terms[] = $value['name'];
+      }
+
+      $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+    }
+
+    if ($attribute) {
+      $data['field_atributy[und][0][value]'] = $attribute;
     }
 
     curl_setopt($curl, CURLOPT_HTTPHEADER, [
