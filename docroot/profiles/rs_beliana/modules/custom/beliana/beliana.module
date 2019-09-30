@@ -833,7 +833,6 @@ function beliana_node_presave($node) {
       $node->workbench_moderation['current']->state != $node->workbench_moderation_state_new) {
     return;
   }
-
   // set field_na_zoradenie if empty or fix it if necessary
   setlocale(LC_COLLATE, 'sk_SK.utf8');
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
@@ -2584,12 +2583,21 @@ function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) 
     ];
 
     $terms = array();
-    if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
-      foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $delta => $value) {
-        $terms[] = $value['name'];
+    if ( !$attribute ) {  # regularly created article
+      if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
+        foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
+          $terms[] = $value['name'];
+        }
+        $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
       }
-
-      $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+    } else {  # only if article is created by merging
+      if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) {
+        foreach ($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE] as $value) {
+          $term = taxonomy_term_load($value['tid']);
+          $terms[] = $term->name;
+       }
+        $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+      }
     }
 
     if ($attribute) {
