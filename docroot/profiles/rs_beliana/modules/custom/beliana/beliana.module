@@ -2576,27 +2576,42 @@ function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) 
       'title' => $node->title,
       'status' => $node->status,
       'title_field[und][0][value]' => $node->title,
-      'field_text_hesla[und][0][value]' => $node->field_text_hesla[LANGUAGE_NONE][0]['value'],
-      'field_text_hesla[und][0][format]' => 'filtered_html',
       'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
       'field_remote_id[und][0][value]' => $node->nid,
     ];
 
-    $terms = array();
-    if ( !$attribute ) {  # regularly created article
-      if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
-        foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
+    // we need to distinguish between: 
+    // field_lexikalna_skupina and  field_lexikalna_skupina_il
+    // field_text_hesla and field_popis
+    if ( $node->type == "heslo" ) {
+      $terms = array();
+      $data['field_text_hesla[und][0][value]'] = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+      $data['field_text_hesla[und][0][format]'] = 'filtered_html';
+      if ( !$attribute ) {  # regularly created article
+        if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
+          foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
+            $terms[] = $value['name'];
+          }
+          $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+        }
+      } else {  # only if article is created by merging
+        if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) {
+          foreach ($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE] as $value) {
+            $term = taxonomy_term_load($value['tid']);
+            $terms[] = $term->name;
+        }
+          $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+        }
+      }
+    } else { // ilustracia
+      $terms = array();
+      $data['field_popis[und][0][value]'] = $node->field_popis[LANGUAGE_NONE][0]['value'];
+      $data['field_popis[und][0][format]'] = 'filtered_html';
+      if (!empty($node->field_lexikalna_skupina_il[LANGUAGE_NONE])) {
+        foreach ($node->field_lexikalna_skupina_il[LANGUAGE_NONE] as $value) {
           $terms[] = $value['name'];
         }
-        $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
-      }
-    } else {  # only if article is created by merging
-      if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) {
-        foreach ($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE] as $value) {
-          $term = taxonomy_term_load($value['tid']);
-          $terms[] = $term->name;
-       }
-        $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+        $data['field_lexikalna_skupina_il[und]'] = implode(', ', $terms);
       }
     }
 
