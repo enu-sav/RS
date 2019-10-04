@@ -253,9 +253,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
       'export' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'lite_display' => array(
@@ -330,9 +329,10 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
       'export' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
+        'type' => 'text_plain',
+        'weight' => 3,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1469,9 +1469,8 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
       ),
       'export' => array(
         'label' => 'inline',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_plain',
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'lite_display' => array(
