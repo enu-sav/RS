@@ -7,6 +7,13 @@
  */
 
 /**
+ * Implements hook_init().
+ */
+function beliana_rsw_init(){
+  drupal_add_css(drupal_get_path('module', 'beliana_rsw') . '/css/admin_menu_override.css');
+}
+
+/**
  * Extract links from node and insert them into beliana_links table.
  * name "beliana_process_links" is not OK, it is called in unexpected situations with funny arguments
  *
