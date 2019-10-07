@@ -1,3 +1,6 @@
-#admin-menu #admin-menu-wrapper {
-    background-color: #045292 !important;
+#branding {
+    background-color: #ffa587 !important;
+}
+#branding h1 {
+    color: #333 !important;;
 }
