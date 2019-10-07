@@ -30,7 +30,7 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment->api_version = 1;
   $environment->machine = 'dev';
   $environment->name = 'DEV';
-  $environment->regexurl = 'dev.beliana.sav.sk';
+  $environment->regexurl = 'webrs-dev.beliana.sav.sk';
   $environment->settings = array(
     'color' => '#37aa33',
     'text_color' => '#ffffff',
@@ -45,7 +45,7 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment->api_version = 1;
   $environment->machine = 'prod';
   $environment->name = 'PROD';
-  $environment->regexurl = 'rs.beliana.sav.sk';
+  $environment->regexurl = 'webrs.beliana.sav.sk';
   $environment->settings = array(
     'color' => '#d0d0d0',
     'text_color' => '#ffffff',
