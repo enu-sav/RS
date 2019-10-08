@@ -1242,7 +1242,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       //$skip = TRUE;
       //}
       // ignore illustrations, which are not intended for web
-      if (il_display_on_web($ilu_node)) {
+      if (il_display_on_web($ilu_node)) { //false always returned in the print version
         if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
           $skip = TRUE;
         }

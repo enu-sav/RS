@@ -367,3 +367,10 @@ function _run_2_korektura_single(&$values) {
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
   }
 }
+
+// check if illustration should go to web
+// dummy function here, used only in the web version
+function il_display_on_web(&$ilu_node) 
+{
+  return false;
+}
