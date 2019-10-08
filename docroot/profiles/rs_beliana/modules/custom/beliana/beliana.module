@@ -43,6 +43,15 @@ function beliana_menu() {
     'access arguments' => array('bypass node access'),
   );
 
+  $items['node/%node/sync-from'] = array(
+    'title' => 'Prebrať obsah',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('beliana_sync_from_remote_form', 1),
+    'access callback' => 'beliana_sync_from_remote_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 
@@ -92,6 +101,14 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
       }
     }
   }
+}
+
+function beliana_sync_from_remote_access($node) {
+  if (in_array($node->type ,array('ilustracia', 'heslo')) && user_access('create heslo content')) {
+    return TRUE;
+  }
+
+  return FALSE;
 }
 
 /**
@@ -263,14 +280,14 @@ function beliana_group_list() {
   return $output;
 }
 
-/** 
+/**
  * access callback for beliana_editor_list
  */
 function beliana_editor_list_access() {
   global $user;
   // roles with allowed access
-  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", "administrátor", 
-                 "Výstupný redaktor 2", "Výstupný redaktor 2X", "useradmin", 
+  $roles = array("Redaktor", "Správca heslára",  "Výstupný redaktor 1", "administrátor",
+                 "Výstupný redaktor 2", "Výstupný redaktor 2X", "useradmin",
                  "Výstupný redaktor 3", "Výstupný redaktor 4", "Výstupný redaktor 5");
   foreach($roles as $role){
     if (in_array($role, $user->roles)) return true;
@@ -313,12 +330,12 @@ function beliana_editor_list() {
           if (in_array("Autor", $usr->roles)) {
             // administrator and useradmin should see all authors
             if (!in_array("administrátor", $user->roles) && !in_array("useradmin", $user->roles)) {
-              if (!isset($user_wba[$term->tid])) continue; 
+              if (!isset($user_wba[$term->tid])) continue;
             }
           }
           else {
             continue;
-            if (!in_array("Redaktor", $usr->roles)) continue; 
+            if (!in_array("Redaktor", $usr->roles)) continue;
           }
           $output .= '<li>'
             . $usr->name . ', '
@@ -588,6 +605,36 @@ function beliana_assign_corrector_validate($form, &$form_state) {
  */
 function beliana_assign_corrector_submit($form, $form_state) {
   return _beliana_submit_assign_user_form($form_state, 'needs_review');
+}
+
+/**
+ * @inheritdoc
+ */
+function beliana_sync_from_remote_form($form, $form_state, $node) {
+  $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
+
+  $form['links'] = array(
+    '#markup' => 'Heslo v {knižnom | webovom} redakčnom systéme: ' . $remote_id . '.<br><br>',
+  );
+
+  $form['remote_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $remote_id,
+  );
+
+  if (empty($node->field_datum_prebratia[LANGUAGE_NONE])) {
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Prevziať',
+    );
+  }
+  else {
+    $form['message'] = array(
+      '#markup' => 'Obsah bol prevzatý ' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '.',
+    );
+  }
+
+  return $form;
 }
 
 /**
@@ -2388,7 +2435,7 @@ function get_header_dates($text) {
  * @param string $where
  *   some text for an error message
  *
- * @return 
+ * @return
  *   cleaned $text or unchenged $text in case of an error (e.g. not valid html)
  */
 function beliana_clean_tags($node, $text, $where) {
@@ -2475,7 +2522,7 @@ function beliana_clean_tags($node, $text, $where) {
  * @param string $where
  *   some text for an error message
  *
- * @return 
+ * @return
  *   null or $dom
  *   no error message if $where == Null
  */
