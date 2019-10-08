@@ -89,31 +89,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'ilustracia_u_vyst_redaktora_3',
       'name' => 'il_u_vr_5-il_u_vr_3',
     ),
-    'importovane:importovane_u_jr2' => array(
-      'from_name' => 'importovane',
-      'to_name' => 'importovane_u_jr2',
-      'name' => 'importovane-importovane_u_JR2',
-    ),
-    'importovane_u_jr2:importovane' => array(
-      'from_name' => 'importovane_u_jr2',
-      'to_name' => 'importovane',
-      'name' => 'importovane_u_jr2-importovane',
-    ),
-    'importovane_u_jr2:importovane_u_vr' => array(
-      'from_name' => 'importovane_u_jr2',
-      'to_name' => 'importovane_u_vr',
-      'name' => 'importovane_u_JR2-importovane_U_VR',
-    ),
-    'importovane_u_vr:importovane' => array(
-      'from_name' => 'importovane_u_vr',
-      'to_name' => 'importovane',
-      'name' => 'importovane_u_vr-importovane',
-    ),
-    'importovane_u_vr:na_zalomenie' => array(
-      'from_name' => 'importovane_u_vr',
-      'to_name' => 'na_zalomenie',
-      'name' => 'importovane_u_vr-na_zalomenie',
-    ),
     'len_vyplatit:zaradene' => array(
       'from_name' => 'len_vyplatit',
       'to_name' => 'zaradene',
@@ -344,20 +319,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_jazykovu_korekturu',
       'name' => 'zlucene_odkazy-u_jaz_redaktora1',
     ),
-    'zverejnene_oprava:na_opakovane_zverejnenie' => array(
-      'from_name' => 'zverejnene_oprava',
-      'to_name' => 'na_opakovane_zverejnenie',
-      'name' => 'zverejnene_oprava-na_opakovane_zverejnenie',
-    ),
     'zverejnene_oprava:zverejnene_vratene' => array(
       'from_name' => 'zverejnene_oprava',
       'to_name' => 'zverejnene_vratene',
       'name' => 'zverejnene_oprava-zverejnene_vratene',
-    ),
-    'zverejnene_vratene:na_opakovane_zverejnenie' => array(
-      'from_name' => 'zverejnene_vratene',
-      'to_name' => 'na_opakovane_zverejnenie',
-      'name' => 'zverejnene_vratene-na_opakovane_zverejnenie',
     ),
     'zverejnene_vratene:zverejnene_oprava' => array(
       'from_name' => 'zverejnene_vratene',

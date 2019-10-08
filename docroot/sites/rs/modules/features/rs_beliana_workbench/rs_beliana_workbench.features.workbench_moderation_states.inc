@@ -75,24 +75,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Importované heslo (zo súboru)',
       'weight' => -10,
     ),
-    'importovane_u_jr2' => array(
-      'name' => 'importovane_u_jr2',
-      'label' => 'Importované u JR',
-      'description' => 'Jazyková redakcia importovaného hesla',
-      'weight' => -9,
-    ),
-    'importovane_u_vr' => array(
-      'name' => 'importovane_u_vr',
-      'label' => 'Importované u VR',
-      'description' => 'Importovane heslo u VR na kontrolu pred zverejnenim',
-      'weight' => -8,
-    ),
-    'importovane_vyradene' => array(
-      'name' => 'importovane_vyradene',
-      'label' => 'Importované - vyradené',
-      'description' => 'Importované heslá, ktoré nebudú zverejneé na webe',
-      'weight' => -2,
-    ),
     'len_vyplatit' => array(
       'name' => 'len_vyplatit',
       'label' => 'Len vyplatiť',
@@ -105,16 +87,10 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Heslo odoslané na  1. jazykovú korektúru, pracuje s ním jazykový redaktor 1',
       'weight' => 10,
     ),
-    'na_opakovane_zverejnenie' => array(
-      'name' => 'na_opakovane_zverejnenie',
-      'label' => 'Na opakované zverejnenie',
-      'description' => 'Na opakované odoslanie zverejneného hesla po úprave na web',
-      'weight' => -3,
-    ),
     'na_zalomenie' => array(
       'name' => 'na_zalomenie',
-      'label' => 'Na zverejnenie/zalomenie',
-      'description' => 'Heslo je pripravené pre web alebo tlač',
+      'label' => 'Na zalomenie',
+      'description' => 'Heslo je pripravené pre tlač',
       'weight' => -7,
     ),
     'na_zverejnenie' => array(
@@ -149,8 +125,8 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     ),
     'publikovane_na_webe' => array(
       'name' => 'publikovane_na_webe',
-      'label' => 'Zverejnené na webe',
-      'description' => 'Finálny stav hesla po akcii "Zverejniť na webe"',
+      'label' => 'Zalomené',
+      'description' => 'Finálny stav hesla po 2. zalomenej korektúre',
       'weight' => -6,
     ),
     'published' => array(
@@ -239,13 +215,13 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     ),
     'zverejnene_oprava' => array(
       'name' => 'zverejnene_oprava',
-      'label' => 'Zverejnené – oprava',
+      'label' => 'Zalomené – oprava',
       'description' => 'Oprava zverejneneho hesla rolou zRedaktor',
       'weight' => -5,
     ),
     'zverejnene_vratene' => array(
       'name' => 'zverejnene_vratene',
-      'label' => 'Zverejnené – vrátené',
+      'label' => 'Zalomené – vrátené',
       'description' => 'Zverejnené heslo vrátené redaktorovi na úpravu',
       'weight' => -4,
     ),
