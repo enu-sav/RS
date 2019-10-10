@@ -105,7 +105,7 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
 
 function beliana_sync_from_remote_access($node) {
   if (in_array($node->type ,array('ilustracia', 'heslo')) && user_access('create heslo content')) {
-    return TRUE;
+    //return TRUE;
   }
 
   return FALSE;
