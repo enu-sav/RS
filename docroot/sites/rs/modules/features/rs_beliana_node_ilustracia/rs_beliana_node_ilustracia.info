@@ -28,7 +28,6 @@ features[conditional_fields][] = node:ilustracia
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_base][] = field_alternativny_text
-features[field_base][] = field_datum_prebratia
 features[field_base][] = field_datum_zverejnenia
 features[field_base][] = field_drzitel_prav
 features[field_base][] = field_institucia

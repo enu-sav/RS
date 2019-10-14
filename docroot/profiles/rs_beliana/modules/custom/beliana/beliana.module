@@ -632,17 +632,18 @@ function beliana_assign_corrector_submit($form, $form_state) {
  */
 function beliana_sync_from_remote_form($form, $form_state, $node) {
   $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+  $date = empty($node->field_datum_prebratia[LANGUAGE_NONE]) ? 'Nikdy' : $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'];
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   $form['links'] = [
-    '#markup' => 'Heslo na' . $type . 'om redakčnom systéme: <b>' . $remote_id . '</b>.<br>Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br><br>',
+    '#markup' => 'Heslo na' . $type . 'om redakčnom systéme: <b>' . $remote_id . '</b>.<br>' .
+      'Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br>' .
+      'Preberané heslo musí byť dokončené.<br><br>',
   ];
 
-  if (!empty($node->field_datum_prebratia[LANGUAGE_NONE])) {
-    $form['message'] = [
-      '#markup' => 'Dátum posledného prenosu obsahu: <b>' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '</b>.<br><br>',
-    ];
-  }
+  $form['message'] = [
+    '#markup' => 'Dátum posledného prenosu obsahu: <b>' . $date . '</b>.<br><br>',
+  ];
 
   $form['nid'] = [
     '#type' => 'hidden',
@@ -728,7 +729,7 @@ function beliana_sync_from_remote_form_submit($form, &$form_state) {
       }
 
       node_save($node);
-      drupal_set_message(t('Helso @id prebratá', ['@id' => $form_state['values']['remote_id']]));
+      drupal_set_message(t('Helso @id prebraté', ['@id' => $form_state['values']['remote_id']]));
     }
     else {
       drupal_set_message(t('Preberané heslo @id nieje dokončené', ['@id' => $form_state['values']['remote_id']]), 'error');

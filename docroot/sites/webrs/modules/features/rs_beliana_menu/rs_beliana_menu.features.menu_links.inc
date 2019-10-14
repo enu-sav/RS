@@ -539,7 +539,7 @@ function rs_beliana_menu_menu_default_menu_links() {
       'identifier' => 'management_sprvy:messages',
     ),
     'module' => 'menu',
-    'hidden' => 0,
+    'hidden' => 1,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,

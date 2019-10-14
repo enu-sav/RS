@@ -305,6 +305,60 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_datum_prebratia'.
+  $field_instances['node-heslo-field_datum_prebratia'] = array(
+    'bundle' => 'heslo',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 30,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_prebratia',
+    'label' => 'Dátum prebratia obsahu',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 29,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-field_datum_prveho_zverejnenia'.
   $field_instances['node-heslo-field_datum_prveho_zverejnenia'] = array(
     'bundle' => 'heslo',
@@ -1782,6 +1836,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla (nesmú byť zafarbené). Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe');
   t('Dátum aktualizácie');
+  t('Dátum prebratia obsahu');
   t('Dátum prvého zverejnenia');
   t('Dátum uloženia údajov pre vyplatenie');
   t('Dátum vyplatenia');
