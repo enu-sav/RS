@@ -29,7 +29,7 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
   ];
 
   $form['web']['beliana_web_password'] = [
-    '#type' => 'password',
+    '#type' => 'textfield',
     '#title' => t('Password'),
     '#default_value' => variable_get('beliana_web_password'),
   ];
@@ -37,6 +37,17 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
   $form['rs'] = [
     '#type' => 'fieldset',
     '#title' => 'WEBRS synchronisation config',
+  ];
+
+  $form['rs']['rs_api_type'] = [
+    '#type' => 'select',
+    '#title' => t('Type'),
+    '#options' => [
+      'rs' => 'RS',
+      'webrs' => 'WEBRS'
+    ],
+    '#default_value' => variable_get('rs_api_type'),
+    '#disabled' => TRUE,
   ];
 
   $form['rs']['rs_api_uri'] = [
@@ -52,7 +63,7 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
   ];
 
   $form['rs']['rs_api_password'] = [
-    '#type' => 'password',
+    '#type' => 'textfield',
     '#title' => t('Password'),
     '#default_value' => variable_get('rs_api_password'),
   ];

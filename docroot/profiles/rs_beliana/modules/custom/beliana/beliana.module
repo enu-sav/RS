@@ -631,15 +631,16 @@ function beliana_assign_corrector_submit($form, $form_state) {
  * @inheritdoc
  */
 function beliana_sync_from_remote_form($form, $form_state, $node) {
+  $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   $form['links'] = [
-    '#markup' => 'Heslo v {knižnom | webovom} redakčnom systéme: ' . $remote_id . '.<br>Po prevzatím obsahu z {knižného | webového} redakčného systému bude lokálny obsah prepísaný.<br><br>',
+    '#markup' => 'Heslo na' . $type . 'om redakčnom systéme: <b>' . $remote_id . '</b>.<br>Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br><br>',
   ];
 
   if (!empty($node->field_datum_prebratia[LANGUAGE_NONE])) {
     $form['message'] = [
-      '#markup' => 'Dátum posledného prenosu obsahu: ' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '.<br><br>',
+      '#markup' => 'Dátum posledného prenosu obsahu: <b>' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '</b>.<br><br>',
     ];
   }
 
@@ -663,6 +664,8 @@ function beliana_sync_from_remote_form($form, $form_state, $node) {
 
 function beliana_sync_from_remote_form_submit($form, &$form_state) {
   if ($remote_node = beliana_api_rest_get_node($form_state['values']['remote_id'])) {
+    $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+
     if (in_array($remote_node->workbench_moderation->current->state, [
       'zaradene',
       'publikovane_na_webe',
@@ -690,7 +693,8 @@ function beliana_sync_from_remote_form_submit($form, &$form_state) {
           }
 
           if ($field == 'field_komentar_instrukcie') {
-            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z {knižného | webového} RS. ' . $value[0]['value'];
+
+            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ' . $value[0]['value'];
           }
 
           if (in_array($field, [
@@ -718,7 +722,7 @@ function beliana_sync_from_remote_form_submit($form, &$form_state) {
       }
 
 
-      $message_log = 'Obsah prevzatý z {knižného|webového} RS';
+      $message_log = 'Obsah prevzatý z ' . $type . 'ého RS';
       if (strpos($node->log, $message_log) !== FALSE) {
         $node->log .= '.' . $message_log;
       }
