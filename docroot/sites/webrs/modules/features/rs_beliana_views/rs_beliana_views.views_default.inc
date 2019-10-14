@@ -9301,7 +9301,15 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['title'] = 'Exportovať';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'viac';
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    10 => '10',
+    34 => '34',
+    14 => '14',
+    15 => '15',
+    16 => '16',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -10564,7 +10572,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -10636,7 +10643,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'export-vydane';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Export vydané';
+  $handler->display->display_options['menu']['title'] = 'Export importované';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -10742,6 +10749,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['label'] = 'alias';
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -10852,7 +10864,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -14385,6 +14396,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('atrib'),
     t('errata'),
     t('alias'),
+    t('Stav'),
     t('Has taxonomy terms (with depth; Simple hierarchical select)'),
     t('Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index)'),
     t('Export ilustrácie'),
@@ -14415,7 +14427,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Export heslo GH - dáta'),
     t('Nid'),
     t('Dátum aktualizácie'),
-    t('Stav'),
     t('povodnyZaznamZGH'),
     t('nazovzorad'),
     t('vyplatenieOdmeny'),
