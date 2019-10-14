@@ -636,7 +636,7 @@ function beliana_sync_from_remote_form($form, $form_state, $node) {
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   $form['links'] = [
-    '#markup' => 'Heslo na' . $type . 'om redakčnom systéme: <b>' . $remote_id . '</b>.<br>' .
+    '#markup' => 'Heslo na' . $type . 'om redakčnom systéme: <b><a href="' . variable_get('rs_api_uri') . '/node/' . $remote_id . '">' . $remote_id . '</a></b>.<br>' .
       'Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br>' .
       'Preberané heslo musí byť dokončené.<br><br>',
   ];
@@ -729,7 +729,7 @@ function beliana_sync_from_remote_form_submit($form, &$form_state) {
       }
 
       node_save($node);
-      drupal_set_message(t('Helso @id prebraté', ['@id' => $form_state['values']['remote_id']]));
+      drupal_set_message(t('Obsah hesla @id bol prebratý', ['@id' => $form_state['values']['remote_id']]));
     }
     else {
       drupal_set_message(t('Preberané heslo @id nieje dokončené', ['@id' => $form_state['values']['remote_id']]), 'error');
