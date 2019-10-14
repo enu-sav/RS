@@ -103,8 +103,19 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   }
 }
 
+/**
+ * Implements hook_permission().
+ */
+function beliana_permission() {
+  return array(
+    'sync heslo content' => array(
+      'title' => t('Allow synchronise remote node'),
+    )
+  );
+}
+
 function beliana_sync_from_remote_access($node) {
-  if (in_array($node->type ,array('ilustracia', 'heslo')) && user_access('create heslo content')) {
+  if (in_array($node->type ,array('ilustracia', 'heslo')) && user_access('sync heslo content') && in_array($node->workbench_moderation['current']->state, array('zaradene', 'needs_review'))) {
     return TRUE;
   }
 
@@ -613,28 +624,106 @@ function beliana_assign_corrector_submit($form, $form_state) {
 function beliana_sync_from_remote_form($form, $form_state, $node) {
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
-  $form['links'] = array(
-    '#markup' => 'Heslo v {knižnom | webovom} redakčnom systéme: ' . $remote_id . '.<br><br>',
-  );
+  $form['links'] = [
+    '#markup' => 'Heslo v {knižnom | webovom} redakčnom systéme: ' . $remote_id . '.<br>Po prevzatím obsahu z {knižného | webového} redakčného systému bude lokálny obsah prepísaný.<br><br>',
+  ];
 
-  $form['remote_id'] = array(
+  if (!empty($node->field_datum_prebratia[LANGUAGE_NONE])) {
+    $form['message'] = [
+      '#markup' => 'Dátum posledného prenosu obsahu: ' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '.<br><br>',
+    ];
+  }
+
+  $form['nid'] = [
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  ];
+
+  $form['remote_id'] = [
     '#type' => 'hidden',
     '#value' => $remote_id,
-  );
+  ];
 
-  if (empty($node->field_datum_prebratia[LANGUAGE_NONE])) {
-    $form['submit'] = array(
-      '#type' => 'submit',
-      '#value' => 'Prevziať',
-    );
-  }
-  else {
-    $form['message'] = array(
-      '#markup' => 'Obsah bol prevzatý ' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '.',
-    );
-  }
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => 'Prebrať',
+  ];
 
   return $form;
+}
+
+function beliana_sync_from_remote_form_submit($form, &$form_state) {
+  if ($remote_node = beliana_api_rest_get_node($form_state['values']['remote_id'])) {
+    if (in_array($remote_node->workbench_moderation->current->state, [
+      'zaradene',
+      'publikovane_na_webe',
+    ])) {
+      $node = node_load($form_state['values']['nid']);
+      $fields_to_skip = [
+        'field_remote_id',
+        'field_ilustracia',
+        'field_zlucene_z',
+        'field_zlucene_do',
+        'field_komentar_instrukcie',
+        'field_datum_autorovho_textu',
+      ];
+
+      foreach ($remote_node as $field => $data) {
+        if (!empty($data)) {
+          $value = json_decode(json_encode($data), TRUE);
+
+          if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
+            $node->{$field} = $value;
+          }
+
+          if ($field == 'field_datum_autorovho_textu') {
+            $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
+          }
+
+          if ($field == 'field_komentar_instrukcie') {
+            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z {knižného | webového} RS. ' . $value[0]['value'];
+          }
+
+          if (in_array($field, [
+            'field_ilustracia',
+            'field_zlucene_z',
+            'field_zlucene_do',
+          ])) {
+            $node->{$field}[LANGUAGE_NONE] = [];
+            foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
+              if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
+                $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
+              }
+            }
+          }
+        }
+      }
+
+      $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
+
+      if ($node->type == 'ilustracia') {
+        $node->workbench_moderation['current']->state = 'ilustracia_u_redaktora';
+      }
+      else {
+        $node->workbench_moderation['current']->state = 'needs_review';
+      }
+
+
+      $message_log = 'Obsah prevzatý z {knižného|webového} RS';
+      if (strpos($node->log, $message_log) !== FALSE) {
+        $node->log .= '.' . $message_log;
+      }
+
+      node_save($node);
+      drupal_set_message(t('Helso @id prebratá', ['@id' => $form_state['values']['remote_id']]));
+    }
+    else {
+      drupal_set_message(t('Preberané heslo @id nieje dokončené', ['@id' => $form_state['values']['remote_id']]), 'error');
+    }
+  }
+  else {
+    drupal_set_message(t('Nepodarilo sa prevziať heslo @id', ['@id' => $form_state['values']['remote_id']]), 'error');
+  }
 }
 
 /**
@@ -2608,7 +2697,7 @@ function beliana_api_rest_login($request_url) {
  * $which_article: "Nové heslo:" or "Zlúčené heslo:"
  * $attribute: if set, field_attibuty of the remote node is set to this value (used to set "Zlucene heslo" in article merging"
  */
-function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) {
+function beliana_api_rest_create_node($node, $site, $which_article, $attribute = NULL) {
   global $user;
 
   $base_url = variable_get('rs_api_uri');
@@ -2688,6 +2777,32 @@ function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) 
     else {
       $http_message = curl_error($curl);
       watchdog('error', 'Error creating remote node (' . $node->title . '): ' . $http_message);
+    }
+  }
+
+  return FALSE;
+}
+
+function beliana_api_rest_get_node($id) {
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/heslo';
+
+  if ($login = beliana_api_rest_login($request_url)) {
+    $curl = curl_init($request_url . '/node/' . $id);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+      'Accept: application/json',
+      'X-CSRF-Token: ' . $login['token'],
+    ]);
+    curl_setopt($curl, CURLOPT_HEADER, FALSE);
+    curl_setopt($curl, CURLOPT_COOKIE, $login['session'] . "");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+    $response = curl_exec($curl);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    if ($http_code == 200) {
+      return json_decode($response);
     }
   }
 

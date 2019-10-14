@@ -55,7 +55,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 21,
+        'weight' => 19,
       ),
       'export' => array(
         'label' => 'above',
@@ -118,6 +118,66 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-ilustracia-field_datum_prebratia'.
+  $field_instances['node-ilustracia-field_datum_prebratia'] = array(
+    'bundle' => 'ilustracia',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 27,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_datum_prebratia',
+    'label' => 'Dátum prebratia obsahu',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 29,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-ilustracia-field_datum_zverejnenia'.
   $field_instances['node-ilustracia-field_datum_zverejnenia'] = array(
     'bundle' => 'ilustracia',
@@ -136,7 +196,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 24,
+        'weight' => 22,
       ),
       'export' => array(
         'label' => 'above',
@@ -249,7 +309,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'export' => array(
         'label' => 'above',
@@ -433,7 +493,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'export' => array(
         'label' => 'inline',
@@ -484,7 +544,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'export' => array(
         'label' => 'above',
@@ -560,7 +620,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'export' => array(
         'label' => 'above',
@@ -685,7 +745,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 25,
       ),
       'export' => array(
         'label' => 'above',
@@ -760,7 +820,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'export' => array(
         'label' => 'above',
@@ -838,7 +898,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
           'image_style' => 'medium',
         ),
         'type' => 'image',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'export' => array(
         'label' => 'inline',
@@ -968,7 +1028,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 23,
+        'weight' => 21,
       ),
       'export' => array(
         'label' => 'above',
@@ -1017,7 +1077,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 25,
+        'weight' => 23,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1074,7 +1134,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1151,7 +1211,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 22,
+        'weight' => 20,
       ),
       'export' => array(
         'label' => 'above',
@@ -1273,6 +1333,59 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-ilustracia-field_remote_id'.
+  $field_instances['node-ilustracia-field_remote_id'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 26,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_remote_id',
+    'label' => 'Remote ID',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 28,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-ilustracia-field_subor_ilustracie'.
   $field_instances['node-ilustracia-field_subor_ilustracie'] = array(
     'bundle' => 'ilustracia',
@@ -1286,7 +1399,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_url_plain',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1615,7 +1728,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1665,7 +1778,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 24,
       ),
       'export' => array(
         'label' => 'above',
@@ -1749,6 +1862,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.');
   t('Comment');
   t('Držiteľ práv');
+  t('Dátum prebratia obsahu');
   t('Dátum zverejnenia');
   t('Dátum zverejnenia ilustrácie na webe alebo v knihe. Dopĺňané programovo, slúži na vyplácanie odmeny');
   t('Inštitúcia');
@@ -1767,6 +1881,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Pokiaľ je zvolená hodnota "Iná verejná licencia" v poli "Typ CC licencie", veďte odkaz na text licencie, ktorá bola použitá na stránke diela.');
   t('Popis modifikácie');
   t('Použiť');
+  t('Remote ID');
   t('Stručne uveďte popis úpravy, napr, "upravený kontrast", "odstránené nežiaduce objekty" a podobne');
   t('Súbor');
   t('Súbory ilustrácie');
