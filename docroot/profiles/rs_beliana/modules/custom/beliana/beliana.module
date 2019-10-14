@@ -318,6 +318,11 @@ function beliana_editor_list() {
   global $user;
   $users = entity_load('user');
   $terms = taxonomy_get_tree(2);
+  # create a list of parents for each term
+  $termParentList=array();  
+  foreach ($terms as $term) {
+    $termParentList[$term->tid] = $term->parents[0];
+  }
   $output = '';
   // get taxonomy access list of the current user (it is not part of the $user variable)
   foreach ($users as $usr) {
@@ -341,7 +346,11 @@ function beliana_editor_list() {
           if (in_array("Autor", $usr->roles)) {
             // administrator and useradmin should see all authors
             if (!in_array("administrátor", $user->roles) && !in_array("useradmin", $user->roles)) {
-              if (!isset($user_wba[$term->tid])) continue;
+              # check access rights in all hierarchy levels
+              if (!(isset($user_wba[$term->tid]) or 
+                    isset($user_wba[$term->parents[0]]) or  #first parent
+                    isset($user_wba[$termParentList[$term->parents[0]]])  #second parent, if 3 levels were used
+              )) continue;
             }
           }
           else {
