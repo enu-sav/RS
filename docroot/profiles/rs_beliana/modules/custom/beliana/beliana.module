@@ -52,6 +52,15 @@ function beliana_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
+  $items['node/%node/sync-from/confirm'] = array(
+    'title' => 'Prebrať obsah',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('beliana_sync_from_remote_confirm_form', 1),
+    'access callback' => 'beliana_sync_from_remote_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 
@@ -497,6 +506,15 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => false,
     ),
+    'beliana_sync_from_remote_action' => array(
+      'type' => 'node',
+      'label' => 'Prebrať obsah',
+      'behavior' => array('changes_property'),
+      'configurable' => TRUE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+      'permissions' => array('sync heslo content'),
+    ),
   );
 }
 
@@ -559,6 +577,22 @@ function importovane_publish_senior_editor(&$node, $context) {
       workbench_moderation_moderate($node, "na_zalomenie");
     }
   }
+}
+
+function beliana_sync_from_remote_action_form($settings, &$form_state) {
+  $form = [];
+
+  return $form;
+}
+
+function beliana_sync_from_remote_action_submit($form, $form_state) {
+  $return = [];
+
+  return $return;
+}
+
+function beliana_sync_from_remote_action(&$node, $context) {
+  beliana_sync_from_remote($node);
 }
 
 /**
@@ -636,7 +670,7 @@ function beliana_sync_from_remote_form($form, $form_state, $node) {
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   $form['links'] = [
-    '#markup' => 'Heslo na' . $type . 'om redakčnom systéme: <b><a href="' . variable_get('rs_api_uri') . '/node/' . $remote_id . '">' . $remote_id . '</a></b>.<br>' .
+    '#markup' => 'Heslo na ' . $type . 'om redakčnom systéme: <b><a href="' . variable_get('rs_api_uri') . '/node/' . $remote_id . '" target="_blank">' . $remote_id . '</a></b>.<br>' .
       'Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br>' .
       'Preberané heslo musí byť dokončené.<br><br>',
   ];
@@ -650,11 +684,6 @@ function beliana_sync_from_remote_form($form, $form_state, $node) {
     '#value' => $node->nid,
   ];
 
-  $form['remote_id'] = [
-    '#type' => 'hidden',
-    '#value' => $remote_id,
-  ];
-
   $form['submit'] = [
     '#type' => 'submit',
     '#value' => 'Prebrať',
@@ -664,14 +693,44 @@ function beliana_sync_from_remote_form($form, $form_state, $node) {
 }
 
 function beliana_sync_from_remote_form_submit($form, &$form_state) {
-  if ($remote_node = beliana_api_rest_get_node($form_state['values']['remote_id'])) {
+  $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from/confirm'];
+}
+
+function beliana_sync_from_remote_confirm_form($form, $form_state, $node) {
+  $form['nid'] = [
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  ];
+
+  return confirm_form(
+    $form,
+    t('Are you sure you want to perform this action?'),
+    'node/' . $node->nid . '/sync-from',
+    t('This action cannot be undone.'),
+    t('Confirm'),
+    t('Cancel')
+  );
+}
+
+function beliana_sync_from_remote_confirm_form_submit($form, &$form_state) {
+  beliana_sync_from_remote(node_load($form_state['values']['nid']));
+
+  $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from'];
+}
+
+function beliana_sync_from_remote($node) {
+  global $user;
+
+  $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
+
+  if ($remote_node = beliana_api_rest_get_node($remote_id)) {
     $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+    $state = variable_get('rs_api_type') == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
 
     if (in_array($remote_node->workbench_moderation->current->state, [
       'zaradene',
       'publikovane_na_webe',
     ])) {
-      $node = node_load($form_state['values']['nid']);
       $fields_to_skip = [
         'field_remote_id',
         'field_ilustracia',
@@ -722,21 +781,23 @@ function beliana_sync_from_remote_form_submit($form, &$form_state) {
         $node->workbench_moderation['current']->state = 'needs_review';
       }
 
-
-      $message_log = 'Obsah prevzatý z ' . $type . 'ého RS';
+      $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
       if (strpos($node->log, $message_log) !== FALSE) {
         $node->log .= '.' . $message_log;
       }
 
       node_save($node);
-      drupal_set_message(t('Obsah hesla @id bol prebratý', ['@id' => $form_state['values']['remote_id']]));
+      drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_id]));
     }
     else {
-      drupal_set_message(t('Preberané heslo @id nieje dokončené', ['@id' => $form_state['values']['remote_id']]), 'error');
+      drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
+        '@id' => $remote_id,
+        '@state' => $state,
+      ]), 'error');
     }
   }
   else {
-    drupal_set_message(t('Nepodarilo sa prevziať heslo @id', ['@id' => $form_state['values']['remote_id']]), 'error');
+    drupal_set_message(t('Nepodarilo sa prevziať heslo @id (komunikačná chyba API)', ['@id' => $remote_id]), 'error');
   }
 }
 
