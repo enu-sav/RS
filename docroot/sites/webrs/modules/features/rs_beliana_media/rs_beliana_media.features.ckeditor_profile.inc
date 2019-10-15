@@ -19,7 +19,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
+    [\'flite-acceptall\',\'flite-rejectall\',\'flite-toggleshow\',\'flite-toggletracking\',\'flite-acceptone\',\'flite-rejectone\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -209,12 +209,37 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'lite' => array(
-            'name' => 'lite',
-            'desc' => 'Plugin file: lite',
-            'path' => '%plugin_dir%lite/',
-            'buttons' => FALSE,
-            'default' => 'f',
+          'flite' => array(
+            'name' => 'flite',
+            'desc' => 'Plugin file: flite',
+            'path' => '%plugin_dir%flite/',
+            'buttons' => array(
+              'flite-acceptall' => array(
+                'label' => 'Accept all changes',
+                'icon' => 'icons/flite-acceptall.png',
+              ),
+              'flite-rejectall' => array(
+                'label' => 'Reject all changes',
+                'icon' => 'icons/flite-rejectall.png',
+              ),
+              'flite-acceptone' => array(
+                'label' => 'Accept change',
+                'icon' => 'icons/flite-acceptone.png',
+              ),
+              'flite-rejectone' => array(
+                'label' => 'Reject change',
+                'icon' => 'icons/flite-rejectone.png',
+              ),
+              'flite-toggleshow' => array(
+                'label' => 'Show/hide tracked changes',
+                'icon' => 'icons/flite-toggleshow.png',
+              ),
+              'flite-toggletracking' => array(
+                'label' => 'Start/stop tracking changes',
+                'icon' => 'icons/flite-toggletracking.png',
+              ),
+            ),
+            'default' => 't',
           ),
           'mathjax' => array(
             'name' => 'mathjax',
@@ -223,7 +248,7 @@ config.specialChars = [
             'buttons' => array(
               'Mathjax' => array(
                 'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulasss',
+                'label' => 'Insert Mathematical Formulas',
               ),
             ),
             'default' => 'f',
