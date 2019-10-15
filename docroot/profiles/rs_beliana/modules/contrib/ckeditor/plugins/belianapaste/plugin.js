@@ -68,6 +68,10 @@
             editor.on('paste', function (evt) {
                 var data = evt.data;
                 var mswordHtml = data.dataValue;
+		// remove flite junk - blue border in pasted formulas
+		evt.data.dataValue = evt.data.dataValue
+		            .replace( /cke_widget_focused/gi, '' )
+		            .replace( /<span data-cke-copybin.+?<\/span>/gi, '' );
 
                 // MS-WORD format sniffing.
                 if (mswordHtml && (forceFromWord || (/(class=\"?Mso|style=\"[^\"]*\bmso\-|w:WordDocument)/).test(mswordHtml))) {
