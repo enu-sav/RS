@@ -167,7 +167,7 @@ config.specialChars = [
           'autogrow' => array(
             'name' => 'autogrow',
             'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/autogrow/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
@@ -218,15 +218,20 @@ config.specialChars = [
           ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin file: mathjax',
-            'path' => '%plugin_dir%mathjax/',
-            'buttons' => FALSE,
+            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
+            'buttons' => array(
+              'Mathjax' => array(
+                'icon' => 'icons/mathjax.png',
+                'label' => 'Insert Mathematical Formulasss',
+              ),
+            ),
             'default' => 'f',
           ),
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/tableresize/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/tableresize/',
             'buttons' => FALSE,
             'default' => 't',
           ),
@@ -240,7 +245,7 @@ config.specialChars = [
       'name' => 'CKEditor Global Profile',
       'settings' => array(
         'skin' => 'moono',
-        'ckeditor_path' => '//cdn.ckeditor.com/4.7.3/full-all',
+        'ckeditor_path' => '//cdn.ckeditor.com/4.11.3/full-all',
         'ckeditor_local_path' => '',
         'ckeditor_plugins_path' => '%m/plugins',
         'ckeditor_plugins_local_path' => '%l/plugins',
@@ -407,7 +412,7 @@ config.specialChars = [
           'autogrow' => array(
             'name' => 'autogrow',
             'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/autogrow/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
@@ -451,15 +456,20 @@ config.specialChars = [
           ),
           'mathjax' => array(
             'name' => 'mathjax',
-            'desc' => 'Plugin file: mathjax',
-            'path' => '%plugin_dir%mathjax/',
-            'buttons' => FALSE,
+            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
+            'buttons' => array(
+              'Mathjax' => array(
+                'icon' => 'icons/mathjax.png',
+                'label' => 'Insert Mathematical Formulasss',
+              ),
+            ),
             'default' => 'f',
           ),
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/tableresize/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/tableresize/',
             'buttons' => FALSE,
             'default' => 't',
           ),
