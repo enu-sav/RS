@@ -2883,3 +2883,37 @@ function beliana_api_rest_get_node($id) {
 
   return FALSE;
 }
+
+// display error message (illustration)
+function il_error($node, $ilu_node, $msg, $category) {
+  if ($node->type === 'ilustracia'){
+    watchdog($category, 'Chyba v ilustrácii "@ilu_title": ' . $msg, [
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_NOTICE);
+    $msg = 'Chyba v ilustrácii <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    drupal_set_message($msg, 'error');
+  } else {
+    watchdog($category, 'Chyba v hesle "@title": ilustrácia "@ilu_title:" ' . $msg, [
+      '@title' => $node->title,
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_NOTICE);
+    $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    drupal_set_message($msg, 'error');
+  }
+}
+
+// display error message (article)
+function art_error($node, $msg, $category) {
+  watchdog($category, 'Chyba v hesle "@title" ' . $msg, [
+    '@title' => $node->title,
+  ], WATCHDOG_NOTICE);
+  $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
+  drupal_set_message($msg, 'error');
+}
+
+// prepare and display error message in the case of html syntax error
+function html_error($node, $error, $shortmsg)
+{
+  $msg = $shortmsg .": ". $error->message . "(" . "riadok " . $error->line . ", znak " . $error->column . ")";
+  art_error($node, $msg, 'htmlerror');
+}
