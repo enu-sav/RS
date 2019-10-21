@@ -1,39 +1,58 @@
 /** Administration enhacements **/
 .page-node-add .vertical-tabs,
 .page-node-edit .vertical-tabs {
-  padding-bottom: 100px;
+    padding-bottom: 100px;
 }
 
 .page-node-add form.node-form,
 .page-node-edit form.node-form {
-  padding-bottom: 40px;
+    padding-bottom: 40px;
 }
 
 .page-node-add .form-actions,
 .page-node-edit .form-actions {
-  position: fixed;
-  bottom: 0;
-  margin: 0;
-  padding: 8px;
-  width: 100%;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .page-node-add .form-actions input,
 .page-node-edit .form-actions input {
-  margin-bottom: 0px !important;
-  font-size: 1.2em !important;
+    margin-bottom: 0px !important;
+    font-size: 1.2em !important;
 }
 
 .adminimal-frontend table td,
 .adminimal-frontend table th {
-  vertical-align: middle;
-  padding: 8px 10px;
-  border: 1px solid lightgray;
-  color: #000;
+    vertical-align: middle;
+    padding: 8px 10px;
+    border: 1px solid lightgray;
+    color: #000;
+}
+
+body.admin-menu.adminimal-menu {
+    margin-top: 142px !important;
+}
+
+body.admin-menu.adminimal-menu:before {
+    height: 0;
+}
+
+body.admin-menu.adminimal-menu #branding {
+    position: fixed;
+    width: 100%;
+    margin-top: -86px;
+    z-index: 9999;
+}
+
+body.admin-menu.adminimal-menu #admin-menu {
+    z-index: 99999;
 }
 
 .filter-guidelines {
-  display: none;
+    display: none;
 }
