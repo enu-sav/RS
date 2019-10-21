@@ -4,3 +4,5 @@ core = 7.x
 base theme = adminimal
 
 stylesheets[all][] = "css/rs_beliana_style.css"
+
+scripts[] = "js/scripts.js"
