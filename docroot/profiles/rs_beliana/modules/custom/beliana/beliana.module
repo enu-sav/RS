@@ -753,8 +753,11 @@ function beliana_sync_from_remote($node) {
           }
 
           if ($field == 'field_komentar_instrukcie') {
+            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ';
 
-            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ' . $value[0]['value'];
+            if (!empty($value)) {
+              $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
+            }
           }
 
           if (in_array($field, [
@@ -774,19 +777,22 @@ function beliana_sync_from_remote($node) {
 
       $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
 
+      $workbench_moderation = 'needs_review';
       if ($node->type == 'ilustracia') {
-        $node->workbench_moderation['current']->state = 'ilustracia_u_redaktora';
+        $workbench_moderation = 'ilustracia_u_redaktora';
       }
-      else {
-        $node->workbench_moderation['current']->state = 'needs_review';
+
+      if ($node->workbench_moderation['current']->state == 'zaradene') {
+        $workbench_moderation = 'zaradene';
       }
 
       $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
-      if (strpos($node->log, $message_log) !== FALSE) {
-        $node->log .= '.' . $message_log;
+      if (strpos($node->log, $message_log) === FALSE) {
+        $node->log .= '. ' . $message_log;
       }
 
       node_save($node);
+      workbench_moderation_moderate($node, $workbench_moderation);
       drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_id]));
     }
     else {
