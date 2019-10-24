@@ -124,7 +124,17 @@ function beliana_permission() {
 }
 
 function beliana_sync_from_remote_access($node) {
-  if (in_array($node->type ,array('ilustracia', 'heslo')) && user_access('sync heslo content') && in_array($node->workbench_moderation['current']->state, array('zaradene', 'needs_review'))) {
+  global $user;
+
+  $response = workbench_access_node_access($node, 'update', $user);
+
+  if (in_array($node->type, [
+      'ilustracia',
+      'heslo',
+    ]) && $response != NODE_ACCESS_DENY && user_access('sync heslo content') && in_array($node->workbench_moderation['current']->state, [
+      'zaradene',
+      'needs_review',
+    ])) {
     return TRUE;
   }
 
@@ -328,7 +338,7 @@ function beliana_editor_list() {
   $users = entity_load('user');
   $terms = taxonomy_get_tree(2);
   # create a list of parents for each term
-  $termParentList=array();  
+  $termParentList=array();
   foreach ($terms as $term) {
     $termParentList[$term->tid] = $term->parents[0];
   }
@@ -356,7 +366,7 @@ function beliana_editor_list() {
             // administrator and useradmin should see all authors
             if (!in_array("administrátor", $user->roles) && !in_array("useradmin", $user->roles)) {
               # check access rights in all hierarchy levels
-              if (!(isset($user_wba[$term->tid]) or 
+              if (!(isset($user_wba[$term->tid]) or
                     isset($user_wba[$term->parents[0]]) or  #first parent
                     isset($user_wba[$termParentList[$term->parents[0]]])  #second parent, if 3 levels were used
               )) continue;
@@ -753,8 +763,11 @@ function beliana_sync_from_remote($node) {
           }
 
           if ($field == 'field_komentar_instrukcie') {
+            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ';
 
-            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ' . $value[0]['value'];
+            if (!empty($value)) {
+              $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
+            }
           }
 
           if (in_array($field, [
@@ -774,19 +787,22 @@ function beliana_sync_from_remote($node) {
 
       $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
 
+      $workbench_moderation = 'needs_review';
       if ($node->type == 'ilustracia') {
-        $node->workbench_moderation['current']->state = 'ilustracia_u_redaktora';
+        $workbench_moderation = 'ilustracia_u_redaktora';
       }
-      else {
-        $node->workbench_moderation['current']->state = 'needs_review';
+
+      if ($node->workbench_moderation['current']->state == 'zaradene') {
+        $workbench_moderation = 'zaradene';
       }
 
       $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
-      if (strpos($node->log, $message_log) !== FALSE) {
-        $node->log .= '.' . $message_log;
+      if (strpos($node->log, $message_log) === FALSE) {
+        $node->log .= '. ' . $message_log;
       }
 
       node_save($node);
+      workbench_moderation_moderate($node, $workbench_moderation);
       drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_id]));
     }
     else {
