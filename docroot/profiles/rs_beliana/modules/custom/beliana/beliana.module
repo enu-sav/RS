@@ -796,6 +796,7 @@ function beliana_sync_from_remote($node) {
       }
 
       $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
+      $node->revision = 1;
 
       $workbench_moderation = 'needs_review';
       if ($node->type == 'ilustracia') {
@@ -811,7 +812,6 @@ function beliana_sync_from_remote($node) {
         $node->log .= '. ' . $message_log;
       }
 
-      node_save($node);
       workbench_moderation_moderate($node, $workbench_moderation);
       drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_id]));
     }
