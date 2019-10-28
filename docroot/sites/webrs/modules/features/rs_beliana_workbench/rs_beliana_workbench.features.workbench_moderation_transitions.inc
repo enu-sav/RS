@@ -9,21 +9,6 @@
  */
 function rs_beliana_workbench_workbench_moderation_export_transitions() {
   $items = array(
-    '1_korektura:u_vyst_redaktora_3' => array(
-      'from_name' => '1_korektura',
-      'to_name' => 'u_vyst_redaktora_3',
-      'name' => '1_korektura-u_vyst_redaktora3',
-    ),
-    '2_korekt_ra:u_vyst_redaktora_3' => array(
-      'from_name' => '2_korekt_ra',
-      'to_name' => 'u_vyst_redaktora_3',
-      'name' => '2_korektura-u_vyst_redaktora3',
-    ),
-    '2_korekt_ra:u_vyst_redaktora_4' => array(
-      'from_name' => '2_korekt_ra',
-      'to_name' => 'u_vyst_redaktora_4',
-      'name' => '2_korektura-u_vyst_redaktora4',
-    ),
     'draft:vyradene' => array(
       'from_name' => 'draft',
       'to_name' => 'vyradene',
@@ -124,25 +109,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => '1_korektura',
       'name' => 'u_jaz_redaktora1-1_korektura',
     ),
-    'na_jazykovu_korekturu:u_vyst_redaktora_2' => array(
-      'from_name' => 'na_jazykovu_korekturu',
-      'to_name' => 'u_vyst_redaktora_2',
-      'name' => 'u_jaz_redaktora1-u_vyst_redaktora2',
-    ),
     'na_zverejnenie:needs_review' => array(
       'from_name' => 'na_zverejnenie',
       'to_name' => 'needs_review',
       'name' => 'u_vyst_redaktora1-u_redaktora',
-    ),
-    'na_zverejnenie:u_vyst_redaktora_2' => array(
-      'from_name' => 'na_zverejnenie',
-      'to_name' => 'u_vyst_redaktora_2',
-      'name' => 'u_vyst_redaktora1-u_vyst_redaktora2',
-    ),
-    'na_zverejnenie:u_vyst_redaktora_2x' => array(
-      'from_name' => 'na_zverejnenie',
-      'to_name' => 'u_vyst_redaktora_2x',
-      'name' => 'u_vyst_redaktora1-u_vyst_redaktora2x',
     ),
     'navrhnute_na_vyradenie:len_vyplatit' => array(
       'from_name' => 'navrhnute_na_vyradenie',
@@ -209,95 +179,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_zalomenie',
       'name' => 'u_jaz_redaktora2-na_zverejnenie',
     ),
-    'u_jaz_redaktora_2:u_v_st_redaktora_5' => array(
-      'from_name' => 'u_jaz_redaktora_2',
-      'to_name' => 'u_v_st_redaktora_5',
-      'name' => 'u_jaz_redaktora2-u_vyst_readaktora5',
-    ),
     'u_konzultanta:needs_review' => array(
       'from_name' => 'u_konzultanta',
       'to_name' => 'needs_review',
       'name' => 'u_konzultanta-u_redaktora',
-    ),
-    'u_v_st_redaktora_5:na_zalomenie' => array(
-      'from_name' => 'u_v_st_redaktora_5',
-      'to_name' => 'na_zalomenie',
-      'name' => 'u_vyst_redaktora5-na_zalomenie',
-    ),
-    'u_vyst_redaktora_2:na_jazykovu_korekturu' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'na_jazykovu_korekturu',
-      'name' => 'u_vyst_redaktora2-u_jaz_redaktora1',
-    ),
-    'u_vyst_redaktora_2:na_zverejnenie' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'na_zverejnenie',
-      'name' => 'u_vyst_redaktora2-u_vyst_redaktora1',
-    ),
-    'u_vyst_redaktora_2:needs_review' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'needs_review',
-      'name' => 'u_vyst_redaktora2-u_redaktora',
-    ),
-    'u_vyst_redaktora_2:u_vyst_redaktora_2x' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'u_vyst_redaktora_2x',
-      'name' => 'u_vyst_redaktora2-u_vyst_redaktora2x',
-    ),
-    'u_vyst_redaktora_2:ukoncenezluene' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'ukoncenezluene',
-      'name' => 'u_vyst_redaktora2-ukoncene_zlucene',
-    ),
-    'u_vyst_redaktora_2:vyradene' => array(
-      'from_name' => 'u_vyst_redaktora_2',
-      'to_name' => 'vyradene',
-      'name' => 'u_vyst_redaktora2-na_vyradenie',
-    ),
-    'u_vyst_redaktora_2x:na_zverejnenie' => array(
-      'from_name' => 'u_vyst_redaktora_2x',
-      'to_name' => 'na_zverejnenie',
-      'name' => 'u_vyst_redaktora2x-u_vyst_redaktora1',
-    ),
-    'u_vyst_redaktora_2x:u_vyst_redaktora_2' => array(
-      'from_name' => 'u_vyst_redaktora_2x',
-      'to_name' => 'u_vyst_redaktora_2',
-      'name' => 'u_vyst_redaktora2x-u_vyst_redaktora2',
-    ),
-    'u_vyst_redaktora_3:2_korekt_ra' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => '2_korekt_ra',
-      'name' => 'u_vyst_redaktora3-2_korektura',
-    ),
-    'u_vyst_redaktora_3:u_jaz_redaktora_2' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => 'u_jaz_redaktora_2',
-      'name' => 'u_vyst_redaktora3-u_jaz_redaktora2',
-    ),
-    'u_vyst_redaktora_3:u_v_st_redaktora_5' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => 'u_v_st_redaktora_5',
-      'name' => 'u_vyst_redaktora3-u_vyst_redaktora5',
-    ),
-    'u_vyst_redaktora_3:u_vyst_redaktora_4' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => 'u_vyst_redaktora_4',
-      'name' => 'u_vyst_redaktora3-u_vyst_redaktora4',
-    ),
-    'u_vyst_redaktora_4:u_jaz_redaktora_2' => array(
-      'from_name' => 'u_vyst_redaktora_4',
-      'to_name' => 'u_jaz_redaktora_2',
-      'name' => 'u_vyst_redaktora4-u_jaz_redaktora2',
-    ),
-    'u_vyst_redaktora_4:u_vyst_redaktora_3' => array(
-      'from_name' => 'u_vyst_redaktora_4',
-      'to_name' => 'u_vyst_redaktora_3',
-      'name' => 'u_vyst_redaktora4-u_vyst_redaktora3',
-    ),
-    'ukoncenezluene:u_vyst_redaktora_2' => array(
-      'from_name' => 'ukoncenezluene',
-      'to_name' => 'u_vyst_redaktora_2',
-      'name' => 'ukoncene_zlucene-u_vyst_redaktora2',
     ),
     'vyradene:zaradene' => array(
       'from_name' => 'vyradene',

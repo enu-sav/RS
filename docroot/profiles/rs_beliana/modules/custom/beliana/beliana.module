@@ -802,7 +802,7 @@ function beliana_sync_from_remote($node) {
         $workbench_moderation = 'ilustracia_u_redaktora';
       }
 
-      if ($type == 'webov') {
+      if ($type == 'knižn') {
         $workbench_moderation = 'prevzate_z_rs';
       }
 
