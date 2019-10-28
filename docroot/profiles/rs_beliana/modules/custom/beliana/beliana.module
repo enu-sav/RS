@@ -145,25 +145,27 @@ function beliana_sync_from_remote_access($node) {
  * Implements hook_form_FORM_ID_alter().
  */
 function beliana_form_heslo_node_form_alter(&$form, &$form_state) {
-  $base_url = variable_get('rs_api_uri');
-  $request_url = $base_url . '/api/heslo';
+  if (empty($form['nid']['#value'])) {
+    $base_url = variable_get('rs_api_uri');
+    $request_url = $base_url . '/api/heslo';
 
-  // Check connection to opposite REST server
-  if ($login = beliana_api_rest_login($request_url)) {
+    // Check connection to opposite REST server
+    if ($login = beliana_api_rest_login($request_url)) {
 
-  }
-  else {
-    $form['title']['#disabled'] = TRUE;
-
-    foreach ($form as $key => $field) {
-      if (strpos($key, 'field_') === 0) {
-        $form[$key][LANGUAGE_NONE]['#disabled'] = TRUE;
-      }
     }
+    else {
+      $form['title']['#disabled'] = TRUE;
 
-    hide($form['actions']);
+      foreach ($form as $key => $field) {
+        if (strpos($key, 'field_') === 0) {
+          $form[$key][LANGUAGE_NONE]['#disabled'] = TRUE;
+        }
+      }
 
-    drupal_set_message(t('Unable to connect <strong>@site</strong> REST API. Check <a href="/admin/config/services/beliana-sync" target="_blank">configuration</a>', ['@site' => $base_url]), 'error');
+      hide($form['actions']);
+
+      drupal_set_message(t('Unable to connect <strong>@site</strong> REST API. Check <a href="/admin/config/services/beliana-sync" target="_blank">configuration</a>', ['@site' => $base_url]), 'error');
+    }
   }
 }
 
