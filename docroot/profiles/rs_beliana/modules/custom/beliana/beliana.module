@@ -1057,11 +1057,11 @@ function prune_node_revisions(&$node, $context = array()) {
 
 /**
  * Callback function for `reset_importovane_and_link_transfer` action.
- * 1. Transfer links from the actual version to the oldest one
- * 2. Set text of the oldest revision as the actual text
+ * 1. Transfer links from the actual version to the oldest one or
+ *    the revision edited by iredaktor_jch or iredaktor_mb (they edited math equations and tables)
+ * 2. Set text of the this revision as the actual text
  * 3. Remove illustrations in tha actual version 
- * 4. Remove all revisions except for the oldest one, the two most recent ones and 
- *    the revision edited by iredaktor_jch or iredaktor_mb (they edited math equations and tables
+ * 4. Remove all revisions except for the actual, the revision edited by iredaktor_jch or iredaktor_mb and the oldest one
  */
 function reset_importovane_and_link_transfer(&$node, $context = array()) {
   if (!in_array($node->type, array('importovane_heslo'))) return;
@@ -1078,10 +1078,12 @@ function reset_importovane_and_link_transfer(&$node, $context = array()) {
   $first_rev = ($extra_rev) ?  entity_revision_load('node',$extra_rev) : entity_revision_load('node',end($revisions)->vid);
   //dpm($first_rev);
 
-  // clean some truff
+  // clean some stuff
   $rslt = transfer_links($first_rev->field_text_hesla['und'][0]['value'], $node->field_text_hesla['und'][0]['value']);
   $node->field_text_hesla['und'][0]['value'] = str_replace("➔", "—&gt; ",$rslt[0]);
-  $node->field_komentar_instrukcie['und'][0]['value'] = $rslt[1];
+  // add text to comment, so that a user knows
+  $komentar = "Knižný text s doplnenými odkazmi. \n" . $rslt[1];
+  $node->field_komentar_instrukcie['und'][0]['value'] = $komentar;
   $node->revision = TRUE;
   $node->log = "Reset and link transfer"; 
   if (isset($node->field_ilustracia['und'])) 
