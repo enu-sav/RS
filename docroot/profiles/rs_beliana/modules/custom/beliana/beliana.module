@@ -750,6 +750,7 @@ function beliana_sync_from_remote($node) {
     if (in_array($remote_node->workbench_moderation->current->state, [
       'zaradene',
       'publikovane_na_webe',
+      'ilustracia_na_webe',
     ])) {
       $fields_to_skip = [
         'field_remote_id',
