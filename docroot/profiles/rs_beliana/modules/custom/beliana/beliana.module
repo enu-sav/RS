@@ -128,14 +128,13 @@ function beliana_sync_from_remote_access($node) {
 
   $response = workbench_access_node_access($node, 'update', $user);
 
-  if (in_array($node->type, [
-      'ilustracia',
-      'heslo',
-    ]) && $response != NODE_ACCESS_DENY && user_access('sync heslo content') && in_array($node->workbench_moderation['current']->state, [
-      'zaradene',
-      'needs_review',
-    ])) {
-    return TRUE;
+  if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
+    switch ($node->type) {
+      case 'heslo':
+        return in_array($node->workbench_moderation['current']->state, ['zaradene', 'needs_review']);
+      case 'ilustracia':
+        return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']);
+    }
   }
 
   return FALSE;
@@ -803,8 +802,8 @@ function beliana_sync_from_remote($node) {
         $workbench_moderation = 'ilustracia_u_redaktora';
       }
 
-      if ($node->workbench_moderation['current']->state == 'zaradene') {
-        $workbench_moderation = 'zaradene';
+      if ($type == 'webov') {
+        $workbench_moderation = 'prevzate_z_rs';
       }
 
       $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
