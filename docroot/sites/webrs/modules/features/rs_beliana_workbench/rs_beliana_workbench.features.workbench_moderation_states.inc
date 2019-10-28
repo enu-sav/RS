@@ -177,36 +177,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'heslo u konzultanta',
       'weight' => 10,
     ),
-    'u_v_st_redaktora_5' => array(
-      'name' => 'u_v_st_redaktora_5',
-      'label' => 'U výst. redaktora 5',
-      'description' => 'Na spracovanie u výst. redaktora 5',
-      'weight' => 9,
-    ),
-    'u_vyst_redaktora_2' => array(
-      'name' => 'u_vyst_redaktora_2',
-      'label' => 'U výst. redaktora 2',
-      'description' => 'Na spracovanie u výst. redaktora 2',
-      'weight' => 6,
-    ),
-    'u_vyst_redaktora_2x' => array(
-      'name' => 'u_vyst_redaktora_2x',
-      'label' => 'U výst. redaktora 2X',
-      'description' => 'Na spracovanie u výstupného redaktora 2x',
-      'weight' => 6,
-    ),
-    'u_vyst_redaktora_3' => array(
-      'name' => 'u_vyst_redaktora_3',
-      'label' => 'U výst. redaktora 3',
-      'description' => 'Na spracovanie u výst. redaktora 3',
-      'weight' => 7,
-    ),
-    'u_vyst_redaktora_4' => array(
-      'name' => 'u_vyst_redaktora_4',
-      'label' => 'U výst. redaktora 4',
-      'description' => 'Na spracovanie u výst. redaktora 4',
-      'weight' => 8,
-    ),
     'ukoncenezluene' => array(
       'name' => 'ukoncenezluene',
       'label' => 'Ukončené/zlúčené',
