@@ -1105,6 +1105,57 @@ function reset_importovane_and_link_transfer(&$node, $context = array()) {
 }
 
 /**
+ * Callback function for `reset_heslo_webrs` action.
+ * To be called only once after splitting the editiorial system in web a print system
+ * Sets state of Heslo articles to Zaradene, Zlucene of Ukoncene/Zlucene
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function reset_heslo_webrs(&$node, $context = array()) {
+  if (!in_array($node->type, array('heslo'))) return;
+  if (!in_array($node->workbench_moderation['current']->state, 
+    array("u_autora","needs_review","na_zverejnenie","u_vyst_redaktora_2",
+    "u_vyst_redaktora_2x","u_vyst_redaktora_3","u_vyst_redaktora_4",
+    "u_v_st_redaktora_5","1_korektura","2_korekt_ra","u_konzultanta",
+    "u_jaz_redaktora_2","na_jazykovu_korekturu","ukoncenezluene"))) return;
+
+  $node->revision = TRUE;
+  if (isset($node->field_zlucene_z['und'])) {
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia zlúčeného hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
+      workbench_moderation_state_label("zlucene") . ".";
+    workbench_moderation_moderate($node, "zlucene");
+  } elseif ($node->workbench_moderation['current']->state == 'ukoncenezluene' ){
+    $user = user_load($node->uid);
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label("ukoncenezluene") . ", nový stav: ".
+      workbench_moderation_state_label("ukoncenezluene") . "." . PHP_EOL .
+      "Autor knižného textu: " . $user->name;
+  } else {
+    $user = user_load($node->uid);
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
+      workbench_moderation_state_label("zaradene") . ".".PHP_EOL.
+      "Autor knižného textu: " . $user->name;
+    workbench_moderation_moderate($node, "zaradene");
+  }
+  $node->log = "Verzia po oddelení redakčných systémov";
+  $node->uid='719'; // 719 == nepriradeny
+  node_save($node);
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  #dpm($revisions);
+  foreach (array_slice($revisions, 1, -1) as $revision) {
+    node_revision_delete($revision->vid);
+  }
+}
+
+/**
  * Implements hook_node_presave().
  *
  * @inheritdoc
