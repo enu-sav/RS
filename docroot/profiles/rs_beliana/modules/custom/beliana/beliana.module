@@ -527,6 +527,15 @@ function beliana_action_info() {
       'triggers' => array('any'),
       'permissions' => array('sync heslo content'),
     ),
+    'reset_importovane_and_link_transfer' => array(
+      'type' => 'node',
+      'label' => t('Reset importovane and transfer links'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => false,
+    ),
   );
 }
 
@@ -1045,6 +1054,106 @@ function prune_node_revisions(&$node, $context = array()) {
     } else {
       $cur_editor_name = $revision->name;
     }
+  }
+}
+
+/**
+ * Callback function for `reset_importovane_and_link_transfer` action.
+ * 1. Transfer links from the actual version to the oldest one or
+ *    the revision edited by iredaktor_jch or iredaktor_mb (they edited math equations and tables)
+ * 2. Set text of the this revision as the actual text
+ * 3. Remove illustrations in tha actual version 
+ * 4. Remove all revisions except for the actual, the revision edited by iredaktor_jch or iredaktor_mb and the oldest one
+ */
+function reset_importovane_and_link_transfer(&$node, $context = array()) {
+  if (!in_array($node->type, array('importovane_heslo'))) return;
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  // find the first revision edited by iredaktor_jch or iredaktor_mb
+  $extra_rev = 0; // revision with corrected mathematics to take
+  foreach ($revisions as $revision){
+    if ($revision->name == "iredaktor_jch" or $revision->name == "iredaktor_mb" ) {
+      $extra_rev = $revision->vid;
+      break;
+    }
+  }
+  $first_rev = ($extra_rev) ?  entity_revision_load('node',$extra_rev) : entity_revision_load('node',end($revisions)->vid);
+  //dpm($first_rev);
+
+  // clean some stuff
+  $rslt = transfer_links($first_rev->field_text_hesla['und'][0]['value'], $node->field_text_hesla['und'][0]['value']);
+  $node->field_text_hesla['und'][0]['value'] = str_replace("➔", "—&gt; ",$rslt[0]);
+  // add text to comment, so that a user knows
+  $komentar = "Knižný text s doplnenými odkazmi. \n" . $rslt[1];
+  $node->field_komentar_instrukcie['und'][0]['value'] = $komentar;
+  $node->revision = TRUE;
+  $node->log = "Reset and link transfer"; 
+  if (isset($node->field_ilustracia['und'])) 
+    unset($node->field_ilustracia['und']);
+  node_save($node);
+
+  #delete all revisions except:
+  #the two most recent and the oldest (imported) one
+  #the first revision edited by iredaktor_jch or iredaktor_mb
+  $revisions = node_revision_list($node);
+  $skip_math = true;
+  foreach (array_slice($revisions, 2, -1) as $revision) {
+    if ($skip_math and ($revision->name == "iredaktor_jch" or $revision->name == "iredaktor_mb") ) {
+      $skip_math = false;
+      continue;
+    }
+    node_revision_delete($revision->vid);
+  }
+}
+
+/**
+ * Callback function for `reset_heslo_webrs` action.
+ * To be called only once after splitting the editiorial system in web a print system
+ * Sets state of Heslo articles to Zaradene, Zlucene of Ukoncene/Zlucene
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function reset_heslo_webrs(&$node, $context = array()) {
+  if (!in_array($node->type, array('heslo'))) return;
+  if (!in_array($node->workbench_moderation['current']->state, 
+    array("u_autora","needs_review","na_zverejnenie","u_vyst_redaktora_2",
+    "u_vyst_redaktora_2x","u_vyst_redaktora_3","u_vyst_redaktora_4",
+    "u_v_st_redaktora_5","1_korektura","2_korekt_ra","u_konzultanta",
+    "u_jaz_redaktora_2","na_jazykovu_korekturu","ukoncenezluene"))) return;
+
+  $node->revision = TRUE;
+  if (isset($node->field_zlucene_z['und'])) {
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia zlúčeného hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
+      workbench_moderation_state_label("zlucene") . ".";
+    workbench_moderation_moderate($node, "zlucene");
+  } elseif ($node->workbench_moderation['current']->state == 'ukoncenezluene' ){
+    $user = user_load($node->uid);
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label("ukoncenezluene") . ", nový stav: ".
+      workbench_moderation_state_label("ukoncenezluene") . "." . PHP_EOL .
+      "Autor knižného textu: " . $user->name;
+  } else {
+    $user = user_load($node->uid);
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
+      workbench_moderation_state_label("zaradene") . ".".PHP_EOL.
+      "Autor knižného textu: " . $user->name;
+    workbench_moderation_moderate($node, "zaradene");
+  }
+  $node->log = "Verzia po oddelení redakčných systémov";
+  $node->uid='719'; // 719 == nepriradeny
+  node_save($node);
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  #dpm($revisions);
+  foreach (array_slice($revisions, 1, -1) as $revision) {
+    node_revision_delete($revision->vid);
   }
 }
 
@@ -2900,4 +3009,227 @@ function beliana_api_rest_get_node($id) {
   }
 
   return FALSE;
+}
+
+// display error message (illustration)
+function il_error($node, $ilu_node, $msg, $category) {
+  if ($node->type === 'ilustracia'){
+    watchdog($category, 'Chyba v ilustrácii "@ilu_title": ' . $msg, [
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_NOTICE);
+    $msg = 'Chyba v ilustrácii <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    drupal_set_message($msg, 'error');
+  } else {
+    watchdog($category, 'Chyba v hesle "@title": ilustrácia "@ilu_title:" ' . $msg, [
+      '@title' => $node->title,
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_NOTICE);
+    $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    drupal_set_message($msg, 'error');
+  }
+}
+
+// display error message (article)
+function art_error($node, $msg, $category) {
+  watchdog($category, 'Chyba v hesle "@title" ' . $msg, [
+    '@title' => $node->title,
+  ], WATCHDOG_NOTICE);
+  $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
+  drupal_set_message($msg, 'error');
+}
+
+// prepare and display error message in the case of html syntax error
+function html_error($node, $error, $shortmsg)
+{
+  $msg = $shortmsg .": ". $error->message . "(" . "riadok " . $error->line . ", znak " . $error->column . ")";
+  art_error($node, $msg, 'htmlerror');
+}
+
+/*
+ * compare two strings taking into account possible abbreviations
+ */
+function abb_equal($abtext, $text)
+{
+  $abte = explode(" ", str_replace(".", "", $abtext));
+  $te = explode(" ", $text);
+  if ( count($abte) != count($te) ) return false;
+  foreach (array_combine($abte, $te) as $a => $t) {
+    if ($a != substr($t, 0, strlen($a) ) ) {
+      return false;
+    }
+  }
+  return "true";
+}
+
+/*
+ * transfer links from text_from to text_to
+ * return array(new_text, log)
+ */
+function transfer_links($text_to, $text_from)
+{
+  //dpm($text_from, "from");
+  //dpm($text_to, "to");
+  $text_to = str_replace("—&gt; ", "➔", $text_to);
+  $text_to = str_replace("—>", "➔", $text_to);
+  $text_to = str_replace("➔","➔ ", $text_to);
+  $text_to = str_replace(" "," ",$text_to); //odstranit nezalomitelnu medzeru
+  $text_to = str_replace("&nbsp;"," ",$text_to); //odstranit nezalomitelnu medzeru
+  $text_to = str_replace("﻿","",$text_to); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_to = str_replace("​","",$text_to); //odstranit nezalomitelny znak 0-ovej sirky
+
+
+  //remove <p> tags from tables
+  preg_match_all('?(<p><table.*</table></p>)?ms', $text_to, $tbs);
+  foreach($tbs[0] as $tb){
+    $tbp = str_replace("</p>", "", str_replace("<p>", "", $tb));
+    $text_to = str_replace($tb, $tbp, $text_to);
+  }
+
+  // fix junk inherited for MS Word
+  //<em>a<sub>i</em></sub>
+  $text_to = preg_replace("?<em>([^<]+)<sub>([^<]+)</em></sub>?u","<em>$1<sub>$2</sub></em>",$text_to);
+  $text_to = preg_replace("?<em>([^<]+)<sup>([^<]+)</em></sup>?u","<em>$1<sup>$2</sup></em>",$text_to);
+  //<strong>Rozloha v tis. km<sup>2</strong></sup>
+  //<strong>e<sub>i</sub> e<sub>j</strong></sub>
+  $text_to = preg_replace("?<strong>([^<]+)<sub>([^<]+)</strong></sub>?u","<strong>$1<sub>$2</sub></strong>",$text_to);
+  $text_to = preg_replace("?<strong>([^<]+)<sup>([^<]+)</strong></sup>?u","<strong>$1<sup>$2</sup></strong>",$text_to);
+  $text_to = preg_replace("?<em>([^<]*)<sub>([^<]*)</sub>([^<]*)<sub>([^<]*)</em></sub>?u","<em>$1<sub>$2</sub>$3<sub>$4</sub></em>",$text_to);
+  $text_to = preg_replace("?<strong>([^<]*)<sub>([^<]*)</sub>([^<]*)<sub>([^<]*)</strong></sub>?u","<strong>$1<sub>$2</sub>$3<sub>$4</sub></strong>",$text_to);
+  #<em>h<sup>1</sup>-e<sup>2</sup>-a<sup>2</em></sup>
+  $text_to = preg_replace("?<em>([^<]*)<sup>([^<]*)</sup>([^<]*)<sup>([^<]*)</sup>([^<]*)<sup>([^<]*)</em></sup>?u", "?<em>$1<sup>$2</sup>$3<sup>$4</sup>$5<sup>$6</sup></em>?u", $text_to);
+  //<em>a. k. = a<sub>i</sub>/c<sub>i</em></sub>
+  $text_to = preg_replace("?<em>([^<]*)<sub>([^<]*)</sub>([^<]*)<sub>([^<]*)</em></sub>?u","<em>$1<sub>$2</sub>$3<sub>$4</sub></em>",$text_to);
+
+  // remove <strong> and <em> from text_from (links are sometimes formatted)
+  $text_from = str_replace("</span>", "", preg_replace("?<span[^>]*>?u", "", $text_from));
+  $text_from = str_replace("</em>", "", str_replace("<em>", "", $text_from));
+  $text_from = str_replace("</strong>", "", str_replace("<strong>", "", $text_from));
+  $text_from = str_replace(" "," ",$text_from); //odstranit nezalomitelnu medzeru
+  $text_from = str_replace("&nbsp;"," ",$text_from); //odstranit nezalomitelnu medzeru
+  $text_from = str_replace("﻿","",$text_from); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_from = str_replace("​","",$text_from); //odstranit nezalomitelny znak 0-ovej sirky
+
+  $log="";
+  #rearrange the arrays
+  #[<a href="/heslo/omyl_02">omylu</a>] =>
+  #     Array ( [0] => <a href="/heslo/omyl_02">omylu</a> [1] => <a href="/heslo/omyl_02"> [2] => omylu)
+  preg_match_all('*(<a [^>]+>)([^<]+)(<\/a>)*', $text_from, $match_from);
+  $rmatch_from = array();
+  for($i=0; $i<count($match_from[0]); $i++) {
+    $rmatch_from[$match_from[0][$i]] = array($match_from[0][$i], $match_from[1][$i], $match_from[2][$i]);
+  }
+
+  preg_match_all('*(<a [^>]+>)([^<]+)(<\/a>)*', $text_to, $match_to);
+  $rmatch_to = array();
+  for($i=0; $i<count($match_to[0]); $i++) {
+    $rmatch_to[$match_to[0][$i]] = array($match_to[0][$i], $match_to[1][$i], $match_to[2][$i]);
+  }
+
+  // remove the <a> tags
+  $text_to = preg_replace("/<a[^>]*>/"," ",$text_to); //odstranit opakovane medzery
+  $text_to = str_replace("</a>","",$text_to); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_to = preg_replace("/  +/"," ",$text_to); //odstranit opakovane medzery
+
+  // replace from >> to by exact matching
+  $used = array();
+  foreach($rmatch_from as $key => $value ) {
+    if ( strpos($text_to, "➔ ".$value[2] )) {
+      $text_to = str_replace("➔ ".$value[2], "➔ ".$value[0], $text_to);
+      $log = $log . "Doplnený odkaz (priamo): " . $value[2] . "\n";
+      $used[] = $key;
+    }
+  }
+  foreach( $used as $key) unset($rmatch_from[$key]);
+
+  // replace from >> to by abbreviation matching or fuzzy matching
+  // find max. number of words in text_from links
+  $wmax = 0;
+  foreach($rmatch_from as $key => $value ) {
+    #$wcnt = count(explode(" ", $value[2]));
+    #$wcnt = str_word_count($value[2]);
+    $wcnt = substr_count($value[2], " ") + 1;
+    if ($wcnt > $wmax)
+      $wmax = $wcnt;
+  }
+  //print_r("wmax $wmax\n");
+  // create lists of matching unresolved links with number 1 .. $wmax
+  $lmatches = array();
+  for($i = 1; $i <= $wmax; $i ++){
+    $ms = "/➔ ([^<][^ <,;()]+){" . $i . "," . $i . "}/";
+    preg_match_all($ms, $text_to, $mmm);
+    $lmatches[$i] = $mmm[0];
+  }
+
+  // abbreviation matching
+  // for each rmatch key find unresolved matching link
+  $used = array();
+  foreach($rmatch_from as $key => $value ) {
+    $wcnt = substr_count($value[2], " ") + 1;
+    foreach( $lmatches[$wcnt] as $ltext){
+      if ( !abb_equal($ltext, "➔ ".$value[2])) continue;
+      $ltext = str_replace("➔ ", "", $ltext);
+      $htext = str_replace($value[2], $ltext, $key);
+      $text_to = str_replace("➔ ".$ltext, "➔ ".$htext, $text_to);
+      $used[] = $key;
+      $log = $log . "Doplnený odkaz (skratka): " . $ltext . "\n";
+     }
+  }
+  foreach( $used as $key) unset($rmatch_from[$key]);
+
+  // for each rmatch key find unresolved matching link
+  $used = array();
+  foreach($rmatch_from as $key => $value ) {
+    #$wcnt = count(explode(" ", $value[2]));
+    #$wcnt = str_word_count($value[2]);
+    $wcnt = substr_count($value[2], " ") + 1;
+    $maxperc = 0;
+    foreach( $lmatches[$wcnt] as $ltext){
+      $ltext = str_replace("➔ ", "", $ltext);
+      $sim = similar_text($ltext, $value[2], $perc);
+      if ( $perc > $maxperc) {
+        $maxperc = $perc;
+        $simkey = $key;
+        $simltext = $ltext;
+      }
+    }
+    // accept if similarity> 60
+    //if ($maxperc > 60){
+      //$htext = str_replace($value[2], $simltext, $simkey);
+    if ($maxperc > 70){
+      $htext = str_replace(">".$value[2], ">".$simltext, $simkey);
+      $text_to = str_replace($simltext, $htext, $text_to);
+      $used[] = $key;
+      $log = $log . "Doplnený odkaz (fuzzy): " . $simltext . "\n";
+      //print_r($wcnt . " " .$simkey . " " .$simltext." " . $maxperc." ". $htext ."\n");
+     }
+  }
+  foreach( $used as $key) unset($rmatch_from[$key]);
+
+  //
+  // replace unresolved links using rmatch_to (by exact matching)
+  foreach($rmatch_to as $key => $value ) {
+    if ( strpos($text_to, "➔ ".$value[2] )) {
+        $text_to = str_replace("➔ ".$value[2], "➔ ".$value[0], $text_to);
+        $log = $log . "Nezmenený odkaz (nenájdený v zdrojovom texte): " . $value[2] . "\n";
+    }
+  }
+
+  // remaining from links:
+  foreach($rmatch_from as $key => $value ) {
+    $log = $log . "Nepoužitý odkaz (nenájdený v cieľovom texte): " . $value[2] . "\n";
+  }
+
+  $text_to = str_replace("➔", "—&gt; ",$text_to);
+  $text_to = str_replace("—>", "—&gt; ",$text_to);
+  $text_to = preg_replace("/ [&]([ .,;)])/", "&amp;$1",$text_to);
+  $text_to = preg_replace("/  +/"," ",$text_to); //odstranit opakovane medzery
+  $text_to = str_replace("</a></a>", "</a>",$text_to);
+
+  // find the remaining links
+  preg_match_all('/—\&gt; [^< ]+/', $text_to, $unresolved);
+  foreach($unresolved[0] as $un)
+    $log = $log . "Nevyriešený odkaz (v cieľovom texte): " . str_replace("&gt;",">", $un) . "\n";
+
+  //dpm($text_to, "2");
+  return array($text_to, $log);
 }
