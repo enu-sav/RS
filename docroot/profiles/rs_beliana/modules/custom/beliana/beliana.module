@@ -52,6 +52,15 @@ function beliana_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
+  $items['node/%node/sync-from/confirm'] = array(
+    'title' => 'Prebrať obsah',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('beliana_sync_from_remote_confirm_form', 1),
+    'access callback' => 'beliana_sync_from_remote_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 
@@ -103,9 +112,29 @@ function beliana_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   }
 }
 
+/**
+ * Implements hook_permission().
+ */
+function beliana_permission() {
+  return array(
+    'sync heslo content' => array(
+      'title' => t('Allow synchronise remote node'),
+    )
+  );
+}
+
 function beliana_sync_from_remote_access($node) {
-  if (in_array($node->type ,array('ilustracia', 'heslo')) && user_access('create heslo content')) {
-    //return TRUE;
+  global $user;
+
+  $response = workbench_access_node_access($node, 'update', $user);
+
+  if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
+    switch ($node->type) {
+      case 'heslo':
+        return in_array($node->workbench_moderation['current']->state, ['zaradene', 'needs_review']);
+      case 'ilustracia':
+        return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']);
+    }
   }
 
   return FALSE;
@@ -115,25 +144,27 @@ function beliana_sync_from_remote_access($node) {
  * Implements hook_form_FORM_ID_alter().
  */
 function beliana_form_heslo_node_form_alter(&$form, &$form_state) {
-  $base_url = variable_get('rs_api_uri');
-  $request_url = $base_url . '/api/heslo';
+  if (empty($form['nid']['#value'])) {
+    $base_url = variable_get('rs_api_uri');
+    $request_url = $base_url . '/api/heslo';
 
-  // Check connection to opposite REST server
-  if ($login = beliana_api_rest_login($request_url)) {
+    // Check connection to opposite REST server
+    if ($login = beliana_api_rest_login($request_url)) {
 
-  }
-  else {
-    $form['title']['#disabled'] = TRUE;
-
-    foreach ($form as $key => $field) {
-      if (strpos($key, 'field_') === 0) {
-        $form[$key][LANGUAGE_NONE]['#disabled'] = TRUE;
-      }
     }
+    else {
+      $form['title']['#disabled'] = TRUE;
 
-    hide($form['actions']);
+      foreach ($form as $key => $field) {
+        if (strpos($key, 'field_') === 0) {
+          $form[$key][LANGUAGE_NONE]['#disabled'] = TRUE;
+        }
+      }
 
-    drupal_set_message(t('Unable to connect <strong>@site</strong> REST API. Check <a href="/admin/config/services/beliana-sync" target="_blank">configuration</a>', ['@site' => $base_url]), 'error');
+      hide($form['actions']);
+
+      drupal_set_message(t('Unable to connect <strong>@site</strong> REST API. Check <a href="/admin/config/services/beliana-sync" target="_blank">configuration</a>', ['@site' => $base_url]), 'error');
+    }
   }
 }
 
@@ -307,6 +338,11 @@ function beliana_editor_list() {
   global $user;
   $users = entity_load('user');
   $terms = taxonomy_get_tree(2);
+  # create a list of parents for each term
+  $termParentList=array();
+  foreach ($terms as $term) {
+    $termParentList[$term->tid] = $term->parents[0];
+  }
   $output = '';
   // get taxonomy access list of the current user (it is not part of the $user variable)
   foreach ($users as $usr) {
@@ -330,7 +366,11 @@ function beliana_editor_list() {
           if (in_array("Autor", $usr->roles)) {
             // administrator and useradmin should see all authors
             if (!in_array("administrátor", $user->roles) && !in_array("useradmin", $user->roles)) {
-              if (!isset($user_wba[$term->tid])) continue;
+              # check access rights in all hierarchy levels
+              if (!(isset($user_wba[$term->tid]) or
+                    isset($user_wba[$term->parents[0]]) or  #first parent
+                    isset($user_wba[$termParentList[$term->parents[0]]])  #second parent, if 3 levels were used
+              )) continue;
             }
           }
           else {
@@ -477,6 +517,24 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => false,
     ),
+    'beliana_sync_from_remote_action' => array(
+      'type' => 'node',
+      'label' => 'Prebrať obsah',
+      'behavior' => array('changes_property'),
+      'configurable' => TRUE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+      'permissions' => array('sync heslo content'),
+    ),
+    'reset_importovane_and_link_transfer' => array(
+      'type' => 'node',
+      'label' => t('Reset importovane and transfer links'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => false,
+    ),
   );
 }
 
@@ -539,6 +597,22 @@ function importovane_publish_senior_editor(&$node, $context) {
       workbench_moderation_moderate($node, "na_zalomenie");
     }
   }
+}
+
+function beliana_sync_from_remote_action_form($settings, &$form_state) {
+  $form = [];
+
+  return $form;
+}
+
+function beliana_sync_from_remote_action_submit($form, $form_state) {
+  $return = [];
+
+  return $return;
+}
+
+function beliana_sync_from_remote_action(&$node, $context) {
+  beliana_sync_from_remote($node);
 }
 
 /**
@@ -611,30 +685,147 @@ function beliana_assign_corrector_submit($form, $form_state) {
  * @inheritdoc
  */
 function beliana_sync_from_remote_form($form, $form_state, $node) {
+  $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+  $date = empty($node->field_datum_prebratia[LANGUAGE_NONE]) ? 'Nikdy' : $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'];
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
-  $form['links'] = array(
-    '#markup' => 'Heslo v {knižnom | webovom} redakčnom systéme: ' . $remote_id . '.<br><br>',
-  );
+  $form['links'] = [
+    '#markup' => 'Heslo na ' . $type . 'om redakčnom systéme: <b><a href="' . variable_get('rs_api_uri') . '/node/' . $remote_id . '" target="_blank">' . $remote_id . '</a></b>.<br>' .
+      'Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br>' .
+      'Preberané heslo musí byť dokončené.<br><br>',
+  ];
 
-  $form['remote_id'] = array(
+  $form['message'] = [
+    '#markup' => 'Dátum posledného prenosu obsahu: <b>' . $date . '</b>.<br><br>',
+  ];
+
+  $form['nid'] = [
     '#type' => 'hidden',
-    '#value' => $remote_id,
-  );
+    '#value' => $node->nid,
+  ];
 
-  if (empty($node->field_datum_prebratia[LANGUAGE_NONE])) {
-    $form['submit'] = array(
-      '#type' => 'submit',
-      '#value' => 'Prevziať',
-    );
-  }
-  else {
-    $form['message'] = array(
-      '#markup' => 'Obsah bol prevzatý ' . $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'] . '.',
-    );
-  }
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => 'Prebrať',
+  ];
 
   return $form;
+}
+
+function beliana_sync_from_remote_form_submit($form, &$form_state) {
+  $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from/confirm'];
+}
+
+function beliana_sync_from_remote_confirm_form($form, $form_state, $node) {
+  $form['nid'] = [
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  ];
+
+  return confirm_form(
+    $form,
+    t('Are you sure you want to perform this action?'),
+    'node/' . $node->nid . '/sync-from',
+    t('This action cannot be undone.'),
+    t('Confirm'),
+    t('Cancel')
+  );
+}
+
+function beliana_sync_from_remote_confirm_form_submit($form, &$form_state) {
+  beliana_sync_from_remote(node_load($form_state['values']['nid']));
+
+  $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from'];
+}
+
+function beliana_sync_from_remote($node) {
+  global $user;
+
+  $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
+
+  if ($remote_node = beliana_api_rest_get_node($remote_id)) {
+    $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+    $state = variable_get('rs_api_type') == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
+
+    if (in_array($remote_node->workbench_moderation->current->state, [
+      'zaradene',
+      'publikovane_na_webe',
+      'ilustracia_na_webe',
+    ])) {
+      $fields_to_skip = [
+        'field_remote_id',
+        'field_ilustracia',
+        'field_zlucene_z',
+        'field_zlucene_do',
+        'field_komentar_instrukcie',
+        'field_datum_autorovho_textu',
+      ];
+
+      foreach ($remote_node as $field => $data) {
+        if (!empty($data)) {
+          $value = json_decode(json_encode($data), TRUE);
+
+          if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
+            $node->{$field} = $value;
+          }
+
+          if ($field == 'field_datum_autorovho_textu') {
+            $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
+          }
+
+          if ($field == 'field_komentar_instrukcie') {
+            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ';
+
+            if (!empty($value)) {
+              $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
+            }
+          }
+
+          if (in_array($field, [
+            'field_ilustracia',
+            'field_zlucene_z',
+            'field_zlucene_do',
+          ])) {
+            $node->{$field}[LANGUAGE_NONE] = [];
+            foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
+              if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
+                $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
+              }
+            }
+          }
+        }
+      }
+
+      $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
+      $node->revision = 1;
+
+      $workbench_moderation = 'needs_review';
+      if ($node->type == 'ilustracia') {
+        $workbench_moderation = 'ilustracia_u_redaktora';
+      }
+
+      if ($type == 'knižn') {
+        $workbench_moderation = 'prevzate_z_rs';
+      }
+
+      $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
+      if (strpos($node->log, $message_log) === FALSE) {
+        $node->log .= '. ' . $message_log;
+      }
+
+      workbench_moderation_moderate($node, $workbench_moderation);
+      drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_id]));
+    }
+    else {
+      drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
+        '@id' => $remote_id,
+        '@state' => $state,
+      ]), 'error');
+    }
+  }
+  else {
+    drupal_set_message(t('Nepodarilo sa prevziať heslo @id (komunikačná chyba API)', ['@id' => $remote_id]), 'error');
+  }
 }
 
 /**
@@ -863,6 +1054,106 @@ function prune_node_revisions(&$node, $context = array()) {
     } else {
       $cur_editor_name = $revision->name;
     }
+  }
+}
+
+/**
+ * Callback function for `reset_importovane_and_link_transfer` action.
+ * 1. Transfer links from the actual version to the oldest one or
+ *    the revision edited by iredaktor_jch or iredaktor_mb (they edited math equations and tables)
+ * 2. Set text of the this revision as the actual text
+ * 3. Remove illustrations in tha actual version 
+ * 4. Remove all revisions except for the actual, the revision edited by iredaktor_jch or iredaktor_mb and the oldest one
+ */
+function reset_importovane_and_link_transfer(&$node, $context = array()) {
+  if (!in_array($node->type, array('importovane_heslo'))) return;
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  // find the first revision edited by iredaktor_jch or iredaktor_mb
+  $extra_rev = 0; // revision with corrected mathematics to take
+  foreach ($revisions as $revision){
+    if ($revision->name == "iredaktor_jch" or $revision->name == "iredaktor_mb" ) {
+      $extra_rev = $revision->vid;
+      break;
+    }
+  }
+  $first_rev = ($extra_rev) ?  entity_revision_load('node',$extra_rev) : entity_revision_load('node',end($revisions)->vid);
+  //dpm($first_rev);
+
+  // clean some stuff
+  $rslt = transfer_links($first_rev->field_text_hesla['und'][0]['value'], $node->field_text_hesla['und'][0]['value']);
+  $node->field_text_hesla['und'][0]['value'] = str_replace("➔", "—&gt; ",$rslt[0]);
+  // add text to comment, so that a user knows
+  $komentar = "Knižný text s doplnenými odkazmi. \n" . $rslt[1];
+  $node->field_komentar_instrukcie['und'][0]['value'] = $komentar;
+  $node->revision = TRUE;
+  $node->log = "Reset and link transfer"; 
+  if (isset($node->field_ilustracia['und'])) 
+    unset($node->field_ilustracia['und']);
+  node_save($node);
+
+  #delete all revisions except:
+  #the two most recent and the oldest (imported) one
+  #the first revision edited by iredaktor_jch or iredaktor_mb
+  $revisions = node_revision_list($node);
+  $skip_math = true;
+  foreach (array_slice($revisions, 2, -1) as $revision) {
+    if ($skip_math and ($revision->name == "iredaktor_jch" or $revision->name == "iredaktor_mb") ) {
+      $skip_math = false;
+      continue;
+    }
+    node_revision_delete($revision->vid);
+  }
+}
+
+/**
+ * Callback function for `reset_heslo_webrs` action.
+ * To be called only once after splitting the editiorial system in web a print system
+ * Sets state of Heslo articles to Zaradene, Zlucene of Ukoncene/Zlucene
+ *
+ * @inheritdoc
+ *
+ * @see beliana_action_info
+ */
+function reset_heslo_webrs(&$node, $context = array()) {
+  if (!in_array($node->type, array('heslo'))) return;
+  if (!in_array($node->workbench_moderation['current']->state, 
+    array("u_autora","needs_review","na_zverejnenie","u_vyst_redaktora_2",
+    "u_vyst_redaktora_2x","u_vyst_redaktora_3","u_vyst_redaktora_4",
+    "u_v_st_redaktora_5","1_korektura","2_korekt_ra","u_konzultanta",
+    "u_jaz_redaktora_2","na_jazykovu_korekturu","ukoncenezluene"))) return;
+
+  $node->revision = TRUE;
+  if (isset($node->field_zlucene_z['und'])) {
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia zlúčeného hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
+      workbench_moderation_state_label("zlucene") . ".";
+    workbench_moderation_moderate($node, "zlucene");
+  } elseif ($node->workbench_moderation['current']->state == 'ukoncenezluene' ){
+    $user = user_load($node->uid);
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label("ukoncenezluene") . ", nový stav: ".
+      workbench_moderation_state_label("ukoncenezluene") . "." . PHP_EOL .
+      "Autor knižného textu: " . $user->name;
+  } else {
+    $user = user_load($node->uid);
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+      "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
+      workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
+      workbench_moderation_state_label("zaradene") . ".".PHP_EOL.
+      "Autor knižného textu: " . $user->name;
+    workbench_moderation_moderate($node, "zaradene");
+  }
+  $node->log = "Verzia po oddelení redakčných systémov";
+  $node->uid='719'; // 719 == nepriradeny
+  node_save($node);
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  #dpm($revisions);
+  foreach (array_slice($revisions, 1, -1) as $revision) {
+    node_revision_delete($revision->vid);
   }
 }
 
@@ -2608,7 +2899,7 @@ function beliana_api_rest_login($request_url) {
  * $which_article: "Nové heslo:" or "Zlúčené heslo:"
  * $attribute: if set, field_attibuty of the remote node is set to this value (used to set "Zlucene heslo" in article merging"
  */
-function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) {
+function beliana_api_rest_create_node($node, $site, $which_article, $attribute = NULL) {
   global $user;
 
   $base_url = variable_get('rs_api_uri');
@@ -2692,4 +2983,253 @@ function beliana_api_rest_node($node, $site, $which_article, $attribute = NULL) 
   }
 
   return FALSE;
+}
+
+function beliana_api_rest_get_node($id) {
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/heslo';
+
+  if ($login = beliana_api_rest_login($request_url)) {
+    $curl = curl_init($request_url . '/node/' . $id);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+      'Accept: application/json',
+      'X-CSRF-Token: ' . $login['token'],
+    ]);
+    curl_setopt($curl, CURLOPT_HEADER, FALSE);
+    curl_setopt($curl, CURLOPT_COOKIE, $login['session'] . "");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+    $response = curl_exec($curl);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    if ($http_code == 200) {
+      return json_decode($response);
+    }
+  }
+
+  return FALSE;
+}
+
+// display error message (illustration)
+function il_error($node, $ilu_node, $msg, $category) {
+  if ($node->type === 'ilustracia'){
+    watchdog($category, 'Chyba v ilustrácii "@ilu_title": ' . $msg, [
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_NOTICE);
+    $msg = 'Chyba v ilustrácii <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    drupal_set_message($msg, 'error');
+  } else {
+    watchdog($category, 'Chyba v hesle "@title": ilustrácia "@ilu_title:" ' . $msg, [
+      '@title' => $node->title,
+      '@ilu_title' => $ilu_node->title,
+    ], WATCHDOG_NOTICE);
+    $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ilustrácia <strong><a href="/' . $ilu_node->path['source'] .'">' . $ilu_node->title . '</a></strong>: ' . $msg . '.';
+    drupal_set_message($msg, 'error');
+  }
+}
+
+// display error message (article)
+function art_error($node, $msg, $category) {
+  watchdog($category, 'Chyba v hesle "@title" ' . $msg, [
+    '@title' => $node->title,
+  ], WATCHDOG_NOTICE);
+  $msg = 'Chyba v hesle <a href ="/' . $node->path['source'] . '">' . $node->title . '</a>: ' . $msg . '.';
+  drupal_set_message($msg, 'error');
+}
+
+// prepare and display error message in the case of html syntax error
+function html_error($node, $error, $shortmsg)
+{
+  $msg = $shortmsg .": ". $error->message . "(" . "riadok " . $error->line . ", znak " . $error->column . ")";
+  art_error($node, $msg, 'htmlerror');
+}
+
+/*
+ * compare two strings taking into account possible abbreviations
+ */
+function abb_equal($abtext, $text)
+{
+  $abte = explode(" ", str_replace(".", "", $abtext));
+  $te = explode(" ", $text);
+  if ( count($abte) != count($te) ) return false;
+  foreach (array_combine($abte, $te) as $a => $t) {
+    if ($a != substr($t, 0, strlen($a) ) ) {
+      return false;
+    }
+  }
+  return "true";
+}
+
+/*
+ * transfer links from text_from to text_to
+ * return array(new_text, log)
+ */
+function transfer_links($text_to, $text_from)
+{
+  //dpm($text_from, "from");
+  //dpm($text_to, "to");
+  $text_to = str_replace("—&gt; ", "➔", $text_to);
+  $text_to = str_replace("—>", "➔", $text_to);
+  $text_to = str_replace("➔","➔ ", $text_to);
+  $text_to = str_replace(" "," ",$text_to); //odstranit nezalomitelnu medzeru
+  $text_to = str_replace("&nbsp;"," ",$text_to); //odstranit nezalomitelnu medzeru
+  $text_to = str_replace("﻿","",$text_to); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_to = str_replace("​","",$text_to); //odstranit nezalomitelny znak 0-ovej sirky
+
+
+  //remove <p> tags from tables
+  preg_match_all('?(<p><table.*</table></p>)?ms', $text_to, $tbs);
+  foreach($tbs[0] as $tb){
+    $tbp = str_replace("</p>", "", str_replace("<p>", "", $tb));
+    $text_to = str_replace($tb, $tbp, $text_to);
+  }
+
+  // fix junk inherited for MS Word
+  //<em>a<sub>i</em></sub>
+  $text_to = preg_replace("?<em>([^<]+)<sub>([^<]+)</em></sub>?u","<em>$1<sub>$2</sub></em>",$text_to);
+  $text_to = preg_replace("?<em>([^<]+)<sup>([^<]+)</em></sup>?u","<em>$1<sup>$2</sup></em>",$text_to);
+  //<strong>Rozloha v tis. km<sup>2</strong></sup>
+  //<strong>e<sub>i</sub> e<sub>j</strong></sub>
+  $text_to = preg_replace("?<strong>([^<]+)<sub>([^<]+)</strong></sub>?u","<strong>$1<sub>$2</sub></strong>",$text_to);
+  $text_to = preg_replace("?<strong>([^<]+)<sup>([^<]+)</strong></sup>?u","<strong>$1<sup>$2</sup></strong>",$text_to);
+  $text_to = preg_replace("?<em>([^<]*)<sub>([^<]*)</sub>([^<]*)<sub>([^<]*)</em></sub>?u","<em>$1<sub>$2</sub>$3<sub>$4</sub></em>",$text_to);
+  $text_to = preg_replace("?<strong>([^<]*)<sub>([^<]*)</sub>([^<]*)<sub>([^<]*)</strong></sub>?u","<strong>$1<sub>$2</sub>$3<sub>$4</sub></strong>",$text_to);
+  #<em>h<sup>1</sup>-e<sup>2</sup>-a<sup>2</em></sup>
+  $text_to = preg_replace("?<em>([^<]*)<sup>([^<]*)</sup>([^<]*)<sup>([^<]*)</sup>([^<]*)<sup>([^<]*)</em></sup>?u", "?<em>$1<sup>$2</sup>$3<sup>$4</sup>$5<sup>$6</sup></em>?u", $text_to);
+  //<em>a. k. = a<sub>i</sub>/c<sub>i</em></sub>
+  $text_to = preg_replace("?<em>([^<]*)<sub>([^<]*)</sub>([^<]*)<sub>([^<]*)</em></sub>?u","<em>$1<sub>$2</sub>$3<sub>$4</sub></em>",$text_to);
+
+  // remove <strong> and <em> from text_from (links are sometimes formatted)
+  $text_from = str_replace("</span>", "", preg_replace("?<span[^>]*>?u", "", $text_from));
+  $text_from = str_replace("</em>", "", str_replace("<em>", "", $text_from));
+  $text_from = str_replace("</strong>", "", str_replace("<strong>", "", $text_from));
+  $text_from = str_replace(" "," ",$text_from); //odstranit nezalomitelnu medzeru
+  $text_from = str_replace("&nbsp;"," ",$text_from); //odstranit nezalomitelnu medzeru
+  $text_from = str_replace("﻿","",$text_from); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_from = str_replace("​","",$text_from); //odstranit nezalomitelny znak 0-ovej sirky
+
+  $log="";
+  #rearrange the arrays
+  #[<a href="/heslo/omyl_02">omylu</a>] =>
+  #     Array ( [0] => <a href="/heslo/omyl_02">omylu</a> [1] => <a href="/heslo/omyl_02"> [2] => omylu)
+  preg_match_all('*(<a [^>]+>)([^<]+)(<\/a>)*', $text_from, $match_from);
+  $rmatch_from = array();
+  for($i=0; $i<count($match_from[0]); $i++) {
+    $rmatch_from[$match_from[0][$i]] = array($match_from[0][$i], $match_from[1][$i], $match_from[2][$i]);
+  }
+
+  preg_match_all('*(<a [^>]+>)([^<]+)(<\/a>)*', $text_to, $match_to);
+  $rmatch_to = array();
+  for($i=0; $i<count($match_to[0]); $i++) {
+    $rmatch_to[$match_to[0][$i]] = array($match_to[0][$i], $match_to[1][$i], $match_to[2][$i]);
+  }
+
+  // remove the <a> tags
+  $text_to = preg_replace("/<a[^>]*>/"," ",$text_to); //odstranit opakovane medzery
+  $text_to = str_replace("</a>","",$text_to); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_to = preg_replace("/  +/"," ",$text_to); //odstranit opakovane medzery
+
+  // replace from >> to by exact matching
+  $used = array();
+  foreach($rmatch_from as $key => $value ) {
+    if ( strpos($text_to, "➔ ".$value[2] )) {
+      $text_to = str_replace("➔ ".$value[2], "➔ ".$value[0], $text_to);
+      $log = $log . "Doplnený odkaz (priamo): " . $value[2] . "\n";
+      $used[] = $key;
+    }
+  }
+  foreach( $used as $key) unset($rmatch_from[$key]);
+
+  // replace from >> to by abbreviation matching or fuzzy matching
+  // find max. number of words in text_from links
+  $wmax = 0;
+  foreach($rmatch_from as $key => $value ) {
+    #$wcnt = count(explode(" ", $value[2]));
+    #$wcnt = str_word_count($value[2]);
+    $wcnt = substr_count($value[2], " ") + 1;
+    if ($wcnt > $wmax)
+      $wmax = $wcnt;
+  }
+  //print_r("wmax $wmax\n");
+  // create lists of matching unresolved links with number 1 .. $wmax
+  $lmatches = array();
+  for($i = 1; $i <= $wmax; $i ++){
+    $ms = "/➔ ([^<][^ <,;()]+){" . $i . "," . $i . "}/";
+    preg_match_all($ms, $text_to, $mmm);
+    $lmatches[$i] = $mmm[0];
+  }
+
+  // abbreviation matching
+  // for each rmatch key find unresolved matching link
+  $used = array();
+  foreach($rmatch_from as $key => $value ) {
+    $wcnt = substr_count($value[2], " ") + 1;
+    foreach( $lmatches[$wcnt] as $ltext){
+      if ( !abb_equal($ltext, "➔ ".$value[2])) continue;
+      $ltext = str_replace("➔ ", "", $ltext);
+      $htext = str_replace($value[2], $ltext, $key);
+      $text_to = str_replace("➔ ".$ltext, "➔ ".$htext, $text_to);
+      $used[] = $key;
+      $log = $log . "Doplnený odkaz (skratka): " . $ltext . "\n";
+     }
+  }
+  foreach( $used as $key) unset($rmatch_from[$key]);
+
+  // for each rmatch key find unresolved matching link
+  $used = array();
+  foreach($rmatch_from as $key => $value ) {
+    #$wcnt = count(explode(" ", $value[2]));
+    #$wcnt = str_word_count($value[2]);
+    $wcnt = substr_count($value[2], " ") + 1;
+    $maxperc = 0;
+    foreach( $lmatches[$wcnt] as $ltext){
+      $ltext = str_replace("➔ ", "", $ltext);
+      $sim = similar_text($ltext, $value[2], $perc);
+      if ( $perc > $maxperc) {
+        $maxperc = $perc;
+        $simkey = $key;
+        $simltext = $ltext;
+      }
+    }
+    // accept if similarity> 60
+    //if ($maxperc > 60){
+      //$htext = str_replace($value[2], $simltext, $simkey);
+    if ($maxperc > 70){
+      $htext = str_replace(">".$value[2], ">".$simltext, $simkey);
+      $text_to = str_replace($simltext, $htext, $text_to);
+      $used[] = $key;
+      $log = $log . "Doplnený odkaz (fuzzy): " . $simltext . "\n";
+      //print_r($wcnt . " " .$simkey . " " .$simltext." " . $maxperc." ". $htext ."\n");
+     }
+  }
+  foreach( $used as $key) unset($rmatch_from[$key]);
+
+  //
+  // replace unresolved links using rmatch_to (by exact matching)
+  foreach($rmatch_to as $key => $value ) {
+    if ( strpos($text_to, "➔ ".$value[2] )) {
+        $text_to = str_replace("➔ ".$value[2], "➔ ".$value[0], $text_to);
+        $log = $log . "Nezmenený odkaz (nenájdený v zdrojovom texte): " . $value[2] . "\n";
+    }
+  }
+
+  // remaining from links:
+  foreach($rmatch_from as $key => $value ) {
+    $log = $log . "Nepoužitý odkaz (nenájdený v cieľovom texte): " . $value[2] . "\n";
+  }
+
+  $text_to = str_replace("➔", "—&gt; ",$text_to);
+  $text_to = str_replace("—>", "—&gt; ",$text_to);
+  $text_to = preg_replace("/ [&]([ .,;)])/", "&amp;$1",$text_to);
+  $text_to = preg_replace("/  +/"," ",$text_to); //odstranit opakovane medzery
+  $text_to = str_replace("</a></a>", "</a>",$text_to);
+
+  // find the remaining links
+  preg_match_all('/—\&gt; [^< ]+/', $text_to, $unresolved);
+  foreach($unresolved[0] as $un)
+    $log = $log . "Nevyriešený odkaz (v cieľovom texte): " . str_replace("&gt;",">", $un) . "\n";
+
+  //dpm($text_to, "2");
+  return array($text_to, $log);
 }

@@ -177,7 +177,7 @@ function beliana_merge(&$entity, $context = array()) {
     $master->field_lexikalna_skupina[LANGUAGE_NONE][]['tid'] = $term->tid;
     workbench_moderation_moderate($master, 'zlucene');
     # Synchtonize to the web editorial system
-    if ($response = beliana_api_rest_node($master, 'rs', "Zlúčené heslo:", "Zlúčené heslo")) {
+    if ($response = beliana_api_rest_create_node($master, 'rs', "Zlúčené heslo:", "Zlúčené heslo")) {
       $master->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
     }
     node_save($master);
