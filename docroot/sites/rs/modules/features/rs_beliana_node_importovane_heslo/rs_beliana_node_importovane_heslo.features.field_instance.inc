@@ -292,7 +292,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
@@ -300,7 +300,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 9,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
