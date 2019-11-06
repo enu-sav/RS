@@ -199,7 +199,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -261,7 +261,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 19,
+        'weight' => 18,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -377,7 +377,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 13,
+        'weight' => 12,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -433,7 +433,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 22,
+        'weight' => 21,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -507,7 +507,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 16,
+        'weight' => 15,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -560,7 +560,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 18,
+        'weight' => 17,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -672,7 +672,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
@@ -680,7 +680,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 10,
+        'weight' => 22,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -924,7 +924,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -968,7 +968,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 13,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1083,7 +1083,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1532,7 +1532,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 17,
+        'weight' => 16,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1576,7 +1576,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 21,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1722,7 +1722,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 20,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
