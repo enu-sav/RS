@@ -4,3 +4,7 @@
 #branding h1 {
     color: #333 !important;;
 }
+
+div.breadcrumb a {
+    color: #333 !important;
+}

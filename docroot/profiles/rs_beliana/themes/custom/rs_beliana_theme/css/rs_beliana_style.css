@@ -34,6 +34,7 @@
     color: #000;
 }
 
+/*
 body.admin-menu.adminimal-menu {
     margin-top: 142px !important;
 }
@@ -52,6 +53,7 @@ body.admin-menu.adminimal-menu #branding {
 body.admin-menu.adminimal-menu #admin-menu {
     z-index: 99999;
 }
+*/
 
 .filter-guidelines {
     display: none;
