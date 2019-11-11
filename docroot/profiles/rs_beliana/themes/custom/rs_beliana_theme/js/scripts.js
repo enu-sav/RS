@@ -13,7 +13,7 @@
         },
         adminMenuOffset: function () {
             var offset = $('body.admin-menu.adminimal-menu #admin-menu').height();
-            $('body.admin-menu.adminimal-menu').attr('style', 'margin-top: ' + (offset + 86) + 'px !important');
+            $('body.admin-menu.adminimal-menu #branding').attr('style', 'margin-top: ' + (offset - 30) + 'px !important');
         }
     };
 })(jQuery);
