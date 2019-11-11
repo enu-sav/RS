@@ -124,7 +124,7 @@ function rs_beliana_media_strongarm() {
       'filenum' => '0',
       'directories' => array(
         0 => array(
-          'name' => 'u%uid',
+          'name' => 'imce/u%uid',
           'subnav' => 1,
           'browse' => 1,
           'upload' => 1,
