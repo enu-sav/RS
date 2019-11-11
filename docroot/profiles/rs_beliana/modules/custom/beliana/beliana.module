@@ -739,92 +739,98 @@ function beliana_sync_from_remote_confirm_form_submit($form, &$form_state) {
 }
 
 function beliana_sync_from_remote($node) {
-  global $user;
-
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   if ($remote_node = beliana_api_rest_get_node($remote_id)) {
-    $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
-    $state = variable_get('rs_api_type') == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
+    beliana_sync_from_remote_build($node, $remote_node);
+  }
+  else {
+    drupal_set_message(t('Nepodarilo sa prevziať heslo @id (komunikačná chyba API)', ['@id' => $remote_id]), 'error');
+  }
+}
 
-    if (in_array($remote_node->workbench_moderation->current->state, [
-      'zaradene',
-      'publikovane_na_webe',
-      'ilustracia_na_webe',
-    ])) {
-      $fields_to_skip = [
-        'field_remote_id',
-        'field_ilustracia',
-        'field_zlucene_z',
-        'field_zlucene_do',
-        'field_komentar_instrukcie',
-        'field_datum_autorovho_textu',
-      ];
+function beliana_sync_from_remote_build($node, $remote_node) {
+  global $user;
 
-      foreach ($remote_node as $field => $data) {
-        if (!empty($data)) {
-          $value = json_decode(json_encode($data), TRUE);
+  $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+  $state = variable_get('rs_api_type') == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
 
-          if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
-            $node->{$field} = $value;
+  if (in_array($remote_node->workbench_moderation->current->state, [
+    'zaradene',
+    'publikovane_na_webe',
+    'ilustracia_na_webe',
+  ])) {
+    $fields_to_skip = [
+      'field_remote_id',
+      'field_ilustracia',
+      'field_zlucene_z',
+      'field_zlucene_do',
+      'field_komentar_instrukcie',
+      'field_datum_autorovho_textu',
+    ];
+
+    foreach ($remote_node as $field => $data) {
+      if (!empty($data)) {
+        $value = json_decode(json_encode($data), TRUE);
+
+        if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
+          $node->{$field} = $value;
+        }
+
+        if ($field == 'field_datum_autorovho_textu') {
+          $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
+        }
+
+        if ($field == 'field_komentar_instrukcie') {
+          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ';
+
+          if (!empty($value)) {
+            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
           }
+        }
 
-          if ($field == 'field_datum_autorovho_textu') {
-            $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
-          }
+        if (in_array($field, [
+          'field_ilustracia',
+          'field_zlucene_z',
+          'field_zlucene_do',
+        ])) {
+          $node->{$field}[LANGUAGE_NONE] = [];
 
-          if ($field == 'field_komentar_instrukcie') {
-            $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $type . 'ého RS. ';
-
-            if (!empty($value)) {
-              $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
-            }
-          }
-
-          if (in_array($field, [
-            'field_ilustracia',
-            'field_zlucene_z',
-            'field_zlucene_do',
-          ])) {
-            $node->{$field}[LANGUAGE_NONE] = [];
-            foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
-              if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
-                $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
-              }
+          foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
+            if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
+              beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
+              $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
             }
           }
         }
       }
-
-      $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
-      $node->revision = 1;
-
-      $workbench_moderation = 'needs_review';
-      if ($node->type == 'ilustracia') {
-        $workbench_moderation = 'ilustracia_u_redaktora';
-      }
-
-      if ($type == 'knižn') {
-        $workbench_moderation = 'prevzate_z_rs';
-      }
-
-      $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
-      if (strpos($node->log, $message_log) === FALSE) {
-        $node->log .= '. ' . $message_log;
-      }
-
-      workbench_moderation_moderate($node, $workbench_moderation);
-      drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_id]));
     }
-    else {
-      drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
-        '@id' => $remote_id,
-        '@state' => $state,
-      ]), 'error');
+
+    $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
+    $node->revision = 1;
+
+    $workbench_moderation = 'needs_review';
+    if ($node->type == 'ilustracia') {
+      $workbench_moderation = 'ilustracia_u_redaktora';
     }
+
+    if ($type == 'knižn') {
+      $workbench_moderation = 'prevzate_z_rs';
+    }
+
+    $message_log = 'Obsah prevzatý z ' . $type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
+    if (strpos($node->log, $message_log) === FALSE) {
+      $node->log .= '. ' . $message_log;
+    }
+
+    workbench_moderation_moderate($node, $workbench_moderation);
+    drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_node->nid]));
   }
   else {
-    drupal_set_message(t('Nepodarilo sa prevziať heslo @id (komunikačná chyba API)', ['@id' => $remote_id]), 'error');
+    drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
+      '@id' => $remote_node->nid,
+      '@state' => $state,
+    ]), 'error');
   }
 }
 
