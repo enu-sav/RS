@@ -636,7 +636,7 @@ function beliana_assign_author_form($form, &$form_state) {
  * @inheritdoc
  */
 function beliana_assign_author_validate($form, &$form_state) {
-  _beliana_validate_assign_user_form($form_state);
+  _beliana_validate_assign_user_form($form_state, array("Autor"));
 }
 
 /**
@@ -675,7 +675,7 @@ function beliana_assign_corrector_form($form, &$form_state) {
  * @inheritdoc
  */
 function beliana_assign_corrector_validate($form, &$form_state) {
-  _beliana_validate_assign_user_form($form_state);
+  _beliana_validate_assign_user_form($form_state, array("Autor", "Redaktor"));
 }
 
 /**
@@ -714,7 +714,7 @@ function beliana_assign_consultant_form($form, &$form_state) {
  * @inheritdoc
  */
 function beliana_assign_consultant_validate($form, &$form_state) {
-  _beliana_validate_assign_user_form($form_state);
+  _beliana_validate_assign_user_form($form_state, array("Konzultant"));
 }
 
 /**
@@ -1831,10 +1831,15 @@ function _beliana_assign_user_form($msg) {
  * @param array $form_state
  *   Array with form values.
  */
-function _beliana_validate_assign_user_form(&$form_state) {
-  if (user_load_by_name($form_state['values']['user']) === FALSE) {
+function _beliana_validate_assign_user_form(&$form_state, $role) {
+  $user = user_load_by_name($form_state['values']['user']);
+  if ($user === FALSE) {
     form_set_error('user', t('You need to choose existing user'));
   }
+  if (empty(array_intersect($role,$user->roles))) {
+    form_set_error('user', t('Specified user needs role: '.implode(", ",$role)));
+  }
+  dpm($user);
 }
 
 /**
