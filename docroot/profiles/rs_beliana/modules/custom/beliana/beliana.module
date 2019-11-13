@@ -432,7 +432,6 @@ function beliana_action_info() {
   return array(
     'beliana_assign_author' => array(
       'type' => 'entity',
-      //'label' => t('Určiť autora a priradiť autorovi'),
       'label' => t('Specify author and assign to author'),
       'configurable' => TRUE,
       'triggers' => array('any'),
@@ -442,8 +441,16 @@ function beliana_action_info() {
     ),
     'beliana_assign_corrector' => array(
       'type' => 'entity',
-      //'label' => t('Určiť autora a priradiť redaktorovi'),
       'label' => t('Specify author and assign to editor'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+      'behavior' => array('create_property'),
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ),
+    'beliana_assign_consultant' => array(
+      'type' => 'entity',
+      'label' => t('Assign to consultant'),
       'configurable' => TRUE,
       'triggers' => array('any'),
       'behavior' => array('create_property'),
@@ -616,12 +623,11 @@ function beliana_sync_from_remote_action(&$node, $context) {
 }
 
 /**
- * Configuration form for `beliana_assign_author` action.
  *
  * @inheritdoc
  */
 function beliana_assign_author_form($form, &$form_state) {
-  return _beliana_assign_user_form();
+  return _beliana_assign_user_form('Choose the author to assign articles to');
 }
 
 /**
@@ -660,7 +666,7 @@ function beliana_assign_author(&$node, $context) {
  * @inheritdoc
  */
 function beliana_assign_corrector_form($form, &$form_state) {
-  return _beliana_assign_user_form();
+  return _beliana_assign_user_form('Choose the author to assign articles to');
 }
 
 /**
@@ -679,6 +685,59 @@ function beliana_assign_corrector_validate($form, &$form_state) {
  */
 function beliana_assign_corrector_submit($form, $form_state) {
   return _beliana_submit_assign_user_form($form_state, 'needs_review');
+}
+
+/**
+ * Callback function for `beliana_assign_corrector` action.
+ *
+ * Assigns selected user as node author and
+ * change workflow status to `needs_review`.
+ *
+ * @inheritdoc
+ */
+function beliana_assign_corrector(&$node, $context) {
+  _beliana_assign_user($node, $context);
+}
+
+/**
+ * Configuration form for `beliana_assign_consultant` action.
+ *
+ * @inheritdoc
+ */
+function beliana_assign_consultant_form($form, &$form_state) {
+  return _beliana_assign_user_form('Choose the consultant to assign articles to');
+}
+
+/**
+ * Validation for `beliana_assign_consultant_form` form.
+ *
+ * @inheritdoc
+ */
+function beliana_assign_consultant_validate($form, &$form_state) {
+  _beliana_validate_assign_user_form($form_state);
+}
+
+/**
+ * Submit function for for `beliana_assign_consultant_form` form.
+ *
+ * @inheritdoc
+ */
+function beliana_assign_consultant_submit($form, $form_state) {
+  #dpm($form, "submit");
+  acquia_debug();
+  return _beliana_submit_assign_user_form($form_state, 'u_konzultanta');
+}
+
+/**
+ * Callback for `beliana_assign_consultant` action.
+ *
+ * Assigns selected user as node author and
+ * changes workflow status to `u_autora`.
+ *
+ * @inheritdoc
+ */
+function beliana_assign_consultant(&$node, $context) {
+  _beliana_assign_user($node, $context);
 }
 
 /**
@@ -832,18 +891,6 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       '@state' => $state,
     ]), 'error');
   }
-}
-
-/**
- * Callback function for `beliana_assign_corrector` action.
- *
- * Assigns selected user as node author and
- * change workflow status to `needs_review`.
- *
- * @inheritdoc
- */
-function beliana_assign_corrector(&$node, $context) {
-  _beliana_assign_user($node, $context);
 }
 
 /**
@@ -1416,6 +1463,14 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
+    // remove state 'u_konzultanta' from the list of transitions
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'needs_review' && in_array("Redaktor", $user->roles)) {
+      foreach ($form['state']['#options'] as $k => $v) {
+        if (in_array($k, array('u_konzultanta'))) {
+          unset($form['state']['#options'][$k]);
+        }
+      }
+    }
 
     // Add custom submit handler.
     $form['#submit'][] = 'beliana_workflow_reaction';
@@ -1759,11 +1814,11 @@ function _check_links(&$node) {
  * @return array
  *   Array with form element.
  */
-function _beliana_assign_user_form() {
+function _beliana_assign_user_form($msg) {
   $form = array();
   $form['user'] = array(
     '#type' => 'textfield',
-    '#title' => t('Vyberte autora, ktorému chcete heslo priradiť'),
+    '#title' => t($msg),
     '#required' => TRUE,
     '#autocomplete_path' => 'user/autocomplete',
   );
