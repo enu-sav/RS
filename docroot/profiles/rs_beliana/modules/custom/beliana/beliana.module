@@ -1501,6 +1501,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   $new_state = $values['state'];
   $cur_state = $values['node']->workbench_moderation['current']->state;
 
+  //Handle special transitions in the book workflow
   handle_special_transitions($values);
 
   // check type heslo
@@ -1577,6 +1578,14 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
       return;
+    }
+  }
+
+  if ($cur_state === "u_konzultanta" and $new_state === "needs_review") {
+    if (isset($values['node']->field_uid_autora['und'])) {
+      $values['node']->uid = $values['node']->field_uid_autora['und'][0]['value'];
+      unset($values['node']->field_uid_autora['und']);
+      node_save($values['node']);
     }
   }
 
@@ -1839,7 +1848,6 @@ function _beliana_validate_assign_user_form(&$form_state, $role) {
   if (empty(array_intersect($role,$user->roles))) {
     form_set_error('user', t('Specified user needs role: '.implode(", ",$role)));
   }
-  dpm($user);
 }
 
 /**
@@ -1891,6 +1899,11 @@ function _beliana_assign_user(&$node, $context) {
     if (empty(array_intersect($node_taxo, $user_taxo))) {
       drupal_set_message($node->title . ' sa nepodarilo priradiť autorovi, pretože nemá zodpovedajúcu lexikálnu skupinu.', 'error');
       return FALSE;
+    }
+    // in the case of transfer to consultant save the author's uid to be later restored
+    // use field_redaktori_zluceneho for that
+    if ($context['status'] === 'u_konzultanta') {
+      $node->field_uid_autora['und'][0]['value'] = $node->uid;
     }
     $node->uid = $user->uid;
     node_save($node);
