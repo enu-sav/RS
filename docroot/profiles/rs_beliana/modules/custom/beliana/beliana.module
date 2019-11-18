@@ -1490,11 +1490,14 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-    // remove state 'u_konzultanta' from the list of transitions
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'needs_review' && in_array("Redaktor", $user->roles)) {
-      foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, array('u_konzultanta'))) {
-          unset($form['state']['#options'][$k]);
+
+    // remove state 'u_konzultanta' from the list of transitions  (webrs only)
+    if (variable_get('rs_api_type') != "webrs") { //rs_api_type specifies type of the opposite side, therefore '!=' 
+      if ($form['node']['#value']->workbench_moderation['current']->state === 'needs_review' && in_array("Redaktor", $user->roles)) {
+        foreach ($form['state']['#options'] as $k => $v) {
+          if (in_array($k, array('u_konzultanta'))) {
+            unset($form['state']['#options'][$k]);
+          }
         }
       }
     }
