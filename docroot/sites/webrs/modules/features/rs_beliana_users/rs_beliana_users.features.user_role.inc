@@ -76,12 +76,6 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 15,
   );
 
-  // Exported role: Výstupný redaktor 2HP.
-  $roles['Výstupný redaktor 2HP'] = array(
-    'name' => 'Výstupný redaktor 2HP',
-    'weight' => 16,
-  );
-
   // Exported role: Výstupný redaktor 2X.
   $roles['Výstupný redaktor 2X'] = array(
     'name' => 'Výstupný redaktor 2X',
@@ -104,12 +98,6 @@ function rs_beliana_users_user_default_roles() {
   $roles['Výstupný redaktor 5'] = array(
     'name' => 'Výstupný redaktor 5',
     'weight' => 20,
-  );
-
-  // Exported role: Zlúčené-odkazy.
-  $roles['Zlúčené-odkazy'] = array(
-    'name' => 'Zlúčené-odkazy',
-    'weight' => 26,
   );
 
   // Exported role: administrátor.
