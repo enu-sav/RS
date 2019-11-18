@@ -849,6 +849,33 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
 
         if (in_array($field, [
+          'field_subor_ilustracie',
+          'field_obrazok_navrh',
+          'field_original',
+        ])) {
+          if (!empty($value)) {
+            $node->{$field}[LANGUAGE_NONE] = [];
+
+            foreach ($value[LANGUAGE_NONE] as $key => $remote_file) {
+              $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
+              $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
+
+              $node->{$field}[LANGUAGE_NONE][$key] = [
+                'fid' => $file->fid,
+                'uid' => $file->uid,
+                'filename' => $file->filename,
+                'uri' => $file->uri,
+                'filemime' => $file->filemime,
+                'filesize' => $file->filesize,
+                'status' => 1,
+                'display' => 1,
+                'description' => '',
+              ];
+            }
+          }
+        }
+
+        if (in_array($field, [
           'field_ilustracia',
           'field_zlucene_z',
           'field_zlucene_do',
@@ -873,8 +900,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     if ($node->type == 'ilustracia') {
       $workbench_moderation = 'ilustracia_u_redaktora';
     }
-
-    if ($type == 'knižn') {
+    elseif ($type == 'knižn') {
       $workbench_moderation = 'prevzate_z_rs';
     }
 
@@ -1116,7 +1142,7 @@ function prune_node_revisions(&$node, $context = array()) {
  * 1. Transfer links from the actual version to the oldest one or
  *    the revision edited by iredaktor_jch or iredaktor_mb (they edited math equations and tables)
  * 2. Set text of the this revision as the actual text
- * 3. Remove illustrations in tha actual version 
+ * 3. Remove illustrations in tha actual version
  * 4. Remove all revisions except for the actual, the revision edited by iredaktor_jch or iredaktor_mb and the oldest one
  */
 function reset_importovane_and_link_transfer(&$node, $context = array()) {
@@ -1141,8 +1167,8 @@ function reset_importovane_and_link_transfer(&$node, $context = array()) {
   $komentar = "Knižný text s doplnenými odkazmi. \n" . $rslt[1];
   $node->field_komentar_instrukcie['und'][0]['value'] = $komentar;
   $node->revision = TRUE;
-  $node->log = "Reset and link transfer"; 
-  if (isset($node->field_ilustracia['und'])) 
+  $node->log = "Reset and link transfer";
+  if (isset($node->field_ilustracia['und']))
     unset($node->field_ilustracia['und']);
   node_save($node);
 
@@ -1171,7 +1197,7 @@ function reset_importovane_and_link_transfer(&$node, $context = array()) {
  */
 function reset_heslo_webrs(&$node, $context = array()) {
   if (!in_array($node->type, array('heslo'))) return;
-  if (!in_array($node->workbench_moderation['current']->state, 
+  if (!in_array($node->workbench_moderation['current']->state,
     array("u_autora","needs_review","na_zverejnenie","u_vyst_redaktora_2",
     "u_vyst_redaktora_2x","u_vyst_redaktora_3","u_vyst_redaktora_4",
     "u_v_st_redaktora_5","1_korektura","2_korekt_ra","u_konzultanta",
@@ -1179,21 +1205,21 @@ function reset_heslo_webrs(&$node, $context = array()) {
 
   $node->revision = TRUE;
   if (isset($node->field_zlucene_z['und'])) {
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] =
       "Verzia zlúčeného hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
       workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
       workbench_moderation_state_label("zlucene") . ".";
     workbench_moderation_moderate($node, "zlucene");
   } elseif ($node->workbench_moderation['current']->state == 'ukoncenezluene' ){
     $user = user_load($node->uid);
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] =
       "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
       workbench_moderation_state_label("ukoncenezluene") . ", nový stav: ".
       workbench_moderation_state_label("ukoncenezluene") . "." . PHP_EOL .
       "Autor knižného textu: " . $user->name;
   } else {
     $user = user_load($node->uid);
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] =
       "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
       workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
       workbench_moderation_state_label("zaradene") . ".".PHP_EOL.
