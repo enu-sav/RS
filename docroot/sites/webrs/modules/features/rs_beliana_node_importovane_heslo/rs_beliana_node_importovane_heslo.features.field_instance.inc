@@ -807,6 +807,59 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-importovane_heslo-field_uid_autora'.
+  $field_instances['node-importovane_heslo-field_uid_autora'] = array(
+    'bundle' => 'importovane_heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 15,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_uid_autora',
+    'label' => 'UID autora',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 15,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-importovane_heslo-field_vyslo_knizne'.
   $field_instances['node-importovane_heslo-field_vyslo_knizne'] = array(
     'bundle' => 'importovane_heslo',
@@ -917,6 +970,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Názov');
   t('Názov súboru sa doplní automaticky na základe názvu hesla');
   t('Opravy, ktoré sa majú uviesť vo zväzku Erráta. Opravy uveďte formou "pôvodné >> opravené;", napríklad "King of Blue >> Kind of Blue;", a to vždy na samostatný riadok a na koniec dajte znak ;. Ak sú zmeny rozsiahle (napr. heslo je celkom prepísané), uveďte len "rozsiahle zmeny".');
+  t('Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.');
   t('Použité zdroje');
   t('Pozícia tabuľky pre geografické heslá');
   t('Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)');
@@ -925,6 +979,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Text hesla');
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
   t('Text určený pre autora, redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
+  t('UID autora');
   t('Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).');
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyberte lexikálnu skupinu najnižšej úrovne (nemá podúrovne a vždy má v texte zátvorky).');
