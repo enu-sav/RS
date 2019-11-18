@@ -857,7 +857,8 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
           foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
             if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
-              beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
+              // do not sync ilusracia bundle when syncing from node
+              //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
               $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
             }
           }
