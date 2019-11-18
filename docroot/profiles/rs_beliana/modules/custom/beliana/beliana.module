@@ -2964,7 +2964,11 @@ function beliana_api_rest_login($request_url) {
 
   $ret = new stdClass;
   $ret->response = curl_exec($curl);
-  $data['token'] = json_decode($ret->response)->token;
+  $response = json_decode($ret->response);
+
+  if (is_object($response)) {
+    $data['token'] = json_decode($ret->response)->token;
+  }
 
   return $data;
 }
@@ -2988,13 +2992,14 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
   if ($login = beliana_api_rest_login($request_url)) {
     $curl = curl_init($request_url . '/node');
     $comment = $site == 'rsw' ? 'vo webovom' : 'v knižnom';
+    $instructions = empty($node->field_komentar_instrukcie[LANGUAGE_NONE]) ? '' : PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
 
     $data = [
       'type' => $node->type,
       'title' => $node->title,
       'status' => $node->status,
       'title_field[und][0][value]' => $node->title,
-      'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
+      'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . $instructions,
       'field_remote_id[und][0][value]' => $node->nid,
     ];
 
