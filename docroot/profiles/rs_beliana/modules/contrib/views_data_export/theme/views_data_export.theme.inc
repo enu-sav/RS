@@ -384,8 +384,9 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     $output = preg_replace('/<\/p>\s+<p>—/', ' —', $output);
     // merge paragraph ending  with —<p> ,
     $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
-    // remove new paragraphs not starting with a tag
-    $output = preg_replace('/<\/p>\s+<p>([^<])/', ' \1', $output);
+    // remove new paragraphs not starting with a tag (but not if it is a list item)
+    //$output = preg_replace('/<\/p>\s+<p>([^<])/', ' \1', $output);
+    $output = preg_replace('/<\/p>\s+<p>([^< ]* [^-–])/', ' \1', $output);
     // add newline between concatenated paragraphs (needed in postprocessing)
     $output = preg_replace("/<\/p><p>/", "</p>\n<p>", $output);
 
@@ -417,7 +418,7 @@ function template_process_views_data_export_msoffice_body(&$vars) {
         '<font color="red">\1</font>', 
         $output
     );
-    // change order if dit is inside math
+    // change order if it is inside math
     $output = str_replace('.\)</font>', '\)</font>.', $output);  
     $output = str_replace(',\)</font>', '\)</font>,', $output);  
 
