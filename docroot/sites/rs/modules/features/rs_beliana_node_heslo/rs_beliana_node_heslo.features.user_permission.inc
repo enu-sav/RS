@@ -320,7 +320,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -931,7 +930,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -943,7 +941,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
