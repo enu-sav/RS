@@ -10756,6 +10756,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['label'] = 'alias';
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Súbor */
+  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */

@@ -849,6 +849,33 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
 
         if (in_array($field, [
+          'field_subor_ilustracie',
+          'field_obrazok_navrh',
+          'field_original',
+        ])) {
+          if (!empty($value)) {
+            $node->{$field}[LANGUAGE_NONE] = [];
+
+            foreach ($value[LANGUAGE_NONE] as $key => $remote_file) {
+              $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
+              $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
+
+              $node->{$field}[LANGUAGE_NONE][$key] = [
+                'fid' => $file->fid,
+                'uid' => $file->uid,
+                'filename' => $file->filename,
+                'uri' => $file->uri,
+                'filemime' => $file->filemime,
+                'filesize' => $file->filesize,
+                'status' => 1,
+                'display' => 1,
+                'description' => '',
+              ];
+            }
+          }
+        }
+
+        if (in_array($field, [
           'field_ilustracia',
           'field_zlucene_z',
           'field_zlucene_do',
@@ -857,7 +884,8 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
           foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
             if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
-              beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
+              // do not sync ilusracia bundle when syncing from node
+              //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
               $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
             }
           }
@@ -872,8 +900,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     if ($node->type == 'ilustracia') {
       $workbench_moderation = 'ilustracia_u_redaktora';
     }
-
-    if ($type == 'knižn') {
+    elseif ($type == 'knižn') {
       $workbench_moderation = 'prevzate_z_rs';
     }
 
@@ -1115,7 +1142,7 @@ function prune_node_revisions(&$node, $context = array()) {
  * 1. Transfer links from the actual version to the oldest one or
  *    the revision edited by iredaktor_jch or iredaktor_mb (they edited math equations and tables)
  * 2. Set text of the this revision as the actual text
- * 3. Remove illustrations in tha actual version 
+ * 3. Remove illustrations in tha actual version
  * 4. Remove all revisions except for the actual, the revision edited by iredaktor_jch or iredaktor_mb and the oldest one
  */
 function reset_importovane_and_link_transfer(&$node, $context = array()) {
@@ -1140,8 +1167,8 @@ function reset_importovane_and_link_transfer(&$node, $context = array()) {
   $komentar = "Knižný text s doplnenými odkazmi. \n" . $rslt[1];
   $node->field_komentar_instrukcie['und'][0]['value'] = $komentar;
   $node->revision = TRUE;
-  $node->log = "Reset and link transfer"; 
-  if (isset($node->field_ilustracia['und'])) 
+  $node->log = "Reset and link transfer";
+  if (isset($node->field_ilustracia['und']))
     unset($node->field_ilustracia['und']);
   node_save($node);
 
@@ -1170,7 +1197,7 @@ function reset_importovane_and_link_transfer(&$node, $context = array()) {
  */
 function reset_heslo_webrs(&$node, $context = array()) {
   if (!in_array($node->type, array('heslo'))) return;
-  if (!in_array($node->workbench_moderation['current']->state, 
+  if (!in_array($node->workbench_moderation['current']->state,
     array("u_autora","needs_review","na_zverejnenie","u_vyst_redaktora_2",
     "u_vyst_redaktora_2x","u_vyst_redaktora_3","u_vyst_redaktora_4",
     "u_v_st_redaktora_5","1_korektura","2_korekt_ra","u_konzultanta",
@@ -1178,21 +1205,21 @@ function reset_heslo_webrs(&$node, $context = array()) {
 
   $node->revision = TRUE;
   if (isset($node->field_zlucene_z['und'])) {
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] =
       "Verzia zlúčeného hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
       workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
       workbench_moderation_state_label("zlucene") . ".";
     workbench_moderation_moderate($node, "zlucene");
   } elseif ($node->workbench_moderation['current']->state == 'ukoncenezluene' ){
     $user = user_load($node->uid);
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] =
       "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
       workbench_moderation_state_label("ukoncenezluene") . ", nový stav: ".
       workbench_moderation_state_label("ukoncenezluene") . "." . PHP_EOL .
       "Autor knižného textu: " . $user->name;
   } else {
     $user = user_load($node->uid);
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] =
       "Verzia hesla v čase oddelenia redakčných systémov. Pôvodný stav: " .
       workbench_moderation_state_label($node->workbench_moderation['current']->state) . ", nový stav: ".
       workbench_moderation_state_label("zaradene") . ".".PHP_EOL.
@@ -1463,11 +1490,14 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-    // remove state 'u_konzultanta' from the list of transitions
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'needs_review' && in_array("Redaktor", $user->roles)) {
-      foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, array('u_konzultanta'))) {
-          unset($form['state']['#options'][$k]);
+
+    // remove state 'u_konzultanta' from the list of transitions  (webrs only)
+    if (variable_get('rs_api_type') != "webrs") { //rs_api_type specifies type of the opposite side, therefore '!=' 
+      if ($form['node']['#value']->workbench_moderation['current']->state === 'needs_review' && in_array("Redaktor", $user->roles)) {
+        foreach ($form['state']['#options'] as $k => $v) {
+          if (in_array($k, array('u_konzultanta'))) {
+            unset($form['state']['#options'][$k]);
+          }
         }
       }
     }
@@ -2963,7 +2993,12 @@ function beliana_api_rest_login($request_url) {
 
   $ret = new stdClass;
   $ret->response = curl_exec($curl);
-  $data['token'] = json_decode($ret->response)->token;
+  $response = json_decode($ret->response);
+  watchdog('error', $ret->response);
+
+  if (is_object($response)) {
+    $data['token'] = $response->token;
+  }
 
   return $data;
 }
@@ -2987,13 +3022,14 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
   if ($login = beliana_api_rest_login($request_url)) {
     $curl = curl_init($request_url . '/node');
     $comment = $site == 'rsw' ? 'vo webovom' : 'v knižnom';
+    $instructions = empty($node->field_komentar_instrukcie[LANGUAGE_NONE]) ? '' : PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'];
 
     $data = [
       'type' => $node->type,
       'title' => $node->title,
       'status' => $node->status,
       'title_field[und][0][value]' => $node->title,
-      'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . PHP_EOL . $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'],
+      'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . $instructions,
       'field_remote_id[und][0][value]' => $node->nid,
     ];
 

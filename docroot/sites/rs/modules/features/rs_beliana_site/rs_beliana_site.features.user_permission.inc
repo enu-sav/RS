@@ -710,7 +710,6 @@ function rs_beliana_site_user_default_permissions() {
       'geoRedaktor' => 'geoRedaktor',
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
-      'iredaktor-jaz' => 'iredaktor-jaz',
       'useradmin' => 'useradmin',
       'zRedaktor' => 'zRedaktor',
     ),
