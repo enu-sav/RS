@@ -770,13 +770,16 @@ function beliana_assign_consultant(&$node, $context) {
  */
 function beliana_sync_from_remote_form($form, $form_state, $node) {
   $type = variable_get('rs_api_type') == 'webrs' ? 'webov' : 'knižn';
+  $prep = variable_get('rs_api_type') == 'webrs' ? 'vo' : 'v';
+  $bundle = $node->type == 'ilustracia' ? 'Ilustrácia' : 'Heslo';
+
   $date = empty($node->field_datum_prebratia[LANGUAGE_NONE]) ? 'Nikdy' : $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'];
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   $form['links'] = [
-    '#markup' => 'Heslo na ' . $type . 'om redakčnom systéme: <b><a href="' . variable_get('rs_api_uri') . '/node/' . $remote_id . '" target="_blank">' . $remote_id . '</a></b>.<br>' .
+    '#markup' => $bundle . ' ' . $prep . ' ' . $type . 'om redakčnom systéme: <b><a href="' . variable_get('rs_api_uri') . '/node/' . $remote_id . '" target="_blank">' . $remote_id . '</a></b>.<br>' .
       'Po prevzatím obsahu z ' . $type . 'ého redakčného systému bude lokálny obsah prepísaný.<br>' .
-      'Preberané heslo musí byť dokončené.<br><br>',
+      'Preberaný obsah musí byť dokončený.<br><br>',
   ];
 
   $form['message'] = [
