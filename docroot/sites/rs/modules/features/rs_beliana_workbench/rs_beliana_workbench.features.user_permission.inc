@@ -459,6 +459,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in importovane state'] = array(
     'name' => 'edit revisions in importovane state',
     'roles' => array(
+      'Správca heslára' => 'Správca heslára',
       'iredaktor' => 'iredaktor',
     ),
     'module' => 'workbench_state_access',
