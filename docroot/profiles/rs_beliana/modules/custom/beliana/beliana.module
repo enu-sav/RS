@@ -850,12 +850,12 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
         if (in_array($field, [
           'field_subor_ilustracie',
-          'field_obrazok_navrh',
+          'field_obrazok_navrh_',
           'field_original',
         ])) {
-          if (!empty($value)) {
-            $node->{$field}[LANGUAGE_NONE] = [];
+          $node->{$field}[LANGUAGE_NONE] = [];
 
+          if (!empty($value)) {
             foreach ($value[LANGUAGE_NONE] as $key => $remote_file) {
               $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
               $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
@@ -1019,8 +1019,8 @@ function _display_payment_fields(&$node) {
   $curstate = $node->workbench_moderation['current']->state;
 //dpm($user);
   // administrator has access to everything
-  //if (0 and !in_array("administrátor", $user->roles)) { // comment out in testing 
-  if (in_array("administrátor", $user->roles)) { // $form: node 
+  //if (0 and !in_array("administrátor", $user->roles)) { // comment out in testing
+  if (in_array("administrátor", $user->roles)) { // $form: node
 #dpm("enableall", "display_payment_fields");
     return "enableall";
   }
@@ -1041,7 +1041,7 @@ function _display_payment_fields(&$node) {
 #dpm("showdisabled (filled out)", "display_payment_fields, field_datum_autorovho_textu is set");
     return("showdisabled");
   }
-  //state of the node changed from vr1 or vr2 state to needs_review after 11.11.2018 
+  //state of the node changed from vr1 or vr2 state to needs_review after 11.11.2018
   if (has_vr_to_r_transition($node)) {
 #dpm("hideall (has transition)", "display_payment_fields");
     return("hideall");
@@ -1277,7 +1277,7 @@ function beliana_node_presave($node) {
     $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
 
-  // set field_taxsubor using the value of field_na_zoradenie 
+  // set field_taxsubor using the value of field_na_zoradenie
   $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
   //$subory = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)); //default sort instead of Slovak
   $subory = taxonomy_get_tree($vocabulary->vid);
@@ -1349,7 +1349,7 @@ function beliana_node_presave($node) {
   }
 
   // store information about the author's text length (used for payments)
-  // first, unset field_dlzka_autorovho_textu_zad if field_vyplatit is not Vyplatiť 
+  // first, unset field_dlzka_autorovho_textu_zad if field_vyplatit is not Vyplatiť
   // (setting it makes no sense, but is possible in the form)
   if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] !== "Vyplatiť") {
@@ -1492,7 +1492,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // remove state 'u_konzultanta' from the list of transitions  (webrs only)
-    if (variable_get('rs_api_type') != "webrs") { //rs_api_type specifies type of the opposite side, therefore '!=' 
+    if (variable_get('rs_api_type') != "webrs") { //rs_api_type specifies type of the opposite side, therefore '!='
       if ($form['node']['#value']->workbench_moderation['current']->state === 'needs_review' && in_array("Redaktor", $user->roles)) {
         foreach ($form['state']['#options'] as $k => $v) {
           if (in_array($k, array('u_konzultanta'))) {
@@ -1670,7 +1670,7 @@ function _check_ilu_attached(&$ilu_node, $category) {
 }
 
 /*
- * $ok_states: list of required illustration states 
+ * $ok_states: list of required illustration states
  * return true if OK
  */
 
@@ -1748,7 +1748,7 @@ function _check_alternative_text_markers(&$node, $text, $where) {
     $retvalue = false;
   }
   // check correctness of tags inside the alternatives
-  // catches only closing tags 
+  // catches only closing tags
   $pattern = "/(*UTF8)▶[^◀▶]*◀/";
   if (preg_match_all($pattern, $text, $matches)) {
     foreach ($matches[0] as $match) {
@@ -2899,7 +2899,7 @@ function beliana_clean_tags($node, $text, $where) {
   $fragment = str_replace("<strong> </strong>", " ", $fragment);
 
   // remove empty lines at start and at end
-  // CKeditor inserts as empty line "<p> </p>" with non-breakable space 
+  // CKeditor inserts as empty line "<p> </p>" with non-breakable space
   // nonbreakable space: " " here
   $fragment = preg_replace('#^(<p> </p>[\r\n]*)*#', '', $fragment);
   $fragment = preg_replace('#[\r\n]*$#', '', $fragment);
@@ -3033,7 +3033,7 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
       'field_remote_id[und][0][value]' => $node->nid,
     ];
 
-    // we need to distinguish between: 
+    // we need to distinguish between:
     // field_lexikalna_skupina and  field_lexikalna_skupina_il
     // field_text_hesla and field_popis
     if ( $node->type == "heslo" ) {
