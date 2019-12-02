@@ -873,14 +873,9 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $value[LANGUAGE_NONE][0]['value'], $matches);
 
         if (!empty($matches)) {
-          $urls = [];
-          foreach ($matches[1] as $img) {
-            $urls[] = $img;
-          }
-
-          foreach (array_unique($urls) as $src) {
+          foreach ($matches[1] as $src) {
             $data = file_get_contents(variable_get('rs_api_uri') . $src);
-            $new_src = str_replace($api_type, $imce_path, $img);
+            $new_src = str_replace($api_type, $imce_path, $src);
             $file = file_save_data($data, str_replace('/sites/' . $imce_path . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
 
             $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['value']);
