@@ -937,17 +937,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from zlucene to na_jazykovu_korekturu'.
-  $permissions['moderate content from zlucene to na_jazykovu_korekturu'] = array(
-    'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from zverejnene_oprava to na_opakovane_zverejnenie'.
   $permissions['moderate content from zverejnene_oprava to na_opakovane_zverejnenie'] = array(
     'name' => 'moderate content from zverejnene_oprava to na_opakovane_zverejnenie',
