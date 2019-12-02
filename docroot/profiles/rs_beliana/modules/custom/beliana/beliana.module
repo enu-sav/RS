@@ -878,10 +878,12 @@ function beliana_sync_from_remote_build($node, $remote_node) {
             $new_src = str_replace($api_type, $imce_path, $src);
             $file = file_save_data($data, str_replace('/sites/' . $imce_path . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
 
-            $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['value']);
-            $node->field_text_hesla[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['safe_value']);
+            $value[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['value']);
+            $value[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['safe_value']);
           }
         }
+
+        $node->field_text_hesla = $value;
       }
 
       if ($field == 'field_datum_autorovho_textu') {
