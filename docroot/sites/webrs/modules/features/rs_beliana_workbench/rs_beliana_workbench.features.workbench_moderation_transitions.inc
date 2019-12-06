@@ -97,12 +97,12 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
     'nova_ilustracia:_ilustr_cia_u_autora' => array(
       'from_name' => 'nova_ilustracia',
       'to_name' => '_ilustr_cia_u_autora',
-      'name' => 'il_nova-il_u_autora',
+      'name' => 'il_nova-u_autora',
     ),
     'nova_ilustracia:ilustracia_u_redaktora' => array(
       'from_name' => 'nova_ilustracia',
       'to_name' => 'ilustracia_u_redaktora',
-      'name' => 'il_nova_u_redaktora',
+      'name' => 'il_nova-u_redaktora',
     ),
     'publikovane_na_webe:zverejnene_oprava' => array(
       'from_name' => 'publikovane_na_webe',
@@ -153,11 +153,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'zaradene',
       'to_name' => 'vyradene',
       'name' => 'zaradené-vyradene',
-    ),
-    'zlucene:na_jazykovu_korekturu' => array(
-      'from_name' => 'zlucene',
-      'to_name' => 'na_jazykovu_korekturu',
-      'name' => 'zlucene-u_jaz_redaktora1',
     ),
     'zverejnene_oprava:na_opakovane_zverejnenie' => array(
       'from_name' => 'zverejnene_oprava',
