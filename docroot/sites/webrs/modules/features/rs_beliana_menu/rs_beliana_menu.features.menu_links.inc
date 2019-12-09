@@ -292,7 +292,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 1,
     'expanded' => 1,
-    'weight' => -50,
+    'weight' => -49,
     'customized' => 1,
   );
   // Exported menu link: management_rozpracovan-hesl:admin/beliana/drafts.
@@ -329,7 +329,7 @@ function rs_beliana_menu_menu_default_menu_links() {
       'identifier' => 'management_sprvy:messages',
     ),
     'module' => 'menu',
-    'hidden' => 1,
+    'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
@@ -395,7 +395,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -50,
+    'weight' => -48,
     'customized' => 1,
   );
   // Exported menu link: management_vyhada-ilustrcie:vyhľadať-ilustrácie.
@@ -415,7 +415,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -49,
+    'weight' => -47,
     'customized' => 1,
   );
   // Exported menu link: management_vyraden:admin/beliana/vyradene.

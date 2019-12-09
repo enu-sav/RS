@@ -25,13 +25,13 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Jazykový redaktor 1.
   $roles['Jazykový redaktor 1'] = array(
     'name' => 'Jazykový redaktor 1',
-    'weight' => 12,
+    'weight' => 13,
   );
 
   // Exported role: Jazykový redaktor 2.
   $roles['Jazykový redaktor 2'] = array(
     'name' => 'Jazykový redaktor 2',
-    'weight' => 13,
+    'weight' => 14,
   );
 
   // Exported role: Komentátor.
@@ -43,13 +43,13 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Konzultant.
   $roles['Konzultant'] = array(
     'name' => 'Konzultant',
-    'weight' => 22,
+    'weight' => 24,
   );
 
   // Exported role: Oznamy.
   $roles['Oznamy'] = array(
     'name' => 'Oznamy',
-    'weight' => 23,
+    'weight' => 25,
   );
 
   // Exported role: Redaktor.
@@ -67,55 +67,55 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Výstupný redaktor 1.
   $roles['Výstupný redaktor 1'] = array(
     'name' => 'Výstupný redaktor 1',
-    'weight' => 14,
+    'weight' => 15,
   );
 
   // Exported role: Výstupný redaktor 2.
   $roles['Výstupný redaktor 2'] = array(
     'name' => 'Výstupný redaktor 2',
-    'weight' => 15,
+    'weight' => 17,
   );
 
   // Exported role: Výstupný redaktor 2X.
   $roles['Výstupný redaktor 2X'] = array(
     'name' => 'Výstupný redaktor 2X',
-    'weight' => 17,
+    'weight' => 19,
   );
 
   // Exported role: Výstupný redaktor 3.
   $roles['Výstupný redaktor 3'] = array(
     'name' => 'Výstupný redaktor 3',
-    'weight' => 18,
+    'weight' => 20,
   );
 
   // Exported role: Výstupný redaktor 4.
   $roles['Výstupný redaktor 4'] = array(
     'name' => 'Výstupný redaktor 4',
-    'weight' => 19,
+    'weight' => 21,
   );
 
   // Exported role: Výstupný redaktor 5.
   $roles['Výstupný redaktor 5'] = array(
     'name' => 'Výstupný redaktor 5',
-    'weight' => 20,
+    'weight' => 22,
   );
 
   // Exported role: administrátor.
   $roles['administrátor'] = array(
     'name' => 'administrátor',
-    'weight' => 21,
+    'weight' => 23,
   );
 
   // Exported role: chRedaktor.
   $roles['chRedaktor'] = array(
     'name' => 'chRedaktor',
-    'weight' => 24,
+    'weight' => 26,
   );
 
   // Exported role: garant.
   $roles['garant'] = array(
     'name' => 'garant',
-    'weight' => 25,
+    'weight' => 27,
   );
 
   // Exported role: geoRedaktor.
@@ -151,13 +151,13 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: useradmin.
   $roles['useradmin'] = array(
     'name' => 'useradmin',
-    'weight' => 11,
+    'weight' => 12,
   );
 
   // Exported role: zRedaktor.
   $roles['zRedaktor'] = array(
     'name' => 'zRedaktor',
-    'weight' => 27,
+    'weight' => 29,
   );
 
   return $roles;

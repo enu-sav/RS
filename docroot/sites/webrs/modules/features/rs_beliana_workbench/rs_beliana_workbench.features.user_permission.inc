@@ -1064,6 +1064,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['view revisions in any state'] = array(
     'name' => 'view revisions in any state',
     'roles' => array(
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',

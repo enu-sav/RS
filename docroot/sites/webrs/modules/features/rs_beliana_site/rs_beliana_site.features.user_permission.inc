@@ -64,6 +64,7 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['access contextual links'] = array(
     'name' => 'access contextual links',
     'roles' => array(
+      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'administrátor' => 'administrátor',
     ),
     'module' => 'contextual',
@@ -689,6 +690,7 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'use text format filtered_html',
     'roles' => array(
       'Autor' => 'Autor',
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
@@ -720,6 +722,7 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'use text format full_html',
     'roles' => array(
       'Autor' => 'Autor',
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
@@ -780,6 +783,7 @@ function rs_beliana_site_user_default_permissions() {
     'name' => 'view revisions',
     'roles' => array(
       'Autor' => 'Autor',
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
