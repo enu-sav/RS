@@ -1,0 +1,53 @@
+diff --git a/views_bulk_operations.module b/views_bulk_operations.module
+index 081e540..f91053b 100644
+--- a/views_bulk_operations.module
++++ b/views_bulk_operations.module
+@@ -916,6 +916,48 @@ function views_bulk_operations_adjust_selection($queue_name, $operation, $option
+   $view->set_arguments($view_info['arguments']);
+   $view->set_display($view_info['display']);
+   $view->set_offset($context['sandbox']['progress']);
++
++  // SELECT query doesn't return results in the same order for the same query,
++  // if the query does not have a deterministic ORDER BY criterion. It causes
++  // duplicities between pages, so some items are processed multiple times
++  // and others stay unprocessed.
++  // @see https://dev.mysql.com/doc/refman/8.0/en/limit-optimization.html
++  // If multiple rows have identical values in the ORDER BY columns, the server
++  // is free to return those rows in any order, and may do so differently
++  // depending on the overall execution plan. In other words, the sort order
++  // of those rows is nondeterministic with respect to the nonordered columns.
++  // To avoid this problem, define default VBO sorting based on base field.
++  $default_vbo_sort = [
++    $view->base_field => [
++      'id' => $view->base_field,
++      'table' => $view->base_table,
++      'field' => $view->base_field,
++      'order' => 'ASC',
++      'relationship' => 'none',
++      'group_type' => 'group',
++      'ui_name' => '',
++      'exposed' => FALSE,
++    ],
++  ];
++  // Assign default VBO sorting to Master display.
++  $handler_default = &$view->display['default']->handler;
++  $handler_default->display->display_options['sorts'] = $default_vbo_sort;
++  // Reset default sorting for table style to None.
++  if (!empty($handler_default->options['style_options']['default'])) {
++    $handler_default->options['style_options']['default'] = '-1';
++  }
++  // Assign default VBO sorting to current display.
++  $handler_current = &$view->display[$view_info['display']]->handler;
++  $handler_current->display->display_options['sorts'] = $default_vbo_sort;
++  // Replace current display sorting with VBO default sorting.
++  if (!empty($handler_current->options['sorts'])) {
++    $handler_current->options['sorts'] = $default_vbo_sort;
++  }
++  // Reset default sorting for table style to None.
++  if (!empty($handler_current->options['style_options']['default'])) {
++    $handler_current->options['style_options']['default'] = '-1';
++  }
++
+   $view->build();
+   $view->execute($view_info['display']);
+   // Note the total number of rows.
