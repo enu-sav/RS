@@ -1194,7 +1194,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ',
+    'description' => 'Uveďte text do popisu ilustrácie ',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1968,7 +1968,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté');
   t('Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.');
-  t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
+  t('Uveďte text do popisu ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
   t('Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
