@@ -567,6 +567,15 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => FALSE,
     ],
+    'reset_vyradene_ilustracie' => [
+      'type' => 'node',
+      'label' => t('Reset ruled out illustrations'),
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['create_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+    ],
   ];
 }
 
@@ -1246,6 +1255,127 @@ function reset_importovane_and_link_transfer(&$node, $context = []) {
       continue;
     }
     node_revision_delete($revision->vid);
+  }
+}
+
+/**
+ * Callback function for `reset_vyradene_ilustracie` action.
+ * Delete moderation history and remove attached files
+ */
+function reset_vyradene_ilustracie(&$node, $context = []) {
+  if (!in_array($node->type, ['ilustracia'])) {
+    return;
+  }
+  if ($node->workbench_moderation['current']->state != "vyradene") {
+    return;
+  }
+  // list of files to be removed
+  $remove_fids=array();
+
+  // get (sorted) list of revisions
+  $revisions = node_revision_list($node);
+  #delete all revisions except the most recent, add fids to $remove_fids
+  foreach (array_slice($revisions, 1) as $rev) {
+    $revision = node_load($node->nid,$rev->vid);
+    while ( $revision->field_obrazok_navrh_[LANGUAGE_NONE] ){
+      $last = array_pop($revision->field_obrazok_navrh_[LANGUAGE_NONE]);
+      $remove_fids[] = $last['fid'];
+    }
+    while ( $revision->field_subor_ilustracie[LANGUAGE_NONE] ){
+      $last = array_pop($revision->field_subor_ilustracie[LANGUAGE_NONE]);
+      $remove_fids[] = $last['fid'];
+    }
+    while ( $revision->field_original[LANGUAGE_NONE] ){
+      $last = array_pop($revision->field_original[LANGUAGE_NONE]);
+      $remove_fids[] = $last['fid'];
+    }
+    node_revision_delete($rev->vid);
+  }
+
+  // clean individual fields of the remaining revision
+  if (isset($node->field_obrazok_navrh_[LANGUAGE_NONE])) {
+    while ( $node->field_obrazok_navrh_[LANGUAGE_NONE] ){
+      $last = array_pop($node->field_obrazok_navrh_[LANGUAGE_NONE]);
+      $remove_fids[] = $last['fid'];
+    }
+  }
+  if (isset($node->field_pouzit[LANGUAGE_NONE][0])) {
+    unset($node->field_pouzit[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0])) {
+    unset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_zdroj_ilustracie[LANGUAGE_NONE][0])) {
+    unset($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_licencia1[LANGUAGE_NONE][0])) {
+    unset($node->field_licencia1[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_modifikovane[LANGUAGE_NONE][0])) {
+    unset($node->field_modifikovane[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_meno_autora_diela[LANGUAGE_NONE][0])) {
+    unset($node->field_meno_autora_diela[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_nazov_diela[LANGUAGE_NONE][0])) {
+    unset($node->field_nazov_diela[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_institucia[LANGUAGE_NONE][0])) {
+    unset($node->field_institucia[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_drzitel_prav[LANGUAGE_NONE][0])) {
+    unset($node->field_drzitel_prav[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_subor_ilustracie[LANGUAGE_NONE][0])) {
+    while ( $node->field_subor_ilustracie[LANGUAGE_NONE] ){
+      $last = array_pop($node->field_subor_ilustracie[LANGUAGE_NONE]);
+      $remove_fids[] = $last['fid'];
+    }
+  }
+  if (isset($node->field_datum_zverejnenia[LANGUAGE_NONE][0])) {
+    unset($node->field_datum_zverejnenia[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_url_autora_diela[LANGUAGE_NONE][0])) {
+    unset($node->field_url_autora_diela[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_url_diela[LANGUAGE_NONE][0])) {
+    unset($node->field_url_diela[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0])) {
+    unset($node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_obrazok_odkaz[LANGUAGE_NONE][0])) {
+    unset($node->field_obrazok_odkaz[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_alternativny_text[LANGUAGE_NONE][0])) {
+    unset($node->field_alternativny_text[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_popis_modifikacie[LANGUAGE_NONE][0])) {
+    unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_original[LANGUAGE_NONE][0])) {
+    while ( $node->field_original[LANGUAGE_NONE] ){
+      $last = array_pop($node->field_original[LANGUAGE_NONE]);
+      $remove_fids[] = $last['fid'];
+    }
+  }
+  if (isset($node->field_datum_prebratia[LANGUAGE_NONE][0])) {
+    unset($node->field_datum_prebratia[LANGUAGE_NONE][0]);
+  }
+  if (isset($node->field_instrukcie_pre_typografa[LANGUAGE_NONE][0])) {
+    unset($node->field_instrukcie_pre_typografa[LANGUAGE_NONE][0]);
+  }
+  node_save($node);
+
+  // remove the files
+  foreach (array_unique($remove_fids) as $fid) {
+    $file = file_load($fid);
+    if ($file) {
+      //drupal_set_message('V ilustracii <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> zmazaný súbor '.$file->uri.' ('.$fid.')');
+      file_delete($file, TRUE);
+    } else { // some files were probably deleter earlier 
+      //drupal_set_message('V ilustracii <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> zlyhalo mazanie súboru ('.$fid.')');
+    }
   }
 }
 
