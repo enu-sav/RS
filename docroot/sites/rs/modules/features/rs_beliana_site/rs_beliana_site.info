@@ -171,6 +171,7 @@ features[variable][] = page_cache_maximum_age
 features[variable][] = page_compression
 features[variable][] = preprocess_css
 features[variable][] = preprocess_js
+features[variable][] = privatemsg_display_loginmessage
 features[variable][] = search_active_modules
 features[variable][] = search_cron_limit
 features[variable][] = search_default_module

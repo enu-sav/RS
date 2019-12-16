@@ -143,6 +143,19 @@ function beliana_sync_from_remote_access($node) {
   return FALSE;
 }
 
+
+/**
+ * Implements hook_page_alter().
+ */
+function beliana_page_alter(&$page) {
+  if (privatemsg_user_access() && !drupal_match_path(current_path(), 'node/*/edit')) {
+    $count = privatemsg_unread_count();
+    if ($count) {
+      drupal_set_message(format_plural($count, 'You have <a href="@messages">1 unread message</a>.', 'You have <a href="@messages">@count unread messages</a>', ['@messages' => url('messages')]));
+    }
+  }
+}
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -1373,7 +1386,7 @@ function reset_vyradene_ilustracie(&$node, $context = []) {
     if ($file) {
       //drupal_set_message('V ilustracii <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> zmazaný súbor '.$file->uri.' ('.$fid.')');
       file_delete($file, TRUE);
-    } else { // some files were probably deleter earlier 
+    } else { // some files were probably deleter earlier
       //drupal_set_message('V ilustracii <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> zlyhalo mazanie súboru ('.$fid.')');
     }
   }
@@ -1707,9 +1720,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 
     // remove some states from the list of transitions in the case of role Redaktor (webrs only)
     //rs_api_type specifies type of the opposite side, therefore '!='  in the test
-    if (variable_get('rs_api_type') != "webrs" && in_array("Redaktor", $user->roles) ) { 
+    if (variable_get('rs_api_type') != "webrs" && in_array("Redaktor", $user->roles) ) {
       // transition to 'konzultant' is implemented in a dedicated view, so remove them here
-      if (in_array($form['node']['#value']->workbench_moderation['current']->state, 
+      if (in_array($form['node']['#value']->workbench_moderation['current']->state,
           array('needs_review', 'u_redaktora_revizia'))) {
         foreach ($form['state']['#options'] as $k => $v) {
           if (in_array($k, array('u_konzultanta', 'u_konzultanta_revizia'))) {
@@ -1718,7 +1731,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       // articles of type 'importovane heslo' cannot be sent to an author
-      if ($form['node']['#value']->type === 'importovane_heslo') { 
+      if ($form['node']['#value']->type === 'importovane_heslo') {
         foreach ($form['state']['#options'] as $k => $v) {
           if (in_array($k, array('u_autora', 'u_autora_revizia'))) {
             unset($form['state']['#options'][$k]);
