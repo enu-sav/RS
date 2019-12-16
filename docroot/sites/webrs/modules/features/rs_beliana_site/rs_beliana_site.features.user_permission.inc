@@ -705,6 +705,7 @@ function rs_beliana_site_user_default_permissions() {
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
       'chRedaktor' => 'chRedaktor',
       'garant' => 'garant',
       'geoRedaktor' => 'geoRedaktor',
@@ -720,26 +721,7 @@ function rs_beliana_site_user_default_permissions() {
   // Exported permission: 'use text format full_html'.
   $permissions['use text format full_html'] = array(
     'name' => 'use text format full_html',
-    'roles' => array(
-      'Autor' => 'Autor',
-      'Etymologický redaktor' => 'Etymologický redaktor',
-      'Grafik' => 'Grafik',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-      'garant' => 'garant',
-      'iredaktor' => 'iredaktor',
-      'useradmin' => 'useradmin',
-    ),
+    'roles' => array(),
     'module' => 'filter',
   );
 
