@@ -396,11 +396,11 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     #archimedovska_grupa.html
     #Single letter math convert to TNR slanted
     #<span class="math-tex">\(G\)</span>
-    $output = preg_replace(
-        '/<span class="math-tex">\\\\\(([a-zA-Z])\\\\\)<\/span>/',
-        '<font face="Times New Roman" color="green"><em>\1</em></font>', 
-        $output
-    );
+    //$output = preg_replace(
+        //'/<span class="math-tex">\\\\\(([a-zA-Z])\\\\\)<\/span>/',
+        //'<font face="Times New Roman" color="green"><em>\1</em></font>', 
+        //$output
+    //);
     // ine rozmery ako MathMagic, nepouzivat
     //$output = preg_replace(
         //'/<span class="math-tex">\\\\\(([a-zA-Z])_([a-zA-Z])\\\\\)<\/span>/',
