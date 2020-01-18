@@ -154,7 +154,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Dátum prebratia obsahu',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -185,17 +185,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Dátum zverejnenia ilustrácie na webe alebo v knihe. Dopĺňané programovo, slúži na vyplácanie odmeny',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 22,
       ),
       'export' => array(
@@ -373,6 +365,82 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-ilustracia-field_instrukcie_pre_typografa'.
+  $field_instances['node-ilustracia-field_instrukcie_pre_typografa'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Inštrukcie, ktoré budú odovzdané typografovi spolu s ostatnými údajmi k ilustrácii',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 28,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 3,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_instrukcie_pre_typografa',
+    'label' => 'Inštrukcie pre typografa',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-ilustracia-field_komentar_instrukcie'.
   $field_instances['node-ilustracia-field_komentar_instrukcie'] = array(
     'bundle' => 'ilustracia',
@@ -389,9 +457,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       ),
       'export' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_plain',
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'lite_display' => array(
@@ -1127,7 +1194,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ',
+    'description' => 'Uveďte text do popisu ilustrácie ',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1141,7 +1208,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1866,6 +1933,8 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Dátum zverejnenia');
   t('Dátum zverejnenia ilustrácie na webe alebo v knihe. Dopĺňané programovo, slúži na vyplácanie odmeny');
   t('Inštitúcia');
+  t('Inštrukcie pre typografa');
+  t('Inštrukcie, ktoré budú odovzdané typografovi spolu s ostatnými údajmi k ilustrácii');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
   t('Meno autora diela');
@@ -1899,7 +1968,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
   t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté');
   t('Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.');
-  t('Uveďte text, ktorý bude v tlačenej alebo webovej verzii uvedený v popise ilustrácie ');
+  t('Uveďte text do popisu ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
   t('Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.');
   t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');

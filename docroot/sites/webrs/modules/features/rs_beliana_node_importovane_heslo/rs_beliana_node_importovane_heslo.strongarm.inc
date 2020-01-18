@@ -196,7 +196,7 @@ function rs_beliana_node_importovane_heslo_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_node_type_importovane_heslo';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['workbench_access_node_type_importovane_heslo'] = $strongarm;
 
   $strongarm = new stdClass();

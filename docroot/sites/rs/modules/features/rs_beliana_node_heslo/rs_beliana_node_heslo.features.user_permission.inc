@@ -55,6 +55,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_datum_prebratia'.
+  $permissions['create field_datum_prebratia'] = array(
+    'name' => 'create field_datum_prebratia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_datum_prveho_zverejnenia'.
   $permissions['create field_datum_prveho_zverejnenia'] = array(
     'name' => 'create field_datum_prveho_zverejnenia',
@@ -98,7 +107,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
@@ -320,7 +328,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'administrátor' => 'administrátor',
       'garant' => 'garant',
       'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -410,6 +417,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_datum_prebratia'.
+  $permissions['edit field_datum_prebratia'] = array(
+    'name' => 'edit field_datum_prebratia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_datum_prveho_zverejnenia'.
   $permissions['edit field_datum_prveho_zverejnenia'] = array(
     'name' => 'edit field_datum_prveho_zverejnenia',
@@ -453,7 +469,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
@@ -690,6 +705,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_datum_prebratia'.
+  $permissions['edit own field_datum_prebratia'] = array(
+    'name' => 'edit own field_datum_prebratia',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_datum_prveho_zverejnenia'.
   $permissions['edit own field_datum_prveho_zverejnenia'] = array(
     'name' => 'edit own field_datum_prveho_zverejnenia',
@@ -733,7 +757,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
@@ -931,7 +954,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -943,7 +965,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -993,6 +1014,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view field_datum_autorovho_textu',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_datum_prebratia'.
+  $permissions['view field_datum_prebratia'] = array(
+    'name' => 'view field_datum_prebratia',
+    'roles' => array(
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1281,6 +1311,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view own field_datum_autorovho_textu'.
   $permissions['view own field_datum_autorovho_textu'] = array(
     'name' => 'view own field_datum_autorovho_textu',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_datum_prebratia'.
+  $permissions['view own field_datum_prebratia'] = array(
+    'name' => 'view own field_datum_prebratia',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),

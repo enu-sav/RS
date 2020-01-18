@@ -335,7 +335,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'label' => 'Dátum prebratia obsahu',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -672,7 +672,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
@@ -680,7 +680,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 10,
+        'weight' => 23,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1223,7 +1223,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1297,7 +1297,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1390,7 +1390,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'liteformatter',
         'settings' => array(),
         'type' => 'liteformatter_formatter',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'lite_display' => array(
         'label' => 'above',

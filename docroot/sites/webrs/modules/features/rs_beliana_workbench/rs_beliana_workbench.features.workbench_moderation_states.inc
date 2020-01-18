@@ -9,18 +9,6 @@
  */
 function rs_beliana_workbench_workbench_moderation_export_states() {
   $items = array(
-    '1_korektura' => array(
-      'name' => '1_korektura',
-      'label' => '1. korektúra',
-      'description' => 'U redaktora/redaktorov na 1. korektúru',
-      'weight' => 10,
-    ),
-    '2_korekt_ra' => array(
-      'name' => '2_korekt_ra',
-      'label' => '2. korektúra',
-      'description' => 'U redaktora/redaktorov na 2. korektúru',
-      'weight' => 10,
-    ),
     '_ilustr_cia_u_autora' => array(
       'name' => '_ilustr_cia_u_autora',
       'label' => 'Ilustrácia u autora',
@@ -101,9 +89,9 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     ),
     'na_jazykovu_korekturu' => array(
       'name' => 'na_jazykovu_korekturu',
-      'label' => 'U jaz. redaktora 1',
-      'description' => 'Heslo odoslané na  1. jazykovú korektúru, pracuje s ním jazykový redaktor 1',
-      'weight' => 10,
+      'label' => 'U jaz. redaktora',
+      'description' => 'Heslo odoslané na jazykovú korektúru',
+      'weight' => 6,
     ),
     'na_opakovane_zverejnenie' => array(
       'name' => 'na_opakovane_zverejnenie',
@@ -113,14 +101,14 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     ),
     'na_zalomenie' => array(
       'name' => 'na_zalomenie',
-      'label' => 'Na zverejnenie/zalomenie',
+      'label' => 'Na zverejnenie',
       'description' => 'Heslo je pripravené pre web alebo tlač',
       'weight' => -7,
     ),
     'na_zverejnenie' => array(
       'name' => 'na_zverejnenie',
-      'label' => 'U výst. redaktora 1',
-      'description' => 'Heslo odoslané na posúdenie výstupnému redaktorovi 1',
+      'label' => 'U výst. redaktora',
+      'description' => 'Heslo odoslané na posúdenie výstupnému redaktorovi',
       'weight' => 5,
     ),
     'navrhnute_na_vyradenie' => array(
@@ -157,7 +145,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'published',
       'label' => 'published',
       'description' => 'nepoužívané',
-      'weight' => 10,
+      'weight' => 9,
     ),
     'u_autora' => array(
       'name' => 'u_autora',
@@ -165,47 +153,11 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Na vypracovanie autorom,  pred odoslaním redaktorovi',
       'weight' => 3,
     ),
-    'u_jaz_redaktora_2' => array(
-      'name' => 'u_jaz_redaktora_2',
-      'label' => 'U jaz. redaktora 2',
-      'description' => 'Heslo odoslané na  2. jazykovú korektúru, pracuje s ním jazykový redaktor 2',
-      'weight' => 10,
-    ),
     'u_konzultanta' => array(
       'name' => 'u_konzultanta',
       'label' => 'U konzultanta',
       'description' => 'heslo u konzultanta',
       'weight' => 10,
-    ),
-    'u_v_st_redaktora_5' => array(
-      'name' => 'u_v_st_redaktora_5',
-      'label' => 'U výst. redaktora 5',
-      'description' => 'Na spracovanie u výst. redaktora 5',
-      'weight' => 9,
-    ),
-    'u_vyst_redaktora_2' => array(
-      'name' => 'u_vyst_redaktora_2',
-      'label' => 'U výst. redaktora 2',
-      'description' => 'Na spracovanie u výst. redaktora 2',
-      'weight' => 6,
-    ),
-    'u_vyst_redaktora_2x' => array(
-      'name' => 'u_vyst_redaktora_2x',
-      'label' => 'U výst. redaktora 2X',
-      'description' => 'Na spracovanie u výstupného redaktora 2x',
-      'weight' => 6,
-    ),
-    'u_vyst_redaktora_3' => array(
-      'name' => 'u_vyst_redaktora_3',
-      'label' => 'U výst. redaktora 3',
-      'description' => 'Na spracovanie u výst. redaktora 3',
-      'weight' => 7,
-    ),
-    'u_vyst_redaktora_4' => array(
-      'name' => 'u_vyst_redaktora_4',
-      'label' => 'U výst. redaktora 4',
-      'description' => 'Na spracovanie u výst. redaktora 4',
-      'weight' => 8,
     ),
     'ukoncenezluene' => array(
       'name' => 'ukoncenezluene',
@@ -217,7 +169,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'vyradene',
       'label' => 'Vyradené',
       'description' => 'Heslo ďalej neexistuje, z Beliany bolo vyradené',
-      'weight' => 10,
+      'weight' => 8,
     ),
     'zaradene' => array(
       'name' => 'zaradene',
@@ -229,13 +181,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'zlucene',
       'label' => 'Zlúčené',
       'description' => 'Heslo vytvorené zlúčením',
-      'weight' => 10,
-    ),
-    'zlucene_odkazy' => array(
-      'name' => 'zlucene_odkazy',
-      'label' => 'Zlúčené-odkazy',
-      'description' => 'Kontrola odkazov na vytvorené zlúčené heslo v iných heslách',
-      'weight' => 10,
+      'weight' => 7,
     ),
     'zverejnene_oprava' => array(
       'name' => 'zverejnene_oprava',

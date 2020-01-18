@@ -326,6 +326,13 @@ function rs_beliana_site_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'privatemsg_display_loginmessage';
+  $strongarm->value = 0;
+  $export['privatemsg_display_loginmessage'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'search_active_modules';
   $strongarm->value = array(
     'node' => 'node',
@@ -563,17 +570,21 @@ function rs_beliana_site_strongarm() {
     'default_logo' => 1,
     'logo_path' => '',
     'logo_upload' => '',
-    'default_favicon' => 1,
-    'favicon_path' => '',
+    'default_favicon' => 0,
+    'favicon_path' => 'sites/webrs/themes/custom/rsw/favicon.ico',
     'favicon_upload' => '',
     'style_checkboxes' => 1,
     'display_icons_config' => 1,
+    'rounded_buttons' => 1,
+    'sticky_actions' => 0,
     'avoid_custom_font' => 0,
+    'adminimal_ckeditor' => 1,
     'use_custom_media_queries' => 0,
     'media_query_mobile' => 'only screen and (max-width: 480px)',
     'media_query_tablet' => 'only screen and (min-width : 481px) and (max-width : 1024px)',
     'custom_css' => 0,
     'adminimal_theme_skin' => 'default',
+    'favicon_mimetype' => 'image/vnd.microsoft.icon',
   );
   $export['theme_adminimal_settings'] = $strongarm;
 

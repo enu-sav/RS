@@ -38,15 +38,16 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions['edit any importovane_heslo content'] = array(
     'name' => 'edit any importovane_heslo content',
     'roles' => array(
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Komentátor' => 'Komentátor',
+      'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
@@ -73,6 +74,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions['view any unpublished importovane_heslo content'] = array(
     'name' => 'view any unpublished importovane_heslo content',
     'roles' => array(
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),

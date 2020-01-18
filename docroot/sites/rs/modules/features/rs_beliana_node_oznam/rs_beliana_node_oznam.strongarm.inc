@@ -14,7 +14,7 @@ function rs_beliana_node_oznam_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_oznam';
-  $strongarm->value = 'edit-diff';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_oznam'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -180,7 +180,7 @@ function rs_beliana_node_oznam_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_node_type_oznam';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['workbench_access_node_type_oznam'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -1,6 +1,9 @@
-#branding {
+#admin-menu #admin-menu-wrapper {
     background-color: #ffa587 !important;
 }
-#branding h1 {
+#admin-menu #admin-menu-menu a, #admin-menu #admin-menu-menu li > span {
     color: #333 !important;;
+}
+#admin-menu #admin-menu-menu .dropdown li a {
+    color: #eee !important;
 }

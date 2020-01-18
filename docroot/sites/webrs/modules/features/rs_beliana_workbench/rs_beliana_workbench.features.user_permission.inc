@@ -92,20 +92,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_access',
   );
 
-  // Exported permission: 'block view revisions in 1_korektura state'.
-  $permissions['block view revisions in 1_korektura state'] = array(
-    'name' => 'block view revisions in 1_korektura state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'block view revisions in 2_korekt_ra state'.
-  $permissions['block view revisions in 2_korekt_ra state'] = array(
-    'name' => 'block view revisions in 2_korekt_ra state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
   // Exported permission: 'block view revisions in _ilustr_cia_u_autora state'.
   $permissions['block view revisions in _ilustr_cia_u_autora state'] = array(
     'name' => 'block view revisions in _ilustr_cia_u_autora state',
@@ -274,51 +260,9 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
-  // Exported permission: 'block view revisions in u_jaz_redaktora_2 state'.
-  $permissions['block view revisions in u_jaz_redaktora_2 state'] = array(
-    'name' => 'block view revisions in u_jaz_redaktora_2 state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
   // Exported permission: 'block view revisions in u_konzultanta state'.
   $permissions['block view revisions in u_konzultanta state'] = array(
     'name' => 'block view revisions in u_konzultanta state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'block view revisions in u_v_st_redaktora_5 state'.
-  $permissions['block view revisions in u_v_st_redaktora_5 state'] = array(
-    'name' => 'block view revisions in u_v_st_redaktora_5 state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'block view revisions in u_vyst_redaktora_2 state'.
-  $permissions['block view revisions in u_vyst_redaktora_2 state'] = array(
-    'name' => 'block view revisions in u_vyst_redaktora_2 state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'block view revisions in u_vyst_redaktora_2x state'.
-  $permissions['block view revisions in u_vyst_redaktora_2x state'] = array(
-    'name' => 'block view revisions in u_vyst_redaktora_2x state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'block view revisions in u_vyst_redaktora_3 state'.
-  $permissions['block view revisions in u_vyst_redaktora_3 state'] = array(
-    'name' => 'block view revisions in u_vyst_redaktora_3 state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'block view revisions in u_vyst_redaktora_4 state'.
-  $permissions['block view revisions in u_vyst_redaktora_4 state'] = array(
-    'name' => 'block view revisions in u_vyst_redaktora_4 state',
     'roles' => array(),
     'module' => 'workbench_state_access',
   );
@@ -351,13 +295,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
-  // Exported permission: 'block view revisions in zlucene_odkazy state'.
-  $permissions['block view revisions in zlucene_odkazy state'] = array(
-    'name' => 'block view revisions in zlucene_odkazy state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
   // Exported permission: 'block view revisions in zverejnene_oprava state'.
   $permissions['block view revisions in zverejnene_oprava state'] = array(
     'name' => 'block view revisions in zverejnene_oprava state',
@@ -379,24 +316,6 @@ function rs_beliana_workbench_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'edit revisions in 1_korektura state'.
-  $permissions['edit revisions in 1_korektura state'] = array(
-    'name' => 'edit revisions in 1_korektura state',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in 2_korekt_ra state'.
-  $permissions['edit revisions in 2_korekt_ra state'] = array(
-    'name' => 'edit revisions in 2_korekt_ra state',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-    ),
-    'module' => 'workbench_state_access',
   );
 
   // Exported permission: 'edit revisions in _ilustr_cia_u_autora state'.
@@ -495,7 +414,6 @@ function rs_beliana_workbench_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
@@ -644,65 +562,11 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
-  // Exported permission: 'edit revisions in u_jaz_redaktora_2 state'.
-  $permissions['edit revisions in u_jaz_redaktora_2 state'] = array(
-    'name' => 'edit revisions in u_jaz_redaktora_2 state',
-    'roles' => array(
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
   // Exported permission: 'edit revisions in u_konzultanta state'.
   $permissions['edit revisions in u_konzultanta state'] = array(
     'name' => 'edit revisions in u_konzultanta state',
     'roles' => array(
       'Konzultant' => 'Konzultant',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in u_v_st_redaktora_5 state'.
-  $permissions['edit revisions in u_v_st_redaktora_5 state'] = array(
-    'name' => 'edit revisions in u_v_st_redaktora_5 state',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in u_vyst_redaktora_2 state'.
-  $permissions['edit revisions in u_vyst_redaktora_2 state'] = array(
-    'name' => 'edit revisions in u_vyst_redaktora_2 state',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in u_vyst_redaktora_2x state'.
-  $permissions['edit revisions in u_vyst_redaktora_2x state'] = array(
-    'name' => 'edit revisions in u_vyst_redaktora_2x state',
-    'roles' => array(
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in u_vyst_redaktora_3 state'.
-  $permissions['edit revisions in u_vyst_redaktora_3 state'] = array(
-    'name' => 'edit revisions in u_vyst_redaktora_3 state',
-    'roles' => array(
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-    ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in u_vyst_redaktora_4 state'.
-  $permissions['edit revisions in u_vyst_redaktora_4 state'] = array(
-    'name' => 'edit revisions in u_vyst_redaktora_4 state',
-    'roles' => array(
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
     ),
     'module' => 'workbench_state_access',
   );
@@ -731,7 +595,6 @@ function rs_beliana_workbench_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
@@ -747,13 +610,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
     ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in zlucene_odkazy state'.
-  $permissions['edit revisions in zlucene_odkazy state'] = array(
-    'name' => 'edit revisions in zlucene_odkazy state',
-    'roles' => array(),
     'module' => 'workbench_state_access',
   );
 
@@ -779,36 +635,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
-  // Exported permission: 'moderate content from 1_korektura to u_vyst_redaktora_3'.
-  $permissions['moderate content from 1_korektura to u_vyst_redaktora_3'] = array(
-    'name' => 'moderate content from 1_korektura to u_vyst_redaktora_3',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from 2_korekt_ra to u_vyst_redaktora_3'.
-  $permissions['moderate content from 2_korekt_ra to u_vyst_redaktora_3'] = array(
-    'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_3',
-    'roles' => array(
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from 2_korekt_ra to u_vyst_redaktora_4'.
-  $permissions['moderate content from 2_korekt_ra to u_vyst_redaktora_4'] = array(
-    'name' => 'moderate content from 2_korekt_ra to u_vyst_redaktora_4',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from draft to vyradene'.
   $permissions['moderate content from draft to vyradene'] = array(
     'name' => 'moderate content from draft to vyradene',
@@ -829,36 +655,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from ilustracia_na_webe to ilustracia_u_vyst_redaktora_5'.
-  $permissions['moderate content from ilustracia_na_webe to ilustracia_u_vyst_redaktora_5'] = array(
-    'name' => 'moderate content from ilustracia_na_webe to ilustracia_u_vyst_redaktora_5',
-    'roles' => array(
-      'ig-redaktor' => 'ig-redaktor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_na_zverejnenie to ilustracia_u_vyst_redaktora_5'.
-  $permissions['moderate content from ilustracia_na_zverejnenie to ilustracia_u_vyst_redaktora_5'] = array(
-    'name' => 'moderate content from ilustracia_na_zverejnenie to ilustracia_u_vyst_redaktora_5',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_grafika to ilustracia_u_redaktora'.
-  $permissions['moderate content from ilustracia_u_grafika to ilustracia_u_redaktora'] = array(
-    'name' => 'moderate content from ilustracia_u_grafika to ilustracia_u_redaktora',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora'.
   $permissions['moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora'] = array(
     'name' => 'moderate content from ilustracia_u_redaktora to _ilustr_cia_u_autora',
@@ -869,74 +665,11 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from ilustracia_u_redaktora to ilustracia_u_grafika'.
-  $permissions['moderate content from ilustracia_u_redaktora to ilustracia_u_grafika'] = array(
-    'name' => 'moderate content from ilustracia_u_redaktora to ilustracia_u_grafika',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_redaktora to ilustracia_u_vyst_redaktora_5'.
-  $permissions['moderate content from ilustracia_u_redaktora to ilustracia_u_vyst_redaktora_5'] = array(
-    'name' => 'moderate content from ilustracia_u_redaktora to ilustracia_u_vyst_redaktora_5',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'ig-redaktor' => 'ig-redaktor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5'.
   $permissions['moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5'] = array(
     'name' => 'moderate content from ilustracia_u_vyst_redaktora_3 to ilustracia_u_vyst_redaktora_5',
     'roles' => array(
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie'.
-  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie'] = array(
-    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_na_zverejnenie',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika'.
-  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika'] = array(
-    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_grafika',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora'.
-  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora'] = array(
-    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_redaktora',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'ig-redaktor' => 'ig-redaktor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3'.
-  $permissions['moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3'] = array(
-    'name' => 'moderate content from ilustracia_u_vyst_redaktora_5 to ilustracia_u_vyst_redaktora_3',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -1006,52 +739,12 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from na_jazykovu_korekturu to 1_korektura'.
-  $permissions['moderate content from na_jazykovu_korekturu to 1_korektura'] = array(
-    'name' => 'moderate content from na_jazykovu_korekturu to 1_korektura',
-    'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from na_jazykovu_korekturu to u_vyst_redaktora_2'.
-  $permissions['moderate content from na_jazykovu_korekturu to u_vyst_redaktora_2'] = array(
-    'name' => 'moderate content from na_jazykovu_korekturu to u_vyst_redaktora_2',
-    'roles' => array(
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from na_zverejnenie to needs_review'.
   $permissions['moderate content from na_zverejnenie to needs_review'] = array(
     'name' => 'moderate content from na_zverejnenie to needs_review',
     'roles' => array(
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from na_zverejnenie to u_vyst_redaktora_2'.
-  $permissions['moderate content from na_zverejnenie to u_vyst_redaktora_2'] = array(
-    'name' => 'moderate content from na_zverejnenie to u_vyst_redaktora_2',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from na_zverejnenie to u_vyst_redaktora_2x'.
-  $permissions['moderate content from na_zverejnenie to u_vyst_redaktora_2x'] = array(
-    'name' => 'moderate content from na_zverejnenie to u_vyst_redaktora_2x',
-    'roles' => array(
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -1128,18 +821,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from nova_ilustracia to ilustracia_u_grafika'.
-  $permissions['moderate content from nova_ilustracia to ilustracia_u_grafika'] = array(
-    'name' => 'moderate content from nova_ilustracia to ilustracia_u_grafika',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from nova_ilustracia to ilustracia_u_redaktora'.
   $permissions['moderate content from nova_ilustracia to ilustracia_u_redaktora'] = array(
     'name' => 'moderate content from nova_ilustracia to ilustracia_u_redaktora',
@@ -1185,194 +866,11 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from u_jaz_redaktora_2 to na_zalomenie'.
-  $permissions['moderate content from u_jaz_redaktora_2 to na_zalomenie'] = array(
-    'name' => 'moderate content from u_jaz_redaktora_2 to na_zalomenie',
-    'roles' => array(
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5'.
-  $permissions['moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5'] = array(
-    'name' => 'moderate content from u_jaz_redaktora_2 to u_v_st_redaktora_5',
-    'roles' => array(
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from u_konzultanta to needs_review'.
   $permissions['moderate content from u_konzultanta to needs_review'] = array(
     'name' => 'moderate content from u_konzultanta to needs_review',
     'roles' => array(
       'Konzultant' => 'Konzultant',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_v_st_redaktora_5 to na_zalomenie'.
-  $permissions['moderate content from u_v_st_redaktora_5 to na_zalomenie'] = array(
-    'name' => 'moderate content from u_v_st_redaktora_5 to na_zalomenie',
-    'roles' => array(
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2 to na_jazykovu_korekturu'.
-  $permissions['moderate content from u_vyst_redaktora_2 to na_jazykovu_korekturu'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2 to na_jazykovu_korekturu',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2 to na_zverejnenie'.
-  $permissions['moderate content from u_vyst_redaktora_2 to na_zverejnenie'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2 to na_zverejnenie',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2 to needs_review'.
-  $permissions['moderate content from u_vyst_redaktora_2 to needs_review'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2 to needs_review',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x'.
-  $permissions['moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2 to u_vyst_redaktora_2x',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2 to ukoncenezluene'.
-  $permissions['moderate content from u_vyst_redaktora_2 to ukoncenezluene'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2 to ukoncenezluene',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2 to vyradene'.
-  $permissions['moderate content from u_vyst_redaktora_2 to vyradene'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2 to vyradene',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2x to na_zverejnenie'.
-  $permissions['moderate content from u_vyst_redaktora_2x to na_zverejnenie'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2x to na_zverejnenie',
-    'roles' => array(
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2'.
-  $permissions['moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_2x to u_vyst_redaktora_2',
-    'roles' => array(
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra'.
-  $permissions['moderate content from u_vyst_redaktora_3 to 2_korekt_ra'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_3 to 2_korekt_ra',
-    'roles' => array(
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2'.
-  $permissions['moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_3 to u_jaz_redaktora_2',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5'.
-  $permissions['moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_3 to u_v_st_redaktora_5',
-    'roles' => array(
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4'.
-  $permissions['moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_3 to u_vyst_redaktora_4',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2'.
-  $permissions['moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_4 to u_jaz_redaktora_2',
-    'roles' => array(
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3'.
-  $permissions['moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3'] = array(
-    'name' => 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from ukoncenezluene to u_vyst_redaktora_2'.
-  $permissions['moderate content from ukoncenezluene to u_vyst_redaktora_2'] = array(
-    'name' => 'moderate content from ukoncenezluene to u_vyst_redaktora_2',
-    'roles' => array(
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -1434,36 +932,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zaradene to vyradene',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from zlucene to na_jazykovu_korekturu'.
-  $permissions['moderate content from zlucene to na_jazykovu_korekturu'] = array(
-    'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
-    'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from zlucene to zlucene_odkazy'.
-  $permissions['moderate content from zlucene to zlucene_odkazy'] = array(
-    'name' => 'moderate content from zlucene to zlucene_odkazy',
-    'roles' => array(
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from zlucene_odkazy to na_jazykovu_korekturu'.
-  $permissions['moderate content from zlucene_odkazy to na_jazykovu_korekturu'] = array(
-    'name' => 'moderate content from zlucene_odkazy to na_jazykovu_korekturu',
-    'roles' => array(
-      'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -1596,13 +1064,13 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['view revisions in any state'] = array(
     'name' => 'view revisions in any state',
     'roles' => array(
+      'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
       'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',

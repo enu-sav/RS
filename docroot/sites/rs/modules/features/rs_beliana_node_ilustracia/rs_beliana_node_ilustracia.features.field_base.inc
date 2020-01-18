@@ -18,7 +18,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_alternativny_text',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -117,6 +117,28 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_instrukcie_pre_typografa'.
+  $field_bases['field_instrukcie_pre_typografa'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_instrukcie_pre_typografa',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_lexikalna_skupina_il'.
@@ -316,7 +338,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_obrazok_odkaz',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(),
     'locked' => 0,
@@ -334,7 +356,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_odmena',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(

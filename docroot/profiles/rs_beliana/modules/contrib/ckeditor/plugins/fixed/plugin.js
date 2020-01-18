@@ -49,7 +49,7 @@ CKEDITOR.plugins.add('fixed', {
         toolbar.style.width = content.offsetWidth + "px";
         toolbar.style.position = "relative";
         content.style.paddingTop = "0px";
-        
+
       }
 
       if ((editor.offsetTop + editor.offsetHeight) + calculatedOffset < (scrollvalue + toolbar.offsetHeight)) {
