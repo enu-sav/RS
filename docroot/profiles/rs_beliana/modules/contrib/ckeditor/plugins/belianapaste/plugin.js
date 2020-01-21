@@ -68,10 +68,37 @@
             editor.on('paste', function (evt) {
                 var data = evt.data;
                 var mswordHtml = data.dataValue;
-		// remove flite junk - blue border in pasted formulas
-		evt.data.dataValue = evt.data.dataValue
-		            .replace( /cke_widget_focused/gi, '' )
-		            .replace( /<span data-cke-copybin.+?<\/span>/gi, '' );
+                // remove flite junk - blue border in pasted formulas
+                evt.data.dataValue = evt.data.dataValue
+                            .replace( /cke_widget_focused/gi, '' )
+                            .replace( /<span data-cke-copybin.+?<\/span>/gi, '' );
+
+                // replace < an > by X and Y (for paste bufferi analysis)
+                //evt.data.dataValue = evt.data.dataValue.replace( /</gi, 'X' ).replace( />/gi, 'Y' );
+                // replace incompletely copied formulas tracked by FLITE by an error message (directly as pasted text)
+                //
+                // count copied objects, which should contain a formula
+                var s = evt.data.dataValue;
+                var f = "data-cke-widget-wrapper";
+                var r = s.indexOf(f);
+                var c1 = 0;   // number of copied objects
+                while (r != -1) {
+                    c1++;
+                    r = s.indexOf(f, r + 1);
+                }
+
+                // count copied formulas
+                f = "cke_widget_element";
+                r = s.indexOf(f);
+                var c2 = 0;   // number of copied formulas
+                while (r != -1) {
+                    c2++;
+                    r = s.indexOf(f, r + 1);
+                }
+                //  c1==c2, if formulas we copied correctly
+                if (c1 != c2){
+                  evt.data.dataValue = "=== CHYBA: NEÚPLNE VYZNAČENÁ KOPÍROVANÁ ROVNICA ===";
+                }
 
                 // MS-WORD format sniffing.
                 if (mswordHtml && (forceFromWord || (/(class=\"?Mso|style=\"[^\"]*\bmso\-|w:WordDocument)/).test(mswordHtml))) {
