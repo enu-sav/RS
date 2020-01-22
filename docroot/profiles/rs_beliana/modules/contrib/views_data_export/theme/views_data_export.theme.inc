@@ -374,6 +374,13 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     // out: height="38" width="33"
     $output = preg_replace('/style="height:(\d+)px; width:(\d+)px"/i','height="$1" width="$2"', $output);
     
+    /* Remove funny spaces
+    * U+200B zero width space
+    * U+200C zero width non-joiner Unicode code point
+    * U+200D zero width joiner Unicode code point
+    * U+FEFF zero width no-break space Unicode code point
+    */
+    $output = preg_replace( '/[\x{200B}-\x{200D}\x{FEFF}]/u', '', $output);
     // Remove new paragraph starting with <p><strong>[1-9]
     $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
     // Remove new paragraph starting with <p><em>
