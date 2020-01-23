@@ -46,9 +46,11 @@ class beliana_handler_field_ilustracia_nazov_pouzit extends views_handler_field 
                     if ($ilustracia = node_load($item['target_id'])) {
                         $use_value = array();
 
-                        foreach ($ilustracia->field_pouzit[LANGUAGE_NONE] as $use){
-                            $use_value[] = $use['value'] == 'Zobrazit_na_webe' ? 'Web': 'Tlač';
-                        }
+			if (isset($ilustracia->field_pouzit[LANGUAGE_NONE])) { 
+                          foreach ($ilustracia->field_pouzit[LANGUAGE_NONE] as $use){
+                              $use_value[] = $use['value'] == 'Zobrazit_na_webe' ? 'Web': 'Tlač';
+                          }
+			}
 
                         $output[] = l($ilustracia->title, 'node/' . $ilustracia->nid) . ' / ' . implode(', ', $use_value);
                     }
