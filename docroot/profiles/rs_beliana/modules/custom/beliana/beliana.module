@@ -1731,6 +1731,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       // articles of type 'importovane heslo' cannot be sent to an author
+      /* change in workflow: even importovane_heslo can have an author now, so comment the following out
       if ($form['node']['#value']->type === 'importovane_heslo') {
         foreach ($form['state']['#options'] as $k => $v) {
           if (in_array($k, array('u_autora', 'u_autora_revizia'))) {
@@ -1738,6 +1739,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
           }
         }
       }
+      */
     }
 
     // Add custom submit handler.
