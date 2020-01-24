@@ -3249,7 +3249,7 @@ function beliana_api_rest_login($request_url) {
   $ret = new stdClass;
   $ret->response = curl_exec($curl);
   $response = json_decode($ret->response);
-  watchdog('error', $ret->response);
+  //watchdog('sync', $ret->response);
 
   if (is_object($response)) {
     $data['token'] = $response->token;
