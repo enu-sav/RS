@@ -67,6 +67,10 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_table']['id'] = 'field_table';
   $handler->display->display_options['fields']['field_table']['table'] = 'field_data_field_table';
   $handler->display->display_options['fields']['field_table']['field'] = 'field_table';
+  $handler->display->display_options['fields']['field_table']['label'] = '';
+  $handler->display->display_options['fields']['field_table']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_table']['alter']['text'] = 'Tabuľka pre geografické heslá: [field_table]';
+  $handler->display->display_options['fields']['field_table']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_table']['hide_empty'] = TRUE;
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
@@ -321,7 +325,7 @@ function rs_beliana_export_views_default_views() {
     t('nasledujúca ›'),
     t('posledná »'),
     t('Zobrazenie po @per_page položkách, @start - @end z @total'),
-    t('Tabuľka pre geografické heslá'),
+    t('Tabuľka pre geografické heslá: [field_table]'),
     t('Ilustrácie'),
     t('Stav'),
     t('Lexikálna skupina'),

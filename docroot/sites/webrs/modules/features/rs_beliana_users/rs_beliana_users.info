@@ -49,7 +49,6 @@ features[user_role][] = Konzultant
 features[user_role][] = Oznamy
 features[user_role][] = Redaktor
 features[user_role][] = Správca heslára
-features[user_role][] = Výstupný redaktor 1
 features[user_role][] = Výstupný redaktor 2
 features[user_role][] = Výstupný redaktor 2X
 features[user_role][] = Výstupný redaktor 3

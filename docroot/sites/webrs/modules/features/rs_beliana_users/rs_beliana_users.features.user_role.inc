@@ -64,12 +64,6 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 8,
   );
 
-  // Exported role: Výstupný redaktor 1.
-  $roles['Výstupný redaktor 1'] = array(
-    'name' => 'Výstupný redaktor 1',
-    'weight' => 15,
-  );
-
   // Exported role: Výstupný redaktor 2.
   $roles['Výstupný redaktor 2'] = array(
     'name' => 'Výstupný redaktor 2',
