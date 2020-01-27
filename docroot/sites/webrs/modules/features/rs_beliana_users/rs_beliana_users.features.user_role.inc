@@ -16,6 +16,12 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 10,
   );
 
+  // Exported role: Etymologický redaktor.
+  $roles['Etymologický redaktor'] = array(
+    'name' => 'Etymologický redaktor',
+    'weight' => 16,
+  );
+
   // Exported role: Grafik.
   $roles['Grafik'] = array(
     'name' => 'Grafik',
@@ -64,10 +70,22 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 8,
   );
 
+  // Exported role: Výstupný redaktor.
+  $roles['Výstupný redaktor'] = array(
+    'name' => 'Výstupný redaktor',
+    'weight' => 15,
+  );
+
   // Exported role: Výstupný redaktor 2.
   $roles['Výstupný redaktor 2'] = array(
     'name' => 'Výstupný redaktor 2',
     'weight' => 17,
+  );
+
+  // Exported role: Výstupný redaktor 2HP.
+  $roles['Výstupný redaktor 2HP'] = array(
+    'name' => 'Výstupný redaktor 2HP',
+    'weight' => 18,
   );
 
   // Exported role: Výstupný redaktor 2X.
@@ -92,6 +110,12 @@ function rs_beliana_users_user_default_roles() {
   $roles['Výstupný redaktor 5'] = array(
     'name' => 'Výstupný redaktor 5',
     'weight' => 22,
+  );
+
+  // Exported role: Zlúčené-odkazy.
+  $roles['Zlúčené-odkazy'] = array(
+    'name' => 'Zlúčené-odkazy',
+    'weight' => 28,
   );
 
   // Exported role: administrátor.
