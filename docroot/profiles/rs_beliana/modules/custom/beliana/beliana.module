@@ -1671,7 +1671,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 
   global $user;
   // disable but show fields related to author's text, if already set
-  if ($form_id == "heslo_node_form") {
+  if ($form_id == "heslo_node_form" or $form_id == "importovane_heslo_node_form" ) {
     $display_payment = _display_payment_fields_form($form);
     //hideall, enableall, showdisabled, showeditable
     if ($display_payment == "enableall") {
@@ -1783,8 +1783,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
   //Handle special transitions in the book workflow
   handle_special_transitions($values);
 
-  // check type heslo
-  if ($values['node']->type === 'heslo') {
+  // check type heslo and importovane heslo 
+  // (in RS importovane heslo is not processed and in WEBRS is processed equaly as heslo)
+  if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
     // do not change state to na_opakovane_zverejnenie or na_zalomenie if LITE changes exist
     if ($new_state === "na_opakovane_zverejnenie" or $new_state === "na_zalomenie") {
@@ -1802,7 +1803,7 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       }
     }
     // check if payment information is stored
-    if (($cur_state === "needs_review" and $new_state === "na_zverejnenie") and // u redaktora state u vr1 state transition
+    if (($cur_state === "needs_review" and $new_state === "na_zverejnenie") and // u redaktora state u vr1/vr state transition
       _display_payment_fields($values['node']) == "showeditable") {
       $fail = TRUE;
       drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
