@@ -770,7 +770,6 @@ function beliana_assign_consultant_validate($form, &$form_state) {
  * @inheritdoc
  */
 function beliana_assign_consultant_submit($form, $form_state) {
-  #dpm($form, "submit");
   return _beliana_submit_assign_user_form($form_state, 'u_konzultanta');
 }
 
@@ -1861,7 +1860,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     }
   }
 
-  if ($cur_state === "u_konzultanta" and $new_state === "needs_review") {
+  // restore id of the node author from the saved value
+  if (($cur_state === "u_konzultanta" and $new_state === "needs_review") or
+     ($cur_state === "u_konzultanta_revizia" and $new_state === "u_redaktora_revizia"))
+  {
     if (isset($values['node']->field_uid_autora['und'])) {
       $values['node']->uid = $values['node']->field_uid_autora['und'][0]['value'];
       unset($values['node']->field_uid_autora['und']);
@@ -2189,7 +2191,14 @@ function _beliana_assign_user(&$node, $context) {
     }
     $node->uid = $user->uid;
     node_save($node);
-    workbench_moderation_moderate($node, $context['status']);
+
+    // if current state is u_redaktora_revizia, change new state to u_konzultanta_revizia
+    // applies only to WEBRS
+    $new_state = $context['status'];
+    if ($new_state === 'u_konzultanta' and $node->workbench_moderation_state_current == "u_redaktora_revizia"){
+      $new_state = "u_konzultanta_revizia";
+    }
+    workbench_moderation_moderate($node, $new_state);
   }
 }
 
