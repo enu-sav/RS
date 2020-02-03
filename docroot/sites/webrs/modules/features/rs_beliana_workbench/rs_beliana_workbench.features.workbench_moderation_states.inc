@@ -9,6 +9,18 @@
  */
 function rs_beliana_workbench_workbench_moderation_export_states() {
   $items = array(
+    '1_korektura' => array(
+      'name' => '1_korektura',
+      'label' => '1. korektúra',
+      'description' => 'U redaktora/redaktorov na 1. korektúru',
+      'weight' => 10,
+    ),
+    '2_korekt_ra' => array(
+      'name' => '2_korekt_ra',
+      'label' => '2. korektúra',
+      'description' => 'U redaktora/redaktorov na 2. korektúru',
+      'weight' => 10,
+    ),
     '_ilustr_cia_u_autora' => array(
       'name' => '_ilustr_cia_u_autora',
       'label' => 'Ilustrácia u autora',
@@ -80,6 +92,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Importované - vyradené',
       'description' => 'Importované heslá, ktoré nebudú zverejneé na webe',
       'weight' => -2,
+    ),
+    'kontrola_etymologie' => array(
+      'name' => 'kontrola_etymologie',
+      'label' => 'Kontrola etymológie',
+      'description' => 'Kontrola etymológie a prepisov',
+      'weight' => 0,
     ),
     'len_vyplatit' => array(
       'name' => 'len_vyplatit',
@@ -153,11 +171,47 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Na vypracovanie autorom,  pred odoslaním redaktorovi',
       'weight' => 3,
     ),
+    'u_autora_revizia' => array(
+      'name' => 'u_autora_revizia',
+      'label' => 'U autora (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
+    'u_jaz_redaktora_2' => array(
+      'name' => 'u_jaz_redaktora_2',
+      'label' => 'U jaz. redaktora 2',
+      'description' => 'Heslo odoslané na  2. jazykovú korektúru, pracuje s ním jazykový redaktor 2',
+      'weight' => 10,
+    ),
+    'u_jaz_redaktora_revizia' => array(
+      'name' => 'u_jaz_redaktora_revizia',
+      'label' => 'U jaz. redaktora (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
     'u_konzultanta' => array(
       'name' => 'u_konzultanta',
       'label' => 'U konzultanta',
       'description' => 'heslo u konzultanta',
       'weight' => 10,
+    ),
+    'u_konzultanta_revizia' => array(
+      'name' => 'u_konzultanta_revizia',
+      'label' => 'U konzultanta (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
+    'u_redaktora_revizia' => array(
+      'name' => 'u_redaktora_revizia',
+      'label' => 'U redaktora (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
+    'u_vyst_redaktora_revizia' => array(
+      'name' => 'u_vyst_redaktora_revizia',
+      'label' => 'U výst. redaktora (revízia)',
+      'description' => '',
+      'weight' => 0,
     ),
     'ukoncenezluene' => array(
       'name' => 'ukoncenezluene',
@@ -182,6 +236,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Zlúčené',
       'description' => 'Heslo vytvorené zlúčením',
       'weight' => 7,
+    ),
+    'zlucene_odkazy' => array(
+      'name' => 'zlucene_odkazy',
+      'label' => 'Zlúčené-odkazy',
+      'description' => 'Kontrola odkazov na vytvorené zlúčené heslo v iných heslách',
+      'weight' => 10,
     ),
     'zverejnene_oprava' => array(
       'name' => 'zverejnene_oprava',

@@ -14587,12 +14587,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Vyšlo knižne */
-  $handler->display->display_options['fields']['field_vyslo_knizne']['id'] = 'field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['table'] = 'field_data_field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['field'] = 'field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['label'] = '';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
@@ -19424,6 +19418,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
         ),
       ),
     ),
+    'action::reset_vyradene_ilustracie' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -19477,17 +19479,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['exclude'] = TRUE;
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Workbench Moderation: Stav */
-  $handler->display->display_options['fields']['state_1']['id'] = 'state_1';
-  $handler->display->display_options['fields']['state_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state_1']['field'] = 'state';
-  $handler->display->display_options['fields']['state_1']['relationship'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['fields']['state_1']['label'] = 'Stav ilustrácie / hesla';
-  $handler->display->display_options['fields']['state_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['state_1']['alter']['text'] = '[state] / [state_1]';
-  $handler->display->display_options['fields']['state_1']['machine_name'] = 0;
   /* Pole: Obsah: Komentár/inštrukcie */
   $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
@@ -19584,10 +19576,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_url_autora_diela_l']['field'] = 'field_url_autora_diela_l';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['label'] = 'URL autora, autora snímky, inštitúcie';
   $handler->display->display_options['fields']['field_url_autora_diela_l']['click_sort_column'] = 'url';
-  /* Pole: Workbench Moderation: Stav */
-  $handler->display->display_options['fields']['state_2']['id'] = 'state_2';
-  $handler->display->display_options['fields']['state_2']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state_2']['field'] = 'state';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Typ */
@@ -19715,6 +19703,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
+    'vyradene' => 'vyradene',
     'nova_ilustracia' => 'nova_ilustracia',
     'ilustracia_na_webe' => 'ilustracia_na_webe',
     '_ilustr_cia_u_autora' => '_ilustr_cia_u_autora',
@@ -19739,15 +19728,19 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     31 => 0,
     27 => 0,
     29 => 0,
-    18 => 0,
+    32 => 0,
     10 => 0,
+    18 => 0,
     5 => 0,
     4 => 0,
+    34 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
+    37 => 0,
     13 => 0,
-    19 => 0,
+    35 => 0,
+    33 => 0,
     14 => 0,
     15 => 0,
     16 => 0,
@@ -19756,7 +19749,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     21 => 0,
     22 => 0,
     23 => 0,
-    26 => 0,
+    36 => 0,
     28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
@@ -20208,12 +20201,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     23 => 0,
     26 => 0,
   );
-  /* Filter criterion: Workbench Moderation: Aktuálny */
-  $handler->display->display_options['filters']['is_current_1']['id'] = 'is_current_1';
-  $handler->display->display_options['filters']['is_current_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current_1']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current_1']['relationship'] = 'reverse_field_ilustracia_node';
-  $handler->display->display_options['filters']['is_current_1']['value'] = '1';
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad ilustrácie';
@@ -21761,8 +21748,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Náhľad'),
     t('Odkaz'),
     t('Heslo'),
-    t('Stav ilustrácie / hesla'),
-    t('[state] / [state_1]'),
     t('Text k ilustrácii'),
     t('Typ CC licencie'),
     t('Typ ilustrácie / CC licencie'),

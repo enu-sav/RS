@@ -77,7 +77,7 @@ function rs_beliana_node_article_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'filtered_html' => 0,
+          'filtered_html' => 'filtered_html',
           'full_html' => 'full_html',
           'plain_text' => 0,
         ),

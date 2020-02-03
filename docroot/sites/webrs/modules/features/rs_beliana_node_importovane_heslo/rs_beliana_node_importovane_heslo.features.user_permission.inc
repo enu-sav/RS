@@ -46,7 +46,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'Výstupný redaktor 3' => 'Výstupný redaktor 3',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
