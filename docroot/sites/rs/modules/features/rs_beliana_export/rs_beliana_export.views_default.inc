@@ -27,6 +27,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['use_more_text'] = 'viac';
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    27 => '27',
     16 => '16',
   );
   $handler->display->display_options['cache']['type'] = 'none';
@@ -191,7 +192,6 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Obsah: Názov */
@@ -263,11 +263,8 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
   $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state_1']['field'] = 'state';
-  $handler->display->display_options['filters']['state_1']['operator'] = 'not in';
   $handler->display->display_options['filters']['state_1']['value'] = array(
-    'vyradene' => 'vyradene',
-    'ukoncenezluene' => 'ukoncenezluene',
-    'len_vyplatit' => 'len_vyplatit',
+    'na_zalomenie' => 'na_zalomenie',
   );
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
