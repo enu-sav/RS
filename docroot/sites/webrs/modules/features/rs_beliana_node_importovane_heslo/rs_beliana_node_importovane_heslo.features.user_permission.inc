@@ -38,6 +38,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions['edit any importovane_heslo content'] = array(
     'name' => 'edit any importovane_heslo content',
     'roles' => array(
+      'Autor' => 'Autor',
       'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
@@ -64,6 +65,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions['edit own importovane_heslo content'] = array(
     'name' => 'edit own importovane_heslo content',
     'roles' => array(
+      'Autor' => 'Autor',
       'administrátor' => 'administrátor',
       'iredaktor' => 'iredaktor',
     ),

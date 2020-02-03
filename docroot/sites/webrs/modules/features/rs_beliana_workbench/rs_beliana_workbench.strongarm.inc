@@ -58,6 +58,7 @@ function rs_beliana_workbench_strongarm() {
   $strongarm->name = 'workbench_access_taxonomy';
   $strongarm->value = array(
     'lexikalne_skupiny' => 'lexikalne_skupiny',
+    'forums' => 0,
     'subory' => 0,
     'tags' => 0,
   );

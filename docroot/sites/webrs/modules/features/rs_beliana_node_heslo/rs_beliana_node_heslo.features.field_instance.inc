@@ -836,7 +836,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 1,
     ),
-    'workbench_access_field' => 1,
+    'workbench_access_field' => TRUE,
   );
 
   // Exported field_instance: 'node-heslo-field_na_zoradenie'.
@@ -1020,7 +1020,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 21,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -1068,7 +1068,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 16,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_redaktori_zluceneho'.
@@ -1115,7 +1115,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 18,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_remote_id'.
@@ -1208,7 +1208,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 17,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_table'.
