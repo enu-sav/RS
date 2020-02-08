@@ -381,6 +381,10 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     * U+FEFF zero width no-break space Unicode code point
     */
     $output = preg_replace( '/[\x{200B}-\x{200D}\x{FEFF}]/u', '', $output);
+ 
+    //replace non-breakable space, may break paragraph merging
+    $output = str_replace(" ", " ", $output); 
+
     // Remove new paragraph starting with <p><strong>[1-9]
     $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
     // Remove new paragraph starting with <p><em>
@@ -392,12 +396,12 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     // merge paragraph ending  with —<p> ,
     $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
     // remove new paragraphs not starting with a tag (but not if it is a list item)
-    //$output = preg_replace('/<\/p>\s+<p>([^<])/', ' \1', $output);
     $output = preg_replace('/<\/p>\s+<p>([^< ]* [^-–])/', ' \1', $output);
+
     // add newline between concatenated paragraphs (needed in postprocessing)
     $output = preg_replace("/<\/p><p>/", "</p>\n<p>", $output);
 
-    #Force Arial and 9pt to each paragraph
+    #Force Arial and 11pt to each paragraph
     $output = str_replace('<p>', '<p style="font-family:Arial;font-size:11pt;">', $output);  
     
     #archimedovska_grupa.html
