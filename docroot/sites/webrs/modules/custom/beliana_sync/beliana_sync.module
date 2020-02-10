@@ -278,7 +278,7 @@ function beliana_sync_sync($nid, &$context) {
       $remote_node_object['table'] = array(Null, 0);
     }
     // add author's name, if necessary`
-    if (isset($node->field_zverejnit_meno_autora[LANGUAGE_NONE]) and $node->field_zverejnit_meno_autora[LANGUAGE_NONE][0]['value'] == "1") {
+    if (isset($node->field_zverejnit_meno_autora[LANGUAGE_NONE]) && $node->field_zverejnit_meno_autora[LANGUAGE_NONE][0]['value'] == "1") {
       if ($user = user_load($node->uid)) {
         $remote_node_object['autor'] = [
           'meno' => $user->field_meno[LANGUAGE_NONE][0]['value'],

@@ -55,7 +55,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 18,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -86,7 +86,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -109,7 +109,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -148,7 +148,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 9,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -171,7 +171,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -234,7 +234,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 18,
+        'weight' => 15,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -273,7 +273,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 21,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -290,7 +290,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 19,
+        'weight' => 16,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -342,7 +342,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -365,7 +365,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 17,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -413,7 +413,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -465,7 +465,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 11,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -486,7 +486,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -518,7 +518,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -536,7 +536,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -583,7 +583,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -631,7 +631,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -683,7 +683,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -700,7 +700,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -752,7 +752,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -769,7 +769,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -843,7 +843,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -874,7 +874,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -891,7 +891,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -918,7 +918,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -935,7 +935,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1010,7 +1010,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 15,
+        'weight' => 12,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1041,7 +1041,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 15,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -1058,7 +1058,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 16,
+        'weight' => 13,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1085,7 +1085,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -1101,7 +1101,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1128,7 +1128,57 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 15,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'node-importovane_heslo-field_zverejnit_meno_autora'.
+  $field_instances['node-importovane_heslo-field_zverejnit_meno_autora'] = array(
+    'bundle' => 'importovane_heslo',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_zverejnit_meno_autora',
+    'label' => 'Zverejniť meno autora',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -1144,7 +1194,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1218,6 +1268,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Vyplatenie odmeny');
   t('Vyšlo knižne');
   t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zverejniť meno autora');
 
   return $field_instances;
 }

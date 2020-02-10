@@ -40,6 +40,7 @@ features[field_instance][] = node-importovane_heslo-field_text_hesla
 features[field_instance][] = node-importovane_heslo-field_uid_autora
 features[field_instance][] = node-importovane_heslo-field_vyplatit
 features[field_instance][] = node-importovane_heslo-field_vyslo_knizne
+features[field_instance][] = node-importovane_heslo-field_zverejnit_meno_autora
 features[field_instance][] = node-importovane_heslo-title_field
 features[node][] = importovane_heslo
 features[user_permission][] = create importovane_heslo content
