@@ -442,6 +442,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in importovane_u_vr state',
     'roles' => array(
       'Komentátor' => 'Komentátor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'ig-redaktor' => 'ig-redaktor',
     ),
@@ -679,7 +680,6 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from importovane to importovane_u_jr2'] = array(
     'name' => 'moderate content from importovane to importovane_u_jr2',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -713,6 +713,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from importovane_u_vr to importovane'] = array(
     'name' => 'moderate content from importovane_u_vr to importovane',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'useradmin' => 'useradmin',
     ),
@@ -723,6 +724,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from importovane_u_vr to na_zalomenie'] = array(
     'name' => 'moderate content from importovane_u_vr to na_zalomenie',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'useradmin' => 'useradmin',
     ),

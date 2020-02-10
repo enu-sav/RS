@@ -77,6 +77,35 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'create field_zivotopis'.
+  $permissions['create field_zivotopis'] = array(
+    'name' => 'create field_zivotopis',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_zivotopis'.
+  $permissions['edit field_zivotopis'] = array(
+    'name' => 'edit field_zivotopis',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_zivotopis'.
+  $permissions['edit own field_zivotopis'] = array(
+    'name' => 'edit own field_zivotopis',
+    'roles' => array(
+      'Autor' => 'Autor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'force password change'.
   $permissions['force password change'] = array(
     'name' => 'force password change',
@@ -104,6 +133,15 @@ function rs_beliana_users_user_default_permissions() {
     'module' => 'password_policy',
   );
 
+  // Exported permission: 'view field_zivotopis'.
+  $permissions['view field_zivotopis'] = array(
+    'name' => 'view field_zivotopis',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view hidden fields'.
   $permissions['view hidden fields'] = array(
     'name' => 'view hidden fields',
@@ -111,6 +149,16 @@ function rs_beliana_users_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'simplify',
+  );
+
+  // Exported permission: 'view own field_zivotopis'.
+  $permissions['view own field_zivotopis'] = array(
+    'name' => 'view own field_zivotopis',
+    'roles' => array(
+      'Autor' => 'Autor',
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
   );
 
   return $permissions;
