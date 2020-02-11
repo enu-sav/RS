@@ -340,7 +340,7 @@ Vybrané publikácie<br />
           ),
         ),
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => 0,
     ),
     'widget' => array(
