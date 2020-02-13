@@ -1788,9 +1788,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     $fail = FALSE;
     // do not change state if article has more that one editor
     // applies on to webrs
-    if ($cur_state === "importovane" and 
-         $new_state === "zaradene" and 
-         count($values['node']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1){
+    if (count($values['node']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1 and
+       (($cur_state === "importovane" and $new_state === "zaradene") or
+       ($cur_state === "zverejnene_oprava" and $new_state === "u_redaktora_revizia"))) {
       $eds=array(); // highest level parent terms
       foreach ($values['node']->field_lexikalna_skupina[LANGUAGE_NONE] as $ls){
         $ed = end(taxonomy_get_parents_all($ls['tid']));
@@ -1800,7 +1800,13 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       }
       if( count($eds) > 1 ){
         $fail = TRUE;
-        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo jeho lexikálne skupiny majú rôznych redaktorov (".implode(", ",$eds).")", 'error');
+        drupal_set_message('Stav hesla <a href="/' . 
+          $values['node']->path['alias'] . '">' . 
+          $values['node']->title . 
+          "</a> nebol zmenený, lebo jeho lexikálne skupiny majú rôznych redaktorov (".
+          implode(", ",$eds).
+          "). Do stavov 'Zaradené' a 'U redaktora (revízia)' možno heslá odosielať len ak majú jedného redaktora.", 
+          'error');
       }
     }
     // do not change state to na_opakovane_zverejnenie or na_zalomenie if LITE changes exist
