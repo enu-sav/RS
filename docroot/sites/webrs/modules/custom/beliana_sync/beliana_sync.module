@@ -474,10 +474,14 @@ function beliana_sync_prepare_queue($source) {
 
   // synchronize just the unique items from the queue
   foreach (array_unique($sync_queue) as $item) {
-    $operations[] = [
-      'beliana_sync_sync',
-      [$item],
-    ];
+    // synchronize only items in the right state (it may happen that an article is in a different state because of its revision)
+    $auxnode = node_load($item);
+    if (in_array($auxnode->workbench_moderation['current']->state,
+          ["publikovane_na_webe",
+          "na_zalomenie",
+          "na_opakovane_zverejnenie"])) {
+      $operations[] = [ 'beliana_sync_sync', [$item] ];
+    }
   }
 
   $batch = array(
