@@ -25,10 +25,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -39,7 +35,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'create field_datum_aktualizacie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
     ),
@@ -110,13 +105,8 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -126,12 +116,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'create field_ilustracia',
     'roles' => array(
       'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -144,10 +132,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
     ),
@@ -159,9 +143,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'create field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -278,7 +259,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_zlucene_do'] = array(
     'name' => 'create field_zlucene_do',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -288,7 +268,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_zlucene_z'] = array(
     'name' => 'create field_zlucene_z',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -310,10 +289,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'node',
@@ -328,14 +303,8 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -369,11 +338,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -395,10 +359,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -409,7 +369,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_datum_aktualizacie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
     ),
@@ -479,13 +438,8 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -495,12 +449,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_ilustracia',
     'roles' => array(
       'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -511,7 +463,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -522,9 +473,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -580,10 +528,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'geoRedaktor' => 'geoRedaktor',
     ),
@@ -595,10 +539,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_table_weight',
     'roles' => array(
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'geoRedaktor' => 'geoRedaktor',
     ),
@@ -653,7 +593,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_zlucene_do'] = array(
     'name' => 'edit field_zlucene_do',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -692,10 +631,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -706,7 +641,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_datum_aktualizacie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
     ),
@@ -777,13 +711,8 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -793,12 +722,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_ilustracia',
     'roles' => array(
       'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -808,7 +735,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -819,9 +745,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -938,7 +861,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_zlucene_do'] = array(
     'name' => 'edit own field_zlucene_do',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -977,10 +899,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -990,9 +909,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit title_field',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1094,10 +1011,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1128,7 +1041,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -1144,10 +1056,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1203,10 +1111,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
       'geoRedaktor' => 'geoRedaktor',
@@ -1219,10 +1123,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view field_table_weight',
     'roles' => array(
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'geoRedaktor' => 'geoRedaktor',
     ),
@@ -1266,10 +1166,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1289,7 +1185,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view field_zlucene_do'] = array(
     'name' => 'view field_zlucene_do',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -1425,7 +1320,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view own field_lexikalna_skupina',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1436,9 +1330,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view own field_na_zoradenie',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1556,7 +1447,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_zlucene_do'] = array(
     'name' => 'view own field_zlucene_do',
     'roles' => array(
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',

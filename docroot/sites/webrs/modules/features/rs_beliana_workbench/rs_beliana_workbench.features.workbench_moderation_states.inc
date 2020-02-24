@@ -9,18 +9,6 @@
  */
 function rs_beliana_workbench_workbench_moderation_export_states() {
   $items = array(
-    '1_korektura' => array(
-      'name' => '1_korektura',
-      'label' => '1. korektúra',
-      'description' => 'U redaktora/redaktorov na 1. korektúru',
-      'weight' => 10,
-    ),
-    '2_korekt_ra' => array(
-      'name' => '2_korekt_ra',
-      'label' => '2. korektúra',
-      'description' => 'U redaktora/redaktorov na 2. korektúru',
-      'weight' => 10,
-    ),
     '_ilustr_cia_u_autora' => array(
       'name' => '_ilustr_cia_u_autora',
       'label' => 'Ilustrácia u autora',
@@ -57,16 +45,10 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 10,
     ),
-    'ilustracia_u_vyst_redaktora_3' => array(
-      'name' => 'ilustracia_u_vyst_redaktora_3',
-      'label' => 'Ilustrácia u výst. redaktora 3',
-      'description' => 'Ilustrácia u výstupného redaktora 3',
-      'weight' => 10,
-    ),
     'ilustracia_u_vyst_redaktora_5' => array(
       'name' => 'ilustracia_u_vyst_redaktora_5',
-      'label' => 'Ilustrácia u výst. redaktora 5',
-      'description' => 'Ilustrácia u výstupného redaktora 5',
+      'label' => 'Ilustrácia u výst. redaktora',
+      'description' => 'Ilustrácia u výstupného redaktora',
       'weight' => 10,
     ),
     'importovane' => array(
@@ -177,12 +159,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 0,
     ),
-    'u_jaz_redaktora_2' => array(
-      'name' => 'u_jaz_redaktora_2',
-      'label' => 'U jaz. redaktora 2',
-      'description' => 'Heslo odoslané na  2. jazykovú korektúru, pracuje s ním jazykový redaktor 2',
-      'weight' => 10,
-    ),
     'u_jaz_redaktora_revizia' => array(
       'name' => 'u_jaz_redaktora_revizia',
       'label' => 'U jaz. redaktora (revízia)',
@@ -236,12 +212,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Zlúčené',
       'description' => 'Heslo vytvorené zlúčením',
       'weight' => 7,
-    ),
-    'zlucene_odkazy' => array(
-      'name' => 'zlucene_odkazy',
-      'label' => 'Zlúčené-odkazy',
-      'description' => 'Kontrola odkazov na vytvorené zlúčené heslo v iných heslách',
-      'weight' => 10,
     ),
     'zverejnene_oprava' => array(
       'name' => 'zverejnene_oprava',
