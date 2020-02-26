@@ -1900,9 +1900,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5') {
       $ilu_node = $values['node'];
 
-      if (!_check_ilu_attached($ilu_node, 'state change')) {
-        $skip = TRUE;
-      }
+      // temporarily disabled
+      //if (!_check_ilu_attached($ilu_node, 'state change')) {
+        //$skip = TRUE;
+      //}
 
       //if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
       //$skip = TRUE;
