@@ -346,7 +346,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'edit revisions in ilustracia_na_zverejnenie state'.
   $permissions['edit revisions in ilustracia_na_zverejnenie state'] = array(
     'name' => 'edit revisions in ilustracia_na_zverejnenie state',
-    'roles' => array(),
+    'roles' => array(
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'workbench_state_access',
   );
 
@@ -374,6 +376,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_vyst_redaktora_5 state',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_state_access',
   );
