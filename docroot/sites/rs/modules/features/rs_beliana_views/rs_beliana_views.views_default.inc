@@ -2784,6 +2784,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['relationship'] = 'nid';
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -15140,12 +15145,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Vyšlo knižne */
-  $handler->display->display_options['fields']['field_vyslo_knizne']['id'] = 'field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['table'] = 'field_data_field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['field'] = 'field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['label'] = '';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
