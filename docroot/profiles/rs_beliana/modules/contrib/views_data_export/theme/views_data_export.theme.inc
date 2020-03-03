@@ -341,14 +341,18 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     }
   }
 
-  // Export na tlac
+  // Export for printing, path /export
   if ($vars['view']->name === 'export' && $vars['view']->current_display === 'views_data_export_1') {
     $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some html tags
     $output = preg_replace('/➔ /', '→ ', $output); 
     $output = preg_replace('/➔/', '→ ', $output); 
     $vars['tbody'] = $output;
   }
-  // Export for typographer
+  // Export na tlac, path /export-multi
+  else if ($vars['view']->name === 'export' && $vars['view']->current_display === 'views_data_export_1') {
+    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
+  }
+  // Export for typographer, path /export-na-sadzbu
   else if ($vars['view']->name === 'export_sadzac' && $vars['view']->current_display === 'views_data_export_1') {
     //$output = preg_replace('/➔/', '→ ', $output); 
 //////////////////////
@@ -440,9 +444,6 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     $output = preg_replace('/➔ /', '→ ', $output); 
     $output = preg_replace('/➔/', '→ ', $output); 
     $vars['tbody'] = $output;
-  }
-  else {
-  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
   }
 }
 
