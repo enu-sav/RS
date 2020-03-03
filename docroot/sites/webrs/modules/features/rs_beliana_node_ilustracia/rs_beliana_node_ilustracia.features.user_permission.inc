@@ -273,6 +273,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
