@@ -285,6 +285,7 @@ function beliana_sync_sync($nid, &$context) {
           'priezvisko' => $user->field_priezvisko[LANGUAGE_NONE][0]['value'],
           'titul_pred_menom' => $user->field_titul_pred_menom[LANGUAGE_NONE][0]['value'],
           'titul_za_menom' => $user->field_titul_za_menom[LANGUAGE_NONE][0]['value'],
+          'posobisko' => $user->field_posobisko[LANGUAGE_NONE][0]['value'],
           'zivotopis' => $user->field_zivotopis[LANGUAGE_NONE][0]['value'],
         ];
       }
