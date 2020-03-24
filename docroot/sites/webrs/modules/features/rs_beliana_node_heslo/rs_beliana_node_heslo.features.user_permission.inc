@@ -340,6 +340,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
+      'garant' => 'garant',
       'useradmin' => 'useradmin',
     ),
     'module' => 'node',

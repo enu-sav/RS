@@ -48,7 +48,9 @@ function rs_beliana_node_page_user_default_permissions() {
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'node',
   );
@@ -57,7 +59,9 @@ function rs_beliana_node_page_user_default_permissions() {
   $permissions['edit body'] = array(
     'name' => 'edit body',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );

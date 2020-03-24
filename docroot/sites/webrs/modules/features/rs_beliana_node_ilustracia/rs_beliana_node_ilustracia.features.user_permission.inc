@@ -914,6 +914,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );

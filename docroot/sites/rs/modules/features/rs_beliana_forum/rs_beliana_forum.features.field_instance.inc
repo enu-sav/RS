@@ -106,7 +106,7 @@ function rs_beliana_forum_field_default_field_instances() {
           ),
         ),
       ),
-      'display_summary' => 1,
+      'display_summary' => 0,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),

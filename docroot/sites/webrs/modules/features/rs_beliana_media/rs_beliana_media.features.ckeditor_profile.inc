@@ -260,9 +260,9 @@ config.specialChars = [
     [\'Source\'],
     [\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
-    [\'JustifyCenter\',\'Bold\',\'Italic\'],
+    [\'JustifyCenter\',\'Bold\',\'Italic\',\'BulletedList\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\']
+    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\']
 ]',
         'expand' => 't',
         'default' => 't',
