@@ -1130,7 +1130,7 @@ function _display_payment_fields(&$node) {
 }
 
 /**
- * Find the first transition needs_review -> na_zalomenie and return text length
+ * Find the first transition needs_review -> na_zverejnenie and return text length
  *
  */
 function _get_authors_text_length(&$node) {
@@ -1138,7 +1138,7 @@ function _get_authors_text_length(&$node) {
     return NULL;
   }
 
-  // get the array of transitions needs_review -> na_zalomenie (U redaktora -> U VR1)
+  // get the array of transitions needs_review -> na_zverejnenie (U redaktora -> U VR1)
   $transitions = db_select('workbench_moderation_node_history', 'w')
     ->fields('w') // all fields
     ->condition('from_state', 'needs_review')  // u redaktora state
@@ -1809,8 +1809,9 @@ function beliana_workflow_reaction(&$form, &$form_state) {
           'error');
       }
     }
-    // do not change state to na_opakovane_zverejnenie or na_zalomenie if LITE changes exist
-    if ($new_state === "na_opakovane_zverejnenie" or $new_state === "na_zalomenie") {
+    // do not change state if LITE changes exist
+    $publish_states = ["na_opakovane_zverejnenie", "na_zalomenie", "importovane_na_zverejnenie"];
+    if (in_array($new_state, $publish_states)) {
       $text = $values['node']->field_text_hesla['und'][0]['value'];
       if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
         $fail = TRUE;
