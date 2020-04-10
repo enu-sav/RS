@@ -479,6 +479,7 @@ function beliana_sync_prepare_queue($source) {
     if (in_array($auxnode->workbench_moderation['current']->state,
           ["publikovane_na_webe",
           "na_zalomenie",
+          "importovane_na_zverejnenie",
           "na_opakovane_zverejnenie"])) {
       $operations[] = [ 'beliana_sync_sync', [$item] ];
     }
