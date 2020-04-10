@@ -126,22 +126,6 @@
                 }
             }, null, null, 3);
 
-            // cancel key-press event SHIFT-Enter (which cause problems when using FLITE
-	    editor.on( 'key', function( event ) {
-              var cancel_keys = [CKEDITOR.SHIFT + 13];
-		    console.log(e);
-              if (cancel_keys.includes(event.data.keyCode)) {
-                event.cancel();
-              }
-            });
-
-            // disable drag&drop inside the editor
-	    editor.on( 'dragstart', function( event ) {
-                event.cancel();
-            });
-	    //editor.on( 'cut', function( event ) {
-                //event.cancel();
-            //});
         }
 
     });
