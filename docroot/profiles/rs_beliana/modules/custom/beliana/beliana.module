@@ -1900,9 +1900,10 @@ function beliana_workflow_reaction(&$form, &$form_state) {
     if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5') {
       $ilu_node = $values['node'];
 
-      if (!_check_ilu_attached($ilu_node, 'state change')) {
-        $skip = TRUE;
-      }
+      // temporarily disabled
+      //if (!_check_ilu_attached($ilu_node, 'state change')) {
+        //$skip = TRUE;
+      //}
 
       //if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
       //$skip = TRUE;
@@ -3655,4 +3656,97 @@ function transfer_links($text_to, $text_from) {
 
   //dpm($text_to, "2");
   return [$text_to, $log];
+}
+
+/*
+ * modify text exported by the 'export' views
+ *  to be called from the function  template_process_views_data_export_msoffice_body of
+ *  the views_data_export/theme/views_data_export.theme.inc file
+ */
+function beliana_render_export($viewname, $displayname, $text) {
+  $output = $text;
+  // Export for printing, path /export
+  if ($viewname === 'export' && $displayname === 'views_data_export_1') {
+    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some html tags
+    $output = preg_replace('/➔ /', '→ ', $output);
+    $output = preg_replace('/➔/', '→ ', $output);
+  }
+  // Export na tlac, path /export-multi
+  else if ($viewname === 'export' && $displayname === 'views_data_export_1') {
+    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
+  }
+  // Export for typographer, path /export-na-sadzbu
+  else if ($viewname === 'export_sadzac' && $displayname === 'views_data_export_1') {
+    //$output = preg_replace('/➔/', '→ ', $output);
+//////////////////////
+
+    // Odstranit html odkazy
+    // Odstranit aj sipku, pokial ide o odkaz na heslo, ktore navyslo knizne:
+    // 1. ak je typ Heslo a zorad mensi ako  "kokpit"
+    // ak je datum vytvorenie hesla vacsie ako  datum vydania zvazka, kam abecedne patri
+    $output = preg_replace('/<\/?a ?.*?>/', '', $output); // remove links
+    $output = preg_replace('/➔ /', '→ ', $output);
+    $output = preg_replace('/➔/', '→ ', $output);
+    //$output = preg_replace('/<p>\s*<\/p>/', ' ', $output);
+
+    //  fix LaTeX
+    $output = preg_replace('/align*/', 'align', $output);
+
+    // fix inline images
+    global $base_url;
+    // in: <src="/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
+    // out: <src="https://beliana.sav.sk/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
+    $output = str_replace('src="/sites','src="'.$base_url.'/sites', $output);
+    // in:  style="height:38px; width:33px"
+    // out: height="38" width="33"
+    $output = preg_replace('/style="height:(\d+)px; width:(\d+)px"/i','height="$1" width="$2"', $output);
+
+    /* Remove funny spaces
+    * U+200B zero width space
+    * U+200C zero width non-joiner Unicode code point
+    * U+200D zero width joiner Unicode code point
+    * U+FEFF zero width no-break space Unicode code point
+    */
+    $output = preg_replace( '/[\x{200B}-\x{200D}\x{FEFF}]/u', '', $output);
+
+    //replace non-breakable space, may break paragraph merging
+    $output = str_replace(" ", " ", $output);
+
+/*
+    // Remove new paragraph starting with <p><strong>[1-9]
+    $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
+    // Remove new paragraph starting with <p><em>
+    $output = preg_replace('/<\/p>\s+<p>(<em>)/', ' \1', $output);
+    // Remove new paragraph starting with <p><span
+    $output = preg_replace('/<\/p>\s+<p>(<span)/', ' \1', $output);
+    // remove paragraph starting with <p>— , bahamy.html
+    $output = preg_replace('/<\/p>\s+<p>—/', ' —', $output);
+    // merge paragraph ending  with —<p> ,
+    $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
+    // remove new paragraphs not starting with a tag (but not if it is a list item)
+    $output = preg_replace('/<\/p>\s+<p>([^< ]* [^-–])/', ' \1', $output);
+*/
+
+    // merge paragraphs
+    $output = preg_replace("/<\/p>\s+<p>/", " ", $output);
+
+    $output = str_replace('<p>', '<p style="font-family:Arial;font-size:11pt;">', $output);
+
+    $output = preg_replace(
+        '/<span class="math-tex">(\\\\\([^<]+\\\\\))<\/span>/',
+        '<font color="red">\1</font>',
+        $output
+    );
+    // change order if . and , are inside math
+    $output = str_replace('.\)</font>', '\)</font>.', $output);
+    $output = str_replace(',\)</font>', '\)</font>,', $output);
+
+    // set table font
+    $output = str_replace( 'style="width:100%"', 'style="font-family:Arial;font-size:11pt"', $output);
+//////////////////////
+    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
+    $output = preg_replace('/➔ /', '→ ', $output);
+    $output = preg_replace('/➔/', '→ ', $output);
+  }
+  return $output;
 }

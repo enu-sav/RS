@@ -15,18 +15,12 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'create field_alternativny_text',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -47,8 +41,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -61,8 +53,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -75,8 +65,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -89,8 +77,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -103,8 +89,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -117,8 +101,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -131,8 +113,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -142,16 +122,10 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'create field_obrazok_odkaz',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -160,9 +134,9 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['create field_odmena'] = array(
     'name' => 'create field_odmena',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -171,8 +145,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['create field_original'] = array(
     'name' => 'create field_original',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -185,8 +159,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -199,8 +171,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -213,8 +183,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -227,8 +195,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -241,8 +207,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -255,8 +219,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -269,8 +231,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -283,10 +243,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -316,11 +273,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'node',
@@ -331,17 +285,11 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'edit field_alternativny_text',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -362,8 +310,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -376,8 +322,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -390,8 +334,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -404,8 +346,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -418,8 +358,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -432,8 +370,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -446,8 +382,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -457,16 +391,10 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'edit field_obrazok_odkaz',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -475,8 +403,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['edit field_odmena'] = array(
     'name' => 'edit field_odmena',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -485,8 +413,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['edit field_original'] = array(
     'name' => 'edit field_original',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -499,8 +427,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -513,8 +439,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -527,8 +451,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -541,8 +463,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -555,8 +475,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -569,8 +487,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -583,8 +499,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -594,17 +508,11 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'edit own field_alternativny_text',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -625,8 +533,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -639,8 +545,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -653,8 +557,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -667,8 +569,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -681,8 +581,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -695,8 +593,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -709,8 +605,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -720,16 +614,10 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'edit own field_obrazok_odkaz',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2HP' => 'Výstupný redaktor 2HP',
-      'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -738,9 +626,9 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['edit own field_odmena'] = array(
     'name' => 'edit own field_odmena',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -749,8 +637,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['edit own field_original'] = array(
     'name' => 'edit own field_original',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -763,8 +651,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -777,8 +663,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -791,8 +675,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -805,8 +687,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -819,8 +699,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -833,8 +711,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -847,8 +723,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -861,10 +735,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -904,8 +775,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -918,8 +787,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -932,8 +799,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -946,8 +811,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -960,8 +823,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -974,8 +835,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -988,8 +847,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1008,8 +865,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['view field_odmena'] = array(
     'name' => 'view field_odmena',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1018,8 +875,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['view field_original'] = array(
     'name' => 'view field_original',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1032,8 +889,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1046,8 +901,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
@@ -1061,8 +914,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
@@ -1075,8 +927,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1089,8 +939,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1103,8 +951,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1117,8 +963,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1149,8 +993,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1163,8 +1005,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1177,8 +1017,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1191,8 +1029,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1205,8 +1041,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1219,8 +1053,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1233,8 +1065,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1253,9 +1083,9 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['view own field_odmena'] = array(
     'name' => 'view own field_odmena',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1264,8 +1094,8 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['view own field_original'] = array(
     'name' => 'view own field_original',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1278,8 +1108,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1292,8 +1120,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1306,8 +1132,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1320,8 +1144,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1334,8 +1156,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1348,8 +1168,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1362,8 +1180,6 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'field_permissions',
   );

@@ -41,7 +41,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     ),
     'ilustracia_na_zverejnenie' => array(
       'name' => 'ilustracia_na_zverejnenie',
-      'label' => 'Ilustrácia na zverejnenie',
+      'label' => 'Ilustrácia na zalomenie',
       'description' => '',
       'weight' => 10,
     ),

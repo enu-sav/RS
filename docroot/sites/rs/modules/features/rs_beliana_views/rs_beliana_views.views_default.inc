@@ -2784,6 +2784,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['relationship'] = 'nid';
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -15140,12 +15145,6 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Vyšlo knižne */
-  $handler->display->display_options['fields']['field_vyslo_knizne']['id'] = 'field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['table'] = 'field_data_field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['field'] = 'field_vyslo_knizne';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['label'] = '';
-  $handler->display->display_options['fields']['field_vyslo_knizne']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
@@ -15615,6 +15614,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     'field_obrazok_odkaz' => 'field_obrazok_odkaz',
     'title_field' => 'title_field',
     'field_komentar_instrukcie' => 'field_komentar_instrukcie',
+    'field_instrukcie_pre_typografa' => 'field_instrukcie_pre_typografa',
     'field_popis' => 'field_popis',
     'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
     'state' => 'state',
@@ -15658,7 +15658,14 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'empty_column' => 0,
     ),
     'field_komentar_instrukcie' => array(
-      'sortable' => 0,
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_instrukcie_pre_typografa' => array(
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -15762,6 +15769,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
+  /* Pole: Obsah: Inštrukcie pre typografa */
+  $handler->display->display_options['fields']['field_instrukcie_pre_typografa']['id'] = 'field_instrukcie_pre_typografa';
+  $handler->display->display_options['fields']['field_instrukcie_pre_typografa']['table'] = 'field_data_field_instrukcie_pre_typografa';
+  $handler->display->display_options['fields']['field_instrukcie_pre_typografa']['field'] = 'field_instrukcie_pre_typografa';
   /* Pole: Obsah: Text k ilustrácii */
   $handler->display->display_options['fields']['field_popis']['id'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
@@ -16098,6 +16109,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Obrázok (náhľad)'),
     t('Obrázok (odkaz)'),
     t('Názov hesla'),
+    t('Inštrukcie pre typografa'),
     t('Text k ilustrácii'),
     t('Súbory ilustrácie'),
     t('Meno autora diela'),
@@ -17489,6 +17501,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
+    'field_na_zoradenie' => 'field_na_zoradenie',
     'type' => 'type',
     'state' => 'state',
     'changed' => 'changed',
@@ -17508,6 +17521,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'empty_column' => 0,
     ),
     'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_na_zoradenie' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -17670,6 +17690,10 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Obsah: Na zoradenie */
+  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
+  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
   /* Pole: Obsah: Typ */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';

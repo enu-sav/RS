@@ -76,13 +76,36 @@ function rs_beliana_node_page_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -91,6 +114,7 @@ function rs_beliana_node_page_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => -4,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Translatables
