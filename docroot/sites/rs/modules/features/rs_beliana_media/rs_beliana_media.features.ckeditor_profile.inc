@@ -260,10 +260,10 @@ config.specialChars = [
     [\'Source\'],
     [\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
-    [\'JustifyCenter\',\'Bold\',\'Italic\'],
+    [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'Mathjax\']
+    [\'Table\',\'TextColor\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    []
 ]',
         'expand' => 't',
         'default' => 't',
@@ -278,7 +278,7 @@ config.specialChars = [
         'extraAllowedContent' => '',
         'enter_mode' => 'p',
         'shift_enter_mode' => 'br',
-        'font_format' => 'p;div;pre;address;h1;h2;h3;h4;h5;h6',
+        'font_format' => 'p;h2;h3',
         'custom_formatting' => 'f',
         'formatting' => array(
           'custom_formatting_options' => array(
