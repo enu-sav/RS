@@ -49,6 +49,7 @@ function rs_beliana_node_page_user_default_permissions() {
     'name' => 'edit any page content',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'node',
   );
@@ -58,6 +59,7 @@ function rs_beliana_node_page_user_default_permissions() {
     'name' => 'edit body',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -85,7 +87,7 @@ function rs_beliana_node_page_user_default_permissions() {
     'name' => 'view any unpublished page content',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'view_unpublished',
   );
