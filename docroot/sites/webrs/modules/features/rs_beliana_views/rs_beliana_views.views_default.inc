@@ -1592,52 +1592,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
-  $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state_1']['field'] = 'state';
-  $handler->display->display_options['filters']['state_1']['value'] = array(
-    'u_vyst_redaktora_revizia' => 'u_vyst_redaktora_revizia',
-    'na_zverejnenie' => 'na_zverejnenie',
-  );
-  $handler->display->display_options['filters']['state_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['state_1']['expose']['operator_id'] = 'state_1_op';
-  $handler->display->display_options['filters']['state_1']['expose']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state_1']['expose']['operator'] = 'state_1_op';
-  $handler->display->display_options['filters']['state_1']['expose']['identifier'] = 'state_1';
-  $handler->display->display_options['filters']['state_1']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['state_1']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    29 => 0,
-    32 => 0,
-    10 => 0,
-    18 => 0,
-    5 => 0,
-    4 => 0,
-    34 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    33 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    28 => 0,
-  );
-  $handler->display->display_options['filters']['state_1']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Workbench Moderation: Stav */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
@@ -1645,6 +1599,41 @@ function rs_beliana_views_views_default_views() {
     'u_vyst_redaktora_revizia' => 'u_vyst_redaktora_revizia',
     'na_zverejnenie' => 'na_zverejnenie',
   );
+  /* Filter criterion: Workbench Moderation: Prišlo zo stavu */
+  $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['value'] = array(
+    'na_zalomenie' => 'na_zalomenie',
+    'u_redaktora_revizia' => 'u_redaktora_revizia',
+    'needs_review' => 'needs_review',
+  );
+  $handler->display->display_options['filters']['from_state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['from_state']['expose']['operator_id'] = 'from_state_op';
+  $handler->display->display_options['filters']['from_state']['expose']['label'] = 'Prišlo zo stavu';
+  $handler->display->display_options['filters']['from_state']['expose']['operator'] = 'from_state_op';
+  $handler->display->display_options['filters']['from_state']['expose']['identifier'] = 'from_state';
+  $handler->display->display_options['filters']['from_state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['from_state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['from_state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/beliana/na-posudenie-vr';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Na posúdenie (VR)';
@@ -1878,6 +1867,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
     'u_jaz_redaktora_revizia' => 'u_jaz_redaktora_revizia',
+    'zverejnene_jaz_kontrola' => 'zverejnene_jaz_kontrola',
     'importovane_jaz_kontrola' => 'importovane_jaz_kontrola',
     'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
   );
@@ -7254,6 +7244,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     'importovane' => 'importovane',
     'importovane_u_vr' => 'importovane_u_vr',
     'importovane_jaz_kontrola' => 'importovane_jaz_kontrola',
+    'importovane_na_zverejnenie' => 'importovane_na_zverejnenie',
   );
   $handler->display->display_options['filters']['from_state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['from_state']['expose']['operator_id'] = 'from_state_op';
@@ -7264,14 +7255,9 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['filters']['from_state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    9 => 0,
-    30 => 0,
     31 => 0,
-    27 => 0,
-    29 => 0,
-    32 => 0,
-    10 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
     34 => 0,
@@ -7279,19 +7265,11 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     12 => 0,
     6 => 0,
     37 => 0,
-    13 => 0,
-    35 => 0,
-    33 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
     3 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
-    36 => 0,
-    28 => 0,
   );
   $handler->display->display_options['filters']['from_state']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/beliana/importovane-vr';
@@ -13641,8 +13619,10 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     'u_redaktora_revizia' => 'u_redaktora_revizia',
     'u_konzultanta_revizia' => 'u_konzultanta_revizia',
     'u_jaz_redaktora_revizia' => 'u_jaz_redaktora_revizia',
+    'zverejnene_jaz_kontrola' => 'zverejnene_jaz_kontrola',
     'importovane_jaz_kontrola' => 'importovane_jaz_kontrola',
     'u_vyst_redaktora_revizia' => 'u_vyst_redaktora_revizia',
+    'importovane_na_zverejnenie' => 'importovane_na_zverejnenie',
     'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
     'zaradene' => 'zaradene',
     'u_autora' => 'u_autora',
@@ -13663,14 +13643,9 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    9 => 0,
-    30 => 0,
     31 => 0,
-    27 => 0,
-    29 => 0,
-    32 => 0,
-    10 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
     34 => 0,
@@ -13678,19 +13653,11 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     12 => 0,
     6 => 0,
     37 => 0,
-    13 => 0,
-    35 => 0,
-    33 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
     3 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
-    36 => 0,
-    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Typ */
@@ -16901,6 +16868,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     'title' => 'title',
     'type' => 'type',
     'state' => 'state',
+    'from_state' => 'from_state',
     'changed' => 'changed',
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
@@ -16931,6 +16899,13 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
       'empty_column' => 0,
     ),
     'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'from_state' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -17072,6 +17047,11 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Workbench Moderation: Prišlo zo stavu */
+  $handler->display->display_options['fields']['from_state']['id'] = 'from_state';
+  $handler->display->display_options['fields']['from_state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['from_state']['field'] = 'from_state';
+  $handler->display->display_options['fields']['from_state']['machine_name'] = 0;
   /* Pole: Obsah: Dátum aktualizácie */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -21453,6 +21433,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
+    t('Prišlo zo stavu'),
     t('Vyplatenie odmeny'),
     t('Počet znakov na vyplatenie'),
     t('Lexikálna skupina (field_lexikalna_skupina)'),

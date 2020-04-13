@@ -662,16 +662,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from importovane_u_vr to na_zalomenie'.
-  $permissions['moderate content from importovane_u_vr to na_zalomenie'] = array(
-    'name' => 'moderate content from importovane_u_vr to na_zalomenie',
-    'roles' => array(
-      'Výstupný redaktor' => 'Výstupný redaktor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: 'moderate content from len_vyplatit to zaradene'.
   $permissions['moderate content from len_vyplatit to zaradene'] = array(
     'name' => 'moderate content from len_vyplatit to zaradene',

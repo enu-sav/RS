@@ -89,11 +89,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'importovane',
       'name' => 'importovane_u_vr-importovane',
     ),
-    'importovane_u_vr:na_zalomenie' => array(
-      'from_name' => 'importovane_u_vr',
-      'to_name' => 'na_zalomenie',
-      'name' => 'importovane_u_vr-na_zalomenie',
-    ),
     'kontrola_etymologie:na_jazykovu_korekturu' => array(
       'from_name' => 'kontrola_etymologie',
       'to_name' => 'na_jazykovu_korekturu',

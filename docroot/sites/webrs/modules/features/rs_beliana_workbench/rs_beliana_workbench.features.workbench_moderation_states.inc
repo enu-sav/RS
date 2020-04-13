@@ -73,7 +73,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'importovane_vyradene',
       'label' => 'Importované - vyradené',
       'description' => 'Importované heslá, ktoré nebudú zverejneé na webe',
-      'weight' => -2,
+      'weight' => -8,
     ),
     'kontrola_etymologie' => array(
       'name' => 'kontrola_etymologie',
@@ -103,7 +103,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'na_zalomenie',
       'label' => 'Na zverejnenie',
       'description' => 'Heslo je pripravené pre web alebo tlač',
-      'weight' => -7,
+      'weight' => -6,
     ),
     'na_zverejnenie' => array(
       'name' => 'na_zverejnenie',
