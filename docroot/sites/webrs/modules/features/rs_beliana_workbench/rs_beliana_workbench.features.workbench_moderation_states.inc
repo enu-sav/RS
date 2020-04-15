@@ -45,16 +45,10 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 10,
     ),
-    'ilustracia_u_vyst_redaktora_3' => array(
-      'name' => 'ilustracia_u_vyst_redaktora_3',
-      'label' => 'Ilustrácia u výst. redaktora 3',
-      'description' => 'Ilustrácia u výstupného redaktora 3',
-      'weight' => 10,
-    ),
     'ilustracia_u_vyst_redaktora_5' => array(
       'name' => 'ilustracia_u_vyst_redaktora_5',
-      'label' => 'Ilustrácia u výst. redaktora 5',
-      'description' => 'Ilustrácia u výstupného redaktora 5',
+      'label' => 'Ilustrácia u výst. redaktora',
+      'description' => 'Ilustrácia u výstupného redaktora',
       'weight' => 10,
     ),
     'importovane' => array(
@@ -79,7 +73,13 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'importovane_vyradene',
       'label' => 'Importované - vyradené',
       'description' => 'Importované heslá, ktoré nebudú zverejneé na webe',
-      'weight' => -2,
+      'weight' => -8,
+    ),
+    'kontrola_etymologie' => array(
+      'name' => 'kontrola_etymologie',
+      'label' => 'Kontrola etymológie',
+      'description' => 'Kontrola etymológie a prepisov',
+      'weight' => 0,
     ),
     'len_vyplatit' => array(
       'name' => 'len_vyplatit',
@@ -103,7 +103,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'na_zalomenie',
       'label' => 'Na zverejnenie',
       'description' => 'Heslo je pripravené pre web alebo tlač',
-      'weight' => -7,
+      'weight' => -6,
     ),
     'na_zverejnenie' => array(
       'name' => 'na_zverejnenie',
@@ -153,11 +153,41 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Na vypracovanie autorom,  pred odoslaním redaktorovi',
       'weight' => 3,
     ),
+    'u_autora_revizia' => array(
+      'name' => 'u_autora_revizia',
+      'label' => 'U autora (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
+    'u_jaz_redaktora_revizia' => array(
+      'name' => 'u_jaz_redaktora_revizia',
+      'label' => 'U jaz. redaktora (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
     'u_konzultanta' => array(
       'name' => 'u_konzultanta',
       'label' => 'U konzultanta',
       'description' => 'heslo u konzultanta',
       'weight' => 10,
+    ),
+    'u_konzultanta_revizia' => array(
+      'name' => 'u_konzultanta_revizia',
+      'label' => 'U konzultanta (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
+    'u_redaktora_revizia' => array(
+      'name' => 'u_redaktora_revizia',
+      'label' => 'U redaktora (revízia)',
+      'description' => '',
+      'weight' => 0,
+    ),
+    'u_vyst_redaktora_revizia' => array(
+      'name' => 'u_vyst_redaktora_revizia',
+      'label' => 'U výst. redaktora (revízia)',
+      'description' => '',
+      'weight' => 0,
     ),
     'ukoncenezluene' => array(
       'name' => 'ukoncenezluene',

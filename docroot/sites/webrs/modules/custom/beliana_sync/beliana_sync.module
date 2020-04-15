@@ -76,7 +76,7 @@ function _beliana_sync_remove_links($node) {
     return $fragment;
 }
 
-// eventual fixes in article text 
+// eventual fixes in article text
 // nonbreakable space: " "
 function modify_body_text($node, $text)
 {
@@ -99,7 +99,7 @@ function modify_body_text($node, $text)
   $text = str_replace(" ⬈"," ",$text);
   $text = str_replace("⬈ "," ",$text);
   $text = str_replace(" "," ",$text);	// remove nonbreakable spaces
-  // multiple spaces 
+  // multiple spaces
   $text = preg_replace('/(  +)/', ' ', $text);
   // &nbsp within numbers
   $text = preg_replace( '/([0-9]) ([0-9])/', "$1&nbsp;$2", $text);
@@ -125,7 +125,7 @@ function modify_body_text($node, $text)
   $text = str_replace("  "," ",$text);
   $text = str_replace("&nbsp; ","&nbsp;",$text);
   $text = str_replace(" &nbsp;","&nbsp;",$text);
-  
+
   return $text;
 }
 
@@ -156,7 +156,7 @@ function beliana_sync_sync($nid, &$context) {
   #dpm("beliana_sync_sync", $node->title." (".$node->nid.")");
   $illustrations = [];	// list of illustrations to be published on web
   $skip = FALSE;
-  
+
   // _check_links defined in beliana/beliana.module
   if (!_check_links($node)) {
     $skip = TRUE;
@@ -172,7 +172,7 @@ function beliana_sync_sync($nid, &$context) {
     $skip = TRUE;
   }
 
-  // issue a warning if text contains Česko-Slovensko or česko-slovenský 
+  // issue a warning if text contains Česko-Slovensko or česko-slovenský
   if (strpos($text_hesla, "esko-Slovensk") or strpos($text_hesla, "esko-slovensk") ){
     $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je uvedené <b>Česko-Slovensko</b> alebo <b>česko-slovenský</b> so spojovníkom. Skotrolujte, či je to tak správne.';
     drupal_set_message($msg, 'warning');
@@ -232,7 +232,7 @@ function beliana_sync_sync($nid, &$context) {
   # remove links to not yet published articles
   $body = _beliana_sync_remove_links($node);
   # if failed owing to html syntax error
-  if (!$body) { 
+  if (!$body) {
     $context['results']['error']++;
     return;
   }
@@ -278,10 +278,18 @@ function beliana_sync_sync($nid, &$context) {
       $remote_node_object['table'] = array(Null, 0);
     }
     // add author's name, if necessary`
-    if (isset($node->field_zverejnit_meno_autora[LANGUAGE_NONE]) and $node->field_zverejnit_meno_autora[LANGUAGE_NONE][0]['value'] == "1") {
-      $user = user_load($node->uid);
-      $remote_node_object['menoautora'] = $user->field_priezvisko[LANGUAGE_NONE][0]['value'] . ", ". $user->field_meno[LANGUAGE_NONE][0]['value'];
-   }
+    if (isset($node->field_zverejnit_meno_autora[LANGUAGE_NONE]) && $node->field_zverejnit_meno_autora[LANGUAGE_NONE][0]['value'] == "1") {
+      if ($user = user_load($node->uid)) {
+        $remote_node_object['autor'] = [
+          'meno' => $user->field_meno[LANGUAGE_NONE][0]['value'],
+          'priezvisko' => $user->field_priezvisko[LANGUAGE_NONE][0]['value'],
+          'titul_pred_menom' => $user->field_titul_pred_menom[LANGUAGE_NONE][0]['value'],
+          'titul_za_menom' => $user->field_titul_za_menom[LANGUAGE_NONE][0]['value'],
+          'posobisko' => $user->field_posobisko[LANGUAGE_NONE][0]['value'],
+          'zivotopis' => $user->field_zivotopis[LANGUAGE_NONE][0]['value'],
+        ];
+      }
+    }
 
     // Use POST for creating new items and PATCH for updating existing items.
     $remote_id = db_select('beliana_sync', 's')
@@ -289,7 +297,7 @@ function beliana_sync_sync($nid, &$context) {
       ->condition('local', $nid)
       ->execute()
       ->fetchCol(0);
-    // if not empty and not equal to '0' 
+    // if not empty and not equal to '0'
     // '0' have postponed pure link articles with unresolved link, not yet transfered to web, but already published
     if (!empty($remote_id) && $remote_id[0] != '0') {
       $remote_id = reset($remote_id);
@@ -302,7 +310,7 @@ function beliana_sync_sync($nid, &$context) {
         //dpm($response->getStatusCode(),"PATCH failed");
     } else {
       // postpone transfer of articles which are pure link articles with unresolved link
-      // list them in the beliana_sync table, so that they will be transferred to web automatically 
+      // list them in the beliana_sync table, so that they will be transferred to web automatically
       // as soon as the target is published
 
       // first delete synchronization info for the earlier postponed articles
@@ -310,7 +318,7 @@ function beliana_sync_sync($nid, &$context) {
         db_delete('beliana_sync')
           ->condition('local', $nid)
           ->execute();
-      }	
+      }
 
       // the articles to be postponed contain neither the '—' character, nor the '<a >' tag
       if (!(strpos($body, '—') == false && strpos($body, '<a ') == false)) {
@@ -364,9 +372,9 @@ function beliana_sync_sync($nid, &$context) {
 }
 
 // check if illustration should go to web
-function il_display_on_web(&$ilu_node) 
+function il_display_on_web(&$ilu_node)
 {
-  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) 
+  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE]))
     return false;
   foreach ($ilu_node->field_pouzit[LANGUAGE_NONE] as $value) {
     if ($value['value'] === 'Zobrazit_na_webe') {
@@ -377,9 +385,9 @@ function il_display_on_web(&$ilu_node)
 }
 
 // check if illustration should be printed
-function il_print(&$ilu_node) 
+function il_print(&$ilu_node)
 {
-  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE])) 
+  if (!isset($ilu_node->field_pouzit[LANGUAGE_NONE]))
     return false;
   foreach ($ilu_node->field_pouzit[LANGUAGE_NONE] as $value) {
     if ($value['value'] === 'Zaradit_do_tlace') {
@@ -467,10 +475,15 @@ function beliana_sync_prepare_queue($source) {
 
   // synchronize just the unique items from the queue
   foreach (array_unique($sync_queue) as $item) {
-    $operations[] = [
-      'beliana_sync_sync',
-      [$item],
-    ];
+    // synchronize only items in the right state (it may happen that an article is in a different state because of its revision)
+    $auxnode = node_load($item);
+    if (in_array($auxnode->workbench_moderation['current']->state,
+          ["publikovane_na_webe",
+          "na_zalomenie",
+          "importovane_na_zverejnenie",
+          "na_opakovane_zverejnenie"])) {
+      $operations[] = [ 'beliana_sync_sync', [$item] ];
+    }
   }
 
   $batch = array(
@@ -525,7 +538,7 @@ function _extract_image(array $images) {
 function _extract_license($node) {
   $formatted_license = '';
   $raw_license = $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'];
-  //license names ('Creative Commons ...') must be exactly the same as in the 'Licencie' taxonomy in the web version 
+  //license names ('Creative Commons ...') must be exactly the same as in the 'Licencie' taxonomy in the web version
   switch ($raw_license) {
     case 'Vlastná ilustrácia':
       $formatted_license = 'Creative Commons BY-SA';
@@ -573,13 +586,13 @@ function _extract_license($node) {
 
 /*
 *  extract information regarding the date of first publishing.
-*  Different for the 'Importovane heslo' and 'Heslo' types  
+*  Different for the 'Importovane heslo' and 'Heslo' types
 */
 function _extract_published_info($node) {
   $label = 'Zverejnené';
-  
+
   // Set the publishing date according to the article name
-  // the key in the $bands array is a first string in the next band 
+  // the key in the $bands array is a first string in the next band
   $bands = array (
     "bell" => "$label v auguste 1999",
     "czzzz" => "$label v júli 2001",
@@ -593,7 +606,7 @@ function _extract_published_info($node) {
 
   setlocale(LC_COLLATE, 'sk_SK.utf8');
   if ( $node->type ==  'importovane_heslo' ){
-    // get name of article, specified in node->field_taxsubor 
+    // get name of article, specified in node->field_taxsubor
     $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
     $collections = taxonomy_get_tree($vocabulary->vid);
     foreach ($collections as $term) {
@@ -614,7 +627,7 @@ function _extract_published_info($node) {
       }
     }
   } else { // the Heslo type
-    // if already published, the 'field_datum_prveho_zverejnenia' is set 
+    // if already published, the 'field_datum_prveho_zverejnenia' is set
     // the field is set elsewhere, after a successfull transfer to web
     if (isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
       $publishedinfo = " $label " .  _form_date2($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value']);
@@ -634,7 +647,7 @@ function _extract_updated_info($node) {
 }
 
 /*
- * replaces month abbrevoation with inflected full name in genitive 
+ * replaces month abbrevoation with inflected full name in genitive
  */
 function _form_date2($utime) {
   setlocale(LC_TIME, 'sk_SK.utf8');
@@ -655,7 +668,7 @@ function _form_date2($utime) {
 }
 
 /*
- * replaces month abbrevoation with inflected full name in local with preposition 
+ * replaces month abbrevoation with inflected full name in local with preposition
  */
 function _form_date6() {
   setlocale(LC_TIME, 'sk_SK.utf8');
@@ -680,7 +693,7 @@ function _form_date6() {
  * $category values:
  * 'sync': execute test only during synchronization to web
  * 'state change': execute test in general state change
- * 'state change ge': execute test on state change from graphics editor to editor 
+ * 'state change ge': execute test on state change from graphics editor to editor
  * return: illustration data or null
  */
 function  _check_illustration_web(&$node, &$ilu_node, $category)
@@ -742,7 +755,7 @@ drupal_set_message($msg, 'warning');
       il_error($node, $ilu_node, 'ak je zvolená "Iná verejná licencia", pole "URL textu licencie" musí byť vyplnené"', $category);
       $skip = TRUE;
     }
-  } 
+  }
 
   //get cleaned illustration text
   $text_il = _beliana_sync_clean_tags($ilu_node, $ilu_node->field_popis[LANGUAGE_NONE][0]['value']);
@@ -774,24 +787,24 @@ drupal_set_message($msg, 'warning');
     $ill_data['image_url_web'] = $image_url_web;
   if( isset($ilu_node->field_meno_autora_diela[LANGUAGE_NONE]) )
     $ill_data['meno_autora_diela'] = $ilu_node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'];
-  if( isset($ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE]) ) 
+  if( isset($ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE]) )
     $ill_data['meno_autora_snimky_diela'] = $ilu_node->field_meno_autora_snimky_diela[LANGUAGE_NONE][0]['value'];
-  if( isset($ilu_node->field_nazov_diela[LANGUAGE_NONE]) ) 
+  if( isset($ilu_node->field_nazov_diela[LANGUAGE_NONE]) )
     $ill_data['nazov_diela'] = $ilu_node->field_nazov_diela[LANGUAGE_NONE][0]['value'];
   if( $ilu_node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Vlastná ilustrácia' ) {
     $ill_data['institucia'] = "Encyklopedický ústav SAV";
-  } else {  
-    if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) ) 
+  } else {
+    if( isset($ilu_node->field_institucia[LANGUAGE_NONE]) )
       $ill_data['institucia'] = $ilu_node->field_institucia[LANGUAGE_NONE][0]['value'];
   }
-  if( isset($ilu_node->field_url_diela_l[LANGUAGE_NONE]) ) 
+  if( isset($ilu_node->field_url_diela_l[LANGUAGE_NONE]) )
     $ill_data['url_diela_l'] = $ilu_node->field_url_diela_l[LANGUAGE_NONE][0]['url'];
-  if( isset($ilu_node->field_url_autora_diela_l[LANGUAGE_NONE]) ) 
+  if( isset($ilu_node->field_url_autora_diela_l[LANGUAGE_NONE]) )
     $ill_data['url_autora_diela_l'] = $ilu_node->field_url_autora_diela_l[LANGUAGE_NONE][0]['url'];
-  if( isset($ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE]) ) 
+  if( isset($ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE]) )
     $ill_data['url_textu_licencie_l'] = $ilu_node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['url'];
 
-  if( isset($ilu_node->field_alternativny_text[LANGUAGE_NONE]) ) { 
+  if( isset($ilu_node->field_alternativny_text[LANGUAGE_NONE]) ) {
     $ill_data['alternativny_text'] = $ilu_node->field_alternativny_text[LANGUAGE_NONE][0]['value'];
   } else {
     // remove eventual formatting (only strong and em are eventually still here), copy just 125 characters

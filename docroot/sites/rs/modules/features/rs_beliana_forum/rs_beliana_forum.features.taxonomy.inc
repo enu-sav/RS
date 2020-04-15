@@ -13,7 +13,7 @@ function rs_beliana_forum_taxonomy_default_vocabularies() {
       'name' => 'Fórum',
       'machine_name' => 'forums',
       'description' => 'Slovník navigácie fóra',
-      'hierarchy' => 1,
+      'hierarchy' => 0,
       'module' => 'forum',
       'weight' => -10,
     ),

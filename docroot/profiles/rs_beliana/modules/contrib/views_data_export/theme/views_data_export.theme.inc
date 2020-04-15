@@ -336,103 +336,14 @@ function template_process_views_data_export_msoffice_body(&$vars) {
 
       // Build row
       foreach ($cells as $cell) {
-        $output .= render($cell);
+	if (!empty($cell)) {
+	  // beliana_render_export defined in the beliana module
+          $output .= beliana_render_export($vars['view']->name, $vars['view']->current_display, render($cell)."\n");
+	}
       }
     }
   }
-
-  // Export na tlac
-  if ($vars['view']->name === 'export' && $vars['view']->current_display === 'views_data_export_1') {
-    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some html tags
-    $output = preg_replace('/➔ /', '→ ', $output); 
-    $output = preg_replace('/➔/', '→ ', $output); 
-    $vars['tbody'] = $output;
-  }
-  // Export for typographer
-  else if ($vars['view']->name === 'export_sadzac' && $vars['view']->current_display === 'views_data_export_1') {
-    //$output = preg_replace('/➔/', '→ ', $output); 
-//////////////////////
-
-    // Odstranit html odkazy
-    // Odstranit aj sipku, pokial ide o odkaz na heslo, ktore navyslo knizne:
-    // 1. ak je typ Heslo a zorad mensi ako  "kokpit"
-    // ak je datum vytvorenie hesla vacsie ako  datum vydania zvazka, kam abecedne patri
-    $output = preg_replace('/<\/?a ?.*?>/', '', $output); // remove links
-    $output = preg_replace('/➔ /', '→ ', $output);
-    $output = preg_replace('/➔/', '→ ', $output);
-    //$output = preg_replace('/<p>\s*<\/p>/', ' ', $output);
-
-    //  fix LaTeX
-    $output = preg_replace('/align*/', 'align', $output);
-
-    // fix inline images
-    global $base_url;
-    // in: <src="/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
-    // out: <src="https://beliana.sav.sk/sites/dev/files/u1427/kekule.png" style="height:38px; width:33px" />'
-    $output = str_replace('src="/sites','src="'.$base_url.'/sites', $output);
-    // in:  style="height:38px; width:33px"
-    // out: height="38" width="33"
-    $output = preg_replace('/style="height:(\d+)px; width:(\d+)px"/i','height="$1" width="$2"', $output);
-    
-    // Remove new paragraph starting with <p><strong>[1-9]
-    $output = preg_replace('/<\/p>\s+<p>(<strong>[1-9])/', ' \1', $output);
-    // Remove new paragraph starting with <p><em>
-    $output = preg_replace('/<\/p>\s+<p>(<em>)/', ' \1', $output);
-    // Remove new paragraph starting with <p><span
-    $output = preg_replace('/<\/p>\s+<p>(<span)/', ' \1', $output);
-    // remove paragraph starting with <p>— , bahamy.html
-    $output = preg_replace('/<\/p>\s+<p>—/', ' —', $output);
-    // merge paragraph ending  with —<p> ,
-    $output = preg_replace('/—[  ]*<\/p>\s+<p>/', '— ', $output);
-    // remove new paragraphs not starting with a tag (but not if it is a list item)
-    //$output = preg_replace('/<\/p>\s+<p>([^<])/', ' \1', $output);
-    $output = preg_replace('/<\/p>\s+<p>([^< ]* [^-–])/', ' \1', $output);
-    // add newline between concatenated paragraphs (needed in postprocessing)
-    $output = preg_replace("/<\/p><p>/", "</p>\n<p>", $output);
-
-    #Force Arial and 9pt to each paragraph
-    $output = str_replace('<p>', '<p style="font-family:Arial;font-size:11pt;">', $output);  
-    
-    #archimedovska_grupa.html
-    #Single letter math convert to TNR slanted
-    #<span class="math-tex">\(G\)</span>
-    //$output = preg_replace(
-        //'/<span class="math-tex">\\\\\(([a-zA-Z])\\\\\)<\/span>/',
-        //'<font face="Times New Roman" color="green"><em>\1</em></font>', 
-        //$output
-    //);
-    // ine rozmery ako MathMagic, nepouzivat
-    //$output = preg_replace(
-        //'/<span class="math-tex">\\\\\(([a-zA-Z])_([a-zA-Z])\\\\\)<\/span>/',
-        //'<font face="Times New Roman" color="green"><em>\1<sub>\2</sub></em></font>', 
-        //$output
-    //);
-    //$output = preg_replace(
-        //'/<span class="math-tex">\\\\\(([a-zA-Z])\^([a-zA-Z])\\\\\)<\/span>/',
-        //'<font face="Times New Roman" color="green"><em>\1<sup>\2</sup></em></font>', 
-        //$output
-    //);
-
-    $output = preg_replace(
-        '/<span class="math-tex">(\\\\\([^<]+\\\\\))<\/span>/',
-        '<font color="red">\1</font>', 
-        $output
-    );
-    // change order if it is inside math
-    $output = str_replace('.\)</font>', '\)</font>.', $output);  
-    $output = str_replace(',\)</font>', '\)</font>,', $output);  
-
-    // set table font
-    $output = str_replace( 'style="width:100%"', 'style="font-family:Arial;font-size:11pt"', $output);  
-//////////////////////
-    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
-    $output = preg_replace('/➔ /', '→ ', $output); 
-    $output = preg_replace('/➔/', '→ ', $output); 
-    $vars['tbody'] = $output;
-  }
-  else {
-  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
-  }
+  $vars['tbody'] = $output;
 }
 
 function template_preprocess_views_data_export_doc_header(&$vars) {

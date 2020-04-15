@@ -14,7 +14,6 @@ function rs_beliana_taxonomy_user_default_permissions() {
   $permissions['administer taxonomy'] = array(
     'name' => 'administer taxonomy',
     'roles' => array(
-      'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
     ),
     'module' => 'taxonomy',

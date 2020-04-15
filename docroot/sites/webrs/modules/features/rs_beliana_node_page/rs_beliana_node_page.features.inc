@@ -19,11 +19,11 @@ function rs_beliana_node_page_ctools_plugin_api($module = NULL, $api = NULL) {
 function rs_beliana_node_page_node_info() {
   $items = array(
     'page' => array(
-      'name' => t('Basic page'),
+      'name' => t('Základná stránka'),
       'base' => 'node_content',
-      'description' => t('Use <em>basic pages</em> for your static content, such as an \'About us\' page.'),
+      'description' => t('Použite <em>základné stránky</em> pre statický obsah, ako napr. stránka \'O nás\'.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Názov'),
       'help' => '',
     ),
   );

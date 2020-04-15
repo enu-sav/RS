@@ -470,7 +470,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 1,
     ),
-    'workbench_access_field' => 1,
+    'workbench_access_field' => TRUE,
   );
 
   // Exported field_instance: 'node-ilustracia-field_licencia1'.

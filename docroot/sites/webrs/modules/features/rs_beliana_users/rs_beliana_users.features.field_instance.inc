@@ -286,12 +286,87 @@ function rs_beliana_users_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'user-user-field_zivotopis'.
+  $field_instances['user-user-field_zivotopis'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Pole <em>Stručný životopis</em>vyplnia len autori, ktorí súhlasia s uvádzaním svojho mena pri článkoch zverejnených na webe na stránke beliana.sav.sk. Životopis bude na tejto stránke dostupný a bude doplnený zoznamom autorových hesiel.<br />
+V texte možno použiť odkazy (na univerzitu a pod.) Príklad hesla s uvedením autora: <a href="https://beliana.sav.sk/heslo/kombinatorika">kombinatorika</a><br/><br/>
+Odporúčaný obsah a forma (kvôli vzhľadu text súvisiacich položiek uvádzať na jeden riadok):<br />
+<br />
+Pôsobisko: 19XX – 19XX Univerzita XXX, 19XX – 19XX Univerzita XXX, doktorandské štúdium, 19XX – súčasnosť Slovenská akadémia vied, XXX ústav<br />
+<br />
+Oblasti záujmu: fyzika polovodičov, fyzika tuhých látok<br />
+<br />
+Vybrané publikácie: (odporúčaný počet: 3, uviesť do riadka a oddeliť bodkočiarkou)',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_zivotopis',
+    'label' => 'Stručný životopis',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 11,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Autorská zmluva');
   t('Meno');
+  t('Pole <em>Stručný životopis</em>vyplnia len autori, ktorí súhlasia s uvádzaním svojho mena pri článkoch zverejnených na webe na stránke beliana.sav.sk. Životopis bude na tejto stránke dostupný a bude doplnený zoznamom autorových hesiel.<br />
+V texte možno použiť odkazy (na univerzitu a pod.) Príklad hesla s uvedením autora: <a href="https://beliana.sav.sk/heslo/kombinatorika">kombinatorika</a><br/><br/>
+Odporúčaný obsah a forma (kvôli vzhľadu text súvisiacich položiek uvádzať na jeden riadok):<br />
+<br />
+Pôsobisko: 19XX – 19XX Univerzita XXX, 19XX – 19XX Univerzita XXX, doktorandské štúdium, 19XX – súčasnosť Slovenská akadémia vied, XXX ústav<br />
+<br />
+Oblasti záujmu: fyzika polovodičov, fyzika tuhých látok<br />
+<br />
+Vybrané publikácie: (odporúčaný počet: 3, uviesť do riadka a oddeliť bodkočiarkou)');
   t('Priezvisko');
   t('Pôsobisko');
+  t('Stručný životopis');
   t('Titul pred menom');
   t('Titul za menom');
   t('Uveďte: oddelenie, inštitúcia, mesto, štát (ak je iný ako Slovensko)');

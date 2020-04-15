@@ -1573,9 +1573,8 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 21,
       ),
       'lite_display' => array(

@@ -27,6 +27,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['use_more_text'] = 'viac';
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    27 => '27',
     16 => '16',
   );
   $handler->display->display_options['cache']['type'] = 'none';
@@ -67,6 +68,10 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['fields']['field_table']['id'] = 'field_table';
   $handler->display->display_options['fields']['field_table']['table'] = 'field_data_field_table';
   $handler->display->display_options['fields']['field_table']['field'] = 'field_table';
+  $handler->display->display_options['fields']['field_table']['label'] = '';
+  $handler->display->display_options['fields']['field_table']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_table']['alter']['text'] = 'Tabuľka pre geografické heslá: [field_table]';
+  $handler->display->display_options['fields']['field_table']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_table']['hide_empty'] = TRUE;
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
@@ -187,7 +192,6 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Obsah: Názov */
@@ -259,11 +263,8 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
   $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state_1']['field'] = 'state';
-  $handler->display->display_options['filters']['state_1']['operator'] = 'not in';
   $handler->display->display_options['filters']['state_1']['value'] = array(
-    'vyradene' => 'vyradene',
-    'ukoncenezluene' => 'ukoncenezluene',
-    'len_vyplatit' => 'len_vyplatit',
+    'na_zalomenie' => 'na_zalomenie',
   );
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
@@ -321,7 +322,7 @@ function rs_beliana_export_views_default_views() {
     t('nasledujúca ›'),
     t('posledná »'),
     t('Zobrazenie po @per_page položkách, @start - @end z @total'),
-    t('Tabuľka pre geografické heslá'),
+    t('Tabuľka pre geografické heslá: [field_table]'),
     t('Ilustrácie'),
     t('Stav'),
     t('Lexikálna skupina'),

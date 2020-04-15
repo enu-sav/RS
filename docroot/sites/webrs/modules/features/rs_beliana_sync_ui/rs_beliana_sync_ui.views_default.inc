@@ -648,6 +648,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'na_zalomenie' => 'na_zalomenie',
     'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+    'importovane_na_zverejnenie' => 'importovane_na_zverejnenie',
   );
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
@@ -660,27 +661,21 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
-    9 => 0,
-    27 => 0,
+    31 => 0,
     18 => 0,
+    10 => 0,
     5 => 0,
     4 => 0,
-    10 => 0,
+    34 => 0,
     7 => 0,
     12 => 0,
     6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
+    37 => 0,
     3 => 0,
     20 => 0,
     21 => 0,
     22 => 0,
     23 => 0,
-    26 => 0,
-    28 => 0,
   );
   $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Na zoradenie (field_na_zoradenie) */

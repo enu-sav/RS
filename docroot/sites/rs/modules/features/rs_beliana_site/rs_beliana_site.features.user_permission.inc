@@ -711,7 +711,6 @@ function rs_beliana_site_user_default_permissions() {
       'ig-redaktor' => 'ig-redaktor',
       'iredaktor' => 'iredaktor',
       'useradmin' => 'useradmin',
-      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'filter',
   );
@@ -738,6 +737,7 @@ function rs_beliana_site_user_default_permissions() {
       'garant' => 'garant',
       'iredaktor' => 'iredaktor',
       'useradmin' => 'useradmin',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'filter',
   );

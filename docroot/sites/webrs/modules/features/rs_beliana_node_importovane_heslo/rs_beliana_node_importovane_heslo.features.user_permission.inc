@@ -15,7 +15,6 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'name' => 'create importovane_heslo content',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
@@ -38,23 +37,17 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions['edit any importovane_heslo content'] = array(
     'name' => 'edit any importovane_heslo content',
     'roles' => array(
+      'Autor' => 'Autor',
       'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Komentátor' => 'Komentátor',
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 3' => 'Výstupný redaktor 3',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
-      'ig-redaktor' => 'ig-redaktor',
-      'iredaktor' => 'iredaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'node',
@@ -64,8 +57,8 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions['edit own importovane_heslo content'] = array(
     'name' => 'edit own importovane_heslo content',
     'roles' => array(
+      'Autor' => 'Autor',
       'administrátor' => 'administrátor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );
