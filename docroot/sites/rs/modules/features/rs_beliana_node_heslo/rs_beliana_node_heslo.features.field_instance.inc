@@ -185,7 +185,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   $field_instances['node-heslo-field_datum_aktualizacie'] = array(
     'bundle' => 'heslo',
     'deleted' => 0,
-    'description' => 'Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
+    'description' => 'Zadajte dátum aktualizácie vydaného hesla v tvare <strong>RRRR/MM/DD</strong> napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -232,7 +232,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'increment' => 1,
         'input_format' => 'Y/m/d - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
+        'label_position' => 'none',
         'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
@@ -1874,7 +1874,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Vypĺňané programovo');
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Vyšlo knižne');
-  t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zadajte dátum aktualizácie vydaného hesla v tvare <strong>RRRR/MM/DD</strong> napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
