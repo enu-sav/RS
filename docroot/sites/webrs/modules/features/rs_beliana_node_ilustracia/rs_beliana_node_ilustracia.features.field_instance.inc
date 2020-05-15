@@ -294,7 +294,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté',
+    'description' => 'Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté. Príklad: Met Museum, NASA (nie Flickr, Pixabay a pod)',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1492,7 +1492,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Uveďte URL autora alebo inštitúcie, z ktorej stránky bolo dielo prevzaté.',
+    'description' => 'Uveďte URL autora alebo inštitúcie, z ktorej stránky bolo dielo prevzaté. Príklady: stránka múzea (https://www.metmuseum.org/), inštitúcie (https://www.nasa.gov/), album autora na flckr a pod.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1541,6 +1541,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
       'enable_tokens' => 1,
       'rel_remove' => 'default',
       'title' => 'none',
+      'title_allowed_values' => '',
       'title_label_use_field_label' => 0,
       'title_maxlength' => 128,
       'title_value' => '',
@@ -1884,12 +1885,12 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('URL autora diela alebo inštitúcie');
   t('URL stránky s obrázkom a údajmi k dielu');
   t('URL textu licencie');
-  t('Uveďte URL autora alebo inštitúcie, z ktorej stránky bolo dielo prevzaté.');
+  t('Uveďte URL autora alebo inštitúcie, z ktorej stránky bolo dielo prevzaté. Príklady: stránka múzea (https://www.metmuseum.org/), inštitúcie (https://www.nasa.gov/), album autora na flckr a pod.');
   t('Uveďte konkrétnu verziu CC licencie alebo zvoľte "Iná verejná licencia"');
   t('Uveďte meno autora (maliara, fotografa, architekta) diela alebo uveďte <em>Neznámy autor</em>. Ak autor diela nie je dôležitý, nechajte prázdne. ');
   t('Uveďte meno autora fotografickej snímky trojrozmerného diela (objekt, socha, stavba). ');
   t('Uveďte názov diela. Ak názov nie je podstatný, pole nechajte prázdne.');
-  t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté');
+  t('Uveďte názov inštitúcie, ktorá poskytla licenciu na použitie diela, meno múzea, kde sa dielo nachádza alebo názov inštitúcie, z ktorej stránky bolo (CC alebo public domain) dielo prevzaté. Príklad: Met Museum, NASA (nie Flickr, Pixabay a pod)');
   t('Uveďte odkaz (URL) na stránku, odkiaľ bolo dielo prevzaté. Na stránke sú okrem obrázka aj podrobnejšie údaje.');
   t('Uveďte text do popisu ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
