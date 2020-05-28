@@ -17,7 +17,7 @@ function rs_beliana_node_heslo_menu() {
 //    'type' => MENU_LOCAL_TASK,
 //    'page callback' => 'drupal_get_form',
 //    'access callback' => 'rs_beliana_node_heslo_content_access',
-//    'page arguments' => array('rs_beliana_node_heslo_content_edit_form', 1),    
+//    'page arguments' => array('rs_beliana_node_heslo_content_edit_form', 1),
 //    'access arguments' => array(1),
 //  );
 
@@ -89,6 +89,47 @@ function rs_beliana_node_heslo_node_postinsert($node) {
           $node->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
           node_save($node);
         }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function rs_beliana_node_heslo_cron() {
+  // select nodes with missing "lexikalna skupina" in workbench access and send notification
+  $results = db_query("SELECT n.nid FROM {node} n NATURAL LEFT JOIN workbench_access_node wa WHERE wa.nid IS NULL AND n.type = (:type)", [':type' => 'heslo'])->fetchAll();
+
+  if (!empty($results)) {
+    $params = ['nodes' => []];
+
+    foreach ($results as $result) {
+      if ($node = node_load($result->nid)) {
+        $params['nodes'][] = $node;
+      }
+    }
+
+    if (!empty($params['nodes'])) {
+      drupal_mail('rs_beliana_node_heslo', 'missing_node_in_view', 'encytsra@savba.sk', language_default(), $params);
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function rs_beliana_node_heslo_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'missing_node_in_view':
+      $message['subject'] = 'Heslo asi zmizlo z views';
+
+      foreach ($params['nodes'] as $node) {
+        $message['body'][] = t('@nid @date @url - heslo treba otvorit a opatovne ulozit;', [
+          '@nid' => $node->nid,
+          '@date' => date('Y/m/d H:i:s', $node->created),
+          '@url' => url('node/' . $node->nid, ['absolute' => TRUE]),
+        ]);
       }
       break;
   }
