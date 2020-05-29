@@ -99,7 +99,7 @@ function rs_beliana_node_heslo_node_postinsert($node) {
  */
 function rs_beliana_node_heslo_cron() {
   // select nodes with missing "lexikalna skupina" in workbench access and send notification
-  $results = db_query("SELECT n.nid FROM {node} n NATURAL LEFT JOIN workbench_access_node wa WHERE wa.nid IS NULL AND n.type = (:type)", [':type' => 'heslo'])->fetchAll();
+  $results = db_query("SELECT n.nid FROM {node} n NATURAL LEFT JOIN {workbench_access_node} wa WHERE wa.nid IS NULL AND n.type = (:type)", [':type' => 'heslo'])->fetchAll();
 
   if (!empty($results)) {
     $params = ['nodes' => []];
@@ -122,7 +122,7 @@ function rs_beliana_node_heslo_cron() {
 function rs_beliana_node_heslo_mail($key, &$message, $params) {
   switch ($key) {
     case 'missing_node_in_view':
-      $message['subject'] = 'Heslo asi zmizlo z views';
+      $message['subject'] = 'ENCB-156: Heslo asi zmizlo z views';
 
       foreach ($params['nodes'] as $node) {
         $message['body'][] = t('@nid @date @url - heslo treba otvorit a opatovne ulozit;', [
