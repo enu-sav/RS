@@ -485,8 +485,8 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in na_zalomenie state'] = array(
     'name' => 'edit revisions in na_zalomenie state',
     'roles' => array(
+      'Grafik' => 'Grafik',
       'Komentátor' => 'Komentátor',
-      'ig-redaktor' => 'ig-redaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
