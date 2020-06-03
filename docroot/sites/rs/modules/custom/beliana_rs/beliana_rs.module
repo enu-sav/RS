@@ -154,6 +154,8 @@ function beliana_merge(&$entity, $context = array()) {
     node_save($master);
 
     $entity->field_zlucene_do[LANGUAGE_NONE][0]['target_id'] = $_SESSION['master'];
+    # remove links from the original
+    _beliana_remove_links($entity);
     // Empty alias for original entity.
     //$entity->path['alias'] = '';
     // Set automatic alias creation to FALSE.
