@@ -1849,6 +1849,11 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       node_save($values['node']);
       return;
     }
+    # remove links from text of artices in state 'vyradene'
+    if (in_array($new_state, ['vyradene']) and strpos($values['node']->field_text_hesla['und'][0]['value'], '</a>')) {
+      _beliana_remove_links($values['node']);
+      node_save($values['node']);
+    }
   }
 
   // check types heslo and importovane_heslo, ignore for authors
