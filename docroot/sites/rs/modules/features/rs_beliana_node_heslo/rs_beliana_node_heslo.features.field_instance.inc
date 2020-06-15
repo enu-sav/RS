@@ -1033,10 +1033,11 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 25,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 7,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1288,7 +1289,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',

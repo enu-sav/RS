@@ -17517,6 +17517,87 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     26 => 0,
     28 => 0,
   );
+  /* Filter criterion: Obsah: Vyplatenie odmeny (field_vyplatit) */
+  $handler->display->display_options['filters']['field_vyplatit_value']['id'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['filters']['field_vyplatit_value']['field'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator_id'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    31 => 0,
+    27 => 0,
+    18 => 0,
+    28 => 0,
+    22 => 0,
+    29 => 0,
+    32 => 0,
+    10 => 0,
+    5 => 0,
+    23 => 0,
+    20 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    33 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    21 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
+  /* Filter criterion: Obsah: Tabuľka pre geografické heslá (field_table) */
+  $handler->display->display_options['filters']['field_table_value']['id'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['table'] = 'field_data_field_table';
+  $handler->display->display_options['filters']['field_table_value']['field'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_table_value']['expose']['operator_id'] = 'field_table_value_op';
+  $handler->display->display_options['filters']['field_table_value']['expose']['label'] = 'Tabuľka pre geografické heslá';
+  $handler->display->display_options['filters']['field_table_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_table_value']['expose']['operator'] = 'field_table_value_op';
+  $handler->display->display_options['filters']['field_table_value']['expose']['identifier'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    31 => 0,
+    27 => 0,
+    18 => 0,
+    28 => 0,
+    22 => 0,
+    29 => 0,
+    32 => 0,
+    10 => 0,
+    5 => 0,
+    23 => 0,
+    20 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    33 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    21 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad (A)';
@@ -21201,10 +21282,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Dátum vyplatenia'),
     t('Zlúčené z'),
     t('Redaktori zlúčeného hesla'),
+    t('Vyplatenie odmeny'),
+    t('Tabuľka pre geografické heslá'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
-    t('Vyplatenie odmeny'),
     t('Počet znakov na vyplatenie'),
     t('Lexikálna skupina (field_lexikalna_skupina)'),
     t('Autor hesla'),
