@@ -433,7 +433,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 21,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1080,9 +1080,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 10,
       ),
       'lite_display' => array(
@@ -1458,9 +1457,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'lite_display' => array(
@@ -1626,9 +1624,8 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 20,
       ),
       'lite_display' => array(
@@ -1775,7 +1772,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
