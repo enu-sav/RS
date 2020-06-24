@@ -3709,7 +3709,7 @@ function beliana_render_export($viewname, $displayname, $text) {
     //$output = preg_replace('/<p>\s*<\/p>/', ' ', $output);
 
     //  fix LaTeX
-    $output = preg_replace('/align*/', 'align', $output);
+    $output = preg_replace('/align\*/', 'align', $output);
 
     // fix inline images
     global $base_url;
