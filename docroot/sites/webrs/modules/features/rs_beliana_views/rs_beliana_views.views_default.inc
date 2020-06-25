@@ -13939,6 +13939,35 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     'ukoncenezluene' => 'ukoncenezluene',
   );
   $handler->display->display_options['filters']['state_1']['group'] = 1;
+  /* Filter criterion: Obsah: Tabuľka pre geografické heslá (field_table) */
+  $handler->display->display_options['filters']['field_table_value']['id'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['table'] = 'field_data_field_table';
+  $handler->display->display_options['filters']['field_table_value']['field'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_table_value']['expose']['operator_id'] = 'field_table_value_op';
+  $handler->display->display_options['filters']['field_table_value']['expose']['label'] = 'Tabuľka pre geografické heslá';
+  $handler->display->display_options['filters']['field_table_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_table_value']['expose']['operator'] = 'field_table_value_op';
+  $handler->display->display_options['filters']['field_table_value']['expose']['identifier'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
   $handler->display->display_options['path'] = 'vyhladat';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať';
