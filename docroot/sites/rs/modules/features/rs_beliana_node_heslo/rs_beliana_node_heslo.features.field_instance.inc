@@ -185,7 +185,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   $field_instances['node-heslo-field_datum_aktualizacie'] = array(
     'bundle' => 'heslo',
     'deleted' => 0,
-    'description' => 'Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
+    'description' => 'Zadajte dátum aktualizácie vydaného hesla v tvare <strong>RRRR/MM/DD</strong> napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -232,7 +232,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'increment' => 1,
         'input_format' => 'Y/m/d - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
+        'label_position' => 'none',
         'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
@@ -366,7 +366,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -429,7 +429,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -498,7 +498,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Vypĺňané programovo',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -920,7 +920,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -964,7 +964,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1033,10 +1033,11 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 25,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 7,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1288,7 +1289,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => 'Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -1717,7 +1718,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -1874,7 +1875,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Vypĺňané programovo');
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Vyšlo knižne');
-  t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zadajte dátum aktualizácie vydaného hesla v tvare <strong>RRRR/MM/DD</strong> napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');

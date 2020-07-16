@@ -38,10 +38,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_datum_aktualizacie'] = array(
     'name' => 'create field_datum_aktualizacie',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
     ),
     'module' => 'field_permissions',
   );
@@ -126,12 +123,12 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'create field_ilustracia',
     'roles' => array(
       'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -400,10 +397,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_datum_aktualizacie'] = array(
     'name' => 'edit field_datum_aktualizacie',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
     ),
     'module' => 'field_permissions',
   );
@@ -487,12 +481,12 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_ilustracia',
     'roles' => array(
       'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -688,10 +682,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_datum_aktualizacie'] = array(
     'name' => 'edit own field_datum_aktualizacie',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'garant' => 'garant',
     ),
     'module' => 'field_permissions',
   );
@@ -776,12 +767,12 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_ilustracia',
     'roles' => array(
       'Autor' => 'Autor',
+      'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
-      'ig-redaktor' => 'ig-redaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -1004,7 +995,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view field_datum_aktualizacie',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -1303,7 +1293,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view own field_datum_aktualizacie',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );

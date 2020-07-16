@@ -1130,6 +1130,37 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['state']['value'] = array(
     'publikovane_na_webe' => 'publikovane_na_webe',
   );
+  /* Filter criterion: Beliana sync: The Unix timestamp of last sync. */
+  $handler->display->display_options['filters']['updated_1']['id'] = 'updated_1';
+  $handler->display->display_options['filters']['updated_1']['table'] = 'beliana_sync';
+  $handler->display->display_options['filters']['updated_1']['field'] = 'updated';
+  $handler->display->display_options['filters']['updated_1']['operator'] = '>';
+  $handler->display->display_options['filters']['updated_1']['value']['type'] = 'offset';
+  $handler->display->display_options['filters']['updated_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['updated_1']['expose']['operator_id'] = 'updated_1_op';
+  $handler->display->display_options['filters']['updated_1']['expose']['label'] = 'Synchronizácia po';
+  $handler->display->display_options['filters']['updated_1']['expose']['description'] = 'Dátum vo formáte RRRR-MM-DD alebo záporná hodnota (-2 day, -5 hour)';
+  $handler->display->display_options['filters']['updated_1']['expose']['operator'] = 'updated_1_op';
+  $handler->display->display_options['filters']['updated_1']['expose']['identifier'] = 'updated_1';
+  $handler->display->display_options['filters']['updated_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
   $handler->display->display_options['path'] = 'zverejnene-na-webe';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejnené';
@@ -1177,6 +1208,8 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Na zoradenie'),
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total'),
+    t('Synchronizácia po'),
+    t('Dátum vo formáte RRRR-MM-DD alebo záporná hodnota (-2 day, -5 hour)'),
   );
   $export['sync_to_web'] = $view;
 

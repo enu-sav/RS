@@ -185,7 +185,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
   $field_instances['node-heslo-field_datum_aktualizacie'] = array(
     'bundle' => 'heslo',
     'deleted' => 0,
-    'description' => 'Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
+    'description' => 'Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -433,7 +433,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 21,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1080,9 +1080,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 10,
       ),
       'lite_display' => array(
@@ -1458,9 +1457,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'lite_display' => array(
@@ -1626,9 +1624,8 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 20,
       ),
       'lite_display' => array(
@@ -1775,7 +1772,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1930,7 +1927,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Vypĺňané programovo');
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Vyšlo knižne');
-  t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');

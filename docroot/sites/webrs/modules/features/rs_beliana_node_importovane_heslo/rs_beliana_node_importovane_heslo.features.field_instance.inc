@@ -157,7 +157,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   $field_instances['node-importovane_heslo-field_datum_aktualizacie'] = array(
     'bundle' => 'importovane_heslo',
     'deleted' => 0,
-    'description' => 'Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
+    'description' => 'Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -410,9 +410,8 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 11,
       ),
       'lite_display' => array(
@@ -769,7 +768,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -843,7 +842,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 10,
+        'weight' => 2,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -891,7 +890,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -932,9 +931,9 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'liteformatter',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'liteformatter_formatter',
         'weight' => 1,
       ),
       'lite_display' => array(
@@ -1217,7 +1216,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Vyberte lexikálnu skupinu najnižšej úrovne (nemá podúrovne a vždy má v texte zátvorky).');
   t('Vyplatenie odmeny');
   t('Vyšlo knižne');
-  t('Zadajte dátum aktualizácie vydaného hesla. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
 
   return $field_instances;
 }

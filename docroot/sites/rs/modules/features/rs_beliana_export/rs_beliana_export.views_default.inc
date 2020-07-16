@@ -265,6 +265,8 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['filters']['state_1']['field'] = 'state';
   $handler->display->display_options['filters']['state_1']['value'] = array(
     'na_zalomenie' => 'na_zalomenie',
+    'v_zalamovani' => 'v_zalamovani',
+    'publikovane_na_webe' => 'publikovane_na_webe',
   );
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';

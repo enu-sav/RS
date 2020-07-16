@@ -1607,8 +1607,21 @@ function beliana_node_presave($node) {
     $node->log = $node->log . ", vyplnené pole Vyplatiť";
   }
 
+  # remove links from text of artices in states 'vyradene' and 'ukoncenezluene'
+  if (in_array($node->workbench_moderation_state_current, ['vyradene', 'ukoncenezluene'])) {
+    _beliana_remove_links($node);
+  }
   #update the link table (updated only in the beliana-webrs module)
   _beliana_process_links($node);
+}
+
+/**
+  remove links from the node text
+ */
+function _beliana_remove_links($node) {
+  $text = $node->field_text_hesla['und'][0]['value'];
+  $text = preg_replace("/<a[^>]*>/", " ", $text);
+  $node->field_text_hesla['und'][0]['value'] = str_replace("</a>", "", $text);
 }
 
 /**
@@ -1835,6 +1848,11 @@ function beliana_workflow_reaction(&$form, &$form_state) {
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
       return;
+    }
+    # remove links from text of artices in state 'vyradene'
+    if (in_array($new_state, ['vyradene']) and strpos($values['node']->field_text_hesla['und'][0]['value'], '</a>')) {
+      _beliana_remove_links($values['node']);
+      node_save($values['node']);
     }
   }
 
@@ -3541,8 +3559,8 @@ function transfer_links($text_to, $text_from) {
   }
 
   // remove the <a> tags
-  $text_to = preg_replace("/<a[^>]*>/", " ", $text_to); //odstranit opakovane medzery
-  $text_to = str_replace("</a>", "", $text_to); //odstranit nezalomitelny znak 0-ovej sirky
+  $text_to = preg_replace("/<a[^>]*>/", " ", $text_to);
+  $text_to = str_replace("</a>", "", $text_to);
   $text_to = preg_replace("/  +/", " ", $text_to); //odstranit opakovane medzery
 
   // replace from >> to by exact matching
@@ -3691,7 +3709,7 @@ function beliana_render_export($viewname, $displayname, $text) {
     //$output = preg_replace('/<p>\s*<\/p>/', ' ', $output);
 
     //  fix LaTeX
-    $output = preg_replace('/align*/', 'align', $output);
+    $output = preg_replace('/align\*/', 'align', $output);
 
     // fix inline images
     global $base_url;
