@@ -27,6 +27,38 @@ function beliana_rs_action_info() {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function beliana_rs_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_profile_form':
+      //disable browser remember password on user edit form
+      $form['account']['current_pass']['#type'] = 'textfield';
+      $form['account']['current_pass']['#attributes']['onfocus'] = "this.setAttribute('type', 'password')";
+      break;
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function beliana_rs_element_info_alter(array &$types) {
+  if (isset($types['password_confirm'])) {
+    $types['password_confirm']['#process'][] = 'beliana_rs_form_process_password_confirm';
+  }
+}
+
+/**
+ * Process the password_confirm element.
+ */
+function beliana_rs_form_process_password_confirm($element) {
+  $element['pass1']['#type'] = $element['pass2']['#type'] = 'textfield';
+  $element['pass1']['#attributes']['onfocus'] = $element['pass2']['#attributes']['onfocus'] = "this.setAttribute('type', 'password')";
+
+  return $element;
+}
+
+/**
  * Callback function for `beliana_merge` action.
  *
  * @inheritdoc
@@ -62,7 +94,7 @@ function beliana_merge(&$entity, $context = array()) {
   if ($master != FALSE) {
     // Merge field_lexikalna_skupina.
     foreach ($entity->field_lexikalna_skupina[LANGUAGE_NONE] as $ls) {
-      // find the top most parent (set to editor name) 
+      // find the top most parent (set to editor name)
       $parents = taxonomy_get_parents_all($ls['tid']);
       foreach ($parents as $parent) {
         if (count(taxonomy_get_parents_all($parent->tid)) == 1) {
@@ -102,7 +134,7 @@ function beliana_merge(&$entity, $context = array()) {
     }
     else {
       // special requirement: in merging put GEO articles in front of others
-      if ($top_parent->tid === "390") {  // "390" is Lubica Krajcovicova, editor of GEO articles. 
+      if ($top_parent->tid === "390") {  // "390" is Lubica Krajcovicova, editor of GEO articles.
         $master->field_text_hesla[LANGUAGE_NONE][0]['value'] = $entity->field_text_hesla[LANGUAGE_NONE][0]['value'] . "<p>&nbsp;</p>" . $master->field_text_hesla[LANGUAGE_NONE][0]['value'];
       }
       else {
@@ -238,7 +270,7 @@ function handle_special_transitions(&$values) {
     if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
       _start_korektura($values);
 
-    // transition 1_korektura >> u_vyst_redaktora_3 
+    // transition 1_korektura >> u_vyst_redaktora_3
     if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
       _transition_korektura($values, "1_korektura");
     }
@@ -260,13 +292,13 @@ function handle_special_transitions(&$values) {
       }
     }
 
-    $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change 
+    $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change
     if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
       // starting 'korektura': copy editor names to field_spravit_1_korekturu
       if (($cur_state === 'u_vyst_redaktora_3' && $new_state === '2_korekt_ra'))
         _start_korektura($values);
 
-      // transition 2_korekt_ra >> u_vyst_redaktora_4 
+      // transition 2_korekt_ra >> u_vyst_redaktora_4
       if ($cur_state === '2_korekt_ra' && $new_state === 'u_vyst_redaktora_4')
         _transition_korektura($values, "2_korekt_ra");
     }
@@ -276,7 +308,7 @@ function handle_special_transitions(&$values) {
     return;
   }
 
-  // transition 1_korektura >> u_vyst_redaktora_3 
+  // transition 1_korektura >> u_vyst_redaktora_3
   if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
     _transition_vr2x($values);
     node_save($values['node']);
@@ -372,7 +404,7 @@ function _run_2_korektura_single(&$values) {
 
 // check if illustration should go to web
 // dummy function here, used only in the web version
-function il_display_on_web(&$ilu_node) 
+function il_display_on_web(&$ilu_node)
 {
   return false;
 }
