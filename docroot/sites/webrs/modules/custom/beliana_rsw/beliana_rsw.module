@@ -13,6 +13,39 @@ function beliana_rsw_init(){
   drupal_add_css(drupal_get_path('module', 'beliana_rsw') . '/css/admin_menu_override.css');
 }
 
+
+/**
+ * Implements hook_form_alter().
+ */
+function beliana_rsw_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_profile_form':
+      //disable browser remember password on user edit form
+      $form['account']['current_pass']['#type'] = 'textfield';
+      $form['account']['current_pass']['#attributes']['onfocus'] = "this.setAttribute('type', 'password')";
+      break;
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function beliana_rsw_element_info_alter(array &$types) {
+  if (isset($types['password_confirm'])) {
+    $types['password_confirm']['#process'][] = 'beliana_rsw_form_process_password_confirm';
+  }
+}
+
+/**
+ * Process the password_confirm element.
+ */
+function beliana_rsw_form_process_password_confirm($element) {
+  $element['pass1']['#type'] = $element['pass2']['#type'] = 'textfield';
+  $element['pass1']['#attributes']['onfocus'] = $element['pass2']['#attributes']['onfocus'] = "this.setAttribute('type', 'password')";
+
+  return $element;
+}
+
 /**
  * Extract links from node and insert them into beliana_links table.
  * name "beliana_process_links" is not OK, it is called in unexpected situations with funny arguments
