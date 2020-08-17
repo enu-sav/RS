@@ -204,9 +204,11 @@ function diff_admin_paths_alter(&$paths) {
 /**
  * Access callback for the node revisions page.
  */
-function diff_node_revision_access($node, $op = 'view') {
-  $may_revision_this_type = variable_get('diff_enable_revisions_page_node_' . $node->type, TRUE) || user_access('administer nodes');
-  return $may_revision_this_type && _node_revision_access($node, $op);
+function diff_node_revision_access($node = NULL, $op = 'view') {
+  if(!empty($node)) {
+    $may_revision_this_type = variable_get('diff_enable_revisions_page_node_' . $node->type, TRUE) || user_access('administer nodes');
+    return $may_revision_this_type && _node_revision_access($node, $op);
+  }
 }
 
 /**
