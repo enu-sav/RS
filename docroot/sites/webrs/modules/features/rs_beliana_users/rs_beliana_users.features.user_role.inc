@@ -94,6 +94,12 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 2,
   );
 
+  // Exported role: guest.
+  $roles['guest'] = array(
+    'name' => 'guest',
+    'weight' => 18,
+  );
+
   // Exported role: useradmin.
   $roles['useradmin'] = array(
     'name' => 'useradmin',

@@ -383,7 +383,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_dlzka_autorovho_textu_zad',
     'label' => 'Počet znakov na vyplatenie',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',

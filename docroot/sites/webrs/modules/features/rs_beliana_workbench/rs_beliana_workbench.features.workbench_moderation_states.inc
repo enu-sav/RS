@@ -79,7 +79,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'kontrola_etymologie',
       'label' => 'Kontrola etymológie',
       'description' => 'Kontrola etymológie a prepisov',
-      'weight' => 0,
+      'weight' => 7,
     ),
     'len_vyplatit' => array(
       'name' => 'len_vyplatit',

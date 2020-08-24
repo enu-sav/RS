@@ -62,6 +62,7 @@ features[user_role][] = administrátor
 features[user_role][] = chRedaktor
 features[user_role][] = garant
 features[user_role][] = geoRedaktor
+features[user_role][] = guest
 features[user_role][] = useradmin
 features[variable][] = account_sync_enabled
 features[variable][] = account_sync_server_key

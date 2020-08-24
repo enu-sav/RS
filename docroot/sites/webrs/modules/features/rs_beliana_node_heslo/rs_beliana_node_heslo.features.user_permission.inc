@@ -925,6 +925,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Etymologický redaktor' => 'Etymologický redaktor',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
+      'guest' => 'guest',
     ),
     'module' => 'view_unpublished',
   );
@@ -1325,6 +1326,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
+      'guest' => 'guest',
     ),
     'module' => 'field_permissions',
   );

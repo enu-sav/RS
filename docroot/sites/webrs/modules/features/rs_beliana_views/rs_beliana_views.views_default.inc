@@ -14632,6 +14632,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     5 => '5',
+    38 => '38',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
