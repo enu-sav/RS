@@ -1607,6 +1607,18 @@ function beliana_node_presave($node) {
     $node->log = $node->log . ", vyplnené pole Vyplatiť";
   }
 
+  // store the proofreader state in which an item was edited in the field_atributy field
+  // to be used to send items always to the same proofreader
+  if (variable_get('rs_api_type') != "webrs" && in_array($node->workbench_moderation_state_current,
+	  ['importovane_jaz_kontrola', 'importovane_u_jaz_korektora',
+	   // "U jaz. redaktora", :U jaz. korektora"
+	   'na_jazykovu_korekturu','u_jaz_korektora'])) {
+    if (!isset($node->field_atributy[LANGUAGE_NONE]) or
+       (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], $node->workbench_moderation_state_current) === FALSE)) {
+         $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo v stave '".$node->workbench_moderation_state_current."'";
+    }
+  }
+
   # remove links from text of artices in states 'vyradene' and 'ukoncenezluene'
   if (in_array($node->workbench_moderation_state_current, ['vyradene', 'ukoncenezluene'])) {
     _beliana_remove_links($node);
@@ -1752,6 +1764,24 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       */
+    }
+
+    // allow to return an item only to the proofreader who has already edited it
+    // influences also admin, so that he does not mess things up
+    $node = $form['node']['#value'];
+    if (variable_get('rs_api_type') != "webrs" && isset($node->field_atributy[LANGUAGE_NONE])) {
+      if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'na_jazykovu_korekturu') !== FALSE) {
+          unset($form['state']['#options']['u_jaz_korektora']);
+      }
+      if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'u_jaz_korektora') !== FALSE) {
+          unset($form['state']['#options']['na_jazykovu_korekturu']);
+      }
+      if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'importovane_jaz_kontrola') !== FALSE) {
+          unset($form['state']['#options']['importovane_u_jaz_korektora']);
+      }
+      if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'importovane_u_jaz_korektora') !== FALSE) {
+          unset($form['state']['#options']['importovane_jaz_kontrola']);
+      }
     }
 
     // Add custom submit handler.
