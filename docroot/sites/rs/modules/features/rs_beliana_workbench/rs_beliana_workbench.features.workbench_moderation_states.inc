@@ -73,7 +73,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'name' => 'importovane',
       'label' => 'Importované',
       'description' => 'Importované heslo (zo súboru)',
-      'weight' => -10,
+      'weight' => 10,
     ),
     'len_vyplatit' => array(
       'name' => 'len_vyplatit',

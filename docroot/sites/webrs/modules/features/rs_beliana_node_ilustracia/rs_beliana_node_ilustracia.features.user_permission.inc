@@ -745,6 +745,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'view any unpublished ilustracia content',
     'roles' => array(
       'authenticated user' => 'authenticated user',
+      'guest' => 'guest',
     ),
     'module' => 'view_unpublished',
   );

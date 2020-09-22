@@ -769,6 +769,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from publikovane_na_webe to zverejnene_oprava',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -980,6 +981,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
+      'guest' => 'guest',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
