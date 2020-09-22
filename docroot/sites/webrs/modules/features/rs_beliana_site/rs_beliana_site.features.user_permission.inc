@@ -747,6 +747,7 @@ function rs_beliana_site_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
+      'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
@@ -764,6 +765,7 @@ function rs_beliana_site_user_default_permissions() {
       'Autor' => 'Autor',
       'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
+      'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',

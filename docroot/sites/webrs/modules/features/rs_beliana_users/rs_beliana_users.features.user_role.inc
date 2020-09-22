@@ -13,7 +13,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Autor.
   $roles['Autor'] = array(
     'name' => 'Autor',
-    'weight' => 6,
+    'weight' => 5,
   );
 
   // Exported role: Etymologický redaktor.
@@ -25,19 +25,19 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Grafik.
   $roles['Grafik'] = array(
     'name' => 'Grafik',
-    'weight' => 2,
+    'weight' => 3,
   );
 
   // Exported role: Jazykový redaktor 1.
   $roles['Jazykový redaktor 1'] = array(
     'name' => 'Jazykový redaktor 1',
-    'weight' => 9,
+    'weight' => 8,
   );
 
   // Exported role: Jazykový redaktor 2.
   $roles['Jazykový redaktor 2'] = array(
     'name' => 'Jazykový redaktor 2',
-    'weight' => 10,
+    'weight' => 9,
   );
 
   // Exported role: Konzultant.
@@ -55,7 +55,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Redaktor.
   $roles['Redaktor'] = array(
     'name' => 'Redaktor',
-    'weight' => 7,
+    'weight' => 6,
   );
 
   // Exported role: Správca heslára.
@@ -103,7 +103,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: useradmin.
   $roles['useradmin'] = array(
     'name' => 'useradmin',
-    'weight' => 8,
+    'weight' => 7,
   );
 
   return $roles;

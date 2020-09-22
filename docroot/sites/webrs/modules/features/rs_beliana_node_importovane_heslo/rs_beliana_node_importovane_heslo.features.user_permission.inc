@@ -40,6 +40,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
       'Autor' => 'Autor',
       'Etymologický redaktor' => 'Etymologický redaktor',
       'Grafik' => 'Grafik',
+      'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Konzultant' => 'Konzultant',

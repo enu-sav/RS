@@ -153,46 +153,16 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Na vypracovanie autorom,  pred odoslaním redaktorovi',
       'weight' => 3,
     ),
-    'u_autora_revizia' => array(
-      'name' => 'u_autora_revizia',
-      'label' => 'U autora (revízia)',
-      'description' => '',
-      'weight' => 0,
-    ),
-    'u_jaz_redaktora_revizia' => array(
-      'name' => 'u_jaz_redaktora_revizia',
-      'label' => 'U jaz. redaktora (revízia)',
-      'description' => '',
-      'weight' => 0,
-    ),
     'u_konzultanta' => array(
       'name' => 'u_konzultanta',
       'label' => 'U konzultanta',
       'description' => 'heslo u konzultanta',
       'weight' => 10,
     ),
-    'u_konzultanta_revizia' => array(
-      'name' => 'u_konzultanta_revizia',
-      'label' => 'U konzultanta (revízia)',
-      'description' => '',
-      'weight' => 0,
-    ),
-    'u_redaktora_revizia' => array(
-      'name' => 'u_redaktora_revizia',
-      'label' => 'U redaktora (revízia)',
-      'description' => '',
-      'weight' => 0,
-    ),
-    'u_vyst_redaktora_revizia' => array(
-      'name' => 'u_vyst_redaktora_revizia',
-      'label' => 'U výst. redaktora (revízia)',
-      'description' => '',
-      'weight' => 0,
-    ),
     'ukoncenezluene' => array(
       'name' => 'ukoncenezluene',
       'label' => 'Ukončené/zlúčené',
-      'description' => 'Heslo bolo zlúčené s inými heslami, v pôvodnej forme ďalej nepokračuje ',
+      'description' => 'Heslo bolo v knižnom RS zlúčené s inými heslami, v pôvodnej forme ďalej nepokračuje ',
       'weight' => 10,
     ),
     'vyradene' => array(
@@ -210,7 +180,7 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
     'zlucene' => array(
       'name' => 'zlucene',
       'label' => 'Zlúčené',
-      'description' => 'Heslo vytvorené zlúčením',
+      'description' => 'Heslo bolo v knižnom RS vytvorené zlúčením (pomocný stav)',
       'weight' => 7,
     ),
     'zverejnene_oprava' => array(

@@ -1089,49 +1089,6 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-importovane_heslo-field_vyslo_knizne'.
-  $field_instances['node-importovane_heslo-field_vyslo_knizne'] = array(
-    'bundle' => 'importovane_heslo',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'lite_display' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_vyslo_knizne',
-    'label' => 'Vyšlo knižne',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 13,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-importovane_heslo-title_field'.
   $field_instances['node-importovane_heslo-title_field'] = array(
     'bundle' => 'importovane_heslo',
@@ -1215,7 +1172,6 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyberte lexikálnu skupinu najnižšej úrovne (nemá podúrovne a vždy má v texte zátvorky).');
   t('Vyplatenie odmeny');
-  t('Vyšlo knižne');
   t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
 
   return $field_instances;

@@ -92,6 +92,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'edit field_zivotopis',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
@@ -138,6 +139,7 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'view field_zivotopis',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );

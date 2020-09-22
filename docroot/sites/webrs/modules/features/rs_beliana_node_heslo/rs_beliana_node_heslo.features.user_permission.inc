@@ -278,6 +278,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_zverejnit_meno_autora'] = array(
     'name' => 'create field_zverejnit_meno_autora',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -333,6 +334,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit any heslo content',
     'roles' => array(
       'Etymologický redaktor' => 'Etymologický redaktor',
+      'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Konzultant' => 'Konzultant',
@@ -528,6 +530,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_table'] = array(
     'name' => 'edit field_table',
     'roles' => array(
+      'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Výstupný redaktor' => 'Výstupný redaktor',
@@ -614,6 +617,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_zverejnit_meno_autora'] = array(
     'name' => 'edit field_zverejnit_meno_autora',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -883,6 +887,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_zverejnit_meno_autora'] = array(
     'name' => 'edit own field_zverejnit_meno_autora',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1471,6 +1476,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_zverejnit_meno_autora'] = array(
     'name' => 'view own field_zverejnit_meno_autora',
     'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',

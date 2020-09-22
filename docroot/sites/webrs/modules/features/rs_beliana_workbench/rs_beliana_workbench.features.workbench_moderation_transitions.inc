@@ -89,20 +89,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'importovane',
       'name' => 'importovane_u_vr-importovane',
     ),
-    'kontrola_etymologie:na_jazykovu_korekturu' => array(
-      'from_name' => 'kontrola_etymologie',
-      'to_name' => 'na_jazykovu_korekturu',
-      'name' => 'kontrola_etymologie-u_jaz_redaktora',
-    ),
     'len_vyplatit:zaradene' => array(
       'from_name' => 'len_vyplatit',
       'to_name' => 'zaradene',
       'name' => 'len_vyplatit-zaradene',
-    ),
-    'na_jazykovu_korekturu:u_redaktora_revizia' => array(
-      'from_name' => 'na_jazykovu_korekturu',
-      'to_name' => 'u_redaktora_revizia',
-      'name' => 'u_jaz_redaktora-u_redaktora_rev',
     ),
     'na_zverejnenie:kontrola_etymologie' => array(
       'from_name' => 'na_zverejnenie',
@@ -174,55 +164,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'needs_review',
       'name' => 'u_autora-u_redaktora',
     ),
-    'u_autora_revizia:u_redaktora_revizia' => array(
-      'from_name' => 'u_autora_revizia',
-      'to_name' => 'u_redaktora_revizia',
-      'name' => 'u_autora_rev-u_redaktora_rev',
-    ),
-    'u_jaz_redaktora_revizia:u_redaktora_revizia' => array(
-      'from_name' => 'u_jaz_redaktora_revizia',
-      'to_name' => 'u_redaktora_revizia',
-      'name' => 'u_jaz_redaktora_rev-u_redaktora_rev',
-    ),
     'u_konzultanta:needs_review' => array(
       'from_name' => 'u_konzultanta',
       'to_name' => 'needs_review',
       'name' => 'u_konzultanta-u_redaktora',
-    ),
-    'u_konzultanta_revizia:u_redaktora_revizia' => array(
-      'from_name' => 'u_konzultanta_revizia',
-      'to_name' => 'u_redaktora_revizia',
-      'name' => 'u_konzultanta_rev-u_redaktora_rev',
-    ),
-    'u_redaktora_revizia:u_autora_revizia' => array(
-      'from_name' => 'u_redaktora_revizia',
-      'to_name' => 'u_autora_revizia',
-      'name' => 'u_redaktora_rev-u_autora_rev',
-    ),
-    'u_redaktora_revizia:u_jaz_redaktora_revizia' => array(
-      'from_name' => 'u_redaktora_revizia',
-      'to_name' => 'u_jaz_redaktora_revizia',
-      'name' => 'u_redaktora_rev-u_jaz_redaktora_rev',
-    ),
-    'u_redaktora_revizia:u_konzultanta_revizia' => array(
-      'from_name' => 'u_redaktora_revizia',
-      'to_name' => 'u_konzultanta_revizia',
-      'name' => 'u_redaktora_rev-u_konzultanta_rev',
-    ),
-    'u_redaktora_revizia:u_vyst_redaktora_revizia' => array(
-      'from_name' => 'u_redaktora_revizia',
-      'to_name' => 'u_vyst_redaktora_revizia',
-      'name' => 'u_redaktora_rev-u_vyst_redaktora_rev',
-    ),
-    'u_vyst_redaktora_revizia:na_zalomenie' => array(
-      'from_name' => 'u_vyst_redaktora_revizia',
-      'to_name' => 'na_zalomenie',
-      'name' => 'u_vyst_redaktora_rev-na_zverejnenie',
-    ),
-    'u_vyst_redaktora_revizia:u_jaz_redaktora_revizia' => array(
-      'from_name' => 'u_vyst_redaktora_revizia',
-      'to_name' => 'u_jaz_redaktora_revizia',
-      'name' => 'u_vyst_redaktora_rev-u_jaz_redaktora_rev',
     ),
     'vyradene:zaradene' => array(
       'from_name' => 'vyradene',
