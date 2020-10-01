@@ -292,32 +292,6 @@ function beliana_field_formatter_view($entity_type, $entity, $field, $instance, 
 }
 
 /**
- * access callback for beliana_editor_list
- */
-function beliana_editor_list_access() {
-  global $user;
-  // roles with allowed access
-  $roles = [
-    "Redaktor",
-    "Správca heslára",
-    "Výstupný redaktor 1",
-    "administrátor",
-    "Výstupný redaktor 2",
-    "Výstupný redaktor 2X",
-    "useradmin",
-    "Výstupný redaktor 3",
-    "Výstupný redaktor 4",
-    "Výstupný redaktor 5",
-  ];
-  foreach ($roles as $role) {
-    if (in_array($role, $user->roles)) {
-      return TRUE;
-    }
-  }
-  return FALSE;
-}
-
-/**
  * Menu callback for `admin/editor-list` path.
  *
  * We are printing editor's taxonomy classes. Fo the current editor also
