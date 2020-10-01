@@ -189,3 +189,24 @@ function _get_users(&$users, $tid)
 	}
 	return $roles;
 }
+
+/**
+ * access callback for beliana_editor_list
+ */
+function beliana_editor_list_access() {
+  global $user;
+  // roles with allowed access
+  $roles = [
+    "Redaktor",
+    "Správca heslára",
+    "Výstupný redaktor",
+    "administrátor",
+    "useradmin",
+  ];
+  foreach ($roles as $role) {
+    if (in_array($role, $user->roles)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
