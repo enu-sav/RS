@@ -328,6 +328,7 @@ function beliana_editor_list() {
       $output .= '<strong>' . $term->name . '</strong>';
       $output .= '<ul>';
       foreach ($users as $usr) {
+	if (substr($usr->name,0,5) == 'test_') continue;
         if (isset($usr->workbench_access[$term->tid])) {
           // we want to print only user in the role Redaktor and Author (but these only if $user has access rights)
           if (in_array("Autor", $usr->roles)) {
