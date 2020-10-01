@@ -478,3 +478,20 @@ function beliana_editor_list_access() {
   }
   return FALSE;
 }
+
+/**
+ * access callback for beliana_group_list
+ */
+function beliana_group_list_access() {
+  global $user;
+  // roles with allowed access
+  $roles = [
+    "administrátor",
+  ];
+  foreach ($roles as $role) {
+    if (in_array($role, $user->roles)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
