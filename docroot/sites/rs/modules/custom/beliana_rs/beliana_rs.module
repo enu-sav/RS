@@ -408,3 +408,47 @@ function il_display_on_web(&$ilu_node)
 {
   return false;
 }
+
+/**
+ * Menu callback for `admin/group-list` path.
+ *
+ * We are printing users grouped by terms assigned to users.
+ *
+ * @return string
+ *   HTML output of users.
+ */
+
+function beliana_group_list() {
+  $users = entity_load('user');
+  $terms = taxonomy_get_tree(2);
+  $output = '';
+  foreach ($terms as $term) {
+    // The list seems to be sorted according to the hierarchy, so print items with depth==0 as H1 headers
+    if ($term->depth == 0) {
+      $output .= '<h1>' . $term->name . '</h1>';
+    }
+    else {
+      //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
+      $output .= '<strong>' . $term->name . '</strong>';
+      $output .= '<ul>';
+      foreach ($users as $user) {
+        if (isset($user->workbench_access[$term->tid])) {
+          $output .= '<li>'
+            . $user->name . ', '
+            . $user->field_meno['und'][0]['value'] . ', '
+            . $user->field_priezvisko['und'][0]['value'] . ', ';
+          if (isset($user->field_autorska_zmluva['und'])) {
+            $output .= $user->mail . ', '
+              . $user->field_autorska_zmluva['und'][0]['value'] . '</li>';
+          }
+          else {
+            $output .= $user->mail . '</li>';
+          }
+        }
+      }
+      //$output .= '</ul><br><br>';
+      $output .= '</ul>';
+    }
+  }
+  return $output;
+}

@@ -116,6 +116,76 @@ function modify_links_merged(&$node) {
  * Handle special transitions in the web workflow
  */
 function handle_special_transitions(&$values) {
-  // nothing special yer
+  // nothing special yet
 }
 
+
+/**
+ * Menu callback for `admin/group-list` path.
+ *
+ * We are printing users grouped by terms assigned to users.
+ *
+ * @return string
+ *   HTML output of users.
+ */
+
+function beliana_group_list() {
+  $users = entity_load('user'); 
+  $terms = taxonomy_get_tree(2);
+  $output = '';
+  $ls0="";
+  $ls1="";
+  $ls2="";
+  //foreach ($terms as $term) {
+  $output="";
+  $output .='<table style="border: 1px solid gray;">';
+  $output .= "<tr><th>"."Hl. kategória"."</th><th>"."Podkategória/LS"."</th><th>"."LS"."</th>";
+  $output .= "<th>".'Redaktor'."</th><th>".'Výst. redaktor'."</th><th>".'Autori'."</th><th>".'Konzultanti'."</th><tr>";
+  //foreach (array_slice($terms,0,100) as $term) {
+  foreach ($terms as $term) {
+    // The list seems to be sorted according to the hierarchy, so print items with depth==0 as H1 headers
+    
+    if ($term->depth == 0) {
+      $ls0 = $term->name;
+      $ls1="-";
+      $ls2="-";
+    } else if ($term->depth == 1) {
+      $ls1 = $term->name;
+      $ls2="-";
+    } else if ($term->depth == 2) {
+      $ls2 = $term->name;
+    }
+    $ausers = _get_users($users,$term->tid); 
+    $output .= '<tr style="border: 1px solid gray;"><td>'.$ls0."</td><td>".$ls1."</td><td>".$ls2."</td>";
+    $output .= "<td>".$ausers['redaktor']."</td><td>".$ausers['vr']."</td><td>".$ausers['autor']."</td><td>".$ausers['konzultant']."</td><tr>\n";
+  }
+  $output.="</table>";
+  return $output;
+}
+
+/* helper sunction to be called in beliana_group_list */
+function _get_users(&$users, $tid)
+{
+	$roles=array(
+		"autor" => '',
+		"konzultant" => '',
+		"redaktor" => '',
+		"vr" => ''
+	);
+	foreach ($users as $user) {
+		//if (strpos($user->name, 'test') !== null) continue;
+		if (substr($user->name,0,5) == 'test_') continue;
+		if (isset($user->workbench_access[$tid])) {
+			if (in_array("Autor", $user->roles)) {
+				$roles["autor"] .= '<a href="/user/'.$user->uid.'">'.$user->name.'</a>, ';
+			} else if (in_array("Redaktor", $user->roles)) {
+				$roles["redaktor"] .= '<a href="/user/'.$user->uid.'">'.$user->name.'</a> ';
+			} else if (in_array("Konzultant", $user->roles)) {
+				$roles["konzultant"] .= '<a href="/user/'.$user->uid.'">'.$user->name.'</a>, ';
+			} else if (in_array("Výstupný redaktor", $user->roles)) {
+				$roles["vr"] .= '<a href="/user/'.$user->uid.'">'.$user->name.'</a> ';
+			}
+		}
+	}
+	return $roles;
+}
