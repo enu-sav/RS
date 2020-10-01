@@ -34,6 +34,7 @@ function beliana_menu() {
   $items['admin/group-list'] = [
     'title' => t('Group list'),
     'page callback' => 'beliana_group_list',
+    'access callback' => 'beliana_group_list_access',
     'access arguments' => ['bypass node access'],
   ];
 
