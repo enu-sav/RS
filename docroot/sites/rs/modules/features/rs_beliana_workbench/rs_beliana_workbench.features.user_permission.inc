@@ -1209,7 +1209,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from u_vyst_redaktora_4 to u_vyst_redaktora_3',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );
