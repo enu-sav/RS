@@ -1394,6 +1394,25 @@ function reset_heslo_webrs(&$node, $context = []) {
   }
 }
 
+
+//Compare strings with characters č, ch, š and ž using the strcmp function according to rules of the Slovak language
+//strcoll does not work, because we need correct sorting of the _ character (ignored in strcoll)
+//The idea: replace these characters by placeholders
+function sk_cmp($a, $b)
+{
+	$a=str_replace("č","czz",$a);
+	$a=str_replace("š","szz",$a);
+	$a=str_replace("ž","zzz",$a);
+	$a=str_replace("ch","hzz",$a);
+
+	$b=str_replace("č","czz",$b);
+	$b=str_replace("š","szz",$b);
+	$b=str_replace("ž","zzz",$b);
+	$b=str_replace("ch","hzz",$b);
+
+	return strcmp($a,$b);
+}
+
 /**
  * Implements hook_node_presave().
  *
@@ -1409,7 +1428,6 @@ function beliana_node_presave($node) {
     return;
   }
   // set field_na_zoradenie if empty or fix it if necessary
-  setlocale(LC_COLLATE, 'sk_SK.utf8');
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
   if (!$rebuild_sort) {
     // are there funny characters in sort string (field_na_zoradenie)?
@@ -1440,7 +1458,7 @@ function beliana_node_presave($node) {
   $subory = taxonomy_get_tree($vocabulary->vid);
   foreach ($subory as $term) {
     // ignore items starting with digit, such as '1. subor'
-    if (!ctype_digit(substr($term->name, 0, 1)) && strcoll($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
+    if (!ctype_digit(substr($term->name, 0, 1)) && sk_cmp($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
     }
