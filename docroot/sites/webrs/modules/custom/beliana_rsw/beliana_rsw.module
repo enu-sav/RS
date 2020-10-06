@@ -112,13 +112,6 @@ function modify_links_merged(&$node) {
 // currently no code here
 }
 
-/*
- * Handle special transitions in the web workflow
- */
-function handle_special_transitions(&$values) {
-  // nothing special yet
-}
-
 
 /**
  * Menu callback for `admin/group-list` path.
@@ -178,35 +171,15 @@ function webrs_beliana_workflow_reaction(&$form, &$form_state) {
   $new_state = $values['state'];
   $cur_state = $values['node']->workbench_moderation['current']->state;
 
-  //Handle special transitions in the book workflow
-  handle_special_transitions($values);
-
   // check type heslo and importovane heslo 
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
   if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
     // do not change state if article has more that one editor
     // applies on to webrs
-    if (count($values['node']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1 and
-       (($cur_state === "importovane" and $new_state === "zaradene"))) {
-      $eds=array(); // highest level parent terms
-      foreach ($values['node']->field_lexikalna_skupina[LANGUAGE_NONE] as $ls){
-        $ed = end(taxonomy_get_parents_all($ls['tid']));
-        if(!in_array($ed->tid, $eds)) {
-          $eds[$ed->tid]=$ed->name;
-        }
-      }
-      if( count($eds) > 1 ){
-        $fail = TRUE;
-        drupal_set_message('Stav hesla <a href="/' . 
-          $values['node']->path['alias'] . '">' . 
-          $values['node']->title . 
-          "</a> nebol zmenený, lebo jeho lexikálne skupiny majú rôznych redaktorov (".
-          implode(", ",$eds).
-          "). Do stavu 'Zaradené' možno heslá odosielať len ak majú jedného redaktora.", 
-          'error');
-      }
-    }
+
+    $fail = check_state_change_importovane_to_zaradene($values['node'], $cur_state, $new_state);
+
     // do not change state if LITE changes exist
     $publish_states = ["na_opakovane_zverejnenie", "na_zalomenie", "importovane_na_zverejnenie"];
     if (in_array($new_state, $publish_states)) {
@@ -396,4 +369,36 @@ function beliana_group_list_access() {
     }
   }
   return FALSE;
+}
+
+// check if transition importovane >> zaradene is possible, return false if not
+function check_state_change_importovane_to_zaradene($node, $cur_state, $new_state)
+{
+    $fail = false;
+    if (count($node->field_lexikalna_skupina[LANGUAGE_NONE]) > 1 and (($cur_state === "importovane" and $new_state === "zaradene"))) {
+      $users = entity_load('user');
+      $eds=array(); // list of editors
+      // for each category
+      foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $ls){
+	// for each category in the full hiererchy
+	foreach (taxonomy_get_parents_all($ls['tid']) as $category) {
+	  $node_users=_get_users($users, $category->tid);
+	  if (($node_users['redaktor'] and !in_array($node_users['redaktor'], $eds))) {
+		  $eds[] = $node_users['redaktor'];
+	  }
+	}
+      }
+      // if too many editors
+      if( count($eds) > 1 ){
+        $fail = TRUE;
+        drupal_set_message('Stav hesla <a href="/' .
+          $values['node']->path['alias'] . '">' .
+          $values['node']->title .
+          "</a> nebol zmenený, lebo jeho lexikálne skupiny majú rôznych redaktorov (".
+          implode(", ",$eds).
+          "). Do stavu 'Zaradené' možno heslá odosielať len ak majú jedného redaktora.",
+          'error');
+      }
+    }
+    return $fail;
 }
