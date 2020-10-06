@@ -410,6 +410,175 @@ function il_display_on_web(&$ilu_node)
 }
 
 /**
+ * Callback function for `workbench_moderation_moderate_form` submit.
+ *
+ * @inheritdoc
+ */
+function rs_beliana_workflow_reaction(&$form, &$form_state) {
+  $values = $form_state['values'];
+  if (!isset($values['node']->workbench_moderation['current']->state)) {
+    return;
+  }
+
+  $new_state = $values['state'];
+  $cur_state = $values['node']->workbench_moderation['current']->state;
+
+  //Handle special transitions in the book workflow
+  handle_special_transitions($values);
+
+  // check type heslo and importovane heslo 
+  // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
+  if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
+    $fail = FALSE;
+    // do not change state if article has more that one editor
+    // applies on to webrs
+    if (count($values['node']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1 and
+       (($cur_state === "importovane" and $new_state === "zaradene"))) {
+      $eds=array(); // highest level parent terms
+      foreach ($values['node']->field_lexikalna_skupina[LANGUAGE_NONE] as $ls){
+        $ed = end(taxonomy_get_parents_all($ls['tid']));
+        if(!in_array($ed->tid, $eds)) {
+          $eds[$ed->tid]=$ed->name;
+        }
+      }
+      if( count($eds) > 1 ){
+        $fail = TRUE;
+        drupal_set_message('Stav hesla <a href="/' . 
+          $values['node']->path['alias'] . '">' . 
+          $values['node']->title . 
+          "</a> nebol zmenený, lebo jeho lexikálne skupiny majú rôznych redaktorov (".
+          implode(", ",$eds).
+          "). Do stavu 'Zaradené' možno heslá odosielať len ak majú jedného redaktora.", 
+          'error');
+      }
+    }
+    // do not change state if LITE changes exist
+    $publish_states = ["na_opakovane_zverejnenie", "na_zalomenie", "importovane_na_zverejnenie"];
+    if (in_array($new_state, $publish_states)) {
+      $text = $values['node']->field_text_hesla['und'][0]['value'];
+      if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
+        $fail = TRUE;
+        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . '</a> nebol zmenený, lebo v jeho texte sú uložené LITE zmeny', 'error');
+      }
+      if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
+        $texttab = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
+        if (strpos($texttab, "ice-ins") or strpos($texttab, "ice-del")) {
+          $fail = TRUE;
+          drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo v poli 'Tabuľka pre geografické heslá' sú uložené LITE zmeny", 'error');
+        }
+      }
+    }
+    // check if payment information is stored
+    if (($cur_state === "needs_review" and $new_state === "na_zverejnenie") and // u redaktora state u vr1/vr state transition
+      _display_payment_fields($values['node']) == "showeditable") {
+      $fail = TRUE;
+      drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
+    }
+    if ($fail) {
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
+    }
+    # remove links from text of artices in state 'vyradene'
+    if (in_array($new_state, ['vyradene']) and strpos($values['node']->field_text_hesla['und'][0]['value'], '</a>')) {
+      _beliana_remove_links($values['node']);
+      node_save($values['node']);
+    }
+  }
+
+  // check types heslo and importovane_heslo, ignore for authors
+  if (!($cur_state === "u_autora" and $new_state === "needs_review")) {
+    if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
+      // Check link correctness
+      $skip = FALSE;
+      if (!_check_links($values['node'])) {
+        $skip = TRUE;
+      }
+      if ($new_state === 'vyradene') {
+        if (!_check_transition_to_vyradene($values['node'])) {
+          $skip = TRUE;
+        }
+      }
+      // Check alternative text marker correctness in article body
+      if (!_check_alternative_text_markers($values['node'], $values['node']->field_text_hesla['und'][0]['value'], "v hesle")) {
+        $skip = TRUE;
+      }
+      // Check alternative text marker correctness in article table
+      if (isset($values['node']->field_table[LANGUAGE_NONE][0])) {
+        $text_table = $values['node']->field_table[LANGUAGE_NONE][0]['value'];
+        if (!_check_alternative_text_markers($values['node'], $text_table, "v tabuľke pre geografické údaje hesla")) {
+          $skip = TRUE;
+        }
+      }
+      if ($skip) {
+        drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
+        $values['node']->workbench_moderation_state_new = $cur_state;
+        node_save($values['node']);
+        return;
+      }
+    }
+  }
+
+  // check illustration state on transition of 'importovane_heslo' to state 'importovane_u_jr2'
+  if ($values['node']->type === 'importovane_heslo' and $new_state == 'importovane_u_jr2') {
+    $skip = FALSE;
+    $ok_states = ['ilustracia_u_vyst_redaktora_5'];
+    $skip = !check_ill_at_node_transition($values['node'], $ok_states, 'state change');
+    if ($skip) {
+      drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
+    }
+  }
+
+  // restore id of the node author from the saved value
+  if (($cur_state === "u_konzultanta" and $new_state === "needs_review"))
+  {
+    if (isset($values['node']->field_uid_autora['und'])) {
+      $values['node']->uid = $values['node']->field_uid_autora['und'][0]['value'];
+      unset($values['node']->field_uid_autora['und']);
+      node_save($values['node']);
+    }
+  }
+
+  // check illustrations
+  if ($values['node']->type === 'ilustracia') {
+    $skip = FALSE;
+    if ($cur_state == 'ilustracia_u_redaktora' and $new_state == 'ilustracia_u_vyst_redaktora_5') {
+      $ilu_node = $values['node'];
+
+      // temporarily disabled
+      //if (!_check_ilu_attached($ilu_node, 'state change')) {
+        //$skip = TRUE;
+      //}
+
+      //if (!_check_field_pouzit($ilu_node, $ilu_node, 'state change')) {
+      //$skip = TRUE;
+      //}
+      // ignore illustrations, which are not intended for web
+      if (il_display_on_web($ilu_node)) { //false always returned in the print version
+        if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
+          $skip = TRUE;
+        }
+      }
+    }
+
+    // a problem with illustration, keep the current state
+    if ($skip) {
+      drupal_set_message('<strong>Stav ilustrácie nebol zmenený</strong>', 'error');
+      $values['node']->workbench_moderation_state_new = $cur_state;
+      node_save($values['node']);
+      return;
+    }
+    else {
+      $values['node']->field_datum_zverejnenia[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s');
+      node_save($values['node']);
+    }
+  }
+}
+
+/**
  * Menu callback for `admin/group-list` path.
  *
  * We are printing users grouped by terms assigned to users.
