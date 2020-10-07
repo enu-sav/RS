@@ -430,28 +430,6 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
   if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
-    // do not change state if article has more that one editor
-    // applies on to webrs
-    if (count($values['node']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1 and
-       (($cur_state === "importovane" and $new_state === "zaradene"))) {
-      $eds=array(); // highest level parent terms
-      foreach ($values['node']->field_lexikalna_skupina[LANGUAGE_NONE] as $ls){
-        $ed = end(taxonomy_get_parents_all($ls['tid']));
-        if(!in_array($ed->tid, $eds)) {
-          $eds[$ed->tid]=$ed->name;
-        }
-      }
-      if( count($eds) > 1 ){
-        $fail = TRUE;
-        drupal_set_message('Stav hesla <a href="/' . 
-          $values['node']->path['alias'] . '">' . 
-          $values['node']->title . 
-          "</a> nebol zmenený, lebo jeho lexikálne skupiny majú rôznych redaktorov (".
-          implode(", ",$eds).
-          "). Do stavu 'Zaradené' možno heslá odosielať len ak majú jedného redaktora.", 
-          'error');
-      }
-    }
     // do not change state if LITE changes exist
     $publish_states = ["na_opakovane_zverejnenie", "na_zalomenie", "importovane_na_zverejnenie"];
     if (in_array($new_state, $publish_states)) {
