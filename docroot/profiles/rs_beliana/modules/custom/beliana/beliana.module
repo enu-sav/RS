@@ -1737,10 +1737,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 
     // Add custom submit handler, distinguish between rs/webrs here
     if (variable_get('rs_api_type') == "webrs") { 	//rs_api_type specifies type of the opposite side
-	    dpm("rs_beliana_workflow_reaction");
     	$form['#submit'][] = 'rs_beliana_workflow_reaction';
     } else {
-	    dpm("webrs_beliana_workflow_reaction");
     	$form['#submit'][] = 'webrs_beliana_workflow_reaction';
     }
   }
