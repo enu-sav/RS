@@ -278,6 +278,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_zverejnit_meno_autora'] = array(
     'name' => 'create field_zverejnit_meno_autora',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
@@ -373,6 +374,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_datum_aktualizacie',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'garant' => 'garant',
     ),
@@ -617,6 +619,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_zverejnit_meno_autora'] = array(
     'name' => 'edit field_zverejnit_meno_autora',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
@@ -887,6 +890,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_zverejnit_meno_autora'] = array(
     'name' => 'edit own field_zverejnit_meno_autora',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
@@ -1476,6 +1480,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_zverejnit_meno_autora'] = array(
     'name' => 'view own field_zverejnit_meno_autora',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
