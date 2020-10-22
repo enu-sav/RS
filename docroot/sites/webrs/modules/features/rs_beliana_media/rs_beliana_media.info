@@ -1,8 +1,6 @@
 name = Redakčný systém Beliana Médiá
 core = 7.x
 package = Configuration
-dependencies[] = ckeditor
-dependencies[] = ckeditor_link
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = filter
@@ -40,3 +38,5 @@ features[variable][] = mathjax_cdn_url
 features[variable][] = mathjax_config_string
 features[variable][] = mathjax_config_type
 features[variable][] = mathjax_use_cdn
+features_exclude[dependencies][ckeditor] = ckeditor
+features_exclude[dependencies][ckeditor_link] = ckeditor_link
