@@ -28,11 +28,6 @@ function rs_beliana_media_filter_default_formats() {
         'status' => 1,
         'settings' => array(),
       ),
-      'ckeditor_link_filter' => array(
-        'weight' => -44,
-        'status' => 1,
-        'settings' => array(),
-      ),
       'filter_mathjax' => array(
         'weight' => -43,
         'status' => 1,
@@ -56,11 +51,6 @@ function rs_beliana_media_filter_default_formats() {
       ),
       'filter_htmlcorrector' => array(
         'weight' => -45,
-        'status' => 1,
-        'settings' => array(),
-      ),
-      'ckeditor_link_filter' => array(
-        'weight' => -44,
         'status' => 1,
         'settings' => array(),
       ),
