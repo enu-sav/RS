@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 (function ($, Drupal) {
+/*
   Drupal.behaviors.belianaEditor = {
     attach: function (context, settings) {
       var body = $(document.body);
@@ -80,5 +81,6 @@
       $('html, body').animate({scrollTop: offset}, 'fast');
     }
   };
+*/
 
 })(jQuery, Drupal);
