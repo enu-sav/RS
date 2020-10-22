@@ -22,15 +22,6 @@ function rs_beliana_site_user_default_permissions() {
     'module' => 'system',
   );
 
-  // Exported permission: 'access ckeditor link'.
-  $permissions['access ckeditor link'] = array(
-    'name' => 'access ckeditor link',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor_link',
-  );
-
   // Exported permission: 'access comments'.
   $permissions['access comments'] = array(
     'name' => 'access comments',
@@ -166,24 +157,6 @@ function rs_beliana_site_user_default_permissions() {
       'administrátor' => 'administrátor',
     ),
     'module' => 'block',
-  );
-
-  // Exported permission: 'administer ckeditor'.
-  $permissions['administer ckeditor'] = array(
-    'name' => 'administer ckeditor',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor',
-  );
-
-  // Exported permission: 'administer ckeditor link'.
-  $permissions['administer ckeditor link'] = array(
-    'name' => 'administer ckeditor link',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor_link',
   );
 
   // Exported permission: 'administer comments'.
@@ -437,15 +410,6 @@ function rs_beliana_site_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'path',
-  );
-
-  // Exported permission: 'customize ckeditor'.
-  $permissions['customize ckeditor'] = array(
-    'name' => 'customize ckeditor',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'ckeditor',
   );
 
   // Exported permission: 'delete privatemsg'.
