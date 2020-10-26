@@ -1624,13 +1624,22 @@ function beliana_views_post_execute(&$view) {
   }
 }
 
+// migrate features specific to ckeditor4, lite and others to ckeditor5
+function migrate_to_cke5($in_text) {
+  // just remove lite tracking
+  $text = preg_replace('|<ins[^>]*>|', '', $in_text);
+  $text = preg_replace('|</ins>|', '', $text);
+  $text = preg_replace('|<del[^>]*>.*</del>|U', '', $text);	//U: ungreedy
+  // remove links with no text - lite leaves these when marking text for deleting, looks like a bug
+  $text = preg_replace('|<a[^>]*></a>|',"",$text);
+  $text = str_replace('﻿', '', $text);
+  $text = str_replace("  "," ", $text);
+
+  return $text;
+}
+
 /**
  * Implements hook_form_alter().
- * If user has role 'redaktor' and state is `zaradene`,
- * we remove option 'u_autora' and 'u redaktora' (needs_review) from possible
- * next states. This forces editor to use the view "Priradit autora" to assign
- * article to and author watchdog('content', '@type: updated @title. (' .
- * (time() - $node->changed) . ' s) ' . date("Y/m/d H:i:s",$node->changed), [
  *
  * @inheritdoc
  */
@@ -1645,7 +1654,25 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     ], WATCHDOG_NOTICE);
   }
 
+
   global $user;
+  // migrate stuff from GKEditor 4 to CKEditor5
+  if( in_array($form_id, ["heslo_node_form", "importovane_heslo_node_form", "ilustracia_node_form"])) {
+    // only in 'heslo' and 'importovane_heslo'
+    if (isset($form['field_text_hesla'][LANGUAGE_NONE][0]['#default_value'])) {
+       $form['field_text_hesla'][LANGUAGE_NONE][0]['#default_value'] = migrate_to_cke5($form['field_text_hesla'][LANGUAGE_NONE][0]['#default_value']);
+    }
+    // only in 'heslo' and 'importovane_heslo'
+    if (isset($form['field_table'][LANGUAGE_NONE][0]['#default_value'])) {
+       $form['field_table'][LANGUAGE_NONE][0]['#default_value'] = migrate_to_cke5($form['field_table'][LANGUAGE_NONE][0]['#default_value']);
+    }
+    // only in 'ilustracia'
+    if (isset($form['field_popis'][LANGUAGE_NONE][0]['#default_value'])) {
+       $form['field_popis'][LANGUAGE_NONE][0]['#default_value'] = migrate_to_cke5($form['field_popis'][LANGUAGE_NONE][0]['#default_value']);
+    }
+  }
+
+
   // disable but show fields related to author's text, if already set
   if ($form_id == "heslo_node_form" or $form_id == "importovane_heslo_node_form" ) {
     $display_payment = _display_payment_fields_form($form);
@@ -1684,8 +1711,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
+  // transition to states 'author' and 'needs_review' from stete 'zaradene' is implemented in a dedicated view, so remove it here
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
-    // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && in_array("Redaktor", $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
@@ -2951,7 +2978,7 @@ function get_header_dates($text) {
  *   some text for an error message
  *
  * @return
- *   cleaned $text or unchenged $text in case of an error (e.g. not valid html)
+ *   cleaned $text or unchanged $text in case of an error (e.g. not valid html)
  */
 function beliana_clean_tags($node, $text, $where) {
   $dom = beliana_get_dom($node, $text, $where);
@@ -3024,6 +3051,8 @@ function beliana_clean_tags($node, $text, $where) {
   $fragment = preg_replace('#^(<p> *</p>[\r\n]*)*#', '', $fragment);
   $fragment = preg_replace('#[\r\n]*$#', '', $fragment);
   $fragment = preg_replace('#([\r\n]*<p> *</p>)*$#', '', $fragment);
+
+  $fragment = str_replace('﻿', '', $fragment);
 
   return $fragment;
 }
