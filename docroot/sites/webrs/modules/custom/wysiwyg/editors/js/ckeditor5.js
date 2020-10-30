@@ -16,7 +16,7 @@ Drupal.wysiwyg.editor.attach.ckeditor5 = function (context, params, settings) {
     if (params.format.includes("filtered_html")) {
         var remove_plugins_conf = [];
         //var toolbar_conf = [];
-        var toolbar_conf = ["heading", "|", 'bold', 'italic', "bulletedlist", "numberedlist", "|", "undo", "redo", "|", "link", "imageupload", "insertTable", "math", "specialcharacters"];
+        var toolbar_conf = ["heading", "|", 'bold', 'italic', "bulletedlist", "numberedlist", "|", "undo", "redo", "|", "link", "imageupload", "insertTable", "math", "specialcharacters", "Comments", "TrackChanges"];
         var heading_conf = {
                     options: [ // We need just P, H2 and H3 
                     { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
@@ -32,6 +32,7 @@ Drupal.wysiwyg.editor.attach.ckeditor5 = function (context, params, settings) {
 
     ClassicEditor
         .create( document.querySelector( '#'+this.field ), {
+            licenseKey: 'my-license-key',
             removePlugins: remove_plugins_conf,
             toolbar: toolbar_conf,
             heading: heading_conf,

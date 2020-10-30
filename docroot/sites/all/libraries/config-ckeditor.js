@@ -33,7 +33,8 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 
 //import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';     // <--- ADDED
 import Mathematics from 'ckeditor5-math/src/math';
-//import TrackChanges from  "@ckeditor/ckeditor5-track-changes/src/trackchanges/";
+import TrackChanges from '@ckeditor/ckeditor5-track-changes/src/trackchanges';
+import Comments from '@ckeditor/ckeditor5-comments/src/comments';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin';
 //import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';

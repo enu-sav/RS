@@ -10,7 +10,8 @@ cd $builddir/packages/ckeditor5-build-classic
 npm install
 npm install ckeditor5-math
 npm install --save @ckeditor/ckeditor5-special-characters
-#npm install --save-dev @ckeditor/ckeditor5-track-changes
+npm install --save-dev @ckeditor/ckeditor5-track-changes
+npm install --save-dev @ckeditor/ckeditor5-comments
 cp src/ckeditor.js src/ckeditor.js.orig
 cp ../../../config-ckeditor.js src/ckeditor.js 
 npm run build
