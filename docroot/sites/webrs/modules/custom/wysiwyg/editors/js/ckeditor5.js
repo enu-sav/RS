@@ -32,6 +32,7 @@ Drupal.wysiwyg.editor.attach.ckeditor5 = function (context, params, settings) {
 
     ClassicEditor
         .create( document.querySelector( '#'+this.field ), {
+            language: 'sk',
             licenseKey: 'my-license-key',
             removePlugins: remove_plugins_conf,
             toolbar: toolbar_conf,

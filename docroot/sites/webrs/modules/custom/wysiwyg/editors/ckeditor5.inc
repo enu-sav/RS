@@ -16,7 +16,7 @@ function wysiwyg_ckeditor5_editor() {
     'libraries' => array(
       '' => array(
         'title' => 'Minified',
-        'files' => array('ckeditor.js'),
+        'files' => array('ckeditor.js','translations/sk.js'),
       ),
     ),
     'verified version range' => array('15.0.0', '19.0.0'),
