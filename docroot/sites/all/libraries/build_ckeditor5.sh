@@ -2,27 +2,25 @@
 # build ckeditor5 from scratch
 
 builddir=ckeditor5-math
-version=19.0.0
-
 rm -rf $builddir
-git clone -b stable https://github.com/ckeditor/ckeditor5-build-classic.git $builddir
+git clone -b stable https://github.com/ckeditor/ckeditor5.git $builddir
 
 (
-cd $builddir
-git checkout v$version
+cd $builddir/packages/ckeditor5-build-classic
 npm install
-npm install ckeditor5-math@$version
-npm install --save @ckeditor/ckeditor5-special-characters@$version
-#npm install --save-dev @ckeditor/ckeditor5-track-changes@$version
+npm install ckeditor5-math
+npm install --save @ckeditor/ckeditor5-special-characters
+#npm install --save-dev @ckeditor/ckeditor5-track-changes
 cp src/ckeditor.js src/ckeditor.js.orig
-cp ../config-ckeditor.js src/ckeditor.js 
-#increase-memory-limit
+cp ../../../config-ckeditor.js src/ckeditor.js 
 npm run build
 )
-rm ckeditor5
-ln -s $builddir/build ckeditor5
 
-#npm install -g increase-memory-limit
-# spustit v priecinku, kde sa preklada: increase-memory-limit
+rm ckeditor5
+ln -s $builddir/packages/ckeditor5-build-classic/build ckeditor5
+
+# links
+#https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/advanced-setup.html
 #https://ckeditor.com/docs/ckeditor5/latest/features/collaboration/track-changes/track-changes-integration.html
 #https://ckeditor.com/docs/ckeditor5/latest/features/special-characters.html
+# update node: https://phoenixnap.com/kb/update-node-js-version
