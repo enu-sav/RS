@@ -1711,6 +1711,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       }
 
       // Decide which is the next state after "importovane", depending on the number of values in field_lexikalna_skupina
+      // Depending on the number remove one of the zaradene and importovane_u_vr states
       if (in_array($form['node']['#value']->workbench_moderation['current']->state, array('importovane'))) {
         if (count($form['node']['#value']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1) {
           unset($form['state']['#options']['zaradene']);
@@ -1719,6 +1720,18 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
           unset($form['state']['#options']['importovane_u_vr']);
         }
       }
+    }
+
+    // Decide which is the next state after "zverejnene_oprava", depending on the role of the node author
+    // Depending on the role remove one of the needs_review and importovane states
+    if (variable_get('rs_api_type') != "webrs" && in_array($form['node']['#value']->workbench_moderation['current']->state, array('zverejnene_oprava'))) {
+      $node_user = user_load_by_name($form['node']['#value']->name);
+      if (empty(array_intersect(array('Redaktor', 'Autor'), $node_user->roles))) {
+          unset($form['state']['#options']['needs_review']);	// The 'U redaktora' state
+      } else {
+          unset($form['state']['#options']['importovane']);
+      }
+    }
 
       // articles of type 'importovane heslo' cannot be sent to an author
       /* change in workflow: even importovane_heslo can have an author now, so comment the following out
@@ -1730,7 +1743,6 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       */
-    }
 
     // allow to return an item only to the proofreader who has already edited it
     // influences also admin, so that he does not mess things up
