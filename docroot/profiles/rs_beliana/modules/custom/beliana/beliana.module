@@ -1686,7 +1686,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && in_array("Redaktor", $user->roles)) {
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
+		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
           unset($form['state']['#options'][$k]);
