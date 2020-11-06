@@ -1709,6 +1709,17 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
           }
         }
       }
+
+      // Decide which is the next state after "importovane", depending on the number of values in field_lexikalna_skupina
+      if (in_array($form['node']['#value']->workbench_moderation['current']->state, array('importovane'))) {
+        if (count($form['node']['#value']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1) {
+          unset($form['state']['#options']['zaradene']);
+        } else {
+	  // Will reroute 'importovane heslo' to the workflow of 'heslo'
+          unset($form['state']['#options']['importovane_u_vr']);
+        }
+      }
+
       // articles of type 'importovane heslo' cannot be sent to an author
       /* change in workflow: even importovane_heslo can have an author now, so comment the following out
       if ($form['node']['#value']->type === 'importovane_heslo') {
