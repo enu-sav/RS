@@ -137,7 +137,7 @@ function beliana_sync_from_remote_access($node) {
     switch ($node->type) {
       case 'heslo':
         return in_array($node->workbench_moderation['current']->state, [
-          'zaradene',
+          //'zaradene',	// removed, since synced node already has information about the author. In stare 'zaradene' we expect no such information
           'needs_review',
         ]);
       case 'ilustracia':
