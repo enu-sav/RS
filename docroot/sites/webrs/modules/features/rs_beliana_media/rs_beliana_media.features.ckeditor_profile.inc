@@ -14,7 +14,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
+    [\'Source\',\'Copy\',\'Find\',\'Replace\',\'Cut\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
@@ -167,7 +167,7 @@ config.specialChars = [
           'autogrow' => array(
             'name' => 'autogrow',
             'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/autogrow/',
+            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
@@ -241,10 +241,17 @@ config.specialChars = [
             ),
             'default' => 't',
           ),
+          'flite-fix' => array(
+            'name' => 'flite-fix',
+            'desc' => 'Plugin file: flite-fix',
+            'path' => '%plugin_dir%flite-fix/',
+            'buttons' => FALSE,
+            'default' => 'f',
+          ),
           'mathjax' => array(
             'name' => 'mathjax',
             'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
+            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/mathjax/',
             'buttons' => array(
               'Mathjax' => array(
                 'icon' => 'icons/mathjax.png',
@@ -256,7 +263,7 @@ config.specialChars = [
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/tableresize/',
+            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/tableresize/',
             'buttons' => FALSE,
             'default' => 't',
           ),
@@ -270,7 +277,7 @@ config.specialChars = [
       'name' => 'CKEditor Global Profile',
       'settings' => array(
         'skin' => 'moono',
-        'ckeditor_path' => '//cdn.ckeditor.com/4.11.3/full-all',
+        'ckeditor_path' => '//cdn.ckeditor.com/4.11.1/full-all',
         'ckeditor_local_path' => '',
         'ckeditor_plugins_path' => '%m/plugins',
         'ckeditor_plugins_local_path' => '%l/plugins',
