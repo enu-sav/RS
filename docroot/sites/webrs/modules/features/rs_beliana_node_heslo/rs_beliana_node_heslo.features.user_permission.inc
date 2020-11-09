@@ -1003,6 +1003,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),

@@ -125,16 +125,19 @@ function beliana_permission() {
   ];
 }
 
+// decides if the "Prebrať obsah" menu item is displayed
 function beliana_sync_from_remote_access($node) {
   global $user;
 
+  // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
+  // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
 
   if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
     switch ($node->type) {
       case 'heslo':
         return in_array($node->workbench_moderation['current']->state, [
-          'zaradene',
+          //'zaradene',	// removed, since synced node already has information about the author. In stare 'zaradene' we expect no such information
           'needs_review',
         ]);
       case 'ilustracia':
@@ -1686,7 +1689,8 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && in_array("Redaktor", $user->roles)) {
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
+		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
           unset($form['state']['#options'][$k]);
@@ -1705,6 +1709,30 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
           }
         }
       }
+
+      // Decide which is the next state after "importovane", depending on the number of values in field_lexikalna_skupina
+      // Depending on the number remove one of the zaradene and importovane_u_vr states
+      if (in_array($form['node']['#value']->workbench_moderation['current']->state, array('importovane'))) {
+        if (count($form['node']['#value']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1) {
+          unset($form['state']['#options']['zaradene']);
+        } else {
+	  // Will reroute 'importovane heslo' to the workflow of 'heslo'
+          unset($form['state']['#options']['importovane_u_vr']);
+        }
+      }
+    }
+
+    // Decide which is the next state after "zverejnene_oprava", depending on the role of the node author
+    // Depending on the role remove one of the needs_review and importovane states
+    if (variable_get('rs_api_type') != "webrs" && in_array($form['node']['#value']->workbench_moderation['current']->state, array('zverejnene_oprava'))) {
+      $node_user = user_load_by_name($form['node']['#value']->name);
+      if (empty(array_intersect(array('Redaktor', 'Autor'), $node_user->roles))) {
+          unset($form['state']['#options']['needs_review']);	// The 'U redaktora' state
+      } else {
+          unset($form['state']['#options']['importovane']);
+      }
+    }
+
       // articles of type 'importovane heslo' cannot be sent to an author
       /* change in workflow: even importovane_heslo can have an author now, so comment the following out
       if ($form['node']['#value']->type === 'importovane_heslo') {
@@ -1715,7 +1743,6 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       */
-    }
 
     // allow to return an item only to the proofreader who has already edited it
     // influences also admin, so that he does not mess things up

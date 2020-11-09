@@ -53,11 +53,10 @@ docker-compose.override.yml
 
 # Drupal #
 #########
-sites/sites.php
-sites/*/settings*.php
+docroot/sites/sites.php
+docroot/sites/*/settings*.php
 
 # Ignore Drupal's file directory
 sites/*/files
 sites/*/private
-
 profiles/*/modules/contrib/ckeditor/plugins/flite
