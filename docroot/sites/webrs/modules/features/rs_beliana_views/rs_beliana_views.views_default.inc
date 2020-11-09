@@ -423,6 +423,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
+    34 => '34',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Nadpis: Globálny: Rozsiahle textové pole */
@@ -16864,6 +16865,37 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     22 => 0,
     23 => 0,
   );
+  /* Filter criterion: Obsah: Dátum prebratia obsahu (field_datum_prebratia) */
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['id'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['table'] = 'field_data_field_datum_prebratia';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['field'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator_id'] = 'field_datum_prebratia_value_op';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['label'] = 'Dátum prebratia obsahu';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator'] = 'field_datum_prebratia_value_op';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['identifier'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    39 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    38 => 0,
+  );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad (A)';
@@ -16904,6 +16936,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     'field_ilustracia' => 'field_ilustracia',
     'field_vyplatit' => 'field_vyplatit',
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
+    'field_datum_prebratia' => 'field_datum_prebratia',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -16985,6 +17018,13 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_datum_prebratia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -17024,14 +17064,17 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
         'display_values' => array(
           'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
           'heslo::field_vyplatit' => 'heslo::field_vyplatit',
+          'heslo::field_zverejnit_meno_autora' => 'heslo::field_zverejnit_meno_autora',
           'heslo::field_vyslo_knizne' => 'heslo::field_vyslo_knizne',
+          'heslo::field_datum_prebratia' => 'heslo::field_datum_prebratia',
           'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',
           'ilustracia::field_zdroj_ilustracie' => 'ilustracia::field_zdroj_ilustracie',
           'ilustracia::field_licencia1' => 'ilustracia::field_licencia1',
           'ilustracia::field_meno_autora_diela' => 'ilustracia::field_meno_autora_diela',
+          'ilustracia::field_datum_prebratia' => 'ilustracia::field_datum_prebratia',
           'importovane_heslo::field_taxsubor' => 'importovane_heslo::field_taxsubor',
           'importovane_heslo::field_lexikalna_skupina' => 'importovane_heslo::field_lexikalna_skupina',
-          'importovane_heslo::field_vyslo_knizne' => 'importovane_heslo::field_vyslo_knizne',
+          'importovane_heslo::field_zverejnit_meno_autora' => 'importovane_heslo::field_zverejnit_meno_autora',
         ),
       ),
     ),
@@ -17125,6 +17168,19 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
+  );
+  /* Pole: Obsah: Dátum prebratia obsahu */
+  $handler->display->display_options['fields']['field_datum_prebratia']['id'] = 'field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['table'] = 'field_data_field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['field'] = 'field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -17583,6 +17639,37 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     22 => 0,
     23 => 0,
     26 => 0,
+  );
+  /* Filter criterion: Obsah: Dátum prebratia obsahu (field_datum_prebratia) */
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['id'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['table'] = 'field_data_field_datum_prebratia';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['field'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator_id'] = 'field_datum_prebratia_value_op';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['label'] = 'Dátum prebratia obsahu';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator'] = 'field_datum_prebratia_value_op';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['identifier'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    39 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    38 => 0,
   );
   $handler->display->display_options['path'] = 'vsetky-operacie';
   $handler->display->display_options['menu']['title'] = 'Prehľad';
@@ -21771,6 +21858,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Zlúčené z'),
     t('Vyplatenie odmeny'),
     t('Tabuľka pre geografické heslá'),
+    t('Dátum prebratia obsahu'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
