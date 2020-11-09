@@ -154,7 +154,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Dátum prebratia obsahu',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',

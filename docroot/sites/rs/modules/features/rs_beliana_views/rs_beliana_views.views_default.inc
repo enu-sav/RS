@@ -16658,17 +16658,19 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'field_na_zoradenie' => 'field_na_zoradenie',
+    'field_taxsubor' => 'field_taxsubor',
     'nid' => 'nid',
     'type' => 'type',
     'state' => 'state',
     'changed' => 'changed',
+    'created' => 'created',
+    'field_datum' => 'field_datum',
+    'field_datum_1' => 'field_datum_1',
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'name_1' => 'name_1',
     'ilustracia_nazov_pouzit' => 'ilustracia_nazov_pouzit',
-    'created' => 'created',
-    'field_datum' => 'field_datum',
-    'field_datum_1' => 'field_datum_1',
+    'field_datum_vyplatenia' => 'field_datum_vyplatenia',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -16680,6 +16682,13 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'empty_column' => 0,
     ),
     'field_na_zoradenie' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_taxsubor' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -16714,6 +16723,25 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'name' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -16738,20 +16766,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
       'separator' => '',
       'empty_column' => 0,
     ),
-    'created' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_datum' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_datum_1' => array(
-      'sortable' => 1,
+    'field_datum_vyplatenia' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -16794,6 +16810,11 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
   $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
   $handler->display->display_options['fields']['field_na_zoradenie']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Súbor */
+  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
   /* Pole: Content revision: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node_revision';

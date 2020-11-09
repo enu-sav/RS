@@ -189,16 +189,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'short',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => 0,
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 12,
       ),
       'lite_display' => array(
@@ -367,16 +359,8 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 13,
       ),
       'lite_display' => array(
@@ -1719,9 +1703,8 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 20,
       ),
       'lite_display' => array(
