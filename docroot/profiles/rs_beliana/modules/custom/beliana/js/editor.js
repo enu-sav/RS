@@ -21,10 +21,16 @@
             isTracking: true,
             tooltipTemplate: "<b>%a</b> %t (%u)",
           };
+          CKEDITOR.config.flite = {
+            ignoreContainers: true,
+            removeDeleteOnPaste: true,
+          };
 
           if (settings.hasOwnProperty('beliana')) {
             CKEDITOR.config.lite.userId = settings.beliana.current_user.id;
             CKEDITOR.config.lite.userName = settings.beliana.current_user.name;
+            CKEDITOR.config.flite.userName = settings.beliana.current_user.name;
+            CKEDITOR.config.flite.userId = settings.beliana.current_user.id;
           }
         });
       });
