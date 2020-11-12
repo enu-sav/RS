@@ -386,10 +386,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in importovane state',
     'roles' => array(
       'Grafik' => 'Grafik',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
       'Redaktor' => 'Redaktor',
-      'Výstupný redaktor' => 'Výstupný redaktor',
       'garant' => 'garant',
     ),
     'module' => 'workbench_state_access',
@@ -624,9 +621,7 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from importovane to importovane_u_jr2'.
   $permissions['moderate content from importovane to importovane_u_jr2'] = array(
     'name' => 'moderate content from importovane to importovane_u_jr2',
-    'roles' => array(
-      'useradmin' => 'useradmin',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
