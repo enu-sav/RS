@@ -14,12 +14,12 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Copy\',\'Find\',\'Replace\',\'Cut\'],
+    [\'Source\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
-    [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\'],
+    [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'flite-acceptall\',\'flite-rejectall\',\'flite-toggleshow\',\'flite-toggletracking\',\'flite-acceptone\',\'flite-rejectone\']
+    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -34,7 +34,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'extraAllowedContent' => '',
         'enter_mode' => 'p',
         'shift_enter_mode' => 'br',
-        'font_format' => 'p;h2;h3',
+        'font_format' => 'p;div;pre;address;h1;h2;h3;h4;h5;h6',
         'custom_formatting' => 'f',
         'formatting' => array(
           'custom_formatting_options' => array(
@@ -83,7 +83,7 @@ config.specialChars = [
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
 [\'–\', \'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
 [\'-\', \'spojovník: v zložených slovách bez medzier (Rakúsko-Uhorsko, bielo-modrý).\'],
-[\'➔\', \'šípka na webe\'],
+[\'➔\', \'šípka v knihe\'],
 [\'*\',\'hviezdička\'],
 [\'†\', \'krížik\'],
 [\'…\', \'elipsa\'],
@@ -144,10 +144,10 @@ config.specialChars = [
 \'Α\', \'Β\', \'Γ\', \'Δ\', \'Ε\', \'Ζ\', \'Η\', \'Θ\', \'Ι\', \'Κ\', \'Λ\', \'Μ\', \'Ν\', \'Ξ\', \'Ο\', \'Π\', \'Ρ\', \'Σ\', \'Τ\', \'Υ\', \'Φ\', \'Χ\', \'Ψ\', \'Ω\',
 \'à\', \'á\', \'â\', \'ã\', \'ä\', \'ā\', \'ą\', \'ă\', \'å\', \'æ\', 
 \'ç\', \'ć\', \'č\', \'ĉ\', \'ċ\', \'ď\', [\'ð\',\'znak eth, islandčina, faerčina, stará angličtina\'],[\'đ\',\'chorvátčina, vietnamčima, sami\'], \'è\', \'é\', \'ê\', 
-\'ë\', \'ē\', \'ę\', \'ě\', \'ĕ\', \'ė\', \'ƒ\', \'ǧ\', \'ĝ\', \'ğ\', \'ġ\', 
+\'ë\', \'ē\', \'ę\', \'ě\', \'ĕ\', \'ė\', \'ǝ\', \'ƒ\', \'ǧ\', \'ĝ\', \'ğ\', \'ġ\', 
 \'ģ\', \'ȟ\', \'ĥ\', \'ħ\', \'ḩ\', \'ì\', \'í\', \'î\', \'ï\', \'ī\', \'ĩ\', \'ĭ\', 
 \'į\', \'ı\', \'ĵ\', \'ķ\', \'ĸ\', \'ł\', \'ľ\', \'ĺ\', \'ļ\', \'ŀ\', 
-\'ñ\', \'ń\', \'ň\', \'ņ\', \'ŉ\', \'ŋ\', \'ò\', \'ó\', \'ô\', \'õ\', [\'ǫ\',\'o+ogonek\'],
+\'ñ\', \'ń\', \'ň\', \'ņ\', \'ŉ\', \'ŋ\', \'ò\', \'ó\', \'ô\', \'õ\',  [\'ǫ\',\'o+ogonek\'],
 \'ö\', \'ø\', \'ō\', \'ő\', \'ŏ\', \'œ\', \'ŕ\', \'ř\', \'ŗ\', \'ś\', 
 \'š\', [\'ş\',\'s chvostíkom\'], [\'ș\',\'rumunčina, s čiarkou\'], \'ť\', [\'ţ\',\'s chvostíkom\'], [\'ț\',\'rumunčina, s čiarkou\'],\'þ\', \'ù\', \'ú\', \'û\', \'ü\', \'ū\', \'ů\',
 \'ű\', \'ŭ\', \'ũ\', \'ų\', \'ŵ\', \'ÿ\', \'ý\', \'ŷ\', \'ż\', \'ź\', 
@@ -167,7 +167,7 @@ config.specialChars = [
           'autogrow' => array(
             'name' => 'autogrow',
             'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/autogrow/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/autogrow/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
@@ -209,49 +209,17 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'flite' => array(
-            'name' => 'flite',
-            'desc' => 'Plugin file: flite',
-            'path' => '%plugin_dir%flite/',
-            'buttons' => array(
-              'flite-acceptall' => array(
-                'label' => 'Accept all changes',
-                'icon' => 'icons/flite-acceptall.png',
-              ),
-              'flite-rejectall' => array(
-                'label' => 'Reject all changes',
-                'icon' => 'icons/flite-rejectall.png',
-              ),
-              'flite-acceptone' => array(
-                'label' => 'Accept change',
-                'icon' => 'icons/flite-acceptone.png',
-              ),
-              'flite-rejectone' => array(
-                'label' => 'Reject change',
-                'icon' => 'icons/flite-rejectone.png',
-              ),
-              'flite-toggleshow' => array(
-                'label' => 'Show/hide tracked changes',
-                'icon' => 'icons/flite-toggleshow.png',
-              ),
-              'flite-toggletracking' => array(
-                'label' => 'Start/stop tracking changes',
-                'icon' => 'icons/flite-toggletracking.png',
-              ),
-            ),
-            'default' => 't',
-          ),
-          'flite-fix' => array(
-            'name' => 'flite-fix',
-            'desc' => 'Plugin file: flite-fix',
-            'path' => '%plugin_dir%flite-fix/',
+          'lite' => array(
+            'name' => 'lite',
+            'desc' => 'Plugin file: lite',
+            'path' => '%plugin_dir%lite/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
           'mathjax' => array(
             'name' => 'mathjax',
             'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/mathjax/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
             'buttons' => array(
               'Mathjax' => array(
                 'icon' => 'icons/mathjax.png',
@@ -263,7 +231,7 @@ config.specialChars = [
           'tableresize' => array(
             'name' => 'tableresize',
             'desc' => 'Table Resize plugin. See <a href="http://ckeditor.com/addon/tableresize">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.7.3/full-all/plugins/tableresize/',
+            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/tableresize/',
             'buttons' => FALSE,
             'default' => 't',
           ),
@@ -277,7 +245,7 @@ config.specialChars = [
       'name' => 'CKEditor Global Profile',
       'settings' => array(
         'skin' => 'moono',
-        'ckeditor_path' => '//cdn.ckeditor.com/4.11.1/full-all',
+        'ckeditor_path' => '//cdn.ckeditor.com/4.11.3/full-all',
         'ckeditor_local_path' => '',
         'ckeditor_plugins_path' => '%m/plugins',
         'ckeditor_plugins_local_path' => '%l/plugins',
@@ -297,9 +265,10 @@ config.specialChars = [
     [\'Source\'],
     [\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
-    [\'JustifyCenter\',\'Bold\',\'Italic\',\'BulletedList\'],
+    [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\']
+    [\'Table\',\'TextColor\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    []
 ]',
         'expand' => 't',
         'default' => 't',
@@ -314,7 +283,7 @@ config.specialChars = [
         'extraAllowedContent' => '',
         'enter_mode' => 'p',
         'shift_enter_mode' => 'br',
-        'font_format' => 'p;div;pre;address;h1;h2;h3;h4;h5;h6',
+        'font_format' => 'p;h2;h3',
         'custom_formatting' => 'f',
         'formatting' => array(
           'custom_formatting_options' => array(
@@ -422,7 +391,7 @@ config.specialChars = [
 \'Α\', \'Β\', \'Γ\', \'Δ\', \'Ε\', \'Ζ\', \'Η\', \'Θ\', \'Ι\', \'Κ\', \'Λ\', \'Μ\', \'Ν\', \'Ξ\', \'Ο\', \'Π\', \'Ρ\', \'Σ\', \'Τ\', \'Υ\', \'Φ\', \'Χ\', \'Ψ\', \'Ω\',
 \'à\', \'á\', \'â\', \'ã\', \'ä\', \'ā\', \'ą\', \'ă\', \'å\', \'æ\', 
 \'ç\', \'ć\', \'č\', \'ĉ\', \'ċ\', \'ď\', [\'ð\',\'znak eth, islandčina, faerčina, stará angličtina\'],[\'đ\',\'chorvátčina, vietnamčima, sami\'], \'è\', \'é\', \'ê\', 
-\'ë\', \'ē\', \'ę\', \'ě\', \'ĕ\', \'ė\', \'ƒ\', \'ǧ\', \'ĝ\', \'ğ\', \'ġ\', 
+\'ë\', \'ē\', \'ę\', \'ě\', \'ĕ\', \'ė\', \'ǝ\', \'ƒ\', \'ǧ\', \'ĝ\', \'ğ\', \'ġ\', 
 \'ģ\', \'ȟ\', \'ĥ\', \'ħ\', \'ḩ\',  \'ì\', \'í\', \'î\', \'ï\', \'ī\', \'ĩ\', \'ĭ\', 
 \'į\', \'ı\', \'ĵ\', \'ķ\', \'ĸ\', \'ł\', \'ľ\', \'ĺ\', \'ļ\', \'ŀ\', 
 \'ñ\', \'ń\', \'ň\', \'ņ\', \'ŉ\', \'ŋ\', \'ò\', \'ó\', \'ô\', \'õ\',  [\'ǫ\',\'o+ogonek\'],
@@ -493,7 +462,7 @@ config.specialChars = [
             'buttons' => array(
               'Mathjax' => array(
                 'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulasss',
+                'label' => 'Insert Mathematical Formulas',
               ),
             ),
             'default' => 'f',
