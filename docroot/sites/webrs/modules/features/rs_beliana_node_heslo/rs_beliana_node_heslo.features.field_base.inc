@@ -254,26 +254,34 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_errta'.
-  $field_bases['field_errta'] = array(
+  // Exported field_base: 'field_doplnkova_ls'.
+  $field_bases['field_doplnkova_ls'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_errta',
+    'field_name' => 'field_doplnkova_ls',
     'field_permissions' => array(
       'type' => 2,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'lexikalne_skupiny',
+          'parent' => 0,
+        ),
+      ),
+      'options_list_callback' => 'title_taxonomy_allowed_values',
+    ),
     'translatable' => 0,
-    'type' => 'text_long',
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_ilustracia'.
@@ -390,38 +398,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_podiel_autora'.
-  $field_bases['field_podiel_autora'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_podiel_autora',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => 'heslo napísal redaktor sám',
-        20 => 'menej ako 20 %',
-        40 => '20 – 40 %',
-        60 => '40 – 60 %',
-        80 => '60 – 80 %',
-        100 => 'viac ako 80 %',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
-  );
-
   // Exported field_base: 'field_pouzite_zdroje'.
   $field_bases['field_pouzite_zdroje'] = array(
     'active' => 1,
@@ -520,36 +496,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'settings' => array(),
     'translatable' => 0,
     'type' => 'number_integer',
-  );
-
-  // Exported field_base: 'field_spravit_1_korekturu'.
-  $field_bases['field_spravit_1_korekturu'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_spravit_1_korekturu',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'taxonomy',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'lexikalne_skupiny',
-          'parent' => 0,
-        ),
-      ),
-      'options_list_callback' => 'title_taxonomy_allowed_values',
-    ),
-    'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_table'.
@@ -712,34 +658,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_vyslo_knizne'.
-  $field_bases['field_vyslo_knizne'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_vyslo_knizne',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => 'Heslo nevyšlo knižne, možno ešte knižne vyjde',
-        1 => 'Heslo vyšlo knižne',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_zlucene_do'.
