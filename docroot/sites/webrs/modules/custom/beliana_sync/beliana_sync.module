@@ -512,7 +512,13 @@ function _extract_category_info($node) {
     $term = taxonomy_term_load($ls['tid']);
     $taglist[] = $term->field_taglist['und'][0]['value'];
   }
-  return $taglist;
+  if (isset($node->field_doplnkova_ls["und"])) {
+    foreach($node->field_doplnkova_ls["und"] as $ls) {
+      $term = taxonomy_term_load($ls['tid']);
+      $taglist[] = $term->field_taglist['und'][0]['value'];
+    }
+  }
+  return array_unique($taglist);
 }
 
 // select image in the order svg, png, jpg
