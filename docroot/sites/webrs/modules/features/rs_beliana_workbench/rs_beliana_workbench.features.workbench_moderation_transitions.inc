@@ -89,11 +89,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'importovane',
       'name' => 'importovane_u_vr-importovane',
     ),
-    'len_vyplatit:zaradene' => array(
-      'from_name' => 'len_vyplatit',
-      'to_name' => 'zaradene',
-      'name' => 'len_vyplatit-zaradene',
-    ),
     'na_zverejnenie:kontrola_etymologie' => array(
       'from_name' => 'na_zverejnenie',
       'to_name' => 'kontrola_etymologie',
@@ -103,11 +98,6 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'na_zverejnenie',
       'to_name' => 'needs_review',
       'name' => 'u_vyst_redaktora1-u_redaktora',
-    ),
-    'navrhnute_na_vyradenie:len_vyplatit' => array(
-      'from_name' => 'navrhnute_na_vyradenie',
-      'to_name' => 'len_vyplatit',
-      'name' => 'navrhute_na_zmenu-len_vyplatit',
     ),
     'navrhnute_na_vyradenie:vyradene' => array(
       'from_name' => 'navrhnute_na_vyradenie',

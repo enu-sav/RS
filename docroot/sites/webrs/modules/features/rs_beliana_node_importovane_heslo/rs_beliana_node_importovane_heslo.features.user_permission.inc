@@ -10,17 +10,6 @@
 function rs_beliana_node_importovane_heslo_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'create field_doplnkova_ls'.
-  $permissions['create field_doplnkova_ls'] = array(
-    'name' => 'create field_doplnkova_ls',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'create importovane_heslo content'.
   $permissions['create importovane_heslo content'] = array(
     'name' => 'create importovane_heslo content',
@@ -65,28 +54,6 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit field_doplnkova_ls'.
-  $permissions['edit field_doplnkova_ls'] = array(
-    'name' => 'edit field_doplnkova_ls',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit own field_doplnkova_ls'.
-  $permissions['edit own field_doplnkova_ls'] = array(
-    'name' => 'edit own field_doplnkova_ls',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit own importovane_heslo content'.
   $permissions['edit own importovane_heslo content'] = array(
     'name' => 'edit own importovane_heslo content',
@@ -106,27 +73,6 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'view_unpublished',
-  );
-
-  // Exported permission: 'view field_doplnkova_ls'.
-  $permissions['view field_doplnkova_ls'] = array(
-    'name' => 'view field_doplnkova_ls',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_doplnkova_ls'.
-  $permissions['view own field_doplnkova_ls'] = array(
-    'name' => 'view own field_doplnkova_ls',
-    'roles' => array(
-      'Redaktor' => 'Redaktor',
-      'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'field_permissions',
   );
 
   return $permissions;
