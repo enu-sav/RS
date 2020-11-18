@@ -412,7 +412,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 2,
       ),
       'lite_display' => array(

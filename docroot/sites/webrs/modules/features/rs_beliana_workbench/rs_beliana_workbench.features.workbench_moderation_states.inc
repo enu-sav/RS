@@ -81,12 +81,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Kontrola etymológie a prepisov',
       'weight' => 7,
     ),
-    'len_vyplatit' => array(
-      'name' => 'len_vyplatit',
-      'label' => 'Len vyplatiť',
-      'description' => 'Heslo bolo vypracované, ale text sa nepoužije. Treba vyplatiť',
-      'weight' => 10,
-    ),
     'na_jazykovu_korekturu' => array(
       'name' => 'na_jazykovu_korekturu',
       'label' => 'U jaz. redaktora',
