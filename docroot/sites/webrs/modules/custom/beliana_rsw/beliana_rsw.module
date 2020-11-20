@@ -409,14 +409,16 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
   $api_type = variable_get('rs_api_type');
 
-  $label_type = $api_type == 'webrs' ? 'webov' : 'knižn';
-  $label_state = $api_type == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
+  // remote accept stetes
+  $heslo_accept_states = ['vyradene', 'ukoncenezluene', 'publikovane_na_webe'];
+  $heslo_accept_states_hr = ['Vyradené', 'Ukončené/zlúčené', 'Zalomené'];	// human readable
+  $ilu_accept_states = ['ilustracia_na_webe'];
+  $ilu_accept_states_hr = ['Ilustrácia na zalomenie'];	// human readable
 
-  if (in_array($remote_node->workbench_moderation->current->state, [
-    'zaradene',
-    'publikovane_na_webe',
-    'ilustracia_na_webe',
-  ])) {
+
+  // accept content if remote is in the accept state
+  if (in_array($remote_node->workbench_moderation->current->state, array_merge($heslo_accept_states,$ilu_accept_states))) 
+  {
     $fields_to_skip = [
       'field_remote_id',
       'field_ilustracia',
@@ -462,7 +464,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       }
 
       if ($field == 'field_komentar_instrukcie') {
-        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $label_type . 'ého RS. ';
+        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z knižného RS. ';
 
         if (!empty($remote_field_value)) {
           $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $remote_field_value[0]['value'];
@@ -498,7 +500,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         if (!empty($remote_field_value)) {
           foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $ilustracia) {
             if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
-              // do not sync ilusracia bundle when syncing from node
+              // do not sync ilustracia bundle when syncing from node
               //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
               $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
             }
@@ -510,26 +512,44 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
     $node->revision = 1;
 
-    $workbench_moderation = 'needs_review';
+    // specify the new node state
+    $nodetype='heslo';
     if ($node->type == 'ilustracia') {
-      $workbench_moderation = 'ilustracia_u_redaktora';
-    }
-    elseif ($label_type == 'knižn') {
-      $workbench_moderation = 'prevzate_z_rs';
+      $moderate_to = 'ilustracia_u_redaktora';
+      $nodetype='ilustrácie';
+    } elseif ( $remote_node->workbench_moderation->current->state == 'vyradene' ) {
+      $moderate_to = 'vyradene';
+    } else {  //all other cases
+      $moderate_to = 'prevzate_z_rs';
     }
 
-    $message_log = 'Obsah prevzatý z ' . $label_type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
+    $message_log = format_string('Obsah @h prevzatý z knižného RS (@d, @u)', ['@h'=>$nodetype, '@d'=>date('Y-m-d'), '@u'=>$user->name]);
     if (strpos($node->log, $message_log) === FALSE) {
       $node->log .= '. ' . $message_log;
     }
 
-    workbench_moderation_moderate($node, $workbench_moderation);
-    drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_node->nid]));
+    workbench_moderation_moderate($node, $moderate_to);
+    drupal_set_message(format_string('Obsah <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
+      '@url' => variable_get('rs_api_uri'),
+      '@title' => $remote_node->title,
+      '@id' => $remote_node->nid, 
+      '@state' => $moderate_to
+    ]));
   }
-  else {
-    drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
-      '@id' => $remote_node->nid,
-      '@state' => $label_state,
-    ]), 'error');
+  else 
+  {
+    if ($node->type == 'ilustracia') {
+      drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
+        '@id' => $remote_node->nid,
+        '@state' => implode(", ", $ilu_accept_states_hr)
+      ]), 'error');
+    } else {
+      drupal_set_message(format_string('Nepodarilo sa prevziať obsah hesla <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
+        '@url' => variable_get('rs_api_uri'),
+        '@title' => $remote_node->title,
+        '@id' => $remote_node->nid,
+        '@state' => implode(", ", $heslo_accept_states_hr)
+      ]), 'error');
+    }
   }
 }
