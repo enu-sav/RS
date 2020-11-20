@@ -132,7 +132,6 @@ function beliana_sync_from_remote_access($node) {
   // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
   // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
-dpm($response, "response");
 
   if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
     switch ($node->type) {
