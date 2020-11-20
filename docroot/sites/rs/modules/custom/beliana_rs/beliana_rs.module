@@ -642,3 +642,140 @@ function beliana_group_list_access() {
   }
   return FALSE;
 }
+
+// transfer node from the web editorial system
+function beliana_sync_from_remote_build($node, $remote_node) {
+  global $user;
+
+  $api_type = variable_get('rs_api_type');
+
+  $label_type = $api_type == 'webrs' ? 'webov' : 'knižn';
+  $label_state = $api_type == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
+
+  if (in_array($remote_node->workbench_moderation->current->state, [
+    'zaradene',
+    'publikovane_na_webe',
+    'ilustracia_na_webe',
+  ])) {
+    $fields_to_skip = [
+      'field_remote_id',
+      'field_ilustracia',
+      'field_zlucene_z',
+      'field_zlucene_do',
+      'field_text_hesla',
+      'field_komentar_instrukcie',
+      'field_datum_autorovho_textu',
+    ];
+
+    foreach ($remote_node as $field => $data) {
+      $value = empty($data) ? '' : json_decode(json_encode($data), TRUE);
+
+      if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
+        $node->{$field} = $value;
+      }
+
+      if ($field == 'field_text_hesla') {
+        $matches = [];
+        $imce_path = $api_type == 'webrs' ? 'rs' : 'webrs';
+
+        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $value[LANGUAGE_NONE][0]['value'], $matches);
+
+        if (!empty($matches)) {
+          foreach ($matches[1] as $src) {
+            $data = file_get_contents(variable_get('rs_api_uri') . $src);
+            $new_src = str_replace($api_type, $imce_path, $src);
+            $file = file_save_data($data, str_replace('/sites/' . $imce_path . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
+
+            $value[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['value']);
+            $value[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['safe_value']);
+          }
+        }
+
+        $node->field_text_hesla = $value;
+      }
+
+      if ($field == 'field_datum_autorovho_textu') {
+        $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
+      }
+
+      if ($field == 'field_komentar_instrukcie') {
+        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $label_type . 'ého RS. ';
+
+        if (!empty($value)) {
+          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
+        }
+      }
+
+      if (in_array($field, [
+        'field_subor_ilustracie',
+        'field_obrazok_navrh_',
+        'field_original',
+      ])) {
+        $node->{$field}[LANGUAGE_NONE] = [];
+
+        if (!empty($value)) {
+          foreach ($value[LANGUAGE_NONE] as $key => $remote_file) {
+            $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
+            $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
+
+            $node->{$field}[LANGUAGE_NONE][$key] = [
+              'fid' => $file->fid,
+              'uid' => $file->uid,
+              'filename' => $file->filename,
+              'uri' => $file->uri,
+              'filemime' => $file->filemime,
+              'filesize' => $file->filesize,
+              'status' => 1,
+              'display' => 1,
+              'description' => '',
+            ];
+          }
+        }
+      }
+
+      if (in_array($field, [
+        'field_ilustracia',
+        'field_zlucene_z',
+        'field_zlucene_do',
+      ])) {
+        $node->{$field}[LANGUAGE_NONE] = [];
+
+        if (!empty($value)) {
+          foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
+            if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
+              // do not sync ilusracia bundle when syncing from node
+              //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
+              $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
+            }
+          }
+        }
+      }
+
+    }
+
+    $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
+    $node->revision = 1;
+
+    $workbench_moderation = 'needs_review';
+    if ($node->type == 'ilustracia') {
+      $workbench_moderation = 'ilustracia_u_redaktora';
+    }
+    elseif ($label_type == 'knižn') {
+      $workbench_moderation = 'prevzate_z_rs';
+    }
+
+    $message_log = 'Obsah prevzatý z ' . $label_type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
+    if (strpos($node->log, $message_log) === FALSE) {
+      $node->log .= '. ' . $message_log;
+    }
+
+    workbench_moderation_moderate($node, $workbench_moderation);
+    drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_node->nid]));
+  }
+  else {
+    drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
+      '@id' => $remote_node->nid,
+      '@state' => $label_state,
+    ]), 'error');
+  }
+}
