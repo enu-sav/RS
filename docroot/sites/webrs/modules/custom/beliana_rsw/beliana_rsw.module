@@ -404,10 +404,10 @@ function check_state_change_importovane_to_zaradene($node, $cur_state, $new_stat
 }
 
 // transfer node from the book editorial system
+// $node: current node
+// $remote_node: remote node (data)
 function beliana_sync_from_remote_build($node, $remote_node) {
   global $user;
-
-  $api_type = variable_get('rs_api_type');
 
   // remote accept states
   $heslo_accept_states = ['vyradene', 'ukoncenezluene', 'publikovane_na_webe'];
@@ -415,6 +415,10 @@ function beliana_sync_from_remote_build($node, $remote_node) {
   $ilu_accept_states = ['ilustracia_na_webe'];
   $ilu_accept_states_hr = ['Ilustrácia na zalomenie'];	// human readable
 
+  $local_site = "webrs";
+  $remote_site = "rs";
+  $local_uri = variable_get('base_url');
+  $remote_uri = variable_get('rs_api_uri');
 
   // accept content if remote is in the accept state
   if (in_array($remote_node->workbench_moderation->current->state, array_merge($heslo_accept_states,$ilu_accept_states)))
@@ -448,30 +452,31 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         $node->{$field} = $remote_field_value;
       }
 
+      // fetch inline images and update their paths in text
       if ($field == 'field_text_hesla') {
-        $matches = [];
-        $imce_path = $api_type == 'webrs' ? 'rs' : 'webrs';
-
-        // adjust paths to inline images
+        // find <img tags
         // "[>]" used in the regexp to make the vim editor happy, otherwise '>' is OK
+        $matches = [];
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?[>]/i', $remote_field_value[LANGUAGE_NONE][0]['value'], $matches);
 
+        // fetch and update
         if (!empty($matches)) {
           foreach ($matches[1] as $src) {
-            $data = file_get_contents(variable_get('rs_api_uri') . $src);
-            $new_src = str_replace($api_type, $imce_path, $src);
-            $file = file_save_data($data, str_replace('/sites/' . $imce_path . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
+            $data = file_get_contents($remote_uri . $src);
+            $new_src = str_replace($remote_site, $local_site, $src);
+            $file = file_save_data($data, str_replace('/sites/' . $local_site . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
 
             $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $remote_field_value[LANGUAGE_NONE][0]['value']);
             $remote_field_value[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $remote_field_value[LANGUAGE_NONE][0]['safe_value']);
           }
         }
-
         $node->field_text_hesla = $remote_field_value;
       }
 
-      if ($field == 'field_datum_autorovho_textu') {
+      if ($field == 'field_datum_autorovho_textu' and $remote_field_value ) {
         $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
+      } else {
+        unset($node->field_datum_autorovho_textu[LANGUAGE_NONE]);
       }
 
       if ($field == 'field_komentar_instrukcie') {
@@ -488,7 +493,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
         if (!empty($remote_field_value)) {
           foreach ($remote_field_value[LANGUAGE_NONE] as $key => $remote_file) {
-            $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
+            $data = file_get_contents($remote_uri . '/sites/' . $remote_site . '/files' . str_replace('public:/', '', $remote_file['uri']));
             $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
 
             $node->{$field}[LANGUAGE_NONE][$key] = [
@@ -547,8 +552,8 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     }
 
     workbench_moderation_moderate($node, $moderate_to);
-    drupal_set_message(format_string('Obsah <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
-      '@url' => variable_get('base_url'),
+    drupal_set_message(format_string('Obsah položky <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
+      '@url' => local_uri,
       '@title' => $remote_node->title,
       '@id' => $remote_node->nid,
       '@state' => $moderate_to
@@ -558,13 +563,13 @@ function beliana_sync_from_remote_build($node, $remote_node) {
   {
     if ($node->type == 'ilustracia') {
       drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
-        '@url' => variable_get('rs_api_uri'),
+        '@url' => $remote_uri,
         '@id' => $remote_node->nid,
         '@state' => implode(", ", $ilu_accept_states_hr)
       ]), 'error');
     } else {
       drupal_set_message(format_string('Nepodarilo sa prevziať obsah hesla <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
-        '@url' => variable_get('rs_api_uri'),
+        '@url' => $remote_uri,
         '@title' => $remote_node->title,
         '@id' => $remote_node->nid,
         '@state' => implode(", ", $heslo_accept_states_hr)
