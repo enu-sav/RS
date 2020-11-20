@@ -427,18 +427,21 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       'field_datum_autorovho_textu',
     ];
 
+    // transfer field values from remote node to local node
     foreach ($remote_node as $field => $data) {
-      $value = empty($data) ? '' : json_decode(json_encode($data), TRUE);
+      $remote_field_value = empty($data) ? '' : json_decode(json_encode($data), TRUE);
 
       if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
-        $node->{$field} = $value;
+        $node->{$field} = $remote_field_value;
       }
 
       if ($field == 'field_text_hesla') {
         $matches = [];
         $imce_path = $api_type == 'webrs' ? 'rs' : 'webrs';
 
-        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $value[LANGUAGE_NONE][0]['value'], $matches);
+        // adjust paths to inline images
+        // "[>]" used in the regexp to make the vim editor happy, otherwise '>' is OK
+        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?[>]/i', $remote_field_value[LANGUAGE_NONE][0]['value'], $matches);
 
         if (!empty($matches)) {
           foreach ($matches[1] as $src) {
@@ -446,12 +449,12 @@ function beliana_sync_from_remote_build($node, $remote_node) {
             $new_src = str_replace($api_type, $imce_path, $src);
             $file = file_save_data($data, str_replace('/sites/' . $imce_path . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
 
-            $value[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['value']);
-            $value[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $value[LANGUAGE_NONE][0]['safe_value']);
+            $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $remote_field_value[LANGUAGE_NONE][0]['value']);
+            $remote_field_value[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $remote_field_value[LANGUAGE_NONE][0]['safe_value']);
           }
         }
 
-        $node->field_text_hesla = $value;
+        $node->field_text_hesla = $remote_field_value;
       }
 
       if ($field == 'field_datum_autorovho_textu') {
@@ -461,20 +464,16 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       if ($field == 'field_komentar_instrukcie') {
         $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $label_type . 'ého RS. ';
 
-        if (!empty($value)) {
-          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $value[0]['value'];
+        if (!empty($remote_field_value)) {
+          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $remote_field_value[0]['value'];
         }
       }
 
-      if (in_array($field, [
-        'field_subor_ilustracie',
-        'field_obrazok_navrh_',
-        'field_original',
-      ])) {
+      if (in_array($field, [ 'field_subor_ilustracie', 'field_obrazok_navrh_', 'field_original', ])) {
         $node->{$field}[LANGUAGE_NONE] = [];
 
-        if (!empty($value)) {
-          foreach ($value[LANGUAGE_NONE] as $key => $remote_file) {
+        if (!empty($remote_field_value)) {
+          foreach ($remote_field_value[LANGUAGE_NONE] as $key => $remote_file) {
             $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
             $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
 
@@ -493,15 +492,11 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
       }
 
-      if (in_array($field, [
-        'field_ilustracia',
-        'field_zlucene_z',
-        'field_zlucene_do',
-      ])) {
+      if (in_array($field, [ 'field_ilustracia', 'field_zlucene_z', 'field_zlucene_do', ])) {
         $node->{$field}[LANGUAGE_NONE] = [];
 
-        if (!empty($value)) {
-          foreach ($value[LANGUAGE_NONE] as $delta => $ilustracia) {
+        if (!empty($remote_field_value)) {
+          foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $ilustracia) {
             if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
               // do not sync ilusracia bundle when syncing from node
               //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
@@ -510,7 +505,6 @@ function beliana_sync_from_remote_build($node, $remote_node) {
           }
         }
       }
-
     }
 
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
