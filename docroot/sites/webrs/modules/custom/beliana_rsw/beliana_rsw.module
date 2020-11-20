@@ -409,7 +409,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
   $api_type = variable_get('rs_api_type');
 
-  // remote accept stetes
+  // remote accept states
   $heslo_accept_states = ['vyradene', 'ukoncenezluene', 'publikovane_na_webe'];
   $heslo_accept_states_hr = ['Vyradené', 'Ukončené/zlúčené', 'Zalomené'];	// human readable
   $ilu_accept_states = ['ilustracia_na_webe'];
@@ -417,22 +417,33 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
 
   // accept content if remote is in the accept state
-  if (in_array($remote_node->workbench_moderation->current->state, array_merge($heslo_accept_states,$ilu_accept_states))) 
+  if (in_array($remote_node->workbench_moderation->current->state, array_merge($heslo_accept_states,$ilu_accept_states)))
   {
+    // fields ignored or treated in a special way
     $fields_to_skip = [
-      'field_remote_id',
-      'field_ilustracia',
-      'field_zlucene_z',
-      'field_zlucene_do',
-      'field_text_hesla',
-      'field_komentar_instrukcie',
+      'field_remote_id',      // keep local value
+      'field_datum_prebratia',// set here
+      'field_ilustracia',     // special processing
+      'field_zlucene_z',      // special processing
+      'field_zlucene_do',     // special processing
+      'field_text_hesla',     // special processing
+      'field_komentar_instrukcie',   // special processing
       'field_datum_autorovho_textu',
+      'field_text_z_gh',      // ignored
+      'field_spravit_1_korekturu',   // ignored
+      'field_povodne_lexikalne_skupiny',   // ignored
+      'field_redaktori_zluceneho',   // ignored
+      'field_vyslo_knizne',   // ignored
+      'field_errta',          // ignored
+      'field_text_z_gh',      // ignored
+      'field_atributy',      // ignored
     ];
 
     // transfer field values from remote node to local node
     foreach ($remote_node as $field => $data) {
       $remote_field_value = empty($data) ? '' : json_decode(json_encode($data), TRUE);
 
+      // copy value except for the skipped ones
       if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
         $node->{$field} = $remote_field_value;
       }
@@ -471,6 +482,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
       }
 
+      // only for 'ilustracia'
       if (in_array($field, [ 'field_subor_ilustracie', 'field_obrazok_navrh_', 'field_original', ])) {
         $node->{$field}[LANGUAGE_NONE] = [];
 
@@ -494,15 +506,19 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
       }
 
+      // fields containing identifiers of other nodes.
+      // It is necessary to check the 'field_remote_id' of the referenced node to get the correct local nid
+      // we do not sync ilustracia bundle referenced here, ilustracia should be synced directly like nodes
       if (in_array($field, [ 'field_ilustracia', 'field_zlucene_z', 'field_zlucene_do', ])) {
         $node->{$field}[LANGUAGE_NONE] = [];
 
         if (!empty($remote_field_value)) {
-          foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $ilustracia) {
-            if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
-              // do not sync ilustracia bundle when syncing from node
-              //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
-              $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
+          foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $target) {
+            // fetch the remote node
+            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'])) {
+              // if 'empty()' node ids on both sides are equal, so use target_remote_node->nid.
+              $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] =
+                empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
             }
           }
         }
@@ -513,33 +529,36 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     $node->revision = 1;
 
     // specify the new node state
-    $nodetype='heslo';
+    $node_type_text='heslo';
     if ($node->type == 'ilustracia') {
       $moderate_to = 'ilustracia_u_redaktora';
-      $nodetype='ilustrácie';
+      $node_type_text='ilustrácie';
     } elseif ( $remote_node->workbench_moderation->current->state == 'vyradene' ) {
       $moderate_to = 'vyradene';
+    } elseif ( $remote_node->workbench_moderation->current->state == 'ukoncenezluene' ) {
+      $moderate_to = 'ukoncenezluene';
     } else {  //all other cases
       $moderate_to = 'prevzate_z_rs';
     }
 
-    $message_log = format_string('Obsah @h prevzatý z knižného RS (@d, @u)', ['@h'=>$nodetype, '@d'=>date('Y-m-d'), '@u'=>$user->name]);
+    $message_log = format_string('Obsah prevzatý z knižného RS (@d, @u)', ['@d'=>date('Y-m-d'), '@u'=>$user->name]);
     if (strpos($node->log, $message_log) === FALSE) {
-      $node->log .= '. ' . $message_log;
+      $node->log = $message_log;
     }
 
     workbench_moderation_moderate($node, $moderate_to);
     drupal_set_message(format_string('Obsah <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
-      '@url' => variable_get('rs_api_uri'),
+      '@url' => variable_get('base_url'),
       '@title' => $remote_node->title,
-      '@id' => $remote_node->nid, 
+      '@id' => $remote_node->nid,
       '@state' => $moderate_to
     ]));
   }
-  else 
+  else
   {
     if ($node->type == 'ilustracia') {
       drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
+        '@url' => variable_get('rs_api_uri'),
         '@id' => $remote_node->nid,
         '@state' => implode(", ", $ilu_accept_states_hr)
       ]), 'error');
