@@ -589,11 +589,13 @@ function beliana_sync_from_remote_access($node) {
 
   if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
     switch ($node->type) {
+      /* We do not allow synchronization of individual articles anymore
       case 'heslo':
         return in_array($node->workbench_moderation['current']->state, [
           //'zaradene',	// removed, since synced node already has information about the author. In stare 'zaradene' we expect no such information
           'needs_review',
         ]);
+      */
       case 'ilustracia':
         return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']);
     }
