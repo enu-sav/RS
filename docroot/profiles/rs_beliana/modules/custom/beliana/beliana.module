@@ -786,6 +786,7 @@ function beliana_sync_from_remote($node) {
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   if ($remote_node = beliana_api_rest_get_node($remote_id)) {
+    // implemented independently for rs and webrs
     beliana_sync_from_remote_build($node, $remote_node);
   }
   else {

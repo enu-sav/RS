@@ -410,8 +410,8 @@ function beliana_sync_from_remote_build($node, $remote_node) {
   global $user;
 
   // remote accept states
-  $heslo_accept_states = ['vyradene', 'ukoncenezluene', 'publikovane_na_webe'];
-  $heslo_accept_states_hr = ['Vyradené', 'Ukončené/zlúčené', 'Zalomené'];	// human readable
+  $heslo_accept_states = ['ukoncenezluene', 'publikovane_na_webe'];
+  $heslo_accept_states_hr = ['Ukončené/zlúčené', 'Zalomené'];	// human readable
   $ilu_accept_states = ['ilustracia_na_webe', 'ilustracia_na_zverejnenie'];
   $ilu_accept_states_hr = ['Ilustrácia na zalomenie'];	// human readable
 
@@ -487,10 +487,11 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
       }
 
-      // only for 'ilustracia'
+      // only for 'ilustracia', transfer image files
       if (in_array($field, [ 'field_subor_ilustracie', 'field_obrazok_navrh_', 'field_original', ])) {
         if (!empty($remote_field_value)) {
           if (isset($node->{$field}[LANGUAGE_NONE]) ) $node->{$field}[LANGUAGE_NONE] = [];
+          // get the file(s)
           foreach ($remote_field_value[LANGUAGE_NONE] as $key => $remote_file) {
             $data = file_get_contents($remote_uri . '/sites/' . $remote_site . '/files' . str_replace('public:/', '', $remote_file['uri']));
             $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
@@ -566,14 +567,14 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         '@title' => $remote_node->title,
         '@id' => $remote_node->nid,
         '@state' => implode(", ", $ilu_accept_states_hr)
-      ]), 'error');
+      ]), 'warning');
     } else {
       drupal_set_message(format_string('Nepodarilo sa prevziať obsah hesla <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov: @state)', [
         '@url' => $remote_uri,
         '@title' => $remote_node->title,
         '@id' => $remote_node->nid,
         '@state' => implode(", ", $heslo_accept_states_hr)
-      ]), 'error');
+      ]), 'warning');
     }
   }
 }
