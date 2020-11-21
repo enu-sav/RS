@@ -644,81 +644,92 @@ function beliana_group_list_access() {
 }
 
 // transfer node from the web editorial system
+// $node: current node
+// $remote_node: remote node (data)
 function beliana_sync_from_remote_build($node, $remote_node) {
   global $user;
 
-  $api_type = variable_get('rs_api_type');
+  // remote accept states
+  $heslo_accept_states = ['publikovane_na_webe'];
+  $heslo_accept_states_hr = ['Zverejnené na webe'];	// human readable
+  $ilu_accept_states = ['ilustracia_na_webe'];
+  $ilu_accept_states_hr = ['Ilustrácia na webe'];	// human readable
 
-  $label_type = $api_type == 'webrs' ? 'webov' : 'knižn';
-  $label_state = $api_type == 'webrs' ? 'Zverejnené na webe' : 'Zalomené';
+  $local_site = "rs";
+  $remote_site = "webrs";
+  $local_uri = variable_get('base_url');
+  $remote_uri = variable_get('rs_api_uri');
 
-  if (in_array($remote_node->workbench_moderation->current->state, [
-    'zaradene',
-    'publikovane_na_webe',
-    'ilustracia_na_webe',
-  ])) {
+  // accept content if remote is in the accept state
+  if (in_array($remote_node->workbench_moderation->current->state, array_merge($heslo_accept_states,$ilu_accept_states)))
+  {
+    // fields ignored or treated in a special way
     $fields_to_skip = [
-      'field_remote_id',
-      'field_ilustracia',
-      'field_zlucene_z',
-      'field_zlucene_do',
-      'field_text_hesla',
-      'field_komentar_instrukcie',
-      'field_datum_autorovho_textu',
+      'field_remote_id',      // keep local value
+      'field_datum_prebratia',// set here
+      'field_ilustracia',     // special processing
+      'field_zlucene_z',      // ignored
+      'field_zlucene_do',     // ignored
+      'field_text_hesla',     // special processing
+      'field_komentar_instrukcie',   // special processing
+      'field_datum_autorovho_textu', // special processing 
+      'field_text_z_gh',      // ignored
+      'field_povodne_lexikalne_skupiny',   // ignored
+      'field_redaktori_zluceneho',   // ignored
+      'field_atributy',      // ignored
     ];
 
     // transfer field values from remote node to local node
     foreach ($remote_node as $field => $data) {
       $remote_field_value = empty($data) ? '' : json_decode(json_encode($data), TRUE);
 
+      // copy value except for the skipped ones
       if (($field == 'uid' || $field == 'title' || strpos($field, 'field_') === 0) && !in_array($field, $fields_to_skip)) {
         $node->{$field} = $remote_field_value;
       }
 
+      // fetch inline images and update their paths in text
       if ($field == 'field_text_hesla') {
-        $matches = [];
-        $imce_path = $api_type == 'webrs' ? 'rs' : 'webrs';
-
-        // adjust paths to inline images
+        // find <img tags
         // "[>]" used in the regexp to make the vim editor happy, otherwise '>' is OK
+        $matches = [];
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?[>]/i', $remote_field_value[LANGUAGE_NONE][0]['value'], $matches);
 
+        // fetch and update
         if (!empty($matches)) {
           foreach ($matches[1] as $src) {
-            $data = file_get_contents(variable_get('rs_api_uri') . $src);
-            $new_src = str_replace($api_type, $imce_path, $src);
-            $file = file_save_data($data, str_replace('/sites/' . $imce_path . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
+            $data = file_get_contents($remote_uri . $src);
+            $new_src = str_replace($remote_site, $local_site, $src);
+            $file = file_save_data($data, str_replace('/sites/' . $local_site . '/files/', 'public://', $new_src), FILE_EXISTS_REPLACE);
 
             $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace('src="' . $src, 'src="' . $new_src, $remote_field_value[LANGUAGE_NONE][0]['value']);
             $remote_field_value[LANGUAGE_NONE][0]['safe_value'] = str_replace('src="' . $src, 'src="' . $new_src, $remote_field_value[LANGUAGE_NONE][0]['safe_value']);
           }
         }
-
         $node->field_text_hesla = $remote_field_value;
       }
 
-      if ($field == 'field_datum_autorovho_textu') {
+      if ($field == 'field_datum_autorovho_textu' and $remote_field_value ) {
         $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
+      } else {
+        unset($node->field_datum_autorovho_textu[LANGUAGE_NONE]);
       }
 
       if ($field == 'field_komentar_instrukcie') {
-        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z ' . $label_type . 'ého RS. ';
+        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = "Obsah prevzatý z webového RS " . date('Y-m-d').".";
 
         if (!empty($remote_field_value)) {
-          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $remote_field_value[0]['value'];
+          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $remote_field_value[LANGUAGE_NONE][0]['value'];
         }
       }
 
-      if (in_array($field, [
-        'field_subor_ilustracie',
-        'field_obrazok_navrh_',
-        'field_original',
-      ])) {
-        $node->{$field}[LANGUAGE_NONE] = [];
-
+      // only for 'ilustracia', transfer image files
+      if (in_array($field, [ 'field_subor_ilustracie', 'field_obrazok_navrh_', 'field_original', ])) {
         if (!empty($remote_field_value)) {
+          if (isset($node->{$field}[LANGUAGE_NONE]) ) $node->{$field}[LANGUAGE_NONE] = [];
+          // get the file(s)
           foreach ($remote_field_value[LANGUAGE_NONE] as $key => $remote_file) {
-            $data = file_get_contents(variable_get('rs_api_uri') . '/sites/' . variable_get('rs_api_type') . '/files' . str_replace('public:/', '', $remote_file['uri']));
+            $data = file_get_contents($remote_uri . '/sites/' . $remote_site . '/files' . str_replace('public:/', '', $remote_file['uri']));
             $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
 
             $node->{$field}[LANGUAGE_NONE][$key] = [
@@ -736,50 +747,65 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
       }
 
-      if (in_array($field, [
-        'field_ilustracia',
-        'field_zlucene_z',
-        'field_zlucene_do',
-      ])) {
+      // fields containing identifiers of other nodes.
+      // It is necessary to check the 'field_remote_id' of the referenced node to get the correct local nid
+      // we do not sync ilustracia bundle referenced here, ilustracia should be synced directly like nodes
+      if (in_array($field, [ 'field_ilustracia'])) {
         $node->{$field}[LANGUAGE_NONE] = [];
 
         if (!empty($remote_field_value)) {
-          foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $ilustracia) {
-            if ($target_remote_node = beliana_api_rest_get_node($ilustracia['target_id'])) {
-              // do not sync ilusracia bundle when syncing from node
-              //beliana_sync_from_remote_build(node_load($ilustracia['target_id']), $target_remote_node);
-              $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] = empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
+          foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $target) {
+            // fetch the remote node
+            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'])) {
+              // if 'empty()' node ids on both sides are equal, so use target_remote_node->nid.
+              $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] =
+                empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
             }
           }
         }
       }
-
     }
 
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
     $node->revision = 1;
 
-    $workbench_moderation = 'needs_review';
+    // specify the new node state
     if ($node->type == 'ilustracia') {
-      $workbench_moderation = 'ilustracia_u_redaktora';
-    }
-    elseif ($label_type == 'knižn') {
-      $workbench_moderation = 'prevzate_z_rs';
+      $moderate_to = 'ilustracia_u_redaktora';
+    } else {  
+      $moderate_to = 'needs_review';
     }
 
-    $message_log = 'Obsah prevzatý z ' . $label_type . 'ého RS (' . date('Y-m-d') . ', ' . $user->name . ')';
+    $message_log = format_string('Obsah prevzatý z webového RS (@d, @u)', ['@d'=>date('Y-m-d'), '@u'=>$user->name]);
     if (strpos($node->log, $message_log) === FALSE) {
-      $node->log .= '. ' . $message_log;
+      $node->log = $message_log;
     }
 
-    workbench_moderation_moderate($node, $workbench_moderation);
-    drupal_set_message(t('Obsah hesla @id bol úspešne prebratý', ['@id' => $remote_node->nid]));
-  }
-  else {
-    drupal_set_message(t('Nepodarilo sa prevziať obsah hesla @id (heslo nie je v stave @state)', [
+    workbench_moderation_moderate($node, $moderate_to);
+    drupal_set_message(format_string('Obsah položky <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
+      '@url' => $local_uri,
+      '@title' => $remote_node->title,
       '@id' => $remote_node->nid,
-      '@state' => $label_state,
-    ]), 'error');
+      '@state' => $moderate_to
+    ]));
+  }
+  else
+  {
+    if ($node->type == 'ilustracia') {
+      drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (vo webovom RS nie je v stave @state)', [
+        '@url' => $remote_uri,
+        '@title' => $remote_node->title,
+        '@id' => $remote_node->nid,
+        '@state' => implode(", ", $ilu_accept_states_hr)
+      ]), 'warning');
+    } else {
+      drupal_set_message(format_string('Nepodarilo sa prevziať obsah hesla <a href="@url/node/@id">@title</a> (vo webovom RS nie je v stave @state)', [
+        '@url' => $remote_uri,
+        '@title' => $remote_node->title,
+        '@id' => $remote_node->nid,
+        '@state' => implode(", ", $heslo_accept_states_hr)
+      ]), 'warning');
+    }
   }
 }
 
@@ -790,13 +816,11 @@ function beliana_sync_from_remote_access($node) {
   // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
   // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
-
   if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
     switch ($node->type) {
       case 'heslo':
         return in_array($node->workbench_moderation['current']->state, [
-          //'zaradene',	// removed, since synced node already has information about the author. In stare 'zaradene' we expect no such information
-          'needs_review',
+          'zaradene', // As articles in webrs already have assigned author, synced articles will be moderated to the state 'needs_review' (U redaktora)
         ]);
       case 'ilustracia':
         return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']);
