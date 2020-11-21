@@ -412,7 +412,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
   // remote accept states
   $heslo_accept_states = ['vyradene', 'ukoncenezluene', 'publikovane_na_webe'];
   $heslo_accept_states_hr = ['Vyradené', 'Ukončené/zlúčené', 'Zalomené'];	// human readable
-  $ilu_accept_states = ['ilustracia_na_webe'];
+  $ilu_accept_states = ['ilustracia_na_webe', 'ilustracia_na_zverejnenie'];
   $ilu_accept_states_hr = ['Ilustrácia na zalomenie'];	// human readable
 
   $local_site = "webrs";
@@ -480,18 +480,17 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       }
 
       if ($field == 'field_komentar_instrukcie') {
-        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = 'Obsah prevzatý z knižného RS. ';
+        $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = "Obsah prevzatý z knižného RS " . date('Y-m-d').".";
 
         if (!empty($remote_field_value)) {
-          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= $remote_field_value[0]['value'];
+          $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] .= "\n" . $remote_field_value[LANGUAGE_NONE][0]['value'];
         }
       }
 
       // only for 'ilustracia'
       if (in_array($field, [ 'field_subor_ilustracie', 'field_obrazok_navrh_', 'field_original', ])) {
-        $node->{$field}[LANGUAGE_NONE] = [];
-
         if (!empty($remote_field_value)) {
+          if (isset($node->{$field}[LANGUAGE_NONE]) ) $node->{$field}[LANGUAGE_NONE] = [];
           foreach ($remote_field_value[LANGUAGE_NONE] as $key => $remote_file) {
             $data = file_get_contents($remote_uri . '/sites/' . $remote_site . '/files' . str_replace('public:/', '', $remote_file['uri']));
             $file = file_save_data($data, $remote_file['uri'], FILE_EXISTS_REPLACE);
@@ -553,7 +552,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
     workbench_moderation_moderate($node, $moderate_to);
     drupal_set_message(format_string('Obsah položky <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
-      '@url' => local_uri,
+      '@url' => $local_uri,
       '@title' => $remote_node->title,
       '@id' => $remote_node->nid,
       '@state' => $moderate_to
@@ -562,13 +561,14 @@ function beliana_sync_from_remote_build($node, $remote_node) {
   else
   {
     if ($node->type == 'ilustracia') {
-      drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
+      drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov: @state)', [
         '@url' => $remote_uri,
+        '@title' => $remote_node->title,
         '@id' => $remote_node->nid,
         '@state' => implode(", ", $ilu_accept_states_hr)
       ]), 'error');
     } else {
-      drupal_set_message(format_string('Nepodarilo sa prevziať obsah hesla <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov @state)', [
+      drupal_set_message(format_string('Nepodarilo sa prevziať obsah hesla <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov: @state)', [
         '@url' => $remote_uri,
         '@title' => $remote_node->title,
         '@id' => $remote_node->nid,
