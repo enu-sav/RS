@@ -501,9 +501,9 @@ function beliana_action_info() {
     ],
     'beliana_sync_from_remote_action' => [
       'type' => 'node',
-      'label' => 'Prebrať obsah',
+      'label' => t('Fetch content'),
       'behavior' => ['changes_property'],
-      'configurable' => TRUE,
+      'configurable' => FALSE,
       'vbo_configurable' => FALSE,
       'triggers' => ['any'],
       'permissions' => ['sync heslo content'],
