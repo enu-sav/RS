@@ -454,6 +454,18 @@ function beliana_sync_from_remote_build($node, $remote_node) {
 
       // fetch inline images and update their paths in text
       if ($field == 'field_text_hesla') {
+        // fix weird formatting
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace("&nbsp;"," ", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace(" ", " ", $remote_field_value[LANGUAGE_NONE][0]['value']); //remove nonbreakable space
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace(" </strong>","</strong> ", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace(" </em>","</em> ", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace("<strong> "," <strong>", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace("<em> "," <em>", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace("⬈ ","", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = str_replace("⬈","", $remote_field_value[LANGUAGE_NONE][0]['value']);
+        // change 1234—56 to 1234 – 56 (first dash is emdash, second is endash
+        $remote_field_value[LANGUAGE_NONE][0]['value'] = preg_replace("/([1-9])—([1-9])/","$1 – $2", $remote_field_value[LANGUAGE_NONE][0]['value']);
+
         // find <img tags
         // "[>]" used in the regexp to make the vim editor happy, otherwise '>' is OK
         $matches = [];
@@ -589,7 +601,7 @@ function beliana_sync_from_remote_access($node) {
 
   if ($response != NODE_ACCESS_DENY && user_access('sync heslo content')) {
     switch ($node->type) {
-      /* We do not allow synchronization of individual articles anymore
+      /* We do not allow synchronization of individual articles from article view anymore
       case 'heslo':
         return in_array($node->workbench_moderation['current']->state, [
           //'zaradene',	// removed, since synced node already has information about the author. In stare 'zaradene' we expect no such information
@@ -604,3 +616,4 @@ function beliana_sync_from_remote_access($node) {
   return FALSE;
 }
 
+# vim: ai ts=2 sts=2 et sw=2 ft=php
