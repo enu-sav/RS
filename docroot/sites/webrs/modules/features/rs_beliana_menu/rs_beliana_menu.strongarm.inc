@@ -40,6 +40,7 @@ function rs_beliana_menu_strongarm() {
     'management' => 0,
     'navigation' => 0,
     'user-menu' => 0,
+    'features' => 0,
     'devel' => 0,
   );
   $export['workbench_access_menu'] = $strongarm;

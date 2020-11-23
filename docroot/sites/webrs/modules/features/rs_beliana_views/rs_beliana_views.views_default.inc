@@ -430,8 +430,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní: 
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom 
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
+ 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
     ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
     ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
  2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
@@ -730,7 +730,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť. 
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť.
 <ul>
 <li><b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>. </li>
 <li><b>Ak chcete heslo odoslať redaktorovi:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).</li>
@@ -1915,151 +1915,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Jazyková redakcia';
   $handler->display->display_options['menu']['weight'] = '100';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: Zlúčené */
-  $handler = $view->new_display('page', 'Zlúčené', 'page_13');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Zlúčené';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    13 => '13',
-  );
-  $handler->display->display_options['defaults']['empty'] = FALSE;
-  /* No results behavior: Globálny: Rozsiahle textové pole */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
-  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Obsah: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
-  /* Pole: Obsah: Názov */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Pole: Obsah: Súbor */
-  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
-  /* Pole: Používateľ: Názov */
-  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
-  $handler->display->display_options['fields']['name_1']['table'] = 'users';
-  $handler->display->display_options['fields']['name_1']['field'] = 'name';
-  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
-  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
-  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
-  /* Pole: Workbench Access: Lexikálna skupina */
-  $handler->display->display_options['fields']['section']['id'] = 'section';
-  $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
-  $handler->display->display_options['fields']['section']['field'] = 'section';
-  $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
-  /* Pole: Content revision: Správa záznamu */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Obsah: Názov */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
-  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    11 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    8 => 0,
-    9 => 0,
-    17 => 0,
-  );
-  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
-  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-  );
-  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
-  /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'zlucene' => 'zlucene',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  /* Filter criterion: Workbench Moderation: Aktuálny */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
-  $handler->display->display_options['path'] = 'admin/beliana/zlucene';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Zlúčené';
-  $handler->display->display_options['menu']['weight'] = '110';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
@@ -6189,8 +6044,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní: 
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom 
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
+ 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
     ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
     ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
  2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
@@ -7233,6 +7088,262 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['menu']['weight'] = '50';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Roztriediť prevzaté */
+  $handler = $view->new_display('page', 'Roztriediť prevzaté', 'page_10');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Roztriediť prevzaté';
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
+    'title' => 'title',
+    'field_taxsubor' => 'field_taxsubor',
+    'name_1' => 'name_1',
+    'state' => 'state',
+    'from_state' => 'from_state',
+    'section' => 'section',
+    'field_ilustracia' => 'field_ilustracia',
+    'timestamp' => 'timestamp',
+  );
+  $handler->display->display_options['style_options']['default'] = 'timestamp';
+  $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_taxsubor' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'from_state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'section' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ilustracia' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'timestamp' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<b>Odosielanie hesiel v stave importované</b><br />
+ ⚫Ak je heslo vhodné na zverejnenie, jeho stav treba zmeniť na <b>Importované u VR</b>. Zrýchleným postupom bude zverejnené.
+ ⚫Ak heslo vyžaduje rozsiahle úpravy, jeho stav treba zmeniť na <b>Zaradené</b>, čím sa dostane do plného redakčného postupu.
+Do stavu <b>Zaradené</b> možno odoslať len heslo, ktoré patrí len jednému redaktorovi.
+Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možno odoslať len vtedy, ak má v komentári značky všetkých ostatných redaktorov. Ak nemá, pridajte svoju a heslo uložte.';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Hromadné operácie: Obsah */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::workbench_moderation_set_state_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Workbench Access: Lexikálna skupina */
+  $handler->display->display_options['fields']['section']['id'] = 'section';
+  $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
+  $handler->display->display_options['fields']['section']['field'] = 'section';
+  $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ilustracia']['multi_type'] = 'ol';
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['relationship'] = 'nid';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    8 => 0,
+    9 => 0,
+    17 => 0,
+    18 => 0,
+  );
+  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
+  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'importovane' => 'importovane',
+    'prevzate_z_rs' => 'prevzate_z_rs',
+  );
+  $handler->display->display_options['filters']['state']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  $handler->display->display_options['path'] = 'admin/beliana/roztriedit';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Roztriediť prevzaté';
+  $handler->display->display_options['menu']['weight'] = '50';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['beliana'] = array(
     t('Defaults'),
     t('Content I\'ve edited'),
@@ -7266,8 +7377,8 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Priradiť autora a zmeniť stav'),
     t('xx'),
     t('viac'),
-    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní: 
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom 
+    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
+ 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
     ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
     ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
  2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
@@ -7286,7 +7397,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Komentár obsahuje'),
     t('Rozpracované'),
     t('Rozpracované heslá'),
-    t('Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť. 
+    t('Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť.
 <ul>
 <li><b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>. </li>
 <li><b>Ak chcete heslo odoslať redaktorovi:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).</li>
@@ -7320,8 +7431,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
  ⚫ <b>Ak chcete heslo odoslať na ďalšie spracovanie:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom kliknite na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).
 <strong>Upozornenie</strong>: Ak počas úpravy kliknete na inú možnosť (napr. Odkazujúce heslá), na úpravu sa vrátite stlačením šípky doľava prehliadača a nie opätovne na Upraviť. Inak sa neuložené zmeny stratia. '),
     t('Dátum úpravy'),
-    t('Zlúčené'),
-    t('Správa záznamu'),
     t('Ilustrácie (R)'),
     t('IlustracieR'),
     t('Obsah referencing Obsah from field_ilustracia'),
@@ -7344,6 +7453,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
  ⚫ Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Do poľa <em>Komentár/inštrukcie/návrh/zdôvodnenie </em> napíšte svoj návrh a kliknite na <em>Uložiť </em>
  ⚫ Potom kliknite na <em>Zmeniť stav</em>, zmeňte stav na <em>Navrhnuté na zmenu</em> a kliknite na <em>Použiť</em>.
 <strong>Poznámka: </strong>Návrh na vytvorenie nového hesla môžete zadať v položke menu <em>Vytvoriť / Heslo </em> alebo kliknutím <a href="/node/add/heslo">sem</a>. Aj v tomto prípade sa k návrhu najskôr vyjadrí správca hesiel. '),
+    t('Správa záznamu'),
     t('Text hesla'),
     t('Navrhnuté'),
     t('Tu sú zobrazené všetky heslá, ktoré boli navrhnuté na zaradenie do Beliany alebo bola navrhnutá zmena ich názvu alebo lexikálnej skupiny.'),
@@ -7371,6 +7481,7 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
 Do stavu <b>Zaradené</b> možno odoslať len heslo, ktoré patrí len jednému redaktorovi.
 Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možno odoslať len vtedy, ak má v komentári značky všetkých ostatných redaktorov. Ak nemá, pridajte svoju a heslo uložte.'),
     t('Importované (VR)'),
+    t('Roztriediť prevzaté'),
   );
   $export['beliana'] = $view;
 
@@ -13177,6 +13288,13 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_text_z_gh']['label'] = '';
   $handler->display->display_options['fields']['field_text_z_gh']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_z_gh']['type'] = 'text_plain';
+  /* Pole: Obsah: Erráta */
+  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
+  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
+  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
+  $handler->display->display_options['fields']['field_errta']['element_type'] = 'strong';
+  $handler->display->display_options['fields']['field_errta']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_errta']['hide_empty'] = TRUE;
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
@@ -13337,6 +13455,37 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     3 => 0,
     8 => 0,
     9 => 0,
+  );
+  /* Filter criterion: Obsah: Erráta (field_errta) */
+  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
+  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
+  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
+  $handler->display->display_options['filters']['field_errta_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
+  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
   );
 
   /* Display: Vyhľadať */
@@ -15375,6 +15524,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>Kalgoorlie-Boulder</em> a heslá 8. zväzku po <em>ker</em> majú typ <em>Importované heslo</em>. Heslá od <em>kolemovité</em> (približný začiatok 9. zväzku) majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete navštíviť vždy. Ostatné heslá môžete navštíviť len vtedy, ak má jednu z vašich lexikálnych skupín. Heslá medzi <em>ker</em> a <em>kolemovité</em> nie sú zatiaľ zaradené (budú zaradené po ich vypracovaní). <br />Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a bude ich treba vložiť ručne. '),
     t('Zobrazenie po @per_page položkách, @start - @end z @total'),
     t('Stav'),
+    t('Erráta'),
     t('Ilustrácie'),
     t('Súbor'),
     t(' '),
@@ -15385,14 +15535,13 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('dddd'),
     t('Text hesla'),
     t('ddddd'),
+    t('Erráta'),
     t('Vyhľadať'),
     t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
     t('Komentár/inštrukcie'),
-    t('Broken handler field_data_field_errta.field_errta'),
     t('Tabuľka pre geografické heslá'),
     t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
     t('Typ'),
-    t('Erráta'),
     t('Komentár obsahuje'),
     t('Komentár neobsahuje'),
     t('Lexikálna skupina (alt)'),
@@ -16051,11 +16200,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
-  /* Vzťah: Odkaz na entitu: Referenced Entity */
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['label'] = 'Ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -21011,6 +21155,14 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['header']['area']['content'] = 'Už zverejnené heslá vrátené na opravu. Požadovaná oprava je uvedená v komentári. Po oprave treba zmeniť stav na "Na opakované zverejnenie" ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Content revision: Používateľ */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Vzťah: Obsah: Autor */
+  $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
+  $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -21032,11 +21184,15 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
-  /* Pole: Obsah: Ilustracia: Nazov/Pouzit */
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['id'] = 'ilustracia_nazov_pouzit';
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['table'] = 'node';
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['field'] = 'ilustracia_nazov_pouzit';
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['label'] = 'Ilustrácie';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -21610,6 +21766,402 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Prevziať heslo */
+  $handler = $view->new_display('page', 'Prevziať heslo', 'page_11');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Prevziať heslo z knižného redakčného systému';
+  $handler->display->display_options['display_description'] = 'Prevziať obsah z knižného redakčného systému';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '500';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'title' => 'title',
+    'type' => 'type',
+    'state' => 'state',
+    'from_state' => 'from_state',
+    'changed' => 'changed',
+    'name' => 'name',
+    'field_lexikalna_skupina' => 'field_lexikalna_skupina',
+    'name_1' => 'name_1',
+    'field_ilustracia' => 'field_ilustracia',
+    'field_vyplatit' => 'field_vyplatit',
+    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
+    'field_datum_prebratia' => 'field_datum_prebratia',
+  );
+  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'from_state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lexikalna_skupina' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ilustracia' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_vyplatit' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dlzka_autorovho_textu_zad' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_prebratia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'Náhľad na dávkové alebo individuálne preberanie hesiel z knižného redakčného systému. <b>Preberajú sa len heslá, ktoré sú v knižnom systéme dokončené.</b>
+<h3>Dávkové preberanie</h3>
+<ol>
+<li>Zvoliť súbor</Ii>
+<li>Vybrať heslá v stavoch Navrhnuté, Zaradené, Vyradené, Zlúčené a Ukončené/zlúčené</Ii>
+<li>Heslá prevziať kliknutím na Prevziať. <b>Prevzaté heslá budú v stavoch Prevzaté z RS alebo Ukončené/zlúčené.</b></Ii>
+</ol>
+<br />
+<h3>Individuálne preberanie – používať len v odôvodnených prípadoch.</h3>
+<ol>
+<li>Vybrať heslo</Ii>
+<li>Heslo prebrať kliknutím na Prevziať</Ii>
+</ol>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Hromadné operácie: Obsah */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Operácia';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::workbench_moderation_set_state_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Dátum aktualizácie */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Naposledy upravil';
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['fields']['name_1']['table'] = 'users';
+  $handler->display->display_options['fields']['name_1']['field'] = 'name';
+  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
+  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
+  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Pole: Obsah: Dátum prebratia obsahu */
+  $handler->display->display_options['fields']['field_datum_prebratia']['id'] = 'field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['table'] = 'field_data_field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['field'] = 'field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
+  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['hierarchy'] = 1;
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'na_zalomenie' => 'na_zalomenie',
+    'publikovane_na_webe' => 'publikovane_na_webe',
+    'zverejnene_oprava' => 'zverejnene_oprava',
+    'zverejnene_vratene' => 'zverejnene_vratene',
+    'zverejnene_jaz_kontrola' => 'zverejnene_jaz_kontrola',
+    'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+    'pozdr_an_' => 'pozdr_an_',
+    'draft' => 'draft',
+    'prevzate_z_rs' => 'prevzate_z_rs',
+    'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
+    'zaradene' => 'zaradene',
+    'u_autora' => 'u_autora',
+    'needs_review' => 'needs_review',
+    'na_zverejnenie' => 'na_zverejnenie',
+    'u_jaz_korektora' => 'u_jaz_korektora',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
+    'zlucene' => 'zlucene',
+    'kontrola_etymologie' => 'kontrola_etymologie',
+    'vyradene' => 'vyradene',
+    'u_konzultanta' => 'u_konzultanta',
+    'ukoncenezluene' => 'ukoncenezluene',
+  );
+  $handler->display->display_options['filters']['state']['group'] = 1;
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    39 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    38 => 0,
+  );
+  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'starts';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    17 => 0,
+    20 => 0,
+  );
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Obsah: Dátum prebratia obsahu (field_datum_prebratia) */
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['id'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['table'] = 'field_data_field_datum_prebratia';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['field'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator_id'] = 'field_datum_prebratia_value_op';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['label'] = 'Dátum prebratia obsahu';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator'] = 'field_datum_prebratia_value_op';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['identifier'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    31 => 0,
+    18 => 0,
+    10 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    39 => 0,
+    6 => 0,
+    37 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    38 => 0,
+  );
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'heslo' => 'heslo',
+  );
+  $handler->display->display_options['filters']['type_1']['group'] = 1;
+  $handler->display->display_options['path'] = 'prevziat-heslo';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Prevziať heslo';
+  $handler->display->display_options['menu']['description'] = 'Prevziať obsah v knižného RS';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['vsetky_hesla_detaily'] = array(
     t('Master'),
     t('Všetky heslá'),
@@ -21647,7 +22199,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t(' Upravil niektorú verziu '),
     t('Komentár'),
     t('Všetky heslá - prehľad'),
-    t('Ilustracia'),
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
     t('[field_datum]'),
@@ -21711,6 +22262,22 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Zverejnené – vrátené'),
     t('Už zverejnené heslá vrátené na opravu. Požadovaná oprava je uvedená v komentári. Po oprave treba zmeniť stav na "Na opakované zverejnenie" '),
     t('Jazyková korektúra'),
+    t('Prevziať heslo'),
+    t('Prevziať heslo z knižného redakčného systému'),
+    t('Prevziať obsah z knižného redakčného systému'),
+    t('Náhľad na dávkové alebo individuálne preberanie hesiel z knižného redakčného systému. <b>Preberajú sa len heslá, ktoré sú v knižnom systéme dokončené.</b>
+<h3>Dávkové preberanie</h3>
+<ol>
+<li>Zvoliť súbor</Ii>
+<li>Vybrať heslá v stavoch Navrhnuté, Zaradené, Vyradené, Zlúčené a Ukončené/zlúčené</Ii>
+<li>Heslá prevziať kliknutím na Prevziať. <b>Prevzaté heslá budú v stavoch Prevzaté z RS alebo Ukončené/zlúčené.</b></Ii>
+</ol>
+<br />
+<h3>Individuálne preberanie – používať len v odôvodnených prípadoch.</h3>
+<ol>
+<li>Vybrať heslo</Ii>
+<li>Heslo prebrať kliknutím na Prevziať</Ii>
+</ol>'),
   );
   $export['vsetky_hesla_detaily'] = $view;
 
