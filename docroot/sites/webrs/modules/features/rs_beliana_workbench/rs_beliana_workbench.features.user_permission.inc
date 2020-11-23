@@ -768,7 +768,9 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from vyradene to zaradene'] = array(
     'name' => 'moderate content from vyradene to zaradene',
     'roles' => array(
+      'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );

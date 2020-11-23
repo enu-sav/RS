@@ -8825,7 +8825,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_atributy']['field'] = 'field_atributy';
   $handler->display->display_options['fields']['field_atributy']['label'] = 'atrib';
   $handler->display->display_options['fields']['field_atributy']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Erráta */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
   $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
   $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
@@ -9973,7 +9973,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'vyplatenieOdmeny';
-  /* Pole: Obsah: Erráta */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
   $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
   $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
@@ -13177,13 +13177,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_text_z_gh']['label'] = '';
   $handler->display->display_options['fields']['field_text_z_gh']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_z_gh']['type'] = 'text_plain';
-  /* Pole: Obsah: Erráta */
-  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['element_type'] = 'strong';
-  $handler->display->display_options['fields']['field_errta']['element_label_type'] = 'strong';
-  $handler->display->display_options['fields']['field_errta']['hide_empty'] = TRUE;
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
@@ -13345,37 +13338,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     8 => 0,
     9 => 0,
   );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-  );
 
   /* Display: Vyhľadať */
   $handler = $view->new_display('page', 'Vyhľadať', 'page');
@@ -13440,7 +13402,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['field_text_z_gh']['label'] = '';
   $handler->display->display_options['fields']['field_text_z_gh']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_z_gh']['type'] = 'text_plain';
-  /* Pole: Obsah: Erráta */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
   $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
   $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
@@ -13709,7 +13671,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     8 => 0,
     9 => 0,
   );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
+  /* Filter criterion: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
   $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
   $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
@@ -14094,7 +14056,7 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     17 => 0,
     20 => 0,
   );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
+  /* Filter criterion: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
   $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
   $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
@@ -15413,7 +15375,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>Kalgoorlie-Boulder</em> a heslá 8. zväzku po <em>ker</em> majú typ <em>Importované heslo</em>. Heslá od <em>kolemovité</em> (približný začiatok 9. zväzku) majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete navštíviť vždy. Ostatné heslá môžete navštíviť len vtedy, ak má jednu z vašich lexikálnych skupín. Heslá medzi <em>ker</em> a <em>kolemovité</em> nie sú zatiaľ zaradené (budú zaradené po ich vypracovaní). <br />Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a bude ich treba vložiť ručne. '),
     t('Zobrazenie po @per_page položkách, @start - @end z @total'),
     t('Stav'),
-    t('Erráta'),
     t('Ilustrácie'),
     t('Súbor'),
     t(' '),
@@ -15427,9 +15388,11 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Vyhľadať'),
     t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
     t('Komentár/inštrukcie'),
+    t('Broken handler field_data_field_errta.field_errta'),
     t('Tabuľka pre geografické heslá'),
     t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
     t('Typ'),
+    t('Erráta'),
     t('Komentár obsahuje'),
     t('Komentár neobsahuje'),
     t('Lexikálna skupina (alt)'),
@@ -15876,37 +15839,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     8 => 0,
     9 => 0,
   );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-  );
   /* Filter criterion: Obsah: User has a revision */
   $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
   $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
@@ -16215,15 +16147,19 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
   $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
   $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
-  /* Pole: Obsah: Ilustracia: Nazov/Pouzit */
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['id'] = 'ilustracia_nazov_pouzit';
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['table'] = 'node';
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['field'] = 'ilustracia_nazov_pouzit';
-  $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['label'] = 'Ilustrácie';
   /* Pole: Obsah: Dátum vyplatenia */
   $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -16482,37 +16418,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     3 => 0,
     8 => 0,
     9 => 0,
-  );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
   );
   /* Filter criterion: Obsah: User has a revision */
   $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
@@ -17439,37 +17344,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     3 => 0,
     8 => 0,
     9 => 0,
-  );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
   );
   /* Filter criterion: Obsah: Author uid */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
@@ -20451,37 +20325,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     8 => 0,
     9 => 0,
   );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-  );
   /* Filter criterion: Obsah: User has a revision */
   $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
   $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
@@ -20998,37 +20841,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     8 => 0,
     9 => 0,
   );
-  /* Filter criterion: Obsah: Erráta (field_errta) */
-  $handler->display->display_options['filters']['field_errta_value']['id'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['filters']['field_errta_value']['field'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_errta_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator_id'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['label'] = 'Erráta';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_errta_value']['expose']['operator'] = 'field_errta_value_op';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['identifier'] = 'field_errta_value';
-  $handler->display->display_options['filters']['field_errta_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-  );
   /* Filter criterion: Obsah: User has a revision */
   $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
   $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
@@ -21199,19 +21011,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
   $handler->display->display_options['header']['area']['content'] = 'Už zverejnené heslá vrátené na opravu. Požadovaná oprava je uvedená v komentári. Po oprave treba zmeniť stav na "Na opakované zverejnenie" ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Vzťah: Content revision: Používateľ */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Vzťah: Obsah: Autor */
-  $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
-  $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
-  /* Vzťah: Odkaz na entitu: Referenced Entity */
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['relationships']['field_ilustracia_target_id']['label'] = 'Ilustracia';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -21845,7 +21644,6 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Text hesla'),
     t('ddddd'),
     t('Atribúty'),
-    t('Erráta'),
     t(' Upravil niektorú verziu '),
     t('Komentár'),
     t('Všetky heslá - prehľad'),
@@ -21853,8 +21651,8 @@ Ak heslo patrí viacerým redaktorom, do stavu <b>Importované u VR</b> ho možn
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
     t('[field_datum]'),
-    t('Ilustrácie'),
     t('Dátum vyplatenia'),
+    t('Ilustrácie'),
     t('Zlúčené z'),
     t('Vyplatenie odmeny'),
     t('Tabuľka pre geografické heslá'),
