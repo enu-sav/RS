@@ -464,7 +464,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['management_zlen:admin/beliana/zlucene'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/zlucene',
-    'router_path' => 'admin/beliana/zlucene',
+    'router_path' => 'admin/beliana',
     'link_title' => 'Zlúčené',
     'options' => array(
       'attributes' => array(
