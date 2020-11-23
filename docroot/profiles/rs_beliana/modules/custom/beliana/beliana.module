@@ -1383,7 +1383,7 @@ function beliana_node_presave($node) {
     $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
     // if  field_dlzka_autorovho_textu_zad is set to 0, fill the value automatically
     if ($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0) {
-      $text = strip_tags(str_replace('<', ' <', $node->field_text_hesla[LANGUAGE_NONE][0]['value']));
+      $text = strip_tags($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
       $text = preg_replace('/\n|\r|\t/m', ' ', $text);
       $text = str_replace('&nbsp;', ' ', $text);
       $text = str_replace("\xc2\xa0", ' ', $text);
