@@ -376,12 +376,13 @@ function beliana_users_list() {
 
 /**
  * Implements hook_action_info().
+ * Visible in both systems, some of them make sense only in one of them (labeled below in comment)
  *
  * @inheritdoc
  */
 function beliana_action_info() {
   return [
-    'beliana_assign_author' => [
+    'beliana_assign_author' => [    // rs and webrs
       'type' => 'entity',
       'label' => t('Specify author and assign to author'),
       'configurable' => TRUE,
@@ -390,7 +391,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'beliana_assign_corrector' => [
+    'beliana_assign_corrector' => [ // rs and webrs
       'type' => 'entity',
       'label' => t('Specify author and assign to editor'),
       'configurable' => TRUE,
@@ -399,7 +400,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'beliana_assign_consultant' => [
+    'beliana_assign_consultant' => [    // rs and webrs
       'type' => 'entity',
       'label' => t('Assign to consultant'),
       'configurable' => TRUE,
@@ -408,7 +409,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'importovane_publish_editor' => [
+    'importovane_publish_editor' => [   // webrs only
       'type' => 'entity',
       //'label' => t('Odoslať na zverejnenie'),
       'label' => t('Mark for publishing (editor)'),
@@ -418,7 +419,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'importovane_publish_senior_editor' => [
+    'importovane_publish_senior_editor' => [    // webrs only
       'type' => 'entity',
       //'label' => t('Odoslať na zverejnenie (VR)'),
       'label' => t('Mark for publishing (senior editor)'),
@@ -428,7 +429,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'importovane_publish_proofreader' => [
+    'importovane_publish_proofreader' => [  // webrs only
       'type' => 'entity',
       //'label' => t('Odoslať na zverejnenie (JR)'),
       'label' => t('Mark for publishing (proofreader)'),
@@ -438,7 +439,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'update_dates' => [
+    'update_dates' => [ // rs and webrs
       'type' => 'entity',
       //'label' => t('Aktualizovať dátumy'),
       'label' => t('Update dates'),
@@ -457,7 +458,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'update_author_payment_data' => [
+    'update_author_payment_data' => [   // rs and webrs
       'type' => 'entity',
       'label' => t('Update author payment data'),
       'configurable' => FALSE,
@@ -466,7 +467,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'prune_node_revisions' => [
+    'prune_node_revisions' => [ // rs and webrs
       'type' => 'node',
       'label' => t('Prune node revisions'),
       'configurable' => FALSE,
@@ -475,7 +476,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => FALSE,
     ],
-    'beliana_sync_from_remote_action' => [
+    'beliana_sync_from_remote_action' => [  // rs and webrs
       'type' => 'node',
       'label' => t('Fetch content'),
       'behavior' => ['changes_property'],
@@ -502,7 +503,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => FALSE,
     ],
-    'moderate_to_vyradene' => [
+    'moderate_to_vyradene' => [ // webrs only
       'type' => 'entity',
       'label' => t("Change state to 'Vyradené'"),
       'configurable' => FALSE,
@@ -511,7 +512,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'prevzate_to_na_zverejnenie' => [
+    'prevzate_to_na_zverejnenie' => [   // webrs only
       'type' => 'entity',
       'label' => t("Change state to 'Na zverejnenie'"),
       'configurable' => FALSE,
@@ -520,7 +521,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'prevzate_to_importovane' => [
+    'prevzate_to_importovane' => [  // webrs only
       'type' => 'entity',
       'label' => t("Change state to 'Importované'"),
       'configurable' => FALSE,
@@ -529,7 +530,7 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'prevzate_to_u_redaktora' => [
+    'prevzate_to_u_redaktora' => [  // webrs only
       'type' => 'entity',
       'label' => t("Change state to 'U redaktora'"),
       'configurable' => FALSE,
