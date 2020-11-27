@@ -604,6 +604,7 @@ function prevzate_to_u_redaktora(&$node, $context) {
  * @inheritdoc
  */
 function moderate_to_vyradene(&$node, $context) {
+  _beliana_remove_links($node);
   workbench_moderation_moderate($node, "vyradene");
 }
 
