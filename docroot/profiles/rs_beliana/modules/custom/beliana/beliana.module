@@ -449,15 +449,6 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'check_path_attributes' => [
-      'type' => 'entity',
-      'label' => t('Check link'),
-      'configurable' => FALSE,
-      'triggers' => ['any'],
-      'behavior' => ['create_property'],
-      'vbo_configurable' => FALSE,
-      'pass rows' => TRUE,
-    ],
     'update_author_payment_data' => [   // rs and webrs
       'type' => 'entity',
       'label' => t('Update author payment data'),
@@ -1052,24 +1043,6 @@ function _get_authors_text_length(&$node) {
   $tlen = drupal_strlen($text);
 
   return $tlen;
-}
-
-/**
- * Callback function for `check_path_attributes` action.
- *
- * @inheritdoc
- *
- * @see beliana_action_info
- */
-function check_path_attributes(&$entity, $context = []) {
-  if ($entity->type == 'heslo' || $entity->type == 'importovane_heslo') {
-    $alias = drupal_get_path_alias('node/' . $entity->nid);
-
-    if (strpos($alias, '_') === FALSE) {
-      $entity->field_atributy = [LANGUAGE_NONE => [['value' => 'odkazOK']]];
-      node_save($entity);
-    }
-  }
 }
 
 /**
