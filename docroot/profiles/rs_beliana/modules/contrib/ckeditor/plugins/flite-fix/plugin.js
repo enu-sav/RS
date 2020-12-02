@@ -37,7 +37,7 @@ CKEDITOR.plugins.add('flite-fix', {
                 var html_text = getSelectionHtml(CKEDITOR.currentInstance);
                 if ((html_text.indexOf("cke_widget_mathjax") != -1)) {
                     if (html_text.indexOf("data-cke-copybin-start") == -1 ) {
-                        alert ("V texte kombinovanom s MathJax vzorcami nie je použitie CTRL-X povolené.\nPoužite CTRL-C a Delete.");
+                        alert ("V texte kombinovanom s MathJax vzorcami nie je použitie CTRL-X povolené.\n\nPoužite CTRL-C a Delete.");
                     }
                     event.cancel();
                 }
@@ -45,21 +45,21 @@ CKEDITOR.plugins.add('flite-fix', {
         });
 
         // various fixes in paste
-        editor.on('paste', function (evt) {
-            var data = evt.data;
+        editor.on('paste', function (event) {
+            var data = event.data;
 
             // replace < and > by X and Y (for paste buffer analysis)
-            //evt.data.dataValue = evt.data.dataValue.replace( /</gi, 'X' ).replace( />/gi, 'Y' );
+            //event.data.dataValue = event.data.dataValue.replace( /</gi, 'X' ).replace( />/gi, 'Y' );
 
             // remove blue border in pasted formulas
-            evt.data.dataValue = evt.data.dataValue
+            event.data.dataValue = event.data.dataValue
                 .replace( /cke_widget_focused/gi, '' )
                 .replace( /<span data-cke-copybin.+?<\/span>/gi, '' );
 
             // replace incompletely copied formulas tracked by FLITE by an error message (directly as pasted text)
             //
             // count copied objects, which should contain a formula
-            var s = evt.data.dataValue;
+            var s = event.data.dataValue;
             var f = "data-cke-widget-wrapper";
             var r = s.indexOf(f);
             var c1 = 0;   // number of copied objects
@@ -78,7 +78,8 @@ CKEDITOR.plugins.add('flite-fix', {
             }
             //  c1==c2, if formulas we copied correctly
             if (c1 != c2){
-              evt.data.dataValue = "=== CHYBA: NEÚPLNE VYZNAČENÁ KOPÍROVANÁ ROVNICA ===";
+                alert("Text nebol vložený, lebo rovnica celkom vľavo nebola úplne vyznačená.\n\nPri vyznačovaní textu a rovnice ťahaním kurzora sprava doľava treba vyznačiť aspoň 1 znak pred rovnicou.\n\nVyznačenie a vloženie zopakujte.");
+                    event.cancel();
             }
         }, null, null, 3);
      }
