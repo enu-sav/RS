@@ -1,10 +1,21 @@
 // various workarounds to fix flite shortcomings
 CKEDITOR.plugins.add('flite-fix', {
     init: function (editor) {
+        // get html of a selection
+        function getSelectionHtml(editor) {
+            var sel = editor.getSelection();
+            var ranges = sel.getRanges();
+            var el = new CKEDITOR.dom.element("div");
+            for (var i = 0, len = ranges.length; i < len; ++i) {
+                el.append(ranges[i].cloneContents());
+            }
+            return el.getHtml();
+        }
+
         // remove cut and paste buttons from the CKEditor's context menu
-	// cut does not work correctly
+	    // cut does not work correctly
         editor.removeMenuItem('cut');
-	// paste is not an FLITE problem - just open a popup somentimes
+	    // paste is not an FLITE problem - just open a popup sometimes
         editor.removeMenuItem('paste');	
 
         // disable drag&drop inside the editor
@@ -13,12 +24,23 @@ CKEDITOR.plugins.add('flite-fix', {
         });
 
         // cancel key-press event SHIFT-Enter nad CTRL-X
-	// SHIFT-ENTER: inserts <br /> (we do not want this)
-	// CTRL-X: cut does not work correctly
-        editor.on( 'key', function( event ) {
-            var cancel_keys = [CKEDITOR.SHIFT + 13, CKEDITOR.CTRL + 88];
+	    // SHIFT-ENTER: inserts <br /> (we do not want this)
+	    // CTRL-X: cut does not work correctly
+        editor.on( 'key', function( event ) { 
+            //var cancel_keys = [CKEDITOR.SHIFT + 13, CKEDITOR.CTRL + 88];
+            var cancel_keys = [CKEDITOR.SHIFT + 13];
             if (cancel_keys.includes(event.data.keyCode)) {
                 event.cancel();
+            }
+            // special treatment for CTRL-X
+            if (event.data.keyCode == CKEDITOR.CTRL + 88) {
+                var html_text = getSelectionHtml(CKEDITOR.currentInstance);
+                if ((html_text.indexOf("cke_widget_mathjax") != -1)) {
+                    if (html_text.indexOf("data-cke-copybin-start") == -1 ) {
+                        alert ("V texte kombinovanom s MathJax vzorcami nie je použitie CTRL-X povolené.\nPoužite CTRL-C a Delete.");
+                    }
+                    event.cancel();
+                }
             }
         });
 
