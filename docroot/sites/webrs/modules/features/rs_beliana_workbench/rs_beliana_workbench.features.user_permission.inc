@@ -428,6 +428,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in na_opakovane_zverejnenie state',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
