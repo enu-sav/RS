@@ -588,7 +588,7 @@ function _views_bulk_operations_modify_action_get_bundles($entity_type, $context
  * Helper function that recursively strips #required from field widgets.
  */
 function _views_bulk_operations_modify_action_unset_required(&$element) {
-  unset($element['#required']);
+  $element['#required'] = FALSE;
   foreach (element_children($element) as $key) {
     _views_bulk_operations_modify_action_unset_required($element[$key]);
   }
