@@ -631,4 +631,59 @@ function beliana_sync_from_remote_access($node) {
   return FALSE;
 }
 
+// check if field related to payment should be displayed, and if, then how (editable, noneditable)
+// return strings hideall enableall or showeditable
+function _display_payment_fields(&$node) {
+  #do not show the fields for new items
+  if (!isset($node->nid)) {
+    #dpm("hideall (nove heslo)", "display_payment_fields");
+    return "hideall";
+  }
+
+  #do not show the fields for merged (zlucene) articles (i. e. field_zlucene_z is nonempty)
+  if (isset($node->field_zlucene_z[LANGUAGE_NONE][0])) {
+    #dpm("hideall (merged)", "display_payment_fields");
+    return "hideall";
+  }
+
+  global $user;
+  $curstate = $node->workbench_moderation['current']->state;
+  //dpm($user);
+  // administrator has access to everything
+  if (in_array("administrátor", $user->roles)) { // $form: node
+    #dpm("enableall", "display_payment_fields");
+    return "enableall";
+  }
+
+  // do not show in the case of nodes imported from files Kolembus-00* and Komunikator-00*
+  if (
+    (isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) and
+      strpos($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'], 'import Kolembus-00') !== FALSE)
+    or (isset($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value']) and
+      strpos($node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'], 'import Komunikator-00') !== FALSE)
+  ) {
+    #dpm("hideall (import)", "display_payment_fields");
+    return "hideall";
+  }
+
+  // if filled out, field_datum_autorovho_textu is set.  Just show, do not edit
+  if (isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+    #dpm("showdisabled (filled out)", "display_payment_fields, field_datum_autorovho_textu is set");
+    return ("showdisabled");
+  }
+  //state of the node changed from vr1 or vr2 state to needs_review after 11.11.2018
+  if (has_vr_to_r_transition($node)) {
+    #dpm("hideall (has transition)", "display_payment_fields");
+    return ("hideall");
+  }
+  if ($curstate === 'needs_review') {
+    #dpm("showeditable (no transition, needs_review)", "display_payment_fields");
+    return ("showeditable");
+  }
+  else {
+    #dpm("hideall (no transition, no needs_review)", "display_payment_fields");
+    return ("hideall");
+  }
+}
+
 # vim: ai ts=2 sts=2 et sw=2 ft=php
