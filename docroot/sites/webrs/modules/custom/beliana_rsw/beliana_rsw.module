@@ -432,15 +432,16 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       'field_zlucene_do',     // special processing
       'field_text_hesla',     // special processing
       'field_komentar_instrukcie',   // special processing
-      'field_datum_autorovho_textu',
       'field_text_z_gh',      // ignored
       'field_spravit_1_korekturu',   // ignored
       'field_povodne_lexikalne_skupiny',   // ignored
       'field_redaktori_zluceneho',   // ignored
       'field_vyslo_knizne',   // ignored
       'field_errta',          // ignored
-      'field_text_z_gh',      // ignored
-      'field_atributy',      // ignored
+      'field_atributy',       // ignored
+      //'field_datum_autorovho_textu', // special processing
+      'field_vyplatit',       // special processing
+      'field_dlzka_autorovho_textu_zad',   // ignored
     ];
 
     // transfer field values from remote node to local node
@@ -483,12 +484,6 @@ function beliana_sync_from_remote_build($node, $remote_node) {
           }
         }
         $node->field_text_hesla = $remote_field_value;
-      }
-
-      if ($field == 'field_datum_autorovho_textu' and $remote_field_value ) {
-        $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = '1970-01-01 00:00:00';
-      } else {
-        unset($node->field_datum_autorovho_textu[LANGUAGE_NONE]);
       }
 
       if ($field == 'field_komentar_instrukcie') {
@@ -541,6 +536,26 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         }
       }
     }
+
+    //if ( isset($remote_node->field_vyplatit[LANGUAGE_NONE])) {
+    if ( isset($remote_node->field_vyplatit) and count($remote_node->field_vyplatit) > 0) {
+        //$node->field_datum_autorovho_textu[LANGUAGE_NONE] = $remote_node->field_datum_autorovho_textu[LANGUAGE_NONE]; 
+        if ($remote_node->field_vyplatit->und[0]->value == 'Vyplatiť' ){ #$remote_node->field_vyplatit is class here, therefore '->und' and '->value' are used
+            $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené v RS';
+        } else {
+            $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = $remote_node->field_vyplatit->und[0]->value;
+        }
+    } elseif ( isset($remote_node->field_zlucene_z) and count($remote_node->field_zlucene_z) > 0) {
+        if ( isset($node->field_vyplatit[LANGUAGE_NONE])) unset($node->field_vyplatit[LANGUAGE_NONE]);
+    } else {
+        if ( isset($node->field_vyplatit[LANGUAGE_NONE])) {
+            unset($node->field_vyplatit[LANGUAGE_NONE]);
+            //$node->field_vyplatit[LANGUAGE_NONE][]['value'] = "Vyplatené mimo RS";
+        }
+        $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené mimo RS';
+        //$node->field_vyplatit = [LANGUAGE_NONE => [['value' => "Vyplatené mimo RS"]]];
+    }
+    if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE])) unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE]);
 
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
     $node->revision = 1;
