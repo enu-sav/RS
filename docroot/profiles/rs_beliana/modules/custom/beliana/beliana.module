@@ -1353,7 +1353,7 @@ function beliana_node_presave($node) {
   if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]) and (!isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value']) or
       $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0)) {
     // set the date (if set,  field field_dlzka_autorovho_textu_zad will never be changed again)
-    $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+    $node->field_datum_autorovho_textu = [LANGUAGE_NONE => [['value' => date('Y/m/d')]]];
     // if  field_dlzka_autorovho_textu_zad is set to 0, fill the value automatically
     if ($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] == 0) {
       $text = strip_tags($node->field_text_hesla[LANGUAGE_NONE][0]['value']);
@@ -1374,7 +1374,7 @@ function beliana_node_presave($node) {
   if (variable_get('rs_api_type') == "webrs" ) {    // we are in the book system
     // do not rewrite existing value
     if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
-        $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+        $node->field_datum_autorovho_textu = [LANGUAGE_NONE => [['value' => date('Y/m/d')]]];
         $node->log = $node->log . ", vyplnené pole Vyplatiť";
     }
   } else {  // we are in the web system
