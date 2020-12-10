@@ -1475,9 +1475,21 @@ function beliana_node_presave($node) {
     }
   }
   // save date when the author's text information was saved. Used for monthly records
-  if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
-    $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
-    $node->log = $node->log . ", vyplnené pole Vyplatiť";
+  if (variable_get('rs_api_type') == "webrs" ) {    // we are in the book system
+    // do not rewrite existing value
+    if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+        $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+        $node->log = $node->log . ", vyplnené pole Vyplatiť";
+    }
+  } else {  // we are in the web system
+    $sync_values = ['Vyplatené v RS', 'Vyplatené mimo RS']; // do not store date in article synchronization
+    if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !in_array($node->field_vyplatit[LANGUAGE_NONE][0]['value'], $sync_values)){
+        // do not rewrite existing value
+        if (!isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
+            $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = date("Y/m/d");
+            $node->log = $node->log . ", vyplnené pole Vyplatiť";
+        }
+    }
   }
 
   // store the proofreader state in which an item was edited in the field_atributy field
