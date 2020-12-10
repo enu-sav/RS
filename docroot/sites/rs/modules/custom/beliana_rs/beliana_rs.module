@@ -885,3 +885,53 @@ function _display_payment_fields(&$node) {
     return ("hideall");
   }
 }
+
+/*
+  Check, if the node was sent to the needs_review state after 11.11.2018
+  the node IS in the state needs_review (U redaktora) since only role Redaktor can edit the payment information
+  find date (tstamp) of the latest of transitions na_zalomenie >> needs_review
+  compare tstamp with the date 11.11.2018 (reftime) (on that day payment data was manuall exported)
+  if tstamp > refdate return True (do not display payment fields). We have manually exported payment data
+  if tstamp < refdate return False (edit payment fields). We do not have payment data
+ */
+
+function has_vr_to_r_transition(&$node) {
+
+  // find transitions na_zverejnenie >> needs_review
+  $reftime = strtotime("11-11-2018"); // date of manual accounting data export
+  $transitions = db_select('workbench_moderation_node_history', 'w')
+    ->fields('w') // all fields
+    ->condition('from_state', 'na_zverejnenie') // u vyst. redaktor 1 state
+    ->condition('state', 'needs_review')  // u redaktora state
+    ->condition('nid', $node->nid)
+    ->execute()
+    ->fetchAll();
+  // find the most recent transition
+  $tstamp1 = 0;
+  foreach ($transitions as $tr) {
+    if ($tr->stamp > $tstamp1) { // find the most recent transition
+      $tstamp1 = $tr->stamp;
+    }
+  }
+
+  // find transitions u_vyst_redaktora_2 >> needs_review
+  $transitions = db_select('workbench_moderation_node_history', 'w')
+    ->fields('w') // all fields
+    ->condition('from_state', 'u_vyst_redaktora_2')  // u redaktora state
+    ->condition('state', 'needs_review')  // u vr1 state
+    ->condition('nid', $node->nid)  // u vr1 state
+    ->execute()
+    ->fetchAll();
+  // find the most recent transition
+  $tstamp2 = 0;
+  if (!empty($transitions)) {
+    foreach ($transitions as $tr) {
+      if ($tr->stamp > $tstamp2) { // find the most recent transition
+        $tstamp2 = $tr->stamp;
+      }
+    }
+  }
+  $tstamp = max($tstamp1, $tstamp2);
+  #dpm(date("m.d.Y",$tstamp), date("m.d.Y",$reftime));
+  return $tstamp > $reftime;
+}
