@@ -295,7 +295,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['required'] = TRUE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -4644,7 +4644,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['required'] = TRUE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -5520,7 +5520,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['required'] = TRUE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -6383,7 +6383,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['required'] = TRUE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -8487,7 +8487,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['required'] = TRUE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -12247,7 +12247,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = 'Prehľad hesiel podľa autorov. Zobrazujú sa len heslá, ktoré nevznikli zlučovaním.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -12912,7 +12912,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -13637,7 +13637,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = 'Prehľad hesiel podľa autorov. Zobrazujú sa len heslá, ktoré nevznikli zlučovaním.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -13839,7 +13839,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -14522,7 +14522,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Obsah: Zverejnené */
+  /* Filter criterion: Obsah: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -14646,7 +14646,7 @@ function rs_beliana_views_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['order'] = 'desc';
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
@@ -14702,7 +14702,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['arguments']['uid_touch']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['uid_touch']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid_touch']['specify_validation'] = TRUE;
-  /* Filter criterion: Obsah: Zverejnené */
+  /* Filter criterion: Obsah: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -16457,7 +16457,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -16863,7 +16863,9 @@ function rs_beliana_views_views_default_views() {
     'name_1' => 'name_1',
     'ilustracia_nazov_pouzit' => 'ilustracia_nazov_pouzit',
     'field_datum_vyplatenia' => 'field_datum_vyplatenia',
+    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
   );
+  $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
@@ -16965,6 +16967,13 @@ function rs_beliana_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_datum_autorovho_textu' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -16980,7 +16989,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -17094,6 +17103,19 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  /* Pole: Obsah: Dátum uloženia údajov pre vyplatenie */
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['field'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -17825,6 +17847,19 @@ function rs_beliana_views_views_default_views() {
       'operator' => '=',
       'value' => '',
     ),
+  );
+  /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['field'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['operator_id'] = 'field_datum_autorovho_textu_value_op';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['label'] = 'Dátum uloženia údajov pre vyplatenie';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['operator'] = 'field_datum_autorovho_textu_value_op';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['identifier'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -19175,7 +19210,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Vzťah: Obsah: Autor */
+  /* Vzťah: Obsah: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
@@ -21459,6 +21494,7 @@ function rs_beliana_views_views_default_views() {
     t('[field_datum]'),
     t('Ilustrácie'),
     t('Dátum vyplatenia'),
+    t('Dátum uloženia údajov pre vyplatenie'),
     t('Zlúčené z'),
     t('Redaktori zlúčeného hesla'),
     t('Vyplatenie odmeny'),
