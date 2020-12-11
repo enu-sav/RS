@@ -6553,7 +6553,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_zlucene_z']['relationship'] = 'nid';
   $handler->display->display_options['fields']['field_zlucene_z']['settings'] = array(
     'bypass_access' => 0,
-    'link' => 0,
+    'link' => 1,
   );
   $handler->display->display_options['fields']['field_zlucene_z']['delta_offset'] = '0';
   /* Pole: Obsah: Ilustrácie */
@@ -6698,7 +6698,7 @@ Heslá treba preradiť do stavov:
       ),
     ),
     2 => array(
-      'title' => 'je jednoduché',
+      'title' => 'Je jednoduché',
       'operator' => 'empty',
       'value' => array(
         'value' => '',
@@ -14961,6 +14961,8 @@ Heslá treba preradiť do stavov:
     'name_1' => 'name_1',
     'field_datum_vyplatenia' => 'field_datum_vyplatenia',
     'field_ilustracia' => 'field_ilustracia',
+    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
+    'field_datum_prebratia' => 'field_datum_prebratia',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
@@ -15053,6 +15055,20 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'field_ilustracia' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_autorovho_textu' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_prebratia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -15180,6 +15196,32 @@ Heslá treba preradiť do stavov:
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  /* Pole: Obsah: Dátum uloženia údajov pre vyplatenie */
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['field'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Dátum prebratia obsahu */
+  $handler->display->display_options['fields']['field_datum_prebratia']['id'] = 'field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['table'] = 'field_data_field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['field'] = 'field_datum_prebratia';
+  $handler->display->display_options['fields']['field_datum_prebratia']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -15812,6 +15854,19 @@ Heslá treba preradiť do stavov:
       'operator' => '=',
       'value' => '',
     ),
+  );
+  /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['field'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['operator_id'] = 'field_datum_autorovho_textu_value_op';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['label'] = 'Dátum uloženia údajov pre vyplatenie';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['operator'] = 'field_datum_autorovho_textu_value_op';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['identifier'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -20849,11 +20904,12 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('[field_datum]'),
     t('Dátum vyplatenia'),
     t('Ilustrácie'),
+    t('Dátum uloženia údajov pre vyplatenie'),
+    t('Dátum prebratia obsahu'),
     t('Atribúty'),
     t('Zlúčené z'),
     t('Vyplatenie odmeny'),
     t('Tabuľka pre geografické heslá'),
-    t('Dátum prebratia obsahu'),
     t('Stav preberania'),
     t('Všetky heslá - operácie'),
     t('Operácia'),

@@ -653,6 +653,8 @@ function rs_beliana_node_heslo_field_default_field_bases() {
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracoval redaktor',
         'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
+        'Vyplatené v RS' => 'Heslo vypracoval autor, na vyplatenie bolo zadané v knižnom RS',
+        'Vyplatené mimo RS' => 'Heslo sa vyplácalo mimo RS (pred novembrom 2018)',
       ),
       'allowed_values_function' => '',
     ),
