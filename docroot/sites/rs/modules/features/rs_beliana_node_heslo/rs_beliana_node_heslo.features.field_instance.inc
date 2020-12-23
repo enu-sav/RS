@@ -1371,7 +1371,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'liteformatter',
         'settings' => array(),
         'type' => 'liteformatter_formatter',
