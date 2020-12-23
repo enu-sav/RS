@@ -14963,6 +14963,7 @@ Heslá treba preradiť do stavov:
     'field_ilustracia' => 'field_ilustracia',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
     'field_datum_prebratia' => 'field_datum_prebratia',
+    'field_vyplatit' => 'field_vyplatit',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
@@ -15067,6 +15068,13 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'field_datum_prebratia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_vyplatit' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -15222,6 +15230,10 @@ Heslá treba preradiť do stavov:
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Pole: Obsah: Vyplatenie odmeny */
+  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -15554,6 +15566,38 @@ Heslá treba preradiť do stavov:
     22 => 0,
     23 => 0,
   );
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['group_info']['label'] = 'Ilustrácie';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['group_info']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Má ilustráciu',
+      'operator' => 'not empty',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    2 => array(
+      'title' => 'Nemá ilustráciu',
+      'operator' => 'empty',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => array(
+        'value' => '',
+        'min' => '',
+        'max' => '',
+      ),
+    ),
+  );
   /* Filter criterion: Obsah: Na zoradenie (field_na_zoradenie) */
   $handler->display->display_options['filters']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['filters']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
@@ -15676,6 +15720,26 @@ Heslá treba preradiť do stavov:
     26 => 0,
     28 => 0,
   );
+  $handler->display->display_options['filters']['field_datum_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_value']['group_info']['label'] = 'Dátum výročia';
+  $handler->display->display_options['filters']['field_datum_value']['group_info']['identifier'] = 'field_datum_value';
+  $handler->display->display_options['filters']['field_datum_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Má dátum',
+      'operator' => 'not empty',
+      'value' => '',
+    ),
+    2 => array(
+      'title' => 'Nemá dátum',
+      'operator' => 'empty',
+      'value' => '',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+  );
   /* Filter criterion: Obsah: Dátum vyplatenia (field_datum_vyplatenia) */
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['id'] = 'field_datum_vyplatenia_value';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['table'] = 'field_data_field_datum_vyplatenia';
@@ -15753,6 +15817,28 @@ Heslá treba preradiť do stavov:
     21 => 0,
     22 => 0,
     23 => 0,
+  );
+  $handler->display->display_options['filters']['field_vyplatit_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['group_info']['label'] = 'Vyplatenie odmeny';
+  $handler->display->display_options['filters']['field_vyplatit_value']['group_info']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Má vyplnené údaje',
+      'operator' => 'not empty',
+      'value' => array(),
+    ),
+    2 => array(
+      'title' => 'Nemá vyplnené údaje',
+      'operator' => 'not',
+      'value' => array(
+        'all' => 'all',
+      ),
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => 'or',
+      'value' => array(),
+    ),
   );
   $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
   /* Filter criterion: Obsah: Tabuľka pre geografické heslá (field_table) */
@@ -15868,6 +15954,26 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['group_info']['label'] = 'Dátum uloženia údajov pre vyplatenie';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['group_info']['identifier'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Má dátum',
+      'operator' => 'not empty',
+      'value' => '',
+    ),
+    2 => array(
+      'title' => 'Nemá dátum',
+      'operator' => 'empty',
+      'value' => '',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+  );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad (A)';
@@ -15882,7 +15988,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['title'] = 'Všetky heslá - operácie';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '500';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -15901,15 +16007,18 @@ Heslá treba preradiť do stavov:
     'type' => 'type',
     'state' => 'state',
     'from_state' => 'from_state',
-    'changed' => 'changed',
-    'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
-    'name_1' => 'name_1',
     'field_ilustracia' => 'field_ilustracia',
+    'name_1' => 'name_1',
+    'name' => 'name',
+    'changed' => 'changed',
+    'field_datum_prebratia' => 'field_datum_prebratia',
+    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
     'field_vyplatit' => 'field_vyplatit',
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
-    'field_datum_prebratia' => 'field_datum_prebratia',
+    'field_zlucene_z' => 'field_zlucene_z',
   );
+  $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
     'views_bulk_operations' => array(
@@ -15945,21 +16054,12 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'changed' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'desc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'name' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_lexikalna_skupina' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ilustracia' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -15971,7 +16071,30 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_ilustracia' => array(
+    'name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_prebratia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_autorovho_textu' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -15990,9 +16113,7 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_datum_prebratia' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
+    'field_zlucene_z' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -16075,69 +16196,25 @@ Heslá treba preradiť do stavov:
       'label' => '',
     ),
   );
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Pole: Obsah: Typ */
-  $handler->display->display_options['fields']['type']['id'] = 'type';
-  $handler->display->display_options['fields']['type']['table'] = 'node';
-  $handler->display->display_options['fields']['type']['field'] = 'type';
-  /* Pole: Workbench Moderation: Stav */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Workbench Moderation: Prišlo zo stavu */
-  $handler->display->display_options['fields']['from_state']['id'] = 'from_state';
-  $handler->display->display_options['fields']['from_state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['from_state']['field'] = 'from_state';
-  $handler->display->display_options['fields']['from_state']['machine_name'] = 0;
-  /* Pole: Obsah: Dátum aktualizácie */
-  $handler->display->display_options['fields']['changed']['id'] = 'changed';
-  $handler->display->display_options['fields']['changed']['table'] = 'node';
-  $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
-  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Pole: Používateľ: Názov */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'users';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Naposledy upravil';
-  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Pole: Obsah: Lexikálna skupina */
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
-  /* Pole: Používateľ: Názov */
-  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
-  $handler->display->display_options['fields']['name_1']['table'] = 'users';
-  $handler->display->display_options['fields']['name_1']['field'] = 'name';
-  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
-  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
-  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
-  /* Pole: Obsah: Ilustrácie */
-  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
-  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'link' => 1,
-  );
-  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  /* Pole: Obsah: Vyplatenie odmeny */
-  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
-  /* Pole: Obsah: Počet znakov na vyplatenie */
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
-  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+  /* Pole: Obsah: Remote ID */
+  $handler->display->display_options['fields']['field_remote_id']['id'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_remote_id']['alter']['text'] = '<a href="https://rs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>';
+  $handler->display->display_options['fields']['field_remote_id']['empty'] = '<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>';
+  $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
@@ -16154,6 +16231,90 @@ Heslá treba preradiť do stavov:
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Pole: Obsah: Dátum uloženia údajov pre vyplatenie */
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['field'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Vyplatenie odmeny */
+  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['label'] = 'Vyplatenie_odmeny';
+  $handler->display->display_options['fields']['field_vyplatit']['empty'] = 'Neuvedené';
+  /* Pole: Obsah: Počet znakov na vyplatenie */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Pole: Obsah: Zlúčené z */
+  $handler->display->display_options['fields']['field_zlucene_z']['id'] = 'field_zlucene_z';
+  $handler->display->display_options['fields']['field_zlucene_z']['table'] = 'field_data_field_zlucene_z';
+  $handler->display->display_options['fields']['field_zlucene_z']['field'] = 'field_zlucene_z';
+  $handler->display->display_options['fields']['field_zlucene_z']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_zlucene_z']['delta_offset'] = '0';
+  /* Pole: Obsah: Typ */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Workbench Moderation: Prišlo zo stavu */
+  $handler->display->display_options['fields']['from_state']['id'] = 'from_state';
+  $handler->display->display_options['fields']['from_state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['from_state']['field'] = 'from_state';
+  $handler->display->display_options['fields']['from_state']['machine_name'] = 0;
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Obsah: Ilustrácie */
+  $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
+  $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['fields']['name_1']['table'] = 'users';
+  $handler->display->display_options['fields']['name_1']['field'] = 'name';
+  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
+  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
+  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Naposledy upravil';
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  /* Pole: Obsah: Dátum aktualizácie */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -20558,10 +20719,9 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
   $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
   $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
   $handler->display->display_options['fields']['field_remote_id']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_remote_id']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_remote_id']['alter']['path'] = '<a href="https://rs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>';
+  $handler->display->display_options['fields']['field_remote_id']['alter']['text'] = '<a href="https://rs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>';
   $handler->display->display_options['fields']['field_remote_id']['alter']['external'] = TRUE;
-  $handler->display->display_options['fields']['field_remote_id']['empty'] = '[nid]';
+  $handler->display->display_options['fields']['field_remote_id']['empty'] = '<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>';
   $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 1,
@@ -20906,16 +21066,21 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('Ilustrácie'),
     t('Dátum uloženia údajov pre vyplatenie'),
     t('Dátum prebratia obsahu'),
+    t('Vyplatenie odmeny'),
     t('Atribúty'),
     t('Zlúčené z'),
-    t('Vyplatenie odmeny'),
     t('Tabuľka pre geografické heslá'),
     t('Stav preberania'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
-    t('Prišlo zo stavu'),
+    t('Remote ID'),
+    t('<a href="https://rs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>'),
+    t('<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>'),
+    t('Vyplatenie_odmeny'),
+    t('Neuvedené'),
     t('Počet znakov na vyplatenie'),
+    t('Prišlo zo stavu'),
     t('Autor hesla'),
     t('Všetky heslá - prehľad (G)'),
     t('Upravil niektorú verziu'),
@@ -20995,8 +21160,6 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
 </ol>
 <br />
  V oboch prípadoch bude stav prevzatých hesiel zmenený na <strong>Prevzaté z RS</strong> alebo <strong>Ukončené/zlúčené</strong>.</b>'),
-    t('Remote ID'),
-    t('[nid]'),
     t('Spôsob preberania'),
   );
   $export['vsetky_hesla_detaily'] = $view;

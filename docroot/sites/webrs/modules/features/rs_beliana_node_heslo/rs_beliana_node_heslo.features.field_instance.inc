@@ -312,7 +312,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -610,7 +610,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'weight' => 5,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -714,7 +714,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 3,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -784,7 +784,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'weight' => 4,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1113,7 +1113,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1187,7 +1187,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 5,
+        'weight' => 2,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1280,7 +1280,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'liteformatter',
         'settings' => array(),
         'type' => 'liteformatter_formatter',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'lite_display' => array(
         'label' => 'above',

@@ -629,8 +629,36 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = 'Zobrazené publikované heslá @start - @end z celkového počtu @total';
+  $handler->display->display_options['header']['result']['content'] = 'Zobrazené publikované heslá @start - @end z celkového počtu @total
+<h1>Postup pri sťahovaní hesla z webu a jeho následnom vyradení</h1>
+<b>Funkcia ešte nie je dokončená</b>
+<ol>
+<li>Na stránke https://beliana.sav.sk zrušiť zverejnenie hesla</li>
+<li> V hesle skontrolovať jeho Odkazujúce heslá</li>
+<li>V tomto náhľade heslo presunúť do stavu <em>Vyradené</em></li>
+</ol>
+Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
+';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Hromadné operácie: Obsah */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::moderate_to_vyradene' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -670,6 +698,11 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['field'] = 'ilustracia_nazov_pouzit';
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['relationship'] = 'nid';
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['label'] = 'Ilustrácie';
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['relationship'] = 'nid';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -914,7 +947,16 @@ function rs_beliana_sync_ui_views_default_views() {
     t('Stav'),
     t('Na zoradenie'),
     t('Zverejnené na webe'),
-    t('Zobrazené publikované heslá @start - @end z celkového počtu @total'),
+    t('Zobrazené publikované heslá @start - @end z celkového počtu @total
+<h1>Postup pri sťahovaní hesla z webu a jeho následnom vyradení</h1>
+<b>Funkcia ešte nie je dokončená</b>
+<ol>
+<li>Na stránke https://beliana.sav.sk zrušiť zverejnenie hesla</li>
+<li> V hesle skontrolovať jeho Odkazujúce heslá</li>
+<li>V tomto náhľade heslo presunúť do stavu <em>Vyradené</em></li>
+</ol>
+Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
+'),
     t('Synchronizácia po'),
     t('Dátum vo formáte RRRR-MM-DD alebo záporná hodnota (-2 day, -5 hour)'),
   );

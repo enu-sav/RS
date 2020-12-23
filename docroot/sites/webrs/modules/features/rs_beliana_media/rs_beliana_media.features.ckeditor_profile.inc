@@ -14,12 +14,12 @@ function rs_beliana_media_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Source\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
+    [\'Source\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
-    [\'JustifyCenter\',\'Bold\',\'Italic\'],
+    [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\',\'NumberedList\',\'BulletedList\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
+    [\'flite-acceptall\',\'flite-rejectall\',\'flite-toggleshow\',\'flite-toggletracking\',\'flite-acceptone\',\'flite-rejectone\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -34,7 +34,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'extraAllowedContent' => '',
         'enter_mode' => 'p',
         'shift_enter_mode' => 'br',
-        'font_format' => 'p;div;pre;address;h1;h2;h3;h4;h5;h6',
+        'font_format' => 'p;h2;h3',
         'custom_formatting' => 'f',
         'formatting' => array(
           'custom_formatting_options' => array(
@@ -209,10 +209,42 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'lite' => array(
-            'name' => 'lite',
-            'desc' => 'Plugin file: lite',
-            'path' => '%plugin_dir%lite/',
+          'flite' => array(
+            'name' => 'flite',
+            'desc' => 'Plugin file: flite',
+            'path' => '%plugin_dir%flite/',
+            'buttons' => array(
+              'flite-acceptall' => array(
+                'label' => 'Accept all changes',
+                'icon' => 'icons/flite-acceptall.png',
+              ),
+              'flite-rejectall' => array(
+                'label' => 'Reject all changes',
+                'icon' => 'icons/flite-rejectall.png',
+              ),
+              'flite-acceptone' => array(
+                'label' => 'Accept change',
+                'icon' => 'icons/flite-acceptone.png',
+              ),
+              'flite-rejectone' => array(
+                'label' => 'Reject change',
+                'icon' => 'icons/flite-rejectone.png',
+              ),
+              'flite-toggleshow' => array(
+                'label' => 'Show/hide tracked changes',
+                'icon' => 'icons/flite-toggleshow.png',
+              ),
+              'flite-toggletracking' => array(
+                'label' => 'Start/stop tracking changes',
+                'icon' => 'icons/flite-toggletracking.png',
+              ),
+            ),
+            'default' => 't',
+          ),
+          'flite-fix' => array(
+            'name' => 'flite-fix',
+            'desc' => 'Plugin file: flite-fix',
+            'path' => '%plugin_dir%flite-fix/',
             'buttons' => FALSE,
             'default' => 'f',
           ),
