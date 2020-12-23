@@ -13,7 +13,7 @@ function beliana_views_data_alter(&$data) {
       'handler' => 'beliana_handler_filter_author_date_month',
     ),
   );
-  
+
   $data['node']['author_date_year'] = array(
     'group' => 'Beliana',
     'title' => t('Author Date Filter (Year)'),
@@ -23,7 +23,7 @@ function beliana_views_data_alter(&$data) {
       'handler' => 'beliana_handler_filter_author_date_year',
     ),
   );
-  
+
   $data['node']['odmena_date_month'] = array(
     'group' => 'Beliana',
     'title' => t('Odmena Date Filter (Month)'),
@@ -33,7 +33,7 @@ function beliana_views_data_alter(&$data) {
       'handler' => 'beliana_handler_filter_odmena_date_month',
     ),
   );
-  
+
   $data['node']['odmena_date_year'] = array(
     'group' => 'Beliana',
     'title' => t('Odmena Date Filter (Year)'),
@@ -49,6 +49,15 @@ function beliana_views_data_alter(&$data) {
     'help' => t('Build "pouzit" data from ilustracia reference'),
     'field' => array(
       'handler' => 'beliana_handler_field_ilustracia_nazov_pouzit',
+    ),
+  );
+
+  $data['node']['sync_remote_id'] = array(
+    'group' => 'Beliana',
+    'title' => t('Remote ID (Sync)'),
+    'help' => t('The node ID from remote WEB env.'),
+    'field' => array(
+      'handler' => 'beliana_handler_field_sync_remote_id',
     ),
   );
 }

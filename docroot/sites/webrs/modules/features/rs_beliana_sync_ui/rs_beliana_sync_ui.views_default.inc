@@ -703,6 +703,13 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba pr
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['relationship'] = 'nid';
+  /* Pole: Beliana: Remote ID (Sync) */
+  $handler->display->display_options['fields']['sync_remote_id']['id'] = 'sync_remote_id';
+  $handler->display->display_options['fields']['sync_remote_id']['table'] = 'node';
+  $handler->display->display_options['fields']['sync_remote_id']['field'] = 'sync_remote_id';
+  $handler->display->display_options['fields']['sync_remote_id']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['sync_remote_id']['label'] = 'Heslo na Webe';
+  $handler->display->display_options['fields']['sync_remote_id']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -957,6 +964,7 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba pr
 </ol>
 Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
 '),
+    t('Heslo na Webe'),
     t('Synchronizácia po'),
     t('Dátum vo formáte RRRR-MM-DD alebo záporná hodnota (-2 day, -5 hour)'),
   );
