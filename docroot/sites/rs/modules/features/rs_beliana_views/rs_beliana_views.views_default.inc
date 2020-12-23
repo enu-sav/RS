@@ -494,8 +494,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní: 
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom 
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
+ 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
     ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
     ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
  2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
@@ -812,7 +812,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť. 
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť.
 <ul>
 <li><b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>. </li>
 <li><b>Ak chcete heslo odoslať redaktorovi:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).</li>
@@ -1807,7 +1807,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = ' ⚫ Ak chcete heslo upraviť: Na riadku hesla kliknite na jeho názov s odkazom a potom na Upraviť. Spravte potrebné úpravy a kliknite na Uložiť
  ⚫ Ak chcete heslo odoslať na ďalšie spracovanie: Na riadku hesla kliknite na jeho názov s odkazom, zvoľte nasledujúci stav a potom kliknite na Zmeniť stav. Kliknite na Použiť (vpravo).
 <b>Voľba nasledujúceho stavu:</b>
- ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5. 
+ ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5.
  ⚫ <i>2. korektúra</i>: ak sa k zmenám od 1. korektúry musia vyjadriť redaktori. Heslo sa vráti naspäť. Pred odoslaním treba v hesle upraviť lexikálnu skupinu na meno toho redaktora, ktorý sa má v 2. korektúre k heslu vyjadriť.
  ⚫ <i>U výst. redaktora 4</i>: ak je potrebné vyjadrenie VR4. Heslo sa vráti naspäť.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
@@ -2405,7 +2405,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = ' ⚫ Ak chcete heslo upraviť: Na riadku hesla kliknite na jeho názov s odkazom a potom na Upraviť. Spravte potrebné úpravy a kliknite na Uložiť
  ⚫ Ak chcete heslo odoslať na ďalšie spracovanie: Na riadku hesla kliknite na jeho názov s odkazom, zvoľte nasledujúci stav a potom kliknite na Zmeniť stav. Kliknite na Použiť (vpravo).
 <b>Voľba nasledujúceho stavu:</b>
- ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5. 
+ ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5.
  ⚫ <i>2. korektúra</i>: ak sa k zmenám od 1. korektúry musia vyjadriť redaktori. Heslo sa vráti naspäť. Pred odoslaním treba v hesle upraviť lexikálnu skupinu na meno toho redaktora, ktorý sa má v 2. korektúre k heslu vyjadriť.
  ⚫ <i>U výst. redaktora 4</i>: ak je potrebné vyjadrenie VR4. Heslo sa vráti naspäť.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
@@ -9248,8 +9248,8 @@ function rs_beliana_views_views_default_views() {
     t('Priradiť autora a zmeniť stav'),
     t('xx'),
     t('viac'),
-    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní: 
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom 
+    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
+ 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
     ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
     ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
  2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
@@ -9267,7 +9267,7 @@ function rs_beliana_views_views_default_views() {
     t('Záznam z pôvodného GH'),
     t('Komentár obsahuje'),
     t('Rozpracované'),
-    t('Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť. 
+    t('Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť.
 <ul>
 <li><b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>. </li>
 <li><b>Ak chcete heslo odoslať redaktorovi:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).</li>
@@ -9298,7 +9298,7 @@ function rs_beliana_views_views_default_views() {
     t(' ⚫ Ak chcete heslo upraviť: Na riadku hesla kliknite na jeho názov s odkazom a potom na Upraviť. Spravte potrebné úpravy a kliknite na Uložiť
  ⚫ Ak chcete heslo odoslať na ďalšie spracovanie: Na riadku hesla kliknite na jeho názov s odkazom, zvoľte nasledujúci stav a potom kliknite na Zmeniť stav. Kliknite na Použiť (vpravo).
 <b>Voľba nasledujúceho stavu:</b>
- ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5. 
+ ⚫ <i>U jaz. redaktora 2</i>: ak zmeny od 1. korektúry boli minimálne, alebo ak už sú doriešené. Heslo ďalej ide k výstupnému redaktorovi 5.
  ⚫ <i>2. korektúra</i>: ak sa k zmenám od 1. korektúry musia vyjadriť redaktori. Heslo sa vráti naspäť. Pred odoslaním treba v hesle upraviť lexikálnu skupinu na meno toho redaktora, ktorý sa má v 2. korektúre k heslu vyjadriť.
  ⚫ <i>U výst. redaktora 4</i>: ak je potrebné vyjadrenie VR4. Heslo sa vráti naspäť.'),
     t('Na zoradenie'),
@@ -12829,10 +12829,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
   $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-  );
   $handler->display->display_options['filters']['author_date_year']['group'] = 1;
   $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
@@ -13498,10 +13494,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
   $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-  );
   $handler->display->display_options['filters']['author_date_year']['group'] = 1;
   $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
@@ -13775,11 +13767,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['odmena_date_year']['id'] = 'odmena_date_year';
   $handler->display->display_options['filters']['odmena_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['odmena_date_year']['field'] = 'odmena_date_year';
-  $handler->display->display_options['filters']['odmena_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-    2020 => '2020',
-  );
   $handler->display->display_options['filters']['odmena_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['odmena_date_year']['expose']['operator_id'] = 'odmena_date_year_op';
   $handler->display->display_options['filters']['odmena_date_year']['expose']['label'] = 'Rok';
@@ -14322,11 +14309,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['odmena_date_year']['id'] = 'odmena_date_year';
   $handler->display->display_options['filters']['odmena_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['odmena_date_year']['field'] = 'odmena_date_year';
-  $handler->display->display_options['filters']['odmena_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-    2020 => '2020',
-  );
   $handler->display->display_options['filters']['odmena_date_year']['group'] = 1;
   $handler->display->display_options['filters']['odmena_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['odmena_date_year']['expose']['operator_id'] = 'odmena_date_year_op';

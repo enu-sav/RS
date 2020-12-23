@@ -17,12 +17,12 @@ class beliana_handler_filter_odmena_date_year extends views_handler_filter_in_op
   function construct() {
     parent::construct();
 
+    $current_year = date('Y');
+    $this->value_options = array();
 
-    $this->value_options = array(
-      2018 => '2018',
-      2019 => '2019',
-      2020 => '2020'
-    );
+    for($year = $current_year - 2; $year <= $current_year + 2; $year++) {
+      $this->value_options[$year] = $year;
+    }
   }
 
   function op_simple() {

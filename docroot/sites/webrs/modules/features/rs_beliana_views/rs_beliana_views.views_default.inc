@@ -9249,7 +9249,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'vyplatenieOdmeny';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
+  /* Pole: Obsah: Erráta */
   $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
   $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
   $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
@@ -10139,10 +10139,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
   $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-  );
   $handler->display->display_options['filters']['author_date_year']['group'] = 1;
   $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
@@ -10151,31 +10147,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['author_date_year']['expose']['identifier'] = 'year';
   $handler->display->display_options['filters']['author_date_year']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
   );
   $handler->display->display_options['filters']['author_date_year']['group_info']['label'] = 'Author Date Filter (Year)';
   $handler->display->display_options['filters']['author_date_year']['group_info']['identifier'] = 'author_date_year';
@@ -10809,10 +10780,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
   $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-  );
   $handler->display->display_options['filters']['author_date_year']['group'] = 1;
   $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
@@ -10821,31 +10788,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['author_date_year']['expose']['identifier'] = 'year';
   $handler->display->display_options['filters']['author_date_year']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
   );
   /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
@@ -11086,11 +11028,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['odmena_date_year']['id'] = 'odmena_date_year';
   $handler->display->display_options['filters']['odmena_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['odmena_date_year']['field'] = 'odmena_date_year';
-  $handler->display->display_options['filters']['odmena_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-    2020 => '2020',
-  );
   $handler->display->display_options['filters']['odmena_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['odmena_date_year']['expose']['operator_id'] = 'odmena_date_year_op';
   $handler->display->display_options['filters']['odmena_date_year']['expose']['label'] = 'Rok';
@@ -11098,33 +11035,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['odmena_date_year']['expose']['identifier'] = 'odmena_date_year';
   $handler->display->display_options['filters']['odmena_date_year']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    10 => 0,
-    18 => 0,
-    5 => 0,
-    4 => 0,
-    33 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    32 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
   );
   $handler->display->display_options['path'] = 'vyplatit-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -11673,11 +11583,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['odmena_date_year']['id'] = 'odmena_date_year';
   $handler->display->display_options['filters']['odmena_date_year']['table'] = 'node';
   $handler->display->display_options['filters']['odmena_date_year']['field'] = 'odmena_date_year';
-  $handler->display->display_options['filters']['odmena_date_year']['value'] = array(
-    2018 => '2018',
-    2019 => '2019',
-    2020 => '2020',
-  );
   $handler->display->display_options['filters']['odmena_date_year']['group'] = 1;
   $handler->display->display_options['filters']['odmena_date_year']['exposed'] = TRUE;
   $handler->display->display_options['filters']['odmena_date_year']['expose']['operator_id'] = 'odmena_date_year_op';
@@ -11686,33 +11591,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['odmena_date_year']['expose']['identifier'] = 'odmena_date_year';
   $handler->display->display_options['filters']['odmena_date_year']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    10 => 0,
-    18 => 0,
-    5 => 0,
-    4 => 0,
-    33 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    32 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
   );
   $handler->display->display_options['path'] = 'vyplatit_ilustracie.csv';
   $handler->display->display_options['displays'] = array(
