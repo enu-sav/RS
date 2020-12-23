@@ -22,6 +22,58 @@ function beliana_sync_menu() {
 }
 
 /**
+ * Implements hook_cron().
+ */
+function beliana_sync_cron() {
+  global $base_url;
+
+  $beliana_web_uri = variable_get('beliana_web_uri');
+  // select duplicate records in beliana_sync and send notification
+  $results = db_query("SELECT CONCAT('$base_url/node/', local) as rs, CONCAT('$beliana_web_uri/node/', remote) as web, FROM_UNIXTIME(updated, '%Y/%m/%e %H:%i:%s') as updated
+FROM {beliana_sync} aa
+WHERE EXISTS(SELECT 1 FROM {beliana_sync} bb WHERE aa.remote = bb.remote and aa.remote <> 0 LIMIT 1,1)
+ORDER BY aa.remote ASC")->fetchAll();
+
+  if (!empty($results)) {
+    drupal_mail('beliana_sync', 'duplicates_in_beliana_sync', 'encytsra@savba.sk', language_default(), ['results' => $results]);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function beliana_sync_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'duplicates_in_beliana_sync':
+      $message['subject'] = 'ENCB-280: Duplikované remote ID (beliana_sync)';
+
+      $table_header = '<thead><tr>';
+      $table_body = '<tbody>';
+      foreach ($params['results'] as $id => $result) {
+        $table_body .= '<tr>';
+        foreach ($result as $key => $value) {
+          if ($id == 0) {
+            $table_header .= '<th>' . $key . '</th>';
+          }
+
+          $text = in_array($key, ['rs', 'web']) ? '<a href="' . $value . '">' . $value . '</a>' : $value;
+          $table_body .= '<td>' . $text . '</td>';
+        }
+        $table_body .= '<tr>';
+      }
+
+      $table_header .= '</tr></thead>';
+      $table_body .= '</tbody>';
+
+      $message['body'][] = '<table>';
+      $message['body'][] = $table_header;
+      $message['body'][] = $table_body;
+      $message['body'][] = '</table>';
+      break;
+  }
+}
+
+/**
  * Extract links from node and insert them into beliana_links table.
  *
  * @param $nid
