@@ -22,9 +22,92 @@ CKEDITOR.plugins.add('lite-fix', {
         editor.removeMenuItem('copy');
         editor.removeMenuItem('paste');
 
-        // disable drag&drop inside the editor
+        // if plugin 'mathjax' is enabled, disable drag&drop inside the editor
         editor.on( 'dragstart', function( event ) {
-            event.cancel();
+            if (event.editor.plugins.mathjax) {
+                event.cancel();
+            }
+        });
+
+        // if plugin 'eqneditor' is enabled, convert mathjax equation 
+        editor.on('instanceReady', function(event) { 
+            // if the mathjax plugin is enabled
+            if (event.editor.plugins.eqneditor) {
+                var data = event.editor.getData();
+                var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
+                if ( data.match(rexp)) {
+                    var fixes = {
+                        "∈": "\\in ",
+                        "∉": "\\not\\in ",
+                        "\\gt{": ">{",
+                        "\\lt{": "<{",
+                        "\\gt ": ">",
+                        "\\lt ": "<",
+                        "∅": "\\empty ",
+                        "⊂": "\\subset ",
+                        "≠": "\\neq ",
+                        "·": "\\cdot ",
+                        "×": "\\times ",
+                        "⟨": "\\langle ",
+                        "⟩": "\\rangle ",
+                        "▪": "\\blacksquare ",
+                        //"≤": "\\leq ",    // ignore, used also out of LaLeX equations
+                        //"≥": "\\geq ",    // ignore, used also out of LaLeX equations
+                        "α ": "\\alpha ",
+                        "β ": "\\beta ",
+                        "γ ": "\\gamma ",
+                        "δ ": "\\delta ",
+                        "ϵ ": "\\epsilon ",
+                        "ε ": "\\varepsilon ",
+                        "ζ ": "\\zeta ",
+                        "η ": "\\eta ",
+                        "θ ": "\\theta ",
+                        "ϑ ": "\\vartheta ",
+                        "ι ": "\\iota ",
+                        "κ ": "\\kappa ",
+                        "ϰ ": "\\varkappa ",
+                        "λ ": "\\lambda ",
+                        "μ ": "\\mu ",
+                        "ν ": "\\nu ",
+                        "ξ ": "\\xi ",
+                        "π ": "\\pi ",
+                        "ρ ": "\\rho ",
+                        "ϱ ": "\\varrho ",
+                        "σ ": "\\sigma ",
+                        "ς ": "\\varsigma ",
+                        "τ ": "\\tau ",
+                        "υ ": "\\upsilon ",
+                        "ϕ ": "\\phi ",
+                        "φ ": "\\varphi ",
+                        "χ ": "\\chi ",
+                        "ψ ": "\\psi ",
+                        "ω ": "\\omega ",
+                        "Γ": "\\Gamma ",
+                        "Δ": "\\Delta ",
+                        "Θ": "\\Theta ",
+                        "Λ": "\\Lambda ",
+                        "Ξ": "\\Xi ",
+                        "Π": "\\Pi ",
+                        "Σ": "\\Sigma ",
+                        "ϒ": "\\Upsilon ",
+                        "Φ": "\\Phi ",
+                        "Ψ": "\\Psi ",
+                        "Ω": "\\Omega ",
+                    };
+                    
+                    //var rexp = /<span class="math-tex">\\\((.*?)\\\)<\/span>/gs;
+                    // if the mathjax plugin is not enabled, 'class="math-tex"' is removed
+                    var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
+                    //var rep = '<img src="https:\/\/latex.codecogs.com\/gif.latex?$1" title="$1" \/>';
+                    var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/gif.latex?$1" \/>';
+                    var data = data.replace(rexp,rep);
+                    for (var key in fixes) {
+                        var value = fixes[key];
+                        data = data.replaceAll(key, value);
+                    }
+                    event.editor.setData(data);
+                }
+            }
         });
 
         // cancel key-press event SHIFT-Enter nad CTRL-X
