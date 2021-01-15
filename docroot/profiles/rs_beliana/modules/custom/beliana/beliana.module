@@ -1335,6 +1335,7 @@ function beliana_node_presave($node) {
 
   // remove unnecessary tags
   $html = beliana_clean_tags($node, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], "Text hesla (beliana_node_presave)");
+  $html = eqneditor2mathjax($html);
   $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = $html;
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $html = beliana_clean_tags($node, $node->field_table[LANGUAGE_NONE][0]['value'], "Tabuľka pre geografické heslá");
@@ -2879,6 +2880,17 @@ function beliana_clean_tags($node, $text, $where) {
   $fragment = preg_replace('#([\r\n]*<p> *</p>)*$#', '', $fragment);
 
   return $fragment;
+}
+
+
+function eqneditor2mathjax($html)
+{
+    if (strpos($html, "latex.codecogs.com")) {
+        $rexp = '#<img alt="(.*)" src="https://latex.codecogs.com/gif.latex\?.*">#U';
+        $rep =  '<span class="math-tex">\\(\1\\)</span>';
+        $html = preg_replace($rexp, $rep, $html);
+    }
+    return $html;
 }
 
 /**
