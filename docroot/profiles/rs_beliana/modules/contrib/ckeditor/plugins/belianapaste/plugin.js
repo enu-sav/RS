@@ -68,6 +68,8 @@
             editor.on('paste', function (evt) {
                 // remove newlines '\n' inserted on copy by LibreOffice
                 evt.data.dataValue = evt.data.dataValue.replace( /\n/g, " ");
+                // remove text marked by lite as deleted
+                evt.data.dataValue = evt.data.dataValue.replace( /<del.*?<\/del>/g, "");
                 var data = evt.data;
                 var mswordHtml = data.dataValue;
 
