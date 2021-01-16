@@ -66,6 +66,8 @@
             // 3. Listen with high priority (3), so clean up is done before content
             // type sniffing (priority = 6).
             editor.on('paste', function (evt) {
+                // remove newlines '\n' inserted on copy by LibreOffice
+                evt.data.dataValue = evt.data.dataValue.replace( /\n/g, " ");
                 var data = evt.data;
                 var mswordHtml = data.dataValue;
 
