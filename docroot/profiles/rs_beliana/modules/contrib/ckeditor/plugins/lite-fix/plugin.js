@@ -31,7 +31,7 @@ CKEDITOR.plugins.add('lite-fix', {
 
         // if plugin 'eqneditor' is enabled, convert mathjax equation 
         editor.on('instanceReady', function(event) { 
-            // if the mathjax plugin is enabled
+            // if the eqneditor (codecogs) plugin is enabled
             if (event.editor.plugins.eqneditor) {
                 var data = event.editor.getData();
                 var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
@@ -51,8 +51,6 @@ CKEDITOR.plugins.add('lite-fix', {
                         "⟨": "\\langle ",
                         "⟩": "\\rangle ",
                         "▪": "\\blacksquare ",
-                        //"≤": "\\leq ",    // ignore, used also out of LaLeX equations
-                        //"≥": "\\geq ",    // ignore, used also out of LaLeX equations
                         "α ": "\\alpha ",
                         "β ": "\\beta ",
                         "γ ": "\\gamma ",
@@ -93,9 +91,39 @@ CKEDITOR.plugins.add('lite-fix', {
                         "Φ": "\\Phi ",
                         "Ψ": "\\Psi ",
                         "Ω": "\\Omega ",
+                        "\\textrm": "\\mathrm",
+                        "\\text": "\\mathrm",
+                        "\\\(\\\)": "",     //Blank equation
+                        "\\\( \\\)": "",    //Blank equation
                     };
+                    data = data.replace(/\\\(\\\)/g, "");
+                    // replace character in equations, which may occur also elsewhere
+                    // repeat the following 2 - 3 times, to fix up to 3 occurences of the character in a single equation
+                    data = data.replace(/(\\\(.*?)°(.*?\\\))/g, "$1^{\\circ\\,}$2");
+
+                    data = data.replace(/(\\\(.*?)≤(.*?\\\))/g, "$1\\leq $2");
+                    data = data.replace(/(\\\(.*?)≤(.*?\\\))/g, "$1\\leq $2");
+
+                    data = data.replace(/(\\\(.*?)≥(.*?\\\))/g, "$1\\geq $2");
+                    data = data.replace(/(\\\(.*?)≥(.*?\\\))/g, "$1\\geq $2");
+
+                    data = data.replace(/(\\\(.*?)´(.*?\\\))/g, "$1'$2");
+                    data = data.replace(/(\\\(.*?)´(.*?\\\))/g, "$1'$2");
+                    data = data.replace(/(\\\(.*?)´(.*?\\\))/g, "$1'$2");
+                    // fix of a 3 various dashes — these look the same in the vi editor
+                    data = data.replace(/(\\\(.*?)–(.*?\\\))/g, "$1-$2");
+                    data = data.replace(/(\\\(.*?)–(.*?\\\))/g, "$1-$2");
+                    data = data.replace(/(\\\(.*?)–(.*?\\\))/g, "$1-$2");
+
+                    data = data.replace(/(\\\(.*?)−(.*?\\\))/g, "$1-$2");
+                    data = data.replace(/(\\\(.*?)−(.*?\\\))/g, "$1-$2");
+                    data = data.replace(/(\\\(.*?)−(.*?\\\))/g, "$1-$2");
+
+                    data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
+                    data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
+                    data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
                     
-                    //var rexp = /<span class="math-tex">\\\((.*?)\\\)<\/span>/gs;
+                    // replace mathjax equations by codecogs image
                     // if the mathjax plugin is not enabled, 'class="math-tex"' is removed
                     var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
                     //var rep = '<img src="https:\/\/latex.codecogs.com\/gif.latex?$1" title="$1" \/>';
@@ -119,6 +147,29 @@ CKEDITOR.plugins.add('lite-fix', {
             if (cancel_keys.includes(event.data.keyCode)) {
                 event.cancel();
             }
+            if (event.data.keyCode == 8 ) { // backspace
+                // if tracking is on
+                var selection = CKEDITOR.currentInstance.getSelection();
+                var sel_text = selection.getSelectedText();
+                if (sel_text == ""){
+                    var ranges = selection.getRanges();
+                    var range = ranges[0];
+                    var prev_node = range.getPreviousNode(); // null on the first text character
+                    if (prev_node && prev_node.type == CKEDITOR.NODE_ELEMENT){
+                        var tagName = prev_node.getName();
+                        if (tagName == "p") {
+                            if (CKEDITOR.currentInstance.plugins.lite) {
+                                var lite = CKEDITOR.currentInstance.plugins.lite.findPlugin(CKEDITOR.currentInstance);
+                                if (lite._isTracking) {
+                                    alert("Ak chcete odstrániť zalomenie odseku, prejdite na koniec predchádzajúceho odseku, vložte medzeru a stlačte kláves Delete.");
+                                    event.cancel();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             // ignore CTRL-X and CTRL-C
             //var copy_keys = [CKEDITOR.CTRL + 67, CKEDITOR.CTRL + 88 ];
             var copy_keys = [CKEDITOR.CTRL + 67, CKEDITOR.CTRL + 88 ];
