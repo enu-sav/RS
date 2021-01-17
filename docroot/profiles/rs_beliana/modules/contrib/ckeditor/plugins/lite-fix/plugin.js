@@ -24,6 +24,10 @@ CKEDITOR.plugins.add('lite-fix', {
             editor.removeMenuItem('paste');
         }
 
+        // add missing formatting of deleted images
+        // the following does not work, changes therefore done directly in lite/css/lite.css
+        //editor.addContentsCss && editor.addContentsCss( 'lite-fix/plugin.css' )
+
         // disable drag&drop inside the editor, does not work with lite
         editor.on( 'dragstart', function( event ) {
             event.cancel();
