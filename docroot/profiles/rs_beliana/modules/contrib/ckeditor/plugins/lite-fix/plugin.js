@@ -18,23 +18,24 @@ CKEDITOR.plugins.add('lite-fix', {
 
         // remove cut and paste buttons from the CKEditor's context menu
 	    // cut and copy do not work correctly with MathJax
-        editor.removeMenuItem('cut');
-        editor.removeMenuItem('copy');
-        editor.removeMenuItem('paste');
+        if (editor.plugins.mathjax) {
+            editor.removeMenuItem('cut');
+            editor.removeMenuItem('copy');
+            editor.removeMenuItem('paste');
+        }
 
-        // if plugin 'mathjax' is enabled, disable drag&drop inside the editor
+        // disable drag&drop inside the editor, does not work with lite
         editor.on( 'dragstart', function( event ) {
-            if (event.editor.plugins.mathjax) {
-                event.cancel();
-            }
+            event.cancel();
         });
 
-        // if plugin 'eqneditor' is enabled, convert mathjax equation 
+        // if plugin 'eqneditor' is enabled, convert mathjax equations to codecogs <img...>
         editor.on('instanceReady', function(event) { 
             // if the eqneditor (codecogs) plugin is enabled
             if (event.editor.plugins.eqneditor) {
                 var data = event.editor.getData();
                 var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
+                // eqneditor does not support unicode, so convert special characters to TeX notation
                 if ( data.match(rexp)) {
                     var fixes = {
                         "∈": "\\in ",
