@@ -25,8 +25,7 @@ CKEDITOR.plugins.add('lite-fix', {
         }
 
         // add missing formatting of deleted images
-        // the following does not work, changes therefore done directly in lite/css/lite.css
-        //editor.addContentsCss && editor.addContentsCss( 'lite-fix/plugin.css' )
+        CKEDITOR.document.appendStyleSheet(CKEDITOR.getUrl(CKEDITOR.plugins.getPath('lite-fix') + 'css/lite-fix.css'));
 
         // disable drag&drop inside the editor, does not work with lite
         editor.on( 'dragstart', function( event ) {
@@ -34,7 +33,7 @@ CKEDITOR.plugins.add('lite-fix', {
         });
 
         // if plugin 'eqneditor' is enabled, convert mathjax equations to codecogs <img...>
-        editor.on('instanceReady', function(event) { 
+        editor.on('instanceReady', function(event) {
             // if the eqneditor (codecogs) plugin is enabled
             if (event.editor.plugins.eqneditor) {
                 var data = event.editor.getData();
@@ -127,7 +126,7 @@ CKEDITOR.plugins.add('lite-fix', {
                     data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
                     data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
                     data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
-                    
+
                     // replace mathjax equations by codecogs image
                     // if the mathjax plugin is not enabled, 'class="math-tex"' is removed
                     var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
@@ -146,7 +145,7 @@ CKEDITOR.plugins.add('lite-fix', {
         // cancel key-press event SHIFT-Enter nad CTRL-X
 	    // SHIFT-ENTER: inserts <br /> (we do not want this)
 	    // CTRL-X: cut does not work correctly
-        editor.on( 'key', function( event ) { 
+        editor.on( 'key', function( event ) {
             //var cancel_keys = [CKEDITOR.SHIFT + 13, CKEDITOR.CTRL + 88];
             var cancel_keys = [CKEDITOR.SHIFT + 13];
             if (cancel_keys.includes(event.data.keyCode)) {
