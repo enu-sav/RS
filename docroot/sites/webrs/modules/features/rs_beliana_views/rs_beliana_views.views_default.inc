@@ -9249,7 +9249,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'vyplatenieOdmeny';
-  /* Pole: Obsah: Erráta */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
   $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
   $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
@@ -13106,7 +13106,9 @@ Heslá treba preradiť do stavov:
     'field_subor_ilustracie' => 'field_subor_ilustracie',
     'field_meno_autora_diela' => 'field_meno_autora_diela',
     'field_meno_autora_snimky_diela' => 'field_meno_autora_snimky_diela',
+    'field_zdroj_ilustracie' => 'field_zdroj_ilustracie',
   );
+  $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
@@ -13181,6 +13183,13 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'field_meno_autora_snimky_diela' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_zdroj_ilustracie' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -13279,6 +13288,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['table'] = 'field_data_field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['field'] = 'field_meno_autora_snimky_diela';
   $handler->display->display_options['fields']['field_meno_autora_snimky_diela']['alter']['text'] = '[title]';
+  /* Pole: Obsah: Typ ilustrácie */
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['id'] = 'field_zdroj_ilustracie';
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['table'] = 'field_data_field_zdroj_ilustracie';
+  $handler->display->display_options['fields']['field_zdroj_ilustracie']['field'] = 'field_zdroj_ilustracie';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Kritéria zoradenia: Obsah: Názov */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
@@ -13497,6 +13510,21 @@ Heslá treba preradiť do stavov:
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '3';
+  /* Filter criterion: Obsah: Typ ilustrácie (field_zdroj_ilustracie) */
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['id'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['table'] = 'field_data_field_zdroj_ilustracie';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['field'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator_id'] = 'field_zdroj_ilustracie_value_op';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['label'] = 'Typ ilustrácie';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator'] = 'field_zdroj_ilustracie_value_op';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['identifier'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['path'] = 'vyhladat-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
@@ -14345,6 +14373,7 @@ Heslá treba preradiť do stavov:
     t('Meno autora diela'),
     t('Meno autora snímky'),
     t('[title]'),
+    t('Typ ilustrácie'),
     t('Vyhľadať heslá (A)'),
     t('Lexikálna skupina (podľa redaktora)'),
     t('Rozpracované heslá'),

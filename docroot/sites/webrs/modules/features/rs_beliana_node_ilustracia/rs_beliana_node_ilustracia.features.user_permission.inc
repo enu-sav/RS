@@ -37,11 +37,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'create field_drzitel_prav'.
   $permissions['create field_drzitel_prav'] = array(
     'name' => 'create field_drzitel_prav',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -51,6 +47,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -63,6 +60,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -75,6 +73,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -87,6 +86,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -99,6 +99,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -111,6 +112,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -136,6 +138,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -157,6 +160,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -169,6 +173,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -181,6 +186,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -193,6 +199,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -205,6 +212,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -217,6 +225,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -229,6 +238,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -306,11 +316,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'edit field_drzitel_prav'.
   $permissions['edit field_drzitel_prav'] = array(
     'name' => 'edit field_drzitel_prav',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -320,6 +326,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -332,6 +339,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -344,6 +352,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -356,6 +365,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -368,6 +378,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -380,6 +391,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -404,6 +416,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'edit field_odmena',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -425,6 +438,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -437,6 +451,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -449,6 +464,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -461,6 +477,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -473,6 +490,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -485,6 +503,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -497,6 +516,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -529,11 +549,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'edit own field_drzitel_prav'.
   $permissions['edit own field_drzitel_prav'] = array(
     'name' => 'edit own field_drzitel_prav',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -543,6 +559,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -555,6 +572,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -567,6 +585,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -579,6 +598,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -591,6 +611,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -603,6 +624,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -628,6 +650,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -649,6 +672,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -661,6 +685,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -673,6 +698,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -685,6 +711,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -697,6 +724,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -709,6 +737,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -721,6 +750,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -772,11 +802,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'view field_drzitel_prav'.
   $permissions['view field_drzitel_prav'] = array(
     'name' => 'view field_drzitel_prav',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -786,6 +812,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -798,6 +825,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -810,6 +838,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -822,6 +851,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -834,6 +864,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -846,6 +877,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -867,6 +899,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'view field_odmena',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -877,6 +910,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'name' => 'view field_original',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -888,6 +922,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -900,6 +935,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'useradmin' => 'useradmin',
@@ -913,6 +949,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'useradmin' => 'useradmin',
@@ -926,6 +963,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -938,6 +976,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -950,6 +989,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -962,6 +1002,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -990,11 +1031,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   // Exported permission: 'view own field_drzitel_prav'.
   $permissions['view own field_drzitel_prav'] = array(
     'name' => 'view own field_drzitel_prav',
-    'roles' => array(
-      'Grafik' => 'Grafik',
-      'administrátor' => 'administrátor',
-      'chRedaktor' => 'chRedaktor',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1004,6 +1041,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1016,6 +1054,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1028,6 +1067,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1040,6 +1080,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1052,6 +1093,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1064,6 +1106,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1086,6 +1129,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1107,6 +1151,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1119,6 +1164,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1131,6 +1177,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1143,6 +1190,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1155,6 +1203,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1167,6 +1216,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
@@ -1179,6 +1229,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
     ),
