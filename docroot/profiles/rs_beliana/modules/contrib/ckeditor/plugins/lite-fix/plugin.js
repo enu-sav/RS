@@ -25,7 +25,8 @@ CKEDITOR.plugins.add('lite-fix', {
         }
 
         // add missing formatting of deleted images
-        CKEDITOR.document.appendStyleSheet(CKEDITOR.getUrl(CKEDITOR.plugins.getPath('lite-fix') + 'css/lite-fix.css'));
+        // the following does not work, changes therefore done directly in lite/css/lite.css
+        //editor.addContentsCss && editor.addContentsCss( 'lite-fix/plugin.css' )
 
         // disable drag&drop inside the editor, does not work with lite
         editor.on( 'dragstart', function( event ) {
@@ -33,21 +34,43 @@ CKEDITOR.plugins.add('lite-fix', {
         });
 
         // if plugin 'eqneditor' is enabled, convert mathjax equations to codecogs <img...>
-        editor.on('instanceReady', function(event) {
+        editor.on('instanceReady', function(event) { 
             // if the eqneditor (codecogs) plugin is enabled
             if (event.editor.plugins.eqneditor) {
                 var data = event.editor.getData();
                 var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
-                // eqneditor does not support unicode, so convert special characters to TeX notation
+                // replace owing to eqneditor limitations
                 if ( data.match(rexp)) {
-                    var fixes = {
-                        "∈": "\\in ",
-                        "∉": "\\not\\in ",
+                    var fixes1 = {
                         "\\gt{": ">{",
                         "\\lt{": "<{",
                         "\\gt ": ">",
                         "\\lt ": "<",
-                        "∅": "\\empty ",
+                        "\\textrm": "\\mathrm",
+                        "\\text": "\\mathrm",
+                        "\\\(\\\)": "",     //Blank equation
+                        "\\\( \\\)": "",    //Blank equation
+                    };
+                    for (var key in fixes1) {
+                        var value = fixes1[key];
+                        data = data.replaceAll(key, value);
+                    }
+
+                    // eqneditor does not support unicode, so convert special characters in equation to TeX notation
+                    // each new character must be added also to the spec_char string
+                    var fixes2 = {
+                        "∈": "\\in ",
+                        "∉": "\\not\\in ",
+                        "°": "^{\\circ\\,}",    // °C
+                        "◦": "\\circ ",
+                        "≤": "\\leq ",
+                        "≥": "\\geq ",
+                        "´": "'",
+                        "’": "'",
+                        "–": "-",
+                        "−": "-",
+                        "—": "-",
+                        "∅": "\\varnothing ",
                         "⊂": "\\subset ",
                         "≠": "\\neq ",
                         "·": "\\cdot ",
@@ -95,37 +118,35 @@ CKEDITOR.plugins.add('lite-fix', {
                         "Φ": "\\Phi ",
                         "Ψ": "\\Psi ",
                         "Ω": "\\Omega ",
-                        "\\textrm": "\\mathrm",
-                        "\\text": "\\mathrm",
-                        "\\\(\\\)": "",     //Blank equation
-                        "\\\( \\\)": "",    //Blank equation
                     };
-                    data = data.replace(/\\\(\\\)/g, "");
-                    // replace character in equations, which may occur also elsewhere
-                    // repeat the following 2 - 3 times, to fix up to 3 occurences of the character in a single equation
-                    data = data.replace(/(\\\(.*?)°(.*?\\\))/g, "$1^{\\circ\\,}$2");
 
-                    data = data.replace(/(\\\(.*?)≤(.*?\\\))/g, "$1\\leq $2");
-                    data = data.replace(/(\\\(.*?)≤(.*?\\\))/g, "$1\\leq $2");
+                    var math_exp = /\\\(.*?\\\)/g;
+                    //spec_char musst contain all keys of fixes2 
+                    var spec_char = /[∈∉°◦≤≥´’–−—∅⊂≠·×⟨⟩▪αβγδϵεζηθϑικϰλμνξπρϱσςτυϕφχψωΓΔΘΛΞΠΣϒΦΨΩ]/g;
+                    var math_matches = data.match(math_exp);
+                    var to_replace = [];
+                    // find all math expressions 
+                    if ( math_matches ) {
+                        for ( var m in math_matches ) {
+                            // check if it has a special character
+                            if (math_matches[m].match(spec_char) ) {
+                                var aux = math_matches[m];
+                                // replace special characters by TeX tags 
+                                for (var key in fixes2) {
+                                    var value = fixes2[key];
+                                    aux = aux.replaceAll(key, value);
+                                }
+                                if (aux != math_matches[m]) 
+                                    to_replace[math_matches[m]] = aux; 
+                            }
+                        }
+                    }
 
-                    data = data.replace(/(\\\(.*?)≥(.*?\\\))/g, "$1\\geq $2");
-                    data = data.replace(/(\\\(.*?)≥(.*?\\\))/g, "$1\\geq $2");
-
-                    data = data.replace(/(\\\(.*?)´(.*?\\\))/g, "$1'$2");
-                    data = data.replace(/(\\\(.*?)´(.*?\\\))/g, "$1'$2");
-                    data = data.replace(/(\\\(.*?)´(.*?\\\))/g, "$1'$2");
-                    // fix of a 3 various dashes — these look the same in the vi editor
-                    data = data.replace(/(\\\(.*?)–(.*?\\\))/g, "$1-$2");
-                    data = data.replace(/(\\\(.*?)–(.*?\\\))/g, "$1-$2");
-                    data = data.replace(/(\\\(.*?)–(.*?\\\))/g, "$1-$2");
-
-                    data = data.replace(/(\\\(.*?)−(.*?\\\))/g, "$1-$2");
-                    data = data.replace(/(\\\(.*?)−(.*?\\\))/g, "$1-$2");
-                    data = data.replace(/(\\\(.*?)−(.*?\\\))/g, "$1-$2");
-
-                    data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
-                    data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
-                    data = data.replace(/(\\\(.*?)—(.*?\\\))/g, "$1-$2");
+                    // replace all found in text
+                    for (var key in to_replace) {
+                        data = data.replaceAll(key, to_replace[key]);
+                    }
+                    
 
                     // replace mathjax equations by codecogs image
                     // if the mathjax plugin is not enabled, 'class="math-tex"' is removed
@@ -133,10 +154,6 @@ CKEDITOR.plugins.add('lite-fix', {
                     //var rep = '<img src="https:\/\/latex.codecogs.com\/gif.latex?$1" title="$1" \/>';
                     var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/gif.latex?$1" \/>';
                     var data = data.replace(rexp,rep);
-                    for (var key in fixes) {
-                        var value = fixes[key];
-                        data = data.replaceAll(key, value);
-                    }
                     event.editor.setData(data);
                 }
             }
@@ -145,7 +162,7 @@ CKEDITOR.plugins.add('lite-fix', {
         // cancel key-press event SHIFT-Enter nad CTRL-X
 	    // SHIFT-ENTER: inserts <br /> (we do not want this)
 	    // CTRL-X: cut does not work correctly
-        editor.on( 'key', function( event ) {
+        editor.on( 'key', function( event ) { 
             //var cancel_keys = [CKEDITOR.SHIFT + 13, CKEDITOR.CTRL + 88];
             var cancel_keys = [CKEDITOR.SHIFT + 13];
             if (cancel_keys.includes(event.data.keyCode)) {
