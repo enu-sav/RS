@@ -537,25 +537,11 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       }
     }
 
-    //if ( isset($remote_node->field_vyplatit[LANGUAGE_NONE])) {
-    if ( isset($remote_node->field_vyplatit) and count($remote_node->field_vyplatit) > 0) {
-        //$node->field_datum_autorovho_textu[LANGUAGE_NONE] = $remote_node->field_datum_autorovho_textu[LANGUAGE_NONE]; 
-        if ($remote_node->field_vyplatit->und[0]->value == 'Vyplatiť' ){ #$remote_node->field_vyplatit is class here, therefore '->und' and '->value' are used
-            $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené v RS';
-        } else {
-            $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = $remote_node->field_vyplatit->und[0]->value;
-        }
-    } elseif ( isset($remote_node->field_zlucene_z) and count($remote_node->field_zlucene_z) > 0) {
-        if ( isset($node->field_vyplatit[LANGUAGE_NONE])) unset($node->field_vyplatit[LANGUAGE_NONE]);
-    } else {
-        if ( isset($node->field_vyplatit[LANGUAGE_NONE])) {
-            unset($node->field_vyplatit[LANGUAGE_NONE]);
-            //$node->field_vyplatit[LANGUAGE_NONE][]['value'] = "Vyplatené mimo RS";
-        }
-        $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené mimo RS';
-        //$node->field_vyplatit = [LANGUAGE_NONE => [['value' => "Vyplatené mimo RS"]]];
-    }
+    // Payment: payment of a transferred article has been already set in the book editorial system
+    // So just set the field value to 'Vyplatené v RS' and unset field_dlzka_autorovho_textu_zad and field_datum_autorovho_textu
+    $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené v RS';
     if (isset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE])) unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE]);
+    if (isset($node->field_datum_autorovho_textu[LANGUAGE_NONE])) unset($node->field_datum_autorovho_textu[LANGUAGE_NONE]);
 
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
     $node->revision = 1;
