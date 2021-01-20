@@ -1515,6 +1515,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
+  dpm($form);
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
@@ -1538,13 +1539,10 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       }
 
       // Decide which is the next state after "importovane", depending on the number of values in field_lexikalna_skupina
-      // Depending on the number remove one of the zaradene and importovane_u_vr states
+      // If the number > 1, remove the zaradene state
       if (in_array($form['node']['#value']->workbench_moderation['current']->state, array('importovane'))) {
         if (count($form['node']['#value']->field_lexikalna_skupina[LANGUAGE_NONE]) > 1) {
           unset($form['state']['#options']['zaradene']);
-        } else {
-	  // Will reroute 'importovane heslo' to the workflow of 'heslo'
-          unset($form['state']['#options']['importovane_u_vr']);
         }
       }
     }
