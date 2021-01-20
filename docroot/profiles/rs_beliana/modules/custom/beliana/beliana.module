@@ -1336,6 +1336,9 @@ function beliana_node_presave($node) {
   // remove unnecessary tags
   $html = beliana_clean_tags($node, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], "Text hesla (beliana_node_presave)");
   $html = eqneditor2mathjax($html);
+  // fix external links
+  $html = str_replace("https://rs.beliana.sav.sk", "", $html);
+  $html = str_replace("https://webrs.beliana.sav.sk", "", $html);
   $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = $html;
   if (isset($node->field_table[LANGUAGE_NONE][0])) {
     $html = beliana_clean_tags($node, $node->field_table[LANGUAGE_NONE][0]['value'], "Tabuľka pre geografické heslá");
@@ -1515,7 +1518,6 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
-  dpm($form);
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
