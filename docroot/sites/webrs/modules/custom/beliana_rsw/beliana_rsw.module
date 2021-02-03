@@ -410,8 +410,8 @@ function beliana_sync_from_remote_build($node, $remote_node) {
   global $user;
 
   // remote accept states
-  $heslo_accept_states = ['ukoncenezluene', 'publikovane_na_webe','v_zalamovani'];
-  $heslo_accept_states_hr = ['Ukončené/zlúčené', 'Zalomené','V zalamovaní'];    // human readable
+  $heslo_accept_states = ['ukoncenezluene', 'publikovane_na_webe','v_zalamovani', 'na_zalomenie'];
+  $heslo_accept_states_hr = ['Ukončené/zlúčené', 'Zalomené','V zalamovaní', 'Na zalomenie'];    // human readable
   $ilu_accept_states = ['ilustracia_na_webe', 'ilustracia_na_zverejnenie'];
   $ilu_accept_states_hr = ['Ilustrácia na zalomenie'];	// human readable
 
