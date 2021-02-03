@@ -512,18 +512,9 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'prevzate_to_importovane' => [  // webrs only
+    'return_for_processing' => [  // webrs only
       'type' => 'entity',
-      'label' => t("Change state to 'Importované'"),
-      'configurable' => FALSE,
-      'triggers' => ['any'],
-      'behavior' => ['create_property'],
-      'vbo_configurable' => FALSE,
-      'pass rows' => TRUE,
-    ],
-    'prevzate_to_u_redaktora' => [  // webrs only
-      'type' => 'entity',
-      'label' => t("Change state to 'U redaktora'"),
+      'label' => t("Return article for processing"),
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
@@ -549,42 +540,28 @@ function prevzate_to_na_zverejnenie(&$node, $context) {
 }
 
 /**
- * Callback for 'prevzate_to_importovane' action.
+ * Callback for 'return_for_processing' action.
  *
- * changes workflow status to 'importovane'
- *
- * @inheritdoc
- */
-function prevzate_to_importovane(&$node, $context) {
-  if ($node->type == 'heslo' && $node->workbench_moderation['current']->state === 'prevzate_z_rs') {
-    if (!isset($node->field_zlucene_z[LANGUAGE_NONE][0])) {
-    drupal_set_message(t('Heslo <a href="/@path">@title</a> nebolo presunuté do stavu Importované, lebo nie je zlúčené.', 
-        ['@path' => $node->path['alias'],
-        '@title' => $node->title]
-        ), 'error');
-        return;
-    }
-    workbench_moderation_moderate($node, "importovane");
-  }
-}
-
-/**
- * Callback for 'prevzate_to_u_redaktora' action.
- *
- * changes workflow status to 'needs_review' (U redaktora)
+ * changes workflow status to 'importovane' or needs_review, depending on its autor role
  *
  * @inheritdoc
  */
-function prevzate_to_u_redaktora(&$node, $context) {
+function return_for_processing(&$node, $context) {
   if ($node->type == 'heslo' && $node->workbench_moderation['current']->state === 'prevzate_z_rs') {
-    if (isset($node->field_zlucene_z[LANGUAGE_NONE][0])) {
-    drupal_set_message(t('Heslo <a href="/@path">@title</a> nebolo presunuté do stavu Importované, lebo je zlúčené.', 
-        ['@path' => $node->path['alias'],
-        '@title' => $node->title]
-        ), 'error');
-        return;
+    $node_user = user_load_by_name($node->name);
+    if (empty(array_intersect(array('Redaktor', 'Autor'), $node_user->roles))) {
+        workbench_moderation_moderate($node, "importovane");
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).', 
+            ['@path' => $node->path['alias'],
+            '@title' => $node->title]
+            ));
+    } else {
+        workbench_moderation_moderate($node, "needs_review");
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).', 
+            ['@path' => $node->path['alias'],
+            '@title' => $node->title]
+            ));
     }
-    workbench_moderation_moderate($node, "needs_review");
   }
 }
 
