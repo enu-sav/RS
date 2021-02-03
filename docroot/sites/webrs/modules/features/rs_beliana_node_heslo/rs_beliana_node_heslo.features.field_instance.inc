@@ -1460,9 +1460,9 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
-Pri odosielanú hesla VR1 však pole musí byť vyplnené.<br /> 
+Pri odosielaní hesla VR1 však pole musí byť vyplnené.<br /> 
 Po uložení hesla voľbu nemožno zmeniť.<br />
-<strong>Posledné dve položky sa dopĺňajú automaticky pri prenose hesla z knižného RS. Nepoužívať</strong>',
+<strong>Položku "Vyriešené v knižnom RS" nepoužívajte, dopĺňa sa automaticky pri prenose hesla z knižného RS.</strong>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1779,9 +1779,9 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Zo zoznamu vyberte názov súboru, do ktorého má byť heslo zaradené. Názov súboru je daný názvom svojho posledného hesla.');
   t('Zverejniť meno autora');
   t('Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
-Pri odosielanú hesla VR1 však pole musí byť vyplnené.<br /> 
+Pri odosielaní hesla VR1 však pole musí byť vyplnené.<br /> 
 Po uložení hesla voľbu nemožno zmeniť.<br />
-<strong>Posledné dve položky sa dopĺňajú automaticky pri prenose hesla z knižného RS. Nepoužívať</strong>');
+<strong>Položku "Vyriešené v knižnom RS" nepoužívajte, dopĺňa sa automaticky pri prenose hesla z knižného RS.</strong>');
   t('Záznam z pôvodného GH');
 
   return $field_instances;

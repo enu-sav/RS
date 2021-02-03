@@ -6722,6 +6722,400 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['menu']['weight'] = '10';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Vyplácanie odmien */
+  $handler = $view->new_display('page', 'Vyplácanie odmien', 'page_10');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Vyplácanie odmien';
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    4 => '4',
+    10 => '10',
+    34 => '34',
+  );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
+    'title' => 'title',
+    'name_1' => 'name_1',
+    'section' => 'section',
+    'state' => 'state',
+    'field_vyplatit' => 'field_vyplatit',
+    'field_datum_vyplatenia' => 'field_datum_vyplatenia',
+    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
+    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
+  );
+  $handler->display->display_options['style_options']['class'] = '';
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'section' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_vyplatit' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_vyplatenia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_autorovho_textu' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dlzka_autorovho_textu_zad' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'Zobrazujú sa záznamu len tých autorov, ktorí majú zadané číslo zmluvy. Čísla zmlúv si môžete overiť <a href="/admin/editor-list">tu</a>.';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['fields']['name_1']['table'] = 'users';
+  $handler->display->display_options['fields']['name_1']['field'] = 'name';
+  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
+  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
+  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Pole: Workbench Access: Lexikálna skupina */
+  $handler->display->display_options['fields']['section']['id'] = 'section';
+  $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
+  $handler->display->display_options['fields']['section']['field'] = 'section';
+  $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Vyplatenie odmeny */
+  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['relationship'] = 'nid';
+  /* Pole: Obsah: Dátum uloženia údajov pre vyplatenie */
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['field'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['settings'] = array(
+    'format_type' => 'custom',
+    'custom_date_format' => 'd.m.Y',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Počet znakov na vyplatenie */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Pole: Obsah: Dátum vyplatenia */
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['relationship'] = 'nid';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Obsah: Vyplatenie odmeny (field_vyplatit) */
+  $handler->display->display_options['filters']['field_vyplatit_value']['id'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['filters']['field_vyplatit_value']['field'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_vyplatit_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_vyplatit_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator_id'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    32 => 0,
+    10 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    33 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    26 => 0,
+    28 => 0,
+  );
+  $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
+  $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state_1']['field'] = 'state';
+  $handler->display->display_options['filters']['state_1']['value'] = array(
+    'importovane' => 'importovane',
+    'importovane_u_jr2' => 'importovane_u_jr2',
+    'importovane_u_vr' => 'importovane_u_vr',
+    'na_zalomenie' => 'na_zalomenie',
+    'publikovane_na_webe' => 'publikovane_na_webe',
+    'zverejnene_oprava' => 'zverejnene_oprava',
+    'zverejnene_vratene' => 'zverejnene_vratene',
+    'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+    'pozdr_an_' => 'pozdr_an_',
+    'draft' => 'draft',
+    'u_autora_revizia' => 'u_autora_revizia',
+    'kontrola_etymologie' => 'kontrola_etymologie',
+    'u_redaktora_revizia' => 'u_redaktora_revizia',
+    'u_konzultanta_revizia' => 'u_konzultanta_revizia',
+    'u_jaz_redaktora_revizia' => 'u_jaz_redaktora_revizia',
+    'u_vyst_redaktora_revizia' => 'u_vyst_redaktora_revizia',
+    'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
+    'zaradene' => 'zaradene',
+    'u_autora' => 'u_autora',
+    'needs_review' => 'needs_review',
+    'na_zverejnenie' => 'na_zverejnenie',
+    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
+    'zlucene' => 'zlucene',
+    'vyradene' => 'vyradene',
+    'u_konzultanta' => 'u_konzultanta',
+  );
+  $handler->display->display_options['filters']['state_1']['group'] = 1;
+  $handler->display->display_options['filters']['state_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state_1']['expose']['operator_id'] = 'state_1_op';
+  $handler->display->display_options['filters']['state_1']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state_1']['expose']['operator'] = 'state_1_op';
+  $handler->display->display_options['filters']['state_1']['expose']['identifier'] = 'state_1';
+  $handler->display->display_options['filters']['state_1']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    9 => 0,
+    30 => 0,
+    31 => 0,
+    27 => 0,
+    29 => 0,
+    32 => 0,
+    10 => 0,
+    18 => 0,
+    5 => 0,
+    4 => 0,
+    34 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    37 => 0,
+    13 => 0,
+    35 => 0,
+    33 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+    36 => 0,
+    28 => 0,
+  );
+  $handler->display->display_options['filters']['state_1']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['state_1']['group_info']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state_1']['group_info']['identifier'] = 'state_1';
+  $handler->display->display_options['filters']['state_1']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['state_1']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
+  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title']['operator'] = 'starts';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Používateľ: Názov */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'users';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['relationship'] = 'uid_1';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['group'] = 1;
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Autor';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    11 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    3 => 0,
+    8 => 0,
+    9 => 0,
+    17 => 0,
+  );
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Používateľ: Autorská zmluva (field_autorska_zmluva) */
+  $handler->display->display_options['filters']['field_autorska_zmluva_value']['id'] = 'field_autorska_zmluva_value';
+  $handler->display->display_options['filters']['field_autorska_zmluva_value']['table'] = 'field_data_field_autorska_zmluva';
+  $handler->display->display_options['filters']['field_autorska_zmluva_value']['field'] = 'field_autorska_zmluva_value';
+  $handler->display->display_options['filters']['field_autorska_zmluva_value']['relationship'] = 'uid_1';
+  $handler->display->display_options['filters']['field_autorska_zmluva_value']['operator'] = 'not empty';
+  $handler->display->display_options['path'] = 'admin/beliana/vyplacanie';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Vyplácanie odmien';
+  $handler->display->display_options['menu']['weight'] = '240';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['title'] = 'Beliana';
+  $handler->display->display_options['tab_options']['weight'] = '0';
   $translatables['beliana'] = array(
     t('Defaults'),
     t('Content I\'ve edited'),
@@ -6871,6 +7265,10 @@ Heslá treba preradiť do stavov:
     t('Zlúčené z'),
     t('Zlúčené (NOT NULL) / normálne (NULL)'),
     t('Zlúčené / jednoduché'),
+    t('Vyplácanie odmien'),
+    t('Zobrazujú sa záznamu len tých autorov, ktorí majú zadané číslo zmluvy. Čísla zmlúv si môžete overiť <a href="/admin/editor-list">tu</a>.'),
+    t('Dátum uloženia údajov pre vyplatenie'),
+    t('Počet znakov na vyplatenie'),
   );
   $export['beliana'] = $view;
 
@@ -8931,6 +9329,13 @@ Heslá treba preradiť do stavov:
     17 => '17',
     3 => '3',
   );
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'Exportuje všetky položky typov Heslo a Importované heslo';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -9081,8 +9486,19 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
@@ -9117,6 +9533,14 @@ Heslá treba preradiť do stavov:
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '3';
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
   $handler->display->display_options['path'] = 'export-heslo-gh';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Export heslo GH';
@@ -9185,6 +9609,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['label'] = 'komentar';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Súbor */
+  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
@@ -9249,12 +9677,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'vyplatenieOdmeny';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
-  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['label'] = 'errata';
-  $handler->display->display_options['fields']['field_errta']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -9403,8 +9825,19 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
@@ -9440,7 +9873,15 @@ Heslá treba preradiť do stavov:
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '3';
-  $handler->display->display_options['path'] = 'exim_heslo_gh.csv';
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
+  $handler->display->display_options['path'] = 'exim_heslo_gh_webrs.csv';
   $handler->display->display_options['displays'] = array(
     'page_2' => 'page_2',
     'default' => 0,
@@ -11666,6 +12107,8 @@ Heslá treba preradiť do stavov:
     t('Text k ilustrácii (field_popis)'),
     t('Export heslo GH'),
     t('Exportovať heslo GH'),
+    t('Exportuje všetky položky typov Heslo a Importované heslo'),
+    t('Typ'),
     t('Export heslo GH - dáta'),
     t('Nid'),
     t('Dátum aktualizácie'),
@@ -11673,7 +12116,6 @@ Heslá treba preradiť do stavov:
     t('nazovzorad'),
     t('atrib'),
     t('vyplatenieOdmeny'),
-    t('errata'),
     t('Vyplatiť heslá'),
     t('Prehľad hesiel podľa autorov. Zobrazujú sa len heslá, ktoré nevznikli zlučovaním.'),
     t('autor'),
@@ -14866,11 +15308,12 @@ Heslá treba preradiť do stavov:
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'name_1' => 'name_1',
-    'field_datum_vyplatenia' => 'field_datum_vyplatenia',
     'field_ilustracia' => 'field_ilustracia',
-    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
-    'field_datum_prebratia' => 'field_datum_prebratia',
     'field_vyplatit' => 'field_vyplatit',
+    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
+    'field_datum_vyplatenia' => 'field_datum_vyplatenia',
+    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
+    'field_datum_prebratia' => 'field_datum_prebratia',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
@@ -14955,14 +15398,14 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_datum_vyplatenia' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
+    'field_ilustracia' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_ilustracia' => array(
+    'field_vyplatit' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -14974,14 +15417,21 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_datum_prebratia' => array(
+    'field_datum_vyplatenia' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_vyplatit' => array(
+    'field_dlzka_autorovho_textu_zad' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_prebratia' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -15098,10 +15548,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
   $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
   $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
-  /* Pole: Obsah: Dátum vyplatenia */
-  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
-  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
-  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
@@ -15111,6 +15557,10 @@ Heslá treba preradiť do stavov:
     'link' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  /* Pole: Obsah: Vyplatenie odmeny */
+  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   /* Pole: Obsah: Dátum uloženia údajov pre vyplatenie */
   $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
   $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
@@ -15123,6 +15573,18 @@ Heslá treba preradiť do stavov:
     'multiple_from' => '',
     'multiple_to' => '',
     'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Dátum vyplatenia */
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  /* Pole: Obsah: Počet znakov na vyplatenie */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
   );
   /* Pole: Obsah: Dátum prebratia obsahu */
   $handler->display->display_options['fields']['field_datum_prebratia']['id'] = 'field_datum_prebratia';
@@ -15137,10 +15599,6 @@ Heslá treba preradiť do stavov:
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Pole: Obsah: Vyplatenie odmeny */
-  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -16595,6 +17053,18 @@ Heslá treba preradiť do stavov:
       'operator' => '=',
       'value' => '',
     ),
+  );
+  /* Filter criterion: Obsah: Vyplatenie odmeny (field_vyplatit) */
+  $handler->display->display_options['filters']['field_vyplatit_value']['id'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['filters']['field_vyplatit_value']['field'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator_id'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-operacie';
   $handler->display->display_options['menu']['title'] = 'Prehľad';
@@ -20523,7 +20993,8 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = '<h2>Dávkové alebo individuálne preberanie hesiel z knižného redakčného systému</h2>
-<b>Preberú sa len heslá, ktoré sú v knižnom systéme dokončené</b> (sú v stavoch V zalamovaní, Zalomené alebo Ukončené/zlúčené).
+<b>Preberú sa len heslá, ktoré sú v knižnom systéme dokončené</b> (sú v stavoch V zalamovaní, Zalomené alebo Ukončené/zlúčené). <br />
+Po prevzatí budú všetky heslá v stave Prevzaté z RS, okrem tých, ktoré sú v knižnom RS v stave Ukončené/zlúčené. Tie budú v stave Ukončené/zlúčené.
 <h3>Dávkové preberanie</h3>
 Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaradené, Navrhnuté, Zlúčené a Ukončené/zlúčené.
 <ul>
@@ -20546,9 +21017,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
  <li> Klikneme na tlačidlo <em>Použiť</em>
 <li>Zaškrtneme požadované heslo</Ii>
 <li>Heslo prevezmeme kliknutím na tlačidlo <strong>Prevziať z knižného RS</strong></Ii>
-</ol>
-<br />
- V oboch prípadoch bude stav prevzatých hesiel zmenený na <strong>Prevzaté z RS</strong> alebo <strong>Ukončené/zlúčené</strong>.</b>';
+</ol>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -20969,11 +21438,12 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
     t('[field_datum]'),
-    t('Dátum vyplatenia'),
     t('Ilustrácie'),
-    t('Dátum uloženia údajov pre vyplatenie'),
-    t('Dátum prebratia obsahu'),
     t('Vyplatenie odmeny'),
+    t('Dátum uloženia údajov pre vyplatenie'),
+    t('Dátum vyplatenia'),
+    t('Počet znakov na vyplatenie'),
+    t('Dátum prebratia obsahu'),
     t('Atribúty'),
     t('Zlúčené z'),
     t('Tabuľka pre geografické heslá'),
@@ -20986,7 +21456,6 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>'),
     t('Vyplatenie_odmeny'),
     t('Neuvedené'),
-    t('Počet znakov na vyplatenie'),
     t('Prišlo zo stavu'),
     t('Autor hesla'),
     t('Všetky heslá - prehľad (G)'),
@@ -21041,7 +21510,8 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('Prevziať heslá z knižného redakčného systému'),
     t('Prevziať obsah z knižného redakčného systému'),
     t('<h2>Dávkové alebo individuálne preberanie hesiel z knižného redakčného systému</h2>
-<b>Preberú sa len heslá, ktoré sú v knižnom systéme dokončené</b> (sú v stavoch V zalamovaní, Zalomené alebo Ukončené/zlúčené).
+<b>Preberú sa len heslá, ktoré sú v knižnom systéme dokončené</b> (sú v stavoch V zalamovaní, Zalomené alebo Ukončené/zlúčené). <br />
+Po prevzatí budú všetky heslá v stave Prevzaté z RS, okrem tých, ktoré sú v knižnom RS v stave Ukončené/zlúčené. Tie budú v stave Ukončené/zlúčené.
 <h3>Dávkové preberanie</h3>
 Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaradené, Navrhnuté, Zlúčené a Ukončené/zlúčené.
 <ul>
@@ -21064,9 +21534,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
  <li> Klikneme na tlačidlo <em>Použiť</em>
 <li>Zaškrtneme požadované heslo</Ii>
 <li>Heslo prevezmeme kliknutím na tlačidlo <strong>Prevziať z knižného RS</strong></Ii>
-</ol>
-<br />
- V oboch prípadoch bude stav prevzatých hesiel zmenený na <strong>Prevzaté z RS</strong> alebo <strong>Ukončené/zlúčené</strong>.</b>'),
+</ol>'),
     t('Spôsob preberania'),
   );
   $export['vsetky_hesla_detaily'] = $view;

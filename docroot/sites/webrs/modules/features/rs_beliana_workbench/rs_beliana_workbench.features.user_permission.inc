@@ -427,8 +427,6 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in na_opakovane_zverejnenie state'] = array(
     'name' => 'edit revisions in na_opakovane_zverejnenie state',
     'roles' => array(
-      'Grafik' => 'Grafik',
-      'Výstupný redaktor' => 'Výstupný redaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
@@ -639,7 +637,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from importovane_u_vr to importovane',
     'roles' => array(
       'Výstupný redaktor' => 'Výstupný redaktor',
-      'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
   );

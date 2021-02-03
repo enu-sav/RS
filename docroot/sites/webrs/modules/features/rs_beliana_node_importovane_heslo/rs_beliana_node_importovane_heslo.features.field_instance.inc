@@ -1023,7 +1023,11 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'bundle' => 'importovane_heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Pole je <strong>potrebné vyplniť</strong> len vtedy, ak ho chcete zo stavu "U redaktora" odoslať do stavu "U výst. redaktora". Ide najmä o situáciu, keď heslo bolo prepracované autorom. V ostatných prípadoch môže zostať nevyplnené.
+Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
+Pri odosielaní hesla VR však pole musí byť vyplnené.<br /> 
+Po uložení hesla voľbu nemožno zmeniť.<br />
+<strong>Položku "Vyriešené v knižnom RS" nepoužívajte, je vyhradená pre heslá prenesené z knižného RS.</strong>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1180,6 +1184,11 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
   t('Na zoradenie');
   t('Názov');
   t('Názov súboru sa doplní automaticky na základe názvu hesla');
+  t('Pole je <strong>potrebné vyplniť</strong> len vtedy, ak ho chcete zo stavu "U redaktora" odoslať do stavu "U výst. redaktora". Ide najmä o situáciu, keď heslo bolo prepracované autorom. V ostatných prípadoch môže zostať nevyplnené.
+Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
+Pri odosielaní hesla VR však pole musí byť vyplnené.<br /> 
+Po uložení hesla voľbu nemožno zmeniť.<br />
+<strong>Položku "Vyriešené v knižnom RS" nepoužívajte, je vyhradená pre heslá prenesené z knižného RS.</strong>');
   t('Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.');
   t('Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe');
   t('Použité zdroje');
