@@ -48,7 +48,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Alternatívny text k ilustrácii určený pre nevidiacich. Nesmie obsahovať formátovanie. Netreba vypĺňať, ak text k ilustrácii neobsahuje formátovanie (okrem tučného a šikmého) a ak má menej ako 125 znakov.',
+    'description' => 'Alternatívny text k ilustrácii určený pre nevidiacich. Netreba vypĺňať, ak text k ilustrácii má menej ako 125 znakov a neobsahuje formátovanie (napr. matematické rovnice).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1926,7 +1926,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.');
 Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplniť aj polia "Typ CC licencie" a ďalšie súvisiace polia (najmä "URL diela", "Meno autora (snímky) diela", "URL autora diela alebo inštitúcie")
 ');
   t('Alternatívny text');
-  t('Alternatívny text k ilustrácii určený pre nevidiacich. Nesmie obsahovať formátovanie. Netreba vypĺňať, ak text k ilustrácii neobsahuje formátovanie (okrem tučného a šikmého) a ak má menej ako 125 znakov.');
+  t('Alternatívny text k ilustrácii určený pre nevidiacich. Netreba vypĺňať, ak text k ilustrácii má menej ako 125 znakov a neobsahuje formátovanie (napr. matematické rovnice).');
   t('Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.');
   t('Comment');
   t('Držiteľ práv');
