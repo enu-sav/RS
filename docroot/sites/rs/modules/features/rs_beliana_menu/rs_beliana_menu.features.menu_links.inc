@@ -550,7 +550,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['management_vetky-moje-hesl:admin/beliana/all'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/all',
-    'router_path' => 'admin/beliana/all',
+    'router_path' => 'admin/beliana',
     'link_title' => 'Všetky moje heslá',
     'options' => array(
       'attributes' => array(

@@ -460,27 +460,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_zlen:admin/beliana/zlucene.
-  $menu_links['management_zlen:admin/beliana/zlucene'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/zlucene',
-    'router_path' => 'admin/beliana',
-    'link_title' => 'Zlúčené',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_zlen:admin/beliana/zlucene',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -33,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
   // Exported menu link: navigation_article:node/add/article.
   $menu_links['navigation_article:node/add/article'] = array(
     'menu_name' => 'navigation',
@@ -764,7 +743,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Vytvoriť');
   t('Všetky moje heslá');
   t('Všetky moje ilustrácie');
-  t('Zlúčené');
 
   return $menu_links;
 }

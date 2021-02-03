@@ -18,8 +18,8 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\',\'NumberedList\',\'BulletedList\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
-    [\'flite-acceptall\',\'flite-rejectall\',\'flite-toggleshow\',\'flite-toggletracking\',\'flite-acceptone\',\'flite-rejectone\']
+    [\'Table\',\'BGColor\',\'EqnEditor\',\'SpecialChar\',\'Image\'],
+    [\'lite-acceptall\',\'lite-rejectall\',\'lite-acceptone\',\'lite-rejectone\',\'lite-toggleshow\',\'lite-toggletracking\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -202,6 +202,18 @@ config.specialChars = [
             ),
             'default' => 't',
           ),
+          'eqneditor' => array(
+            'name' => 'eqneditor',
+            'desc' => 'Plugin file: eqneditor',
+            'path' => '%plugin_dir%eqneditor/',
+            'buttons' => array(
+              'EqnEditor' => array(
+                'label' => 'EqnEditor',
+                'icon' => 'icons/eqneditor.png',
+              ),
+            ),
+            'default' => 'f',
+          ),
           'fixed' => array(
             'name' => 'fixed',
             'desc' => 'Plugin file: fixed',
@@ -209,55 +221,43 @@ config.specialChars = [
             'buttons' => FALSE,
             'default' => 'f',
           ),
-          'flite' => array(
-            'name' => 'flite',
-            'desc' => 'Plugin file: flite',
-            'path' => '%plugin_dir%flite/',
+          'lite' => array(
+            'name' => 'lite',
+            'desc' => 'Plugin file: lite',
+            'path' => '%plugin_dir%lite/',
             'buttons' => array(
-              'flite-acceptall' => array(
+              'lite-acceptall' => array(
                 'label' => 'Accept all changes',
-                'icon' => 'icons/flite-acceptall.png',
+                'icon' => 'icons/lite-acceptall.png',
               ),
-              'flite-rejectall' => array(
+              'lite-rejectall' => array(
                 'label' => 'Reject all changes',
-                'icon' => 'icons/flite-rejectall.png',
+                'icon' => 'icons/lite-rejectall.png',
               ),
-              'flite-acceptone' => array(
+              'lite-acceptone' => array(
                 'label' => 'Accept change',
-                'icon' => 'icons/flite-acceptone.png',
+                'icon' => 'icons/lite-acceptone.png',
               ),
-              'flite-rejectone' => array(
+              'lite-rejectone' => array(
                 'label' => 'Reject change',
-                'icon' => 'icons/flite-rejectone.png',
+                'icon' => 'icons/lite-rejectone.png',
               ),
-              'flite-toggleshow' => array(
+              'lite-toggleshow' => array(
                 'label' => 'Show/hide tracked changes',
-                'icon' => 'icons/flite-toggleshow.png',
+                'icon' => 'icons/lite-toggleshow.png',
               ),
-              'flite-toggletracking' => array(
+              'lite-toggletracking' => array(
                 'label' => 'Start/stop tracking changes',
-                'icon' => 'icons/flite-toggletracking.png',
+                'icon' => 'icons/lite-toggletracking.png',
               ),
             ),
             'default' => 't',
           ),
-          'flite-fix' => array(
-            'name' => 'flite-fix',
-            'desc' => 'Plugin file: flite-fix',
-            'path' => '%plugin_dir%flite-fix/',
+          'lite-fix' => array(
+            'name' => 'lite-fix',
+            'desc' => 'Plugin file: lite-fix',
+            'path' => '%plugin_dir%lite-fix/',
             'buttons' => FALSE,
-            'default' => 'f',
-          ),
-          'mathjax' => array(
-            'name' => 'mathjax',
-            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
-            'buttons' => array(
-              'Mathjax' => array(
-                'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulas',
-              ),
-            ),
             'default' => 'f',
           ),
           'tableresize' => array(

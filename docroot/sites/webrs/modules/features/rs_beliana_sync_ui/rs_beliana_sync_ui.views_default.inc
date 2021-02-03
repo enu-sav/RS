@@ -567,14 +567,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    4 => '4',
-    10 => '10',
-    6 => '6',
-    13 => '13',
-    33 => '33',
-    14 => '14',
-    15 => '15',
-    16 => '16',
+    3 => '3',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -631,13 +624,12 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['header']['result']['field'] = 'result';
   $handler->display->display_options['header']['result']['content'] = 'Zobrazené publikované heslá @start - @end z celkového počtu @total
 <h1>Postup pri sťahovaní hesla z webu a jeho následnom vyradení</h1>
-<b>Funkcia ešte nie je dokončená</b>
 <ol>
-<li>Na stránke https://beliana.sav.sk zrušiť zverejnenie hesla</li>
-<li> V hesle skontrolovať jeho Odkazujúce heslá</li>
+<li>Na stránke <a href="v">https://beliana.sav.sk</a> zrušiť zverejnenie hesla (možno použiť odkaz v stĺpci <em>Heslo na webe</em>, najskôr sa treba na web prihlásiť)</li>
+<li> V hesle skontrolovať jeho Odkazujúce heslá (v prípade potreby upraviť)</li>
 <li>V tomto náhľade heslo presunúť do stavu <em>Vyradené</em></li>
 </ol>
-Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
+Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (namiesto bodu 3)  preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
 ';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Hromadné operácie: Obsah */
@@ -708,7 +700,7 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba pr
   $handler->display->display_options['fields']['sync_remote_id']['table'] = 'node';
   $handler->display->display_options['fields']['sync_remote_id']['field'] = 'sync_remote_id';
   $handler->display->display_options['fields']['sync_remote_id']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['sync_remote_id']['label'] = 'Heslo na Webe';
+  $handler->display->display_options['fields']['sync_remote_id']['label'] = 'Heslo na webe';
   $handler->display->display_options['fields']['sync_remote_id']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
@@ -956,15 +948,14 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba pr
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total
 <h1>Postup pri sťahovaní hesla z webu a jeho následnom vyradení</h1>
-<b>Funkcia ešte nie je dokončená</b>
 <ol>
-<li>Na stránke https://beliana.sav.sk zrušiť zverejnenie hesla</li>
-<li> V hesle skontrolovať jeho Odkazujúce heslá</li>
+<li>Na stránke <a href="v">https://beliana.sav.sk</a> zrušiť zverejnenie hesla (možno použiť odkaz v stĺpci <em>Heslo na webe</em>, najskôr sa treba na web prihlásiť)</li>
+<li> V hesle skontrolovať jeho Odkazujúce heslá (v prípade potreby upraviť)</li>
 <li>V tomto náhľade heslo presunúť do stavu <em>Vyradené</em></li>
 </ol>
-Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
+Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (namiesto bodu 3)  preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
 '),
-    t('Heslo na Webe'),
+    t('Heslo na webe'),
     t('Synchronizácia po'),
     t('Dátum vo formáte RRRR-MM-DD alebo záporná hodnota (-2 day, -5 hour)'),
   );
