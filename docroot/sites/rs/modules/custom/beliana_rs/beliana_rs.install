@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * Implements hook_update_N().
+ */
+function beliana_rs_update_7001() {
+  $language = 'sk';
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'archivovane_knizne', '!=')
+    ->propertyCondition('language', 'und');
+
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    foreach (array_keys($result['node']) as $nid) {
+      if ($node = node_load($nid)) {
+        $revisions = node_revision_list($node);
+
+        // Update revisions object language
+        if (!empty($revisions)) {
+          foreach (array_keys($revisions) as $vid) {
+            if ($revision = entity_revision_load('node', $vid)) {
+              $revision->language = $language;
+              drupal_write_record('node_revision', $revision, 'vid');
+            }
+          }
+        }
+
+        // Delete title field records other then SK
+        db_delete('field_data_title_field')
+          ->condition('entity_id', $node->nid)
+          ->condition('language', $language, '!=')
+          ->execute();
+
+        // Delete title field revisions records other then SK
+        db_delete('field_revision_title_field')
+          ->condition('entity_id', $node->nid)
+          ->condition('language', $language, '!=')
+          ->execute();
+
+        // Update node object language
+        $node->language = $language;
+        node_save($node);
+      }
+    }
+  }
+}
