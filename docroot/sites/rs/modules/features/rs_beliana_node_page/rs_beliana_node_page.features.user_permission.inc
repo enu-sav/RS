@@ -59,6 +59,7 @@ function rs_beliana_node_page_user_default_permissions() {
     'name' => 'edit body',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -68,6 +69,7 @@ function rs_beliana_node_page_user_default_permissions() {
     'name' => 'edit own body',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'field_permissions',
   );
@@ -106,6 +108,7 @@ function rs_beliana_node_page_user_default_permissions() {
     'name' => 'view own body',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'zRedaktor' => 'zRedaktor',
     ),
     'module' => 'field_permissions',
   );

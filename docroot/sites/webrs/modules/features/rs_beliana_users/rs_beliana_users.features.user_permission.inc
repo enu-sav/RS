@@ -82,7 +82,6 @@ function rs_beliana_users_user_default_permissions() {
     'name' => 'create field_zivotopis',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'anonymous user' => 'anonymous user',
     ),
     'module' => 'field_permissions',
   );

@@ -319,9 +319,9 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_doc';
   $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = '%view.html';
+  $handler->display->display_options['style_options']['filename'] = 'export_sadzac.html';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'export-na-sadzbu.html';
+  $handler->display->display_options['path'] = 'export_sadzac.html';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,

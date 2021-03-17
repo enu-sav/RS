@@ -9908,13 +9908,16 @@ Heslá treba preradiť do stavov:
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'state' => 'state',
+    'field_meno_1' => 'field_meno_1',
     'field_meno' => 'field_meno',
     'field_priezvisko' => 'field_priezvisko',
     'field_autorska_zmluva' => 'field_autorska_zmluva',
     'field_vyplatit' => 'field_vyplatit',
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
+    'field_datum_vyplatenia' => 'field_datum_vyplatenia',
   );
+  $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
@@ -9937,6 +9940,13 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_meno_1' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -9985,6 +9995,13 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_datum_vyplatenia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -10018,6 +10035,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
   /* Pole: Termín taxonómie: Názov */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
@@ -10033,6 +10054,12 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_lexikalna_skupina']['alter']['text'] = '[name]';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Používateľ: Meno */
+  $handler->display->display_options['fields']['field_meno_1']['id'] = 'field_meno_1';
+  $handler->display->display_options['fields']['field_meno_1']['table'] = 'field_data_field_meno';
+  $handler->display->display_options['fields']['field_meno_1']['field'] = 'field_meno';
+  $handler->display->display_options['fields']['field_meno_1']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['field_meno_1']['label'] = 'Prihlásiť sa';
   /* Pole: Workbench Moderation: Stav */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
@@ -10079,6 +10106,10 @@ Heslá treba preradiť do stavov:
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Pole: Obsah: Dátum vyplatenia */
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -10680,6 +10711,13 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_lexikalna_skupina']['alter']['text'] = '[name]';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['fields']['name_1']['table'] = 'users';
+  $handler->display->display_options['fields']['name_1']['field'] = 'name';
+  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name_1']['label'] = 'Prihlásiť sa';
+  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
   /* Pole: Workbench Moderation: Stav */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
@@ -10727,6 +10765,10 @@ Heslá treba preradiť do stavov:
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Pole: Obsah: Dátum vyplatenia */
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -12121,12 +12163,14 @@ Heslá treba preradiť do stavov:
     t('autor'),
     t('Nadradený'),
     t('[name]'),
+    t('Prihlásiť sa'),
     t('Meno'),
     t('Priezvisko'),
     t('Autorská zmluva'),
     t('Vyplatenie odmeny'),
     t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
+    t('Dátum vyplatenia'),
     t('Kategórie používateľov'),
     t('Používatelia'),
     t('Mesiac'),
@@ -13034,32 +13078,12 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator_id'] = 'taxonomy_entity_index_tid_depth_op';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['label'] = 'Lexikálna skupina';
-  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['description'] = 'Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['description'] = 'Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator'] = 'taxonomy_entity_index_tid_depth_op';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['identifier'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
   );
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['type'] = 'select';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
@@ -13789,32 +13813,12 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator_id'] = 'taxonomy_entity_index_tid_depth_op';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['label'] = 'Lexikálna skupina';
-  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['description'] = 'Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['description'] = ' Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu ';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator'] = 'taxonomy_entity_index_tid_depth_op';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['identifier'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
   );
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['type'] = 'select';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
@@ -14123,40 +14127,11 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['group'] = 1;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Lexikálna skupina (podľa redaktora)';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Lexikálna skupina (podľa kategórií)';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    29 => 0,
-    32 => 0,
-    10 => 0,
-    18 => 0,
-    5 => 0,
-    4 => 0,
-    34 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    37 => 0,
-    13 => 0,
-    35 => 0,
-    33 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    36 => 0,
-    28 => 0,
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '3';
@@ -14795,7 +14770,7 @@ Heslá treba preradiť do stavov:
     t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
     t('Komentár/inštrukcie'),
     t('Tabuľka pre geografické heslá'),
-    t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
+    t('Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu'),
     t('Typ'),
     t('Komentár obsahuje'),
     t('Komentár neobsahuje'),
@@ -14816,8 +14791,9 @@ Heslá treba preradiť do stavov:
     t('Meno autora snímky'),
     t('[title]'),
     t('Typ ilustrácie'),
+    t(' Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu '),
     t('Vyhľadať heslá (A)'),
-    t('Lexikálna skupina (podľa redaktora)'),
+    t('Lexikálna skupina (podľa kategórií)'),
     t('Rozpracované heslá'),
     t(' ⚫ <b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov, a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>
  ⚫ <b>Po vypracovaní treba heslo odoslať redaktorovi:</b> Na riadku hesla kliknite na jeho názov, potom na <em>Zmeniť stav / porovnať verzie</em> a napokon na tlačidlo <em>Použiť</em>, ktoré sa nachádza vedľa poľa s názvom cieľového  stavu.'),
