@@ -27,22 +27,29 @@ function beliana_rs_update_7001() {
           }
         }
 
-        // Delete title field records other then SK
-        db_delete('field_data_title_field')
-          ->condition('entity_id', $node->nid)
-          ->condition('language', $language, '!=')
-          ->execute();
-
-        // Delete title field revisions records other then SK
-        db_delete('field_revision_title_field')
-          ->condition('entity_id', $node->nid)
-          ->condition('language', $language, '!=')
-          ->execute();
-
         // Update node object language
         $node->language = $language;
         node_save($node);
       }
     }
   }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function beliana_rs_update_7002() {
+  // Delete title field records other then SK
+  db_delete('field_data_title_field')
+    ->condition('bundle', 'archivovane_knizne', '!=')
+    ->condition('language', 'und')
+    ->execute();
+
+  // Delete title field revisions records other then SK
+  db_delete('field_revision_title_field')
+    ->condition('bundle', 'archivovane_knizne', '!=')
+    ->condition('language', 'und')
+    ->execute();
+
+  drupal_flush_all_caches();
 }
