@@ -1222,6 +1222,7 @@ function beliana_node_presave($node) {
     return;
   }
   // set field_na_zoradenie if empty or fix it if necessary
+  // we do not use utf-8 sorting here (the ô letter is in utf-8 sorted incorrectly)
   $rebuild_sort = !isset($node->field_na_zoradenie['und'][0]['value']);
   if (!$rebuild_sort) {
     // are there funny characters in sort string (field_na_zoradenie)?
@@ -1239,14 +1240,19 @@ function beliana_node_presave($node) {
     $transliterated = _beliana_remove_accents($transliterated);
     $transliterated = str_replace(",", "_", $transliterated);
     $transliterated = preg_replace('/[^a-zA-ZŠšČčŽž_0-9]/', '', $transliterated);
-    $transliterated = strtolower($transliterated);
-    $transliterated = str_replace("Š", "š", $transliterated); // not changed by strtolower
-    $transliterated = str_replace("Č", "č", $transliterated);
-    $transliterated = str_replace("Ž", "ž", $transliterated);
     $node->field_na_zoradenie['und'][0]['value'] = substr($transliterated, 0, 50);
   }
+  // change field_na_zoradenie to lowercase
+  // owing to a bug in 2016 there are some capital letters in the database in the sort string.
+  // As a consequence, these articles have on save incorrectly set field_taxsubor value to 'alare'.
+  $fixed_case = strtolower($node->field_na_zoradenie['und'][0]['value']);
+  // this does nor work with Č, Ź and Ś, so change then explicitely:
+  $fixed_case = str_replace("Š", "š", $fixed_case); // not changed by strtolower
+  $fixed_case = str_replace("Č", "č", $fixed_case);
+  $node->field_na_zoradenie['und'][0]['value'] = str_replace("Ž", "ž", $fixed_case);
 
   // set field_taxsubor using the value of field_na_zoradenie
+  // we do not use utf-8 sorting here (the ô letter is in utf-8 sorted incorrectly)
   $vocabulary = taxonomy_vocabulary_machine_name_load('subory');
   //$subory = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)); //default sort instead of Slovak
   $subory = taxonomy_get_tree($vocabulary->vid);
