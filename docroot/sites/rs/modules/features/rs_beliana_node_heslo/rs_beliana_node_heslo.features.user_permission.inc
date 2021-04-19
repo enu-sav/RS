@@ -495,7 +495,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_lexikalna_skupina'] = array(
     'name' => 'edit field_lexikalna_skupina',
     'roles' => array(
-      'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',

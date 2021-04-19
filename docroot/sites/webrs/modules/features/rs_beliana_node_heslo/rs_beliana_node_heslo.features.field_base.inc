@@ -654,6 +654,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
         'Redaktor' => 'Heslo vypracoval redaktor',
         'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
         'Vyplatené v RS' => 'Vyriešené v knižnom RS',
+        'Vyradené' => 'Vyradené bez vypracovania',
       ),
       'allowed_values_function' => '',
     ),

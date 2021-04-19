@@ -10641,6 +10641,19 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['field'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['group'] = 2;
+  /* Filter criterion: Obsah: Author uid */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'node';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Autor hesla';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['path'] = 'vyplatit-hesla';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyplatiť heslá';
@@ -11284,6 +11297,19 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['field'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value_1']['group'] = 2;
+  /* Filter criterion: Obsah: Author uid */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'node';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Autor hesla';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['path'] = 'vyplatit_hesla.csv';
   $handler->display->display_options['displays'] = array(
     'page_3' => 'page_3',
@@ -12177,6 +12203,7 @@ Heslá treba preradiť do stavov:
     t('Author Date Filter (Month)'),
     t('Rok'),
     t('Author Date Filter (Year)'),
+    t('Autor hesla'),
     t('Vyplatiť heslá - dáta'),
     t('https://rs.beliana.sav.sk/node/[nid]'),
     t('Dátum záznamu dĺžky'),
@@ -12982,7 +13009,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. ';
+  $handler->display->display_options['header']['area']['content'] = 'Vo vyhľadávacích textových poliach sa diakritika neberie do úvahy (okrem znakov č, ž, š a ô)';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
@@ -13996,7 +14023,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. ';
+  $handler->display->display_options['header']['area']['content'] = 'Vo vyhľadávacích textových poliach sa diakritika neberie do úvahy (okrem znakov č, ž, š a ô)';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
@@ -14767,7 +14794,7 @@ Heslá treba preradiť do stavov:
     t('Text hesla'),
     t('ddddd'),
     t('Vyhľadať'),
-    t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
+    t('Vo vyhľadávacích textových poliach sa diakritika neberie do úvahy (okrem znakov č, ž, š a ô)'),
     t('Komentár/inštrukcie'),
     t('Tabuľka pre geografické heslá'),
     t('Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu'),
@@ -15243,6 +15270,19 @@ Heslá treba preradiť do stavov:
     20 => 0,
     21 => 0,
     22 => 0,
+  );
+  /* Filter criterion: Obsah: Author uid */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'node';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Autor';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
   );
 
   /* Display: Všetky heslá - prehľad */
