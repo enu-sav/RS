@@ -3,7 +3,7 @@
 /**
  * Implements hook_update_N().
  */
-function beliana_rs_update_7001() {
+function beliana_rsw_update_7001() {
   $language = 'sk';
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
@@ -37,7 +37,7 @@ function beliana_rs_update_7001() {
 /**
  * Implements hook_update_N().
  */
-function beliana_rs_update_7002() {
+function beliana_rsw_update_7002() {
   $results = db_select('field_revision_title_field', 't')
     ->fields('t', ['entity_id', 'revision_id', 'language'])
     ->condition('bundle', 'archivovane_knizne', '!=')
