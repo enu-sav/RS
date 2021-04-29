@@ -9565,22 +9565,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Feeds item: Item GUID */
-  $handler->display->display_options['fields']['guid']['id'] = 'guid';
-  $handler->display->display_options['fields']['guid']['table'] = 'feeds_item';
-  $handler->display->display_options['fields']['guid']['field'] = 'guid';
-  $handler->display->display_options['fields']['guid']['label'] = 'guid';
-  $handler->display->display_options['fields']['guid']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Pole: Content revision: Dátum aktualizácie */
-  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
-  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['date_format'] = 'short';
-  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'privatemsg_current_day';
   /* Pole: Workbench Moderation: Stav */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
@@ -9603,16 +9591,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
-  /* Pole: Obsah: Komentár/inštrukcie */
-  $handler->display->display_options['fields']['field_komentar_instrukcie']['id'] = 'field_komentar_instrukcie';
-  $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
-  $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
-  $handler->display->display_options['fields']['field_komentar_instrukcie']['label'] = 'komentar';
-  $handler->display->display_options['fields']['field_komentar_instrukcie']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Súbor */
-  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
@@ -9620,29 +9598,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_text_hesla']['label'] = 'text';
   $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_hesla']['type'] = 'text_plain';
-  /* Pole: Obsah: Záznam z pôvodného GH */
-  $handler->display->display_options['fields']['field_text_z_gh']['id'] = 'field_text_z_gh';
-  $handler->display->display_options['fields']['field_text_z_gh']['table'] = 'field_data_field_text_z_gh';
-  $handler->display->display_options['fields']['field_text_z_gh']['field'] = 'field_text_z_gh';
-  $handler->display->display_options['fields']['field_text_z_gh']['label'] = 'povodnyZaznamZGH';
-  /* Pole: Obsah: Dátum výročia */
-  $handler->display->display_options['fields']['field_datum']['id'] = 'field_datum';
-  $handler->display->display_options['fields']['field_datum']['table'] = 'field_data_field_datum';
-  $handler->display->display_options['fields']['field_datum']['field'] = 'field_datum';
-  $handler->display->display_options['fields']['field_datum']['label'] = 'datum';
-  $handler->display->display_options['fields']['field_datum']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_datum']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_datum']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_datum']['settings'] = array(
-    'format_type' => 'short',
-    'fromto' => '',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
-  $handler->display->display_options['fields']['field_datum']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_datum']['separator'] = ';';
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
@@ -9655,28 +9610,6 @@ Heslá treba preradiť do stavov:
     'links' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  /* Pole: Obsah: Na zoradenie */
-  $handler->display->display_options['fields']['field_na_zoradenie']['id'] = 'field_na_zoradenie';
-  $handler->display->display_options['fields']['field_na_zoradenie']['table'] = 'field_data_field_na_zoradenie';
-  $handler->display->display_options['fields']['field_na_zoradenie']['field'] = 'field_na_zoradenie';
-  $handler->display->display_options['fields']['field_na_zoradenie']['label'] = 'nazovzorad';
-  /* Pole: Obsah: Cesta */
-  $handler->display->display_options['fields']['path']['id'] = 'path';
-  $handler->display->display_options['fields']['path']['table'] = 'node';
-  $handler->display->display_options['fields']['path']['field'] = 'path';
-  $handler->display->display_options['fields']['path']['label'] = 'alias';
-  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Atribúty */
-  $handler->display->display_options['fields']['field_atributy']['id'] = 'field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['table'] = 'field_data_field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['field'] = 'field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['label'] = 'atrib';
-  $handler->display->display_options['fields']['field_atributy']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Vyplatenie odmeny */
-  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
-  $handler->display->display_options['fields']['field_vyplatit']['label'] = 'vyplatenieOdmeny';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -9881,7 +9814,7 @@ Heslá treba preradiť do stavov:
     'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
-  $handler->display->display_options['path'] = 'exim_heslo_gh_webrs.csv';
+  $handler->display->display_options['path'] = 'export_gh_webrs.csv';
   $handler->display->display_options['displays'] = array(
     'page_2' => 'page_2',
     'default' => 0,
@@ -12179,11 +12112,6 @@ Heslá treba preradiť do stavov:
     t('Typ'),
     t('Export heslo GH - dáta'),
     t('Nid'),
-    t('Dátum aktualizácie'),
-    t('povodnyZaznamZGH'),
-    t('nazovzorad'),
-    t('atrib'),
-    t('vyplatenieOdmeny'),
     t('Vyplatiť heslá'),
     t('Prehľad hesiel podľa autorov. Zobrazujú sa len heslá, ktoré nevznikli zlučovaním.'),
     t('autor'),

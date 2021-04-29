@@ -1690,6 +1690,75 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_zmluva'.
+  $field_instances['node-heslo-field_zmluva'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 31,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_zmluva',
+    'label' => 'Zmluva na vyplatenie',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 30,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-field_zverejnit_meno_autora'.
   $field_instances['node-heslo-field_zverejnit_meno_autora'] = array(
     'bundle' => 'heslo',
@@ -1862,8 +1931,10 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Zadajte podiel autora na texte hesla (<strong>v stave pri prvom odosielaní VR 1</strong>). Voľba "Žiadne" je neplatná. Zadaná hodnota sa použije pri výpočte autorskej odmeny. Netreba vypĺňať, ak je vyplnené pole <em>Dĺžka autorom odovzdaného textu</em>. Ak je pole <em>Dĺžka autorom odovzdaného textu</em> vyplnené, tak tam zadaná hodnota  má pri výpočte autorskej odmeny prednosť.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
+  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie');
   t('Zlúčené do');
   t('Zlúčené z');
+  t('Zmluva na vyplatenie');
   t('Zo zoznamu vyberte názov súboru, do ktorého má byť heslo zaradené. Názov súboru je daný názvom svojho posledného hesla.');
   t('Zverejniť meno autora');
   t('Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
