@@ -218,24 +218,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_dlzka_autorovho_textu'.
-  $field_bases['field_dlzka_autorovho_textu'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_dlzka_autorovho_textu',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'number_integer',
-  );
-
   // Exported field_base: 'field_dlzka_autorovho_textu_zad'.
   $field_bases['field_dlzka_autorovho_textu_zad'] = array(
     'active' => 1,
@@ -388,38 +370,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_podiel_autora'.
-  $field_bases['field_podiel_autora'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_podiel_autora',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => 'heslo napísal redaktor sám',
-        20 => 'menej ako 20 %',
-        40 => '20 – 40 %',
-        60 => '40 – 60 %',
-        80 => '60 – 80 %',
-        100 => 'viac ako 80 %',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_pouzite_zdroje'.
@@ -689,6 +639,8 @@ function rs_beliana_node_heslo_field_default_field_bases() {
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracoval redaktor',
         'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
+        'Odkazové' => 'Odkazové heslo, nevypláca sa',
+        'Vyplatené vo WEBRS' => 'Vyriešené vo webovom RS',
         'Vyradené' => 'Vyradené bez vypracovania',
       ),
       'allowed_values_function' => '',
