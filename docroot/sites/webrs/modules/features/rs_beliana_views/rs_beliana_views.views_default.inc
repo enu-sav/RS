@@ -10008,11 +10008,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: Používateľ: Autorská zmluva */
-  $handler->display->display_options['fields']['field_autorska_zmluva']['id'] = 'field_autorska_zmluva';
-  $handler->display->display_options['fields']['field_autorska_zmluva']['table'] = 'field_data_field_autorska_zmluva';
-  $handler->display->display_options['fields']['field_autorska_zmluva']['field'] = 'field_autorska_zmluva';
-  $handler->display->display_options['fields']['field_autorska_zmluva']['relationship'] = 'uid';
+  /* Pole: Obsah: Zmluva na vyplatenie */
+  $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
   /* Pole: Obsah: Vyplatenie odmeny */
   $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
@@ -10679,11 +10678,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: Používateľ: Autorská zmluva */
-  $handler->display->display_options['fields']['field_autorska_zmluva']['id'] = 'field_autorska_zmluva';
-  $handler->display->display_options['fields']['field_autorska_zmluva']['table'] = 'field_data_field_autorska_zmluva';
-  $handler->display->display_options['fields']['field_autorska_zmluva']['field'] = 'field_autorska_zmluva';
-  $handler->display->display_options['fields']['field_autorska_zmluva']['relationship'] = 'uid';
+  /* Pole: Obsah: Zmluva na vyplatenie */
+  $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
   /* Pole: Obsah: Vyplatenie odmeny */
   $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
@@ -11243,7 +11241,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
     2 => '2',
   );
-  $handler->display->display_options['path'] = 'vyplatit_hesla.csv';
+  $handler->display->display_options['path'] = 'export_vyplatit_webrs.csv';
   $handler->display->display_options['displays'] = array(
     'page_3' => 'page_3',
     'default' => 0,
@@ -12120,7 +12118,7 @@ Heslá treba preradiť do stavov:
     t('Prihlásiť sa'),
     t('Meno'),
     t('Priezvisko'),
-    t('Autorská zmluva'),
+    t('Zmluva na vyplatenie'),
     t('Vyplatenie odmeny'),
     t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
@@ -16312,7 +16310,15 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
+    'nid' => 'nid',
     'title' => 'title',
+    'field_remote_id' => 'field_remote_id',
+    'field_datum_prebratia' => 'field_datum_prebratia',
+    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
+    'field_vyplatit' => 'field_vyplatit',
+    'field_zmluva' => 'field_zmluva',
+    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
+    'field_zlucene_z' => 'field_zlucene_z',
     'type' => 'type',
     'state' => 'state',
     'from_state' => 'from_state',
@@ -16321,11 +16327,6 @@ Heslá treba preradiť do stavov:
     'name_1' => 'name_1',
     'name' => 'name',
     'changed' => 'changed',
-    'field_datum_prebratia' => 'field_datum_prebratia',
-    'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
-    'field_vyplatit' => 'field_vyplatit',
-    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
-    'field_zlucene_z' => 'field_zlucene_z',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
@@ -16335,9 +16336,63 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
+    'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_remote_id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_prebratia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_autorovho_textu' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_vyplatit' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_zmluva' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dlzka_autorovho_textu_zad' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_zlucene_z' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -16394,39 +16449,6 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_datum_prebratia' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_datum_autorovho_textu' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_vyplatit' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_dlzka_autorovho_textu_zad' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_zlucene_z' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -16454,32 +16476,6 @@ Heslá treba preradiť do stavov:
         'log' => 0,
       ),
     ),
-    'action::views_bulk_operations_modify_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'show_all_tokens' => 1,
-        'display_values' => array(
-          'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
-          'heslo::field_vyplatit' => 'heslo::field_vyplatit',
-          'heslo::field_zverejnit_meno_autora' => 'heslo::field_zverejnit_meno_autora',
-          'heslo::field_vyslo_knizne' => 'heslo::field_vyslo_knizne',
-          'heslo::field_datum_prebratia' => 'heslo::field_datum_prebratia',
-          'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',
-          'ilustracia::field_zdroj_ilustracie' => 'ilustracia::field_zdroj_ilustracie',
-          'ilustracia::field_licencia1' => 'ilustracia::field_licencia1',
-          'ilustracia::field_meno_autora_diela' => 'ilustracia::field_meno_autora_diela',
-          'ilustracia::field_datum_prebratia' => 'ilustracia::field_datum_prebratia',
-          'importovane_heslo::field_taxsubor' => 'importovane_heslo::field_taxsubor',
-          'importovane_heslo::field_lexikalna_skupina' => 'importovane_heslo::field_lexikalna_skupina',
-          'importovane_heslo::field_zverejnit_meno_autora' => 'importovane_heslo::field_zverejnit_meno_autora',
-        ),
-      ),
-    ),
     'action::node_save_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -16495,6 +16491,36 @@ Heslá treba preradiť do stavov:
       'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
+          'heslo::field_vyplatit' => 'heslo::field_vyplatit',
+          'heslo::field_zverejnit_meno_autora' => 'heslo::field_zverejnit_meno_autora',
+          'heslo::field_datum_prebratia' => 'heslo::field_datum_prebratia',
+          'heslo::field_zmluva' => 'heslo::field_zmluva',
+          'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',
+          'ilustracia::field_zdroj_ilustracie' => 'ilustracia::field_zdroj_ilustracie',
+          'ilustracia::field_licencia1' => 'ilustracia::field_licencia1',
+          'ilustracia::field_meno_autora_diela' => 'ilustracia::field_meno_autora_diela',
+          'ilustracia::field_datum_prebratia' => 'ilustracia::field_datum_prebratia',
+          'importovane_heslo::field_taxsubor' => 'importovane_heslo::field_taxsubor',
+          'importovane_heslo::field_lexikalna_skupina' => 'importovane_heslo::field_lexikalna_skupina',
+          'importovane_heslo::field_vyplatit' => 'importovane_heslo::field_vyplatit',
+          'importovane_heslo::field_dlzka_autorovho_textu_zad' => 'importovane_heslo::field_dlzka_autorovho_textu_zad',
+          'importovane_heslo::field_datum_autorovho_textu' => 'importovane_heslo::field_datum_autorovho_textu',
+          'importovane_heslo::field_zverejnit_meno_autora' => 'importovane_heslo::field_zverejnit_meno_autora',
+          'importovane_heslo::field_zmluva' => 'importovane_heslo::field_zmluva',
+        ),
+      ),
     ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
@@ -16559,6 +16585,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'Vyplatenie_odmeny';
   $handler->display->display_options['fields']['field_vyplatit']['empty'] = 'Neuvedené';
+  /* Pole: Obsah: Zmluva na vyplatenie */
+  $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
   /* Pole: Obsah: Počet znakov na vyplatenie */
   $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
   $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
@@ -21400,6 +21430,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>'),
     t('Vyplatenie_odmeny'),
     t('Neuvedené'),
+    t('Zmluva na vyplatenie'),
     t('Prišlo zo stavu'),
     t('Autor hesla'),
     t('Všetky heslá - prehľad (G)'),

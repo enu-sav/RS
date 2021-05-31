@@ -218,24 +218,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_dlzka_autorovho_textu'.
-  $field_bases['field_dlzka_autorovho_textu'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_dlzka_autorovho_textu',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'number_integer',
-  );
-
   // Exported field_base: 'field_dlzka_autorovho_textu_zad'.
   $field_bases['field_dlzka_autorovho_textu_zad'] = array(
     'active' => 1,
@@ -653,6 +635,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracoval redaktor',
         'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
+        'Odkazové' => 'Odkazové heslo, nevypláca sa',
         'Vyplatené v RS' => 'Vyriešené v knižnom RS',
         'Vyradené' => 'Vyradené bez vypracovania',
       ),
