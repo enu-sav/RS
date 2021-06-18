@@ -125,6 +125,7 @@ config.specialChars = [
 [\'ᴅ\', \'kapitálka D, zápis chirality\'],
 [\'ʟ\', \'kapitálka L, zápis chirality\'],
 [\'→\', \'šípka v chemickej reakcii; implikuje\'],
+[\'↔\', \'šípka v chemickej reakcii\'],
 [\'⇌\', \'šípka v chemickej reakcii\'],
 ["ℵ",\'alef, ALT+2135\'],
 [\'∧\',\'logické AND, ALT+2227\'],
@@ -213,8 +214,33 @@ config.specialChars = [
             'name' => 'lite',
             'desc' => 'Plugin file: lite',
             'path' => '%plugin_dir%lite/',
-            'buttons' => FALSE,
-            'default' => 'f',
+            'buttons' => array(
+              'lite-acceptall' => array(
+                'label' => 'Accept all changes',
+                'icon' => 'icons/lite-acceptall.png',
+              ),
+              'lite-rejectall' => array(
+                'label' => 'Reject all changes',
+                'icon' => 'icons/lite-rejectall.png',
+              ),
+              'lite-acceptone' => array(
+                'label' => 'Accept change',
+                'icon' => 'icons/lite-acceptone.png',
+              ),
+              'lite-rejectone' => array(
+                'label' => 'Reject change',
+                'icon' => 'icons/lite-rejectone.png',
+              ),
+              'lite-toggleshow' => array(
+                'label' => 'Show/hide tracked changes',
+                'icon' => 'icons/lite-toggleshow.png',
+              ),
+              'lite-toggletracking' => array(
+                'label' => 'Start/stop tracking changes',
+                'icon' => 'icons/lite-toggletracking.png',
+              ),
+            ),
+            'default' => 't',
           ),
           'mathjax' => array(
             'name' => 'mathjax',

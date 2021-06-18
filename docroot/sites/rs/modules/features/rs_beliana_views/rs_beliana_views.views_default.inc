@@ -12309,6 +12309,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_text_hesla']['label'] = 'text';
   $handler->display->display_options['fields']['field_text_hesla']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_text_hesla']['type'] = 'text_plain';
+  /* Pole: Obsah: Súbor */
+  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
@@ -19119,45 +19124,25 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
   $handler->display->display_options['filters']['field_taxsubor_tid']['hierarchy'] = 1;
-  /* Filter criterion: Obsah: Lexikálna skupina (field_lexikalna_skupina) */
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['id'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['field'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['id'] = 'taxonomy_entity_index_tid_depth';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['field'] = 'taxonomy_entity_index_tid_depth';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['group'] = 1;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator_id'] = 'taxonomy_entity_index_tid_depth_op';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator'] = 'taxonomy_entity_index_tid_depth_op';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['identifier'] = 'taxonomy_entity_index_tid_depth';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
   );
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['type'] = 'select';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['depth'] = '3';
   /* Filter criterion: Obsah: Názov */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
@@ -19334,6 +19319,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
   $handler->display->display_options['filters']['uid_revision']['field'] = 'uid_revision';
   $handler->display->display_options['filters']['uid_revision']['value'] = '';
+  $handler->display->display_options['filters']['uid_revision']['group'] = 1;
   $handler->display->display_options['filters']['uid_revision']['exposed'] = TRUE;
   $handler->display->display_options['filters']['uid_revision']['expose']['operator_id'] = 'uid_revision_op';
   $handler->display->display_options['filters']['uid_revision']['expose']['label'] = 'Upravil niektorú verziu';
@@ -19366,6 +19352,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
@@ -19402,6 +19389,7 @@ function rs_beliana_views_views_default_views() {
     'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
+  $handler->display->display_options['filters']['type_1']['group'] = 1;
   $handler->display->display_options['path'] = 'vsetky-prehlad-g';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad (G)';
