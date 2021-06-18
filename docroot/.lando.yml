@@ -1,0 +1,30 @@
+name: beliana.rs
+recipe: drupal7
+config:
+  php: '7.0'
+  via: apache
+  webroot: .
+  xdebug: false
+  config:
+    php: .lando/php.ini
+
+services:
+  appserver:
+    overrides:
+      environment:
+        XDEBUG_MODE:
+        PHP_IDE_CONFIG: "serverName=appserver"
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+
+proxy:
+  appserver:
+    - rs.beliana.lndo.site
+    - webrs.beliana.lndo.site

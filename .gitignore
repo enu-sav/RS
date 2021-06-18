@@ -53,8 +53,7 @@ docker-compose.override.yml
 
 # Drupal #
 #########
-docroot/sites/sites.php
-docroot/sites/*/settings*.php
+docroot/sites/*/settings.*.php
 
 # Ignore Drupal's file directory
 docroot/sites/*/files
