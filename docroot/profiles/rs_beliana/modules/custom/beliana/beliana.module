@@ -391,6 +391,16 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_unassign_author' => [    // rs and webrs
+      'type' => 'entity',
+      'label' => t('Unassign author from node'),
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+      'permissions' => ['administer taxonomy'],
+    ],
     'beliana_assign_corrector' => [ // rs and webrs
       'type' => 'entity',
       'label' => t('Specify author and assign to editor'),
@@ -551,13 +561,13 @@ function return_for_processing(&$node, $context) {
     $node_user = user_load_by_name($node->name);
     if (empty(array_intersect(array('Redaktor', 'Autor'), $node_user->roles))) {
         workbench_moderation_moderate($node, "importovane");
-        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).', 
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).',
             ['@path' => $node->path['alias'],
             '@title' => $node->title]
             ));
     } else {
         workbench_moderation_moderate($node, "needs_review");
-        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).', 
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).',
             ['@path' => $node->path['alias'],
             '@title' => $node->title]
             ));
@@ -690,6 +700,34 @@ function beliana_assign_author_submit($form, $form_state) {
  */
 function beliana_assign_author(&$node, $context) {
   _beliana_assign_user($node, $context);
+}
+
+/**
+ * Callback for `beliana_unassign_author` action.
+ *
+ * Unassign user from node author and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_unassign_author(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->uid = 719;
+    $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = '';
+    $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] = 0;
+    $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = NULL;
+    $node->field_zmluva[LANGUAGE_NONE][0]['value'] = '';
+    $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
+    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = '';
+    $node->field_table[LANGUAGE_NONE][0]['value'] = '';
+    $node->field_table_weight[LANGUAGE_NONE][0]['value'] = NULL;
+    //$node->field_ilustracia[LANGUAGE_NONE][0]['target_id'] = NULL; // Integrity constraint violation
+    $node->field_datum[LANGUAGE_NONE][0]['value'] = '';
+    $node->log = 'Zrušený autor ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'zaradene');
+  }
 }
 
 /**
@@ -1502,7 +1540,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' &&
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
@@ -1860,8 +1898,7 @@ function _beliana_submit_assign_user_form($form_state, $state) {
  *
  */
 function _beliana_assign_user(&$node, $context) {
-  $user = user_load_by_name($context['user']);
-  if ($user !== FALSE) {
+  if ($user = user_load_by_name($context['user'])) {
     // create array of node's categories
     $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
     $node_taxo = [];
