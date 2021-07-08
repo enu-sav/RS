@@ -445,10 +445,19 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::beliana_unassign_author' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::beliana_assign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
     ),
@@ -456,6 +465,7 @@ function rs_beliana_views_views_default_views() {
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
     ),
@@ -10008,7 +10018,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: Obsah: Zmluva na vyplatenie */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -10678,7 +10688,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: Obsah: Zmluva na vyplatenie */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -12118,7 +12128,7 @@ Heslá treba preradiť do stavov:
     t('Prihlásiť sa'),
     t('Meno'),
     t('Priezvisko'),
-    t('Zmluva na vyplatenie'),
+    t('Broken handler field_data_field_zmluva.field_zmluva'),
     t('Vyplatenie odmeny'),
     t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
@@ -12935,7 +12945,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'Vo vyhľadávacích textových poliach sa diakritika neberie do úvahy (okrem znakov č, ž, š a ô)';
+  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. ';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
@@ -13949,7 +13959,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'Vo vyhľadávacích textových poliach sa diakritika neberie do úvahy (okrem znakov č, ž, š a ô)';
+  $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. ';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
@@ -14720,7 +14730,7 @@ Heslá treba preradiť do stavov:
     t('Text hesla'),
     t('ddddd'),
     t('Vyhľadať'),
-    t('Vo vyhľadávacích textových poliach sa diakritika neberie do úvahy (okrem znakov č, ž, š a ô)'),
+    t('V tomto náhľade sa zobrazujú vydané a aj budúce heslá Beliany. Knižne vydané heslá po <em>kokpit</em> majú typ <em>Importované heslo</em>. Heslá od <em>koks</em> majú typ <em>Heslo</em> a budú sa vypracovávať v redakčnom systéme. <br />Heslá s typom <em>Importované heslo</em> môžete upraviť vždy. Ostatné heslá môžete upraviť len vtedy, ak má jednu z vašich lexikálnych skupín. Odkazy na heslá sú aktívne.  Odkazy označené pôvodnou šípkou —> neboli programovo nájdené a treba ich vložiť ručne. '),
     t('Komentár/inštrukcie'),
     t('Tabuľka pre geografické heslá'),
     t('Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu'),
@@ -16585,7 +16595,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'Vyplatenie_odmeny';
   $handler->display->display_options['fields']['field_vyplatit']['empty'] = 'Neuvedené';
-  /* Pole: Obsah: Zmluva na vyplatenie */
+  /* Pole: Nefunkčný/chýbajúci ovládač */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -21430,7 +21440,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>'),
     t('Vyplatenie_odmeny'),
     t('Neuvedené'),
-    t('Zmluva na vyplatenie'),
+    t('Broken handler field_data_field_zmluva.field_zmluva'),
     t('Prišlo zo stavu'),
     t('Autor hesla'),
     t('Všetky heslá - prehľad (G)'),
