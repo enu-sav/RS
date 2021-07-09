@@ -106,7 +106,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
@@ -129,7 +129,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -176,7 +176,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 11,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -199,7 +199,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 11,
+        'weight' => 8,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -261,7 +261,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 18,
+        'weight' => 12,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -300,7 +300,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -323,7 +323,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 20,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -362,7 +362,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 30,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -385,7 +385,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 9,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -424,7 +424,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 19,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -441,7 +441,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 19,
+        'weight' => 13,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -493,7 +493,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -515,7 +515,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 17,
+        'weight' => 11,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -546,7 +546,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -614,7 +614,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 50,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -650,7 +650,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 10,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -789,7 +789,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'title_style' => '',
         ),
         'type' => 'title_linked',
-        'weight' => 30,
+        'weight' => 16,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -858,7 +858,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 25,
+        'weight' => 15,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -910,7 +910,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 16,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -956,9 +956,56 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 31,
+      'weight' => 27,
     ),
     'workbench_access_field' => FALSE,
+  );
+
+  // Exported field_instance: 'node-heslo-field_povodny_autor'.
+  $field_instances['node-heslo-field_povodny_autor'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_povodny_autor',
+    'label' => 'Pôvodný autor hesla',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 25,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-heslo-field_redaktori_zluceneho'.
@@ -972,7 +1019,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 23,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1002,7 +1049,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 31,
+      'weight' => 26,
     ),
     'workbench_access_field' => FALSE,
   );
@@ -1018,7 +1065,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 28,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1049,7 +1096,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 28,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -1188,7 +1235,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 30,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1216,7 +1263,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 31,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -1303,7 +1350,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 21,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1355,7 +1402,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 31,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1371,7 +1418,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 29,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1402,7 +1449,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 31,
+      'weight' => 28,
     ),
     'workbench_access_field' => 0,
   );
@@ -1422,7 +1469,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 16,
+        'weight' => 10,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1449,7 +1496,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -1469,7 +1516,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 30,
+        'weight' => 18,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1500,7 +1547,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 31,
+      'weight' => 30,
     ),
     'workbench_access_field' => 0,
   );
@@ -1520,7 +1567,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 30,
+        'weight' => 17,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1551,76 +1598,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 31,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-heslo-field_zmluva'.
-  $field_instances['node-heslo-field_zmluva'] = array(
-    'bundle' => 'heslo',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 51,
-      ),
-      'lite_display' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_zmluva',
-    'label' => 'Zmluva na vyplatenie',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'filtered_html' => 'filtered_html',
-          'full_html' => 'full_html',
-          'plain_text' => 'plain_text',
-        ),
-        'allowed_formats_toggle' => 0,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'filtered_html' => array(
-              'weight' => 5,
-            ),
-            'full_html' => array(
-              'weight' => 2,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
-            ),
-          ),
-        ),
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -1641,7 +1619,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1670,7 +1648,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 9,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1775,6 +1753,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Pozícia tabuľky pre geografické heslá');
   t('Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)');
   t('Počet znakov na vyplatenie');
+  t('Pôvodný autor hesla');
   t('Pôvodný text hesla v generálnom heslári pred importovaním z XLS súborov. XLS tabuľka heslára mala 8 stĺpcov ZODAD, HESLO, P_R, L_S, AUT, IL, POZN a POZN 2 . Obsah stĺpcov je uvedený v zátvorke, POZN a POZN2 sú spojené.
 ');
   t('Redaktori zlúčeného hesla');
@@ -1793,11 +1772,9 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny. Slúži na riadenie prístupu k heslám a na kategorizáciu hesla na webe. Ak chcete heslo priradiť autorovi, zadajte len jednu hodnotu.');
-  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie');
   t('Zaškrtnite, ak sa majú na webe zobraziť meno a stručný životopis.');
   t('Zlúčené do');
   t('Zlúčené z');
-  t('Zmluva na vyplatenie');
   t('Zo zoznamu vyberte názov súboru, do ktorého má byť heslo zaradené. Názov súboru je daný názvom svojho posledného hesla.');
   t('Zverejniť meno autora');
   t('Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />

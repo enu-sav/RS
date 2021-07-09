@@ -127,7 +127,7 @@ function rs_beliana_node_importovane_heslo_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '9',
         ),
         'workbench_access' => array(
           'weight' => '0',
