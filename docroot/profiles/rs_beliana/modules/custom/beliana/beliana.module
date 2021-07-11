@@ -1592,6 +1592,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['field_dlzka_autorovho_textu_zad'])) {
         $form['field_dlzka_autorovho_textu_zad']['#access'] = FALSE;
       }
+      if (isset($form['field_zmluva'])) {
+        $form['field_zmluva']['#access'] = FALSE;
+      }
     }
     elseif ($display_payment == "showdisabled") {
       if (isset($form['field_vyplatit'])) {
@@ -1599,6 +1602,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       }
       if (isset($form['field_dlzka_autorovho_textu_zad'])) {
         $form['field_dlzka_autorovho_textu_zad']['#disabled'] = TRUE;
+      }
+      if (isset($form['field_zmluva'])) {
+        $form['field_zmluva']['#disabled'] = TRUE;
       }
       if (isset($form['field_datum_autorovho_textu'])) {
         $form['field_datum_autorovho_textu']['#access'] = FALSE;
