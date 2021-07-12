@@ -1561,7 +1561,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie',
+    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie>viac o určení čísla zmluvy</a>).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1793,7 +1793,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny. Slúži na riadenie prístupu k heslám a na kategorizáciu hesla na webe. Ak chcete heslo priradiť autorovi, zadajte len jednu hodnotu.');
-  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie');
+  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie>viac o určení čísla zmluvy</a>).');
   t('Zaškrtnite, ak sa majú na webe zobraziť meno a stručný životopis.');
   t('Zlúčené do');
   t('Zlúčené z');

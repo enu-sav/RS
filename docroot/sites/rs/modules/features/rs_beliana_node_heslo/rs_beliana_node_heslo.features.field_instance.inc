@@ -106,7 +106,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -129,7 +129,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -191,7 +191,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -230,7 +230,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 13,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -253,7 +253,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 19,
+        'weight' => 15,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -292,7 +292,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 23,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -346,7 +346,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 29,
+      'weight' => 31,
     ),
     'workbench_access_field' => 0,
   );
@@ -361,7 +361,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -400,7 +400,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 19,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -417,7 +417,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 22,
+        'weight' => 16,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -469,7 +469,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 27,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
@@ -491,7 +491,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 18,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -522,7 +522,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -538,7 +538,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 24,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -590,7 +590,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -611,7 +611,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 23,
+        'weight' => 17,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -855,7 +855,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 12,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -907,7 +907,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 21,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -924,7 +924,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -954,7 +954,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 16,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -1001,7 +1001,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 18,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1048,7 +1048,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 28,
+      'weight' => 30,
     ),
     'workbench_access_field' => 0,
   );
@@ -1094,7 +1094,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 17,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -1261,7 +1261,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -1349,7 +1349,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1401,7 +1401,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1420,7 +1420,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 17,
+        'weight' => 13,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1447,7 +1447,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -1463,7 +1463,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 23,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1490,7 +1490,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 28,
     ),
     'workbench_access_field' => 0,
   );
@@ -1506,7 +1506,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 25,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1537,7 +1537,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 15,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -1588,7 +1588,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 14,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -1598,14 +1598,14 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie',
+    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo objednané. Ak ho nepoznáte, zadajte číslo zmluvy, ktorá bola aktívna v čase odovzdanie textu autorom (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie">viac o určení čísla zmluvy</a>).',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 31,
+        'weight' => 18,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1657,7 +1657,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -1677,7 +1677,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 22,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1706,7 +1706,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 24,
+      'weight' => 27,
     ),
     'workbench_access_field' => 0,
   );
@@ -1830,7 +1830,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Zadajte dátum aktualizácie vydaného hesla v tvare <strong>RRRR/MM/DD</strong> napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
-  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie');
+  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo objednané. Ak ho nepoznáte, zadajte číslo zmluvy, ktorá bola aktívna v čase odovzdanie textu autorom (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie">viac o určení čísla zmluvy</a>).');
   t('Zlúčené do');
   t('Zlúčené z');
   t('Zmluva na vyplatenie');
