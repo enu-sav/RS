@@ -16540,6 +16540,14 @@ Heslá treba preradiť do stavov:
         ),
       ),
     ),
+    'action::beliana_change_author' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -16611,10 +16619,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['label'] = 'Vyplatenie_odmeny';
   $handler->display->display_options['fields']['field_vyplatit']['empty'] = 'Neuvedené';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
-  $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
-  $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
-  $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
   /* Pole: Obsah: Počet znakov na vyplatenie */
   $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
   $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
@@ -21456,7 +21460,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('<a href="https://rs.beliana.sav.sk/node/[nid]">[nid]</a>'),
     t('Vyplatenie_odmeny'),
     t('Neuvedené'),
-    t('Broken handler field_data_field_zmluva.field_zmluva'),
+    t('Zmluva na vyplatenie'),
     t('Prišlo zo stavu'),
     t('Autor hesla'),
     t('Všetky heslá - prehľad (G)'),
