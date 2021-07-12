@@ -17227,6 +17227,8 @@ function rs_beliana_views_views_default_views() {
     'field_datum_vyplatenia' => 'field_datum_vyplatenia',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
     'field_vyplatit' => 'field_vyplatit',
+    'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
+    'field_zmluva' => 'field_zmluva',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
@@ -17338,6 +17340,20 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_vyplatit' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dlzka_autorovho_textu_zad' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_zmluva' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -17490,6 +17506,18 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
+  /* Pole: Obsah: Počet znakov na vyplatenie */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Pole: Obsah: Zmluva na vyplatenie */
+  $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -18286,7 +18314,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['title'] = 'Všetky heslá - operácie';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '500';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -21912,14 +21940,14 @@ function rs_beliana_views_views_default_views() {
     t('Dátum vyplatenia'),
     t('Dátum uloženia údajov pre vyplatenie'),
     t('Vyplatenie odmeny'),
+    t('Počet znakov na vyplatenie'),
+    t('Zmluva na vyplatenie'),
     t('Redaktori zlúčeného hesla'),
     t('Tabuľka pre geografické heslá'),
     t('Zlúčené z'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
-    t('Počet znakov na vyplatenie'),
-    t('Zmluva na vyplatenie'),
     t('Autor hesla'),
     t('Záznam z pôvodného GH'),
     t('Zlúčené z (field_zlucene_z)'),
