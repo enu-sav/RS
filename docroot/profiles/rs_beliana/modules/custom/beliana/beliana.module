@@ -391,18 +391,18 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'beliana_change_author' => [    // rs and webrs
+    'beliana_change_author' => [    // rs and webrs - BEL-8
       'type' => 'entity',
-      'label' => 'Zmeniť autora',
+      'label' => 'Zmeniť priradenie autora',
       'configurable' => TRUE,
       'triggers' => ['any'],
       'behavior' => ['change_property'],
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'beliana_unassign_author' => [    // rs and webrs
+    'beliana_unassign_author' => [    // rs and webrs - BEL-13
       'type' => 'entity',
-      'label' => 'Zrušiť priradenie hesla',
+      'label' => 'Zrušiť priradenie autora',
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['changes_property'],

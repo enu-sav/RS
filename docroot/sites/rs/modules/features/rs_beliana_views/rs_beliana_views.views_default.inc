@@ -526,14 +526,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::beliana_change_author' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::beliana_assign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -543,14 +535,6 @@ function rs_beliana_views_views_default_views() {
       'label' => '',
     ),
     'action::beliana_assign_corrector' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::beliana_unassign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -18504,7 +18488,23 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
+    'action::beliana_change_author' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::workbench_moderation_set_state_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::beliana_unassign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
