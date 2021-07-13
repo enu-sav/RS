@@ -445,6 +445,14 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::beliana_change_author' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::beliana_unassign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -10018,7 +10026,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
+  /* Pole: Obsah: Zmluva na vyplatenie */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -10688,7 +10696,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: Nefunkčný/chýbajúci ovládač */
+  /* Pole: Obsah: Zmluva na vyplatenie */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -12128,7 +12136,7 @@ Heslá treba preradiť do stavov:
     t('Prihlásiť sa'),
     t('Meno'),
     t('Priezvisko'),
-    t('Broken handler field_data_field_zmluva.field_zmluva'),
+    t('Zmluva na vyplatenie'),
     t('Vyplatenie odmeny'),
     t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
@@ -16533,6 +16541,14 @@ Heslá treba preradiť do stavov:
       ),
     ),
     'action::workbench_moderation_set_state_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::beliana_unassign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
