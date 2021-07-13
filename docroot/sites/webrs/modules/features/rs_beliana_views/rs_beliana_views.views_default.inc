@@ -10026,7 +10026,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: field_zmluva */
+  /* Pole: Obsah: Zmluva na vyplatenie */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -10696,7 +10696,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_priezvisko']['table'] = 'field_data_field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['field'] = 'field_priezvisko';
   $handler->display->display_options['fields']['field_priezvisko']['relationship'] = 'uid';
-  /* Pole: field_zmluva */
+  /* Pole: Obsah: Zmluva na vyplatenie */
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
@@ -12136,7 +12136,7 @@ Heslá treba preradiť do stavov:
     t('Prihlásiť sa'),
     t('Meno'),
     t('Priezvisko'),
-    t('field_zmluva'),
+    t('Zmluva na vyplatenie'),
     t('Vyplatenie odmeny'),
     t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
@@ -16537,14 +16537,6 @@ Heslá treba preradiť do stavov:
           'importovane_heslo::field_zverejnit_meno_autora' => 'importovane_heslo::field_zverejnit_meno_autora',
         ),
       ),
-    ),
-    'action::beliana_change_author' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
     ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,

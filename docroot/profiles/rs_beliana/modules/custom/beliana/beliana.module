@@ -391,15 +391,6 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
-    'beliana_change_author' => [    // rs and webrs - BEL-8
-      'type' => 'entity',
-      'label' => 'Zmeniť priradenie autora',
-      'configurable' => TRUE,
-      'triggers' => ['any'],
-      'behavior' => ['change_property'],
-      'vbo_configurable' => FALSE,
-      'pass rows' => TRUE,
-    ],
     'beliana_unassign_author' => [    // rs and webrs - BEL-13
       'type' => 'entity',
       'label' => 'Zrušiť priradenie autora',
@@ -712,72 +703,6 @@ function beliana_assign_author(&$node, $context) {
 }
 
 /**
- *
- * @inheritdoc
- */
-function beliana_change_author_form($form, &$form_state) {
-  return _beliana_assign_user_form('Choose the author to assign articles to');
-}
-
-/**
- * Validation for `beliana_assign_author_form`.
- *
- * @inheritdoc
- */
-function beliana_change_author_validate($form, &$form_state) {
-  _beliana_validate_assign_user_form($form_state, ["Autor"]);
-}
-
-/**
- * Submit function for `beliana_assign_author_form`.
- *
- * @inheritdoc
- */
-function beliana_change_author_submit($form, $form_state) {
-  return _beliana_submit_assign_user_form($form_state, 'u_autora');
-}
-
-/**
- * Callback for `beliana_change_author` action.
- *
- * Assigns selected user as node author and
- * changes workflow status to `u_autora`.
- *
- * @inheritdoc
- */
-function beliana_change_author(&$node, $context) {
-  // Skip rules
-  if (empty($node->field_vyplatit[LANGUAGE_NONE][0]['value'])) {
-    return;
-  }
-  else {
-    if ($node->field_vyplatit[LANGUAGE_NONE][0]['value'] == 'Vyplatiť' && empty($node->field_datum_vyplatenia[LANGUAGE_NONE][0]['value'] = NULL)) {
-      return;
-    }
-  }
-
-  if ($original_user = user_load($node->uid)) {
-    if ($new_user = user_load_by_name($context['user'])) {
-      $node->uid = $new_user->uid;
-      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = '';
-      $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] = 0;
-      $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = NULL;
-      $node->field_zmluva[LANGUAGE_NONE][0]['value'] = '';
-      $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
-      $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = '';
-      $node->field_table[LANGUAGE_NONE][0]['value'] = '';
-      $node->field_table_weight[LANGUAGE_NONE][0]['value'] = NULL;
-      $node->field_datum[LANGUAGE_NONE][0]['value'] = '';
-      $node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
-      $node->log = 'Zmena autora z ' . $original_user->name . ' na ' . $new_user->name;
-
-      node_save($node);
-      workbench_moderation_moderate($node, $context['status']);
-    }
-  }
-}
-
-/**
  * Callback for `beliana_unassign_author` action.
  *
  * Unassign user from node author and
@@ -786,22 +711,43 @@ function beliana_change_author(&$node, $context) {
  * @inheritdoc
  */
 function beliana_unassign_author(&$node, $context) {
-  if ($user = user_load($node->uid)) {
-    $node->uid = 719;
-    $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = '';
-    $node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE][0]['value'] = 0;
-    $node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'] = NULL;
-    $node->field_zmluva[LANGUAGE_NONE][0]['value'] = '';
-    $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
-    $node->field_komentar_instrukcie[LANGUAGE_NONE][0]['value'] = '';
-    $node->field_table[LANGUAGE_NONE][0]['value'] = '';
-    $node->field_table_weight[LANGUAGE_NONE][0]['value'] = NULL;
-    //$node->field_ilustracia[LANGUAGE_NONE][0]['target_id'] = NULL; // Integrity constraint violation
-    $node->field_datum[LANGUAGE_NONE][0]['value'] = '';
-    $node->log = 'Zrušený autor ' . $user->name;
+  if ($original_user = user_load($node->uid)) {
+    // Skip rules
+    if ($node->field_vyplatit[LANGUAGE_NONE][0]['value'] == 'Vyplatiť' && empty($node->field_datum_vyplatenia[LANGUAGE_NONE][0]['value'] = NULL)) {
+      drupal_set_message(t('Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nie je vyplatené.', array(
+        '!link' => '/node/' . $node->nid,
+        '@title' => $node->title_field['sk'][0]['value'],
+        '@name' => $original_user->name,
+      )), 'error');
+      return;
+    }
 
-    node_save($node);
-    workbench_moderation_moderate($node, 'zaradene');
+    if ($user = user_load($node->uid)) {
+      $node->uid = 719;
+
+      foreach (array(
+                 'field_vyplatit' => '',
+                 'field_dlzka_autorovho_textu_zad' => 0,
+                 'field_datum_autorovho_textu' => NULL,
+                 'field_zmluva' => '',
+                 'field_komentar_instrukcie' => '',
+                 'field_table' => '',
+                 'field_table_weight' => NULL,
+                 'field_datum' => '',
+               ) as $field => $value) {
+        if (!empty($node->{$field}[LANGUAGE_NONE])) {
+          $node->{$field}[LANGUAGE_NONE][0]['value'] = $value;
+        }
+      }
+
+      $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
+      //$node->field_ilustracia[LANGUAGE_NONE][0]['target_id'] = NULL; // Integrity constraint violation
+      $node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
+      $node->log = 'Zrušený autor ' . $user->name;
+
+      node_save($node);
+      workbench_moderation_moderate($node, 'zaradene');
+    }
   }
 }
 

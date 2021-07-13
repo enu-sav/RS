@@ -18516,14 +18516,6 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::beliana_change_author' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
