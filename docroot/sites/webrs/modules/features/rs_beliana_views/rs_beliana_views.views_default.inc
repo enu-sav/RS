@@ -6476,8 +6476,8 @@ Heslá treba preradiť do stavov:
 <ul>
 <li><strong>Na zverejnenie</strong>: heslo je vhodné na zverejnenie (ak treba, ešte pred zmenou stavu možno heslo otvoriť a spraviť drobné úpravy). Ak je heslo zlúčené, stav do stavu Na zverejnenie možno zmeniť až vtedy, ak heslo videli ostatní výstupní redaktori a ak súhlasia. Svoj súhlas naznačte pridaním svojej značky do komentáta, nesúhlas pridaním značky a zdôvodnením nesúhlasu.</li>
 <li><strong>Vyradené</strong>: heslo nie je vhodné na zverejnenie. V komentári uveďte dôvod</li>
-<li><strong>Importované</strong>: zlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy. Stav možno zmeniť, až heslo videli všetci výstupní redaktori</li>
-<li><strong>U redaktora</strong>: nezlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy</li>
+<li><strong>Importované</strong> (použiť <em>Vrátiť na prepracovanie</em>): zlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy. Stav možno zmeniť, až heslo videli všetci výstupní redaktori</li>
+<li><strong>U redaktora</strong> (použiť <em>Vrátiť na prepracovanie</em>): nezlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy</li>
 </ul>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -6499,7 +6499,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::prevzate_to_importovane' => array(
+    'action::return_for_processing' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -6508,14 +6508,6 @@ Heslá treba preradiť do stavov:
       'label' => '',
     ),
     'action::prevzate_to_na_zverejnenie' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::prevzate_to_u_redaktora' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -7259,8 +7251,8 @@ Heslá treba preradiť do stavov:
 <ul>
 <li><strong>Na zverejnenie</strong>: heslo je vhodné na zverejnenie (ak treba, ešte pred zmenou stavu možno heslo otvoriť a spraviť drobné úpravy). Ak je heslo zlúčené, stav do stavu Na zverejnenie možno zmeniť až vtedy, ak heslo videli ostatní výstupní redaktori a ak súhlasia. Svoj súhlas naznačte pridaním svojej značky do komentáta, nesúhlas pridaním značky a zdôvodnením nesúhlasu.</li>
 <li><strong>Vyradené</strong>: heslo nie je vhodné na zverejnenie. V komentári uveďte dôvod</li>
-<li><strong>Importované</strong>: zlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy. Stav možno zmeniť, až heslo videli všetci výstupní redaktori</li>
-<li><strong>U redaktora</strong>: nezlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy</li>
+<li><strong>Importované</strong> (použiť <em>Vrátiť na prepracovanie</em>): zlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy. Stav možno zmeniť, až heslo videli všetci výstupní redaktori</li>
+<li><strong>U redaktora</strong> (použiť <em>Vrátiť na prepracovanie</em>): nezlúčené heslo vhodné na zverejnenie, ktoré však vyžaduje úpravy</li>
 </ul>'),
     t('Zlúčené z'),
     t('Zlúčené (NOT NULL) / normálne (NULL)'),
