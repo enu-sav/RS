@@ -551,13 +551,13 @@ function return_for_processing(&$node, $context) {
     $node_user = user_load_by_name($node->name);
     if (empty(array_intersect(array('Redaktor', 'Autor'), $node_user->roles))) {
         workbench_moderation_moderate($node, "importovane");
-        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).', 
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).',
             ['@path' => $node->path['alias'],
             '@title' => $node->title]
             ));
     } else {
         workbench_moderation_moderate($node, "needs_review");
-        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).', 
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).',
             ['@path' => $node->path['alias'],
             '@title' => $node->title]
             ));
@@ -647,11 +647,18 @@ function beliana_sync_from_remote_action_form($settings, &$form_state) {
 function beliana_sync_from_remote_action_submit($form, $form_state) {
   $return = [];
 
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/heslo';
+
+  if ($login = beliana_api_rest_login($request_url)) {
+    $return['login'] = $login;
+  }
+
   return $return;
 }
 
 function beliana_sync_from_remote_action(&$node, $context) {
-  beliana_sync_from_remote($node);
+  beliana_sync_from_remote($node, $context);
 }
 
 /**
@@ -830,10 +837,15 @@ function beliana_sync_from_remote_confirm_form_submit($form, &$form_state) {
   $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from'];
 }
 
-function beliana_sync_from_remote($node) {
+function beliana_sync_from_remote($node, $context) {
+  $login = FALSE;
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
-  if ($remote_node = beliana_api_rest_get_node($remote_id)) {
+  if(isset($context['login']) && !empty($context['login'])) {
+    $login = $context['login'];
+  }
+
+  if ($remote_node = beliana_api_rest_get_node($remote_id, $login)) {
     // implemented independently for rs and webrs
     beliana_sync_from_remote_build($node, $remote_node);
   }
@@ -1502,7 +1514,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' &&
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
@@ -3067,11 +3079,15 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
   return FALSE;
 }
 
-function beliana_api_rest_get_node($id) {
+function beliana_api_rest_get_node($id, $login = FALSE) {
   $base_url = variable_get('rs_api_uri');
   $request_url = $base_url . '/api/heslo';
 
-  if ($login = beliana_api_rest_login($request_url)) {
+  if (!$login) {
+    $login = beliana_api_rest_login($request_url);
+  }
+
+  if ($login) {
     $curl = curl_init($request_url . '/node/' . $id);
     curl_setopt($curl, CURLOPT_HTTPHEADER, [
       'Accept: application/json',
@@ -3088,7 +3104,13 @@ function beliana_api_rest_get_node($id) {
     if ($http_code == 200) {
       return json_decode($response);
     }
+    else {
+      $http_message = curl_error($curl);
+      watchdog('error', 'Error getting remote node (' . $id . '): ' . $http_message);
+    }
   }
+
+  watchdog('error', 'Error getting remote node (' . $id . '): Login failed/invalid.');
 
   return FALSE;
 }
