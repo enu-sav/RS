@@ -169,19 +169,6 @@ function beliana_merge(&$entity, $context = array()) {
       }
     }
 
-    // Check if entity has moderation state history: u_vyst_redaktora_2x >> u_vyst_redaktora_2
-    $transitions = db_select('workbench_moderation_node_history', 'w')
-        ->fields('w')
-        ->condition('state', 'u_vyst_redaktora_2x')
-        ->condition('nid', $entity->nid)
-        ->execute()
-        ->fetchAll();
-
-    // If master has state u_vyst_redaktora_2x, write to merged entity as attribute
-    if (!empty($transitions)) {
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] = 'VR2X';
-    }
-
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
     node_save($master);
 
@@ -307,12 +294,6 @@ function handle_special_transitions(&$values) {
     node_save($values['node']);
     return;
   }
-
-  // transition 1_korektura >> u_vyst_redaktora_3
-  if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
-    _transition_vr2x($values);
-    node_save($values['node']);
-  }
 }
 
 /**
@@ -338,37 +319,8 @@ function _transition_korektura(&$values, $korektura) {
     $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
   }
   else {
-    _transition_vr2x($values);
     // we are done, restore the initial status
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
-  }
-}
-
-/**
- * Helper function: transition korektura >>  next state
- */
-function _transition_vr2x(&$values) {
-  // check if "heslo" was already seen by vr2x
-  $already_seen_by_vr2x = FALSE;
-  if (empty($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
-    $transitions = db_select('workbench_moderation_node_history', 'w')
-        ->fields('w')
-        ->condition('state', 'u_vyst_redaktora_2x')
-        ->condition('nid', $values['node']->nid)
-        ->execute()
-        ->fetchAll();
-
-    $already_seen_by_vr2x = !empty($transitions);
-  }
-  else {
-    if (!empty($values['node']->field_atributy[LANGUAGE_NONE])) {
-      $already_seen_by_vr2x = $values['node']->field_atributy[LANGUAGE_NONE][0]['value'] == 'VR2X';
-    }
-  }
-
-  // if seen, move to vr4
-  if ($already_seen_by_vr2x) {
-    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_4';
   }
 }
 
