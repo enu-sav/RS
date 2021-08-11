@@ -257,8 +257,9 @@ function handle_special_transitions(&$values) {
     if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
       _start_korektura($values);
 
-    // transition 1_korektura >> u_vyst_redaktora_3
-    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
+    // transition 1_korektura >> u_vyst_redaktora_4
+    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_4') {
+      dpm("1. korektura >> u_vyst_redaktora_4 trans");
       _transition_korektura($values, "1_korektura");
     }
 
@@ -279,6 +280,7 @@ function handle_special_transitions(&$values) {
       }
     }
 
+    // Po vybaveni 2. korektury zmazat az po XX
     $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change
     if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
       // starting 'korektura': copy editor names to field_spravit_1_korekturu
@@ -291,6 +293,8 @@ function handle_special_transitions(&$values) {
     }
     else // korekt_ra: version with only one editor selected
       _run_2_korektura_single($values);
+    //XX
+
     node_save($values['node']);
     return;
   }
