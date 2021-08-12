@@ -321,7 +321,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/na-posudenie-vr3',
-    'router_path' => 'admin/beliana/na-posudenie-vr3',
+    'router_path' => 'admin/beliana',
     'link_title' => 'Na posúdenie (VR3)',
     'options' => array(
       'attributes' => array(
