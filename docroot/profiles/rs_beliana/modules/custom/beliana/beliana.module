@@ -712,36 +712,47 @@ function beliana_assign_author(&$node, $context) {
  */
 function beliana_unassign_author(&$node, $context) {
   if ($original_user = user_load($node->uid)) {
+    $options = [
+      '!link' => '/node/' . $node->nid,
+      '@title' => $node->title_field['sk'][0]['value'],
+      '@name' => $original_user->name,
+    ];
+
     // Skip rules
     if ($node->field_vyplatit[LANGUAGE_NONE][0]['value'] == 'Vyplatiť' && empty($node->field_datum_vyplatenia[LANGUAGE_NONE][0]['value'] = NULL)) {
-      drupal_set_message(t('Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nie je vyplatené.', array(
-        '!link' => '/node/' . $node->nid,
-        '@title' => $node->title_field['sk'][0]['value'],
-        '@name' => $original_user->name,
-      )), 'error');
+      $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nie je vyplatené.';
+    }
+
+    if (!empty($node->field_zlucene_z[LANGUAGE_NONE])) {
+      $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, lebo ide o zlúčené heslo.';
+    }
+
+    if (isset($error_message)) {
+      drupal_set_message(t($error_message, $options), 'error');
       return;
     }
 
     if ($user = user_load($node->uid)) {
       $node->uid = 719;
 
-      foreach (array(
-                 'field_vyplatit' => '',
-                 'field_dlzka_autorovho_textu_zad' => 0,
-                 'field_datum_autorovho_textu' => NULL,
-                 'field_zmluva' => '',
-                 'field_komentar_instrukcie' => '',
-                 'field_table' => '',
-                 'field_table_weight' => NULL,
-                 'field_datum' => '',
-               ) as $field => $value) {
+      foreach ([
+                 'field_vyplatit',
+                 'field_dlzka_autorovho_textu_zad',
+                 'field_datum_autorovho_textu',
+                 'field_zmluva',
+                 'field_komentar_instrukcie',
+                 'field_table',
+                 'field_table_weight',
+                 'field_ilustracia',
+                 'field_datum',
+                 'field_pouzite_zdroje',
+               ] as $field) {
         if (!empty($node->{$field}[LANGUAGE_NONE])) {
-          $node->{$field}[LANGUAGE_NONE][0]['value'] = $value;
+          $node->{$field}[LANGUAGE_NONE] = [];
         }
       }
 
       $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
-      //$node->field_ilustracia[LANGUAGE_NONE][0]['target_id'] = NULL; // Integrity constraint violation
       $node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
       $node->log = 'Zrušený autor ' . $user->name;
 
