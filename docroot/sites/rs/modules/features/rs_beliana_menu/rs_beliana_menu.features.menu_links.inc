@@ -300,7 +300,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/na-posudenie-vr2x',
-    'router_path' => 'admin/beliana/na-posudenie-vr2x',
+    'router_path' => 'admin/beliana',
     'link_title' => 'Na posúdenie (VR2X)',
     'options' => array(
       'attributes' => array(
@@ -309,7 +309,7 @@ function rs_beliana_menu_menu_default_menu_links() {
       'identifier' => 'management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x',
     ),
     'module' => 'menu',
-    'hidden' => 0,
+    'hidden' => 1,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
@@ -330,7 +330,7 @@ function rs_beliana_menu_menu_default_menu_links() {
       'identifier' => 'management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3',
     ),
     'module' => 'menu',
-    'hidden' => 0,
+    'hidden' => 1,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
@@ -695,7 +695,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['management_zli:admin/beliana/zlucovanie'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/zlucovanie',
-    'router_path' => 'admin/beliana/zlucovanie',
+    'router_path' => 'admin/beliana',
     'link_title' => 'Zlúčiť',
     'options' => array(
       'attributes' => array(

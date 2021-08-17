@@ -702,7 +702,6 @@ function rs_beliana_site_user_default_permissions() {
       'Výstupný redaktor 2X' => 'Výstupný redaktor 2X',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'Zlúčené-odkazy' => 'Zlúčené-odkazy',
       'administrátor' => 'administrátor',
       'chRedaktor' => 'chRedaktor',
       'garant' => 'garant',

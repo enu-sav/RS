@@ -100,12 +100,6 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 23,
   );
 
-  // Exported role: Zlúčené-odkazy.
-  $roles['Zlúčené-odkazy'] = array(
-    'name' => 'Zlúčené-odkazy',
-    'weight' => 26,
-  );
-
   // Exported role: administrátor.
   $roles['administrátor'] = array(
     'name' => 'administrátor',
@@ -140,12 +134,6 @@ function rs_beliana_users_user_default_roles() {
   $roles['iredaktor'] = array(
     'name' => 'iredaktor',
     'weight' => 2,
-  );
-
-  // Exported role: komentátor VR2.
-  $roles['komentátor VR2'] = array(
-    'name' => 'komentátor VR2',
-    'weight' => 9,
   );
 
   // Exported role: useradmin.
