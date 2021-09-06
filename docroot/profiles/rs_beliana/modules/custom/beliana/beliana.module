@@ -521,7 +521,35 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_order_article_cancel' => [    // rs and webrs - BEL-16
+      'type' => 'entity',
+      'label' => 'Zrušiť objednávku',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+      'permissions' => ['administer taxonomy'],
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_unassign_password_to_author` action.
+ *
+ * Cancel order and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_cancel(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->uid = 719;
+    $node->log = 'Zrušená objednávka: ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'zaradene');
+  }
 }
 
 /**
@@ -551,13 +579,13 @@ function return_for_processing(&$node, $context) {
     $node_user = user_load_by_name($node->name);
     if (empty(array_intersect(array('Redaktor', 'Autor'), $node_user->roles))) {
         workbench_moderation_moderate($node, "importovane");
-        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).', 
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu Importované (nemá priradeného autora).',
             ['@path' => $node->path['alias'],
             '@title' => $node->title]
             ));
     } else {
         workbench_moderation_moderate($node, "needs_review");
-        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).', 
+        drupal_set_message(t('Heslo <a href="/@path">@title</a> bolo presunuté do stavu U redaktora (má priradeného autora).',
             ['@path' => $node->path['alias'],
             '@title' => $node->title]
             ));
@@ -1507,7 +1535,7 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
     // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' && 
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' &&
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
