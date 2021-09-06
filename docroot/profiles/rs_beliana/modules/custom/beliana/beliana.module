@@ -716,6 +716,7 @@ function beliana_unassign_author(&$node, $context) {
       '!link' => '/node/' . $node->nid,
       '@title' => $node->title_field['sk'][0]['value'],
       '@name' => $original_user->name,
+      '@type' => $node->type,
     ];
 
     // Skip rules
@@ -725,6 +726,17 @@ function beliana_unassign_author(&$node, $context) {
 
     if (!empty($node->field_zlucene_z[LANGUAGE_NONE])) {
       $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, lebo ide o zlúčené heslo.';
+    }
+
+    if (variable_get('rs_api_type') == 'webrs') {
+      if ($node->type != 'heslo' && $node->type != 'importovane_heslo') {
+        $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, nepovolený typ obsahu (@type).';
+      }
+    }
+    else {
+      if ($node->type != 'heslo') {
+        $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, nepovolený typ obsahu (@type).';
+      }
     }
 
     if (isset($error_message)) {
@@ -746,6 +758,7 @@ function beliana_unassign_author(&$node, $context) {
                  'field_ilustracia',
                  'field_datum',
                  'field_pouzite_zdroje',
+                 'field_atributy',
                ] as $field) {
         if (!empty($node->{$field}[LANGUAGE_NONE])) {
           $node->{$field}[LANGUAGE_NONE] = [];
@@ -753,7 +766,7 @@ function beliana_unassign_author(&$node, $context) {
       }
 
       $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
-      $node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
+      //$node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
       $node->log = 'Zrušený autor ' . $user->name;
 
       node_save($node);
