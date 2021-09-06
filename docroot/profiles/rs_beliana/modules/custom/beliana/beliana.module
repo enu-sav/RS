@@ -1460,18 +1460,23 @@ function beliana_node_presave($node) {
 
   // store the proofreader state in which an item was edited in the field_atributy field
   // to be used to send items always to the same proofreader
-  if (variable_get('rs_api_type') != "webrs" && in_array($node->workbench_moderation_state_current,
-	  ['importovane_jaz_kontrola', 'importovane_u_jaz_korektora',
-	   // "U jaz. redaktora", :U jaz. korektora"
-	   'na_jazykovu_korekturu','u_jaz_korektora'])) {
+  $moderation_state = $node->workbench_moderation['current']->state;
+  if (variable_get('rs_api_type') != "webrs" && in_array($moderation_state,
+      [
+        'importovane_jaz_kontrola',
+        'importovane_u_jaz_korektora',
+        // "U jaz. redaktora", :U jaz. korektora"
+        'na_jazykovu_korekturu',
+        'u_jaz_korektora',
+      ])) {
     if (!isset($node->field_atributy[LANGUAGE_NONE]) or
-       (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], $node->workbench_moderation_state_current) === FALSE)) {
-         $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo v stave '".$node->workbench_moderation_state_current."'";
+      (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], $moderation_state) === FALSE)) {
+      $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo v stave '" . $moderation_state . "'";
     }
   }
 
   # remove links from text of artices in states 'vyradene' and 'ukoncenezluene'
-  if (in_array($node->workbench_moderation_state_current, ['vyradene', 'ukoncenezluene'])) {
+  if (in_array($moderation_state, ['vyradene', 'ukoncenezluene'])) {
     _beliana_remove_links($node);
   }
   #update the link table (updated only in the beliana-webrs module)
