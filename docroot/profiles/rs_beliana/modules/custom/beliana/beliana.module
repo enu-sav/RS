@@ -720,7 +720,11 @@ function beliana_unassign_author(&$node, $context) {
     ];
 
     // Skip rules
-    if ($node->field_vyplatit[LANGUAGE_NONE][0]['value'] == 'Vyplatiť' && empty($node->field_datum_vyplatenia[LANGUAGE_NONE][0]['value'] = NULL)) {
+    if (empty($node->field_vyplatit[LANGUAGE_NONE]) || empty($node->field_vyplatit[LANGUAGE_NONE][0]['value'])) {
+      $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nemá vyplnené pole "Vyplatenie odmeny".';
+    }
+
+    if ($node->field_vyplatit[LANGUAGE_NONE][0]['value'] == 'Vyplatiť' && (empty($node->field_datum_vyplatenia[LANGUAGE_NONE]) || empty($node->field_datum_vyplatenia[LANGUAGE_NONE][0]['value']))) {
       $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nie je vyplatené.';
     }
 
@@ -751,6 +755,7 @@ function beliana_unassign_author(&$node, $context) {
                  'field_vyplatit',
                  'field_dlzka_autorovho_textu_zad',
                  'field_datum_autorovho_textu',
+                 'field_datum_vyplatenia',
                  'field_zmluva',
                  'field_komentar_instrukcie',
                  'field_table',
@@ -759,6 +764,7 @@ function beliana_unassign_author(&$node, $context) {
                  'field_datum',
                  'field_pouzite_zdroje',
                  'field_atributy',
+                 'field_doplnkova_ls',
                ] as $field) {
         if (!empty($node->{$field}[LANGUAGE_NONE])) {
           $node->{$field}[LANGUAGE_NONE] = [];
