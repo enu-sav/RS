@@ -755,6 +755,7 @@ function beliana_unassign_author(&$node, $context) {
                  'field_vyplatit',
                  'field_dlzka_autorovho_textu_zad',
                  'field_datum_autorovho_textu',
+                 'field_datum_vyplatenia',
                  'field_zmluva',
                  'field_komentar_instrukcie',
                  'field_table',
