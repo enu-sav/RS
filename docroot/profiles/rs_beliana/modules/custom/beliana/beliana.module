@@ -533,7 +533,7 @@ function beliana_action_info() {
     ],
     'beliana_order_article' => [    // rs and webrs - BEL-15
       'type' => 'entity',
-      'label' => 'Create an order',
+      'label' => 'Vytvoriť objednávku',
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['changes_property'],
@@ -543,7 +543,7 @@ function beliana_action_info() {
     ],
     'beliana_order_article_cancel' => [    // rs and webrs - BEL-16
       'type' => 'entity',
-      'label' => 'Cancel order',
+      'label' => 'Zrušiť objednávku',
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['changes_property'],
@@ -563,19 +563,34 @@ function beliana_action_info() {
  * @inheritdoc
  */
 function beliana_order_article(&$node, $context) {
+  $options = [
+    '!link' => '/user/' . $node->id,
+    '@autor' => $node->title_field['sk'][0]['value'],
+  ];
+
+  // Skip rules
+  if (empty($node->field_autorska_zmluva[LANGUAGE_NONE]) || empty($node->field_autorska_zmluva[LANGUAGE_NONE][0]['value'])) {
+    $error_message = 'Objednávanie hesiel zlyhalo, lebo autor <a href="!link">@autor</a> nemá autorskú zmluvu.';
+  }
+
+  if (isset($error_message)) {
+    drupal_set_message(t($error_message, $options), 'error');
+    return FALSE;
+  }
+
   if ($user = user_load($node->uid)) {
-    if (isset($user->field_autorska_zmluva['und'])) {
-      $array_autorska_zmluva = explode(',', $user->field_autorska_zmluva['und'][0]['value']);
+    if (isset($user->field_autorska_zmluva[LANGUAGE_NONE])) {
+      $array_autorska_zmluva = explode(',', $user->field_autorska_zmluva[LANGUAGE_NONE][0]['value']);
       if (!is_null(end($array_autorska_zmluva))) {
         $node->field_zmluva['und'][0]['value'] = end($array_autorska_zmluva);
       }
     }
     $node->log = 'Objednané: ' . $user->name;
+    $node->log = 'Priradené autorovi: ' . $user->name;
 
     node_save($node);
-
     workbench_moderation_moderate($node, 'objednane');
-    $node->log = 'Priradené autorovi: ' . $user->name;
+
   }
 }
 
@@ -1664,21 +1679,11 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
-    // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
+    // transition to 'author' and 'needs_review', 'objednane' from 'zaradene' is implemented in a dedicated view, so remove it here
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' &&
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, ['needs_review', 'u_autora'])) {
-          unset($form['state']['#options'][$k]);
-        }
-      }
-    }
-
-    // transition to 'objednane' from 'zaradene' is implemented in a dedicated view, so remove it here
-    if ($form['node']['#value']->workbench_moderation['current']->state === 'objednane' &&
-      array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
-      foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, ['objednane'])) {
+        if (in_array($k, ['needs_review', 'u_autora', 'objednane'])) {
           unset($form['state']['#options'][$k]);
         }
       }
