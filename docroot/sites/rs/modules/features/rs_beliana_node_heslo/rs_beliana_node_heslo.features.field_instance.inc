@@ -527,6 +527,53 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_doplnkova_ls'.
+  $field_instances['node-heslo-field_doplnkova_ls'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe (nevkladajte rovnakú skupinu ako je Lexikálna skupina) ',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 31,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_doplnkova_ls',
+    'label' => 'Doplnková lexikálna skupina',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 5,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-field_errta'.
   $field_instances['node-heslo-field_errta'] = array(
     'bundle' => 'heslo',
@@ -1601,7 +1648,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo objednané. Ak ho nepoznáte, zadajte číslo zmluvy, ktorá bola aktívna v čase odovzdanie textu autorom (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie">viac o určení čísla zmluvy</a>).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1790,6 +1837,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Comment');
   t('Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla (nesmú byť zafarbené). Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe');
+  t('Doplnková lexikálna skupina');
   t('Dátum aktualizácie');
   t('Dátum prebratia obsahu');
   t('Dátum prvého zverejnenia');
@@ -1806,6 +1854,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
   t('Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.');
+  t('Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe (nevkladajte rovnakú skupinu ako je Lexikálna skupina) ');
   t('Použité zdroje');
   t('Povodne lexikalne skupiny');
   t('Pozícia tabuľky pre geografické heslá');

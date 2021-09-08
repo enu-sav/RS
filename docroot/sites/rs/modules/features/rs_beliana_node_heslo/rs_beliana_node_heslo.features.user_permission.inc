@@ -88,6 +88,17 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_doplnkova_ls'.
+  $permissions['create field_doplnkova_ls'] = array(
+    'name' => 'create field_doplnkova_ls',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_errta'.
   $permissions['create field_errta'] = array(
     'name' => 'create field_errta',
@@ -268,6 +279,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_zmluva'] = array(
     'name' => 'create field_zmluva',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -430,6 +442,17 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_doplnkova_ls'.
+  $permissions['edit field_doplnkova_ls'] = array(
+    'name' => 'edit field_doplnkova_ls',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
@@ -616,6 +639,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_zmluva'] = array(
     'name' => 'edit field_zmluva',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -704,6 +728,17 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_doplnkova_ls'.
+  $permissions['edit own field_doplnkova_ls'] = array(
+    'name' => 'edit own field_doplnkova_ls',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
@@ -881,6 +916,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_zmluva'] = array(
     'name' => 'edit own field_zmluva',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
@@ -1018,6 +1054,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_doplnkova_ls'.
+  $permissions['view field_doplnkova_ls'] = array(
+    'name' => 'view field_doplnkova_ls',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -1210,7 +1256,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view field_zmluva'] = array(
     'name' => 'view field_zmluva',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -1295,6 +1349,17 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_doplnkova_ls'.
+  $permissions['view own field_doplnkova_ls'] = array(
+    'name' => 'view own field_doplnkova_ls',
+    'roles' => array(
+      'Redaktor' => 'Redaktor',
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
@@ -1459,6 +1524,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_zmluva'] = array(
     'name' => 'view own field_zmluva',
     'roles' => array(
+      'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',

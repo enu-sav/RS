@@ -530,6 +530,7 @@ function rs_beliana_views_views_default_views() {
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
     ),
@@ -537,6 +538,7 @@ function rs_beliana_views_views_default_views() {
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
       'override_label' => 0,
       'label' => '',
     ),
@@ -11997,7 +11999,7 @@ function rs_beliana_views_views_default_views() {
     'name_1' => 'name_1',
     'field_meno' => 'field_meno',
     'field_priezvisko' => 'field_priezvisko',
-    'field_autorska_zmluva' => 'field_autorska_zmluva',
+    'field_zmluva' => 'field_zmluva',
     'field_vyplatit' => 'field_vyplatit',
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
@@ -12053,7 +12055,7 @@ function rs_beliana_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_autorska_zmluva' => array(
+    'field_zmluva' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -17941,7 +17943,23 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
+    'action::beliana_change_author' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::workbench_moderation_set_state_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::beliana_unassign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -20647,6 +20665,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Obsah: Doplnková lexikálna skupina */
+  $handler->display->display_options['fields']['field_doplnkova_ls']['id'] = 'field_doplnkova_ls';
+  $handler->display->display_options['fields']['field_doplnkova_ls']['table'] = 'field_data_field_doplnkova_ls';
+  $handler->display->display_options['fields']['field_doplnkova_ls']['field'] = 'field_doplnkova_ls';
+  $handler->display->display_options['fields']['field_doplnkova_ls']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_doplnkova_ls']['delta_offset'] = '0';
   /* Pole: Používateľ: Názov */
   $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
   $handler->display->display_options['fields']['name_1']['table'] = 'users';
@@ -20845,6 +20869,23 @@ function rs_beliana_views_views_default_views() {
     8 => 0,
     9 => 0,
   );
+  /* Filter criterion: Obsah: Doplnková lexikálna skupina (field_doplnkova_ls) */
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['id'] = 'field_doplnkova_ls_tid';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['table'] = 'field_data_field_doplnkova_ls';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['field'] = 'field_doplnkova_ls_tid';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['expose']['operator_id'] = 'field_doplnkova_ls_tid_op';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['expose']['label'] = 'Doplnková lexikálna skupina';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['expose']['operator'] = 'field_doplnkova_ls_tid_op';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['expose']['identifier'] = 'field_doplnkova_ls_tid';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['type'] = 'textfield';
+  $handler->display->display_options['filters']['field_doplnkova_ls_tid']['vocabulary'] = 'lexikalne_skupiny';
   /* Filter criterion: Workbench Moderation: Aktuálny */
   $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
@@ -21027,6 +21068,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['uid']['table'] = 'node';
   $handler->display->display_options['filters']['uid']['field'] = 'uid';
   $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['group'] = 1;
   $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['label'] = 'Autor hesla';
@@ -21044,6 +21086,7 @@ function rs_beliana_views_views_default_views() {
     'zlucene' => 'zlucene',
     'importovane' => 'importovane',
   );
+  $handler->display->display_options['filters']['state_1']['group'] = 1;
   $handler->display->display_options['path'] = 'vsetky-prehlad-r';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Prehľad (R)';
@@ -21393,6 +21436,7 @@ function rs_beliana_views_views_default_views() {
     t('Atribúty'),
     t('Text hesla 2'),
     t('Všetky heslá - prehľad (R)'),
+    t('Doplnková lexikálna skupina'),
     t('Na zalomenie > V zalamovaní'),
   );
   $export['vsetky_hesla_detaily'] = $view;
