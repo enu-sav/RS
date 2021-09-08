@@ -117,6 +117,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 10,
     ),
+    'objednane' => array(
+      'name' => 'objednane',
+      'label' => 'Objednané',
+      'description' => '',
+      'weight' => 1,
+    ),
     'pozdr_an_' => array(
       'name' => 'pozdr_an_',
       'label' => 'Pozdržané',

@@ -521,9 +521,19 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_order_article' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Create an order',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+      'permissions' => ['administer taxonomy'],
+    ],
     'beliana_order_article_cancel' => [    // rs and webrs - BEL-16
       'type' => 'entity',
-      'label' => 'Zrušiť objednávku',
+      'label' => 'Cancel order',
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['changes_property'],
@@ -532,6 +542,31 @@ function beliana_action_info() {
       'permissions' => ['administer taxonomy'],
     ],
   ];
+}
+
+/**
+ * Callback for `beliana_unassign_password_to_author` action.
+ *
+ * Create an order and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    if (isset($user->field_autorska_zmluva['und'])) {
+      $array_autorska_zmluva = explode(',', $user->field_autorska_zmluva['und'][0]['value']);
+      if (!is_null(end($array_autorska_zmluva))) {
+        $node->field_zmluva['und'][0]['value'] = end($array_autorska_zmluva);
+      }
+    }
+    $node->log = 'Objednané: ' . $user->name;
+
+    node_save($node);
+
+    workbench_moderation_moderate($node, 'objednane');
+    $node->log = 'Priradené autorovi: ' . $user->name;
+  }
 }
 
 /**
@@ -1539,6 +1574,16 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
         if (in_array($k, ['needs_review', 'u_autora'])) {
+          unset($form['state']['#options'][$k]);
+        }
+      }
+    }
+
+    // transition to 'objednane' from 'zaradene' is implemented in a dedicated view, so remove it here
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'objednane' &&
+      array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
+      foreach ($form['state']['#options'] as $k => $v) {
+        if (in_array($k, ['objednane'])) {
           unset($form['state']['#options'][$k]);
         }
       }

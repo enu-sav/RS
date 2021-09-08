@@ -638,7 +638,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in zlucene state',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
     ),
     'module' => 'workbench_state_access',
   );
@@ -1185,7 +1184,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'moderate content from zlucene to na_jazykovu_korekturu',
     'roles' => array(
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
