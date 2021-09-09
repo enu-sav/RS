@@ -59,7 +59,6 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
     'name' => 'edit own importovane_heslo content',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'iredaktor' => 'iredaktor',
     ),
     'module' => 'node',
   );

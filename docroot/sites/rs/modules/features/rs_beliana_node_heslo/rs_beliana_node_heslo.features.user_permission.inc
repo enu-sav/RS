@@ -363,6 +363,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
+      'iredaktor' => 'iredaktor',
       'useradmin' => 'useradmin',
     ),
     'module' => 'node',

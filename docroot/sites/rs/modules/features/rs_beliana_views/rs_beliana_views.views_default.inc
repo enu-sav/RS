@@ -9045,6 +9045,13 @@ function rs_beliana_views_views_default_views() {
     1523 => '1523',
     324 => '324',
     1594 => '1594',
+    1524 => '1524',
+    1525 => '1525',
+    1526 => '1526',
+    1527 => '1527',
+    1518 => '1518',
+    1528 => '1528',
+    322 => '322',
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '2';
@@ -20601,6 +20608,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     27 => '27',
+    9 => '9',
     7 => '7',
     12 => '12',
     4 => '4',
