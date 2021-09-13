@@ -217,13 +217,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
-  // Exported permission: 'block view revisions in pozdr_an_ state'.
-  $permissions['block view revisions in pozdr_an_ state'] = array(
-    'name' => 'block view revisions in pozdr_an_ state',
-    'roles' => array(),
-    'module' => 'workbench_state_access',
-  );
-
   // Exported permission: 'block view revisions in publikovane_na_webe state'.
   $permissions['block view revisions in publikovane_na_webe state'] = array(
     'name' => 'block view revisions in publikovane_na_webe state',
@@ -515,13 +508,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'ig-redaktor' => 'ig-redaktor',
     ),
-    'module' => 'workbench_state_access',
-  );
-
-  // Exported permission: 'edit revisions in pozdr_an_ state'.
-  $permissions['edit revisions in pozdr_an_ state'] = array(
-    'name' => 'edit revisions in pozdr_an_ state',
-    'roles' => array(),
     'module' => 'workbench_state_access',
   );
 
