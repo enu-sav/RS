@@ -63,6 +63,20 @@ function beliana_menu() {
     'type' => MENU_LOCAL_TASK,
   ];
 
+  $items['prepare-order/%node'] = [
+    'title' => 'Objednávka na stiahnutie',
+    'page callback' =>'prepare_order_file',
+    'access arguments' => [1],
+    'access callback' => TRUE,
+  ];
+
+  $items['download-order-file/%'] = [
+    'title' => 'Súbor na stiahnutie',
+    'page callback' =>'download_order_file',
+    'page arguments' => [1],
+    'access callback' => TRUE,
+  ];
+
   return $items;
 }
 
@@ -531,7 +545,250 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_order_article' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Vytvoriť objednávku',
+      'configurable' => TRUE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
+    'beliana_order_article_cancel' => [    // rs and webrs - BEL-16
+      'type' => 'entity',
+      'label' => 'Zrušiť objednávku',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_order_article` action.
+ *
+ * Create an order and
+ * changes workflow status to `zaradene`.
+ */
+function beliana_order_article(&$node, $context) {
+  if ($user = user_load_by_name($context['user'])) {
+    $previous_user = $node->name;
+    $options = [
+      '!link' => '/user/' . $user->uid,
+      '@autor' => $user->name,
+    ];
+
+    // Skip rules
+    if (empty($user->field_autorska_zmluva[LANGUAGE_NONE]) || empty($user->field_autorska_zmluva[LANGUAGE_NONE][0]['value'])) {
+      $error_message = 'Objednávanie hesiel zlyhalo, lebo autor <a href="!link">@autor</a> nemá autorskú zmluvu.';
+    }
+
+    if (isset($error_message)) {
+      drupal_set_message(t($error_message, $options), 'error');
+      return FALSE;
+    }
+
+    if (isset($user->field_autorska_zmluva[LANGUAGE_NONE])) {
+      $array_autorska_zmluva = explode(',', $user->field_autorska_zmluva[LANGUAGE_NONE][0]['value']);
+      if (!is_null(end($array_autorska_zmluva))) {
+        $node->field_zmluva['und'][0]['value'] = end($array_autorska_zmluva);
+      }
+    }
+    $node->uid = $user->uid;
+    $node->log = 'Objednané: ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'objednane');
+
+    _beliana_create_article_order_variable($node, $previous_user, $context['user']);
+  }
+}
+
+/**
+ * Helper function create article order variable.
+ *
+ * Create variable beliana_create_article_order_data
+ *
+ * @param $node
+ * @param $previous_user
+ * @param $current_user
+ *
+ * @return false|mixed|string
+ */
+function _beliana_create_article_order_variable($node, $previous_user, $current_user) {
+  if (!is_null(variable_get('beliana_create_article_order_data'))) {
+    $context = variable_get('beliana_create_article_order_data');
+    $context['order_data'][] = [
+      'nid' => $node->nid,
+      'previous_user' => $previous_user,
+      'current_user' => $current_user,
+      'contract' => $node->field_zmluva['und'][0]['value'],
+      'password' => $node->title,
+    ];
+  } else {
+    $context = [
+      'type' => 'ordered',
+    ];
+    $context['order_data'][] = [
+      'nid' => $node->nid,
+      'previous_user' => $previous_user,
+      'current_user' => $current_user,
+      'contract' => $node->field_zmluva['und'][0]['value'],
+      'password' => $node->title,
+    ];
+  }
+  variable_set('beliana_create_article_order_data', $context);
+}
+
+/**
+ * Outputs a batch processing page without JavaScript support.
+ *
+ * @see _batch_process()
+ */
+function beliana_batch_alter(&$batch) {
+  foreach ($batch['sets'] as $key => $set) {
+    if ($set['finished'] == 'views_bulk_operations_execute_finished') {
+      $batch['sets'][$key]['finished'] = 'beliana_create_article_order_execute_finished';
+    }
+  }
+}
+
+/**
+ * Helper function create article order execute finished.
+ *
+ * @param $success
+ * @param $results
+ * @param $operations
+ *
+ * @return false|mixed|string
+ */
+function beliana_create_article_order_execute_finished($success, $results, $operations) {
+  if (!is_null(variable_get('beliana_create_article_order_data'))) {
+    $order_data = variable_get('beliana_create_article_order_data');
+    if ($order_data['type'] == 'ordered') {
+      $request_time = REQUEST_TIME;
+
+      $order_file_content[] = [
+        '#theme' => 'order_file',
+        '#order_data' => $order_data['order_data'],
+      ];
+
+      $file_content = render($order_file_content);
+      $filepath = _beliana_create_article_order_file($request_time, $file_content);
+
+      if (!empty($filepath)) {
+        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '" download>Objednávka na stahnutie</a>'));
+      }
+      variable_del('beliana_create_article_order_data');
+    }
+  }
+}
+
+/**
+ * Helper function create order file.
+ *
+ * @param $request_time
+ * @param $content
+ *
+ * @return false|mixed|string
+ */
+function _beliana_create_article_order_file($request_time, $content) {
+  $filepath = '';
+  $filename = 'order-' . $request_time . '.html';
+  $destination = 'public://orders/';
+
+  if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+    file_put_contents($destination . $filename, $content);
+    $filepath = file_create_url($destination . $filename);
+  }
+
+  return $filepath;
+}
+
+/**
+ * Helper function create order file.
+ *
+ * @param $node
+ */
+function prepare_order_file($node){
+  global $base_url;
+  $dir = 'public://orders/';
+  file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
+  $file = file_create_url($dir. 'order-' . $node->nid . '.html');
+  if (file_exists($file)) {
+    $file = $base_url . '/' .$file;
+    drupal_goto($file, array('absolute' => 'true'));
+  } else {
+    $file = $base_url . '/' .$file;
+    watchdog('file not found', 'this file that can not be found: '.$file);
+    drupal_goto('<front>');
+  }
+}
+
+/**
+ * Helper function force download order file.
+ *
+ * @param $request_time
+ *
+ * @return void
+ */
+function download_order_file($request_time) {
+  $destination = 'public://orders/';
+  $filepath = file_create_url($destination . 'order-' . $request_time . '.html');
+
+  header('Content-Type: ' . mime_content_type($filepath));
+  header('Content-Length: ' . filesize($filepath));
+  header("Content-Transfer-Encoding: Binary");
+  header("Content-disposition: attachment; filename=\"" . basename($filepath) . "\"");
+
+  readfile($filepath);
+}
+
+/**
+ * Configuration form for `beliana_order_article` action.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_form($form, &$form_state) {
+  return _beliana_assign_user_form('Choose the author to assign articles to');
+}
+
+/**
+ * Validation for `beliana_order_article_form` form.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_validate($form, &$form_state) {
+  _beliana_validate_assign_user_form($form_state, ["Autor", "Redaktor"]);
+}
+
+/**
+ * Submit function for for `beliana_order_article_form` form.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_submit($form, $form_state) {
+  return _beliana_submit_assign_user_form($form_state, 'needs_review');
+}
+
+/**
+ * Callback for `beliana_order_article_cancel.
+ *
+ * Cancel order and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_cancel(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->uid = 719;
+    $node->log = 'Zrušená objednávka: ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'zaradene');
+  }
 }
 
 /**
@@ -1481,6 +1738,11 @@ function beliana_node_presave($node) {
     }
   }
 
+  if ($node->original->workbench_moderation['current']->state == 'needs_review' && $node->workbench_moderation['current']->from_state == 'objednane') {
+    $user = user_load($node->uid);
+    $node->log .= '<br>Priradené autorovi: ' . $user->name;
+  }
+
   # remove links from text of artices in states 'vyradene' and 'ukoncenezluene'
   if (in_array($moderation_state, ['vyradene', 'ukoncenezluene'])) {
     _beliana_remove_links($node);
@@ -1601,11 +1863,11 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
-    // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
+    // transition to 'author' and 'needs_review', 'objednane' from 'zaradene' is implemented in a dedicated view, so remove it here
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' &&
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, ['needs_review', 'u_autora'])) {
+        if (in_array($k, ['needs_review', 'u_autora', 'objednane'])) {
           unset($form['state']['#options'][$k]);
         }
       }
@@ -3526,3 +3788,18 @@ function beliana_render_export($viewname, $displayname, $text) {
   }
   return $output;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function beliana_theme() {
+  $themes['order_file'] = [
+    'variables' => [
+      'order_data' => []
+    ],
+    'template' => 'templates/order_file'
+  ];
+
+  return $themes;
+}
+

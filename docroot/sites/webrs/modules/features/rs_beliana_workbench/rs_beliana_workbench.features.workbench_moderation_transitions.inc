@@ -114,6 +114,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_zverejnenie',
       'name' => 'u_redaktora-u_vyst_redaktora1',
     ),
+    'needs_review:objednane' => array(
+      'from_name' => 'needs_review',
+      'to_name' => 'objednane',
+      'name' => 'u_redaktora-objednane',
+    ),
     'needs_review:u_autora' => array(
       'from_name' => 'needs_review',
       'to_name' => 'u_autora',
