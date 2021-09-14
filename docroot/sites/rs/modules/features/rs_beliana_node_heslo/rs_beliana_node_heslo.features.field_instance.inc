@@ -1670,7 +1670,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
     'entity_type' => 'node',
     'field_name' => 'field_zmluva',
     'label' => 'Zmluva na vyplatenie',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(

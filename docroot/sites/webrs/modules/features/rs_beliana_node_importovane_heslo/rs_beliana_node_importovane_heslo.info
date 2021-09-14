@@ -1,6 +1,7 @@
 name = Redakčný systém Beliana Importované heslo
 core = 7.x
 package = Content
+dependencies[] = conditional_fields
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = entityreference
@@ -19,6 +20,7 @@ dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = view_unpublished
+features[conditional_fields][] = node:importovane_heslo
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_instance][] = comment-comment_node_importovane_heslo-comment_body

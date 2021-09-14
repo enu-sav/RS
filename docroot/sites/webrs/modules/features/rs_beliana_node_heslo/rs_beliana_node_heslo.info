@@ -1,6 +1,7 @@
 name = Redakčný systém Beliana Heslo
 core = 7.x
 package = Content
+dependencies[] = conditional_fields
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = entityreference
@@ -20,6 +21,7 @@ dependencies[] = text
 dependencies[] = title
 dependencies[] = ultimate_cron
 dependencies[] = view_unpublished
+features[conditional_fields][] = node:heslo
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = ultimate_cron:ultimate_cron:3
 features[features_api][] = api:2
