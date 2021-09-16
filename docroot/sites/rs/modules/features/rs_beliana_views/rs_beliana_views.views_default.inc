@@ -550,14 +550,6 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::beliana_order_article_cancel' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
   );
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -9078,8 +9070,8 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Ordered */
-  $handler = $view->new_display('page', 'Ordered', 'page_ordered');
+  /* Display: Objednané */
+  $handler = $view->new_display('page', 'Objednané', 'page_ordered');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Objednané';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
@@ -9170,6 +9162,41 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Hromadné operácie: Obsah */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::beliana_assign_author' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::beliana_assign_corrector' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::beliana_order_article_cancel' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -9305,7 +9332,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
   $handler->display->display_options['filters']['state']['value'] = array(
-    'needs_review' => 'needs_review',
+    'objednane' => 'objednane',
   );
   $handler->display->display_options['filters']['state']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Aktuálny */
@@ -9330,7 +9357,7 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['path'] = 'admin/beliana/ordered';
   $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Ordered';
+  $handler->display->display_options['menu']['title'] = 'Objednané';
   $handler->display->display_options['menu']['weight'] = '51';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
@@ -9477,7 +9504,6 @@ function rs_beliana_views_views_default_views() {
 '),
     t('Zlúčiť GEO'),
     t('Zlučovanie VR2 - GEO'),
-    t('Ordered'),
     t('Objednané'),
     t('Objednané u'),
     t('Číslo zmluvy'),
@@ -18220,7 +18246,7 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::node_assign_owner_action' => array(
+    'action::beliana_order_article' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -18228,7 +18254,7 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::beliana_change_author' => array(
+    'action::node_assign_owner_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -20886,7 +20912,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     27 => '27',
-    9 => '9',
     7 => '7',
     12 => '12',
     4 => '4',

@@ -696,7 +696,7 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
  */
 function _beliana_create_article_order_file($request_time, $content) {
   $filepath = '';
-  $filename = 'order-' . $request_time . '.html';
+  $filename = 'order-' . $request_time . '.doc';
   $destination = 'public://orders/';
 
   if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
@@ -716,7 +716,7 @@ function prepare_order_file($node){
   global $base_url;
   $dir = 'public://orders/';
   file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
-  $file = file_create_url($dir. 'order-' . $node->nid . '.html');
+  $file = file_create_url($dir. 'order-' . $node->nid . '.doc');
   if (file_exists($file)) {
     $file = $base_url . '/' .$file;
     drupal_goto($file, array('absolute' => 'true'));
@@ -736,9 +736,9 @@ function prepare_order_file($node){
  */
 function download_order_file($request_time) {
   $destination = 'public://orders/';
-  $filepath = file_create_url($destination . 'order-' . $request_time . '.html');
+  $filepath = file_create_url($destination . 'order-' . $request_time . '.doc');
 
-  header('Content-Type: ' . mime_content_type($filepath));
+  header("Content-Type: application/vnd.ms-excel");
   header('Content-Length: ' . filesize($filepath));
   header("Content-Transfer-Encoding: Binary");
   header("Content-disposition: attachment; filename=\"" . basename($filepath) . "\"");
