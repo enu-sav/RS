@@ -7229,7 +7229,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::beliana_assign_author' => array(
+    'action::beliana_order_article_assign_author' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -7237,7 +7237,7 @@ Heslá treba preradiť do stavov:
       'override_label' => 0,
       'label' => '',
     ),
-    'action::beliana_assign_corrector' => array(
+    'action::beliana_order_article_assign_editor' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,

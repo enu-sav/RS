@@ -563,7 +563,53 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_order_article_assign_author' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Priradiť autorovi',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
+    'beliana_order_article_assign_editor' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Priradiť redaktorovi',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_order_article_assign_editor` action.
+ *
+ * Changes workflow status to `U redaktora`.
+ */
+function beliana_order_article_assign_editor(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->log = 'Priradené autorovi: ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'needs_review');
+  }
+}
+
+/**
+ * Callback for `beliana_order_article_assign_author` action.
+ *
+ * Changes workflow status to `U autora`.
+ */
+function beliana_order_article_assign_author(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->log = 'Priradené autorovi: ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'u_autora');
+  }
 }
 
 /**
