@@ -63,13 +63,6 @@ function beliana_menu() {
     'type' => MENU_LOCAL_TASK,
   ];
 
-  $items['prepare-order/%node'] = [
-    'title' => 'Objednávka na stiahnutie',
-    'page callback' =>'prepare_order_file',
-    'access arguments' => [1],
-    'access callback' => TRUE,
-  ];
-
   $items['download-order-file/%'] = [
     'title' => 'Súbor na stiahnutie',
     'page callback' =>'download_order_file',
@@ -591,10 +584,9 @@ function beliana_action_info() {
  */
 function beliana_order_article_assign_editor(&$node, $context) {
   if ($user = user_load($node->uid)) {
+    $node->revision = TRUE;
     $node->log = 'Priradené autorovi: ' . $user->name;
-
-    node_save($node);
-    workbench_moderation_moderate($node, 'needs_review');
+    $node->workbench_moderation_state_new = 'needs_review';
   }
 }
 
@@ -605,10 +597,9 @@ function beliana_order_article_assign_editor(&$node, $context) {
  */
 function beliana_order_article_assign_author(&$node, $context) {
   if ($user = user_load($node->uid)) {
+    $node->revision = TRUE;
     $node->log = 'Priradené autorovi: ' . $user->name;
-
-    node_save($node);
-    workbench_moderation_moderate($node, 'u_autora');
+    $node->workbench_moderation_state_new = 'u_autora';
   }
 }
 
@@ -620,7 +611,7 @@ function beliana_order_article_assign_author(&$node, $context) {
  */
 function beliana_order_article(&$node, $context) {
   if ($user = user_load_by_name($context['user'])) {
-    $previous_user = $node->name;
+    $assign_user = $user->field_titul_pred_menom['und'][0]['value'] . ' ' . $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'] . ' ' . $user->field_titul_za_menom['und'][0]['value'];
     $options = [
       '!link' => '/user/' . $user->uid,
       '@autor' => $user->name,
@@ -637,18 +628,18 @@ function beliana_order_article(&$node, $context) {
     }
 
     if (isset($user->field_autorska_zmluva[LANGUAGE_NONE])) {
-      $array_autorska_zmluva = explode(',', $user->field_autorska_zmluva[LANGUAGE_NONE][0]['value']);
-      if (!is_null(end($array_autorska_zmluva))) {
-        $node->field_zmluva['und'][0]['value'] = end($array_autorska_zmluva);
+      $array_contract = explode(',', $user->field_autorska_zmluva[LANGUAGE_NONE][0]['value']);
+      if (!is_null(end($array_contract))) {
+        $contract = end($array_contract);
+        $node->field_zmluva['und'][0]['value'] = $contract;
       }
     }
+    $node->revision = TRUE;
     $node->uid = $user->uid;
     $node->log = 'Objednané: ' . $user->name;
+    $node->workbench_moderation_state_new = 'objednane';
 
-    node_save($node);
-    workbench_moderation_moderate($node, 'objednane');
-
-    _beliana_create_article_order_variable($node, $previous_user, $context['user']);
+    _beliana_create_article_order_variable($node, $assign_user, $contract);
   }
 }
 
@@ -658,30 +649,38 @@ function beliana_order_article(&$node, $context) {
  * Create variable beliana_create_article_order_data
  *
  * @param $node
- * @param $previous_user
- * @param $current_user
+ * @param $assign_user
+ * @param $contract
  *
  * @return false|mixed|string
  */
-function _beliana_create_article_order_variable($node, $previous_user, $current_user) {
+function _beliana_create_article_order_variable($node, $assign_user, $contract) {
+  global $user;
+  $user = user_load($user->uid);
+
   if (!is_null(variable_get('beliana_create_article_order_data'))) {
     $context = variable_get('beliana_create_article_order_data');
     $context['order_data'][] = [
       'nid' => $node->nid,
-      'previous_user' => $previous_user,
-      'current_user' => $current_user,
-      'contract' => $node->field_zmluva['und'][0]['value'],
       'password' => $node->title,
     ];
   } else {
     $context = [
       'type' => 'ordered',
+      'current_user' => [
+        'id' => $user->uid,
+        'titul_pred_menom' => $user->field_titul_pred_menom['und'][0]['value'],
+        'name' => $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'],
+          'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
+        'email' => $user->mail,
+        'login' => $user->name,
+      ],
+      'assign_user' => $assign_user,
+      'contract' => $contract,
+      'date' => REQUEST_TIME,
     ];
     $context['order_data'][] = [
       'nid' => $node->nid,
-      'previous_user' => $previous_user,
-      'current_user' => $current_user,
-      'contract' => $node->field_zmluva['und'][0]['value'],
       'password' => $node->title,
     ];
   }
@@ -718,14 +717,18 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
 
       $order_file_content[] = [
         '#theme' => 'order_file',
+        '#current_user' => $order_data['current_user'],
+        '#assign_user' => $order_data['assign_user'],
+        '#contract' => $order_data['contract'],
+        '#date' => $order_data['date'],
         '#order_data' => $order_data['order_data'],
       ];
 
       $file_content = render($order_file_content);
-      $filepath = _beliana_create_article_order_file($request_time, $file_content);
+      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['current_user']);
 
       if (!empty($filepath)) {
-        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '" download>Objednávka na stahnutie</a>'));
+        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stahnutie</a>'));
       }
       variable_del('beliana_create_article_order_data');
     }
@@ -740,9 +743,9 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
  *
  * @return false|mixed|string
  */
-function _beliana_create_article_order_file($request_time, $content) {
+function _beliana_create_article_order_file($request_time, $content, $current_user) {
   $filepath = '';
-  $filename = 'order-' . $request_time . '.doc';
+  $filename = 'order-' . $request_time . '-' . str_replace(' ', '-', $current_user['name']) . '.doc';
   $destination = 'public://orders/';
 
   if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
@@ -754,26 +757,6 @@ function _beliana_create_article_order_file($request_time, $content) {
 }
 
 /**
- * Helper function create order file.
- *
- * @param $node
- */
-function prepare_order_file($node){
-  global $base_url;
-  $dir = 'public://orders/';
-  file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
-  $file = file_create_url($dir. 'order-' . $node->nid . '.doc');
-  if (file_exists($file)) {
-    $file = $base_url . '/' .$file;
-    drupal_goto($file, array('absolute' => 'true'));
-  } else {
-    $file = $base_url . '/' .$file;
-    watchdog('file not found', 'this file that can not be found: '.$file);
-    drupal_goto('<front>');
-  }
-}
-
-/**
  * Helper function force download order file.
  *
  * @param $request_time
@@ -782,14 +765,16 @@ function prepare_order_file($node){
  */
 function download_order_file($request_time) {
   $destination = 'public://orders/';
-  $filepath = file_create_url($destination . 'order-' . $request_time . '.doc');
+  $folder = file_stream_wrapper_get_instance_by_uri($destination)->realpath();
 
-  header("Content-Type: application/vnd.ms-excel");
-  header('Content-Length: ' . filesize($filepath));
-  header("Content-Transfer-Encoding: Binary");
-  header("Content-disposition: attachment; filename=\"" . basename($filepath) . "\"");
+  foreach(glob($folder . '/order-' . $request_time . '-*') as $file) {
+    header("Content-Type: application/vnd.ms-excel");
+    header('Content-Length: ' . filesize($file));
+    header("Content-Transfer-Encoding: Binary");
+    header("Content-disposition: attachment; filename=\"" . basename($file) . "\"");
 
-  readfile($filepath);
+    readfile($file);
+  }
 }
 
 /**
@@ -829,11 +814,10 @@ function beliana_order_article_submit($form, $form_state) {
  */
 function beliana_order_article_cancel(&$node, $context) {
   if ($user = user_load($node->uid)) {
+    $node->revision = TRUE;
     $node->uid = 719;
     $node->log = 'Zrušená objednávka: ' . $user->name;
-
-    node_save($node);
-    workbench_moderation_moderate($node, 'zaradene');
+    $node->workbench_moderation_state_new = 'zaradene';
   }
 }
 
@@ -3841,7 +3825,11 @@ function beliana_render_export($viewname, $displayname, $text) {
 function beliana_theme() {
   $themes['order_file'] = [
     'variables' => [
-      'order_data' => []
+      'current_user' => NULL,
+      'assign_user' => NULL,
+      'contract' => NULL,
+      'order_data' => NULL,
+      'date' => NULL,
     ],
     'template' => 'templates/order_file'
   ];
