@@ -611,7 +611,12 @@ function beliana_order_article_assign_author(&$node, $context) {
  */
 function beliana_order_article(&$node, $context) {
   if ($user = user_load_by_name($context['user'])) {
-    $assign_user = $user->field_titul_pred_menom['und'][0]['value'] . ' ' . $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'] . ' ' . $user->field_titul_za_menom['und'][0]['value'];
+    $assign_user = [
+      'titul_pred_menom' => $user->field_titul_pred_menom['und'][0]['value'],
+      'name' => $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'],
+      'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
+    ];
+
     $options = [
       '!link' => '/user/' . $user->uid,
       '@autor' => $user->name,
@@ -671,7 +676,7 @@ function _beliana_create_article_order_variable($node, $assign_user, $contract) 
         'id' => $user->uid,
         'titul_pred_menom' => $user->field_titul_pred_menom['und'][0]['value'],
         'name' => $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'],
-          'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
+        'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
         'email' => $user->mail,
         'login' => $user->name,
       ],
@@ -725,10 +730,10 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
       ];
 
       $file_content = render($order_file_content);
-      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['current_user']);
+      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['assign_user']);
 
       if (!empty($filepath)) {
-        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stahnutie</a>'));
+        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stiahnutie</a>'));
       }
       variable_del('beliana_create_article_order_data');
     }
@@ -743,9 +748,9 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
  *
  * @return false|mixed|string
  */
-function _beliana_create_article_order_file($request_time, $content, $current_user) {
+function _beliana_create_article_order_file($request_time, $content, $assign_user) {
   $filepath = '';
-  $filename = 'order-' . $request_time . '-' . str_replace(' ', '-', $current_user['name']) . '.doc';
+  $filename = 'objednavka-' . $request_time . '-' . str_replace(' ', '-', $assign_user['name']) . '.doc';
   $destination = 'public://orders/';
 
   if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
@@ -767,13 +772,15 @@ function download_order_file($request_time) {
   $destination = 'public://orders/';
   $folder = file_stream_wrapper_get_instance_by_uri($destination)->realpath();
 
-  foreach(glob($folder . '/order-' . $request_time . '-*') as $file) {
-    header("Content-Type: application/vnd.ms-excel");
-    header('Content-Length: ' . filesize($file));
-    header("Content-Transfer-Encoding: Binary");
-    header("Content-disposition: attachment; filename=\"" . basename($file) . "\"");
+  foreach(glob($folder . '/objednavka-' . $request_time . '-*') as $file) {
+    @header("Content-Type: application/force-download");
+    @header("Cache-Control: ");// leave blank to avoid IE errors
+    @header("Pragma: ");// leave blank to avoid IE errors
+    @header("Content-type: application/octet-stream");
+    @header("Content-Disposition: attachment; filename=".basename($file));
+    @header("Content-Description: File Transfer");
 
-    readfile($file);
+    @readfile($file);
   }
 }
 
@@ -1768,7 +1775,7 @@ function beliana_node_presave($node) {
     }
   }
 
-  if ($node->original->workbench_moderation['current']->state == 'needs_review' && $node->workbench_moderation['current']->from_state == 'objednane') {
+  if ($node->original->workbench_moderation['current']->state == 'needs_review' && $node->workbench_moderation['current']->state == 'objednane') {
     $user = user_load($node->uid);
     $node->log .= '<br>Priradené autorovi: ' . $user->name;
   }
