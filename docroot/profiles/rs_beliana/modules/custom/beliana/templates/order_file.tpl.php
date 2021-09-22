@@ -1,8 +1,21 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"= xmlns="http://www.w3.org/TR/REC-html40">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+  <meta name=ProgId content=Word.Document>
+  <meta name=Generator content="Microsoft Word 9">
+  <meta name=Originator content="Microsoft Word 9">
   <title>Encyklopedický ústav Slovenskej akadémie vied</title>
+  <xml>
+    <w:WordDocument>
+      <w:View>Print
+        <w:Zoom>100
+          <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml>
 </head>
   <body lang="sk-SK" text="#000000" link="#000080" vlink="#800000" dir="ltr"><p>
     Encyklopedický ústav CSČ Slovenskej akadémie vied</p>
@@ -14,7 +27,7 @@
     <p><br/></p>
     <h2>Objednávka hesiel do Encyclopaedie Beliany</h2>
     <p><br/></p>
-    <p> Autor: <b><?php print $assign_user; ?></b></p>
+    <p> Autor: <b><?php print $assign_user['titul_pred_menom']; ?> <?php print $assign_user['name']; ?> <?php print $assign_user['titul_za_menom']; ?></b></p>
     <p> Príloha k zmluve č. <b><?php print $contract; ?></b></p>
     <p> Odbor: <font color="#ff0000"><b>doplní redaktor</b></font></p>
     <p>
