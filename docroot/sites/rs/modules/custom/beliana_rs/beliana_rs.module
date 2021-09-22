@@ -384,7 +384,7 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
 
   // check type heslo and importovane heslo 
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
-  if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
+  if ($values['node']->type === 'heslo' || $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
     // do not change state if LITE changes exist
     $publish_states = ["na_opakovane_zverejnenie", "na_zalomenie", "importovane_na_zverejnenie"];
@@ -403,11 +403,25 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
       }
     }
     // check if payment information is stored
-    if (($cur_state === "needs_review" and $new_state === "na_zverejnenie") and // u redaktora state u vr1/vr state transition
+    if (($cur_state === "needs_review" && $new_state === "na_zverejnenie") && // u redaktora state u vr1/vr state transition
       _display_payment_fields($values['node']) == "showeditable") {
       $fail = TRUE;
       drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
     }
+
+    // check "lexikalna skupina"
+    if ($cur_state === "u_jaz_redaktora1" && $new_state === "u_vyst_redaktora2") { // u jt state > u vr2 state transition
+      $tids = [];
+      foreach ($values['node']->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
+        $tids[] = $value['tid'];
+      }
+
+      if (in_array(827, $tids)) { //827 = "Zlúčené heslo"
+        $fail = TRUE;
+        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo zlúčené heslá nemôžu byť v stave 'U výst. redaktora 2", 'error');
+      }
+    }
+
     if ($fail) {
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
