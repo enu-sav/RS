@@ -22,12 +22,12 @@
     <p> Bradáčova 7</p>
     <p> 851 02 Bratislava</p>
     <p><br/></p>
-    <p> Objednávajúci redaktor: <b><?php print $current_user['titul_pred_menom']; ?> <?php print $current_user['name']; ?> <?php print $current_user['titul_za_menom']; ?></b></p>
+    <p> Objednávajúci redaktor: <b><?php print $current_user['titul_pred_menom']; ?> <?php print $current_user['name']; ?><?php print !empty($current_user['titul_za_menom']) ? ', ' . $current_user['titul_za_menom'] : ''; ?></b></p>
     <p> E-mail: <b><?php print $current_user['email']; ?></b></p>
     <p><br/></p>
     <h2>Objednávka hesiel do Encyclopaedie Beliany</h2>
     <p><br/></p>
-    <p> Autor: <b><?php print $assign_user['titul_pred_menom']; ?> <?php print $assign_user['name']; ?> <?php print $assign_user['titul_za_menom']; ?></b></p>
+    <p> Autor: <b><?php print $assign_user['titul_pred_menom']; ?> <?php print $assign_user['name']; ?><?php print !empty($assign_user['titul_za_menom']) ? ', ' . $assign_user['titul_za_menom'] : ''; ?></b></p>
     <p> Príloha k zmluve č. <b><?php print $contract; ?></b></p>
     <p> Odbor: <font color="#ff0000"><b>doplní redaktor</b></font></p>
     <p>
