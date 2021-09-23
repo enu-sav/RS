@@ -35,7 +35,7 @@
           redaktor</b></font></p>
     <h2>Zoznam hesiel na vypracovanie</h2>
     <?php foreach ($order_data as $data): ?>
-      <a href="https://rs.beliana.sav.sk/node/<?php print $data['nid']; ?>"><?php print $data['password']; ?></a>,
+      <a href="<?php print $GLOBALS['base_root'] . '/node/' . $data['nid']; ?>"><?php print $data['password']; ?></a>,
     <?php endforeach; ?>
     <p><br/></p>
     <p><em> Objednávku v redakčnom systéme Beliana vygeneroval redaktor <?php print $current_user['name']; ?>, <?php print date('d. m. Y', $date); ?>.</em></p>
