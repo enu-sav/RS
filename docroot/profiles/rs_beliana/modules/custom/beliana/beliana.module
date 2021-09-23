@@ -622,6 +622,10 @@ function beliana_order_article(&$node, $context) {
       '@autor' => $user->name,
     ];
 
+    if ($node->workbench_moderation['current']->state != 'zaradene') {
+      return;
+    }
+
     // Skip rules
     if (empty($user->field_autorska_zmluva[LANGUAGE_NONE]) || empty($user->field_autorska_zmluva[LANGUAGE_NONE][0]['value'])) {
       $error_message = 'Objednávanie hesiel zlyhalo, lebo autor <a href="!link">@autor</a> nemá autorskú zmluvu.';
@@ -730,7 +734,7 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
       ];
 
       $file_content = render($order_file_content);
-      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['assign_user']);
+      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['current_user']);
 
       if (!empty($filepath)) {
         drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stiahnutie</a>'));
@@ -748,9 +752,9 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
  *
  * @return false|mixed|string
  */
-function _beliana_create_article_order_file($request_time, $content, $assign_user) {
+function _beliana_create_article_order_file($request_time, $content, $current_user) {
   $filepath = '';
-  $filename = 'objednavka-' . $request_time . '-' . str_replace(' ', '-', $assign_user['name']) . '.doc';
+  $filename = 'objednavka-' . $request_time . '-' . str_replace(' ', '-', $current_user['login']) . '.doc';
   $destination = 'public://orders/';
 
   if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
