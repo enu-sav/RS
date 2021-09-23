@@ -611,10 +611,13 @@ function beliana_order_article_assign_author(&$node, $context) {
  */
 function beliana_order_article(&$node, $context) {
   if ($user = user_load_by_name($context['user'])) {
+    global $base_url;
+
     $assign_user = [
       'titul_pred_menom' => $user->field_titul_pred_menom['und'][0]['value'],
       'name' => $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'],
       'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
+      'login' => $user->name,
     ];
 
     $options = [
@@ -623,7 +626,8 @@ function beliana_order_article(&$node, $context) {
     ];
 
     if ($node->workbench_moderation['current']->state != 'zaradene') {
-      return;
+      $odkaz = '<a href="' . $base_url . '/node/' . $node->nid . '">' . $node->title . '</a>';
+      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené';
     }
 
     // Skip rules
@@ -734,7 +738,7 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
       ];
 
       $file_content = render($order_file_content);
-      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['current_user']);
+      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['assign_user']);
 
       if (!empty($filepath)) {
         drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stiahnutie</a>'));
@@ -752,9 +756,9 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
  *
  * @return false|mixed|string
  */
-function _beliana_create_article_order_file($request_time, $content, $current_user) {
+function _beliana_create_article_order_file($request_time, $content, $assign_user) {
   $filepath = '';
-  $filename = 'objednavka-' . $request_time . '-' . str_replace(' ', '-', $current_user['login']) . '.doc';
+  $filename = 'objednavka-' . $request_time . '-' . str_replace(' ', '-', $assign_user['login']) . '.doc';
   $destination = 'public://orders/';
 
   if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
