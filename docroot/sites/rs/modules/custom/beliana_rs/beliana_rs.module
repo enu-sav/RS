@@ -382,7 +382,7 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
   //Handle special transitions in the book workflow
   handle_special_transitions($values);
 
-  // check type heslo and importovane heslo 
+  // check type heslo and importovane heslo
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
   if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
@@ -568,9 +568,8 @@ function beliana_editor_list_access() {
     "Výstupný redaktor 1",
     "administrátor",
     "Výstupný redaktor 2",
-    "Výstupný redaktor 2X",
+    "Výstupný redaktor 2Z",
     "useradmin",
-    "Výstupný redaktor 3",
     "Výstupný redaktor 4",
     "Výstupný redaktor 5",
   ];
@@ -589,7 +588,14 @@ function beliana_group_list_access() {
   global $user;
   // roles with allowed access
   $roles = [
+    "Správca heslára",
+    "Výstupný redaktor 1",
     "administrátor",
+    "Výstupný redaktor 2",
+    "Výstupný redaktor 2Z",
+    "useradmin",
+    "Výstupný redaktor 4",
+    "Výstupný redaktor 5",
   ];
   foreach ($roles as $role) {
     if (in_array($role, $user->roles)) {
@@ -628,7 +634,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       'field_zlucene_do',     // ignored
       'field_text_hesla',     // special processing
       'field_komentar_instrukcie',   // special processing
-      'field_datum_autorovho_textu', // special processing 
+      'field_datum_autorovho_textu', // special processing
       'field_text_z_gh',      // ignored
       'field_povodne_lexikalne_skupiny',   // ignored
       'field_redaktori_zluceneho',   // ignored
@@ -728,7 +734,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     // specify the new node state
     if ($node->type == 'ilustracia') {
       $moderate_to = 'ilustracia_u_redaktora';
-    } else {  
+    } else {
       $moderate_to = 'needs_review';
     }
 
