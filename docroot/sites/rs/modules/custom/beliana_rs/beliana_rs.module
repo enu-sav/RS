@@ -577,9 +577,8 @@ function beliana_editor_list_access() {
     "Výstupný redaktor 1",
     "administrátor",
     "Výstupný redaktor 2",
-    "Výstupný redaktor 2X",
+    "Výstupný redaktor 2Z",
     "useradmin",
-    "Výstupný redaktor 3",
     "Výstupný redaktor 4",
     "Výstupný redaktor 5",
   ];
@@ -598,7 +597,14 @@ function beliana_group_list_access() {
   global $user;
   // roles with allowed access
   $roles = [
+    "Správca heslára",
+    "Výstupný redaktor 1",
     "administrátor",
+    "Výstupný redaktor 2",
+    "Výstupný redaktor 2Z",
+    "useradmin",
+    "Výstupný redaktor 4",
+    "Výstupný redaktor 5",
   ];
   foreach ($roles as $role) {
     if (in_array($role, $user->roles)) {
