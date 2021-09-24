@@ -531,7 +531,35 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_order_article_cancel' => [    // rs and webrs - BEL-16
+      'type' => 'entity',
+      'label' => 'Zrušiť objednávku',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+      'permissions' => ['administer taxonomy'],
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_unassign_password_to_author` action.
+ *
+ * Cancel order and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_cancel(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->uid = 719;
+    $node->log = 'Zrušená objednávka: ' . $user->name;
+
+    node_save($node);
+    workbench_moderation_moderate($node, 'zaradene');
+  }
 }
 
 /**
