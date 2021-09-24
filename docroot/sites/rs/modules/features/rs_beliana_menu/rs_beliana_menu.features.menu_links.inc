@@ -296,48 +296,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x.
-  $menu_links['management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/na-posudenie-vr2x',
-    'router_path' => 'admin/beliana',
-    'link_title' => 'Na posúdenie (VR2X)',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x',
-    ),
-    'module' => 'menu',
-    'hidden' => 1,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -42,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
-  // Exported menu link: management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3.
-  $menu_links['management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/na-posudenie-vr3',
-    'router_path' => 'admin/beliana',
-    'link_title' => 'Na posúdenie (VR3)',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3',
-    ),
-    'module' => 'menu',
-    'hidden' => 1,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -41,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
   // Exported menu link: management_na-posdenie-vr4:admin/beliana/na-posudenie-vr4.
   $menu_links['management_na-posdenie-vr4:admin/beliana/na-posudenie-vr4'] = array(
     'menu_name' => 'management',
@@ -670,27 +628,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_zlen:admin/beliana/zlucene.
-  $menu_links['management_zlen:admin/beliana/zlucene'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/zlucene',
-    'router_path' => 'admin/beliana/zlucene',
-    'link_title' => 'Zlúčené',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_zlen:admin/beliana/zlucene',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -33,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
   // Exported menu link: management_zli:admin/beliana/zlucovanie.
   $menu_links['management_zli:admin/beliana/zlucovanie'] = array(
     'menu_name' => 'management',
@@ -702,6 +639,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_zli:admin/beliana/zlucovanie',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -985,8 +923,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Na posúdenie (R)');
   t('Na posúdenie (VR1)');
   t('Na posúdenie (VR2)');
-  t('Na posúdenie (VR2X)');
-  t('Na posúdenie (VR3)');
   t('Na posúdenie (VR4)');
   t('Na posúdenie (VR5)');
   t('Navrhnuté');
@@ -1005,7 +941,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Vytvoriť');
   t('Všetky moje heslá');
   t('Všetky moje ilustrácie');
-  t('Zlúčené');
   t('Zlúčiť');
 
   return $menu_links;
