@@ -382,7 +382,7 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
   //Handle special transitions in the book workflow
   handle_special_transitions($values);
 
-  // check type heslo and importovane heslo 
+  // check type heslo and importovane heslo
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
   if ($values['node']->type === 'heslo' || $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
@@ -410,13 +410,8 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
     }
 
     // check "lexikalna skupina"
-    if ($cur_state === "u_jaz_redaktora1" && $new_state === "u_vyst_redaktora2") { // u jt state > u vr2 state transition
-      $tids = [];
-      foreach ($values['node']->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
-        $tids[] = $value['tid'];
-      }
-
-      if (in_array(827, $tids)) { //827 = "Zlúčené heslo"
+    if ($cur_state === "na_jazykovu_korekturu" && $new_state === "u_vyst_redaktora_2") { // u jt state > u vr2 state transition
+      if (isset($values['node']->field_zlucene_z[LANGUAGE_NONE][0])) {
         $fail = TRUE;
         drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo zlúčené heslá nemôžu byť v stave 'U výst. redaktora 2", 'error');
       }
@@ -642,7 +637,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       'field_zlucene_do',     // ignored
       'field_text_hesla',     // special processing
       'field_komentar_instrukcie',   // special processing
-      'field_datum_autorovho_textu', // special processing 
+      'field_datum_autorovho_textu', // special processing
       'field_text_z_gh',      // ignored
       'field_povodne_lexikalne_skupiny',   // ignored
       'field_redaktori_zluceneho',   // ignored
@@ -742,7 +737,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     // specify the new node state
     if ($node->type == 'ilustracia') {
       $moderate_to = 'ilustracia_u_redaktora';
-    } else {  
+    } else {
       $moderate_to = 'needs_review';
     }
 
