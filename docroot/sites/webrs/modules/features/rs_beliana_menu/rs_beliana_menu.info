@@ -25,6 +25,7 @@ features[menu_links][] = management_my-workbench:admin/workbench
 features[menu_links][] = management_na-posdenie-r:admin/beliana/na-posudenie-r
 features[menu_links][] = management_navrhnut:admin/beliana/navrhnute
 features[menu_links][] = management_nepriraden-hesl:admin/beliana/nepriradene
+features[menu_links][] = management_objednan:admin/beliana/ordered
 features[menu_links][] = management_odovzdan-hesl:admin/beliana/odovzdane
 features[menu_links][] = management_oznam:node/add/odkaz
 features[menu_links][] = management_priradi-autora:admin/beliana/priradit-autora
