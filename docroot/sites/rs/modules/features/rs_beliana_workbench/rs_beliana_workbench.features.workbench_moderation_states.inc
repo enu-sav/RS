@@ -123,12 +123,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 1,
     ),
-    'pozdr_an_' => array(
-      'name' => 'pozdr_an_',
-      'label' => 'Pozdržané',
-      'description' => 'Heslo na ceste k zverejnieniu, ale dočasne pozdržané ',
-      'weight' => -1,
-    ),
     'publikovane_na_webe' => array(
       'name' => 'publikovane_na_webe',
       'label' => 'Zalomené',
