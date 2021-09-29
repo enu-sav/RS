@@ -1,0 +1,12 @@
+name = Menu item visibility
+description = Allows contexts to be set for menu items, similar to block visibility.
+core = 7.x
+dependencies[] = menu
+conflicts[] = menu_per_role
+
+; Information added by Drupal.org packaging script on 2017-09-08
+version = "7.x-1.0-beta3"
+core = "7.x"
+project = "menu_item_visibility"
+datestamp = "1504908255"
+
