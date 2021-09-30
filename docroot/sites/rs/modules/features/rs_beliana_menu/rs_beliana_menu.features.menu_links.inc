@@ -680,6 +680,28 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
+  // Exported menu link: management_zli-geo:admin/beliana/zlucit-geo.
+  $menu_links['management_zli-geo:admin/beliana/zlucit-geo'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/beliana/zlucit-geo',
+    'router_path' => 'admin/beliana/zlucit-geo',
+    'link_title' => 'Zlúčiť GEO',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'alter' => TRUE,
+      'identifier' => 'management_zli-geo:admin/beliana/zlucit-geo',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+    'parent_identifier' => 'management_redakn-systm:admin/beliana',
+  );
   // Exported menu link: management_zli:admin/beliana/zlucovanie.
   $menu_links['management_zli:admin/beliana/zlucovanie'] = array(
     'menu_name' => 'management',
@@ -1008,6 +1030,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Všetky moje heslá');
   t('Všetky moje ilustrácie');
   t('Zlúčiť');
+  t('Zlúčiť GEO');
 
   return $menu_links;
 }

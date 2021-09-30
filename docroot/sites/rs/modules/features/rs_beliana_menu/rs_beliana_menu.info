@@ -47,6 +47,7 @@ features[menu_links][] = management_vyhada-hesl:vyhľadať
 features[menu_links][] = management_vyhada-ilustrcie:vyhľadať-ilustrácie
 features[menu_links][] = management_vyraden:admin/beliana/vyradene
 features[menu_links][] = management_vytvori:node/add
+features[menu_links][] = management_zli-geo:admin/beliana/zlucit-geo
 features[menu_links][] = management_zli:admin/beliana/zlucovanie
 features[menu_links][] = navigation_article:node/add/article
 features[menu_links][] = navigation_basic-page:node/add/page
