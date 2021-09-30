@@ -426,7 +426,7 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
   //Handle special transitions in the book workflow
   handle_special_transitions($values);
 
-  // check type heslo and importovane heslo 
+  // check type heslo and importovane heslo
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
   if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
@@ -646,7 +646,7 @@ function beliana_group_list_access() {
 // transfer node from the web editorial system
 // $node: current node
 // $remote_node: remote node (data)
-function beliana_sync_from_remote_build($node, $remote_node) {
+function beliana_sync_from_remote_build($node, $remote_node, $login) {
   global $user;
 
   // remote accept states
@@ -672,7 +672,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
       'field_zlucene_do',     // ignored
       'field_text_hesla',     // special processing
       'field_komentar_instrukcie',   // special processing
-      'field_datum_autorovho_textu', // special processing 
+      'field_datum_autorovho_textu', // special processing
       'field_text_z_gh',      // ignored
       'field_povodne_lexikalne_skupiny',   // ignored
       'field_redaktori_zluceneho',   // ignored
@@ -756,7 +756,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         if (!empty($remote_field_value)) {
           foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $target) {
             // fetch the remote node
-            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'])) {
+            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'], $login)) {
               // if 'empty()' node ids on both sides are equal, so use target_remote_node->nid.
               $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] =
                 empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
@@ -772,7 +772,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
     // specify the new node state
     if ($node->type == 'ilustracia') {
       $moderate_to = 'ilustracia_u_redaktora';
-    } else {  
+    } else {
       $moderate_to = 'needs_review';
     }
 
