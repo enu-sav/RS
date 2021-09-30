@@ -488,7 +488,7 @@ function beliana_action_info() {
       'type' => 'node',
       'label' => t('Fetch content'),
       'behavior' => ['changes_property'],
-      'configurable' => FALSE,
+      'configurable' => TRUE,
       'vbo_configurable' => FALSE,
       'triggers' => ['any'],
       'permissions' => ['sync heslo content'],
@@ -1238,7 +1238,7 @@ function beliana_sync_from_remote($node, $context) {
 
   if ($remote_node = beliana_api_rest_get_node($remote_id, $login)) {
     // implemented independently for rs and webrs
-    beliana_sync_from_remote_build($node, $remote_node);
+    beliana_sync_from_remote_build($node, $remote_node, $login);
   }
   else {
     drupal_set_message(t('Nepodarilo sa prevziať heslo @id (komunikačná chyba API)', ['@id' => $remote_id]), 'error');

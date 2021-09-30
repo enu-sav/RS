@@ -123,7 +123,7 @@ function modify_links_merged(&$node) {
  */
 
 function beliana_group_list() {
-  $users = entity_load('user'); 
+  $users = entity_load('user');
   $terms = taxonomy_get_tree(2);
   $output = '';
   $ls0="";
@@ -137,7 +137,7 @@ function beliana_group_list() {
   //foreach (array_slice($terms,0,100) as $term) {
   foreach ($terms as $term) {
     // The list seems to be sorted according to the hierarchy, so print items with depth==0 as H1 headers
-    
+
     if ($term->depth == 0) {
       $ls0 = $term->name;
       $ls1="-";
@@ -148,7 +148,7 @@ function beliana_group_list() {
     } else if ($term->depth == 2) {
       $ls2 = $term->name;
     }
-    $ausers = _get_users($users,$term->tid); 
+    $ausers = _get_users($users,$term->tid);
     $output .= '<tr style="border: 1px solid gray;"><td>'.$ls0."</td><td>".$ls1."</td><td>".$ls2."</td>";
     $output .= "<td>".$ausers['redaktor']."</td><td>".$ausers['vr']."</td><td>".$ausers['autor']."</td><td>".$ausers['konzultant']."</td><tr>\n";
   }
@@ -171,7 +171,7 @@ function webrs_beliana_workflow_reaction(&$form, &$form_state) {
   $new_state = $values['state'];
   $cur_state = $values['node']->workbench_moderation['current']->state;
 
-  // check type heslo and importovane heslo 
+  // check type heslo and importovane heslo
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
   if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
@@ -406,7 +406,7 @@ function check_state_change_importovane_to_zaradene($node, $cur_state, $new_stat
 // transfer node from the book editorial system
 // $node: current node
 // $remote_node: remote node (data)
-function beliana_sync_from_remote_build($node, $remote_node) {
+function beliana_sync_from_remote_build($node, $remote_node, $login) {
   global $user;
 
   // remote accept states
@@ -527,7 +527,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         if (!empty($remote_field_value)) {
           foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $target) {
             // fetch the remote node
-            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'])) {
+            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'], $login)) {
               // if 'empty()' node ids on both sides are equal, so use target_remote_node->nid.
               $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] =
                 empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
