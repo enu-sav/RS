@@ -18,6 +18,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Home',
     'options' => array(
       'identifier' => 'main-menu_home:<front>',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -38,6 +39,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_redakn-systm:admin/beliana',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -58,6 +60,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_vyhada-hesl:vyhladat',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -78,6 +81,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_vyhada-ilustrcie:vyhladat-ilustracie',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -98,6 +102,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_ilustrcie-g:admin/beliana/Ilustracie-g',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -119,6 +124,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_ilustrcie-r:admin/beliana/Ilustracie-r',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -140,6 +146,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_jazykov-redakcia-1:admin/beliana/jaz-redakcia-1',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -161,6 +168,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_jazykov-redakcia-2:admin/beliana/jaz-redakcia-2',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -182,6 +190,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_korektra-1:admin/beliana/korektura1',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -203,6 +212,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_korektra-2:admin/beliana/korektura2',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -224,6 +234,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => 'My Workbench area',
       ),
       'identifier' => 'management_my-workbench:admin/workbench',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -244,6 +255,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_na-posdenie-r:admin/beliana/na-posudenie-r',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -265,6 +277,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_na-posdenie-vr1:admin/beliana/na-posudenie-vr1',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -286,6 +299,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_na-posdenie-vr2:admin/beliana/na-posudenie-vr2',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -293,48 +307,6 @@ function rs_beliana_menu_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -43,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
-  // Exported menu link: management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x.
-  $menu_links['management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/na-posudenie-vr2x',
-    'router_path' => 'admin/beliana/na-posudenie-vr2x',
-    'link_title' => 'Na posúdenie (VR2X)',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_na-posdenie-vr2x:admin/beliana/na-posudenie-vr2x',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -42,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
-  // Exported menu link: management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3.
-  $menu_links['management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/na-posudenie-vr3',
-    'router_path' => 'admin/beliana/na-posudenie-vr3',
-    'link_title' => 'Na posúdenie (VR3)',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_na-posdenie-vr3:admin/beliana/na-posudenie-vr3',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -41,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -349,6 +321,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_na-posdenie-vr4:admin/beliana/na-posudenie-vr4',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -370,6 +343,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_na-posdenie-vr5:admin/beliana/na-posudenie-vr5',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -391,6 +365,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_navrhnut:admin/beliana/navrhnute',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -412,6 +387,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_nepriraden-hesl:admin/beliana/nepriradene',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -419,6 +395,28 @@ function rs_beliana_menu_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -30,
+    'customized' => 1,
+    'parent_identifier' => 'management_redakn-systm:admin/beliana',
+  );
+  // Exported menu link: management_objednan:admin/beliana/ordered.
+  $menu_links['management_objednan:admin/beliana/ordered'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/beliana/ordered',
+    'router_path' => 'admin/beliana/ordered',
+    'link_title' => 'Objednané',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'management_objednan:admin/beliana/ordered',
+      'alter' => TRUE,
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
@@ -433,6 +431,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_odovzdan-hesl:admin/beliana/odovzdane',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -454,6 +453,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_oznam:node/add/odkaz',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 1,
@@ -475,6 +475,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_priradi-autora:admin/beliana/priradit-autora',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -496,6 +497,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_redakn-systm:admin/beliana',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -516,6 +518,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_rozpracovan-hesl:admin/beliana/drafts',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -537,6 +540,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_sprvy:messages',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -557,6 +561,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_vetky-moje-hesl:admin/beliana/all',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -578,6 +583,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_vetky-moje-ilustrcie:admin/beliana/Ilustracie-vr',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -599,6 +605,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_vyhada-hesl:vyhľadať',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -619,6 +626,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_vyhada-ilustrcie:vyhľadať-ilustrácie',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -639,6 +647,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_vyraden:admin/beliana/vyradene',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -660,6 +669,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'management_vytvori:node/add',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 1,
@@ -670,38 +680,18 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
-  // Exported menu link: management_zlen:admin/beliana/zlucene.
-  $menu_links['management_zlen:admin/beliana/zlucene'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/beliana/zlucene',
-    'router_path' => 'admin/beliana/zlucene',
-    'link_title' => 'Zlúčené',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_zlen:admin/beliana/zlucene',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -33,
-    'customized' => 1,
-    'parent_identifier' => 'management_redakn-systm:admin/beliana',
-  );
   // Exported menu link: management_zli:admin/beliana/zlucovanie.
   $menu_links['management_zli:admin/beliana/zlucovanie'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/zlucovanie',
-    'router_path' => 'admin/beliana/zlucovanie',
+    'router_path' => 'admin/beliana',
     'link_title' => 'Zlúčiť',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
       'identifier' => 'management_zli:admin/beliana/zlucovanie',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -723,6 +713,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => 'Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.',
       ),
       'identifier' => 'navigation_article:node/add/article',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -744,6 +735,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => 'Use <em>basic pages</em> for your static content, such as an \'About us\' page.',
       ),
       'identifier' => 'navigation_basic-page:node/add/page',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -762,6 +754,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Beliana',
     'options' => array(
       'identifier' => 'navigation_beliana:admin/beliana',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -782,6 +775,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '<em>Téma fóra</em> začíná nové diskusné vlákno v rámci fóra.',
       ),
       'identifier' => 'navigation_diskusn-tma:node/add/forum',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -800,6 +794,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Glossary',
     'options' => array(
       'identifier' => 'navigation_glossary:glossary',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -820,6 +815,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => 'Heslo bude vytvorené v stave "Navrhnuté". Po odsúhlasení správcom heslára sa stav zmení na "Zaradené" a redaktor ho môže priradiť autorovi na vypracovanie. ',
       ),
       'identifier' => 'navigation_heslo:node/add/heslo',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -841,6 +837,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => 'Ilustrácia k heslu. Zvoľte rovnaký názov ako je názov súvisiaceho hesla (prípadne pridajte "Il.1" alebo podobne)  a rovnakú lexikálnu skupinu. Po vytvorení treba ilustráciu heslu priradiť (otvoriť heslo na úpravu a nastaviť pole Ilustrácia).',
       ),
       'identifier' => 'navigation_ilustrcia:node/add/ilustracia',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -859,6 +856,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Import',
     'options' => array(
       'identifier' => 'navigation_import:import',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -879,6 +877,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => 'Knižne vydané heslo dielov 1 - 7. Importované z doc súborov, ktoré boli použité ako podklady na tlač',
       ),
       'identifier' => 'navigation_importovan-heslo:node/add/importovane-heslo',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -897,6 +896,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Recent posts',
     'options' => array(
       'identifier' => 'navigation_recent-posts:tracker',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -914,6 +914,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Tlačiť',
     'options' => array(
       'identifier' => 'navigation_tlai:admin/beliana/print',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -935,6 +936,7 @@ function rs_beliana_menu_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'navigation_vytvori:node/add',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -952,6 +954,7 @@ function rs_beliana_menu_menu_default_menu_links() {
     'link_title' => 'Messages',
     'options' => array(
       'identifier' => 'user-menu_messages:messages',
+      'alter' => TRUE,
     ),
     'module' => 'system',
     'hidden' => 1,
@@ -985,12 +988,11 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Na posúdenie (R)');
   t('Na posúdenie (VR1)');
   t('Na posúdenie (VR2)');
-  t('Na posúdenie (VR2X)');
-  t('Na posúdenie (VR3)');
   t('Na posúdenie (VR4)');
   t('Na posúdenie (VR5)');
   t('Navrhnuté');
   t('Nepriradené heslá');
+  t('Objednané');
   t('Odovzdané heslá');
   t('Oznam');
   t('Priradiť autora');
@@ -1005,7 +1007,6 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Vytvoriť');
   t('Všetky moje heslá');
   t('Všetky moje ilustrácie');
-  t('Zlúčené');
   t('Zlúčiť');
 
   return $menu_links;

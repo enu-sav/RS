@@ -178,5 +178,65 @@ function rs_beliana_feeds_feeds_tamper_default() {
   $feeds_tamper->description = 'Explode';
   $export['import_ilustr_cie-pouzit-explode'] = $feeds_tamper;
 
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'reimport_exp_il-datum_prevzatia-strtotime';
+  $feeds_tamper->importer = 'reimport_exp_il';
+  $feeds_tamper->source = 'datum_prevzatia';
+  $feeds_tamper->plugin_id = 'strtotime';
+  $feeds_tamper->settings = array();
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'String to Unix timestamp';
+  $export['reimport_exp_il-datum_prevzatia-strtotime'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'reimport_exp_il-kategoria-explode';
+  $feeds_tamper->importer = 'reimport_exp_il';
+  $feeds_tamper->source = 'kategoria';
+  $feeds_tamper->plugin_id = 'explode';
+  $feeds_tamper->settings = array(
+    'separator' => ',',
+    'limit' => '',
+    'real_separator' => ',',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Explode';
+  $export['reimport_exp_il-kategoria-explode'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'reimport_exp_il-nazverejnenie-explode';
+  $feeds_tamper->importer = 'reimport_exp_il';
+  $feeds_tamper->source = 'nazverejnenie';
+  $feeds_tamper->plugin_id = 'explode';
+  $feeds_tamper->settings = array(
+    'separator' => ';',
+    'limit' => 3,
+    'real_separator' => ';',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Explode';
+  $export['reimport_exp_il-nazverejnenie-explode'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'reimport_exp_il-pouzit-explode';
+  $feeds_tamper->importer = 'reimport_exp_il';
+  $feeds_tamper->source = 'pouzit';
+  $feeds_tamper->plugin_id = 'explode';
+  $feeds_tamper->settings = array(
+    'separator' => ';',
+    'limit' => '',
+    'real_separator' => ';',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Explode';
+  $export['reimport_exp_il-pouzit-explode'] = $feeds_tamper;
+
   return $export;
 }

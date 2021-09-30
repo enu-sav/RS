@@ -13,7 +13,6 @@ services:
     overrides:
       environment:
         XDEBUG_MODE:
-        PHP_IDE_CONFIG: "serverName=appserver"
   phpmyadmin:
     type: phpmyadmin
     hosts:
@@ -28,3 +27,16 @@ proxy:
   appserver:
     - rs.beliana.lndo.site
     - webrs.beliana.lndo.site
+
+tooling:
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for Apache.
+    cmd: docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Enabling xdebug"
+    user: root
+
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for Apache.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Disabling xdebug"
+    user: root

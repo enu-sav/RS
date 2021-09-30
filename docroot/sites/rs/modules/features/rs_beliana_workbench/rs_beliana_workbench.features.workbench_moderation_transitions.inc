@@ -9,16 +9,6 @@
  */
 function rs_beliana_workbench_workbench_moderation_export_transitions() {
   $items = array(
-    '1_korektura:u_vyst_redaktora_3' => array(
-      'from_name' => '1_korektura',
-      'to_name' => 'u_vyst_redaktora_3',
-      'name' => '1_korektura-u_vyst_redaktora3',
-    ),
-    '2_korekt_ra:u_vyst_redaktora_3' => array(
-      'from_name' => '2_korekt_ra',
-      'to_name' => 'u_vyst_redaktora_3',
-      'name' => '2_korektura-u_vyst_redaktora3',
-    ),
     '2_korekt_ra:u_vyst_redaktora_4' => array(
       'from_name' => '2_korekt_ra',
       'to_name' => 'u_vyst_redaktora_4',
@@ -139,6 +129,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_zverejnenie',
       'name' => 'u_redaktora-u_vyst_redaktora1',
     ),
+    'needs_review:objednane' => array(
+      'from_name' => 'needs_review',
+      'to_name' => 'objednane',
+      'name' => 'u_redaktora-objednane',
+    ),
     'needs_review:u_autora' => array(
       'from_name' => 'needs_review',
       'to_name' => 'u_autora',
@@ -239,35 +234,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_vyst_redaktora_2',
       'name' => 'u_vyst_redaktora2x-u_vyst_redaktora2',
     ),
-    'u_vyst_redaktora_3:2_korekt_ra' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => '2_korekt_ra',
-      'name' => 'u_vyst_redaktora3-2_korektura',
-    ),
-    'u_vyst_redaktora_3:u_jaz_redaktora_2' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => 'u_jaz_redaktora_2',
-      'name' => 'u_vyst_redaktora3-u_jaz_redaktora2',
-    ),
-    'u_vyst_redaktora_3:u_v_st_redaktora_5' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => 'u_v_st_redaktora_5',
-      'name' => 'u_vyst_redaktora3-u_vyst_redaktora5',
-    ),
-    'u_vyst_redaktora_3:u_vyst_redaktora_4' => array(
-      'from_name' => 'u_vyst_redaktora_3',
-      'to_name' => 'u_vyst_redaktora_4',
-      'name' => 'u_vyst_redaktora3-u_vyst_redaktora4',
-    ),
     'u_vyst_redaktora_4:u_jaz_redaktora_2' => array(
       'from_name' => 'u_vyst_redaktora_4',
       'to_name' => 'u_jaz_redaktora_2',
       'name' => 'u_vyst_redaktora4-u_jaz_redaktora2',
-    ),
-    'u_vyst_redaktora_4:u_vyst_redaktora_3' => array(
-      'from_name' => 'u_vyst_redaktora_4',
-      'to_name' => 'u_vyst_redaktora_3',
-      'name' => 'u_vyst_redaktora4-u_vyst_redaktora3',
     ),
     'ukoncenezluene:u_vyst_redaktora_2' => array(
       'from_name' => 'ukoncenezluene',

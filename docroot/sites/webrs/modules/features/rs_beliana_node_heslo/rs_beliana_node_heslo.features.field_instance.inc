@@ -556,7 +556,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe',
+    'description' => 'Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe (nevkladajte rovnakú skupinu ako je Lexikálna skupina)',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -959,6 +959,53 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'weight' => 31,
     ),
     'workbench_access_field' => FALSE,
+  );
+
+  // Exported field_instance: 'node-heslo-field_povodny_autor'.
+  $field_instances['node-heslo-field_povodny_autor'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_povodny_autor',
+    'label' => 'Pôvodný autor hesla',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 25,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-heslo-field_redaktori_zluceneho'.
@@ -1561,7 +1608,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie',
+    'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie>viac o určení čísla zmluvy</a>).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1586,7 +1633,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
     'entity_type' => 'node',
     'field_name' => 'field_zmluva',
     'label' => 'Zmluva na vyplatenie',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
@@ -1620,7 +1667,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -1769,12 +1816,13 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
   t('Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.');
-  t('Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe');
+  t('Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe (nevkladajte rovnakú skupinu ako je Lexikálna skupina)');
   t('Použité zdroje');
   t('Povodne lexikalne skupiny');
   t('Pozícia tabuľky pre geografické heslá');
   t('Pozície sú číslované od 0 (t. j. ak má byť tabuľka celkom hore nad obrázkami, vložte 0)');
   t('Počet znakov na vyplatenie');
+  t('Pôvodný autor hesla');
   t('Pôvodný text hesla v generálnom heslári pred importovaním z XLS súborov. XLS tabuľka heslára mala 8 stĺpcov ZODAD, HESLO, P_R, L_S, AUT, IL, POZN a POZN 2 . Obsah stĺpcov je uvedený v zátvorke, POZN a POZN2 sú spojené.
 ');
   t('Redaktori zlúčeného hesla');
@@ -1793,7 +1841,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny. Slúži na riadenie prístupu k heslám a na kategorizáciu hesla na webe. Ak chcete heslo priradiť autorovi, zadajte len jednu hodnotu.');
-  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie');
+  t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie>viac o určení čísla zmluvy</a>).');
   t('Zaškrtnite, ak sa majú na webe zobraziť meno a stručný životopis.');
   t('Zlúčené do');
   t('Zlúčené z');

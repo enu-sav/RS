@@ -117,11 +117,11 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => '',
       'weight' => 10,
     ),
-    'pozdr_an_' => array(
-      'name' => 'pozdr_an_',
-      'label' => 'Pozdržané',
-      'description' => 'Heslo na ceste k zverejnieniu, ale dočasne pozdržané ',
-      'weight' => -1,
+    'objednane' => array(
+      'name' => 'objednane',
+      'label' => 'Objednané',
+      'description' => '',
+      'weight' => 1,
     ),
     'publikovane_na_webe' => array(
       'name' => 'publikovane_na_webe',
@@ -170,12 +170,6 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'U výst. redaktora 2X',
       'description' => 'Na spracovanie u výstupného redaktora 2x',
       'weight' => 6,
-    ),
-    'u_vyst_redaktora_3' => array(
-      'name' => 'u_vyst_redaktora_3',
-      'label' => 'U výst. redaktora 3',
-      'description' => 'Na spracovanie u výst. redaktora 3',
-      'weight' => 7,
     ),
     'u_vyst_redaktora_4' => array(
       'name' => 'u_vyst_redaktora_4',

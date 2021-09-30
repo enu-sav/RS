@@ -63,6 +63,13 @@ function beliana_menu() {
     'type' => MENU_LOCAL_TASK,
   ];
 
+  $items['download-order-file/%'] = [
+    'title' => 'Súbor na stiahnutie',
+    'page callback' =>'download_order_file',
+    'page arguments' => [1],
+    'access callback' => TRUE,
+  ];
+
   return $items;
 }
 
@@ -384,16 +391,26 @@ function beliana_action_info() {
   return [
     'beliana_assign_author' => [    // rs and webrs
       'type' => 'entity',
-      'label' => t('Specify author and assign to author'),
+      'label' => 'Určiť autora a priradiť autorovi',
       'configurable' => TRUE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_unassign_author' => [    // rs and webrs - BEL-13
+      'type' => 'entity',
+      'label' => 'Zrušiť priradenie autora',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+      'permissions' => ['administer taxonomy'],
+    ],
     'beliana_assign_corrector' => [ // rs and webrs
       'type' => 'entity',
-      'label' => t('Specify author and assign to editor'),
+      'label' => 'Určiť autora a priradiť redaktorovi',
       'configurable' => TRUE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
@@ -521,7 +538,302 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_order_article' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Vytvoriť objednávku',
+      'configurable' => TRUE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
+    'beliana_order_article_cancel' => [    // rs and webrs - BEL-16
+      'type' => 'entity',
+      'label' => 'Zrušiť objednávku',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
+    'beliana_order_article_assign_author' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Priradiť autorovi',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
+    'beliana_order_article_assign_editor' => [    // rs and webrs - BEL-15
+      'type' => 'entity',
+      'label' => 'Priradiť redaktorovi',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_order_article_assign_editor` action.
+ *
+ * Changes workflow status to `U redaktora`.
+ */
+function beliana_order_article_assign_editor(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->revision = TRUE;
+    $node->log = 'Priradené autorovi: ' . $user->name;
+    $node->workbench_moderation_state_new = 'needs_review';
+  }
+}
+
+/**
+ * Callback for `beliana_order_article_assign_author` action.
+ *
+ * Changes workflow status to `U autora`.
+ */
+function beliana_order_article_assign_author(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->revision = TRUE;
+    $node->log = 'Priradené autorovi: ' . $user->name;
+    $node->workbench_moderation_state_new = 'u_autora';
+  }
+}
+
+/**
+ * Callback for `beliana_order_article` action.
+ *
+ * Create an order and
+ * changes workflow status to `zaradene`.
+ */
+function beliana_order_article(&$node, $context) {
+  if ($user = user_load_by_name($context['user'])) {
+    global $base_url;
+
+    $assign_user = [
+      'titul_pred_menom' => $user->field_titul_pred_menom['und'][0]['value'],
+      'name' => $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'],
+      'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
+      'login' => $user->name,
+    ];
+
+    $options = [
+      '!link' => '/user/' . $user->uid,
+      '@autor' => $user->name,
+    ];
+
+    if ($node->workbench_moderation['current']->state != 'zaradene') {
+      $odkaz = '<a href="' . $base_url . '/node/' . $node->nid . '">' . $node->title . '</a>';
+      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené';
+    }
+
+    // Skip rules
+    if (empty($user->field_autorska_zmluva[LANGUAGE_NONE]) || empty($user->field_autorska_zmluva[LANGUAGE_NONE][0]['value'])) {
+      $error_message = 'Objednávanie hesiel zlyhalo, lebo autor <a href="!link">@autor</a> nemá autorskú zmluvu.';
+    }
+
+    if (isset($error_message)) {
+      drupal_set_message(t($error_message, $options), 'error');
+      return FALSE;
+    }
+
+    if (isset($user->field_autorska_zmluva[LANGUAGE_NONE])) {
+      $array_contract = explode(',', $user->field_autorska_zmluva[LANGUAGE_NONE][0]['value']);
+      if (!is_null(end($array_contract))) {
+        $contract = end($array_contract);
+        $node->field_zmluva['und'][0]['value'] = $contract;
+      }
+    }
+    $node->revision = TRUE;
+    $node->uid = $user->uid;
+    $node->log = 'Objednané: ' . $user->name;
+    $node->workbench_moderation_state_new = 'objednane';
+
+    _beliana_create_article_order_variable($node, $assign_user, $contract);
+  }
+}
+
+/**
+ * Helper function create article order variable.
+ *
+ * Create variable beliana_create_article_order_data
+ *
+ * @param $node
+ * @param $assign_user
+ * @param $contract
+ *
+ * @return false|mixed|string
+ */
+function _beliana_create_article_order_variable($node, $assign_user, $contract) {
+  global $user;
+  $user = user_load($user->uid);
+
+  if (!is_null(variable_get('beliana_create_article_order_data'))) {
+    $context = variable_get('beliana_create_article_order_data');
+    $context['order_data'][] = [
+      'nid' => $node->nid,
+      'password' => $node->title,
+    ];
+  } else {
+    $context = [
+      'type' => 'ordered',
+      'current_user' => [
+        'id' => $user->uid,
+        'titul_pred_menom' => $user->field_titul_pred_menom['und'][0]['value'],
+        'name' => $user->field_meno['und'][0]['value'] . ' ' . $user->field_priezvisko['und'][0]['value'],
+        'titul_za_menom' => $user->field_titul_za_menom['und'][0]['value'],
+        'email' => $user->mail,
+        'login' => $user->name,
+      ],
+      'assign_user' => $assign_user,
+      'contract' => $contract,
+      'date' => REQUEST_TIME,
+    ];
+    $context['order_data'][] = [
+      'nid' => $node->nid,
+      'password' => $node->title,
+    ];
+  }
+  variable_set('beliana_create_article_order_data', $context);
+}
+
+/**
+ * Outputs a batch processing page without JavaScript support.
+ *
+ * @see _batch_process()
+ */
+function beliana_batch_alter(&$batch) {
+  foreach ($batch['sets'] as $key => $set) {
+    if ($set['finished'] == 'views_bulk_operations_execute_finished') {
+      $batch['sets'][$key]['finished'] = 'beliana_create_article_order_execute_finished';
+    }
+  }
+}
+
+/**
+ * Helper function create article order execute finished.
+ *
+ * @param $success
+ * @param $results
+ * @param $operations
+ *
+ * @return false|mixed|string
+ */
+function beliana_create_article_order_execute_finished($success, $results, $operations) {
+  if (!is_null(variable_get('beliana_create_article_order_data'))) {
+    $order_data = variable_get('beliana_create_article_order_data');
+    if ($order_data['type'] == 'ordered') {
+      $request_time = REQUEST_TIME;
+
+      $order_file_content[] = [
+        '#theme' => 'order_file',
+        '#current_user' => $order_data['current_user'],
+        '#assign_user' => $order_data['assign_user'],
+        '#contract' => $order_data['contract'],
+        '#date' => $order_data['date'],
+        '#order_data' => $order_data['order_data'],
+      ];
+
+      $file_content = render($order_file_content);
+      $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['assign_user']);
+
+      if (!empty($filepath)) {
+        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stiahnutie</a>'));
+      }
+      variable_del('beliana_create_article_order_data');
+    }
+  }
+}
+
+/**
+ * Helper function create order file.
+ *
+ * @param $request_time
+ * @param $content
+ *
+ * @return false|mixed|string
+ */
+function _beliana_create_article_order_file($request_time, $content, $assign_user) {
+  $filepath = '';
+  $filename = 'objednavka-' . $request_time . '-' . str_replace(' ', '-', $assign_user['login']) . '.doc';
+  $destination = 'public://orders/';
+
+  if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+    file_put_contents($destination . $filename, $content);
+    $filepath = file_create_url($destination . $filename);
+  }
+
+  return $filepath;
+}
+
+/**
+ * Helper function force download order file.
+ *
+ * @param $request_time
+ *
+ * @return void
+ */
+function download_order_file($request_time) {
+  $destination = 'public://orders/';
+  $folder = file_stream_wrapper_get_instance_by_uri($destination)->realpath();
+
+  foreach(glob($folder . '/objednavka-' . $request_time . '-*') as $file) {
+    @header("Content-Type: application/force-download");
+    @header("Cache-Control: ");// leave blank to avoid IE errors
+    @header("Pragma: ");// leave blank to avoid IE errors
+    @header("Content-type: application/octet-stream");
+    @header("Content-Disposition: attachment; filename=".basename($file));
+    @header("Content-Description: File Transfer");
+
+    @readfile($file);
+  }
+}
+
+/**
+ * Configuration form for `beliana_order_article` action.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_form($form, &$form_state) {
+  return _beliana_assign_user_form('Choose the author to assign articles to');
+}
+
+/**
+ * Validation for `beliana_order_article_form` form.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_validate($form, &$form_state) {
+  _beliana_validate_assign_user_form($form_state, ["Autor", "Redaktor"]);
+}
+
+/**
+ * Submit function for for `beliana_order_article_form` form.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_submit($form, $form_state) {
+  return _beliana_submit_assign_user_form($form_state, 'needs_review');
+}
+
+/**
+ * Callback for `beliana_order_article_cancel.
+ *
+ * Cancel order and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_order_article_cancel(&$node, $context) {
+  if ($user = user_load($node->uid)) {
+    $node->revision = TRUE;
+    $node->uid = 719;
+    $node->log = 'Zrušená objednávka: ' . $user->name;
+    $node->workbench_moderation_state_new = 'zaradene';
+  }
 }
 
 /**
@@ -697,6 +1009,85 @@ function beliana_assign_author_submit($form, $form_state) {
  */
 function beliana_assign_author(&$node, $context) {
   _beliana_assign_user($node, $context);
+}
+
+/**
+ * Callback for `beliana_unassign_author` action.
+ *
+ * Unassign user from node author and
+ * changes workflow status to `zaradene`.
+ *
+ * @inheritdoc
+ */
+function beliana_unassign_author(&$node, $context) {
+  if ($original_user = user_load($node->uid)) {
+    $options = [
+      '!link' => '/node/' . $node->nid,
+      '@title' => $node->title_field['sk'][0]['value'],
+      '@name' => $original_user->name,
+      '@type' => $node->type,
+    ];
+
+    // Skip rules
+    if (empty($node->field_vyplatit[LANGUAGE_NONE]) || empty($node->field_vyplatit[LANGUAGE_NONE][0]['value'])) {
+      $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nemá vyplnené pole "Vyplatenie odmeny".';
+    }
+
+    if ($node->field_vyplatit[LANGUAGE_NONE][0]['value'] == 'Vyplatiť' && (empty($node->field_datum_vyplatenia[LANGUAGE_NONE]) || empty($node->field_datum_vyplatenia[LANGUAGE_NONE][0]['value']))) {
+      $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, heslo nie je vyplatené.';
+    }
+
+    if (!empty($node->field_zlucene_z[LANGUAGE_NONE])) {
+      $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, lebo ide o zlúčené heslo.';
+    }
+
+    if (variable_get('rs_api_type') == 'webrs') {
+      if ($node->type != 'heslo' && $node->type != 'importovane_heslo') {
+        $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, nepovolený typ obsahu (@type).';
+      }
+    }
+    else {
+      if ($node->type != 'heslo') {
+        $error_message = 'Priradenie hesla <a href="!link">@title</a> autorovi @name nebolo zrušené, nepovolený typ obsahu (@type).';
+      }
+    }
+
+    if (isset($error_message)) {
+      drupal_set_message(t($error_message, $options), 'error');
+      return;
+    }
+
+    if ($user = user_load($node->uid)) {
+      $node->uid = 719;
+
+      foreach ([
+                 'field_vyplatit',
+                 'field_dlzka_autorovho_textu_zad',
+                 'field_datum_autorovho_textu',
+                 'field_datum_vyplatenia',
+                 'field_zmluva',
+                 'field_komentar_instrukcie',
+                 'field_table',
+                 'field_table_weight',
+                 'field_ilustracia',
+                 'field_datum',
+                 'field_pouzite_zdroje',
+                 'field_atributy',
+                 'field_doplnkova_ls',
+               ] as $field) {
+        if (!empty($node->{$field}[LANGUAGE_NONE])) {
+          $node->{$field}[LANGUAGE_NONE] = [];
+        }
+      }
+
+      $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = '<strong>' . $node->title_field['sk'][0]['value'] . '</strong> —';
+      //$node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
+      $node->log = 'Zrušený autor ' . $user->name;
+
+      node_save($node);
+      workbench_moderation_moderate($node, 'zaradene');
+    }
+  }
 }
 
 /**
@@ -1389,18 +1780,28 @@ function beliana_node_presave($node) {
 
   // store the proofreader state in which an item was edited in the field_atributy field
   // to be used to send items always to the same proofreader
-  if (variable_get('rs_api_type') != "webrs" && in_array($node->workbench_moderation_state_current,
-	  ['importovane_jaz_kontrola', 'importovane_u_jaz_korektora',
-	   // "U jaz. redaktora", :U jaz. korektora"
-	   'na_jazykovu_korekturu','u_jaz_korektora'])) {
+  $moderation_state = $node->workbench_moderation['current']->state;
+  if (variable_get('rs_api_type') != "webrs" && in_array($moderation_state,
+      [
+        'importovane_jaz_kontrola',
+        'importovane_u_jaz_korektora',
+        // "U jaz. redaktora", :U jaz. korektora"
+        'na_jazykovu_korekturu',
+        'u_jaz_korektora',
+      ])) {
     if (!isset($node->field_atributy[LANGUAGE_NONE]) or
-       (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], $node->workbench_moderation_state_current) === FALSE)) {
-         $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo v stave '".$node->workbench_moderation_state_current."'";
+      (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], $moderation_state) === FALSE)) {
+      $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo v stave '" . $moderation_state . "'";
     }
   }
 
+  if ($node->original->workbench_moderation['current']->state == 'needs_review' && $node->workbench_moderation['current']->state == 'objednane') {
+    $user = user_load($node->uid);
+    $node->log .= '<br>Priradené autorovi: ' . $user->name;
+  }
+
   # remove links from text of artices in states 'vyradene' and 'ukoncenezluene'
-  if (in_array($node->workbench_moderation_state_current, ['vyradene', 'ukoncenezluene'])) {
+  if (in_array($moderation_state, ['vyradene', 'ukoncenezluene'])) {
     _beliana_remove_links($node);
   }
   #update the link table (updated only in the beliana-webrs module)
@@ -1491,6 +1892,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['field_dlzka_autorovho_textu_zad'])) {
         $form['field_dlzka_autorovho_textu_zad']['#access'] = FALSE;
       }
+      if (isset($form['field_zmluva'])) {
+        $form['field_zmluva']['#access'] = FALSE;
+      }
     }
     elseif ($display_payment == "showdisabled") {
       if (isset($form['field_vyplatit'])) {
@@ -1498,6 +1902,9 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       }
       if (isset($form['field_dlzka_autorovho_textu_zad'])) {
         $form['field_dlzka_autorovho_textu_zad']['#disabled'] = TRUE;
+      }
+      if (isset($form['field_zmluva'])) {
+        $form['field_zmluva']['#disabled'] = TRUE;
       }
       if (isset($form['field_datum_autorovho_textu'])) {
         $form['field_datum_autorovho_textu']['#access'] = FALSE;
@@ -1513,11 +1920,11 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
   //'workbench_moderation_moderate_form': the form displaying a node 'view' or similar
   //$form['node']['#value'] is not set if user cannot modify a node
   if (isset($form['node']['#value']) && $form_id === 'workbench_moderation_moderate_form') {
-    // transition to 'author' and 'needs_review' from 'zaradene' is implemented in a dedicated view, so remove it here
+    // transition to 'author' and 'needs_review', 'objednane' from 'zaradene' is implemented in a dedicated view, so remove it here
     if ($form['node']['#value']->workbench_moderation['current']->state === 'zaradene' &&
 		  array_intersect(array("Redaktor","useradmin", "administrátor"), $user->roles)) {
       foreach ($form['state']['#options'] as $k => $v) {
-        if (in_array($k, ['needs_review', 'u_autora'])) {
+        if (in_array($k, ['needs_review', 'u_autora', 'objednane'])) {
           unset($form['state']['#options'][$k]);
         }
       }
@@ -1872,8 +2279,7 @@ function _beliana_submit_assign_user_form($form_state, $state) {
  *
  */
 function _beliana_assign_user(&$node, $context) {
-  $user = user_load_by_name($context['user']);
-  if ($user !== FALSE) {
+  if ($user = user_load_by_name($context['user'])) {
     // create array of node's categories
     $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
     $node_taxo = [];
@@ -1896,6 +2302,7 @@ function _beliana_assign_user(&$node, $context) {
       $node->field_uid_autora['und'][0]['value'] = $node->uid;
     }
     $node->uid = $user->uid;
+    $node->log = 'Priradené autorovi: ' . $user->name;
     node_save($node);
 
     $new_state = $context['status'];
@@ -3448,3 +3855,22 @@ function beliana_render_export($viewname, $displayname, $text) {
   }
   return $output;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function beliana_theme() {
+  $themes['order_file'] = [
+    'variables' => [
+      'current_user' => NULL,
+      'assign_user' => NULL,
+      'contract' => NULL,
+      'order_data' => NULL,
+      'date' => NULL,
+    ],
+    'template' => 'templates/order_file'
+  ];
+
+  return $themes;
+}
+

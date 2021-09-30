@@ -169,19 +169,6 @@ function beliana_merge(&$entity, $context = array()) {
       }
     }
 
-    // Check if entity has moderation state history: u_vyst_redaktora_2x >> u_vyst_redaktora_2
-    $transitions = db_select('workbench_moderation_node_history', 'w')
-        ->fields('w')
-        ->condition('state', 'u_vyst_redaktora_2x')
-        ->condition('nid', $entity->nid)
-        ->execute()
-        ->fetchAll();
-
-    // If master has state u_vyst_redaktora_2x, write to merged entity as attribute
-    if (!empty($transitions)) {
-      $master->field_atributy[LANGUAGE_NONE][0]['value'] = 'VR2X';
-    }
-
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
     node_save($master);
 
@@ -270,8 +257,9 @@ function handle_special_transitions(&$values) {
     if (($cur_state === 'na_jazykovu_korekturu' && $new_state === '1_korektura'))
       _start_korektura($values);
 
-    // transition 1_korektura >> u_vyst_redaktora_3
-    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
+    // transition 1_korektura >> u_vyst_redaktora_4
+    if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_4') {
+      dpm("1. korektura >> u_vyst_redaktora_4 trans");
       _transition_korektura($values, "1_korektura");
     }
 
@@ -292,6 +280,7 @@ function handle_special_transitions(&$values) {
       }
     }
 
+    // Po vybaveni 2. korektury zmazat az po XX
     $run_as_1_korektura = true;  // choose between two ways how to run 2_korekt_ra - FIXME needs workflow change
     if ($run_as_1_korektura) { // 2_korekt_ra: the same procedure as 1_korektura
       // starting 'korektura': copy editor names to field_spravit_1_korekturu
@@ -304,14 +293,10 @@ function handle_special_transitions(&$values) {
     }
     else // korekt_ra: version with only one editor selected
       _run_2_korektura_single($values);
+    //XX
+
     node_save($values['node']);
     return;
-  }
-
-  // transition 1_korektura >> u_vyst_redaktora_3
-  if ($cur_state === '1_korektura' && $new_state === 'u_vyst_redaktora_3') {
-    _transition_vr2x($values);
-    node_save($values['node']);
   }
 }
 
@@ -338,37 +323,8 @@ function _transition_korektura(&$values, $korektura) {
     $values['node']->field_lexikalna_skupina['und'][0] = array_shift($values['node']->field_spravit_1_korekturu['und']);
   }
   else {
-    _transition_vr2x($values);
     // we are done, restore the initial status
     $values['node']->field_lexikalna_skupina = $values['node']->field_povodne_lexikalne_skupiny;
-  }
-}
-
-/**
- * Helper function: transition korektura >>  next state
- */
-function _transition_vr2x(&$values) {
-  // check if "heslo" was already seen by vr2x
-  $already_seen_by_vr2x = FALSE;
-  if (empty($values['node']->field_zlucene_z[LANGUAGE_NONE])) {
-    $transitions = db_select('workbench_moderation_node_history', 'w')
-        ->fields('w')
-        ->condition('state', 'u_vyst_redaktora_2x')
-        ->condition('nid', $values['node']->nid)
-        ->execute()
-        ->fetchAll();
-
-    $already_seen_by_vr2x = !empty($transitions);
-  }
-  else {
-    if (!empty($values['node']->field_atributy[LANGUAGE_NONE])) {
-      $already_seen_by_vr2x = $values['node']->field_atributy[LANGUAGE_NONE][0]['value'] == 'VR2X';
-    }
-  }
-
-  // if seen, move to vr4
-  if ($already_seen_by_vr2x) {
-    $values['node']->workbench_moderation_state_new = 'u_vyst_redaktora_4';
   }
 }
 
@@ -428,7 +384,7 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
 
   // check type heslo and importovane heslo
   // (in RS importovane heslo is not processed and in WEBRS is processed (nearly) equaly as heslo)
-  if ($values['node']->type === 'heslo' or $values['node']->type === 'importovane_heslo' ) {
+  if ($values['node']->type === 'heslo' || $values['node']->type === 'importovane_heslo' ) {
     $fail = FALSE;
     // do not change state if LITE changes exist
     $publish_states = ["na_opakovane_zverejnenie", "na_zalomenie", "importovane_na_zverejnenie"];
@@ -447,11 +403,20 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
       }
     }
     // check if payment information is stored
-    if (($cur_state === "needs_review" and $new_state === "na_zverejnenie") and // u redaktora state u vr1/vr state transition
+    if (($cur_state === "needs_review" && $new_state === "na_zverejnenie") && // u redaktora state u vr1/vr state transition
       _display_payment_fields($values['node']) == "showeditable") {
       $fail = TRUE;
       drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo nie je vyplnené pole 'Vyplatenie odmeny'", 'error');
     }
+
+    // check "lexikalna skupina"
+    if ($cur_state === "na_jazykovu_korekturu" && $new_state === "u_vyst_redaktora_2") { // u jt state > u vr2 state transition
+      if (isset($values['node']->field_zlucene_z[LANGUAGE_NONE][0])) {
+        $fail = TRUE;
+        drupal_set_message('Stav hesla <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> nebol zmenený, lebo zlúčené heslá nemôžu byť v stave 'U výst. redaktora 2", 'error');
+      }
+    }
+
     if ($fail) {
       $values['node']->workbench_moderation_state_new = $cur_state;
       node_save($values['node']);
@@ -612,9 +577,8 @@ function beliana_editor_list_access() {
     "Výstupný redaktor 1",
     "administrátor",
     "Výstupný redaktor 2",
-    "Výstupný redaktor 2X",
+    "Výstupný redaktor 2Z",
     "useradmin",
-    "Výstupný redaktor 3",
     "Výstupný redaktor 4",
     "Výstupný redaktor 5",
   ];
@@ -633,7 +597,14 @@ function beliana_group_list_access() {
   global $user;
   // roles with allowed access
   $roles = [
+    "Správca heslára",
+    "Výstupný redaktor 1",
     "administrátor",
+    "Výstupný redaktor 2",
+    "Výstupný redaktor 2Z",
+    "useradmin",
+    "Výstupný redaktor 4",
+    "Výstupný redaktor 5",
   ];
   foreach ($roles as $role) {
     if (in_array($role, $user->roles)) {
