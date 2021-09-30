@@ -10,6 +10,7 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = menu
 dependencies[] = password_policy
+dependencies[] = prlp
 dependencies[] = rs_beliana_site
 dependencies[] = simplify
 dependencies[] = strongarm
