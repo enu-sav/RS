@@ -10804,7 +10804,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
@@ -10891,6 +10890,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Pole: Obsah: Dátum aktualizácie */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'privatemsg_current_day';
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
@@ -10942,18 +10947,6 @@ function rs_beliana_views_views_default_views() {
     'links' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  /* Pole: Obsah: Atribúty */
-  $handler->display->display_options['fields']['field_atributy']['id'] = 'field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['table'] = 'field_data_field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['field'] = 'field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['label'] = 'atrib';
-  $handler->display->display_options['fields']['field_atributy']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Erráta */
-  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['label'] = 'errata';
-  $handler->display->display_options['fields']['field_errta']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Cesta */
   $handler->display->display_options['fields']['path']['id'] = 'path';
   $handler->display->display_options['fields']['path']['table'] = 'node';
@@ -14535,13 +14528,12 @@ function rs_beliana_views_views_default_views() {
     t('Export importované - dáta'),
     t('guid'),
     t('nazov'),
+    t('Dátum aktualizácie'),
     t('kategoria'),
     t('komentar'),
     t('text'),
     t('datum'),
     t('ilustracia'),
-    t('atrib'),
-    t('errata'),
     t('alias'),
     t('Has taxonomy terms (with depth; Simple hierarchical select)'),
     t('Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index)'),
