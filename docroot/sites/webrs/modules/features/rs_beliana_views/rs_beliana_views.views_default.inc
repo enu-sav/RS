@@ -469,14 +469,6 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::beliana_unassign_author' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
   );
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -16775,14 +16767,6 @@ Heslá treba preradiť do stavov:
       'override_label' => 0,
       'label' => '',
     ),
-    'action::node_assign_owner_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -16812,14 +16796,6 @@ Heslá treba preradiť do stavov:
           'importovane_heslo::field_zmluva' => 'importovane_heslo::field_zmluva',
         ),
       ),
-    ),
-    'action::beliana_change_author' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
     ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
@@ -19618,6 +19594,14 @@ Heslá treba preradiť do stavov:
         'log' => 0,
       ),
     ),
+    'action::node_save_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -19637,22 +19621,6 @@ Heslá treba preradiť do stavov:
           'importovane_heslo::field_lexikalna_skupina' => 'importovane_heslo::field_lexikalna_skupina',
         ),
       ),
-    ),
-    'action::node_save_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_assign_owner_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
     ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,

@@ -617,7 +617,7 @@ function beliana_group_list_access() {
 // transfer node from the web editorial system
 // $node: current node
 // $remote_node: remote node (data)
-function beliana_sync_from_remote_build($node, $remote_node) {
+function beliana_sync_from_remote_build($node, $remote_node, $login) {
   global $user;
 
   // remote accept states
@@ -727,7 +727,7 @@ function beliana_sync_from_remote_build($node, $remote_node) {
         if (!empty($remote_field_value)) {
           foreach ($remote_field_value[LANGUAGE_NONE] as $delta => $target) {
             // fetch the remote node
-            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'])) {
+            if ($target_remote_node = beliana_api_rest_get_node($target['target_id'], $login)) {
               // if 'empty()' node ids on both sides are equal, so use target_remote_node->nid.
               $node->{$field}[LANGUAGE_NONE][$delta]['target_id'] =
                 empty($target_remote_node->field_remote_id->und) ? $target_remote_node->nid : $target_remote_node->field_remote_id->und[0]->value;
