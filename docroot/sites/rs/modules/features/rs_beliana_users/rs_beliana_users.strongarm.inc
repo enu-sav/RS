@@ -99,7 +99,7 @@ function rs_beliana_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'password_policy_new_login_change';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['password_policy_new_login_change'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -191,7 +191,7 @@ na [site:name] sme zaznamenali požiadavku o nové heslo.
 
 Teraz sa môžete prihlásiť kliknutím na tento odkaz alebo jeho skopírovaním do poľa s adresou vo vašom prehliadači:
 
-[user:one-time-login-url]
+[user:one-time-login-url]/brief
 
 Tento odkaz môžete použiť na jednorázové prihlásenie a zavedie vás na stránku, kde si môžete zmeniť heslo. Platnosť tohto odkazu vyprší v priebehu jedného dňa a nič sa nestane, ak nebude použitý. 
 
