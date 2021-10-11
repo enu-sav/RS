@@ -187,13 +187,13 @@ Platnosť tohto odkazu vyprší v priebehu jedného dňa a ak ho nevyužijete, k
   $strongarm->name = 'user_mail_password_reset_body';
   $strongarm->value = '[user:name],
 
-na [site:name] sme zaznamenali požiadavku o nové heslo.
+na stránke [site:name] sme zaznamenali požiadavku o nové heslo.
 
-Teraz sa môžete prihlásiť kliknutím na tento odkaz alebo jeho skopírovaním do poľa s adresou vo vašom prehliadači:
+Kliknite na nasledujúci odkaz alebo ho skopírujte do poľa s adresou v prehliadači:
 
 [user:one-time-login-url]/brief
 
-Tento odkaz môžete použiť na jednorázové prihlásenie a zavedie vás na stránku, kde si môžete zmeniť heslo. Platnosť tohto odkazu vyprší v priebehu jedného dňa a nič sa nestane, ak nebude použitý. 
+Odkaz môžete použiť len raz. Zavedie vás na stránku, kde môžete zadať nové heslo. Platnosť odkazu vyprší v priebehu jedného dňa a nič sa nestane, ak nebude použitý.
 
 --  Tím [site:name]';
   $export['user_mail_password_reset_body'] = $strongarm;
