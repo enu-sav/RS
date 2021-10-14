@@ -12,6 +12,7 @@ dependencies[] = field_permissions
 dependencies[] = menu
 dependencies[] = password_policy
 dependencies[] = rs_beliana_site
+dependencies[] = simple_pass_reset
 dependencies[] = simplify
 dependencies[] = strongarm
 dependencies[] = text

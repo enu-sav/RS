@@ -66,3 +66,7 @@ body.admin-menu.adminimal-menu #admin-menu {
 .ICE-Tracking .ice-del {
   display: inline;
 }
+
+.page-user-reset #user-profile-form .form-item-current-pass {
+  display: none;
+}
