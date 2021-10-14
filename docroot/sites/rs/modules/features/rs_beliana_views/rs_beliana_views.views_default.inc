@@ -9150,9 +9150,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené všetky heslá, ktoré treba posúdiť pred odoslaním výstupnému redaktorovi 1. </em>
- ⚫ <b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>
- ⚫ <b>Ak chcete heslo odoslať autorovi, konzultantovi alebo výstupnému redaktorovi:</b> Na riadku hesla kliknite na jeho názov s odkazom, vyberte požadovaný stav a potom kliknite na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené všetky vami objednané heslá</em>
+ • <b>Ak autor heslo nevypracoval:</b> Heslo zaškrtnite a kliknite na <em>Zrušiť objednávku</em>. Heslo sa vráti do stavu "Zaradené" a môžete ho objednať u iného autora.
+ • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť.
+ • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Globálny: Rozsiahle textové pole */
@@ -9505,6 +9507,10 @@ function rs_beliana_views_views_default_views() {
     t('Zlúčiť GEO'),
     t('Zlučovanie VR2 - GEO'),
     t('Objednané'),
+    t('<em>Tu sú zobrazené všetky vami objednané heslá</em>
+ • <b>Ak autor heslo nevypracoval:</b> Heslo zaškrtnite a kliknite na <em>Zrušiť objednávku</em>. Heslo sa vráti do stavu "Zaradené" a môžete ho objednať u iného autora.
+ • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť.
+ • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať'),
     t('Objednané u'),
     t('Číslo zmluvy'),
     t('Name (raw)'),
