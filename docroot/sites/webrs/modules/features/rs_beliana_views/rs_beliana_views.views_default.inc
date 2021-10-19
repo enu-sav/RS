@@ -413,18 +413,14 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
-    ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
-    ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
- 2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
-<strong>Upozornenie:</strong> Nastavenie nesprávneho autora môže opraviť len administrátor.
-<strong>Upozornenie:</strong> Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
-<strong>Upozornenie:</strong> Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
-
-
-
-';
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno objednať u autorov na vypracovanie alebo ich autorom priradiť, ak už sú vypracované. Postup:
+<strong> 1.</strong> Zaškrtneme heslá, ktoré chceme objednať alebo priradiť.
+ <strong>2a.</strong> Ak chceme heslá objednať, klikneme na <strong>Vytvoriť objednávku</strong> a následne zadáme autora. Po dokončení sa zobrazí odkaz <strong>Objednávka na stiahnutie</strong>. Objednávku treba kliknutím otvoriť, upraviť a mailom odoslať autorovi. Zoznam objednaných hesiel je v <a href="ordered">Objednané</a>. Ak vytvátanie objednávky zlyhá, lebo autor nemá platnú zmluvu, postupujte podľa <a href="/content/vytvorenie-novej-autorskej-zmluvy"> návodu</a>.
+  <strong>2b.</strong> Ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
+<strong>Upozornenie:</strong>
+• Nastavenie nesprávneho autora môže opraviť len administrátor.
+• Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
+• Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Globálny: Rozsiahle textové pole */
@@ -484,7 +480,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Pole: Používateľ: Názov */
   $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
   $handler->display->display_options['fields']['name_1']['table'] = 'users';
@@ -7202,7 +7197,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené všetky vami objednané heslá</em>
  • <b>Ak autor heslo nevypracoval:</b> Heslo zaškrtnite a kliknite na <em>Zrušiť objednávku</em>. Heslo sa vráti do stavu "Zaradené" a môžete ho objednať u iného autora.
- • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť.
+ • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť. 
  • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -7431,18 +7426,14 @@ Heslá treba preradiť do stavov:
     t('Priradiť autora a zmeniť stav'),
     t('xx'),
     t('viac'),
-    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
-    ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
-    ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
- 2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
-<strong>Upozornenie:</strong> Nastavenie nesprávneho autora môže opraviť len administrátor.
-<strong>Upozornenie:</strong> Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
-<strong>Upozornenie:</strong> Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
-
-
-
-'),
+    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno objednať u autorov na vypracovanie alebo ich autorom priradiť, ak už sú vypracované. Postup:
+<strong> 1.</strong> Zaškrtneme heslá, ktoré chceme objednať alebo priradiť.
+ <strong>2a.</strong> Ak chceme heslá objednať, klikneme na <strong>Vytvoriť objednávku</strong> a následne zadáme autora. Po dokončení sa zobrazí odkaz <strong>Objednávka na stiahnutie</strong>. Objednávku treba kliknutím otvoriť, upraviť a mailom odoslať autorovi. Zoznam objednaných hesiel je v <a href="ordered">Objednané</a>. Ak vytvátanie objednávky zlyhá, lebo autor nemá platnú zmluvu, postupujte podľa <a href="/content/vytvorenie-novej-autorskej-zmluvy"> návodu</a>.
+  <strong>2b.</strong> Ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
+<strong>Upozornenie:</strong>
+• Nastavenie nesprávneho autora môže opraviť len administrátor.
+• Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
+• Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.'),
     t('Podmienkam zobrazenia nezodpovedajú žiadne položky.'),
     t('Obsah'),
     t('Vybrať operáciu'),
@@ -7527,6 +7518,18 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
     t('Kontrola etymológie'),
     t('Kontrola etymológie a prepisov'),
     t('Odoslať na konzultáciu'),
+    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
+ 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
+    ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
+    ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
+ 2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
+<strong>Upozornenie:</strong> Nastavenie nesprávneho autora môže opraviť len administrátor.
+<strong>Upozornenie:</strong> Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
+<strong>Upozornenie:</strong> Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
+
+
+
+'),
     t('Zverejnené – oprava'),
     t('Importované (R)'),
     t('<b>Odosielanie hesiel v stave importované</b><br />
@@ -7554,7 +7557,7 @@ Heslá treba preradiť do stavov:
     t('Objednané'),
     t('<em>Tu sú zobrazené všetky vami objednané heslá</em>
  • <b>Ak autor heslo nevypracoval:</b> Heslo zaškrtnite a kliknite na <em>Zrušiť objednávku</em>. Heslo sa vráti do stavu "Zaradené" a môžete ho objednať u iného autora.
- • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť.
+ • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť. 
  • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať'),
     t('Objednané u'),
     t('Číslo zmluvy'),
