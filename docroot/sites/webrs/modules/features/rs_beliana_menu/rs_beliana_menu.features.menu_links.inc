@@ -216,7 +216,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   $menu_links['management_objednan:admin/beliana/ordered'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/beliana/ordered',
-    'router_path' => 'admin/beliana',
+    'router_path' => 'admin/beliana/ordered',
     'link_title' => 'Objednané',
     'options' => array(
       'attributes' => array(

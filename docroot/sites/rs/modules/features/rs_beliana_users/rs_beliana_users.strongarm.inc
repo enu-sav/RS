@@ -187,11 +187,11 @@ Platnosť tohto odkazu vyprší v priebehu jedného dňa a ak ho nevyužijete, k
   $strongarm->name = 'user_mail_password_reset_body';
   $strongarm->value = '[user:name],
 
-na stránke [site:name] sme zaznamenali požiadavku o nové heslo.
+na stránke [site:name] sme zaznamenali požiadavku na vytvorenie nového hesla.
 
 Kliknite na nasledujúci odkaz alebo ho skopírujte do poľa s adresou v prehliadači:
 
-[user:one-time-login-url]/brief
+<a href="[user:one-time-login-url]/brief">[user:one-time-login-url]/brief</a>
 
 Odkaz môžete použiť len raz. Zavedie vás na stránku, kde môžete zadať nové heslo. Platnosť odkazu vyprší v priebehu jedného dňa a nič sa nestane, ak nebude použitý.
 
@@ -202,7 +202,7 @@ Odkaz môžete použiť len raz. Zavedie vás na stránku, kde môžete zadať n
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_password_reset_subject';
-  $strongarm->value = 'Nahradné prihlasovacie údaje pre [user:name] na [site:name]';
+  $strongarm->value = 'Nové heslo pre [user:name] na [site:name]';
   $export['user_mail_password_reset_subject'] = $strongarm;
 
   $strongarm = new stdClass();
