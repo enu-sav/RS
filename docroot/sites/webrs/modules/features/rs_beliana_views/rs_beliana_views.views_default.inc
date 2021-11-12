@@ -9833,6 +9833,19 @@ Heslá treba preradiť do stavov:
     'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
   );
+  /* Filter criterion: Obsah: User has a revision */
+  $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
+  $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
+  $handler->display->display_options['filters']['uid_revision']['field'] = 'uid_revision';
+  $handler->display->display_options['filters']['uid_revision']['value'] = '';
+  $handler->display->display_options['filters']['uid_revision']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid_revision']['expose']['operator_id'] = 'uid_revision_op';
+  $handler->display->display_options['filters']['uid_revision']['expose']['label'] = 'User has a revision';
+  $handler->display->display_options['filters']['uid_revision']['expose']['operator'] = 'uid_revision_op';
+  $handler->display->display_options['filters']['uid_revision']['expose']['identifier'] = 'uid_revision';
+  $handler->display->display_options['filters']['uid_revision']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['path'] = 'export-heslo-gh';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Export heslo GH';
@@ -10105,6 +10118,19 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'heslo' => 'heslo',
     'importovane_heslo' => 'importovane_heslo',
+  );
+  /* Filter criterion: Obsah: User has a revision */
+  $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
+  $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
+  $handler->display->display_options['filters']['uid_revision']['field'] = 'uid_revision';
+  $handler->display->display_options['filters']['uid_revision']['value'] = '';
+  $handler->display->display_options['filters']['uid_revision']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid_revision']['expose']['operator_id'] = 'uid_revision_op';
+  $handler->display->display_options['filters']['uid_revision']['expose']['label'] = 'User has a revision';
+  $handler->display->display_options['filters']['uid_revision']['expose']['operator'] = 'uid_revision_op';
+  $handler->display->display_options['filters']['uid_revision']['expose']['identifier'] = 'uid_revision';
+  $handler->display->display_options['filters']['uid_revision']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'export_gh_webrs.csv';
   $handler->display->display_options['displays'] = array(
@@ -11681,6 +11707,7 @@ Heslá treba preradiť do stavov:
     t('Exportovať heslo GH'),
     t('Exportuje všetky položky typov Heslo a Importované heslo'),
     t('Typ'),
+    t('User has a revision'),
     t('Export heslo GH - dáta'),
     t('Nid'),
     t('Vyplatiť heslá'),
@@ -16067,7 +16094,10 @@ Heslá treba preradiť do stavov:
         'display_values' => array(
           'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
           'heslo::field_vyplatit' => 'heslo::field_vyplatit',
+          'heslo::field_datum_autorovho_textu' => 'heslo::field_datum_autorovho_textu',
+          'heslo::field_dlzka_autorovho_textu_zad' => 'heslo::field_dlzka_autorovho_textu_zad',
           'heslo::field_zverejnit_meno_autora' => 'heslo::field_zverejnit_meno_autora',
+          'heslo::field_datum_vyplatenia' => 'heslo::field_datum_vyplatenia',
           'heslo::field_datum_prebratia' => 'heslo::field_datum_prebratia',
           'heslo::field_zmluva' => 'heslo::field_zmluva',
           'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',

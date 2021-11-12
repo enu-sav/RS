@@ -211,13 +211,15 @@ Odkaz môžete použiť len raz. Zavedie vás na stránku, kde môžete zadať n
   $strongarm->name = 'user_mail_register_admin_created_body';
   $strongarm->value = '[user:name],
 
-administrátor [site:name] vám vytvoril používateľský účet. Môžete sa prihlásiť kliknutím na nasledujúci odkaz alebo jeho skopírovaním do adresového poľa prehliadača:
+správca stránky [site:name] Vám vytvoril používateľský účet. Prihlásiť sa môžete kliknutím na nasledujúci odkaz alebo jeho skopírovaním do adresového poľa prehliadača:
 
-[user:one-time-login-url]
+<a href="[user:one-time-login-url]/brief">[user:one-time-login-url]/brief</a>
 
-Tento odkaz je na jednorázové prihlásenie a zavedie vás na stránku, kde si môžete zmeniť heslo.
+Tento odkaz je určený na jednorazové prihlásenie a zavedie Vás na stránku, kde musíte zadať svoje nové heslo. Heslo musí mať aspoň 10 znakov, pričom odporúčame použiť kombináciu znakov bez diakritiky a číslic.
 
-Po nastavení hesla sa budete môcť prihlásiť na [site:login-url] v budúcnosti použitím týchto údajov:
+Po zadaní hesla môžete so stránkou ihneď pracovať.
+
+V budúcnosti sa do redakčného systému prihlásite na adrese [site:url] pomocou nasledujúcich údajov:
 
 používateľské meno: [user:name]
 heslo: Vaše heslo
@@ -229,7 +231,7 @@ heslo: Vaše heslo
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_admin_created_subject';
-  $strongarm->value = 'Správca vám vytvoril účet na [site:name]';
+  $strongarm->value = 'Nový účet na stránke [site:name]';
   $export['user_mail_register_admin_created_subject'] = $strongarm;
 
   $strongarm = new stdClass();
