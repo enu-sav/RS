@@ -99,7 +99,7 @@ function rs_beliana_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'password_policy_new_login_change';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['password_policy_new_login_change'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -187,13 +187,13 @@ Platnosť tohto odkazu vyprší v priebehu jedného dňa a ak ho nevyužijete, k
   $strongarm->name = 'user_mail_password_reset_body';
   $strongarm->value = '[user:name],
 
-na [site:name] sme zaznamenali požiadavku o nové heslo.
+na stránke [site:name] sme zaznamenali požiadavku na vytvorenie nového hesla.
 
-Teraz sa môžete prihlásiť kliknutím na tento odkaz alebo jeho skopírovaním do poľa s adresou vo vašom prehliadači:
+Kliknite na nasledujúci odkaz alebo ho skopírujte do poľa s adresou v prehliadači:
 
-[user:one-time-login-url]
+<a href="[user:one-time-login-url]/brief">[user:one-time-login-url]/brief</a>
 
-Tento odkaz môžete použiť na jednorázové prihlásenie a zavedie vás na stránku, kde si môžete zmeniť heslo. Platnosť tohto odkazu vyprší v priebehu jedného dňa a nič sa nestane, ak nebude použitý. 
+Odkaz môžete použiť len raz. Zavedie vás na stránku, kde môžete zadať nové heslo. Platnosť odkazu vyprší v priebehu jedného dňa a nič sa nestane, ak nebude použitý.
 
 --  Tím [site:name]';
   $export['user_mail_password_reset_body'] = $strongarm;
@@ -202,7 +202,7 @@ Tento odkaz môžete použiť na jednorázové prihlásenie a zavedie vás na st
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_password_reset_subject';
-  $strongarm->value = 'Nahradné prihlasovacie údaje pre [user:name] na [site:name]';
+  $strongarm->value = 'Nové heslo pre [user:name] na [site:name]';
   $export['user_mail_password_reset_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -211,13 +211,15 @@ Tento odkaz môžete použiť na jednorázové prihlásenie a zavedie vás na st
   $strongarm->name = 'user_mail_register_admin_created_body';
   $strongarm->value = '[user:name],
 
-administrátor [site:name] vám vytvoril používateľský účet. Môžete sa prihlásiť kliknutím na nasledujúci odkaz alebo jeho skopírovaním do adresového poľa prehliadača:
+správca stránky [site:name] Vám vytvoril používateľský účet. Prihlásiť sa môžete kliknutím na nasledujúci odkaz alebo jeho skopírovaním do adresového poľa prehliadača:
 
-[user:one-time-login-url]
+<a href="[user:one-time-login-url]/brief">[user:one-time-login-url]/brief</a>
 
-Tento odkaz je na jednorázové prihlásenie a zavedie vás na stránku, kde si môžete zmeniť heslo.
+Tento odkaz je určený na jednorazové prihlásenie a zavedie Vás na stránku, kde musíte zadať svoje nové heslo. Heslo musí mať aspoň 10 znakov, pričom odporúčame použiť kombináciu znakov bez diakritiky a číslic.
 
-Po nastavení hesla sa budete môcť prihlásiť na [site:login-url] v budúcnosti použitím týchto údajov:
+Po zadaní hesla môžete so stránkou ihneď pracovať.
+
+V budúcnosti sa do redakčného systému prihlásite na adrese [site:url] pomocou nasledujúcich údajov:
 
 používateľské meno: [user:name]
 heslo: Vaše heslo
@@ -229,7 +231,7 @@ heslo: Vaše heslo
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_admin_created_subject';
-  $strongarm->value = 'Správca vám vytvoril účet na [site:name]';
+  $strongarm->value = 'Nový účet na stránke [site:name]';
   $export['user_mail_register_admin_created_subject'] = $strongarm;
 
   $strongarm = new stdClass();

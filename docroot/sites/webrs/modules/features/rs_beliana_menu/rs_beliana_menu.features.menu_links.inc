@@ -212,6 +212,27 @@ function rs_beliana_menu_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_redakn-systm:admin/beliana',
   );
+  // Exported menu link: management_objednan:admin/beliana/ordered.
+  $menu_links['management_objednan:admin/beliana/ordered'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/beliana/ordered',
+    'router_path' => 'admin/beliana/ordered',
+    'link_title' => 'Objednané',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'management_objednan:admin/beliana/ordered',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+    'parent_identifier' => 'management_redakn-systm:admin/beliana',
+  );
   // Exported menu link: management_odovzdan-hesl:admin/beliana/odovzdane.
   $menu_links['management_odovzdan-hesl:admin/beliana/odovzdane'] = array(
     'menu_name' => 'management',
@@ -729,6 +750,7 @@ function rs_beliana_menu_menu_default_menu_links() {
   t('Na posúdenie (R)');
   t('Navrhnuté');
   t('Nepriradené heslá');
+  t('Objednané');
   t('Odovzdané heslá');
   t('Oznam');
   t('Priradiť autora');

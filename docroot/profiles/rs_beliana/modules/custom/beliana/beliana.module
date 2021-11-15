@@ -70,6 +70,12 @@ function beliana_menu() {
     'access callback' => TRUE,
   ];
 
+  $items['get-terms-subory-autocomplete'] = [
+    'title' => 'Terms - Súbory',
+    'page callback' =>'_beliana_get_taxonomy_terms_subory',
+    'access callback' => TRUE,
+  ];
+
   return $items;
 }
 
@@ -485,7 +491,7 @@ function beliana_action_info() {
       'type' => 'node',
       'label' => t('Fetch content'),
       'behavior' => ['changes_property'],
-      'configurable' => FALSE,
+      'configurable' => TRUE,
       'vbo_configurable' => FALSE,
       'triggers' => ['any'],
       'permissions' => ['sync heslo content'],
@@ -767,6 +773,26 @@ function _beliana_create_article_order_file($request_time, $content, $assign_use
 }
 
 /**
+ * Helper function get taxonomy names.
+ */
+function _beliana_get_taxonomy_terms_subory($text) {
+  $results = array();
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query
+    ->condition('ttd.name', '%' . db_like($text) . '%', 'LIKE')
+    ->condition('ttd.vid', 3, '=')
+    ->fields('ttd', ['tid', 'name'])
+    ->orderBy('name', 'ASC');
+  $terms = $query->execute();
+
+  foreach ($terms as $term) {
+    $results[check_plain($term->name) . ':' . $term->tid] = check_plain($term->name);
+  }
+
+  drupal_json_output($results);
+}
+
+/**
  * Helper function force download order file.
  *
  * @param $request_time
@@ -956,11 +982,18 @@ function beliana_sync_from_remote_action_form($settings, &$form_state) {
 function beliana_sync_from_remote_action_submit($form, $form_state) {
   $return = [];
 
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/heslo';
+
+  if ($login = beliana_api_rest_login($request_url)) {
+    $return['login'] = $login;
+  }
+
   return $return;
 }
 
 function beliana_sync_from_remote_action(&$node, $context) {
-  beliana_sync_from_remote($node);
+  beliana_sync_from_remote($node, $context);
 }
 
 /**
@@ -1218,12 +1251,17 @@ function beliana_sync_from_remote_confirm_form_submit($form, &$form_state) {
   $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from'];
 }
 
-function beliana_sync_from_remote($node) {
+function beliana_sync_from_remote($node, $context) {
+  $login = FALSE;
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
-  if ($remote_node = beliana_api_rest_get_node($remote_id)) {
+  if(isset($context['login']) && !empty($context['login'])) {
+    $login = $context['login'];
+  }
+
+  if ($remote_node = beliana_api_rest_get_node($remote_id, $login)) {
     // implemented independently for rs and webrs
-    beliana_sync_from_remote_build($node, $remote_node);
+    beliana_sync_from_remote_build($node, $remote_node, $login);
   }
   else {
     drupal_set_message(t('Nepodarilo sa prevziať heslo @id (komunikačná chyba API)', ['@id' => $remote_id]), 'error');
@@ -1650,6 +1688,12 @@ function beliana_node_presave($node) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
     }
+  }
+
+  //evaluate the weight of node/password to taxonomy
+  $term_taxsubor = explode(":", variable_get('rs_taxonomy_names_files'));
+  if ($node->field_taxsubor['und'][0]['tid'] >= $term_taxsubor[1]) {
+    $node->workbench_moderation_state_new = 'vyradene';
   }
 
   # do not continue if node has just been created
@@ -3471,11 +3515,15 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
   return FALSE;
 }
 
-function beliana_api_rest_get_node($id) {
+function beliana_api_rest_get_node($id, $login = FALSE) {
   $base_url = variable_get('rs_api_uri');
   $request_url = $base_url . '/api/heslo';
 
-  if ($login = beliana_api_rest_login($request_url)) {
+  if (!$login) {
+    $login = beliana_api_rest_login($request_url);
+  }
+
+  if ($login) {
     $curl = curl_init($request_url . '/node/' . $id);
     curl_setopt($curl, CURLOPT_HTTPHEADER, [
       'Accept: application/json',
@@ -3492,7 +3540,13 @@ function beliana_api_rest_get_node($id) {
     if ($http_code == 200) {
       return json_decode($response);
     }
+    else {
+      $http_message = curl_error($curl);
+      watchdog('error', 'Error getting remote node (' . $id . '): ' . $http_message);
+    }
   }
+
+  watchdog('error', 'Error getting remote node (' . $id . '): Login failed/invalid.');
 
   return FALSE;
 }

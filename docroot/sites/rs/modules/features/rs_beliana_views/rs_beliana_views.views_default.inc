@@ -494,14 +494,14 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
-    ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
-    ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
- 2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
-<strong>Upozornenie:</strong> Nastavenie nesprávneho autora môže opraviť len administrátor.
-<strong>Upozornenie:</strong> Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
-<strong>Upozornenie:</strong> Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
+  $handler->display->display_options['header']['area']['content'] = 'Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno objednať u autorov na vypracovanie alebo ich autorom priradiť, ak už sú vypracované. Postup:
+<strong> 1.</strong> Zaškrtneme heslá, ktoré chceme objednať alebo priradiť.
+ <strong>2a.</strong> Ak chceme heslá objednať, klikneme na <strong>Vytvoriť objednávku</strong> a následne zadáme autora. Po dokončení sa zobrazí odkaz <strong>Objednávka na stiahnutie</strong>. Objednávku treba kliknutím otvoriť, upraviť a mailom odoslať autorovi. Zoznam objednaných hesiel je v <a href="ordered">Objednané</a>. Ak vytvátanie objednávky zlyhá, lebo autor nemá platnú zmluvu, postupujte podľa <a href="/content/vytvorenie-novej-autorskej-zmluvy"> návodu</a>.
+  <strong>2b.</strong> Ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
+<strong>Upozornenie:</strong>
+• Nastavenie nesprávneho autora môže opraviť len administrátor.
+• Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
+• Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
 
 
 
@@ -565,7 +565,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Pole: Používateľ: Názov */
   $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
   $handler->display->display_options['fields']['name_1']['table'] = 'users';
@@ -9150,9 +9149,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené všetky heslá, ktoré treba posúdiť pred odoslaním výstupnému redaktorovi 1. </em>
- ⚫ <b>Ak chcete heslo upraviť:</b> Na riadku hesla kliknite na jeho názov s odkazom a potom na <em>Upraviť</em>. Spravte potrebné úpravy a kliknite na <em>Uložiť </em>
- ⚫ <b>Ak chcete heslo odoslať autorovi, konzultantovi alebo výstupnému redaktorovi:</b> Na riadku hesla kliknite na jeho názov s odkazom, vyberte požadovaný stav a potom kliknite na <em>Zmeniť stav</em>. Kliknite na <em>Použiť</em> (vpravo).';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené všetky vami objednané heslá</em>
+ • <b>Ak autor heslo nevypracoval:</b> Heslo zaškrtnite a kliknite na <em>Zrušiť objednávku</em>. Heslo sa vráti do stavu "Zaradené" a môžete ho objednať u iného autora.
+ • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť. 
+ • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Globálny: Rozsiahle textové pole */
@@ -9394,14 +9395,14 @@ function rs_beliana_views_views_default_views() {
     t('Priradiť autora a zmeniť stav'),
     t('xx'),
     t('viac'),
-    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno priradiť autorom na vypracovanie. Postup pri priraďovaní:
- 1. Zaškrtneme heslá, ktoré chceme priradiť. Potom
-    ⚫ ak má heslo vypracovať autor, klikneme na <strong>Určiť autora a priradiť autorovi</strong>.
-    ⚫ ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
- 2. Meno autora zadáme v druhom kroku do poľa <strong>Vyberte autora...</strong>, čo potvrdíme kliknutím na <strong>Ďalej</strong>, a (po overení) na <strong>Potvrdiť\'</strong>. Po dokončení operácie sa zobrazenie vráti na túto stránku, pričom priradené heslá zo zoznamu zmiznú.
-<strong>Upozornenie:</strong> Nastavenie nesprávneho autora môže opraviť len administrátor.
-<strong>Upozornenie:</strong> Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
-<strong>Upozornenie:</strong> Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
+    t('Tu sú zobrazené všetky heslá v stave <em>Zaradené</em>, ktoré možno objednať u autorov na vypracovanie alebo ich autorom priradiť, ak už sú vypracované. Postup:
+<strong> 1.</strong> Zaškrtneme heslá, ktoré chceme objednať alebo priradiť.
+ <strong>2a.</strong> Ak chceme heslá objednať, klikneme na <strong>Vytvoriť objednávku</strong> a následne zadáme autora. Po dokončení sa zobrazí odkaz <strong>Objednávka na stiahnutie</strong>. Objednávku treba kliknutím otvoriť, upraviť a mailom odoslať autorovi. Zoznam objednaných hesiel je v <a href="ordered">Objednané</a>. Ak vytvátanie objednávky zlyhá, lebo autor nemá platnú zmluvu, postupujte podľa <a href="/content/vytvorenie-novej-autorskej-zmluvy"> návodu</a>.
+  <strong>2b.</strong> Ak už máme od autora vypracovaný text a chceme ho do redakčného systému vložiť,  klikneme na <strong>Určiť autora a priradiť redaktorovi</strong>. Správne určenie autora je dôležité, lebo na jeho základe sa určí odmena autorovi.
+<strong>Upozornenie:</strong>
+• Nastavenie nesprávneho autora môže opraviť len administrátor.
+• Ak má heslo chybný názov alebo má nesprávnu lexikálnu skupinu, zmenu <a href="admin/beliana/nepriradene">navrhnite</a> ešte pred priradením autora.
+• Ak redaktor vypracuje heslo sám, tak klikne na <strong>Určiť autora a priradiť redaktorovi</strong> a následne ako autora priradí seba.
 
 
 
@@ -9505,6 +9506,10 @@ function rs_beliana_views_views_default_views() {
     t('Zlúčiť GEO'),
     t('Zlučovanie VR2 - GEO'),
     t('Objednané'),
+    t('<em>Tu sú zobrazené všetky vami objednané heslá</em>
+ • <b>Ak autor heslo nevypracoval:</b> Heslo zaškrtnite a kliknite na <em>Zrušiť objednávku</em>. Heslo sa vráti do stavu "Zaradené" a môžete ho objednať u iného autora.
+ • <b>Ak už autor odovzdal text hesla:</b> Heslo zaškrtnite a kliknite na <em>Priradiť redaktorovi</em>. Stav hesla sa zmení na "U redaktora", v ktorom môžete text hesla vložiť. 
+ • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať'),
     t('Objednané u'),
     t('Číslo zmluvy'),
     t('Name (raw)'),
@@ -10804,7 +10809,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
@@ -10891,6 +10895,12 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Pole: Obsah: Dátum aktualizácie */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'privatemsg_current_day';
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
@@ -10942,18 +10952,6 @@ function rs_beliana_views_views_default_views() {
     'links' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
-  /* Pole: Obsah: Atribúty */
-  $handler->display->display_options['fields']['field_atributy']['id'] = 'field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['table'] = 'field_data_field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['field'] = 'field_atributy';
-  $handler->display->display_options['fields']['field_atributy']['label'] = 'atrib';
-  $handler->display->display_options['fields']['field_atributy']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Erráta */
-  $handler->display->display_options['fields']['field_errta']['id'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['table'] = 'field_data_field_errta';
-  $handler->display->display_options['fields']['field_errta']['field'] = 'field_errta';
-  $handler->display->display_options['fields']['field_errta']['label'] = 'errata';
-  $handler->display->display_options['fields']['field_errta']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Cesta */
   $handler->display->display_options['fields']['path']['id'] = 'path';
   $handler->display->display_options['fields']['path']['table'] = 'node';
@@ -12608,398 +12606,6 @@ function rs_beliana_views_views_default_views() {
     28 => 0,
   );
   $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
-  /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['state']['is_grouped'] = TRUE;
-  $handler->display->display_options['filters']['state']['group_info']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state']['group_info']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['group_info']['group_items'] = array(
-    1 => array(
-      'title' => 'Zaradené a navrhnuté',
-      'operator' => 'in',
-      'value' => array(
-        'draft' => 'draft',
-        'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
-        'zaradene' => 'zaradene',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    2 => array(
-      'title' => 'U VR1 a ďalej',
-      'operator' => 'in',
-      'value' => array(
-        'na_zalomenie' => 'na_zalomenie',
-        'publikovane_na_webe' => 'publikovane_na_webe',
-        'zverejnene_oprava' => 'zverejnene_oprava',
-        'zverejnene_vratene' => 'zverejnene_vratene',
-        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
-        'pozdr_an_' => 'pozdr_an_',
-        'na_zverejnenie' => 'na_zverejnenie',
-        'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
-        'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
-        'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
-        'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-        '1_korektura' => '1_korektura',
-        '2_korekt_ra' => '2_korekt_ra',
-        'len_vyplatit' => 'len_vyplatit',
-        'ukoncenezluene' => 'ukoncenezluene',
-        'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
-        'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'importovane_vyradene' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        'u_konzultanta' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    3 => array(
-      'title' => 'Dokončené',
-      'operator' => 'in',
-      'value' => array(
-        'na_zalomenie' => 'na_zalomenie',
-        'publikovane_na_webe' => 'publikovane_na_webe',
-        'zverejnene_oprava' => 'zverejnene_oprava',
-        'zverejnene_vratene' => 'zverejnene_vratene',
-        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
-        'pozdr_an_' => 'pozdr_an_',
-        'len_vyplatit' => 'len_vyplatit',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'importovane_vyradene' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    4 => array(
-      'title' => 'Ukončené/zlúčené',
-      'operator' => 'in',
-      'value' => array(
-        'ukoncenezluene' => 'ukoncenezluene',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'u_konzultanta' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    5 => array(
-      'title' => 'Vyradené',
-      'operator' => 'in',
-      'value' => array(
-        'vyradene' => 'vyradene',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    6 => array(
-      'title' => 'U autora, U redaktora a U konzultanta',
-      'operator' => 'in',
-      'value' => array(
-        'u_autora' => 'u_autora',
-        'needs_review' => 'needs_review',
-        'u_konzultanta' => 'u_konzultanta',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-  );
-  /* Filter criterion: Beliana: Author Date Filter (Month) */
-  $handler->display->display_options['filters']['author_date_month']['id'] = 'author_date_month';
-  $handler->display->display_options['filters']['author_date_month']['table'] = 'node';
-  $handler->display->display_options['filters']['author_date_month']['field'] = 'author_date_month';
-  $handler->display->display_options['filters']['author_date_month']['value'] = array(
-    1 => '1',
-    2 => '2',
-    3 => '3',
-    4 => '4',
-    5 => '5',
-    6 => '6',
-    7 => '7',
-    8 => '8',
-    9 => '9',
-    10 => '10',
-    11 => '11',
-    12 => '12',
-  );
-  $handler->display->display_options['filters']['author_date_month']['group'] = 1;
-  $handler->display->display_options['filters']['author_date_month']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['author_date_month']['expose']['operator_id'] = 'author_date_month_op';
-  $handler->display->display_options['filters']['author_date_month']['expose']['label'] = 'Mesiac';
-  $handler->display->display_options['filters']['author_date_month']['expose']['operator'] = 'author_date_month_op';
-  $handler->display->display_options['filters']['author_date_month']['expose']['identifier'] = 'month';
-  $handler->display->display_options['filters']['author_date_month']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
-  );
-  $handler->display->display_options['filters']['author_date_month']['group_info']['label'] = 'Author Date Filter (Month)';
-  $handler->display->display_options['filters']['author_date_month']['group_info']['identifier'] = 'author_date_month';
-  $handler->display->display_options['filters']['author_date_month']['group_info']['remember'] = FALSE;
-  $handler->display->display_options['filters']['author_date_month']['group_info']['group_items'] = array(
-    1 => array(),
-    2 => array(),
-    3 => array(),
-  );
-  /* Filter criterion: Beliana: Author Date Filter (Year) */
-  $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
-  $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['group'] = 1;
-  $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
-  $handler->display->display_options['filters']['author_date_year']['expose']['label'] = 'Rok';
-  $handler->display->display_options['filters']['author_date_year']['expose']['operator'] = 'author_date_year_op';
-  $handler->display->display_options['filters']['author_date_year']['expose']['identifier'] = 'year';
-  $handler->display->display_options['filters']['author_date_year']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
-  );
-  $handler->display->display_options['filters']['author_date_year']['group_info']['label'] = 'Author Date Filter (Year)';
-  $handler->display->display_options['filters']['author_date_year']['group_info']['identifier'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['group_info']['remember'] = FALSE;
-  $handler->display->display_options['filters']['author_date_year']['group_info']['group_items'] = array(
-    1 => array(),
-    2 => array(),
-    3 => array(),
-  );
   /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
@@ -13273,383 +12879,6 @@ function rs_beliana_views_views_default_views() {
     28 => 0,
   );
   $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
-  /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['state']['is_grouped'] = TRUE;
-  $handler->display->display_options['filters']['state']['group_info']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state']['group_info']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['group_info']['widget'] = 'radios';
-  $handler->display->display_options['filters']['state']['group_info']['group_items'] = array(
-    1 => array(
-      'title' => 'Zaradené a navrhnuté',
-      'operator' => 'in',
-      'value' => array(
-        'draft' => 'draft',
-        'navrhnute_na_vyradenie' => 'navrhnute_na_vyradenie',
-        'zaradene' => 'zaradene',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    2 => array(
-      'title' => 'U VR1 a ďalej',
-      'operator' => 'in',
-      'value' => array(
-        'na_zalomenie' => 'na_zalomenie',
-        'publikovane_na_webe' => 'publikovane_na_webe',
-        'zverejnene_oprava' => 'zverejnene_oprava',
-        'zverejnene_vratene' => 'zverejnene_vratene',
-        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
-        'pozdr_an_' => 'pozdr_an_',
-        'na_zverejnenie' => 'na_zverejnenie',
-        'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
-        'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
-        'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
-        'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-        '1_korektura' => '1_korektura',
-        '2_korekt_ra' => '2_korekt_ra',
-        'len_vyplatit' => 'len_vyplatit',
-        'ukoncenezluene' => 'ukoncenezluene',
-        'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
-        'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'importovane_vyradene' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        'u_konzultanta' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    3 => array(
-      'title' => 'Dokončené',
-      'operator' => 'in',
-      'value' => array(
-        'na_zalomenie' => 'na_zalomenie',
-        'publikovane_na_webe' => 'publikovane_na_webe',
-        'zverejnene_oprava' => 'zverejnene_oprava',
-        'zverejnene_vratene' => 'zverejnene_vratene',
-        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
-        'pozdr_an_' => 'pozdr_an_',
-        'len_vyplatit' => 'len_vyplatit',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'importovane_vyradene' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    4 => array(
-      'title' => 'Ukončené/zlúčené',
-      'operator' => 'in',
-      'value' => array(
-        'ukoncenezluene' => 'ukoncenezluene',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'u_konzultanta' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    5 => array(
-      'title' => 'Vyradené',
-      'operator' => 'in',
-      'value' => array(
-        'vyradene' => 'vyradene',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'u_autora' => 0,
-        'needs_review' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'u_konzultanta' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-    6 => array(
-      'title' => 'U autora, U redaktora a U konzultanta',
-      'operator' => 'in',
-      'value' => array(
-        'u_autora' => 'u_autora',
-        'needs_review' => 'needs_review',
-        'u_konzultanta' => 'u_konzultanta',
-        'all' => 0,
-        'importovane' => 0,
-        'importovane_u_jr2' => 0,
-        'importovane_u_vr' => 0,
-        'na_zalomenie' => 0,
-        'publikovane_na_webe' => 0,
-        'zverejnene_oprava' => 0,
-        'zverejnene_vratene' => 0,
-        'na_opakovane_zverejnenie' => 0,
-        'importovane_vyradene' => 0,
-        'pozdr_an_' => 0,
-        'draft' => 0,
-        'navrhnute_na_vyradenie' => 0,
-        'zaradene' => 0,
-        'na_zverejnenie' => 0,
-        'u_vyst_redaktora_2' => 0,
-        'u_vyst_redaktora_3' => 0,
-        'u_vyst_redaktora_4' => 0,
-        'u_v_st_redaktora_5' => 0,
-        'zlucene' => 0,
-        'vyradene' => 0,
-        'published' => 0,
-        '1_korektura' => 0,
-        '2_korekt_ra' => 0,
-        'len_vyplatit' => 0,
-        'ukoncenezluene' => 0,
-        'zlucene_odkazy' => 0,
-        'nova_ilustracia' => 0,
-        'u_jaz_redaktora_2' => 0,
-        'ilustracia_na_webe' => 0,
-        '_ilustr_cia_u_autora' => 0,
-        'ilustracia_u_grafika' => 0,
-        'na_jazykovu_korekturu' => 0,
-        'ilustracia_u_redaktora' => 0,
-        'ilustracia_na_zverejnenie' => 0,
-        'ilustracia_u_vyst_redaktora_5' => 0,
-      ),
-    ),
-  );
-  /* Filter criterion: Beliana: Author Date Filter (Month) */
-  $handler->display->display_options['filters']['author_date_month']['id'] = 'author_date_month';
-  $handler->display->display_options['filters']['author_date_month']['table'] = 'node';
-  $handler->display->display_options['filters']['author_date_month']['field'] = 'author_date_month';
-  $handler->display->display_options['filters']['author_date_month']['value'] = array(
-    1 => '1',
-    2 => '2',
-    3 => '3',
-    4 => '4',
-    5 => '5',
-    6 => '6',
-    7 => '7',
-    8 => '8',
-    9 => '9',
-    10 => '10',
-    11 => '11',
-    12 => '12',
-  );
-  $handler->display->display_options['filters']['author_date_month']['group'] = 1;
-  $handler->display->display_options['filters']['author_date_month']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['author_date_month']['expose']['operator_id'] = 'author_date_month_op';
-  $handler->display->display_options['filters']['author_date_month']['expose']['label'] = 'Mesiac';
-  $handler->display->display_options['filters']['author_date_month']['expose']['operator'] = 'author_date_month_op';
-  $handler->display->display_options['filters']['author_date_month']['expose']['identifier'] = 'month';
-  $handler->display->display_options['filters']['author_date_month']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
-  );
-  /* Filter criterion: Beliana: Author Date Filter (Year) */
-  $handler->display->display_options['filters']['author_date_year']['id'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['table'] = 'node';
-  $handler->display->display_options['filters']['author_date_year']['field'] = 'author_date_year';
-  $handler->display->display_options['filters']['author_date_year']['group'] = 1;
-  $handler->display->display_options['filters']['author_date_year']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['author_date_year']['expose']['operator_id'] = 'author_date_year_op';
-  $handler->display->display_options['filters']['author_date_year']['expose']['label'] = 'Rok';
-  $handler->display->display_options['filters']['author_date_year']['expose']['operator'] = 'author_date_year_op';
-  $handler->display->display_options['filters']['author_date_year']['expose']['identifier'] = 'year';
-  $handler->display->display_options['filters']['author_date_year']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    28 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    29 => 0,
-  );
   /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
@@ -14535,13 +13764,12 @@ function rs_beliana_views_views_default_views() {
     t('Export importované - dáta'),
     t('guid'),
     t('nazov'),
+    t('Dátum aktualizácie'),
     t('kategoria'),
     t('komentar'),
     t('text'),
     t('datum'),
     t('ilustracia'),
-    t('atrib'),
-    t('errata'),
     t('alias'),
     t('Has taxonomy terms (with depth; Simple hierarchical select)'),
     t('Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index)'),
@@ -14587,10 +13815,6 @@ function rs_beliana_views_views_default_views() {
     t('Vyplatenie odmeny'),
     t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
-    t('Mesiac'),
-    t('Author Date Filter (Month)'),
-    t('Rok'),
-    t('Author Date Filter (Year)'),
     t('Autor hesla'),
     t('Lexikálna skupina (podľa redaktorov)'),
     t('Vyplatiť heslá - dáta'),
@@ -14603,6 +13827,8 @@ function rs_beliana_views_views_default_views() {
     t('Meno autora snímky'),
     t('Odmena'),
     t('Dátum zverejnenia'),
+    t('Mesiac'),
+    t('Rok'),
     t('Vyplatiť ilustrácie - dáta'),
     t('[field_datum_zverejnenia]'),
     t('Kategórie používateľov'),
@@ -18262,14 +17488,6 @@ function rs_beliana_views_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::node_assign_owner_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -20427,14 +19645,6 @@ function rs_beliana_views_views_default_views() {
       ),
     ),
     'action::node_save_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_assign_owner_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,

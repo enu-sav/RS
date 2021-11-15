@@ -496,13 +496,6 @@ function rs_beliana_node_heslo_conditional_fields_default_fields() {
           3 => 0,
           4 => 0,
         ),
-        14 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
         19 => array(
           1 => 1,
           2 => 2,
@@ -511,6 +504,13 @@ function rs_beliana_node_heslo_conditional_fields_default_fields() {
           4 => 0,
         ),
         33 => array(
+          1 => 1,
+          2 => 2,
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        14 => array(
           1 => 1,
           2 => 2,
           5 => 0,
@@ -639,15 +639,15 @@ function rs_beliana_node_heslo_conditional_fields_default_fields() {
           1 => 1,
           3 => 0,
         ),
-        14 => array(
-          1 => 1,
-          3 => 0,
-        ),
         19 => array(
           1 => 1,
           3 => 0,
         ),
         33 => array(
+          1 => 1,
+          3 => 0,
+        ),
+        14 => array(
           1 => 1,
           3 => 0,
         ),

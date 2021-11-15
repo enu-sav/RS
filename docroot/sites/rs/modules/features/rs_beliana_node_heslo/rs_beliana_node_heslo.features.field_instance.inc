@@ -416,7 +416,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'text_plain',
         'weight' => 16,
       ),
       'lite_display' => array(
