@@ -70,6 +70,12 @@ function beliana_menu() {
     'access callback' => TRUE,
   ];
 
+  $items['get-terms-subory-autocomplete'] = [
+    'title' => 'Terms - Súbory',
+    'page callback' =>'_beliana_get_taxonomy_terms_subory',
+    'access callback' => TRUE,
+  ];
+
   return $items;
 }
 
@@ -767,6 +773,26 @@ function _beliana_create_article_order_file($request_time, $content, $assign_use
   }
 
   return $filepath;
+}
+
+/**
+ * Helper function get taxonomy names.
+ */
+function _beliana_get_taxonomy_terms_subory($text) {
+  $results = array();
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query
+    ->condition('ttd.name', '%' . db_like($text) . '%', 'LIKE')
+    ->condition('ttd.vid', 3, '=')
+    ->fields('ttd', ['tid', 'name'])
+    ->orderBy('name', 'ASC');
+  $terms = $query->execute();
+
+  foreach ($terms as $term) {
+    $results[check_plain($term->name) . ':' . $term->tid] = check_plain($term->name);
+  }
+
+  drupal_json_output($results);
 }
 
 /**
@@ -1665,6 +1691,12 @@ function beliana_node_presave($node) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
       break;
     }
+  }
+
+  //evaluate the weight of node/password to taxonomy
+  $term_taxsubor = explode(":", variable_get('rs_taxonomy_names_files'));
+  if ($node->field_taxsubor['und'][0]['tid'] >= $term_taxsubor[1]) {
+    $node->workbench_moderation_state_new = 'vyradene';
   }
 
   # do not continue if node has just been created
