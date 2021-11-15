@@ -309,11 +309,9 @@ function beliana_editor_list() {
     if ($term->depth == 0) {
       $output .= '<br /><h1>' . $term->name . '</h1>';
     }
-    else {
-      //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
-      $output .= '<strong>' . $term->name . '</strong>';
-      $output .= '<ul>';
-      foreach ($users as $usr) {
+    $output .= '<strong>' . $term->name . '</strong>';
+    $output .= '<ul>';
+    foreach ($users as $usr) {
 	if (substr($usr->name,0,5) == 'test_') continue;
         if (isset($usr->workbench_access[$term->tid])) {
           // we want to print only user in the role Redaktor and Author (but these only if $user has access rights)
@@ -350,7 +348,6 @@ function beliana_editor_list() {
       }
       //$output .= '</ul><br><br>';
       $output .= '</ul>';
-    }
   }
   return $output;
 }
