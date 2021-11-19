@@ -68,9 +68,9 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     '#default_value' => variable_get('rs_api_password'),
   ];
 
-  $form['rs']['rs_taxonomy_names_files'] = [
+  $form['rs']['rs_api_taxonomy_names_files'] = [
     '#type' => 'textfield',
-    '#default_value' => variable_get('rs_taxonomy_names_files'),
+    '#default_value' => variable_get('rs_api_taxonomy_names_files'),
     '#maxlength' => 60,
     '#autocomplete_path' => 'get-terms-subory-autocomplete',
     '#title' => 'V knižnom RS automaticky vyradiť novovytvorené heslá v abecednom rozsahu A až',
