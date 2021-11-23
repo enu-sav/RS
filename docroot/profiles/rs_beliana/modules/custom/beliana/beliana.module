@@ -315,11 +315,9 @@ function beliana_editor_list() {
     if ($term->depth == 0) {
       $output .= '<br /><h1>' . $term->name . '</h1>';
     }
-    else {
-      //$output .= '<h3> Lexikálna skupina: <em>' . $term->name . '</em></h3>';
-      $output .= '<strong>' . $term->name . '</strong>';
-      $output .= '<ul>';
-      foreach ($users as $usr) {
+    $output .= '<strong>' . $term->name . '</strong>';
+    $output .= '<ul>';
+    foreach ($users as $usr) {
 	if (substr($usr->name,0,5) == 'test_') continue;
         if (isset($usr->workbench_access[$term->tid])) {
           // we want to print only user in the role Redaktor and Author (but these only if $user has access rights)
@@ -356,7 +354,6 @@ function beliana_editor_list() {
       }
       //$output .= '</ul><br><br>';
       $output .= '</ul>';
-    }
   }
   return $output;
 }
@@ -1692,12 +1689,9 @@ function beliana_node_presave($node) {
 
       //evaluate the weight of node/password to taxonomy
       $term_taxsubor = variable_get('rs_api_taxonomy_names_files') ? explode(":", variable_get('rs_api_taxonomy_names_files')) : NULL;
-      if (isset($term_taxsubor) && sk_cmp($term->name, $term_taxsubor[0]) >= 0) {
+      if (isset($term_taxsubor) && sk_cmp($term->name, $term_taxsubor[0]) <= 0) {
         if (variable_get('rs_api_type') != "rs" ) {
           $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené vo WEBRS';
-        }
-        if (variable_get('rs_api_type') != "webrs" ) {
-          $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené v RS';
         }
 
         drupal_set_message(t('Vytvorené heslo bolo automaticky vyradené,  lebo spadá do abecedného rozsahu už vydaných hesiel'));
