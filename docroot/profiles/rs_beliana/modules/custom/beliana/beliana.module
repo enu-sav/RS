@@ -1689,12 +1689,9 @@ function beliana_node_presave($node) {
 
       //evaluate the weight of node/password to taxonomy
       $term_taxsubor = variable_get('rs_api_taxonomy_names_files') ? explode(":", variable_get('rs_api_taxonomy_names_files')) : NULL;
-      if (isset($term_taxsubor) && sk_cmp($term->name, $term_taxsubor[0]) >= 0) {
+      if (isset($term_taxsubor) && sk_cmp($term->name, $term_taxsubor[0]) <= 0) {
         if (variable_get('rs_api_type') != "rs" ) {
           $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené vo WEBRS';
-        }
-        if (variable_get('rs_api_type') != "webrs" ) {
-          $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené v RS';
         }
 
         drupal_set_message(t('Vytvorené heslo bolo automaticky vyradené,  lebo spadá do abecedného rozsahu už vydaných hesiel'));
