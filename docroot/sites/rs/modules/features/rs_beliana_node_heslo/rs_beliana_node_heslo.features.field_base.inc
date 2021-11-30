@@ -704,7 +704,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
         'Vyplatiť' => 'Heslo vypracoval autor, vyplatiť',
         'Vyplatené' => 'Heslo vypracoval autor, už bolo vyplatené',
         'Redaktor' => 'Heslo vypracoval redaktor',
-        'Bez odmeny' => 'Heslo vypracované bez nároku na odmenu',
+        'Bez odmeny' => 'Heslo vypracoval autor bez nároku na odmenu',
         'Odkazové' => 'Odkazové heslo, nevypláca sa',
         'Vyplatené vo WEBRS' => 'Vyriešené vo webovom RS',
         'Vyradené' => 'Vyradené bez vypracovania',

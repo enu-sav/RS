@@ -15,7 +15,7 @@ function rs_beliana_users_field_default_field_instances() {
     'bundle' => 'user',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Vložte číslo autorskej zmluvy autora. U ostatných používateľov nechajte prázdne.',
+    'description' => 'Vložte <strong>číslo aktuálne platnej autorskej zmluvy</strong> autora. U ostatných používateľov nechajte prázdne.<br />Pole môže byť prázdne alebo môže obsahovať jednu zmluvu. Nesmie obsahovať viac zmlúv.<br />Ak ide o autora a pole je prázdne, znamená to, že autor nemá zmluvu z roku 2016 alebo novšiu.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -30,6 +30,28 @@ function rs_beliana_users_field_default_field_instances() {
     'label' => 'Autorská zmluva',
     'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 0,
       'user_register_form' => 1,
     ),
@@ -370,7 +392,7 @@ Vybrané publikácie: (odporúčaný počet: 3, uviesť do riadka a oddeliť bod
   t('Titul pred menom');
   t('Titul za menom');
   t('Uveďte: oddelenie, inštitúcia, mesto, štát (ak je iný ako Slovensko)');
-  t('Vložte číslo autorskej zmluvy autora. U ostatných používateľov nechajte prázdne.');
+  t('Vložte <strong>číslo aktuálne platnej autorskej zmluvy</strong> autora. U ostatných používateľov nechajte prázdne.<br />Pole môže byť prázdne alebo môže obsahovať jednu zmluvu. Nesmie obsahovať viac zmlúv.<br />Ak ide o autora a pole je prázdne, znamená to, že autor nemá zmluvu z roku 2016 alebo novšiu.');
 
   return $field_instances;
 }
