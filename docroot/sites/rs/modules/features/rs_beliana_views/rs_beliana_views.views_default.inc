@@ -11925,6 +11925,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
@@ -12212,6 +12213,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
@@ -16368,6 +16370,17 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node_revision';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  /* Pole: Obsah: Remote ID */
+  $handler->display->display_options['fields']['field_remote_id']['id'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_remote_id']['alter']['text'] = '<a href="https://webrs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>';
+  $handler->display->display_options['fields']['field_remote_id']['empty'] = '<a href="https://webrs.beliana.sav.sk/node/[nid]">[nid]</a>';
+  $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Pole: Obsah: Typ */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -20938,6 +20951,9 @@ function rs_beliana_views_views_default_views() {
     t(' Upravil niektorú verziu '),
     t('Komentár'),
     t('Všetky heslá - prehľad'),
+    t('Remote ID'),
+    t('<a href="https://webrs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>'),
+    t('<a href="https://webrs.beliana.sav.sk/node/[nid]">[nid]</a>'),
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
     t('[field_datum]'),

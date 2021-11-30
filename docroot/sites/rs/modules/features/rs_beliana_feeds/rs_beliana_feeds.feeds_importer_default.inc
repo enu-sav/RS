@@ -11,7 +11,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export = array();
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'bb';
   $feeds_importer->config = array(
@@ -128,7 +128,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['bb'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'beliana_importovanie_gh';
   $feeds_importer->config = array(
@@ -261,7 +261,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'datum_vyplatenia';
   $feeds_importer->config = array(
-    'name' => 'Dátum vyplatenia',
+    'name' => 'Dátum vyplatenia (csv súbor vytvorený v DjangoBel)',
     'description' => 'Dátum vyplatenia',
     'fetcher' => array(
       'plugin_key' => 'FeedsFileFetcher',
@@ -323,7 +323,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['datum_vyplatenia'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'import_ilustr_cie';
   $feeds_importer->config = array(
@@ -558,7 +558,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['import_ls'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'import_pou_vate_ov_beliany';
   $feeds_importer->config = array(
@@ -767,7 +767,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['importova_vydan_ako_archivovan_'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'reimport_exp_il';
   $feeds_importer->config = array(
@@ -961,7 +961,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['reimport_exp_il'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'reimport_gh';
   $feeds_importer->config = array(
@@ -1110,7 +1110,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['reimport_gh'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'reimport_pou_vate_ov';
   $feeds_importer->config = array(
@@ -1203,7 +1203,7 @@ function rs_beliana_feeds_feeds_importer_default() {
   $export['reimport_pou_vate_ov'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'vyplatenie_odmeny';
   $feeds_importer->config = array(
@@ -1244,33 +1244,10 @@ function rs_beliana_feeds_feeds_importer_default() {
             'language' => 'und',
           ),
           1 => array(
-            'source' => 'datum_vyplatenia',
-            'target' => 'field_datum_vyplatenia',
-            'feeds_empty_use_old' => 1,
-            'language' => 'und',
-          ),
-          2 => array(
-            'source' => 'Vyplatenie odmeny',
-            'target' => 'field_vyplatit',
-            'feeds_empty_use_old' => 1,
-            'language' => 'und',
-          ),
-          3 => array(
-            'source' => 'Číslo zmluvy',
-            'target' => 'field_zmluva',
-            'feeds_empty_use_old' => 1,
-            'language' => 'und',
-          ),
-          4 => array(
             'source' => 'Prihlasovacie meno autora',
             'target' => 'user_name',
             'feeds_empty_use_old' => 1,
             'language' => 'und',
-          ),
-          5 => array(
-            'source' => 'Počet znakov',
-            'target' => 'field_dlzka_autorovho_textu_zad',
-            'feeds_empty_use_old' => 1,
           ),
         ),
         'update_existing' => '2',
