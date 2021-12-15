@@ -1687,15 +1687,19 @@ function beliana_node_presave($node) {
     if (!ctype_digit(substr($term->name, 0, 1)) && sk_cmp($term->name, $node->field_na_zoradenie['und'][0]['value']) >= 0) {
       $node->field_taxsubor['und'][0]['tid'] = $term->tid;
 
+      //get variable rs_api_taxonomy_names_files
+      if (variable_get('rs_api_type') != "webrs" ) {
+        $term_taxsubor = beliana_api_rest_get_variable('rs_api_taxonomy_names_files') ? explode(":",  beliana_api_rest_get_variable('rs_api_taxonomy_names_files')[0]) : NULL;;
+      } else {
+        $term_taxsubor = variable_get('rs_api_taxonomy_names_files') ? explode(":", variable_get('rs_api_taxonomy_names_files')) : NULL;
+      }
       //evaluate the weight of node/password to taxonomy
-      $term_taxsubor = variable_get('rs_api_taxonomy_names_files') ? explode(":", variable_get('rs_api_taxonomy_names_files')) : NULL;
       if (isset($term_taxsubor) && sk_cmp($term->name, $term_taxsubor[0]) <= 0) {
-        if (variable_get('rs_api_type') != "rs" ) {
+        if (variable_get('rs_api_type') != "rs" && !empty(variable_get('rs_api_type'))) {
           $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené vo WEBRS';
+          $node->workbench_moderation_state_new = 'vyradene';
+          drupal_set_message(t('Vytvorené heslo bolo automaticky vyradené,  lebo spadá do abecedného rozsahu už vydaných hesiel'));
         }
-
-        drupal_set_message(t('Vytvorené heslo bolo automaticky vyradené,  lebo spadá do abecedného rozsahu už vydaných hesiel'));
-        $node->workbench_moderation_state_new = 'vyradene';
       }
 
       break;
@@ -3553,6 +3557,46 @@ function beliana_api_rest_get_node($id, $login = FALSE) {
   }
 
   watchdog('error', 'Error getting remote node (' . $id . '): Login failed/invalid.');
+
+  return FALSE;
+}
+
+function beliana_api_rest_get_variable($key, $login = FALSE) {
+  $base_url = variable_get('rs_api_uri');
+  $request_url = $base_url . '/api/variable';
+
+  if (!$login) {
+    $login = beliana_api_rest_login($request_url);
+  }
+
+  if ($login) {
+    $get_variable_args = ['name' => $key];
+    $curl = curl_init($request_url . '/system/get_variable');
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+      'Accept: application/json',
+      'X-CSRF-Token: ' . $login['token'],
+    ]);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($get_variable_args));
+    curl_setopt($curl, CURLOPT_HEADER, FALSE);
+    curl_setopt($curl, CURLOPT_COOKIE, $login['session'] . "");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
+
+
+    $response = curl_exec($curl);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    if ($http_code == 200) {
+      return json_decode($response);
+    }
+    else {
+      $http_message = curl_error($curl);
+      watchdog('error', 'Error getting remote variable (' . $key . '): ' . $http_message);
+    }
+  }
+
+  watchdog('error', 'Error getting remote variable (' . $key . '): Login failed/invalid.');
 
   return FALSE;
 }
