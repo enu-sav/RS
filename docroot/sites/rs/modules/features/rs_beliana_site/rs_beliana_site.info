@@ -52,6 +52,7 @@ features[environment_indicator_environment][] = prod
 features[features_api][] = api:2
 features[services_endpoint][] = heslo
 features[services_endpoint][] = ilustracia
+features[services_endpoint][] = variable
 features[user_permission][] = access administration pages
 features[user_permission][] = access ckeditor link
 features[user_permission][] = access comments

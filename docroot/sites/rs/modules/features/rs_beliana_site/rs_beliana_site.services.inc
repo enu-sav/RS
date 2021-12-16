@@ -137,5 +137,57 @@ function rs_beliana_site_default_services_endpoint() {
   $endpoint->debug = 0;
   $export['ilustracia'] = $endpoint;
 
+  $endpoint = new stdClass();
+  $endpoint->disabled = FALSE; /* Edit this to true to make a default endpoint disabled initially */
+  $endpoint->api_version = 3;
+  $endpoint->name = 'variable';
+  $endpoint->server = 'rest_server';
+  $endpoint->path = 'api/variable';
+  $endpoint->authentication = array(
+    'services' => 'services',
+  );
+  $endpoint->server_settings = array(
+    'formatters' => array(
+      'json' => TRUE,
+      'bencode' => FALSE,
+      'jsonp' => FALSE,
+      'php' => FALSE,
+      'xml' => FALSE,
+    ),
+    'parsers' => array(
+      'application/json' => TRUE,
+      'application/x-www-form-urlencoded' => TRUE,
+      'application/xml' => FALSE,
+      'multipart/form-data' => FALSE,
+      'text/xml' => FALSE,
+    ),
+  );
+  $endpoint->resources = array(
+    'system' => array(
+      'actions' => array(
+        'get_variable' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'user' => array(
+      'actions' => array(
+        'login' => array(
+          'enabled' => '1',
+          'settings' => array(
+            'services' => array(
+              'resource_api_version' => '1.0',
+            ),
+          ),
+        ),
+        'token' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+  );
+  $endpoint->debug = 0;
+  $export['variable'] = $endpoint;
+
   return $export;
 }
