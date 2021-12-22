@@ -12014,6 +12014,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Vzťah: Obsah: Content author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -12037,7 +12042,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['label'] = 'kategoria';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
@@ -12065,6 +12069,48 @@ function rs_beliana_views_views_default_views() {
     'links' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  /* Pole: Používateľ: Názov */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Prihlásiť sa';
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  /* Pole: Obsah: Zmluva na vyplatenie */
+  $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
+  $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
+  /* Pole: Obsah: Vyplatenie odmeny */
+  $handler->display->display_options['fields']['field_vyplatit']['id'] = 'field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['table'] = 'field_data_field_vyplatit';
+  $handler->display->display_options['fields']['field_vyplatit']['field'] = 'field_vyplatit';
+  /* Pole: Obsah: Počet znakov na vyplatenie */
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['id'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['table'] = 'field_data_field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['field'] = 'field_dlzka_autorovho_textu_zad';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['label'] = 'Dĺžka autorom odovzdaného textu';
+  $handler->display->display_options['fields']['field_dlzka_autorovho_textu_zad']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Pole: Obsah: Dátum uloženia údajov pre vyplatenie */
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['id'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['table'] = 'field_data_field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['field'] = 'field_datum_autorovho_textu';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['label'] = 'Dátum záznamu dĺžky';
+  $handler->display->display_options['fields']['field_datum_autorovho_textu']['settings'] = array(
+    'format_type' => 'long',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Dátum vyplatenia */
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -12299,6 +12345,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    34 => '34',
   );
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
@@ -13803,26 +13850,26 @@ function rs_beliana_views_views_default_views() {
     t('Dátum vyplatenia (field_datum_vyplatenia)'),
     t('Dátum vyplatenia'),
     t('Export heslo GH - dáta'),
+    t('autor'),
     t('Nid'),
     t('Stav'),
+    t('Prihlásiť sa'),
+    t('Zmluva na vyplatenie'),
+    t('Vyplatenie odmeny'),
+    t('Dĺžka autorom odovzdaného textu'),
+    t('Dátum záznamu dĺžky'),
     t('Vyplatiť heslá'),
     t('Prehľad hesiel podľa autorov. Zobrazujú sa len heslá, ktoré nevznikli zlučovaním.'),
-    t('autor'),
     t('Nadradený'),
     t('[name]'),
     t('login'),
     t('Meno'),
     t('Priezvisko'),
-    t('Zmluva na vyplatenie'),
-    t('Vyplatenie odmeny'),
-    t('Dĺžka autorom odovzdaného textu'),
     t('Dátum uloženia údajov pre vyplatenie'),
     t('Autor hesla'),
     t('Lexikálna skupina (podľa redaktorov)'),
     t('Vyplatiť heslá - dáta'),
     t('https://rs.beliana.sav.sk/node/[nid]'),
-    t('Prihlásiť sa'),
-    t('Dátum záznamu dĺžky'),
     t('Vyplatenie odmeny (field_vyplatit)'),
     t('Vyplatiť ilustrácie'),
     t('Meno autora diela'),
@@ -17465,6 +17512,7 @@ function rs_beliana_views_views_default_views() {
           'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
           'heslo::field_komentar_instrukcie' => 'heslo::field_komentar_instrukcie',
           'heslo::field_vyplatit' => 'heslo::field_vyplatit',
+          'heslo::field_dlzka_autorovho_textu_zad' => 'heslo::field_dlzka_autorovho_textu_zad',
           'heslo::field_datum_vyplatenia' => 'heslo::field_datum_vyplatenia',
           'heslo::field_zmluva' => 'heslo::field_zmluva',
           'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',
@@ -17494,6 +17542,14 @@ function rs_beliana_views_views_default_views() {
       'label' => '',
     ),
     'action::beliana_order_article' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_assign_owner_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
@@ -17689,6 +17745,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_vyplatit_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator_id'] = 'field_vyplatit_value_op';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['multiple'] = TRUE;
@@ -19646,6 +19703,7 @@ function rs_beliana_views_views_default_views() {
         'display_values' => array(
           'heslo::field_lexikalna_skupina' => 'heslo::field_lexikalna_skupina',
           'heslo::field_vyplatit' => 'heslo::field_vyplatit',
+          'heslo::field_dlzka_autorovho_textu_zad' => 'heslo::field_dlzka_autorovho_textu_zad',
           'heslo::field_datum_vyplatenia' => 'heslo::field_datum_vyplatenia',
           'heslo::field_zmluva' => 'heslo::field_zmluva',
           'ilustracia::field_pouzit' => 'ilustracia::field_pouzit',
@@ -19658,6 +19716,14 @@ function rs_beliana_views_views_default_views() {
       ),
     ),
     'action::node_save_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_assign_owner_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
