@@ -292,7 +292,7 @@ config.specialChars = [
     [\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\',\'Format\'],
-    [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
+    [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\',\'Mathjax\'],
     [\'Table\',\'TextColor\',\'BGColor\',\'SpecialChar\',\'Image\'],
     []
 ]',

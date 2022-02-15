@@ -12993,6 +12993,7 @@ Heslá treba preradiť do stavov:
     'title_field' => 'title_field',
     'field_komentar_instrukcie' => 'field_komentar_instrukcie',
     'field_popis' => 'field_popis',
+    'field_alternativny_text' => 'field_alternativny_text',
     'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
     'state' => 'state',
     'field_subor_ilustracie' => 'field_subor_ilustracie',
@@ -13044,6 +13045,13 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'field_popis' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_alternativny_text' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -13153,6 +13161,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_popis']['table'] = 'field_data_field_popis';
   $handler->display->display_options['fields']['field_popis']['field'] = 'field_popis';
   $handler->display->display_options['fields']['field_popis']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Alternatívny text */
+  $handler->display->display_options['fields']['field_alternativny_text']['id'] = 'field_alternativny_text';
+  $handler->display->display_options['fields']['field_alternativny_text']['table'] = 'field_data_field_alternativny_text';
+  $handler->display->display_options['fields']['field_alternativny_text']['field'] = 'field_alternativny_text';
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['id'] = 'field_lexikalna_skupina_il';
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['table'] = 'field_data_field_lexikalna_skupina_il';
@@ -13397,6 +13409,20 @@ Heslá treba preradiť do stavov:
     2 => '2',
   );
   $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['reduce_duplicates'] = TRUE;
+  /* Filter criterion: Obsah: Alternatívny text (field_alternativny_text) */
+  $handler->display->display_options['filters']['field_alternativny_text_value']['id'] = 'field_alternativny_text_value';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['table'] = 'field_data_field_alternativny_text';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['field'] = 'field_alternativny_text_value';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_alternativny_text_value']['expose']['operator_id'] = 'field_alternativny_text_value_op';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['expose']['label'] = 'Alternatívny text (field_alternativny_text)';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_alternativny_text_value']['expose']['operator'] = 'field_alternativny_text_value_op';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['expose']['identifier'] = 'field_alternativny_text_value';
+  $handler->display->display_options['filters']['field_alternativny_text_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['path'] = 'vyhladat-ilustracie';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyhľadať ilustrácie';
@@ -14212,12 +14238,14 @@ Heslá treba preradiť do stavov:
     t('Obrázok (odkaz)'),
     t('Názov hesla'),
     t('Text k ilustrácii'),
+    t('Alternatívny text'),
     t('Súbory ilustrácie'),
     t('Meno autora diela'),
     t('Meno autora snímky'),
     t('[title]'),
     t('Typ ilustrácie'),
     t(' Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu '),
+    t('Alternatívny text (field_alternativny_text)'),
     t('Vyhľadať heslá (A)'),
     t('Lexikálna skupina (podľa kategórií)'),
     t('Rozpracované heslá'),
