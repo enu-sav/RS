@@ -1,0 +1,21 @@
+name: beliana.rs
+recipe: drupal7
+config:
+  php: 7.4
+  via: apache
+  webroot: dorcoot
+  drush: 8
+services:
+  appserver:
+    xdebug: true
+    config:
+      php: .lando/php.ini
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+proxy:
+  appserver:
+    - rs.beliana.lndo.site
+    - webrs.beliana.lndo.site
