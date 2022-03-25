@@ -12697,6 +12697,35 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['type'] = 'textfield';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '2';
+  /* Filter criterion: Obsah: Dátum vyplatenia (field_datum_vyplatenia) */
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['id'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['field'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['operator_id'] = 'field_datum_vyplatenia_value_op';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['label'] = 'Dátum vyplatenia (field_datum_vyplatenia)';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['operator'] = 'field_datum_vyplatenia_value_op';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['identifier'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['label'] = 'Dátum vyplatenia';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['identifier'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Má dátum',
+      'operator' => 'not empty',
+      'value' => '',
+    ),
+    2 => array(
+      'title' => 'Nemá dátum',
+      'operator' => 'empty',
+      'value' => '',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+  );
   $handler->display->display_options['path'] = 'vyplatit-hesla';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Vyplatiť heslá';
@@ -12969,6 +12998,35 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['type'] = 'textfield';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '2';
+  /* Filter criterion: Obsah: Dátum vyplatenia (field_datum_vyplatenia) */
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['id'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['table'] = 'field_data_field_datum_vyplatenia';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['field'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['operator_id'] = 'field_datum_vyplatenia_value_op';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['label'] = 'Dátum vyplatenia (field_datum_vyplatenia)';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['operator'] = 'field_datum_vyplatenia_value_op';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['identifier'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['label'] = 'Dátum vyplatenia';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['identifier'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Má dátum',
+      'operator' => 'not empty',
+      'value' => '',
+    ),
+    2 => array(
+      'title' => 'Nemá dátum',
+      'operator' => 'empty',
+      'value' => '',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+  );
   $handler->display->display_options['path'] = 'export_vyplatit_rs.csv';
   $handler->display->display_options['displays'] = array(
     'page_3' => 'page_3',
@@ -17130,35 +17188,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['identifier'] = 'field_datum_vyplatenia_value';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    31 => 0,
-    27 => 0,
-    29 => 0,
-    32 => 0,
-    10 => 0,
-    18 => 0,
-    5 => 0,
-    4 => 0,
-    34 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    33 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    28 => 0,
   );
-  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['is_grouped'] = TRUE;
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['label'] = 'Dátum vyplatenia';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['identifier'] = 'field_datum_vyplatenia_value';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group_info']['group_items'] = array(

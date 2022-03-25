@@ -134,30 +134,29 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
-  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
-  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
-  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
+  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
   );
-  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
   /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['id'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['table'] = 'node';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['field'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['group'] = 1;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator_id'] = 'taxonomy_entity_index_tid_depth_op';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['label'] = 'Lexikálna skupina';
@@ -171,6 +170,84 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['hierarchy'] = 1;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['depth'] = '3';
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
+  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Obrázok - odkaz (návrh/náhľad) (field_obrazok_odkaz) */
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['id'] = 'field_obrazok_odkaz_value_1';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['table'] = 'field_data_field_obrazok_odkaz';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['field'] = 'field_obrazok_odkaz_value';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['relationship'] = 'field_ilustracia_target_id_1';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['operator_id'] = 'field_obrazok_odkaz_value_1_op';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['label'] = 'Obrázok je odkaz';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['operator'] = 'field_obrazok_odkaz_value_1_op';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['identifier'] = 'field_obrazok_odkaz_value_1';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Má ilustráciu';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
 
   /* Display: Zverejniť na web */
   $handler = $view->new_display('page', 'Zverejniť na web', 'page');
@@ -346,24 +423,23 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
   $handler->display->display_options['filters']['is_current']['value'] = '1';
   $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Obsah: Má termíny taxonómie (s hĺbkou) */
-  $handler->display->display_options['filters']['term_node_tid_depth']['id'] = 'term_node_tid_depth';
-  $handler->display->display_options['filters']['term_node_tid_depth']['table'] = 'node';
-  $handler->display->display_options['filters']['term_node_tid_depth']['field'] = 'term_node_tid_depth';
-  $handler->display->display_options['filters']['term_node_tid_depth']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['term_node_tid_depth']['group'] = 1;
-  $handler->display->display_options['filters']['term_node_tid_depth']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['operator_id'] = 'term_node_tid_depth_op';
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['label'] = 'Súbor';
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['operator'] = 'term_node_tid_depth_op';
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['identifier'] = 'term_node_tid_depth';
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['remember_roles'] = array(
+  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
+  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
     2 => '2',
   );
-  $handler->display->display_options['filters']['term_node_tid_depth']['type'] = 'select';
-  $handler->display->display_options['filters']['term_node_tid_depth']['vocabulary'] = 'subory';
-  $handler->display->display_options['filters']['term_node_tid_depth']['depth'] = '0';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
   /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['id'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['table'] = 'node';
@@ -383,79 +459,6 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['hierarchy'] = 1;
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['depth'] = '3';
-  /* Filter criterion: Obsah: Názov (title_field) */
-  $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
-  $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
-  $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
-  $handler->display->display_options['filters']['title_field_value']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['title_field_value']['operator'] = 'starts';
-  $handler->display->display_options['filters']['title_field_value']['group'] = 1;
-  $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Názov';
-  $handler->display->display_options['filters']['title_field_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
-  $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
-    2 => '2',
-  );
-  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
-  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
-  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_text_hesla_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
-  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
-    2 => '2',
-  );
-  /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['table'] = 'field_data_field_komentar_instrukcie';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['field'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator_id'] = 'field_komentar_instrukcie_value_op';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['label'] = 'Komentár';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator'] = 'field_komentar_instrukcie_value_op';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['identifier'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    27 => 0,
-    29 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    28 => 0,
-  );
   /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -466,7 +469,6 @@ function rs_beliana_sync_ui_views_default_views() {
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
@@ -475,14 +477,65 @@ function rs_beliana_sync_ui_views_default_views() {
     2 => '2',
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
+  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Obrázok - odkaz (návrh/náhľad) (field_obrazok_odkaz) */
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['id'] = 'field_obrazok_odkaz_value_1';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['table'] = 'field_data_field_obrazok_odkaz';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['field'] = 'field_obrazok_odkaz_value';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['relationship'] = 'field_ilustracia_target_id_1';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['operator_id'] = 'field_obrazok_odkaz_value_1_op';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['label'] = 'Obrázok je odkaz';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['operator'] = 'field_obrazok_odkaz_value_1_op';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['identifier'] = 'field_obrazok_odkaz_value_1';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Má ilustráciu';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   /* Filter criterion: Workbench Moderation: Stav */
   $handler->display->display_options['filters']['state']['id'] = 'state';
@@ -492,65 +545,6 @@ function rs_beliana_sync_ui_views_default_views() {
     'importovane_na_zverejnenie' => 'importovane_na_zverejnenie',
     'na_zalomenie' => 'na_zalomenie',
     'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
-  );
-  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['expose']['required'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
-    2 => '2',
-  );
-  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Obsah: Na zoradenie (field_na_zoradenie) */
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['field'] = 'field_na_zoradenie_value';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['operator_id'] = 'field_na_zoradenie_value_op';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['label'] = 'Na zoradenie';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['operator'] = 'field_na_zoradenie_value_op';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['identifier'] = 'field_na_zoradenie_value';
-  $handler->display->display_options['filters']['field_na_zoradenie_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-  );
-  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Ilustrácie';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
-  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
-    2 => '2',
   );
   $handler->display->display_options['path'] = 'zverejnit-na-web';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -806,22 +800,6 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
-  /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['table'] = 'field_data_field_komentar_instrukcie';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['field'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator_id'] = 'field_komentar_instrukcie_value_op';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['label'] = 'Komentár';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator'] = 'field_komentar_instrukcie_value_op';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['identifier'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember_roles'] = array(
-    2 => '2',
-  );
   /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -900,6 +878,34 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
     22 => 0,
     23 => 0,
   );
+  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Má ilustráciu';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Obrázok - odkaz (návrh/náhľad) (field_obrazok_odkaz) */
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['id'] = 'field_obrazok_odkaz_value';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['table'] = 'field_data_field_obrazok_odkaz';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['field'] = 'field_obrazok_odkaz_value';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['relationship'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['expose']['operator_id'] = 'field_obrazok_odkaz_value_op';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['expose']['label'] = 'Obrázok je odkaz';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['expose']['operator'] = 'field_obrazok_odkaz_value_op';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['expose']['identifier'] = 'field_obrazok_odkaz_value';
+  $handler->display->display_options['filters']['field_obrazok_odkaz_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['path'] = 'zverejnene-na-webe';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejnené';
@@ -933,18 +939,17 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
     t('Dátum aktualizácie'),
     t('Posledná synchronizácia'),
     t('Ešte nebola'),
-    t('Typ'),
+    t('Súbor'),
     t('Lexikálna skupina'),
+    t('Typ'),
+    t('Text hesla'),
+    t('Obrázok je odkaz'),
+    t('Má ilustráciu'),
     t('Zverejniť na web'),
     t('Synchronizácia'),
     t('[timestamp] / [updated]'),
     t('Komentár/inštrukcie'),
-    t('Text hesla'),
     t('Ilustrácie'),
-    t('Súbor'),
-    t('Komentár'),
-    t('Stav'),
-    t('Na zoradenie'),
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total
 <h1>Postup pri sťahovaní hesla z webu a jeho následnom vyradení</h1>
