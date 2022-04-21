@@ -1251,7 +1251,7 @@ function beliana_sync_from_remote_confirm_form_submit($form, &$form_state) {
   $form_state['redirect'] = ['node/' . $form_state['values']['nid'] . '/sync-from'];
 }
 
-function beliana_sync_from_remote($node, $context) {
+function beliana_sync_from_remote($node, $context=Null) {
   $login = FALSE;
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
