@@ -1758,9 +1758,11 @@ function beliana_node_presave($node) {
   // modify links due to article merging
   modify_links_merged($node);
 
-  // remove unnecessary tags
-  $html = beliana_clean_tags($node, $node->field_text_hesla[LANGUAGE_NONE][0]['value'], "Text hesla (beliana_node_presave)");
+  $html =  $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+  #eqneditor2mathjax must precede beliana_clean_tags
   $html = eqneditor2mathjax($html);
+  // remove unnecessary tags and attributes
+  $html = beliana_clean_tags($node, $html, "Text hesla (beliana_node_presave)");
   // fix external links
   $html = str_replace("https://rs.beliana.sav.sk", "", $html);
   $html = str_replace("https://webrs.beliana.sav.sk", "", $html);
@@ -3323,11 +3325,12 @@ function beliana_clean_tags($node, $text, $where) {
   return $fragment;
 }
 
-
 function eqneditor2mathjax($html)
 {
+    #<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
     if (strpos($html, "latex.codecogs.com")) {
-        $rexp = '#<img alt="(.*)" src="https://latex.codecogs.com/gif.latex\?.*">#U';
+        #The U modifier enforces nongreedy matching
+        $rexp = '#<img alt="(.*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
         $rep =  '<span class="math-tex">\\(\1\\)</span>';
         $html = preg_replace($rexp, $rep, $html);
     }
