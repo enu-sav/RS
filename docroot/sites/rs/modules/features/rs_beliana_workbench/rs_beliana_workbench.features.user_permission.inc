@@ -397,7 +397,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'edit revisions in ilustracia_na_zverejnenie state'.
   $permissions['edit revisions in ilustracia_na_zverejnenie state'] = array(
     'name' => 'edit revisions in ilustracia_na_zverejnenie state',
-    'roles' => array(),
+    'roles' => array(
+      'Grafik' => 'Grafik',
+    ),
     'module' => 'workbench_state_access',
   );
 
@@ -514,7 +516,9 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'edit revisions in publikovane_na_webe state'.
   $permissions['edit revisions in publikovane_na_webe state'] = array(
     'name' => 'edit revisions in publikovane_na_webe state',
-    'roles' => array(),
+    'roles' => array(
+      'Komentátor' => 'Komentátor',
+    ),
     'module' => 'workbench_state_access',
   );
 

@@ -155,15 +155,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_remote_id'.
-  $permissions['create field_remote_id'] = array(
-    'name' => 'create field_remote_id',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'create field_table'.
   $permissions['create field_table'] = array(
     'name' => 'create field_table',
@@ -465,15 +456,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit field_remote_id'.
-  $permissions['edit field_remote_id'] = array(
-    'name' => 'edit field_remote_id',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit field_table'.
   $permissions['edit field_table'] = array(
     'name' => 'edit field_table',
@@ -709,15 +691,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'edit own field_redaktori_zluceneho'.
   $permissions['edit own field_redaktori_zluceneho'] = array(
     'name' => 'edit own field_redaktori_zluceneho',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit own field_remote_id'.
-  $permissions['edit own field_remote_id'] = array(
-    'name' => 'edit own field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -1007,15 +980,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_remote_id'.
-  $permissions['view field_remote_id'] = array(
-    'name' => 'view field_remote_id',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view field_table'.
   $permissions['view field_table'] = array(
     'name' => 'view field_table',
@@ -1252,15 +1216,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view own field_redaktori_zluceneho'.
   $permissions['view own field_redaktori_zluceneho'] = array(
     'name' => 'view own field_redaktori_zluceneho',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_remote_id'.
-  $permissions['view own field_remote_id'] = array(
-    'name' => 'view own field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),

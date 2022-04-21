@@ -105,6 +105,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
@@ -353,6 +354,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
@@ -464,6 +466,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
