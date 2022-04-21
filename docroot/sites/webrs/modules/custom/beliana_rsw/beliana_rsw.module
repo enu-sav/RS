@@ -610,7 +610,9 @@ function beliana_sync_from_remote_access($node) {
         ]);
       */
       case 'ilustracia':
-        return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']);
+        #return true;
+        # illustration can be synchronized either if it is not in state ilustracia_u_redaktora (by role Redaktor) or by administrator and useradmin
+        return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']) or array_intersect($user->roles, ["administrátor", "useradmin"]);
     }
   }
 
