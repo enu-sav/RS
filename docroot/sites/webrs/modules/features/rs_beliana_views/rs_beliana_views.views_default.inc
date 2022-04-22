@@ -9263,12 +9263,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Feeds item: Item GUID */
-  $handler->display->display_options['fields']['guid']['id'] = 'guid';
-  $handler->display->display_options['fields']['guid']['table'] = 'feeds_item';
-  $handler->display->display_options['fields']['guid']['field'] = 'guid';
-  $handler->display->display_options['fields']['guid']['label'] = 'guid';
-  $handler->display->display_options['fields']['guid']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -9283,6 +9277,14 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Pole: Obsah: Remote ID */
+  $handler->display->display_options['fields']['field_remote_id']['id'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['id'] = 'field_lexikalna_skupina_il';
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['table'] = 'field_data_field_lexikalna_skupina_il';
@@ -9800,6 +9802,14 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Remote ID */
+  $handler->display->display_options['fields']['field_remote_id']['id'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -11619,6 +11629,7 @@ Heslá treba preradiť do stavov:
     t('Export ilustácie - dáta'),
     t('Obsah referencing Obsah from field_ilustracia'),
     t('nid'),
+    t('Remote ID'),
     t('popis'),
     t('nazverejnenie'),
     t('obr_navrh'),
@@ -14801,6 +14812,7 @@ Heslá treba preradiť do stavov:
     'title' => 'title',
     'field_na_zoradenie' => 'field_na_zoradenie',
     'nid' => 'nid',
+    'field_remote_id' => 'field_remote_id',
     'type' => 'type',
     'state' => 'state',
     'changed' => 'changed',
@@ -14835,6 +14847,13 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_remote_id' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -15622,6 +15641,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['id'] = 'field_datum_vyplatenia_value';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['field'] = 'field_datum_vyplatenia_value';
+  $handler->display->display_options['filters']['field_datum_vyplatenia_value']['group'] = 1;
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['operator_id'] = 'field_datum_vyplatenia_value_op';
   $handler->display->display_options['filters']['field_datum_vyplatenia_value']['expose']['label'] = 'Dátum vyplatenia';
@@ -15654,6 +15674,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_vyplatit_value']['id'] = 'field_vyplatit_value';
   $handler->display->display_options['filters']['field_vyplatit_value']['table'] = 'field_data_field_vyplatit';
   $handler->display->display_options['filters']['field_vyplatit_value']['field'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['group'] = 1;
   $handler->display->display_options['filters']['field_vyplatit_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator_id'] = 'field_vyplatit_value_op';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
@@ -15705,6 +15726,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_table_value']['id'] = 'field_table_value';
   $handler->display->display_options['filters']['field_table_value']['table'] = 'field_data_field_table';
   $handler->display->display_options['filters']['field_table_value']['field'] = 'field_table_value';
+  $handler->display->display_options['filters']['field_table_value']['group'] = 1;
   $handler->display->display_options['filters']['field_table_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_table_value']['expose']['operator_id'] = 'field_table_value_op';
   $handler->display->display_options['filters']['field_table_value']['expose']['label'] = 'Tabuľka pre geografické heslá';
@@ -15754,6 +15776,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_datum_prebratia_value']['id'] = 'field_datum_prebratia_value';
   $handler->display->display_options['filters']['field_datum_prebratia_value']['table'] = 'field_data_field_datum_prebratia';
   $handler->display->display_options['filters']['field_datum_prebratia_value']['field'] = 'field_datum_prebratia_value';
+  $handler->display->display_options['filters']['field_datum_prebratia_value']['group'] = 1;
   $handler->display->display_options['filters']['field_datum_prebratia_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['operator_id'] = 'field_datum_prebratia_value_op';
   $handler->display->display_options['filters']['field_datum_prebratia_value']['expose']['label'] = 'Dátum prebratia obsahu';
@@ -15805,6 +15828,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['id'] = 'field_datum_autorovho_textu_value';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['table'] = 'field_data_field_datum_autorovho_textu';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['field'] = 'field_datum_autorovho_textu_value';
+  $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['group'] = 1;
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['operator_id'] = 'field_datum_autorovho_textu_value_op';
   $handler->display->display_options['filters']['field_datum_autorovho_textu_value']['expose']['label'] = 'Dátum uloženia údajov pre vyplatenie';
@@ -15833,6 +15857,34 @@ Heslá treba preradiť do stavov:
       'operator' => '=',
       'value' => '',
     ),
+  );
+  /* Filter criterion: Obsah: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'Nid';
+  $handler->display->display_options['filters']['nid']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Remote ID (field_remote_id) */
+  $handler->display->display_options['filters']['field_remote_id_value']['id'] = 'field_remote_id_value';
+  $handler->display->display_options['filters']['field_remote_id_value']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['filters']['field_remote_id_value']['field'] = 'field_remote_id_value';
+  $handler->display->display_options['filters']['field_remote_id_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_remote_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['operator_id'] = 'field_remote_id_value_op';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['label'] = 'Remote ID';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['operator'] = 'field_remote_id_value_op';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['identifier'] = 'field_remote_id_value';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';

@@ -13,9 +13,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
   // Exported permission: 'create importovane_heslo content'.
   $permissions['create importovane_heslo content'] = array(
     'name' => 'create importovane_heslo content',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
