@@ -80,6 +80,7 @@ config.disableNativeSpellChecker = false;
 //config.removePlugins = \'scayt,menubutton,contextmenu\';
 config.browserContextMenuOnCtrl = true;
 config.specialChars = [ 
+[\'&nbsp;\',\'Nezalomiteľná medzera\'],
 [\'—\', \'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel\'],
 [\'–\', \'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.\'],
 [\'-\', \'spojovník: v zložených slovách bez medzier (Rakúsko-Uhorsko, bielo-modrý).\'],

@@ -11398,12 +11398,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ilustracia_node']['field'] = 'reverse_field_ilustracia_node';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Pole: Feeds item: Item GUID */
-  $handler->display->display_options['fields']['guid']['id'] = 'guid';
-  $handler->display->display_options['fields']['guid']['table'] = 'feeds_item';
-  $handler->display->display_options['fields']['guid']['field'] = 'guid';
-  $handler->display->display_options['fields']['guid']['label'] = 'guid';
-  $handler->display->display_options['fields']['guid']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -11418,6 +11412,14 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Pole: Obsah: Remote ID */
+  $handler->display->display_options['fields']['field_remote_id']['id'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['id'] = 'field_lexikalna_skupina_il';
   $handler->display->display_options['fields']['field_lexikalna_skupina_il']['table'] = 'field_data_field_lexikalna_skupina_il';
@@ -12029,6 +12031,14 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Remote ID */
+  $handler->display->display_options['fields']['field_remote_id']['id'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['field'] = 'field_remote_id';
+  $handler->display->display_options['fields']['field_remote_id']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -13885,6 +13895,7 @@ function rs_beliana_views_views_default_views() {
     t('Export ilustácie - dáta'),
     t('Obsah referencing Obsah from field_ilustracia'),
     t('nid'),
+    t('Remote ID'),
     t('popis'),
     t('nazverejnenie'),
     t('obr_navrh'),
@@ -16288,6 +16299,7 @@ function rs_beliana_views_views_default_views() {
     'field_na_zoradenie' => 'field_na_zoradenie',
     'field_taxsubor' => 'field_taxsubor',
     'nid' => 'nid',
+    'field_remote_id' => 'field_remote_id',
     'type' => 'type',
     'state' => 'state',
     'changed' => 'changed',
@@ -16297,7 +16309,7 @@ function rs_beliana_views_views_default_views() {
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
     'name_1' => 'name_1',
-    'ilustracia_nazov_pouzit' => 'ilustracia_nazov_pouzit',
+    'field_ilustracia' => 'field_ilustracia',
     'field_datum_vyplatenia' => 'field_datum_vyplatenia',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
     'field_vyplatit' => 'field_vyplatit',
@@ -16329,6 +16341,13 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'nid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_remote_id' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -16394,7 +16413,7 @@ function rs_beliana_views_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'ilustracia_nazov_pouzit' => array(
+    'field_ilustracia' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -17354,6 +17373,32 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_zlucene_z_target_id']['expose']['operator'] = 'field_zlucene_z_target_id_op';
   $handler->display->display_options['filters']['field_zlucene_z_target_id']['expose']['identifier'] = 'field_zlucene_z_target_id';
   $handler->display->display_options['filters']['field_zlucene_z_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'Nid';
+  $handler->display->display_options['filters']['nid']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Remote ID (field_remote_id) */
+  $handler->display->display_options['filters']['field_remote_id_value']['id'] = 'field_remote_id_value';
+  $handler->display->display_options['filters']['field_remote_id_value']['table'] = 'field_data_field_remote_id';
+  $handler->display->display_options['filters']['field_remote_id_value']['field'] = 'field_remote_id_value';
+  $handler->display->display_options['filters']['field_remote_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['operator_id'] = 'field_remote_id_value_op';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['label'] = 'Remote ID';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['operator'] = 'field_remote_id_value_op';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['identifier'] = 'field_remote_id_value';
+  $handler->display->display_options['filters']['field_remote_id_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
