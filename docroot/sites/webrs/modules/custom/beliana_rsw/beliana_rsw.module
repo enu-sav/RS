@@ -592,11 +592,12 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
   }
 }
 
-// decides if the "Prebrať obsah" menu item is displayed
+// decides if the "Prebrať obsah" menu item is displayed and thus is a user can synchronize content
 function beliana_sync_from_remote_access($node) {
   global $user;
 
   // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
+  // Permission to be set: Beliana / Allow synchronise remote node 
   // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
 
@@ -610,12 +611,22 @@ function beliana_sync_from_remote_access($node) {
         ]);
       */
       case 'ilustracia':
-        #return true;
-        # illustration can be synchronized either if it is not in state ilustracia_u_redaktora (by role Redaktor) or by administrator and useradmin
-        return in_array($node->workbench_moderation['current']->state, ['ilustracia_u_redaktora']) or array_intersect($user->roles, ["administrátor", "useradmin"]);
+        # illustration can be synchronized by roles 'administrátor, 'redaktor' 'Výstupný redaktor':
+        if (in_array("administrátor", $user->roles)) {
+            return TRUE;
+        }
+        # ilustracia_u_vyst_redaktora_5 == "Ilustrácia u výst. redaktora"
+        else if (in_array("Výstupný redaktor", $user->roles) and $node->workbench_moderation['current']->state == 'ilustracia_u_vyst_redaktora_5') {
+            return TRUE;
+        }
+        else if (in_array("Redaktor", $user->roles) and $node->workbench_moderation['current']->state == 'ilustracia_u_redaktora') {
+            return TRUE;
+        }
+        else {
+            return FALSE;
+        }
     }
   }
-
   return FALSE;
 }
 
@@ -646,7 +657,7 @@ function _display_payment_fields(&$node) {
   // if filled out, field_datum_autorovho_textu is set.  Just show, do not edit
   //if (isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
   if (isset($node->field_vyplatit[LANGUAGE_NONE][0]['value'])) {
-    dpm("showdisabled (filled out)", "display_payment_fields, field_datum_autorovho_textu is set");
+    #dpm("showdisabled (filled out)", "display_payment_fields, field_datum_autorovho_textu is set");
     return ("showdisabled");
   }
 
