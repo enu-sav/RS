@@ -6558,9 +6558,11 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['field'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_ilustracia']['type'] = 'entityreference_entity_view';
   $handler->display->display_options['fields']['field_ilustracia']['settings'] = array(
-    'bypass_access' => 0,
-    'link' => 1,
+    'view_mode' => 'teaser',
+    'links' => 0,
+    'use_content_language' => 0,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
   /* Pole: Workbench Access: Lexikálna skupina */
@@ -6712,6 +6714,20 @@ Heslá treba preradiť do stavov:
         'max' => '',
       ),
     ),
+  );
+  /* Filter criterion: Obsah: Ilustrácie (field_ilustracia) */
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['id'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['table'] = 'field_data_field_ilustracia';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['field'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator_id'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['label'] = 'Má ilustráciu';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['operator'] = 'field_ilustracia_target_id_op';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['identifier'] = 'field_ilustracia_target_id';
+  $handler->display->display_options['filters']['field_ilustracia_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'admin/beliana/prevzate';
   $handler->display->display_options['menu']['type'] = 'tab';
@@ -7550,6 +7566,7 @@ Heslá treba preradiť do stavov:
     t('Zlúčené z'),
     t('Zlúčené (NOT NULL) / normálne (NULL)'),
     t('Zlúčené / jednoduché'),
+    t('Má ilustráciu'),
     t('Vyplácanie odmien'),
     t('Zobrazujú sa záznamu len tých autorov, ktorí majú zadané číslo zmluvy. Čísla zmlúv si môžete overiť <a href="/admin/editor-list">tu</a>.'),
     t('Dátum uloženia údajov pre vyplatenie'),
