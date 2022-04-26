@@ -303,6 +303,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in _ilustr_cia_u_autora state',
     'roles' => array(
       'Autor' => 'Autor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -350,6 +351,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_u_grafika state',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -360,6 +362,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Grafik' => 'Grafik',
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -474,6 +477,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in nova_ilustracia state',
     'roles' => array(
       'Grafik' => 'Grafik',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_state_access',
   );
