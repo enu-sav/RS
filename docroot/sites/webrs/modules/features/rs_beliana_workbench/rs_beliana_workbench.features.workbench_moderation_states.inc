@@ -57,6 +57,24 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Importované heslo (zo súboru)',
       'weight' => -10,
     ),
+    'importovane_jaz_kontrola' => array(
+      'name' => 'importovane_jaz_kontrola',
+      'label' => 'Importované u jaz. redaktora',
+      'description' => 'Jazyková kontrola importovaného hesla',
+      'weight' => -8,
+    ),
+    'importovane_na_zverejnenie' => array(
+      'name' => 'importovane_na_zverejnenie',
+      'label' => 'Importované – na zverejnenie',
+      'description' => '',
+      'weight' => -7,
+    ),
+    'importovane_u_jaz_korektora' => array(
+      'name' => 'importovane_u_jaz_korektora',
+      'label' => 'Importované u jaz. korektora',
+      'description' => '',
+      'weight' => -8,
+    ),
     'importovane_u_jr2' => array(
       'name' => 'importovane_u_jr2',
       'label' => 'Importované u JR',
@@ -135,6 +153,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Heslo na ceste k zverejnieniu, ale dočasne pozdržané ',
       'weight' => -1,
     ),
+    'prevzate_z_rs' => array(
+      'name' => 'prevzate_z_rs',
+      'label' => 'Prevzaté z RS',
+      'description' => 'Prevzaté z knižného RS, podľa obsahu ho treba zverejniť, vyradiť alebo poslať na úpravu',
+      'weight' => 0,
+    ),
     'publikovane_na_webe' => array(
       'name' => 'publikovane_na_webe',
       'label' => 'Zverejnené na webe',
@@ -152,6 +176,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'U autora',
       'description' => 'Na vypracovanie autorom,  pred odoslaním redaktorovi',
       'weight' => 3,
+    ),
+    'u_jaz_korektora' => array(
+      'name' => 'u_jaz_korektora',
+      'label' => 'U jaz. korektora',
+      'description' => '',
+      'weight' => 6,
     ),
     'u_konzultanta' => array(
       'name' => 'u_konzultanta',
@@ -171,6 +201,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Heslo ďalej neexistuje, z Beliany bolo vyradené',
       'weight' => 8,
     ),
+    'wiki' => array(
+      'name' => 'wiki',
+      'label' => 'Wiki',
+      'description' => 'Základný stav wiki stránky',
+      'weight' => 0,
+    ),
     'zaradene' => array(
       'name' => 'zaradene',
       'label' => 'Zaradené',
@@ -182,6 +218,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Zlúčené',
       'description' => 'Heslo bolo v knižnom RS vytvorené zlúčením (pomocný stav)',
       'weight' => 7,
+    ),
+    'zverejnene_jaz_kontrola' => array(
+      'name' => 'zverejnene_jaz_kontrola',
+      'label' => 'Zverejnené – jaz. kontrola',
+      'description' => '',
+      'weight' => -3,
     ),
     'zverejnene_oprava' => array(
       'name' => 'zverejnene_oprava',
