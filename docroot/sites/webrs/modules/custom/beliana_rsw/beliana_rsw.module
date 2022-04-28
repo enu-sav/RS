@@ -568,7 +568,7 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
     drupal_set_message(format_string('Obsah položky <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
       '@url' => $local_uri,
       '@title' => $remote_node->title,
-      '@id' => $remote_node->nid,
+      '@id' => $node->nid,
       '@state' => $moderate_to
     ]));
   }
