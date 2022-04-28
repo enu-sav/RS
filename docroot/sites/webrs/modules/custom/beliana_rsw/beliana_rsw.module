@@ -286,8 +286,12 @@ function webrs_beliana_workflow_reaction(&$form, &$form_state) {
       //}
       // ignore illustrations, which are not intended for web
       if (il_display_on_web($ilu_node)) { //false always returned in the print version
-        if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
-          $skip = TRUE;
+        global $user;
+        // do not check for "Výstupný redaktor" in the case of this transition, since it relates to synchronization with book version
+        if (empty(array_intersect(["administrátor", "Výstupný redaktor"], $user->roles))) {
+            if (is_null(_check_illustration_web($ilu_node, $ilu_node, 'state change'))) {
+            $skip = TRUE;
+            }
         }
       }
     }
