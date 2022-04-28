@@ -1200,6 +1200,8 @@ function beliana_sync_from_remote_form($form, $form_state, $node) {
   $bundle = $node->type == 'ilustracia' ? 'Ilustrácia' : 'Heslo';
 
   $date = empty($node->field_datum_prebratia[LANGUAGE_NONE]) ? 'Nikdy' : $node->field_datum_prebratia[LANGUAGE_NONE][0]['value'];
+  #$date nay still be empty, so set it to Nikdy
+  if (!$date) $date = "Nikdy";
   $remote_id = empty($node->field_remote_id[LANGUAGE_NONE]) ? $node->nid : $node->field_remote_id[LANGUAGE_NONE][0]['value'];
 
   $form['links'] = [
