@@ -605,7 +605,7 @@ function beliana_sync_from_remote_access($node) {
   global $user;
 
   // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
-  // Permission to be set: Beliana / Allow synchronise remote node 
+  // Permission to be set: Beliana / Allow synchronise remote node
   // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
 
