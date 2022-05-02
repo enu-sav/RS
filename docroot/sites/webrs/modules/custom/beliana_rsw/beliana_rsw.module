@@ -550,31 +550,35 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
     $node->revision = 1;
 
-    // specify the new node state
-    $node_type_text='heslo';
-    if ($node->type == 'ilustracia') {
-      $moderate_to = 'ilustracia_u_redaktora';
-      $node_type_text='ilustrácie';
-    } elseif ( $remote_node->workbench_moderation->current->state == 'vyradene' ) {
-      $moderate_to = 'vyradene';
-    } elseif ( $remote_node->workbench_moderation->current->state == 'ukoncenezluene' ) {
-      $moderate_to = 'ukoncenezluene';
-    } else {  //all other cases
-      $moderate_to = 'prevzate_z_rs';
-    }
+    // specify the new node state for heslo, keep it for ilustracia
+    if ($node->type == 'heslo') {
+      if ( $remote_node->workbench_moderation->current->state == 'vyradene' ) {
+        $moderate_to = 'vyradene';
+      } elseif ( $remote_node->workbench_moderation->current->state == 'ukoncenezluene' ) {
+        $moderate_to = 'ukoncenezluene';
+      } else {  //all other cases
+        $moderate_to = 'prevzate_z_rs';
+      }
 
-    $message_log = format_string('Obsah prevzatý z knižného RS (@d, @u)', ['@d'=>date('Y-m-d'), '@u'=>$user->name]);
-    if (strpos($node->log, $message_log) === FALSE) {
-      $node->log = $message_log;
-    }
+      $message_log = format_string('Obsah prevzatý z knižného RS (@d, @u)', ['@d'=>date('Y-m-d'), '@u'=>$user->name]);
+      if (strpos($node->log, $message_log) === FALSE) {
+        $node->log = $message_log;
+      }
 
-    workbench_moderation_moderate($node, $moderate_to);
-    drupal_set_message(format_string('Obsah položky <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state', [
-      '@url' => $local_uri,
-      '@title' => $remote_node->title,
-      '@id' => $node->nid,
-      '@state' => $moderate_to
-    ]));
+      workbench_moderation_moderate($node, $moderate_to);
+      drupal_set_message(format_string('Obsah hesla <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state.', [
+        '@url' => $local_uri,
+        '@title' => $remote_node->title,
+        '@id' => $node->nid,
+        '@state' => $moderate_to
+      ]));
+    } else {
+      drupal_set_message(format_string('Obsah ilustrácie <a href="@url/node/@id">@title</a> bol úspešne prebratý.', [
+        '@url' => $local_uri,
+        '@title' => $remote_node->title,
+        '@id' => $node->nid
+      ]));
+    }
   }
   else
   {
