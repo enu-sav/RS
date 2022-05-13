@@ -9036,6 +9036,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = array(
     390 => '390',
     1516 => '1516',
+    1626 => '1626',
     323 => '323',
     1613 => '1613',
     1614 => '1614',
@@ -9044,6 +9045,7 @@ function rs_beliana_views_views_default_views() {
     1618 => '1618',
     1616 => '1616',
     1619 => '1619',
+    1625 => '1625',
     1519 => '1519',
     1520 => '1520',
     1521 => '1521',

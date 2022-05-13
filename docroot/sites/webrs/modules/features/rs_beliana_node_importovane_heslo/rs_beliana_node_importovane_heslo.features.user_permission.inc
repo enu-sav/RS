@@ -43,6 +43,7 @@ function rs_beliana_node_importovane_heslo_user_default_permissions() {
       'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
