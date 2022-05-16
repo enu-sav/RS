@@ -2345,10 +2345,8 @@ function _beliana_assign_user(&$node, $context) {
       $node->field_uid_autora['und'][0]['value'] = $node->uid;
     }
     $node->uid = $user->uid;
-    $node->log = 'Priradené autorovi: ' . $user->name;
-    node_save($node);
-
     $new_state = $context['status'];
+    $node->log = 'Priradené autorovi: ' . $user->name;
     workbench_moderation_moderate($node, $new_state);
   }
 }
