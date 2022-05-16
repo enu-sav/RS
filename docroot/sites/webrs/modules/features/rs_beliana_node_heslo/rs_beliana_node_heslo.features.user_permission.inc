@@ -146,9 +146,27 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_povodny_autor'.
+  $permissions['create field_povodny_autor'] = array(
+    'name' => 'create field_povodny_autor',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_redaktori_zluceneho'.
   $permissions['create field_redaktori_zluceneho'] = array(
     'name' => 'create field_redaktori_zluceneho',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'create field_remote_id'.
+  $permissions['create field_remote_id'] = array(
+    'name' => 'create field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -179,6 +197,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['create field_taxsubor'] = array(
     'name' => 'create field_taxsubor',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'create field_text_hesla'.
+  $permissions['create field_text_hesla'] = array(
+    'name' => 'create field_text_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -303,6 +331,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Jazykový korektor' => 'Jazykový korektor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Konzultant' => 'Konzultant',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
@@ -447,9 +476,27 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_povodny_autor'.
+  $permissions['edit field_povodny_autor'] = array(
+    'name' => 'edit field_povodny_autor',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_redaktori_zluceneho'.
   $permissions['edit field_redaktori_zluceneho'] = array(
     'name' => 'edit field_redaktori_zluceneho',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_remote_id'.
+  $permissions['edit field_remote_id'] = array(
+    'name' => 'edit field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -485,6 +532,28 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit field_taxsubor'] = array(
     'name' => 'edit field_taxsubor',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_text_hesla'.
+  $permissions['edit field_text_hesla'] = array(
+    'name' => 'edit field_text_hesla',
+    'roles' => array(
+      'Autor' => 'Autor',
+      'Etymologický redaktor' => 'Etymologický redaktor',
+      'Grafik' => 'Grafik',
+      'Jazykový korektor' => 'Jazykový korektor',
+      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Konzultant' => 'Konzultant',
+      'Redaktor' => 'Redaktor',
+      'Správca heslára' => 'Správca heslára',
+      'Výstupný redaktor' => 'Výstupný redaktor',
+      'administrátor' => 'administrátor',
+      'chRedaktor' => 'chRedaktor',
+      'garant' => 'garant',
+      'useradmin' => 'useradmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -688,9 +757,27 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_povodny_autor'.
+  $permissions['edit own field_povodny_autor'] = array(
+    'name' => 'edit own field_povodny_autor',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_redaktori_zluceneho'.
   $permissions['edit own field_redaktori_zluceneho'] = array(
     'name' => 'edit own field_redaktori_zluceneho',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_remote_id'.
+  $permissions['edit own field_remote_id'] = array(
+    'name' => 'edit own field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -721,6 +808,15 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_taxsubor'] = array(
     'name' => 'edit own field_taxsubor',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_text_hesla'.
+  $permissions['edit own field_text_hesla'] = array(
+    'name' => 'edit own field_text_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -971,11 +1067,31 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_povodny_autor'.
+  $permissions['view field_povodny_autor'] = array(
+    'name' => 'view field_povodny_autor',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_redaktori_zluceneho'.
   $permissions['view field_redaktori_zluceneho'] = array(
     'name' => 'view field_redaktori_zluceneho',
     'roles' => array(
       'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_remote_id'.
+  $permissions['view field_remote_id'] = array(
+    'name' => 'view field_remote_id',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -1010,6 +1126,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view field_taxsubor',
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_text_hesla'.
+  $permissions['view field_text_hesla'] = array(
+    'name' => 'view field_text_hesla',
+    'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -1213,9 +1339,27 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view own field_povodny_autor'.
+  $permissions['view own field_povodny_autor'] = array(
+    'name' => 'view own field_povodny_autor',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_redaktori_zluceneho'.
   $permissions['view own field_redaktori_zluceneho'] = array(
     'name' => 'view own field_redaktori_zluceneho',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_remote_id'.
+  $permissions['view own field_remote_id'] = array(
+    'name' => 'view own field_remote_id',
     'roles' => array(
       'administrátor' => 'administrátor',
     ),
@@ -1247,6 +1391,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_taxsubor'] = array(
     'name' => 'view own field_taxsubor',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_text_hesla'.
+  $permissions['view own field_text_hesla'] = array(
+    'name' => 'view own field_text_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'field_permissions',
   );
 

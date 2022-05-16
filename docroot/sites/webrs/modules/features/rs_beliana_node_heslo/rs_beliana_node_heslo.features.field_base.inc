@@ -440,7 +440,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_povodny_autor',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'target_id' => array(
@@ -506,7 +506,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_remote_id',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(),
     'locked' => 0,
@@ -594,7 +594,7 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_text_hesla',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
