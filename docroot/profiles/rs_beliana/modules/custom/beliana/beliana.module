@@ -1107,7 +1107,7 @@ function beliana_unassign_author(&$node, $context) {
       //$node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
       $node->log = 'Zrušený autor ' . $user->name;
 
-      node_save($node);
+      # moderate and save
       workbench_moderation_moderate($node, 'zaradene');
     }
   }
