@@ -3330,7 +3330,7 @@ function eqneditor2mathjax($html)
     #<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
     if (strpos($html, "latex.codecogs.com")) {
         #The U modifier enforces nongreedy matching
-        $rexp = '#<img alt="(.*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
+        $rexp = '#<img alt="([^"]*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
         $rep =  '<span class="math-tex">\\(\1\\)</span>';
         $html = preg_replace($rexp, $rep, $html);
     }
