@@ -51,7 +51,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Alternatívny text k ilustrácii určený pre nevidiacich. Netreba vypĺňať, ak text k ilustrácii má menej ako 125 znakov a neobsahuje formátovanie (napr. matematické rovnice).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -128,7 +128,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 28,
       ),
       'export' => array(
         'label' => 'above',
@@ -188,7 +188,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 23,
       ),
       'export' => array(
         'label' => 'above',
@@ -233,7 +233,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 26,
+      'weight' => 27,
     ),
     'workbench_access_field' => 0,
   );
@@ -283,7 +283,82 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 21,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-ilustracia-field_freemap_url'.
+  $field_instances['node-ilustracia-field_freemap_url'] = array(
+    'bundle' => 'ilustracia',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 29,
+      ),
+      'export' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_freemap_url',
+    'label' => 'Freemap url',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -358,7 +433,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -515,7 +590,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -590,7 +665,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -665,7 +740,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -715,7 +790,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -731,7 +806,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 26,
       ),
       'export' => array(
         'label' => 'above',
@@ -789,7 +864,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 100,
       ),
       'type' => 'text_textfield',
-      'weight' => 24,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -864,7 +939,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -1005,7 +1080,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -1042,7 +1117,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 26,
     ),
     'workbench_access_field' => 0,
   );
@@ -1054,11 +1129,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 23,
+        'weight' => 22,
       ),
       'export' => array(
         'label' => 'inline',
@@ -1188,7 +1263,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Stručne uveďte popis úpravy, napr, "upravený kontrast", "odstránené nežiaduce objekty" a podobne',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1250,7 +1325,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -1325,7 +1400,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 27,
       ),
       'export' => array(
         'label' => 'above',
@@ -1541,7 +1616,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 22,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -1612,7 +1687,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 23,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -1683,7 +1758,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 21,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1757,7 +1832,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 25,
       ),
       'export' => array(
         'label' => 'above',
@@ -1843,6 +1918,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Dátum prebratia obsahu');
   t('Dátum zverejnenia');
   t('Dátum zverejnenia ilustrácie na webe alebo v knihe. Dopĺňané programovo, slúži na vyplácanie odmeny');
+  t('Freemap url');
   t('Inštitúcia');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
