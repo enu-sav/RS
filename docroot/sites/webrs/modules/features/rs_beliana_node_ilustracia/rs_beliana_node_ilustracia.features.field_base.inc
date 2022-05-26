@@ -95,6 +95,30 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_freemap_url'.
+  $field_bases['field_freemap_url'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_freemap_url',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 300,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_institucia'.
   $field_bases['field_institucia'] = array(
     'active' => 1,
@@ -603,6 +627,8 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
         'Autorské dielo' => 'Autorské dielo (na základe súhlasu alebo priamy odkaz)',
         'Muzeálny objekt' => 'Muzeálny objekt (na základe súhlasu alebo priamy odkaz)',
         'Iná licencia' => 'Logo, erb, zástava',
+        'Mapa' => 'Mapa',
+        'Mapa - Poloha' => 'Mapa - Poloha',
       ),
       'allowed_values_function' => '',
     ),
