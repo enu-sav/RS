@@ -28,7 +28,6 @@
         var title = $("#title-field-add-more-wrapper input").val();
         if (title.length === 0){
           alert('Pole Názov ilustrácie nieje vyplnené.');
-
           return;
         }
 
@@ -39,7 +38,9 @@
             "freemap_url": freemap_url.val(),
           },
           success: function (data, status, xhr) {
-            if (data) {
+            if (data['status']) {
+              $('.image-preview').css('display', 'block');
+              $('#free-map-img').attr("src", data['file_url'] + `?v=${new Date().getTime()}`);
               alert('Obrázok mapy bol vytvorený');
             } else {
               alert('Obrázok nebol vytvorený. Kontaktujte administrátora');
@@ -63,8 +64,10 @@
             "freemap_title": "mapa-poloha-" + title,
             "freemap_url": freemap_url.val(),
           },
-          success: function () {
-            if (data) {
+          success: function (data, status, xhr) {
+            if (data['status']) {
+              $('.image-preview-place').css('display', 'block');
+              $('#free-map-img-place').attr("src", data['file_url'] + `?v=${new Date().getTime()}`);
               alert('Obrázok mapy bol vytvorený');
             } else {
               alert('Obrázok nebol vytvorený. Kontaktujte administrátora');
