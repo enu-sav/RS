@@ -189,6 +189,7 @@ function beliana_form_heslo_node_form_alter(&$form, &$form_state) {
  * Implements hook_form_FORM_ID_alter().
  */
 function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
+  $freemap_img_url = '';
   $freemap_default_url = 'https://www.freemap.sk/?map=8/48.681415/19.699450&layers=O&osm-relation=14296&embed=search';
   $form['field_freemap_url'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = 'disabled';
 
@@ -196,9 +197,21 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     $freemap_default_url = $form['field_url_diela_l']['und'][0]['#default_value']['url'];
   }
 
+  if (isset($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['fid'])) {
+    $freemap_img_url = file_create_url($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['uri']);
+  }
+
   $form['field_map_embed'] = [
     '#type' => 'item',
-    '#markup' => '<div><iframe id="freemap" src="' . $freemap_default_url . '" style="width: 100%; height: 680px; border: 0" allowfullscreen></iframe></div><div><a href="#freemap_administrative_area" class="form-submit" id="free-map-btn">Vytvoriť obrázok mapy</a></div>',
+    '#markup' => '<div>
+                    <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 800px; height: 600px; border: 0" allowfullscreen></iframe>
+                  </div>
+                  <div class="button">
+                    <a href="#free-map-btn" class="form-submit" id="free-map-btn">Vytvoriť obrázok mapy</a>
+                  </div>
+                  <div class="image-preview" style="display: none;">
+                    <img id="free-map-img" width="200" height="150" src="' . $freemap_img_url . '" />
+                  </div>',
     '#weight' => 20,
     '#states' => [
       'visible' => [
@@ -208,7 +221,15 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   ];
   $form['field_map_embed_location'] = [
     '#type' => 'item',
-    '#markup' => '<div><iframe id="freemap_embed_location" src="' . $freemap_default_url . '" style="width: 100%; height: 680px; border: 0" allowfullscreen></iframe></div><div><a href="#freemap_administrative_area" class="form-submit" id="free-map-btn-place">Vytvoriť obrázok mapy</a></div>',
+    '#markup' => '<div>
+                    <iframe id="freemap-place" src="' . $freemap_default_url . '" style="width: 800px; height: 600px; border: 0" allowfullscreen></iframe>
+                  </div>
+                  <div class="button">
+                    <a href="#free-map-btn-place" class="form-submit" id="free-map-btn-place">Vytvoriť obrázok mapy</a>
+                  </div>
+                  <div class="image-preview-place" style="display: none;">
+                    <img id="free-map-img-place" width="200" height="150" src="' . $freemap_img_url . '" />
+                  </div>',
     '#weight' => 20,
     '#states' => [
       'visible' => [
@@ -258,21 +279,29 @@ function _beliana_get_freemap_image() {
   $response = curl_exec($curl);
   $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
+  $info = [
+    'status' => FALSE,
+    'file_url' => '',
+  ];
+
   if ($http_code == 200) {
     $image_data = $response;
+    $info['status'] = TRUE;
   }
   else {
     $http_message = curl_error($curl);
     watchdog('error', 'Auth error in node synchronization ('. $url .') ' . $http_message);
-    drupal_json_output(FALSE);
+    drupal_json_output($info);
     drupal_exit();
   }
 
   curl_close($curl);
 
   file_prepare_directory($destination, FILE_CREATE_DIRECTORY);
-  file_save_data($image_data,  $destination . $freemap_title . '.jpg', FILE_EXISTS_REPLACE);
-  drupal_json_output(TRUE);
+  $file = file_save_data($image_data,  $destination . $freemap_title . '.jpg', FILE_EXISTS_REPLACE);
+  image_path_flush('medium');
+  $info['file_url'] = file_create_url($file->uri);
+  drupal_json_output($info);
   drupal_exit();
 }
 
