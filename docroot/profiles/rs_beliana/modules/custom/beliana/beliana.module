@@ -299,7 +299,7 @@ function _beliana_get_freemap_image() {
 
   file_prepare_directory($destination, FILE_CREATE_DIRECTORY);
   $file = file_save_data($image_data,  $destination . $freemap_title . '.jpg', FILE_EXISTS_REPLACE);
-  image_path_flush('medium');
+  image_path_flush($file->uri);
   $info['file_url'] = file_create_url($file->uri);
   drupal_json_output($info);
   drupal_exit();
