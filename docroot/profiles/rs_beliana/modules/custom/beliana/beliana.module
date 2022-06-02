@@ -190,26 +190,30 @@ function beliana_form_heslo_node_form_alter(&$form, &$form_state) {
  */
 function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $freemap_img_url = '';
+  $image_preview_style = 'none';
   $freemap_default_url = 'https://www.freemap.sk/?map=8/48.681415/19.699450&layers=O&osm-relation=14296&embed=search';
   $form['field_freemap_url'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = 'disabled';
+  $form['field_mapa_obrazok_fid']['#attributes']['style'][] = 'display:none;';
+
 
   if (isset($form['field_url_diela_l']['und'][0]['#default_value']['url'])) {
     $freemap_default_url = $form['field_url_diela_l']['und'][0]['#default_value']['url'];
   }
 
   if (isset($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['fid'])) {
+    $image_preview_style = 'block';
     $freemap_img_url = file_create_url($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['uri']);
   }
 
   $form['field_map_embed'] = [
     '#type' => 'item',
-    '#markup' => '<div>
-                    <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 800px; height: 600px; border: 0" allowfullscreen></iframe>
+    '#markup' => '<div class="freemap-wrapper" style="width: 1600px; height: 1200px;">
+                    <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 100%; height: 100%; border: 0; pointer-events: none;" allowfullscreen></iframe>
                   </div>
                   <div class="button">
                     <a href="#free-map-btn" class="form-submit" id="free-map-btn">Vytvoriť obrázok mapy</a>
                   </div>
-                  <div class="image-preview" style="display: none;">
+                  <div class="image-preview" style="display: ' . $image_preview_style . ';">
                     <img id="free-map-img" width="200" height="150" src="' . $freemap_img_url . '" />
                   </div>',
     '#weight' => 20,
@@ -221,13 +225,13 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   ];
   $form['field_map_embed_location'] = [
     '#type' => 'item',
-    '#markup' => '<div>
-                    <iframe id="freemap-place" src="' . $freemap_default_url . '" style="width: 800px; height: 600px; border: 0" allowfullscreen></iframe>
+    '#markup' => '<div class="freemap-wrapper" style="width: 1600px; height: 1200px;">
+                    <iframe id="freemap-place" src="' . $freemap_default_url . '" style="width: 100%; height: 100%; border: 0; pointer-events: none;" allowfullscreen></iframe>
                   </div>
                   <div class="button">
                     <a href="#free-map-btn-place" class="form-submit" id="free-map-btn-place">Vytvoriť obrázok mapy</a>
                   </div>
-                  <div class="image-preview-place" style="display: none;">
+                  <div class="image-preview-place" style="display: ' . $image_preview_style . ';">
                     <img id="free-map-img-place" width="200" height="150" src="' . $freemap_img_url . '" />
                   </div>',
     '#weight' => 20,
@@ -254,8 +258,13 @@ function _beliana_get_freemap_image() {
   if(!isset($_GET["freemap_title"])) {
     return;
   }
+  if(!isset($_GET["freemap_img_fid"])) {
+    return;
+  }
   $freemap_url = $_GET["freemap_url"];
-  $freemap_title = str_replace(' ', '-', _beliana_remove_accents(strtolower($_GET["freemap_title"])));
+  $random_hash = str_replace('/', '', base64_encode(random_bytes(10)));
+  $freemap_title = str_replace(' ', '-', _beliana_remove_accents(strtolower($_GET["freemap_title"]))) . '-' . $random_hash;
+  $freemap_img_fid = $_GET["freemap_img_fid"];
   $destination = 'public://ilustracia/navrh/';
 
   $data = [
@@ -266,7 +275,7 @@ function _beliana_get_freemap_image() {
       'deviceScaleFactor' => 1,
     ],
   ];
-  $url = 'http://127.0.0.1:8080/';
+  $url = 'host.docker.internal:8080';
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: image/jpeg']);
@@ -281,6 +290,7 @@ function _beliana_get_freemap_image() {
 
   $info = [
     'status' => FALSE,
+    'file_fid' => '',
     'file_url' => '',
   ];
 
@@ -300,7 +310,13 @@ function _beliana_get_freemap_image() {
   file_prepare_directory($destination, FILE_CREATE_DIRECTORY);
   $file = file_save_data($image_data,  $destination . $freemap_title . '.jpg', FILE_EXISTS_REPLACE);
   image_path_flush($file->uri);
+  $info['file_fid'] = $file->fid;
   $info['file_url'] = file_create_url($file->uri);
+
+  if (file_load($freemap_img_fid)) {
+    file_delete(file_load($freemap_img_fid), TRUE);
+  }
+
   drupal_json_output($info);
   drupal_exit();
 }
@@ -1839,22 +1855,21 @@ function beliana_node_presave($node) {
     if ($node->type == "ilustracia") {
       if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa'
         || $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
-        $zdroj_ilustracie =  str_replace(' ', '', strtolower($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value']));
+        if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
+          $file = file_load($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value']);
+          $file_uri = $file->uri;
 
-        $filename = str_replace(' ', '-', $zdroj_ilustracie . '-' . _beliana_remove_accents($node->title) . '.jpg');
-        $uri = 'public://ilustracia/navrh/' . $filename;
-        if (!file_destination($uri, FILE_EXISTS_ERROR)) {
-          $files = file_load_multiple([], ['uri' => $uri]);
-          $file = reset($files);
-
-          if ($file) {
-            $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file;
-            $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
-              'fid' => $file->fid,
-              'display' => 1,
-            ];
+          if (!file_destination($file_uri, FILE_EXISTS_ERROR)) {
+            if ($file) {
+              $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file;
+              $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
+                'fid' => $file->fid,
+                'display' => 1,
+              ];
+            }
           }
         }
+
         $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
         $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
         $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
@@ -1863,7 +1878,6 @@ function beliana_node_presave($node) {
       }
     }
   }
-
 
   # do not continue if node has just been created
   if (isset($node->is_new) and $node->is_new === TRUE) {

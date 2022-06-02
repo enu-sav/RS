@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 (function ($, Drupal) {
-  Drupal.behaviors.belianaEditor = {
+  Drupal.behaviors.belianaFreeMap = {
     attach: function (context, settings) {
       var body = $(document.body);
       var freemap_url = $('#edit-field-freemap-url input');
       var freemap_url_diela = $('#field-url-diela-l-add-more-wrapper input');
+      var freemap_img_fid = $('#edit-field-mapa-obrazok-fid input');
 
       window.addEventListener("message", (e) => {
         try {
@@ -24,8 +25,17 @@
         // console.log("URL", e.data.freemap.payload);
       });
 
+      body.find('.freemap-wrapper').click(function () {
+        $('.freemap-wrapper #freemap').css('pointer-events', 'auto');
+      });
+
+      body.find('.freemap-wrapper').mouseleave(function() {
+        $('.freemap-wrapper #freemap').css('pointer-events', 'none');
+      });
+
       body.find('#free-map-btn').click(function () {
-        var title = $("#title-field-add-more-wrapper input").val();
+        var title = $('#title-field-add-more-wrapper input').val();
+
         if (title.length === 0){
           alert('Pole Názov ilustrácie nieje vyplnené.');
           return;
@@ -35,11 +45,13 @@
           url: location.protocol + "//" + location.host + "/get-freemap-image",
           data: {
             "freemap_title": "mapa-" + title,
-            "freemap_url": freemap_url.val(),
+            "freemap_url": freemap_url_diela.val(),
+            "freemap_img_fid": freemap_img_fid.val(),
           },
           success: function (data, status, xhr) {
             if (data['status']) {
               $('.image-preview').css('display', 'block');
+              freemap_img_fid.val(data['file_fid']);
               $('#free-map-img').attr("src", data['file_url'] + `?v=${new Date().getTime()}`);
               alert('Obrázok mapy bol vytvorený');
             } else {
@@ -54,6 +66,7 @@
 
       body.find('#free-map-btn-place').click(function () {
         var title = $("#title-field-add-more-wrapper input").val();
+
         if (title.length === 0){
           alert('Pole Názov ilustrácie nieje vyplnené.');
         }
@@ -62,11 +75,13 @@
           url: location.protocol + "//" + location.host + "/get-freemap-image",
           data: {
             "freemap_title": "mapa-poloha-" + title,
-            "freemap_url": freemap_url.val(),
+            "freemap_url": freemap_url_diela.val(),
+            "freemap_img_fid": freemap_img_fid.val(),
           },
           success: function (data, status, xhr) {
             if (data['status']) {
               $('.image-preview-place').css('display', 'block');
+              freemap_img_fid.val(data['file_fid']);
               $('#free-map-img-place').attr("src", data['file_url'] + `?v=${new Date().getTime()}`);
               alert('Obrázok mapy bol vytvorený');
             } else {
