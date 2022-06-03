@@ -2190,10 +2190,10 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
     'dependent' => 'field_obrazok_navrh_',
     'dependee' => 'field_zdroj_ilustracie',
     'options' => array(
-      'state' => '!visible',
+      'state' => 'unchanged',
       'condition' => 'value',
       'grouping' => 'OR',
-      'effect' => 'show',
+      'effect' => FALSE,
       'effect_options' => array(),
       'element_view' => array(
         1 => 1,
