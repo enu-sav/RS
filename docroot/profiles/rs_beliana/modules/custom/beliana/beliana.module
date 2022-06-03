@@ -275,7 +275,7 @@ function _beliana_get_freemap_image() {
       'deviceScaleFactor' => 1,
     ],
   ];
-  $url = 'host.docker.internal:8080';
+  $url = 'http://127.0.0.1:8080/';
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: image/jpeg']);
