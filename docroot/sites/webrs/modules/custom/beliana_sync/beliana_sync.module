@@ -573,10 +573,15 @@ function _extract_category_info($node) {
   return array_unique($taglist);
 }
 
-// select image in the order svg, png, jpg
+// select image in the order svg, gif (animated), png, jpg
 function _extract_image(array $images) {
   foreach ($images as $image) {
     if (strpos($image['filemime'], 'svg')) {
+      return file_create_url($image['uri']);
+    }
+  }
+  foreach ($images as $image) {
+    if (strpos($image['filemime'], 'gif')) {
       return file_create_url($image['uri']);
     }
   }
