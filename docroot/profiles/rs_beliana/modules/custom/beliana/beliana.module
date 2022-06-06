@@ -1887,7 +1887,9 @@ function beliana_node_presave($node) {
   // clean tags and remove unnecessary field values in type 'ilustracie'
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
     if ($node->type == "ilustracia") {
-      $html = beliana_clean_tags($node, $node->field_popis[LANGUAGE_NONE][0]['value'], "Popis ilustracie (beliana_node_presave)");
+      $html = $node->field_popis[LANGUAGE_NONE][0]['value'];
+      $html = eqneditor2mathjax($html);
+      $html = beliana_clean_tags($node, $html, "Popis ilustracie (beliana_node_presave)");
       $node->field_popis[LANGUAGE_NONE][0]['value'] = $html;
       // remove inappropriate setting of field_licencia1 if licence type is not 'CC licencia' (possible in the form)
       $zdroj_ilustracie_array = ['CC licencia', 'Mapa', 'Mapa - Poloha'];
