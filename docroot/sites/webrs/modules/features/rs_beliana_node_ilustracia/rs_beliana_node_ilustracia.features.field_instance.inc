@@ -1409,7 +1409,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
     'settings' => array(
       'description_field' => 0,
       'file_directory' => 'ilustracia/na_zverejnenie',
-      'file_extensions' => 'jpg cdr eps svg png odg cdx tif jpeg tex asy dia',
+      'file_extensions' => 'jpg cdr eps svg png odg cdx tif jpeg tex asy dia gif',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),

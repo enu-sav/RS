@@ -966,6 +966,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -996,6 +997,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
       'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
@@ -1169,6 +1171,8 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
