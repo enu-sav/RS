@@ -2196,8 +2196,8 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
       'effect' => FALSE,
       'effect_options' => array(),
       'element_view' => array(
-        1 => 1,
         2 => 2,
+        1 => 0,
         5 => 0,
         3 => 0,
         4 => 0,
