@@ -449,9 +449,8 @@ function _beliana_get_freemap_image() {
     ],
   ];
 
-
-//  $url = 'host.docker.internal:8080';
   $url = 'http://127.0.0.1:8080';
+  //  $url = 'host.docker.internal:8080';
   _create_map_image(['jpg'], $url, $data, $destination, $title, $map_img_fid);
 }
 
@@ -501,8 +500,8 @@ function _beliana_get_geodata_image() {
     $params_url = '?features=regions,cities,roads&placeId=' . $geodata_municipality;
   }
 
-//  $url = 'host.docker.internal:8080' . $params_url;
   $url = 'http://127.0.0.1:8081' . $params_url;
+  //  $url = 'host.docker.internal:8080' . $params_url;
   _create_map_image(['jpg', 'svg'], $url, [], $destination, $title, $map_img_fid);
 }
 
