@@ -523,7 +523,6 @@ function rs_beliana_node_ilustracia_conditional_fields_default_fields() {
       'value_form' => NULL,
       'values' => array(
         0 => 'Mapa',
-        1 => 'Mapa - Poloha',
       ),
       'value' => array(),
     ),
