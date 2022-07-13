@@ -19,7 +19,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Etymologický redaktor.
   $roles['Etymologický redaktor'] = array(
     'name' => 'Etymologický redaktor',
-    'weight' => 12,
+    'weight' => 13,
   );
 
   // Exported role: Grafik.
@@ -28,28 +28,40 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 3,
   );
 
+  // Exported role: Jazykový korektor.
+  $roles['Jazykový korektor'] = array(
+    'name' => 'Jazykový korektor',
+    'weight' => 11,
+  );
+
   // Exported role: Jazykový redaktor 1.
   $roles['Jazykový redaktor 1'] = array(
     'name' => 'Jazykový redaktor 1',
-    'weight' => 8,
+    'weight' => 9,
   );
 
   // Exported role: Jazykový redaktor 2.
   $roles['Jazykový redaktor 2'] = array(
     'name' => 'Jazykový redaktor 2',
-    'weight' => 9,
+    'weight' => 10,
+  );
+
+  // Exported role: Komentátor.
+  $roles['Komentátor'] = array(
+    'name' => 'Komentátor',
+    'weight' => 8,
   );
 
   // Exported role: Konzultant.
   $roles['Konzultant'] = array(
     'name' => 'Konzultant',
-    'weight' => 14,
+    'weight' => 15,
   );
 
   // Exported role: Oznamy.
   $roles['Oznamy'] = array(
     'name' => 'Oznamy',
-    'weight' => 15,
+    'weight' => 16,
   );
 
   // Exported role: Redaktor.
@@ -67,25 +79,25 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: Výstupný redaktor.
   $roles['Výstupný redaktor'] = array(
     'name' => 'Výstupný redaktor',
-    'weight' => 11,
+    'weight' => 12,
   );
 
   // Exported role: administrátor.
   $roles['administrátor'] = array(
     'name' => 'administrátor',
-    'weight' => 13,
+    'weight' => 14,
   );
 
   // Exported role: chRedaktor.
   $roles['chRedaktor'] = array(
     'name' => 'chRedaktor',
-    'weight' => 16,
+    'weight' => 17,
   );
 
   // Exported role: garant.
   $roles['garant'] = array(
     'name' => 'garant',
-    'weight' => 17,
+    'weight' => 18,
   );
 
   // Exported role: geoRedaktor.
@@ -97,7 +109,7 @@ function rs_beliana_users_user_default_roles() {
   // Exported role: guest.
   $roles['guest'] = array(
     'name' => 'guest',
-    'weight' => 18,
+    'weight' => 19,
   );
 
   // Exported role: useradmin.

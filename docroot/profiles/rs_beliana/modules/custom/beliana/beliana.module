@@ -521,7 +521,6 @@ function _create_map_image(array $img_types = NULL, string $url, array $data = [
 
   foreach ($img_types as $img_type) {
     if ($img_type == 'svg') {
-
       if (strpos($url, '?features=')) {
         $url .= '&format=svg';
       } else {
@@ -1506,7 +1505,7 @@ function beliana_unassign_author(&$node, $context) {
       //$node->field_povodny_autor[LANGUAGE_NONE][] = ['target_id' => $original_user->uid];
       $node->log = 'Zrušený autor ' . $user->name;
 
-      node_save($node);
+      # moderate and save
       workbench_moderation_moderate($node, 'zaradene');
     }
   }
@@ -2168,7 +2167,9 @@ function beliana_node_presave($node) {
   // clean tags and remove unnecessary field values in type 'ilustracie'
   if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
     if ($node->type == "ilustracia") {
-      $html = beliana_clean_tags($node, $node->field_popis[LANGUAGE_NONE][0]['value'], "Popis ilustracie (beliana_node_presave)");
+      $html = $node->field_popis[LANGUAGE_NONE][0]['value'];
+      $html = eqneditor2mathjax($html);
+      $html = beliana_clean_tags($node, $html, "Popis ilustracie (beliana_node_presave)");
       $node->field_popis[LANGUAGE_NONE][0]['value'] = $html;
       // remove inappropriate setting of field_licencia1 if licence type is not 'CC licencia' (possible in the form)
       $zdroj_ilustracie_array = ['CC licencia', 'Mapa', 'Mapa - Poloha'];
@@ -2800,10 +2801,8 @@ function _beliana_assign_user(&$node, $context) {
       $node->field_uid_autora['und'][0]['value'] = $node->uid;
     }
     $node->uid = $user->uid;
-    $node->log = 'Priradené autorovi: ' . $user->name;
-    node_save($node);
-
     $new_state = $context['status'];
+    $node->log = 'Priradené autorovi: ' . $user->name;
     workbench_moderation_moderate($node, $new_state);
   }
 }
@@ -3787,7 +3786,7 @@ function eqneditor2mathjax($html)
     #<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
     if (strpos($html, "latex.codecogs.com")) {
         #The U modifier enforces nongreedy matching
-        $rexp = '#<img alt="(.*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
+        $rexp = '#<img alt="([^"]*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
         $rep =  '<span class="math-tex">\\(\1\\)</span>';
         $html = preg_replace($rexp, $rep, $html);
     }

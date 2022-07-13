@@ -415,7 +415,7 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
 
   // remote accept states
   $heslo_accept_states = ['ukoncenezluene', 'publikovane_na_webe','v_zalamovani', 'na_zalomenie'];
-  $heslo_accept_states_hr = ['Ukončené/zlúčené', 'Zalomené','V zalamovaní', 'Na zalomenie'];    // human readable
+  $heslo_accept_states_hr = ['Ukončené/zlúčené', 'Zalomené','V zalamovaní (korektura)', 'Na zalomenie'];    // human readable
   $ilu_accept_states = ['ilustracia_na_webe', 'ilustracia_na_zverejnenie'];
   $ilu_accept_states_hr = ['Ilustrácia na zalomenie'];	// human readable
 
@@ -550,7 +550,14 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
     $node->field_datum_prebratia = [LANGUAGE_NONE => [['value' => date('Y-m-d H:i:s')]]];
     $node->revision = 1;
 
-    // specify the new node state for heslo, keep it for ilustracia
+
+    # add text to revision log
+    $message_log = format_string('Obsah prevzatý z knižného RS (@d, @u)', ['@d'=>date('Y-m-d'), '@u'=>$user->name]);
+    if (strpos($node->log, $message_log) === FALSE) {
+      $node->log = $message_log;
+    }
+
+    // specify the new node state for heslo, keep it for ilustracia and save the node in both cases
     if ($node->type == 'heslo') {
       if ( $remote_node->workbench_moderation->current->state == 'vyradene' ) {
         $moderate_to = 'vyradene';
@@ -560,11 +567,7 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
         $moderate_to = 'prevzate_z_rs';
       }
 
-      $message_log = format_string('Obsah prevzatý z knižného RS (@d, @u)', ['@d'=>date('Y-m-d'), '@u'=>$user->name]);
-      if (strpos($node->log, $message_log) === FALSE) {
-        $node->log = $message_log;
-      }
-
+      // save node and moderate it to new state
       workbench_moderation_moderate($node, $moderate_to);
       drupal_set_message(format_string('Obsah hesla <a href="@url/node/@id">@title</a> bol úspešne prebratý, nový stav: @state.', [
         '@url' => $local_uri,
@@ -573,6 +576,7 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
         '@state' => $moderate_to
       ]));
     } else {
+      node_save($node);
       drupal_set_message(format_string('Obsah ilustrácie <a href="@url/node/@id">@title</a> bol úspešne prebratý.', [
         '@url' => $local_uri,
         '@title' => $remote_node->title,
@@ -580,7 +584,7 @@ function beliana_sync_from_remote_build($node, $remote_node, $login) {
       ]));
     }
   }
-  else
+  else  #failed (incorrect state on the book side)
   {
     if ($node->type == 'ilustracia') {
       drupal_set_message(format_string('Nepodarilo sa prevziať obsah ilustrácie <a href="@url/node/@id">@title</a> (v knižnom RS nie je v žiadnom zo stavov: @state)', [
@@ -605,7 +609,7 @@ function beliana_sync_from_remote_access($node) {
   global $user;
 
   // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
-  // Permission to be set: Beliana / Allow synchronise remote node
+  // Permission to be set: Beliana / Allow synchronise remote node 
   // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
 
