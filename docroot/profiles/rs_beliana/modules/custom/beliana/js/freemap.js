@@ -9,7 +9,7 @@
       var self = this;
       var body = $(document.body);
       var freemap_url = $('#edit-field-freemap-url input');
-      var freemap_url_diela = $('#field-url-diela-l-add-more-wrapper input');
+      var freemap_url_diela = $('#edit-field-url-diela-l input');
       var map_img_fid = $('#edit-field-mapa-obrazok-fid input');
 
       window.addEventListener("message", (e) => {
@@ -26,7 +26,7 @@
         // console.log("URL", e.data.freemap.payload);
       });
 
-      body.find('.freemap-wrapper').one("click", function () {
+      body.find('.freemap-wrapper').unbind('click').click(function () {
         $('.freemap-wrapper #freemap').css('pointer-events', 'auto');
       });
 
