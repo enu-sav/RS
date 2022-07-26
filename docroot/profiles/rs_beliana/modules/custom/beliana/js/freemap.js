@@ -9,7 +9,7 @@
       var self = this;
       var body = $(document.body);
       var freemap_url = $('#edit-field-freemap-url input');
-      var freemap_url_diela = $('#field-url-diela-l-add-more-wrapper input');
+      var freemap_url_diela = $('#edit-field-url-diela-l input');
       var map_img_fid = $('#edit-field-mapa-obrazok-fid input');
 
       window.addEventListener("message", (e) => {
@@ -26,7 +26,7 @@
         // console.log("URL", e.data.freemap.payload);
       });
 
-      body.find('.freemap-wrapper').one("click", function () {
+      body.find('.freemap-wrapper').unbind('click').click(function () {
         $('.freemap-wrapper #freemap').css('pointer-events', 'auto');
       });
 
@@ -52,8 +52,8 @@
           success: function (data, status, xhr) {
             if (data['status']) {
               $('.image-preview').css('display', 'block');
-              map_img_fid.val(data['file_fid_jpg']);
-              $('#free-map-img').attr("src", data['file_url_jpg'] + `?v=${new Date().getTime()}`);
+              map_img_fid.val(data['file_fid']);
+              $('#free-map-img').attr("src", data['file_url'] + `?v=${new Date().getTime()}`);
               alert('Obrázok mapy bol vytvorený');
             }
             else {
@@ -97,8 +97,8 @@
           success: function (data, status, xhr) {
             if (data['status']) {
               $('.image-preview').css('display', 'block');
-              map_img_fid.val(data['file_fid_jpg'] + '/' + data['file_fid_svg']);
-              $('#geodata-img').attr("src", data['file_url_jpg'] + `?v=${new Date().getTime()}`);
+              map_img_fid.val(data['file_fid'] + '/' + data['file_fid']);
+              $('#geodata-img').attr("src", data['file_url'] + `?v=${new Date().getTime()}`);
 
               self.commentInstructionAddValue(comment_instruction);
 
