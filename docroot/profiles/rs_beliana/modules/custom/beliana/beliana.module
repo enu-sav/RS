@@ -203,7 +203,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $form['field_mapa_obrazok_fid']['#attributes']['style'][] = 'display:none;';
 
   if (isset($form['field_url_diela_l']['und'][0]['#default_value']['url'])) {
-    $freemap_default_url = remove_query_parameter($form['field_url_diela_l']['und'][0]['#default_value']['url'], 'osm-relation');
+    $freemap_default_url = remove_query_parameter($form['field_url_diela_l']['und'][0]['#default_value']['url']);
   }
 
   if (isset($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['fid'])) {
@@ -350,15 +350,10 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   ];
 }
 
-function remove_query_parameter($url, $param){
-  [$baseUrl, $urlQuery] = explode('#', $url, 2);
-  parse_str($urlQuery, $urlQueryArr);
-  unset($urlQueryArr[$param]);
 
-  if(count($urlQueryArr))
-    return $baseUrl.'?'.http_build_query($urlQueryArr);
-  else
-    return $baseUrl;
+# remove osm-relation parameter from freemap url
+function remove_query_parameter($url){
+  return preg_replace('/&osm-relation=[0-9]*/', '', $url);
 }
 
 function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_param = NULL, $form_value = NULL) {
