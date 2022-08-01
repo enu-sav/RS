@@ -203,6 +203,7 @@ function beliana_sync_sync($nid, &$context) {
     ],
     'query' => ['_format' => 'json'],
   ]);
+  $client->setDefaultOption('verify', false);
   $generic_node = node_load($nid);
   $node = workbench_moderation_node_current_load($generic_node);
   #dpm("beliana_sync_sync", $node->title." (".$node->nid.")");
