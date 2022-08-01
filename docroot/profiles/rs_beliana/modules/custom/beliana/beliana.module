@@ -444,8 +444,8 @@ function _beliana_get_freemap_image() {
   $data = [
     'url' => $freemap_url,
     'viewport' => [
-      'width' => 1600,
-      'height' => 1200,
+      'width' => 800,
+      'height' => 600,
       'deviceScaleFactor' => 2,
     ],
     'searchResultStyle' => [
