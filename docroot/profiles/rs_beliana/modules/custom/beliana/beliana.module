@@ -213,7 +213,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
 
   $form['field_map_embed'] = [
     '#type' => 'item',
-    '#markup' => '<div class="freemap-wrapper" style="width: 800px; height: 600px;">
+    '#markup' => '<div class="freemap-wrapper" style="width: 1200px; height: 900px;">
                     <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 100%; height: 100%; border: 0; pointer-events: none;" allowfullscreen></iframe>
                   </div>
                   <div class="button">
@@ -444,8 +444,8 @@ function _beliana_get_freemap_image() {
   $data = [
     'url' => $freemap_url,
     'viewport' => [
-      'width' => 800,
-      'height' => 600,
+      'width' => 1200,
+      'height' => 900,
       'deviceScaleFactor' => 2,
     ],
     'searchResultStyle' => [
