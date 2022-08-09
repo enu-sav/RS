@@ -196,7 +196,7 @@ function beliana_sync_sync($nid, &$context) {
   // Create client object.
   $client = new Client([
     'base_uri' => variable_get('beliana_web_uri'),
-    'verify' => false,
+    'verify' => true,
     'headers' => [
       'Content-Type' => 'application/json',
       'Accept' => 'application/json',
