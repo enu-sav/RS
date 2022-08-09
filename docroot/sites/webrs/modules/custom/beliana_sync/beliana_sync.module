@@ -638,6 +638,14 @@ function _extract_license($node) {
         break;
       }
       break;
+    case 'Mapa':
+    case 'Mapa - Poloha':
+      switch ($node->field_licencia1[LANGUAGE_NONE][0]['value']) {
+        case 'IVL':
+          $formatted_license = 'Iná verejná licencia';
+          break;
+      }
+      break;
     case 'Získané na základe zmluvy':
     case 'Muzeálny objekt':
     case 'Autorské dielo':
