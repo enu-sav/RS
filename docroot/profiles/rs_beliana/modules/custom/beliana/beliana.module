@@ -203,7 +203,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $form['field_mapa_obrazok_fid']['#attributes']['style'][] = 'display:none;';
 
   if (isset($form['field_url_diela_l']['und'][0]['#default_value']['url'])) {
-    $freemap_default_url = remove_query_parameter($form['field_url_diela_l']['und'][0]['#default_value']['url']);
+    $freemap_default_url = $form['field_url_diela_l']['und'][0]['#default_value']['url'];
   }
 
   if (isset($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['fid'])) {
