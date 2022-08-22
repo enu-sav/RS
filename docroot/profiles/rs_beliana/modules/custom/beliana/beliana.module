@@ -2288,13 +2288,15 @@ function beliana_node_presave($node) {
       [
         'importovane_jaz_kontrola',
         'importovane_u_jaz_korektora',
+        'importovan_u_jr_kk',
         // "U jaz. redaktora", :U jaz. korektora"
         'na_jazykovu_korekturu',
         'u_jaz_korektora',
+        'u_jr_kk',
       ])) {
     if (!isset($node->field_atributy[LANGUAGE_NONE]) or
       (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], $moderation_state) === FALSE)) {
-      $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo v stave '" . $moderation_state . "'";
+      $node->field_atributy[LANGUAGE_NONE][0]['value'] = "Heslo bolo upravené v stave '" . $moderation_state . "'";
     }
   }
 
@@ -2482,15 +2484,27 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     if (variable_get('rs_api_type') != "webrs" && isset($node->field_atributy[LANGUAGE_NONE])) {
       if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'na_jazykovu_korekturu') !== FALSE) {
           unset($form['state']['#options']['u_jaz_korektora']);
+          unset($form['state']['#options']['u_jr_kk']);
       }
       if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'u_jaz_korektora') !== FALSE) {
           unset($form['state']['#options']['na_jazykovu_korekturu']);
+          unset($form['state']['#options']['u_jr_kk']);
+      }
+      if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'u_jr_kk') !== FALSE) {
+          unset($form['state']['#options']['na_jazykovu_korekturu']);
+          unset($form['state']['#options']['u_jaz_korektora']);
       }
       if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'importovane_jaz_kontrola') !== FALSE) {
           unset($form['state']['#options']['importovane_u_jaz_korektora']);
+          unset($form['state']['#options']['importovan_u_jr_kk']);
       }
       if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'importovane_u_jaz_korektora') !== FALSE) {
           unset($form['state']['#options']['importovane_jaz_kontrola']);
+          unset($form['state']['#options']['importovan_u_jr_kk']);
+      }
+      if (strpos($node->field_atributy[LANGUAGE_NONE][0]['value'], 'importovan_u_jr_kk') !== FALSE) {
+          unset($form['state']['#options']['importovane_jaz_kontrola']);
+          unset($form['state']['#options']['importovane_u_jaz_korektora']);
       }
     }
 
