@@ -79,10 +79,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'ilustracia_u_redaktora',
       'name' => 'il_u_vr-il_u_redaktora',
     ),
-    'importovane:importovane_u_jr2' => array(
-      'from_name' => 'importovane',
-      'to_name' => 'importovane_u_jr2',
-      'name' => 'importovane-importovane_u_JR2',
+    'importovan_u_jr_kk:importovane_u_vr' => array(
+      'from_name' => 'importovan_u_jr_kk',
+      'to_name' => 'importovane_u_vr',
+      'name' => 'importovane_u_JR_KK-importovane_u_vr',
     ),
     'importovane:importovane_u_vr' => array(
       'from_name' => 'importovane',
@@ -119,15 +119,10 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'importovane_u_vr',
       'name' => 'importovane_u_jaz_korektora-importovane_u_vr',
     ),
-    'importovane_u_jr2:importovane' => array(
-      'from_name' => 'importovane_u_jr2',
-      'to_name' => 'importovane',
-      'name' => 'importovane_u_jr2-importovane',
-    ),
-    'importovane_u_jr2:importovane_u_vr' => array(
-      'from_name' => 'importovane_u_jr2',
-      'to_name' => 'importovane_u_vr',
-      'name' => 'importovane_u_JR2-importovane_U_VR',
+    'importovane_u_vr:importovan_u_jr_kk' => array(
+      'from_name' => 'importovane_u_vr',
+      'to_name' => 'importovan_u_jr_kk',
+      'name' => 'importovane_u_vr-importovane_u_JR_KK',
     ),
     'importovane_u_vr:importovane' => array(
       'from_name' => 'importovane_u_vr',
@@ -188,6 +183,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'na_zverejnenie',
       'to_name' => 'u_jaz_korektora',
       'name' => 'u_vyst_redaktora-u_jaz_korektora',
+    ),
+    'na_zverejnenie:u_jr_kk' => array(
+      'from_name' => 'na_zverejnenie',
+      'to_name' => 'u_jr_kk',
+      'name' => 'u_vyst_redaktora-u_JR_KK',
     ),
     'navrhnute_na_vyradenie:vyradene' => array(
       'from_name' => 'navrhnute_na_vyradenie',
@@ -258,6 +258,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'u_jaz_korektora',
       'to_name' => 'na_zverejnenie',
       'name' => 'u_jaz_korektora-u_vyst_redaktora',
+    ),
+    'u_jr_kk:na_zverejnenie' => array(
+      'from_name' => 'u_jr_kk',
+      'to_name' => 'na_zverejnenie',
+      'name' => 'u_JR_KK-u_vyst_redaktora',
     ),
     'u_konzultanta:needs_review' => array(
       'from_name' => 'u_konzultanta',
