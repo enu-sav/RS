@@ -15,7 +15,7 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'access workbench',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
@@ -29,8 +29,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'access workbench access by role',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
@@ -131,6 +131,13 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'block view revisions in ilustracia_u_vyst_redaktora_5 state'.
   $permissions['block view revisions in ilustracia_u_vyst_redaktora_5 state'] = array(
     'name' => 'block view revisions in ilustracia_u_vyst_redaktora_5 state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'block view revisions in importovan_u_jr_kk state'.
+  $permissions['block view revisions in importovan_u_jr_kk state'] = array(
+    'name' => 'block view revisions in importovan_u_jr_kk state',
     'roles' => array(),
     'module' => 'workbench_state_access',
   );
@@ -289,6 +296,13 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'block view revisions in u_jr_kk state'.
+  $permissions['block view revisions in u_jr_kk state'] = array(
+    'name' => 'block view revisions in u_jr_kk state',
+    'roles' => array(),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'block view revisions in u_konzultanta state'.
   $permissions['block view revisions in u_konzultanta state'] = array(
     'name' => 'block view revisions in u_konzultanta state',
@@ -441,6 +455,15 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_state_access',
   );
 
+  // Exported permission: 'edit revisions in importovan_u_jr_kk state'.
+  $permissions['edit revisions in importovan_u_jr_kk state'] = array(
+    'name' => 'edit revisions in importovan_u_jr_kk state',
+    'roles' => array(
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
+    ),
+    'module' => 'workbench_state_access',
+  );
+
   // Exported permission: 'edit revisions in importovane state'.
   $permissions['edit revisions in importovane state'] = array(
     'name' => 'edit revisions in importovane state',
@@ -457,7 +480,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in importovane_jaz_kontrola state'] = array(
     'name' => 'edit revisions in importovane_jaz_kontrola state',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
     ),
     'module' => 'workbench_state_access',
   );
@@ -475,7 +498,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in importovane_u_jaz_korektora state'] = array(
     'name' => 'edit revisions in importovane_u_jaz_korektora state',
     'roles' => array(
-      'Jazykový korektor' => 'Jazykový korektor',
+      'Jaz. redaktor DS' => 'Jaz. redaktor DS',
     ),
     'module' => 'workbench_state_access',
   );
@@ -485,8 +508,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in importovane_u_jr2 state',
     'roles' => array(
       'Grafik' => 'Grafik',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_state_access',
@@ -522,7 +545,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in na_jazykovu_korekturu state'] = array(
     'name' => 'edit revisions in na_jazykovu_korekturu state',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
     ),
     'module' => 'workbench_state_access',
   );
@@ -635,7 +658,17 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in u_jaz_korektora state'] = array(
     'name' => 'edit revisions in u_jaz_korektora state',
     'roles' => array(
-      'Jazykový korektor' => 'Jazykový korektor',
+      'Jaz. redaktor DS' => 'Jaz. redaktor DS',
+    ),
+    'module' => 'workbench_state_access',
+  );
+
+  // Exported permission: 'edit revisions in u_jr_kk state'.
+  $permissions['edit revisions in u_jr_kk state'] = array(
+    'name' => 'edit revisions in u_jr_kk state',
+    'roles' => array(
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -702,7 +735,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in zverejnene_jaz_kontrola state'] = array(
     'name' => 'edit revisions in zverejnene_jaz_kontrola state',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
     ),
     'module' => 'workbench_state_access',
   );
@@ -864,10 +897,12 @@ function rs_beliana_workbench_user_default_permissions() {
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from importovane to importovane_u_jr2'.
-  $permissions['moderate content from importovane to importovane_u_jr2'] = array(
-    'name' => 'moderate content from importovane to importovane_u_jr2',
-    'roles' => array(),
+  // Exported permission: 'moderate content from importovan_u_jr_kk to importovane_u_vr'.
+  $permissions['moderate content from importovan_u_jr_kk to importovane_u_vr'] = array(
+    'name' => 'moderate content from importovan_u_jr_kk to importovane_u_vr',
+    'roles' => array(
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
+    ),
     'module' => 'workbench_moderation',
   );
 
@@ -909,7 +944,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from importovane_jaz_kontrola to importovane_u_vr'] = array(
     'name' => 'moderate content from importovane_jaz_kontrola to importovane_u_vr',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
     ),
     'module' => 'workbench_moderation',
   );
@@ -927,29 +962,16 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from importovane_u_jaz_korektora to importovane_u_vr'] = array(
     'name' => 'moderate content from importovane_u_jaz_korektora to importovane_u_vr',
     'roles' => array(
-      'Jazykový korektor' => 'Jazykový korektor',
+      'Jaz. redaktor DS' => 'Jaz. redaktor DS',
     ),
     'module' => 'workbench_moderation',
   );
 
-  // Exported permission: 'moderate content from importovane_u_jr2 to importovane'.
-  $permissions['moderate content from importovane_u_jr2 to importovane'] = array(
-    'name' => 'moderate content from importovane_u_jr2 to importovane',
+  // Exported permission: 'moderate content from importovane_u_vr to importovan_u_jr_kk'.
+  $permissions['moderate content from importovane_u_vr to importovan_u_jr_kk'] = array(
+    'name' => 'moderate content from importovane_u_vr to importovan_u_jr_kk',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'useradmin' => 'useradmin',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: 'moderate content from importovane_u_jr2 to importovane_u_vr'.
-  $permissions['moderate content from importovane_u_jr2 to importovane_u_vr'] = array(
-    'name' => 'moderate content from importovane_u_jr2 to importovane_u_vr',
-    'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'useradmin' => 'useradmin',
+      'Výstupný redaktor' => 'Výstupný redaktor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1003,7 +1025,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from na_jazykovu_korekturu to na_zverejnenie'] = array(
     'name' => 'moderate content from na_jazykovu_korekturu to na_zverejnenie',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1059,6 +1081,15 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'moderate content from na_zverejnenie to u_jaz_korektora'.
   $permissions['moderate content from na_zverejnenie to u_jaz_korektora'] = array(
     'name' => 'moderate content from na_zverejnenie to u_jaz_korektora',
+    'roles' => array(
+      'Výstupný redaktor' => 'Výstupný redaktor',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from na_zverejnenie to u_jr_kk'.
+  $permissions['moderate content from na_zverejnenie to u_jr_kk'] = array(
+    'name' => 'moderate content from na_zverejnenie to u_jr_kk',
     'roles' => array(
       'Výstupný redaktor' => 'Výstupný redaktor',
     ),
@@ -1195,7 +1226,16 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from u_jaz_korektora to na_zverejnenie'] = array(
     'name' => 'moderate content from u_jaz_korektora to na_zverejnenie',
     'roles' => array(
-      'Jazykový korektor' => 'Jazykový korektor',
+      'Jaz. redaktor DS' => 'Jaz. redaktor DS',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'moderate content from u_jr_kk to na_zverejnenie'.
+  $permissions['moderate content from u_jr_kk to na_zverejnenie'] = array(
+    'name' => 'moderate content from u_jr_kk to na_zverejnenie',
+    'roles' => array(
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
     ),
     'module' => 'workbench_moderation',
   );
@@ -1283,7 +1323,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['moderate content from zverejnene_jaz_kontrola to zverejnene_oprava'] = array(
     'name' => 'moderate content from zverejnene_jaz_kontrola to zverejnene_oprava',
     'roles' => array(
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'useradmin' => 'useradmin',
     ),
     'module' => 'workbench_moderation',
@@ -1381,8 +1421,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'view all unpublished content',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
@@ -1397,8 +1437,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'view moderation history',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
@@ -1413,8 +1453,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'view moderation messages',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',
@@ -1447,8 +1487,8 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'view workbench access information',
     'roles' => array(
       'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Jaz. redaktor JS' => 'Jaz. redaktor JS',
+      'Jaz. redaktor KK' => 'Jaz. redaktor KK',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',

@@ -460,7 +460,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
-          'use_content_language' => TRUE,
+          'use_content_language' => 1,
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',

@@ -828,9 +828,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 16,
       ),
       'export' => array(
@@ -1025,7 +1024,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => 'Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'image',
         'settings' => array(
           'image_link' => 'file',
@@ -1097,11 +1096,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'description' => '<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba aj pole <em>URL stránky s obrázkom a údajmi k dielu</em>',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'beliana',
         'settings' => array(
-          'link' => 1,
-          'size' => 'medium',
+          'link' => 0,
+          'size' => 'large',
         ),
         'type' => 'beliana_external_image',
         'weight' => 3,

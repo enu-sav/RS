@@ -28,24 +28,6 @@ function rs_beliana_users_user_default_roles() {
     'weight' => 3,
   );
 
-  // Exported role: Jazykový korektor.
-  $roles['Jazykový korektor'] = array(
-    'name' => 'Jazykový korektor',
-    'weight' => 11,
-  );
-
-  // Exported role: Jazykový redaktor 1.
-  $roles['Jazykový redaktor 1'] = array(
-    'name' => 'Jazykový redaktor 1',
-    'weight' => 9,
-  );
-
-  // Exported role: Jazykový redaktor 2.
-  $roles['Jazykový redaktor 2'] = array(
-    'name' => 'Jazykový redaktor 2',
-    'weight' => 10,
-  );
-
   // Exported role: Komentátor.
   $roles['Komentátor'] = array(
     'name' => 'Komentátor',

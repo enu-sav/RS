@@ -489,6 +489,7 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
     2 => '2',
   );
@@ -781,6 +782,7 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
   $handler->display->display_options['filters']['title_field_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
   $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
