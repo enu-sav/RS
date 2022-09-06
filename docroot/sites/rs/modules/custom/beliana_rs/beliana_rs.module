@@ -217,6 +217,12 @@ function _beliana_process_links(&$node) {
   //dpm("_beliana_process_links beliana-rs");
 }
 
+/*
+ * Update fields data from mapa/mapa poloha
+ */
+function update_fields_value_from_map_creator(&$node) {
+  // currently no code here
+}
 
 /*
  * modify links in text due to article merging

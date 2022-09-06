@@ -7,6 +7,481 @@
  */
 
 /**
+ * Implements hook_menu().
+ *
+ * @inheritdoc
+ */
+function beliana_rsw_menu() {
+  $items = [];
+  $items['get-freemap-image'] = [
+    'title' => 'Freemap image',
+    'page callback' =>'_beliana_get_freemap_image',
+    'access callback' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+  ];
+
+  $items['get-geodata-image'] = [
+    'title' => 'Geodata image',
+    'page callback' =>'_beliana_get_geodata_image',
+    'access callback' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
+  $map_img_url = '';
+  $image_preview_style = 'none';
+  $freemap_default_url = 'https://www.freemap.sk/?map=8/48.681415/19.699450&layers=O&osm-relation=14296&embed=search';
+  $form['field_freemap_url']['#attributes']['style'][] = 'display:none;';
+  $form['field_mapa_obrazok_fid']['#attributes']['style'][] = 'display:none;';
+
+  if (isset($form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'])) {
+    $freemap_default_url = $form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'];
+  }
+
+  if (isset($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['fid'])) {
+    $image_preview_style = 'block';
+    $map_img_url = file_create_url($form['#node']->field_obrazok_navrh_[LANGUAGE_NONE][0]['uri']);
+  }
+
+  $form['field_map_embed'] = [
+    '#type' => 'item',
+    '#markup' => '<div class="freemap-url-wrapper">' . $freemap_default_url . '</div>
+                  <div class="freemap-wrapper" style="width: 1200px; height: 900px;">
+                    <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 100%; height: 100%; border: 0; pointer-events: none;" allowfullscreen></iframe>
+                  </div>
+                  <div class="button">
+                    <a href="#free-map-btn" class="form-submit" id="free-map-btn">Vytvoriť obrázok mapy</a>
+                  </div>
+                  <div class="image-preview" style="display: ' . $image_preview_style . ';">
+                    <img id="free-map-img" width="auto" height="150" src="' . $map_img_url . '" />
+                  </div>',
+    '#weight' => 20,
+    '#states' => [
+      'visible' => [
+        ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa'],
+      ],
+    ],
+  ];
+
+  $form['field_geodata'] = [
+    '#type' => 'item',
+    '#markup' => '<div class="button">
+                      <a href="#geodata-btn" class="form-submit" id="geodata-btn-place">Vytvoriť obrázok mapy - Poloha</a>
+                    </div>
+                    <div class="image-preview" style="display: ' . $image_preview_style . ';">
+                      <img id="geodata-img" width="auto" height="150" src="' . $map_img_url . '" />
+                    </div>',
+    '#weight' => 20,
+    '#states' => [
+      'visible' => [
+        ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
+      ],
+    ],
+  ];
+
+  $form['field_geodata_select'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['top-content']],
+    '#weight' => 20,
+    '#states' => [
+      'visible' => [
+        ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
+      ],
+    ],
+  ];
+
+  $country_options = get_data_from_json('sr_3.geojson', 'NUTS1_CODE', 'NM1');
+  $form['field_geodata_select']['country'] = [
+    '#title' => t('Štát'),
+    '#type' => 'select',
+    '#options' => $country_options,
+    '#default_value' => $country_options[0],
+    '#attributes' => [
+      'class' => ['geodata-country-wrapper']
+    ],
+    '#ajax' => array(
+      'event'=>'change',
+      'callback' =>'ajax_dropdown_region',
+      'wrapper' => 'region-wrapper',
+    ),
+  ];
+
+  // Wrapper for city dropdown list
+  $form['field_geodata_select']['region_wrapper'] = array(
+    '#prefix' => '<div id="region-wrapper" class="visually-hidden">',
+    '#suffix' => '</div>',
+  );
+
+  // Options for city dropdown list
+  $region_options = ['- Zvoliť -'];
+  if (!empty($form_state['values']['country'])) {
+    // Pre-populate options for city dropdown list if province id is set
+    $region_options = get_data_from_json('kraj_3.geojson', 'IDN2', 'NUTS3', 'NUTS1_CODE', $form_state['values']['country']);
+  }
+
+  $form['field_geodata_select']['region_wrapper']['region'] = [
+    '#title' => t('Kraj'),
+    '#type' => 'select',
+    '#options' => $region_options,
+    '#attributes' => [
+      'class' => ['geodata-region-wrapper']
+    ],
+    '#ajax' => array(
+      'event'=>'change',
+      'callback' =>'ajax_dropdown_district',
+      'wrapper' => 'district-wrapper',
+    ),
+  ];
+
+  // Wrapper for city dropdown list
+  $form['field_geodata_select']['district_wrapper'] = array(
+    '#prefix' => '<div id="district-wrapper" class="visually-hidden">',
+    '#suffix' => '</div>',
+  );
+
+  // Options for city dropdown list
+  $district_options = ['- Zvoliť -'];
+  if (!empty($form_state['values']['region'])) {
+    // Pre-populate options for city dropdown list if province id is set
+    $district_options = get_data_from_json('okres_3.geojson', 'IDN3', 'LAU1', 'IDN2', $form_state['values']['region']);
+  }
+
+  $form['field_geodata_select']['district_wrapper']['district'] = [
+    '#title' => t('Okres'),
+    '#type' => 'select',
+    '#options' => $district_options,
+    '#attributes' => [
+      'class' => ['geodata-district-wrapper']
+    ],
+    '#ajax' => array(
+      'event'=>'change',
+      'callback' =>'ajax_dropdown_municipality',
+      'wrapper' => 'municipality-wrapper',
+    ),
+  ];
+
+  // Wrapper for city dropdown list
+  $form['field_geodata_select']['municipality_wrapper'] = array(
+    '#prefix' => '<div id="municipality-wrapper" class="visually-hidden">',
+    '#suffix' => '</div>',
+  );
+
+  // Options for city dropdown list
+  $municipality_options = ['- Zvoliť -'];
+  if (!empty($form_state["values"]["district"])) {
+    // Pre-populate options for city dropdown list if province id is set
+    $municipality_options = get_data_from_json('obec_3.geojson', 'IDN4', 'LAU2', 'IDN3', $form_state['values']['district']);
+  }
+
+  $form['field_geodata_select']['municipality_wrapper']['municipality'] = [
+    '#title' => t('Obec'),
+    '#type' => 'select',
+    '#options' => $municipality_options,
+    '#attributes' => [
+      'class' => ['geodata-municipality-wrapper']
+    ],
+  ];
+}
+
+function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_param = NULL, $form_value = NULL) {
+  global $base_url;
+  $options = ['- Zvoliť -'];
+  $path = drupal_get_path('module', 'beliana_rsw') . '/geodata_SK0/' . $file_name;
+  $sr_data = file_get_contents($base_url . '/' . $path);
+  $data = json_decode($sr_data);
+
+  if ($con_param != NULL && $form_value != NULL) {
+    foreach ($data->features as $value) {
+      if ($value->properties->$con_param ==$form_value) {
+        $options[$value->properties->$param_1] = $value->properties->$param_2;
+      }
+    }
+  } else {
+    foreach ($data->features as $value) {
+      $options[$value->properties->$param_1] = $value->properties->$param_2;
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Function for handling ajax request
+ */
+function ajax_dropdown_region($form, $form_state) {
+  // Return the dropdown list including the wrapper
+  if (empty($form_state["values"]["country"])) {
+    $form["field_geodata_select"]["region_wrapper"]["#prefix"] = '<div id="region-wrapper" class="visually-hidden">';
+  } else {
+    $form["field_geodata_select"]["region_wrapper"]["#prefix"] = '<div id="region-wrapper">';
+  }
+  return $form['field_geodata_select']['region_wrapper'];
+}
+
+/**
+ * Function for handling ajax request
+ */
+function ajax_dropdown_district($form, $form_state) {
+  // Return the dropdown list including the wrapper
+  if (empty($form_state["values"]["region"])) {
+    $form["field_geodata_select"]["district_wrapper"]["#prefix"] = '<div id="district-wrapper" class="visually-hidden">';
+  } else {
+    $form["field_geodata_select"]["district_wrapper"]["#prefix"] = '<div id="district-wrapper">';
+  }
+  return $form['field_geodata_select']['district_wrapper'];
+}
+
+/**
+ * Function for handling ajax request
+ */
+function ajax_dropdown_municipality($form, $form_state) {
+  // Return the dropdown list including the wrapper
+  if (empty($form_state["values"]["district"])) {
+    $form["field_geodata_select"]["municipality_wrapper"]["#prefix"] = '<div id="municipality-wrapper" class="visually-hidden">';
+  } else {
+    $form["field_geodata_select"]["municipality_wrapper"]["#prefix"] = '<div id="municipality-wrapper">';
+  }
+
+  return $form['field_geodata_select']['municipality_wrapper'];
+}
+
+/**
+ * Helper function force download freemap file.
+ *
+ * @param $request_time
+ *
+ * @return void
+ */
+function _beliana_get_freemap_image() {
+  if(!isset($_GET["freemap_url"])) {
+    return;
+  }
+  if(!isset($_GET["title"])) {
+    return;
+  }
+  if(!isset($_GET["map_img_fid"])) {
+    return;
+  }
+  $freemap_url = $_GET["freemap_url"];
+  $random_hash = str_replace('/', '', hash('crc32b', $_GET["title"]));
+  $title = str_replace(' ', '-', _beliana_remove_accents(strtolower($_GET["title"]))) . '-' . $random_hash;
+  $map_img_fid = $_GET["map_img_fid"];
+  $destination = 'public://ilustracia/navrh/';
+
+  $data = [
+    'url' => $freemap_url,
+    'viewport' => [
+      'width' => 1200,
+      'height' => 900,
+      'deviceScaleFactor' => 2,
+    ],
+    'searchResultStyle' => [
+      'color' => '#DC143C',
+      'fillColor' => '#000',
+      'fill' => true,
+    ],
+  ];
+
+  $url = 'http://127.0.0.1:8080';
+//  $url = 'host.docker.internal:8080';
+  _create_map_image(['png'], $url, $data, $destination, $title, $map_img_fid);
+}
+
+/**
+ * Helper function force download geodata file.
+ *
+ * @param $request_time
+ *
+ * @return void
+ */
+function _beliana_get_geodata_image() {
+  if(!isset($_GET["title"])) {
+    return;
+  }
+  if(!isset($_GET["map_img_fid"])) {
+    return;
+  }
+  if(!isset($_GET["geodata_country"])) {
+    return;
+  }
+  if(!isset($_GET["geodata_region"])) {
+    return;
+  }
+  if(!isset($_GET["geodata_district"])) {
+    return;
+  }
+  if(!isset($_GET["geodata_municipality"])) {
+    return;
+  }
+
+  $map_img_fid = $_GET["map_img_fid"];
+  $geodata_region = $_GET["geodata_region"];
+  $geodata_district = $_GET["geodata_district"];
+  $geodata_municipality = $_GET["geodata_municipality"];
+  $destination = 'public://ilustracia/navrh/';
+
+  $params_url = '';
+  if ($geodata_region) {
+    $params_url = '?features=regions&regionId=' . $geodata_region;
+  }
+  if ($geodata_district) {
+    $params_url = '?features=regions,districts&districtId=' . $geodata_district;
+  }
+  if ($geodata_municipality) {
+    $params_url = '?features=regions,cities,roads&placeId=' . $geodata_municipality;
+  }
+
+//  $url = 'http://127.0.0.1:8081' . $params_url;
+  $url = 'host.docker.internal:8080' . $params_url;
+
+  $random_hash = str_replace('/', '', hash('crc32b', $_GET["title"] . '-' . $url));
+  $title = str_replace(' ', '-', _beliana_remove_accents(strtolower($_GET["title"]))) . '-' . $random_hash;
+  _create_map_image(['png', 'png'], $url, [], $destination, $title, $map_img_fid);
+}
+
+/**
+ * @param array|null $img_types
+ * @param string $url
+ * @param array|null $data
+ * @param string $destination
+ * @param string $title
+ * @param $map_img_fid
+ */
+function _create_map_image(array $img_types = NULL, string $url, array $data = [], string $destination, string $title, $map_img_fid) {
+  $info = [
+    'status' => FALSE,
+  ];
+
+  foreach ($img_types as $img_type) {
+    if ($img_type == 'png') {
+      if (strpos($url, '?features=')) {
+        $url .= '&format=png';
+      } else {
+        $url .= '?format=png';
+      }
+    }
+
+    $curl = curl_init();
+    $headers = array(
+      'Content-Type: image/json',
+      'Cache-Control: no-cache, no-store, must-revalidate',
+      'Pragma: no-cache',
+      'Expires: 0',
+    );
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    if (!empty($data)) {
+      curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+    }
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($curl);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    if ($http_code == 200) {
+      $image_data = $response;
+      $info['status'] = TRUE;
+    }
+    else {
+      $http_message = curl_error($curl);
+      watchdog('error', 'Auth error in node synchronization (' . $url . ') ' . $http_message);
+      drupal_json_output($info);
+      drupal_exit();
+    }
+
+    curl_close($curl);
+
+    file_prepare_directory($destination, FILE_CREATE_DIRECTORY);
+    $file = file_save_data($image_data, $destination . $title . '.' . $img_type, FILE_EXISTS_REPLACE);
+    image_path_flush($file->uri);
+    $info['file_fid'] = $file->fid;
+    $info['file_url'] = file_create_url($file->uri);
+
+    $map_img_fids = explode('/', $map_img_fid);
+
+    foreach ($map_img_fids as $map_img_fid) {
+      if (!empty($_GET["map_img_fid"]) && $map_img_fid != $file->fid) {
+        if (file_load($map_img_fid)) {
+          file_delete(file_load($map_img_fid), TRUE);
+        }
+      }
+    }
+  }
+
+  drupal_json_output($info);
+  drupal_exit();
+}
+
+
+/*
+ * Update fields data from mapa/mapa poloha
+ */
+function update_fields_value_from_map_creator(&$node) {
+  if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
+    if ($node->type == "ilustracia") {
+      if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa') {
+        if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
+          $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
+          $field_mapa_obrazok_fid_jpg = explode('/', $field_mapa_obrazok_fid);
+          $file_jpg = file_load($field_mapa_obrazok_fid_jpg[0]);
+          $file_uri = $file_jpg->uri;
+
+          if (!file_destination($file_uri, FILE_EXISTS_ERROR) && $file_jpg) {
+            $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file_jpg;
+            $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
+              'fid' => $file_jpg->fid,
+              'display' => 1,
+            ];
+            image_style_create_derivative(image_style_load('medium'), $file_uri, image_style_path('medium', $file_uri));
+          }
+        }
+
+        $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
+        $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
+        $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
+        $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
+        $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
+      }
+      if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
+        if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
+          $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
+
+          $file_jpg = file_load(explode('/', $field_mapa_obrazok_fid)[0]);
+          $file_uri_jpg = $file_jpg->uri;
+          if (!file_destination($file_uri_jpg, FILE_EXISTS_ERROR) && $file_jpg) {
+            $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file_jpg;
+          }
+
+          $file_svg = file_load(explode('/', $field_mapa_obrazok_fid)[1]);
+          $file_uri_svg = $file_svg->uri;
+          if (!file_destination($file_uri_svg, FILE_EXISTS_ERROR) && $file_svg) {
+            $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
+              'fid' => $file_svg->fid,
+              'display' => 1,
+            ];
+          }
+        }
+
+        $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
+        $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
+        $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
+        $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
+        $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_init().
  */
 function beliana_rsw_init(){
@@ -23,6 +498,10 @@ function beliana_rsw_form_alter(&$form, &$form_state, $form_id) {
       //disable browser remember password on user edit form
       $form['account']['current_pass']['#type'] = 'textfield';
       $form['account']['current_pass']['#attributes']['onfocus'] = "this.setAttribute('type', 'password')";
+      break;
+    case 'ilustracia_node_form':
+      $form['#attached']['js'][] = drupal_get_path('module', 'beliana_rsw') . '/js/freemap.js';
+      drupal_add_js([], ['type' => 'setting']);
       break;
   }
 }
@@ -609,7 +1088,7 @@ function beliana_sync_from_remote_access($node) {
   global $user;
 
   // Access rights must be set in /admin/config/workbench/access/ (even for administrator)
-  // Permission to be set: Beliana / Allow synchronise remote node 
+  // Permission to be set: Beliana / Allow synchronise remote node
   // returns 'deny' or Null
   $response = workbench_access_node_access($node, 'update', $user);
 
