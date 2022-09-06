@@ -8,10 +8,10 @@
     attach: function (context, settings) {
       var self = this;
       var body = $(document.body);
-      var freemap_url = $('#edit-field-freemap-url input');
+      var freemap_url = $('.freemap-url-wrapper');
+      var freemap_url_input = $('#edit-field-freemap-url input');
       var freemap_url_diela = $('#edit-field-url-diela-l input');
       var map_img_fid = $('#edit-field-mapa-obrazok-fid input');
-
       window.addEventListener("message", (e) => {
         try {
           if (e.data.freemap.action !== "urlUpdated") {
@@ -21,7 +21,8 @@
         catch (err) {
           return;
         }
-        freemap_url.val(e.data.freemap.payload);
+        freemap_url.text(e.data.freemap.payload);
+        freemap_url_input.val(e.data.freemap.payload);
         freemap_url_diela.val(e.data.freemap.payload);
         // console.log("URL", e.data.freemap.payload);
       });
@@ -115,25 +116,25 @@
       });
     },
     commentInstructionAddValue: function (comment_instruction) {
-      if (comment_instruction.val().length !== 0) {
-        comment_instruction.val(comment_instruction.val() + "\n");
-      }
-
       var country = $('select.geodata-country-wrapper option:selected').text();
       var region = $('select.geodata-region-wrapper option:selected').text();
       var district = $('select.geodata-district-wrapper option:selected').text();
       var municipality = $('select.geodata-municipality-wrapper option:selected').text();
 
-      if (country !== '- Zvoľiť -') {
+      if (comment_instruction.val().length !== 0 && country !== '- Zvoliť -') {
+        comment_instruction.val(comment_instruction.val() + "\n");
+      }
+
+      if (country !== '- Zvoliť -') {
         comment_instruction.val(comment_instruction.val() + 'Generovanie mapy poloha: ' + country);
       }
-      if (region !== '- Zvoľiť -') {
+      if (region !== '- Zvoliť -') {
         comment_instruction.val(comment_instruction.val() + ' / ' + region);
       }
-      if (district !== '- Zvoľiť -') {
+      if (district !== '- Zvoliť -') {
         comment_instruction.val(comment_instruction.val() + ' / ' + district);
       }
-      if (municipality !== '- Zvoľiť -') {
+      if (municipality !== '- Zvoliť -') {
         comment_instruction.val(comment_instruction.val() + ' / ' + municipality);
       }
     },
