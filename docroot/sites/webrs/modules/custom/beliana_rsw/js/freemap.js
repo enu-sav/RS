@@ -10,7 +10,6 @@
       var body = $(document.body);
       var freemap_url = $('.freemap-url-wrapper');
       var freemap_url_input = $('#edit-field-freemap-url input');
-      var freemap_url_diela = $('#edit-field-url-diela-l input');
       var map_img_fid = $('#edit-field-mapa-obrazok-fid input');
       window.addEventListener("message", (e) => {
         try {
@@ -23,7 +22,6 @@
         }
         freemap_url.text(e.data.freemap.payload);
         freemap_url_input.val(e.data.freemap.payload);
-        freemap_url_diela.val(e.data.freemap.payload);
         // console.log("URL", e.data.freemap.payload);
       });
 
@@ -47,7 +45,7 @@
           url: location.protocol + "//" + location.host + "/get-freemap-image",
           data: {
             "title": "mapa-" + title,
-            "freemap_url": freemap_url_diela.val(),
+            "freemap_url": freemap_url_input.val(),
             "map_img_fid": map_img_fid.val(),
           },
           success: function (data, status, xhr) {
