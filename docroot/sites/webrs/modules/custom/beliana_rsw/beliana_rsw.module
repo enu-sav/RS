@@ -52,37 +52,39 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $form['field_map_embed'] = [
     '#type' => 'item',
     '#markup' => '<div class="freemap-url-wrapper">' . $freemap_default_url . '</div>
-                  <div class="freemap-wrapper" style="width: 1200px; height: 900px;">
-                    <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 100%; height: 100%; border: 0; pointer-events: none;" allowfullscreen></iframe>
-                  </div>
-                  <div class="button">
-                    <a href="#free-map-btn" class="form-submit" id="free-map-btn">Vytvoriť obrázok mapy</a>
-                  </div>
-                  <div class="image-preview" style="display: ' . $image_preview_style . ';">
-                    <img id="free-map-img" width="auto" height="150" src="' . $map_img_url . '" />
-                  </div>',
+                <div class="freemap-wrapper" style="width: 1200px; height: 900px;">
+                  <iframe id="freemap" src="' . $freemap_default_url . '" style="width: 100%; height: 100%; border: 0; pointer-events: none;" allowfullscreen></iframe>
+                </div>
+                <div class="button">
+                  <a href="#free-map-btn" class="form-submit" id="free-map-btn">Vytvoriť obrázok mapy</a>
+                </div>
+                <div class="image-preview" style="display: ' . $image_preview_style . ';">
+                  <img id="free-map-img" width="auto" height="150" src="' . $map_img_url . '" />
+                </div>',
     '#weight' => 20,
     '#states' => [
       'visible' => [
         ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa'],
       ],
     ],
+    '#access' => $form["field_zdroj_ilustracie"]["#access"],
   ];
 
   $form['field_geodata'] = [
     '#type' => 'item',
     '#markup' => '<div class="button">
-                      <a href="#geodata-btn" class="form-submit" id="geodata-btn-place">Vytvoriť obrázok mapy - Poloha</a>
-                    </div>
-                    <div class="image-preview" style="display: ' . $image_preview_style . ';">
-                      <img id="geodata-img" width="auto" height="150" src="' . $map_img_url . '" />
-                    </div>',
+                    <a href="#geodata-btn" class="form-submit" id="geodata-btn-place">Vytvoriť obrázok mapy - Poloha</a>
+                  </div>
+                  <div class="image-preview" style="display: ' . $image_preview_style . ';">
+                    <img id="geodata-img" width="auto" height="150" src="' . $map_img_url . '" />
+                  </div>',
     '#weight' => 20,
     '#states' => [
       'visible' => [
         ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
       ],
     ],
+    '#access' => $form["field_zdroj_ilustracie"]["#access"],
   ];
 
   $form['field_geodata_select'] = [
@@ -94,6 +96,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
         ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
       ],
     ],
+    '#access' => $form["field_zdroj_ilustracie"]["#access"],
   ];
 
   $country_options = get_data_from_json('sr_3.geojson', 'NUTS1_CODE', 'NM1');
@@ -105,18 +108,18 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     '#attributes' => [
       'class' => ['geodata-country-wrapper']
     ],
-    '#ajax' => array(
-      'event'=>'change',
-      'callback' =>'ajax_dropdown_region',
+    '#ajax' => [
+      'event' => 'change',
+      'callback' => 'ajax_dropdown_region',
       'wrapper' => 'region-wrapper',
-    ),
+    ],
   ];
 
   // Wrapper for city dropdown list
-  $form['field_geodata_select']['region_wrapper'] = array(
+  $form['field_geodata_select']['region_wrapper'] = [
     '#prefix' => '<div id="region-wrapper" class="visually-hidden">',
     '#suffix' => '</div>',
-  );
+  ];
 
   // Options for city dropdown list
   $region_options = ['- Zvoliť -'];
@@ -132,18 +135,18 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     '#attributes' => [
       'class' => ['geodata-region-wrapper']
     ],
-    '#ajax' => array(
-      'event'=>'change',
-      'callback' =>'ajax_dropdown_district',
+    '#ajax' => [
+      'event' => 'change',
+      'callback' => 'ajax_dropdown_district',
       'wrapper' => 'district-wrapper',
-    ),
+    ],
   ];
 
   // Wrapper for city dropdown list
-  $form['field_geodata_select']['district_wrapper'] = array(
+  $form['field_geodata_select']['district_wrapper'] = [
     '#prefix' => '<div id="district-wrapper" class="visually-hidden">',
     '#suffix' => '</div>',
-  );
+  ];
 
   // Options for city dropdown list
   $district_options = ['- Zvoliť -'];
@@ -159,18 +162,18 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     '#attributes' => [
       'class' => ['geodata-district-wrapper']
     ],
-    '#ajax' => array(
-      'event'=>'change',
-      'callback' =>'ajax_dropdown_municipality',
+    '#ajax' => [
+      'event' => 'change',
+      'callback' => 'ajax_dropdown_municipality',
       'wrapper' => 'municipality-wrapper',
-    ),
+    ],
   ];
 
   // Wrapper for city dropdown list
-  $form['field_geodata_select']['municipality_wrapper'] = array(
+  $form['field_geodata_select']['municipality_wrapper'] = [
     '#prefix' => '<div id="municipality-wrapper" class="visually-hidden">',
     '#suffix' => '</div>',
-  );
+  ];
 
   // Options for city dropdown list
   $municipality_options = ['- Zvoliť -'];
