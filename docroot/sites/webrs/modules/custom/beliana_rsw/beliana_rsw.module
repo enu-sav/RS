@@ -30,6 +30,13 @@ function beliana_rsw_menu() {
   return $items;
 }
 
+const COUNTRY_LEVELS = [
+  'AT' => [4],
+  'DE' => [4],
+  'FR' => [4],
+  'UR' => [4],
+];
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -78,120 +85,178 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
                   <div class="image-preview" style="display: ' . $image_preview_style . ';">
                     <img id="geodata-img" width="auto" height="150" src="' . $map_img_url . '" />
                   </div>',
-    '#weight' => 20,
+    '#weight' => 22,
     '#states' => [
       'visible' => [
         ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
       ],
     ],
-    '#access' => $form["field_zdroj_ilustracie"]["#access"],
+    '#access' => $form['field_zdroj_ilustracie']['#access'],
   ];
 
-  $form['field_geodata_select'] = [
+  $form['field_country_select'] = [
     '#type' => 'container',
-    '#attributes' => ['class' => ['top-content']],
+    '#attributes' => [
+      'class' => ['top-content']
+    ],
     '#weight' => 20,
     '#states' => [
       'visible' => [
         ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
       ],
     ],
-    '#access' => $form["field_zdroj_ilustracie"]["#access"],
+    '#access' => $form['field_zdroj_ilustracie']['#access'],
   ];
 
-  $country_options = get_data_from_json('sr_3.geojson', 'NUTS1_CODE', 'NM1');
-  $form['field_geodata_select']['country'] = [
+  $admin_level_id = 0;
+  if (!empty($form_state['values']['admin_level_id']) && $form_state['triggering_element']['#name'] != 'country_code') {
+    $admin_level_id = $form_state['values']['admin_level_id'];
+  }
+
+  $form['field_country_select']['admin_level_id'] = [
+    '#type' => 'hidden',
+    '#value' => $admin_level_id,
+  ];
+
+  $country_options = [
+    0 => '- Zvoliť -',
+    'SK' => 'Slovensko',
+    'AT' => 'Rakusko',
+    'DE' => 'Nemecko',
+    'FR' => 'Francúzko',
+    ]
+  ;
+
+  $form['field_country_select']['country_code'] = [
     '#title' => t('Štát'),
     '#type' => 'select',
     '#options' => $country_options,
-    '#default_value' => $country_options[0],
+    '#default_value' => $form_state["values"]["country_code"] ?? $country_options['0'],
     '#attributes' => [
-      'class' => ['geodata-country-wrapper']
+      'class' => ['country-code']
     ],
+    '#weight' => 22,
     '#ajax' => [
       'event' => 'change',
       'callback' => 'ajax_dropdown_region',
       'wrapper' => 'region-wrapper',
     ],
+    '#states' => [
+      'visible' => [
+        ':input[name="field_zdroj_ilustracie[und]"]' => ['value' => 'Mapa - Poloha'],
+      ],
+    ],
+    '#access' => $form['field_zdroj_ilustracie']['#access'],
   ];
 
-  // Wrapper for city dropdown list
-  $form['field_geodata_select']['region_wrapper'] = [
+  $country_code = $form_state['values']['country_code'];
+
+  $form['field_country_select']['region_wrapper'] = [
     '#prefix' => '<div id="region-wrapper" class="visually-hidden">',
     '#suffix' => '</div>',
-  ];
-
-  // Options for city dropdown list
-  $region_options = ['- Zvoliť -'];
-  if (!empty($form_state['values']['country'])) {
-    // Pre-populate options for city dropdown list if province id is set
-    $region_options = get_data_from_json('kraj_3.geojson', 'IDN2', 'NUTS3', 'NUTS1_CODE', $form_state['values']['country']);
-  }
-
-  $form['field_geodata_select']['region_wrapper']['region'] = [
-    '#title' => t('Kraj'),
-    '#type' => 'select',
-    '#options' => $region_options,
-    '#attributes' => [
-      'class' => ['geodata-region-wrapper']
-    ],
-    '#ajax' => [
-      'event' => 'change',
-      'callback' => 'ajax_dropdown_district',
-      'wrapper' => 'district-wrapper',
-    ],
+    '#weight' => 24,
   ];
 
   // Wrapper for city dropdown list
-  $form['field_geodata_select']['district_wrapper'] = [
+  $form['field_country_select']['region_wrapper']['district_wrapper'] = [
     '#prefix' => '<div id="district-wrapper" class="visually-hidden">',
     '#suffix' => '</div>',
-  ];
-
-  // Options for city dropdown list
-  $district_options = ['- Zvoliť -'];
-  if (!empty($form_state['values']['region'])) {
-    // Pre-populate options for city dropdown list if province id is set
-    $district_options = get_data_from_json('okres_3.geojson', 'IDN3', 'LAU1', 'IDN2', $form_state['values']['region']);
-  }
-
-  $form['field_geodata_select']['district_wrapper']['district'] = [
-    '#title' => t('Okres'),
-    '#type' => 'select',
-    '#options' => $district_options,
-    '#attributes' => [
-      'class' => ['geodata-district-wrapper']
-    ],
-    '#ajax' => [
-      'event' => 'change',
-      'callback' => 'ajax_dropdown_municipality',
-      'wrapper' => 'municipality-wrapper',
-    ],
+    '#weight' => 26,
   ];
 
   // Wrapper for city dropdown list
-  $form['field_geodata_select']['municipality_wrapper'] = [
+  $form['field_country_select']['region_wrapper']['municipality_wrapper'] = [
     '#prefix' => '<div id="municipality-wrapper" class="visually-hidden">',
     '#suffix' => '</div>',
+    '#weight' => 28,
   ];
 
-  // Options for city dropdown list
-  $municipality_options = ['- Zvoliť -'];
-  if (!empty($form_state["values"]["district"])) {
-    // Pre-populate options for city dropdown list if province id is set
-    $municipality_options = get_data_from_json('obec_3.geojson', 'IDN4', 'LAU2', 'IDN3', $form_state['values']['district']);
+  $country_admin_levels = COUNTRY_LEVELS[$country_code];
+
+  if ($country_code != 'SK') {
+    foreach ($country_admin_levels as $country_admin_level) {
+      // Wrapper for admin level dropdown list
+
+      $admin_level_options = get_data_from_map_sqlite($country_code, $country_admin_level);
+
+      $form['field_country_select']['region_wrapper']['admin_level_' . $country_admin_level] = [
+        '#title' => t('Admin level ' . $country_admin_level),
+        '#type' => 'select',
+        '#options' => $admin_level_options,
+        '#default_value' => $form_state["values"]["admin_level_" . $country_admin_level] ?? $admin_level_options['0'],
+        '#name' => 'admin_level_' . $country_admin_level,
+        '#attributes' => [
+          'class' => ['admin-level-' . $country_admin_level]
+        ],
+      ];
+      if ($country_admin_level > $admin_level_id) {
+        $form['field_country_select']['admin_level_id']["#value"] = $country_admin_level;
+        break;
+      }
+    }
+
+  } else {
+//    // Options for city dropdown list
+    $region_options = ['- Zvoliť -'];
+    if (!empty($form_state['values']['country_code'])) {
+      // Pre-populate options for city dropdown list if province id is set
+      $region_options = get_data_from_json('kraj_3.geojson', 'IDN2', 'NUTS3', 'NUTS1_CODE', $form_state['values']['country']);
+    }
+
+    $form['field_country_select']['region_wrapper']['region'] = [
+      '#title' => t('Kraj'),
+      '#type' => 'select',
+      '#options' => $region_options,
+      '#attributes' => [
+        'class' => ['geodata-region-wrapper']
+      ],
+      '#ajax' => [
+        'event' => 'change',
+        'callback' => 'ajax_dropdown_district',
+        'wrapper' => 'district-wrapper',
+      ],
+    ];
+
+    // Options for city dropdown list
+    $district_options = ['- Zvoliť -'];
+    if (!empty($form_state['values']['region'])) {
+      // Pre-populate options for city dropdown list if province id is set
+      $district_options = get_data_from_json('okres_3.geojson', 'IDN3', 'LAU1', 'IDN2', $form_state['values']['region']);
+    }
+
+    $form['field_country_select']['region_wrapper']['district_wrapper']['district'] = [
+      '#title' => t('Okres'),
+      '#type' => 'select',
+      '#options' => $district_options,
+      '#attributes' => [
+        'class' => ['geodata-district-wrapper']
+      ],
+      '#ajax' => [
+        'event' => 'change',
+        'callback' => 'ajax_dropdown_municipality',
+        'wrapper' => 'municipality-wrapper',
+      ],
+    ];
+
+    // Options for city dropdown list
+    $municipality_options = ['- Zvoliť -'];
+    if (!empty($form_state["values"]["district"])) {
+      // Pre-populate options for city dropdown list if province id is set
+      $municipality_options = get_data_from_json('obec_3.geojson', 'IDN4', 'LAU2', 'IDN3', $form_state['values']['district']);
+    }
+
+    $form['field_country_select']['region_wrapper']['municipality_wrapper']['municipality'] = [
+      '#title' => t('Obec'),
+      '#type' => 'select',
+      '#options' => $municipality_options,
+      '#attributes' => [
+        'class' => ['geodata-municipality-wrapper']
+      ],
+    ];
   }
-
-  $form['field_geodata_select']['municipality_wrapper']['municipality'] = [
-    '#title' => t('Obec'),
-    '#type' => 'select',
-    '#options' => $municipality_options,
-    '#attributes' => [
-      'class' => ['geodata-municipality-wrapper']
-    ],
-  ];
 }
 
+// Get country values form geodata files
 function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_param = NULL, $form_value = NULL) {
   global $base_url;
   $options = ['- Zvoliť -'];
@@ -201,7 +266,7 @@ function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_p
 
   if ($con_param != NULL && $form_value != NULL) {
     foreach ($data->features as $value) {
-      if ($value->properties->$con_param ==$form_value) {
+      if ($value->properties->$con_param == $form_value) {
         $options[$value->properties->$param_1] = $value->properties->$param_2;
       }
     }
@@ -214,17 +279,48 @@ function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_p
   return $options;
 }
 
+// Get country values form map.sqlite
+function get_data_from_map_sqlite($country_code, $admin_level) {
+  $options = ['- Zvoliť -'];
+  db_set_active('minimap');
+  $query = db_query('select distinct osm_id, name from admin_areas where admin_level = :admin_level and country_code = :country_code and name is not null', [':country_code' => $country_code, ':admin_level' => $admin_level]);
+  $result = $query->fetchAll();
+  db_set_active('default');
+
+  foreach ($result as $item) {
+    $options[$item->osm_id] = $item->name;
+  }
+
+  return $options;
+}
+
+/**
+ * Function for handling ajax request
+ */
+function ajax_dropdown_admin_level($form, $form_state) {
+  // Return the dropdown list including the wrapper
+  if (empty($form_state["values"]["country_code"])) {
+    $form['field_country_select']['admin_level_wrapper']['#prefix'] = '<div id="admin-level-wrapper" class="visually-hidden">';
+  } else {
+    $form['field_country_select']['admin_level_wrapper']['#prefix'] = '<div id="admin-level-wrapper">';
+  }
+
+  return $form['field_country_select']['admin_level_wrapper'];
+}
+
 /**
  * Function for handling ajax request
  */
 function ajax_dropdown_region($form, $form_state) {
   // Return the dropdown list including the wrapper
-  if (empty($form_state["values"]["country"])) {
-    $form["field_geodata_select"]["region_wrapper"]["#prefix"] = '<div id="region-wrapper" class="visually-hidden">';
+
+  if (empty($form_state["values"]["country_code"])) {
+    $form['field_country_select']['region_wrapper']['#prefix'] = '<div id="region-wrapper" class="visually-hidden">';
   } else {
-    $form["field_geodata_select"]["region_wrapper"]["#prefix"] = '<div id="region-wrapper">';
+    $form['field_country_select']['region_wrapper']['#prefix'] = '<div id="region-wrapper">';
   }
-  return $form['field_geodata_select']['region_wrapper'];
+
+  return $form['field_country_select']['region_wrapper'];
 }
 
 /**
@@ -233,11 +329,12 @@ function ajax_dropdown_region($form, $form_state) {
 function ajax_dropdown_district($form, $form_state) {
   // Return the dropdown list including the wrapper
   if (empty($form_state["values"]["region"])) {
-    $form["field_geodata_select"]["district_wrapper"]["#prefix"] = '<div id="district-wrapper" class="visually-hidden">';
+    $form['field_country_select']['region_wrapper']['district_wrapper']['#prefix'] = '<div id="district-wrapper" class="visually-hidden">';
   } else {
-    $form["field_geodata_select"]["district_wrapper"]["#prefix"] = '<div id="district-wrapper">';
+    $form['field_country_select']['region_wrapper']['district_wrapper']['#prefix'] = '<div id="district-wrapper">';
   }
-  return $form['field_geodata_select']['district_wrapper'];
+
+  return $form['field_country_select']['region_wrapper']['district_wrapper'];
 }
 
 /**
@@ -246,12 +343,12 @@ function ajax_dropdown_district($form, $form_state) {
 function ajax_dropdown_municipality($form, $form_state) {
   // Return the dropdown list including the wrapper
   if (empty($form_state["values"]["district"])) {
-    $form["field_geodata_select"]["municipality_wrapper"]["#prefix"] = '<div id="municipality-wrapper" class="visually-hidden">';
+    $form['field_country_select']['region_wrapper']['municipality_wrapper']['#prefix'] = '<div id="municipality-wrapper" class="visually-hidden">';
   } else {
-    $form["field_geodata_select"]["municipality_wrapper"]["#prefix"] = '<div id="municipality-wrapper">';
+    $form['field_country_select']['region_wrapper']['municipality_wrapper']['#prefix'] = '<div id="municipality-wrapper">';
   }
 
-  return $form['field_geodata_select']['municipality_wrapper'];
+  return $form['field_country_select']['region_wrapper']['municipality_wrapper'];
 }
 
 /**
@@ -322,22 +419,33 @@ function _beliana_get_geodata_image() {
   if(!isset($_GET["geodata_municipality"])) {
     return;
   }
+  if(!isset($_GET["geodata_admin_level_4"])) {
+    return;
+  }
 
   $map_img_fid = $_GET["map_img_fid"];
+  $geodata_country = strtolower($_GET["geodata_country"]);
   $geodata_region = $_GET["geodata_region"];
   $geodata_district = $_GET["geodata_district"];
   $geodata_municipality = $_GET["geodata_municipality"];
+  $geodata_admin_level_4 = $_GET["geodata_admin_level_4"];
   $destination = 'public://ilustracia/navrh/';
 
-  $params_url = '';
+  $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city,town";
   if ($geodata_region) {
-    $params_url = '?features=regions&regionId=' . $geodata_region;
+    $geodata_region = urlencode($geodata_region);
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&highlight-admin-area=$geodata_region";
   }
   if ($geodata_district) {
-    $params_url = '?features=regions,districts&districtId=' . $geodata_district;
+    $geodata_district = urlencode('okres ' . $geodata_district);
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&place-types=city&highlight-admin-area=$geodata_district";
   }
   if ($geodata_municipality) {
-    $params_url = '?features=regions,cities,roads&placeId=' . $geodata_municipality;
+    $params_url = "?features=borders,landcover&country=$geodata_country&width=1200&scale=1&margin=20&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&placeId=" . $geodata_municipality;
+  }
+  if ($geodata_admin_level_4) {
+    $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city,town&highlight-admin-area=$geodata_admin_level_4";
   }
 
   $url = 'http://127.0.0.1:8081' . $params_url;
