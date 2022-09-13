@@ -68,19 +68,39 @@
       body.find('#geodata-btn-place').unbind('click').click(function () {
         var title = $("#title-field-add-more-wrapper input").val();
         var comment_instruction = $('#field-komentar-instrukcie-add-more-wrapper textarea');
-        var geodata_country = $('select.geodata-country-wrapper');
-        var geodata_region = $('select.geodata-region-wrapper');
-        var geodata_district = $('select.geodata-district-wrapper');
-        var geodata_municipality = $('select.geodata-municipality-wrapper');
+        var geodata_country = $('select.country-code').val();
+        var geodata_region =   $('select.geodata-region-wrapper').val();
+        var geodata_district = $('select.geodata-district-wrapper').val();
+        var geodata_municipality = $('select.geodata-municipality-wrapper').val();
+        var geodata_admin_level_4 = $('select.admin-level-4').val();
 
         if (title.length === 0) {
           alert('Pole Názov ilustrácie nieje vyplnené.');
           return;
         }
 
-        if (geodata_country.val() === "0") {
+        if (geodata_country === "0") {
           alert('Pole Krajina nieje vybratá.');
           return;
+        }
+
+        if (geodata_region !== "0") {
+          geodata_region = $('select.geodata-region-wrapper :selected').text();
+        }
+
+        if (geodata_district !== "0") {
+          geodata_district = $('select.geodata-district-wrapper :selected').text();
+        }
+
+        if (geodata_municipality !== "0") {
+          geodata_municipality = $('select.geodata-municipality-wrapper :selected').val();
+          if (typeof(geodata_municipality) === "undefined") {
+            geodata_municipality = "";
+          }
+        }
+
+        if (geodata_admin_level_4 !== "0") {
+          geodata_admin_level_4 = $('select.admin-level-4 :selected').text();
         }
 
         $.ajax({
@@ -88,10 +108,11 @@
           data: {
             "title": "mapa-poloha-" + title,
             "map_img_fid": map_img_fid.val(),
-            "geodata_country": geodata_country.val(),
-            "geodata_region": geodata_region.val(),
-            "geodata_district": geodata_district.val(),
-            "geodata_municipality": geodata_municipality.val(),
+            "geodata_country": geodata_country,
+            "geodata_region": geodata_region,
+            "geodata_district": geodata_district,
+            "geodata_municipality": geodata_municipality,
+            "geodata_admin_level_4": geodata_admin_level_4,
           },
           success: function (data, status, xhr) {
             if (data['status']) {
@@ -114,10 +135,11 @@
       });
     },
     commentInstructionAddValue: function (comment_instruction) {
-      var country = $('select.geodata-country-wrapper option:selected').text();
+      var country = $('select.country-code option:selected').text();
       var region = $('select.geodata-region-wrapper option:selected').text();
       var district = $('select.geodata-district-wrapper option:selected').text();
       var municipality = $('select.geodata-municipality-wrapper option:selected').text();
+      var geodata_admin_level_4 = $('select.admin-level-4 option:selected').text();
 
       if (comment_instruction.val().length !== 0 && country !== '- Zvoliť -') {
         comment_instruction.val(comment_instruction.val() + "\n");
@@ -126,14 +148,17 @@
       if (country !== '- Zvoliť -') {
         comment_instruction.val(comment_instruction.val() + 'Generovanie mapy poloha: ' + country);
       }
-      if (region !== '- Zvoliť -') {
+      if (region !== '- Zvoliť -' && region !== '') {
         comment_instruction.val(comment_instruction.val() + ' / ' + region);
       }
-      if (district !== '- Zvoliť -') {
+      if (district !== '- Zvoliť -' && district !== '') {
         comment_instruction.val(comment_instruction.val() + ' / ' + district);
       }
-      if (municipality !== '- Zvoliť -') {
+      if (municipality !== '- Zvoliť -' && municipality !== '') {
         comment_instruction.val(comment_instruction.val() + ' / ' + municipality);
+      }
+      if (geodata_admin_level_4 !== '- Zvoliť -' && geodata_admin_level_4 !== '') {
+        comment_instruction.val(comment_instruction.val() + ' / ' + geodata_admin_level_4);
       }
     },
   };
