@@ -35,6 +35,7 @@ const COUNTRY_LEVELS = [
   'DE' => [4],
   'FR' => [4],
   'UR' => [4],
+  'CH' => [4],
 ];
 
 /**
@@ -124,6 +125,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     'AT' => 'Rakusko',
     'DE' => 'Nemecko',
     'FR' => 'Francúzko',
+    'CH' => 'Švajčiarsko',
     ]
   ;
 
@@ -448,8 +450,8 @@ function _beliana_get_geodata_image() {
     $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city,town&highlight-admin-area=$geodata_admin_level_4";
   }
 
-  $url = 'http://127.0.0.1:8081' . $params_url;
-//  $url = 'host.docker.internal:8080' . $params_url;
+//  $url = 'http://127.0.0.1:8081' . $params_url;
+  $url = 'host.docker.internal:8080' . $params_url;
 
   $random_hash = str_replace('/', '', hash('crc32b', $_GET["title"] . '-' . $url));
   $title = str_replace(' ', '-', _beliana_remove_accents(strtolower($_GET["title"]))) . '-' . $random_hash;

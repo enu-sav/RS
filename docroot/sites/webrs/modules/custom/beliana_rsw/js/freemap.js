@@ -74,6 +74,8 @@
         var geodata_municipality = $('select.geodata-municipality-wrapper').val();
         var geodata_admin_level_4 = $('select.admin-level-4').val();
 
+        $('#edit-field-freemap-url input').val('');
+
         if (title.length === 0) {
           alert('Pole Názov ilustrácie nieje vyplnené.');
           return;
