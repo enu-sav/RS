@@ -35,6 +35,7 @@ const COUNTRY_LEVELS = [
   'DE' => [4],
   'FR' => [4],
   'UR' => [4],
+  'CH' => [4],
 ];
 
 /**
@@ -121,9 +122,10 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $country_options = [
     0 => '- Zvoliť -',
     'SK' => 'Slovensko',
-    'AT' => 'Rakusko',
+    'AT' => 'Rakúsko',
     'DE' => 'Nemecko',
     'FR' => 'Francúzko',
+    'CH' => 'Švajčiarsko',
     ]
   ;
 
