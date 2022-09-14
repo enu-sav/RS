@@ -122,7 +122,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $country_options = [
     0 => '- Zvoliť -',
     'SK' => 'Slovensko',
-    'AT' => 'Rakusko',
+    'AT' => 'Rakúsko',
     'DE' => 'Nemecko',
     'FR' => 'Francúzko',
     'CH' => 'Švajčiarsko',
