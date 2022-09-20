@@ -615,9 +615,9 @@ function update_fields_value_from_map_creator(&$node) {
 }
 
 /**
- * Implements hook_node_postupdate().
+ * Implements hook_node_postsave().
  */
-function beliana_rsw_node_postupdate($node) {
+function beliana_rsw_node_postsave($node) {
   if($node->type == 'ilustracia') {
     //replace file uri after create node - ilustracia
     if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa' ||
