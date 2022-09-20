@@ -632,6 +632,7 @@ function beliana_rsw_node_postsave($node) {
           if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
             $title = 'mapa-poloha-' . $node->title . '-' . $node->nid;
           }
+          $title = str_replace(' ', '-', _beliana_remove_accents(strtolower($title)));
           file_move($file_jpg, $destination . '/' . $title . '.png', FILE_EXISTS_REPLACE);
         }
       }
