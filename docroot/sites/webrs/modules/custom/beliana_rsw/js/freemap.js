@@ -8,6 +8,7 @@
     attach: function (context, settings) {
       var self = this;
       var body = $(document.body);
+      var node_id = $("#node-id").val();
       var freemap_url = $('.freemap-url-wrapper');
       var freemap_url_input = $('#edit-field-freemap-url input');
       var map_img_fid = $('#edit-field-mapa-obrazok-fid input');
@@ -44,6 +45,7 @@
         $.ajax({
           url: location.protocol + "//" + location.host + "/get-freemap-image",
           data: {
+            "node_id": node_id,
             "title": "mapa-" + title,
             "freemap_url": freemap_url_input.val(),
             "map_img_fid": map_img_fid.val(),
@@ -66,6 +68,7 @@
       });
 
       body.find('#geodata-btn-place').unbind('click').click(function () {
+        var node_id = $("#node-id").val();
         var title = $("#title-field-add-more-wrapper input").val();
         var comment_instruction = $('#field-komentar-instrukcie-add-more-wrapper textarea');
         var geodata_country = $('select.country-code').val();
@@ -108,6 +111,7 @@
         $.ajax({
           url: location.protocol + "//" + location.host + "/get-geodata-image",
           data: {
+            "node_id": node_id,
             "title": "mapa-poloha-" + title,
             "map_img_fid": map_img_fid.val(),
             "geodata_country": geodata_country,
