@@ -908,6 +908,25 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
   $handler->display->display_options['filters']['field_obrazok_odkaz_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
+  /* Filter criterion: Obsah: Dátum aktualizácie (field_datum_aktualizacie) */
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['id'] = 'field_datum_aktualizacie_value';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['table'] = 'field_data_field_datum_aktualizacie';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['field'] = 'field_datum_aktualizacie_value';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['operator_id'] = 'field_datum_aktualizacie_value_op';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['label'] = 'Dátum aktualizácie';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['operator'] = 'field_datum_aktualizacie_value_op';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['limit_operators'] = TRUE;
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['available_operators'] = array(
+    'empty' => 'empty',
+    'not empty' => 'not empty',
+  );
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['identifier'] = 'field_datum_aktualizacie_value';
+  $handler->display->display_options['filters']['field_datum_aktualizacie_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['path'] = 'zverejnene-na-webe';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Zverejnené';
