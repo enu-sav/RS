@@ -14314,7 +14314,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = 'V tomto náhľade možno vyhľadať heslá, ktoré možno komentovať (heslá v stave Zverejnené na webe). <br />
-Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používateľské meno do poľa <strong>Upravil revíziu</strong>.';
+Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používateľské meno do poľa <strong>Upravené používateľom</strong>.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -14536,7 +14536,7 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     t('Komentovať'),
     t('Komentovať heslá a ilustrácie'),
     t('V tomto náhľade možno vyhľadať heslá, ktoré možno komentovať (heslá v stave Zverejnené na webe). <br />
-Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používateľské meno do poľa <strong>Upravil revíziu</strong>.'),
+Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používateľské meno do poľa <strong>Upravené používateľom</strong>.'),
     t('Upravené používateľom'),
     t('User has a revision'),
   );
