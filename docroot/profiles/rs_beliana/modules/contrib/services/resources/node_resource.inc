@@ -325,7 +325,7 @@ function _node_resource_create($node) {
   // but always make the node author default to the current user (if the user
   // has permission to change it, $form_state['values'] will override this
   // default when the form is submitted).
-  $stub_node = (object) array_intersect_key($node, array_flip(array('type', 'language')));
+  $stub_node = (object) array_intersect_key($node, array_flip(array('type', 'language', 'tnid')));
   $stub_node->name = $user->name;
 
   // Contributed modules may check the triggering element in the form state.
@@ -339,9 +339,8 @@ function _node_resource_create($node) {
   );
   $stub_form = drupal_build_form($node_type . '_node_form', $stub_form_state);
   $form_state['triggering_element'] = $stub_form['actions']['submit'];
-  $node = (object) array_merge((array) $stub_node, (array) $node);
 
-  drupal_form_submit($node_type . '_node_form', $form_state, $node);
+  drupal_form_submit($node_type . '_node_form', $form_state, (object)$stub_node);
 
   if ($errors = form_get_errors()) {
     return services_error(implode(" ", $errors), 406, array('form_errors' => $errors));
@@ -424,7 +423,6 @@ function _node_resource_update($nid, $node) {
 
   $node_type = $node['type'];
   node_object_prepare($old_node);
-  $old_node = (object) array_merge((array) $old_node, (array) $node);
 
   // Setup form_state.
   $form_state = array();
