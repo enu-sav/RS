@@ -241,71 +241,13 @@ function ckeditor_ckeditor_plugin() {
     $plugins['drupalbreaks']['default'] = 't';
 
     // Remove the page break button if there is no module to handle it.
-    if (isset($plugins['drupalbreaks']['buttons']['DrupalPageBreak']) && !module_exists('paging') && !module_exists('pagebreak')) {
+    if (isset($plugins['drupalbreaks']['buttons']['DrupalPageBreak'])
+      && !module_exists('paging')
+      && !module_exists('pagebreak')
+      && !module_exists('smart_paging')
+    ) {
       unset($plugins['drupalbreaks']['buttons']['DrupalPageBreak']);
     }
-  }
-
-  // Set icons for the FLITE plugin
-  // In FLITE icons are not added in plugin.js, thus the code above fails to add correctly
-  if (isset($plugins['flite'])) {
-    $plugins['flite']['default'] = 't';
-    $plugins['flite']['buttons'] = array();
-    $plugins['flite']['buttons']['flite-acceptall']=array(
-        'label' => 'Accept all changes',
-        'icon' => 'icons/flite-acceptall.png',
-    );
-    $plugins['flite']['buttons']['flite-rejectall']=array(
-        'label' => 'Reject all changes',
-        'icon' => 'icons/flite-rejectall.png',
-    );
-    $plugins['flite']['buttons']['flite-acceptone']=array(
-        'label' => t('Accept change'),
-        'icon' => 'icons/flite-acceptone.png',
-    );
-    $plugins['flite']['buttons']['flite-rejectone']=array(
-        'label' => t('Reject change'),
-        'icon' => 'icons/flite-rejectone.png',
-    );
-    $plugins['flite']['buttons']['flite-toggleshow']=array(
-        'label' => t('Show/hide tracked changes'),
-        'icon' => 'icons/flite-toggleshow.png',
-    );
-    $plugins['flite']['buttons']['flite-toggletracking']=array(
-        'label' => t('Start/stop tracking changes'),
-        'icon' => 'icons/flite-toggletracking.png',
-    );
-  }
-
-  // Set icons for the LITE plugin
-  // In LITE icons are not added in plugin.js, thus the code above fails to add correctly
-  if (isset($plugins['lite'])) {
-    $plugins['lite']['default'] = 't';
-    $plugins['lite']['buttons'] = array();
-    $plugins['lite']['buttons']['lite-acceptall']=array(
-        'label' => 'Accept all changes',
-        'icon' => 'icons/lite-acceptall.png',
-    );
-    $plugins['lite']['buttons']['lite-rejectall']=array(
-        'label' => 'Reject all changes',
-        'icon' => 'icons/lite-rejectall.png',
-    );
-    $plugins['lite']['buttons']['lite-acceptone']=array(
-        'label' => t('Accept change'),
-        'icon' => 'icons/lite-acceptone.png',
-    );
-    $plugins['lite']['buttons']['lite-rejectone']=array(
-        'label' => t('Reject change'),
-        'icon' => 'icons/lite-rejectone.png',
-    );
-    $plugins['lite']['buttons']['lite-toggleshow']=array(
-        'label' => t('Show/hide tracked changes'),
-        'icon' => 'icons/lite-toggleshow.png',
-    );
-    $plugins['lite']['buttons']['lite-toggletracking']=array(
-        'label' => t('Start/stop tracking changes'),
-        'icon' => 'icons/lite-toggletracking.png',
-    );
   }
 
   return $plugins;
