@@ -458,21 +458,21 @@ function _beliana_get_geodata_image() {
   $geodata_admin_level_4 = $_GET["geodata_admin_level_4"];
   $destination = 'public://ilustracia/navrh/';
 
-  $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city,town";
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&hillshading-opacity=0.7";
   if ($geodata_region) {
     $geodata_region = urlencode($geodata_region);
-    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&highlight-admin-area=$geodata_region";
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&highlight-admin-area=$geodata_region&hillshading-opacity=0.7";
   }
   if ($geodata_district) {
     $geodata_district = urlencode('okres ' . $geodata_district);
-    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&place-types=city&highlight-admin-area=$geodata_district";
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&place-types=city&highlight-admin-area=$geodata_district&hillshading-opacity=0.7";
   }
   if ($geodata_municipality) {
-    $params_url = "?features=borders,landcover&country=$geodata_country&width=1200&scale=1&margin=20&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&placeId=" . $geodata_municipality;
+    $params_url = "?features=borders,landcover&country=$geodata_country&width=1200&scale=1&margin=20&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city&placeId=$geodata_municipality&hillshading-opacity=0.7";
   }
   if ($geodata_admin_level_4) {
     $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
-    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city,town&highlight-admin-area=$geodata_admin_level_4";
+    $params_url = "?features=borders,landcover&country=$geodata_country&margin=20&scale=1&width=1200&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city,town&highlight-admin-area=$geodata_admin_level_4&hillshading-opacity=0.7";
   }
 
   $url = 'http://127.0.0.1:8081' . $params_url;

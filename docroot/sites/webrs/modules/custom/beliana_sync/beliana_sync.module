@@ -391,6 +391,8 @@ function beliana_sync_sync($nid, &$context) {
         }
       } else {
           // insert the postponed articles into the table of synchronized articles, but with id '0'
+          $msg = 'Upozornenie: heslo <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> bolo presunuté do stavu "Zverejnené" ale nebolo prenesené na web. Ide buď o odkazové heslo alebo v hesle chýba dlhá pomlčka "—" za jeho záhlavím.';
+          drupal_set_message($msg, 'warning');
           db_insert('beliana_sync')
             ->fields([
               'local' => $nid,
