@@ -3289,7 +3289,6 @@ function system_update_7081() {
  * Rebuild JavaScript aggregates to include 'ajax.js' fix for Chrome 83.
  */
 function system_update_7084() {
-  // Empty update to force a rebuild of JS aggregates.
 }
 
 /**

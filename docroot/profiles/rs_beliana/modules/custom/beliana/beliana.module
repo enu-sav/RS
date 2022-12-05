@@ -1691,7 +1691,7 @@ function beliana_node_presave($node) {
 
       //get variable rs_api_taxonomy_names_files
       if (variable_get('rs_api_type') != "webrs" ) {
-        $term_taxsubor = beliana_api_rest_get_variable('rs_api_taxonomy_names_files') ? explode(":",  beliana_api_rest_get_variable('rs_api_taxonomy_names_files')[0]) : NULL;;
+        $term_taxsubor = beliana_api_rest_get_variable('rs_api_taxonomy_names_files') ? explode(":",  beliana_api_rest_get_variable('rs_api_taxonomy_names_files')[0]) : NULL;
       } else {
         $term_taxsubor = variable_get('rs_api_taxonomy_names_files') ? explode(":", variable_get('rs_api_taxonomy_names_files')) : NULL;
       }

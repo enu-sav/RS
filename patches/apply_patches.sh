@@ -19,8 +19,6 @@ function apply {
 #apply where (relative to ..) what
 echo "apply docroot/profiles/rs_beliana/modules/contrib/ctools modules/ctools/ctools-fix-disappearing-exposed-in-not-in-operator-filter-1249684-59.patch"
 
-echo "apply . modules/link/link-adding_vertical_bar_to_allowed_chars.patch"
-
 echo "apply . modules/views/views-export-fix-removed-tags.patch"
 
 echo "apply . modules/editable_views/editable_views_enable_new_revision.patch"
