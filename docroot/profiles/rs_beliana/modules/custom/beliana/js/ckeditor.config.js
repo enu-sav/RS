@@ -39,16 +39,6 @@ CKEDITOR.editorConfig = function (config) {
     * config.extraCss = 'body {color:#FF0000;}';
     */
   config.extraCss = '';
-  /**
-   * Sample extraCss code for the "marinelli" theme.
-   */
-  if (Drupal.settings.ckeditor.theme == "marinelli") {
-    config.extraCss += "body{background:#FFF;text-align:left;font-size:0.8em;}";
-    config.extraCss += "#primary ol, #primary ul{margin:10px 0 10px 25px;}";
-  }
-  if (Drupal.settings.ckeditor.theme == "newsflash") {
-    config.extraCss = "body{min-width:400px}";
-  }
 
   /**
    * CKEditor's editing area body ID & class.
@@ -58,13 +48,6 @@ CKEDITOR.editorConfig = function (config) {
    */
   config.bodyClass = '';
   config.bodyId = '';
-  /**
-   * Sample bodyClass and BodyId for the "marinelli" theme.
-   */
-  if (Drupal.settings.ckeditor.theme == "marinelli") {
-    config.bodyClass = 'singlepage';
-    config.bodyId = 'primary';
-  }
 
   // Make CKEditor's edit area as high as the textarea would be.
   if (this.element.$.rows > 0) {
@@ -178,46 +161,6 @@ CKEDITOR.editorConfig = function (config) {
     'Ŧ', 'Þ', 'Ù', 'Ú', 'Û', 'Ü', 'Ū', 'Ů', 'Ű', 'Ŭ', 'Ũ', 'Ų', 'Ŵ', 'Ŷ', 'Ÿ', 'Ý', 'Ź', 'Ż', 'Ž'
   ];
 }
-
-/*
- * Sample toolbars
- */
-
-//Toolbar definition for basic buttons
-Drupal.settings.cke_toolbar_DrupalBasic = [['Format', 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink', 'Image']];
-
-//Toolbar definition for Advanced buttons
-Drupal.settings.cke_toolbar_DrupalAdvanced = [
-  ['Source'],
-  ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SpellChecker', 'Scayt'],
-  ['Undo', 'Redo', 'Find', 'Replace', '-', 'SelectAll'],
-  ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
-  ['Maximize', 'ShowBlocks'],
-  '/',
-  ['Format'],
-  ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
-  ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-  ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
-  ['Link', 'Unlink', 'Anchor', 'Linkit', 'LinkToNode', 'LinkToMenu']
-];
-
-// Toolbar definition for all buttons
-Drupal.settings.cke_toolbar_DrupalFull = [
-  ['Source'],
-  ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SpellChecker', 'Scayt'],
-  ['Undo', 'Redo', 'Find', 'Replace', '-', 'SelectAll'],
-  ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe'],
-  '/',
-  ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
-  ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv'],
-  ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', '-', 'Language'],
-  ['Link', 'Unlink', 'Anchor', 'Linkit', 'LinkToNode', 'LinkToMenu'],
-  '/',
-  ['Format', 'Font', 'FontSize'],
-  ['TextColor', 'BGColor'],
-  ['Maximize', 'ShowBlocks'],
-  ['DrupalBreak', 'DrupalPageBreak']
-];
 
 /**
  * To enable browser native spell checker uncomment (default) first of
