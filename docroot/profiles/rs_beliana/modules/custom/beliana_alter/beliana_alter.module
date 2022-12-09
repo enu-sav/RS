@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function beliana_alter_form_heslo_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#node']->type) && locale_multilingual_node_type($form['#node']->type)) {
+    $form = _change_local_select($form);
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function beliana_alter_form_ilustracia_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#node']->type) && locale_multilingual_node_type($form['#node']->type)) {
+    $form = _change_local_select($form);
+  }
+}
+
+/**
+ * @param $form
+ *
+ * @return array
+ */
+function _change_local_select($form): array {
+  $form['language']['#options']['und'] = 'Slovenčina';
+  unset($form['language']['#options']['sk']);
+
+  return $form;
+}
