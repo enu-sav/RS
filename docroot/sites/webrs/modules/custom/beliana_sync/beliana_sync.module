@@ -421,7 +421,7 @@ function beliana_sync_sync($nid, &$context) {
     // save the date of first publication to web here
     // field_datum_prveho_zverejnenia exists only in heslo
     if ($node->type === 'heslo' and !isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
-      $node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'] = date("Y/m/d - H:i");
+      $node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'] = date("Y-m-d H:i:s");
       node_save($node);
     }
 }
