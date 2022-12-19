@@ -303,10 +303,18 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
 
+
+    foreach($node->field_lexikalna_skupina["und"] as $ls) {
+      $term = taxonomy_term_load($ls['tid']);
+      if (strpos($term->name, '(EN)') !== false) {
+        $language = 'en';
+      }
+    }
+
     // form object to be sent over.
     $remote_node_object = [
       'title' => $node->title,
-      'language' => $node->language,
+      'language' => $language,
       'body' => $body,
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],

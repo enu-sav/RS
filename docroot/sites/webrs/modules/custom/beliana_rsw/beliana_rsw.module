@@ -1022,13 +1022,13 @@ function check_state_change_importovane_to_zaradene($node, $cur_state, $new_stat
       $eds=array(); // list of editors
       // for each category
       foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $ls){
-	// for each category in the full hiererchy
-	foreach (taxonomy_get_parents_all($ls['tid']) as $category) {
-	  $node_users=_get_users($users, $category->tid);
-	  if (($node_users['redaktor'] and !in_array($node_users['redaktor'], $eds))) {
-		  $eds[] = $node_users['redaktor'];
-	  }
-	}
+        // for each category in the full hiererchy
+        foreach (taxonomy_get_parents_all($ls['tid']) as $category) {
+          $node_users=_get_users($users, $category->tid);
+          if (($node_users['redaktor'] and !in_array($node_users['redaktor'], $eds))) {
+            $eds[] = $node_users['redaktor'];
+          }
+        }
       }
       // if too many editors
       if( count($eds) > 1 ){

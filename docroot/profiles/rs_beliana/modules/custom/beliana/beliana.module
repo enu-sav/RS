@@ -2071,15 +2071,6 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Implements hook_node_postinsert().
- */
-function beliana_entity_postinsert($entity, $entity_type) {
-  if ($entity->type == 'heslo' && strpos($entity->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
-    $entity->language = 'en';
-  }
-}
-
-/**
  * Implements hook_form_BASE_FORM_ID_alter().
  *
  * @inheritdoc
@@ -3519,9 +3510,9 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
             $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
         }
-        if ($node->language == 'en') {
+        if (strpos($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
           $data['status'] = 0;
-          $data['title_field[und][0][value]'] = 'Vyradené heslo';
+          $data['title_field[und][0][value]'] = 'Anglické heslo - Vyradené';
           $data['field_text_hesla[und][0][value]'] = 'Anglické heslo vytvorené vo WEBRS';
           $data['field_text_hesla[und][0][format]'] = 'filtered_html';
           $data['field_lexikalna_skupina[und]'] = 'Neurčená';
