@@ -1695,19 +1695,26 @@ function beliana_node_presave($node) {
       } else {
         $term_taxsubor = variable_get('rs_api_taxonomy_names_files') ? explode(":", variable_get('rs_api_taxonomy_names_files')) : NULL;
       }
-      //evaluate the weight of node/password to taxonomy
+      //evaluate the weight of node/article to taxonomy
       if (isset($term_taxsubor) && sk_cmp($term->name, $term_taxsubor[0]) <= 0) {
-        //only for new node/password
+        //only for new node/article
         if (variable_get('rs_api_type') != "rs" && !empty(variable_get('rs_api_type')) && (isset($node->is_new) and $node->is_new === TRUE)) {
           $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené vo WEBRS';
           $node->workbench_moderation_state_new = 'vyradene';
-          drupal_set_message(t('Vytvorené heslo bolo automaticky vyradené,  lebo spadá do abecedného rozsahu už vydaných hesiel'));
+          drupal_set_message(t('Vytvorené heslo bolo automaticky vyradené, lebo spadá do abecedného rozsahu už vydaných hesiel'));
         }
       }
 
       break;
     }
   }
+  // is article EN languge, set state vyradene
+  if (variable_get('rs_api_type') == 'webrs') {
+    if ($node->title == 'Vyradené heslo' && $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
+      $node->workbench_moderation_state_new = 'vyradene';
+    }
+  }
+
   // Update fields data from mapa/mapa poloha
   update_fields_value_from_map_creator($node);
 
@@ -2060,6 +2067,15 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     } else {
     	$form['#submit'][] = 'webrs_beliana_workflow_reaction';
     }
+  }
+}
+
+/**
+ * Implements hook_node_postinsert().
+ */
+function beliana_entity_postinsert($entity, $entity_type) {
+  if ($entity->type == 'heslo' && strpos($entity->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
+    $entity->language = 'en';
   }
 }
 
@@ -3483,26 +3499,33 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
     // field_lexikalna_skupina and  field_lexikalna_skupina_il
     // field_text_hesla and field_popis
     if ($node->type == "heslo") {
-      $terms = [];
-      $data['field_text_hesla[und][0][value]'] = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
-      $data['field_text_hesla[und][0][format]'] = 'filtered_html';
-      if (!$attribute) {  # regularly created article
-        if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
-          foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
-            $terms[] = $value['name'];
+        $terms = [];
+        $data['field_text_hesla[und][0][value]'] = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+        $data['field_text_hesla[und][0][format]'] = 'filtered_html';
+        if (!$attribute) {  # regularly created article
+          if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
+            foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
+              $terms[] = $value['name'];
+            }
+            $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
-          $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
         }
-      }
-      else {  # only if article is created by merging
-        if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) {
-          foreach ($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE] as $value) {
-            $term = taxonomy_term_load($value['tid']);
-            $terms[] = $term->name;
+        else {  # only if article is created by merging
+          if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) {
+            foreach ($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE] as $value) {
+              $term = taxonomy_term_load($value['tid']);
+              $terms[] = $term->name;
+            }
+            $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
-          $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
         }
-      }
+        if ($node->language == 'en') {
+          $data['status'] = 0;
+          $data['title_field[und][0][value]'] = 'Vyradené heslo';
+          $data['field_text_hesla[und][0][value]'] = 'Anglické heslo vytvorené vo WEBRS';
+          $data['field_text_hesla[und][0][format]'] = 'filtered_html';
+          $data['field_lexikalna_skupina[und]'] = 'Neurčená';
+        }
     }
     else { // ilustracia
       $terms = [];
