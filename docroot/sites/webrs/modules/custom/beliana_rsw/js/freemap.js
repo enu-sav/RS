@@ -34,7 +34,7 @@
         $('.freemap-wrapper #freemap').css('pointer-events', 'none');
       });
 
-      body.find('#free-map-btn').unbind('click').click(function () {
+      body.find('#free-map-btn').unbind('click').click(function (e) {
         e.preventDefault();
 
         var link = $(this);
