@@ -41,7 +41,7 @@
         var title = $('#title-field-add-more-wrapper input').val();
 
         if (title.length === 0) {
-          alert('Pole Názov ilustrácie nieje vyplnené.');
+          alert('Pole Názov ilustrácie nie je vyplnené.');
           return;
         }
 
@@ -88,12 +88,12 @@
         $('#edit-field-freemap-url input').val('');
 
         if (title.length === 0) {
-          alert('Pole Názov ilustrácie nieje vyplnené.');
+          alert('Pole Názov ilustrácie nie je vyplnené.');
           return;
         }
 
         if (geodata_country === "0") {
-          alert('Pole Krajina nieje vybratá.');
+          alert('Pole Krajina nie je vybratá.');
           return;
         }
 
