@@ -35,6 +35,9 @@
       });
 
       body.find('#free-map-btn').unbind('click').click(function () {
+        e.preventDefault();
+
+        var link = $(this);
         var title = $('#title-field-add-more-wrapper input').val();
 
         if (title.length === 0) {
@@ -42,6 +45,7 @@
           return;
         }
 
+        link.addClass('isDisabled');
         $.ajax({
           url: location.protocol + "//" + location.host + "/get-freemap-image",
           data: {
@@ -60,6 +64,7 @@
             else {
               alert('Obrázok nebol vytvorený. Kontaktujte administrátora');
             }
+            link.removeClass('isDisabled');
           },
           error: function (jqXhr, textStatus, errorMessage) {
             alert('Error' + errorMessage);
@@ -67,12 +72,15 @@
         });
       });
 
-      body.find('#geodata-btn-place').unbind('click').click(function () {
+      body.find('#geodata-btn-place').unbind('click').click(function (e) {
+        e.preventDefault();
+
+        var link = $(this);
         var node_id = $("#node-id").val();
         var title = $("#title-field-add-more-wrapper input").val();
         var comment_instruction = $('#field-komentar-instrukcie-add-more-wrapper textarea');
         var geodata_country = $('select.country-code').val();
-        var geodata_region =   $('select.geodata-region-wrapper').val();
+        var geodata_region = $('select.geodata-region-wrapper').val();
         var geodata_district = $('select.geodata-district-wrapper').val();
         var geodata_municipality = $('select.geodata-municipality-wrapper').val();
         var geodata_admin_level_4 = $('select.admin-level-4').val();
@@ -99,7 +107,7 @@
 
         if (geodata_municipality !== "0") {
           geodata_municipality = $('select.geodata-municipality-wrapper :selected').val();
-          if (typeof(geodata_municipality) === "undefined") {
+          if (typeof (geodata_municipality) === "undefined") {
             geodata_municipality = "";
           }
         }
@@ -108,6 +116,7 @@
           geodata_admin_level_4 = $('select.admin-level-4 :selected').text();
         }
 
+        link.addClass('isDisabled');
         $.ajax({
           url: location.protocol + "//" + location.host + "/get-geodata-image",
           data: {
@@ -133,6 +142,7 @@
             else {
               alert('Obrázok nebol vytvorený. Kontaktujte administrátora');
             }
+            link.removeClass('isDisabled');
           },
           error: function (jqXhr, textStatus, errorMessage) {
             alert('Error' + errorMessage);

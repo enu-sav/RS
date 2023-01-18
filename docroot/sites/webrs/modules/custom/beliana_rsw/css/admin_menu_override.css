@@ -7,3 +7,12 @@
 #admin-menu #admin-menu-menu .dropdown li a {
     color: #eee !important;
 }
+
+#free-map-btn.isDisabled,
+#geodata-btn-place.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+  text-decoration: none;
+}
