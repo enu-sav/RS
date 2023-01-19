@@ -46,6 +46,7 @@
         }
 
         link.addClass('isDisabled');
+        $('#ilustracia-node-form').addClass('isDisabled');
         $.ajax({
           url: location.protocol + "//" + location.host + "/get-freemap-image",
           data: {
@@ -65,6 +66,7 @@
               alert('Obrázok nebol vytvorený. Kontaktujte administrátora');
             }
             link.removeClass('isDisabled');
+            $('#ilustracia-node-form').removeClass('isDisabled');
           },
           error: function (jqXhr, textStatus, errorMessage) {
             alert('Error' + errorMessage);
@@ -117,6 +119,7 @@
         }
 
         link.addClass('isDisabled');
+        $('#ilustracia-node-form').addClass('isDisabled');
         $.ajax({
           url: location.protocol + "//" + location.host + "/get-geodata-image",
           data: {
@@ -143,6 +146,7 @@
               alert('Obrázok nebol vytvorený. Kontaktujte administrátora');
             }
             link.removeClass('isDisabled');
+            $('#ilustracia-node-form').removeClass('isDisabled');
           },
           error: function (jqXhr, textStatus, errorMessage) {
             alert('Error' + errorMessage);
