@@ -16,3 +16,7 @@
   opacity: 0.5;
   text-decoration: none;
 }
+
+#ilustracia-node-form.isDisabled {
+  cursor: wait;
+}
