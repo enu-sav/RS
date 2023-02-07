@@ -1710,7 +1710,7 @@ function beliana_node_presave($node) {
   }
   // is article EN languge, set state vyradene
   if (variable_get('rs_api_type') == 'webrs') {
-    if ($node->title == 'Vyradené heslo' && $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
+    if ($node->title == 'Anglické heslo - Vyradené' && $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
       $node->workbench_moderation_state_new = 'vyradene';
     }
   }
@@ -2066,6 +2066,40 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
     	$form['#submit'][] = 'rs_beliana_workflow_reaction';
     } else {
     	$form['#submit'][] = 'webrs_beliana_workflow_reaction';
+    }
+  }
+
+  if ($form_id == "heslo_node_form") {
+    $form['#validate'][] = '_validate_heslo_node_form';
+  }
+}
+
+/**
+ * additional form validation
+ *
+ * @param $form
+ * @param $form_state
+ *
+ * @return void
+ */
+function _validate_heslo_node_form(&$form, &$form_state) {
+  $form_values = $form_state['values'];
+
+  //allowed to set only one lexical group excepted zlucene
+  if(empty($form_values['field_zlucene_z'][LANGUAGE_NONE][0]['target_id'])) {
+    if ($form_values['field_lexikalna_skupina'] && count($form_values['field_lexikalna_skupina'][LANGUAGE_NONE]) > 1) {
+      form_set_error('field_lexikalna_skupina', t('V poli Lexikálna skupina sa uvádza len jedna položka. Ak chcete uviesť viac lexikálnych skupín, zadajte ich v poli Doplnková lexikálna skupina.'));
+    }
+  }
+
+  //lexical group - all must be English or none must be English.
+  if (!empty($form_values['field_lexikalna_skupina'][LANGUAGE_NONE]) && !empty($form_values['field_doplnkova_ls'][LANGUAGE_NONE])) {
+    $is_lexikalna_skupina_en = strpos($form_values['field_lexikalna_skupina'][LANGUAGE_NONE][0]['name'], '(EN)') !== false;
+    $is_doplnkova_ls_name_en = strpos($form_values['field_doplnkova_ls'][LANGUAGE_NONE][0]['name'], '(EN)') !== false;
+
+    if(($is_lexikalna_skupina_en && !$is_doplnkova_ls_name_en) || (!$is_lexikalna_skupina_en && $is_doplnkova_ls_name_en)) {
+      form_set_error('field_lexikalna_skupina', t(''));
+      form_set_error('field_doplnkova_ls', t('Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť anglické alebo žiadna nesmie byť anglická.'));
     }
   }
 }
@@ -3498,6 +3532,8 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
             foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
               $terms[] = $value['name'];
             }
+            $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
+            $data['field_text_hesla[und][0][format]'] = 'filtered_html';
             $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
         }
@@ -3507,6 +3543,8 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
               $term = taxonomy_term_load($value['tid']);
               $terms[] = $term->name;
             }
+            $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
+            $data['field_text_hesla[und][0][format]'] = 'filtered_html';
             $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
         }

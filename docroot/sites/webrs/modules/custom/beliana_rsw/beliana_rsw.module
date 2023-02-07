@@ -256,7 +256,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     $municipality_options = ['- Zvoliť -'];
     if (!empty($form_state["values"]["district"])) {
       // Pre-populate options for city dropdown list if province id is set
-      $municipality_options = get_data_from_json('obec_3.geojson', 'IDN4', 'LAU2', 'IDN3', $form_state['values']['district']);
+      $municipality_options = get_data_from_json('obec_3_center.geojson', 'center', 'LAU2', 'IDN3', $form_state['values']['district']);
     }
 
     $form['field_country_select']['region_wrapper']['municipality_wrapper']['municipality'] = [
@@ -281,12 +281,20 @@ function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_p
   if ($con_param != NULL && $form_value != NULL) {
     foreach ($data->features as $value) {
       if ($value->properties->$con_param == $form_value) {
-        $options[$value->properties->$param_1] = $value->properties->$param_2;
+        if(array_key_exists(0, $value->properties->$param_1) && array_key_exists(1, $value->properties->$param_1)) {
+          $options['lon=' . $value->properties->$param_1[0] . '&lat=' . $value->properties->$param_1[1]] = $value->properties->$param_2;
+        } else {
+          $options[$value->properties->$param_1] = $value->properties->$param_2;
+        }
       }
     }
   } else {
     foreach ($data->features as $value) {
-      $options[$value->properties->$param_1] = $value->properties->$param_2;
+      if(array_key_exists(0, $value->properties->$param_1) && array_key_exists(1, $value->properties->$param_1)) {
+        $options['lon=' . $value->properties->$param_1[0] . '&lat=' . $value->properties->$param_1[1]] = $value->properties->$param_2;
+      } else {
+        $options[$value->properties->$param_1] = $value->properties->$param_2;
+      }
     }
   }
 
@@ -474,10 +482,15 @@ function _beliana_get_geodata_image() {
   else if ($geodata_municipality) {  #SK 'kraj' + 'okres' + obec`
     $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&placeId=$geodata_municipality";
   }
+#<<<<<<< HEAD
   else if ($geodata_district) {  #SK 'kraj' + 'okres'
     $features = $features . ",scale";
     $geodata_district = urlencode('okres ' . $geodata_district);
     $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district";
+#=======
+  #if ($geodata_municipality) {
+    #$params_url = "?features=borders,landcover&country=$geodata_country&width=1200&scale=1&margin=20&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&place-types=city,town&$geodata_municipality&hillshading-opacity=0.7";
+#>>>>>>> 1f8481d03894e0a995ffb1ec0fdac96b64fc52db
   }
   else {    #SK 'kraj'
     $features = $features . ",scale";
