@@ -1710,7 +1710,7 @@ function beliana_node_presave($node) {
   }
   // is article EN languge, set state vyradene
   if (variable_get('rs_api_type') == 'webrs') {
-    if ($node->title == 'Vyradené heslo' && $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
+    if ($node->title == 'Anglické heslo - Vyradené' && $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
       $node->workbench_moderation_state_new = 'vyradene';
     }
   }
