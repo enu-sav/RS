@@ -469,35 +469,29 @@ function _beliana_get_geodata_image() {
 
   #map settings
   $features="?features=borders,landcover,limitPlacesToCountry,coastlineBorders"; #starts with ?, must be the first in the url string
-  $map_params="&margin=20&scale=1&width=1200&hillshading-opacity=0.7";
+  $map_params="&margin=20&scale=1&width=1200&hillshading-opacity=0.7&landcover-types=forest,water-body";
   $place_types="&place-types=city";
 
-    #$params_url = "?features=$features&country=$geodata_country&$map_param&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&place-types=city";
   if ($geodata_admin_level_4) { # not SK
     $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
     $place_types="&place-types=city,town";
-    #$params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
     $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
   }
   else if ($geodata_municipality) {  #SK 'kraj' + 'okres' + obec`
-    $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&placeId=$geodata_municipality";
+    $geodata_district = urlencode('okres ' . $geodata_district);
+    $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district&$geodata_municipality";
   }
-#<<<<<<< HEAD
   else if ($geodata_district) {  #SK 'kraj' + 'okres'
     $features = $features . ",scale";
     $geodata_district = urlencode('okres ' . $geodata_district);
     $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district";
-#=======
-  #if ($geodata_municipality) {
-    #$params_url = "?features=borders,landcover&country=$geodata_country&width=1200&scale=1&margin=20&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&place-types=city,town&$geodata_municipality&hillshading-opacity=0.7";
-#>>>>>>> 1f8481d03894e0a995ffb1ec0fdac96b64fc52db
   }
   else {    #SK 'kraj'
     $features = $features . ",scale";
     $geodata_region = urlencode($geodata_region);
     $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_region";
   }
- dpm($params_url);
+ #dpm($params_url);
 
   $url = 'http://127.0.0.1:8081' . $params_url;
 //  $url = 'host.docker.internal:8080' . $params_url;
