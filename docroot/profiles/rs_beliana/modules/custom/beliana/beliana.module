@@ -3532,7 +3532,7 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
             foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
               $terms[] = $value['name'];
             }
-            $data['field_text_hesla[und][0][value]'] = '<strong>názov hesla</strong> —';
+            $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
             $data['field_text_hesla[und][0][format]'] = 'filtered_html';
             $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
@@ -3543,7 +3543,7 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
               $term = taxonomy_term_load($value['tid']);
               $terms[] = $term->name;
             }
-            $data['field_text_hesla[und][0][value]'] = '<strong>názov hesla</strong> —';
+            $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
             $data['field_text_hesla[und][0][format]'] = 'filtered_html';
             $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
           }
