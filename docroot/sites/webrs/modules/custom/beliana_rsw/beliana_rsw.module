@@ -473,6 +473,10 @@ function _beliana_get_geodata_image() {
   $place_types="&place-types=city";
 
   if ($geodata_admin_level_4) { # not SK
+      #decide, if width or height of the map is fixed. Default: width
+      if (in_array($geodata_country, ["de"])) {
+            $map_params = str_replace("width", "height", $map_params); 
+      }
     $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
     $place_types="&place-types=city,town";
     $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
