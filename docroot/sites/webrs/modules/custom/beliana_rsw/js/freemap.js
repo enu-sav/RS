@@ -114,9 +114,7 @@
           }
         }
 
-        if (geodata_admin_level_4 !== "0") {
-          geodata_admin_level_4 = $('select.admin-level-4 :selected').text();
-        }
+        geodata_admin_level_4 = $('select.admin-level-4 :selected').text();
 
         link.addClass('isDisabled');
         $('#ilustracia-node-form').addClass('isDisabled');
