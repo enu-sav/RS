@@ -30,14 +30,6 @@ function beliana_rsw_menu() {
   return $items;
 }
 
-const COUNTRY_LEVELS = [
-  'AT' => [4],
-  'DE' => [4],
-  'FR' => [4],
-  'UR' => [4],
-  'CH' => [4],
-];
-
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -47,6 +39,8 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $freemap_default_url = 'https://www.freemap.sk/?map=8/48.681415/19.699450&layers=O&osm-relation=14296&embed=search';
   $form['field_freemap_url']['#attributes']['style'][] = 'display:none;';
   $form['field_mapa_obrazok_fid']['#attributes']['style'][] = 'display:none;';
+
+  $states_content = get_states_data_from_json();
 
   if (isset($form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'])) {
     $freemap_default_url = $form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'];
@@ -134,12 +128,10 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
   $country_options = [
     0 => '- Zvoliť -',
     'SK' => 'Slovensko',
-    'AT' => 'Rakúsko',
-    'DE' => 'Nemecko',
-    'FR' => 'Francúzsko',
-    'CH' => 'Švajčiarsko',
     ]
   ;
+
+  $country_options = array_merge($country_options, get_states_country_options($states_content));
 
   $form['field_country_select']['country_code'] = [
     '#title' => t('Štát'),
@@ -185,13 +177,16 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     '#weight' => 28,
   ];
 
-  $country_admin_levels = COUNTRY_LEVELS[$country_code];
+  if (!empty($country_code) && $country_code != 'SK') { # not SK
 
-  if ($country_code != 'SK') {
+    $country_admin_levels = [
+      $country_code => $states_content->$country_code->admin_level,
+    ];
+
     foreach ($country_admin_levels as $country_admin_level) {
       // Wrapper for admin level dropdown list
 
-      $admin_level_options = get_data_from_map_sqlite($country_code, $country_admin_level);
+      $admin_level_options = get_data_from_json('states.json', $country_code);
 
       $form['field_country_select']['region_wrapper']['admin_level_' . $country_admin_level] = [
         '#title' => t('Admin level ' . $country_admin_level),
@@ -209,12 +204,12 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
       }
     }
 
-  } else {
+  } else { # only SK
 //    // Options for city dropdown list
     $region_options = ['- Zvoliť -'];
     if (!empty($form_state['values']['country_code'])) {
       // Pre-populate options for city dropdown list if province id is set
-      $region_options = get_data_from_json('kraj_3.geojson', 'IDN2', 'NUTS3', 'NUTS1_CODE', $form_state['values']['country']);
+      $region_options = get_data_from_json_sk('kraj_3.geojson', 'IDN2', 'NUTS3', 'NUTS1_CODE', $form_state['values']['country']);
     }
 
     $form['field_country_select']['region_wrapper']['region'] = [
@@ -235,7 +230,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     $district_options = ['- Zvoliť -'];
     if (!empty($form_state['values']['region'])) {
       // Pre-populate options for city dropdown list if province id is set
-      $district_options = get_data_from_json('okres_3.geojson', 'IDN3', 'LAU1', 'IDN2', $form_state['values']['region']);
+      $district_options = get_data_from_json_sk('okres_3.geojson', 'IDN3', 'LAU1', 'IDN2', $form_state['values']['region']);
     }
 
     $form['field_country_select']['region_wrapper']['district_wrapper']['district'] = [
@@ -256,7 +251,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
     $municipality_options = ['- Zvoliť -'];
     if (!empty($form_state["values"]["district"])) {
       // Pre-populate options for city dropdown list if province id is set
-      $municipality_options = get_data_from_json('obec_3_center.geojson', 'center', 'LAU2', 'IDN3', $form_state['values']['district']);
+      $municipality_options = get_data_from_json_sk('obec_3_center.geojson', 'center', 'LAU2', 'IDN3', $form_state['values']['district']);
     }
 
     $form['field_country_select']['region_wrapper']['municipality_wrapper']['municipality'] = [
@@ -271,7 +266,7 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
 }
 
 // Get country values form geodata files
-function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_param = NULL, $form_value = NULL) {
+function get_data_from_json_sk($file_name, $param_1 = NULL, $param_2 = NULL, $con_param = NULL, $form_value = NULL) {
   global $base_url;
   $options = ['- Zvoliť -'];
   $path = drupal_get_path('module', 'beliana_rsw') . '/geodata/' . $file_name;
@@ -301,17 +296,38 @@ function get_data_from_json($file_name, $param_1 = NULL, $param_2 = NULL, $con_p
   return $options;
 }
 
-// Get country values form map.sqlite
-function get_data_from_map_sqlite($country_code, $admin_level) {
+function get_states_data_from_json() {
+  global $base_url;
+
+  $path = drupal_get_path('module', 'beliana_rsw') . '/geodata/states.json';
+  $states_content = json_decode(file_get_contents($base_url . '/' . $path));
+
+
+  return $states_content;
+}
+
+function get_states_country_options($states_content) {
+  $country_options = [];
+
+  foreach ($states_content as $key => $state) {
+    $country_options[$key] = $state->sk_name;
+  }
+
+  return $country_options;
+}
+
+// Get country values form states.json
+function get_data_from_json($file_name, $country_code) {
+  global $base_url;
   $options = ['- Zvoliť -'];
-  db_set_active('minimap');
 
-  $query = db_query('select distinct osm_id, name from admin_areas where admin_level = :admin_level and country_code = :country_code and name is not null', [':country_code' => $country_code, ':admin_level' => $admin_level]);
-  $result = $query->fetchAll();
-  db_set_active('default');
+  $path = drupal_get_path('module', 'beliana_rsw') . '/geodata/' . $file_name;
+  $country_contents = file_get_contents($base_url . '/' . $path);
+  $country = json_decode($country_contents);
+  $country_date = $country->$country_code;
 
-  foreach ($result as $item) {
-    $options[$item->osm_id] = $item->name;
+  foreach ($country_date->states as $states) {
+    $options[$states] = $states;
   }
 
   return $options;
@@ -475,11 +491,14 @@ function _beliana_get_geodata_image() {
   if ($geodata_admin_level_4) { # not SK
       #decide, if width or height of the map is fixed. Default: width
       if (in_array($geodata_country, ["de"])) {
-            $map_params = str_replace("width", "height", $map_params); 
+            $map_params = str_replace("width", "height", $map_params);
       }
-    $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
     $place_types="&place-types=city,town";
-    $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
+    if($geodata_admin_level_4 != '- Zvoliť -') {
+      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
+    } else {
+      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4";
+    }
   }
   else if ($geodata_municipality) {  #SK 'kraj' + 'okres' + obec`
     $geodata_district = urlencode('okres ' . $geodata_district);
