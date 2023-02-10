@@ -184,5 +184,122 @@
             "Saskatchewan",
             "Yukon"
         ]
+    },
+    "GB": {
+        "sk_name":"Spojené Kráľovstvo",
+        "epsg": "3035",
+        "admin_level": 4,
+        "map_aspect": "height",
+        "states": [
+            "Alba / Scotland",
+            "Cymru / Wales",
+            "England",
+            "Northern Ireland"
+        ]
+    },
+    "IT": {
+        "sk_name":"Taliansko",
+        "epsg": "3035",
+        "admin_level": 4,
+        "map_aspect": "height",
+        "states": [
+           "Abruzzo",
+           "Basilicata",
+           "Calabria",
+           "Campania",
+           "Emilia-Romagna",
+           "Friuli Venezia Giulia",
+           "Lazio",
+           "Liguria",
+           "Lombardia",
+           "Marche",
+           "Molise",
+           "Piemonte",
+           "Puglia",
+           "Sardigna/Sardegna",
+           "Sicilia",
+           "Toscana",
+           "Trentino-Alto Adige/Südtirol",
+           "Umbria",
+           "Valle d'Aosta",
+           "Veneto"
+        ]
+    },
+    "ES": {
+        "sk_name":"Španielsko",
+        "epsg": "3035",
+        "admin_level": 4,
+        "map_aspect": "height",
+        "states": [
+            "Andalucía",
+            "Aragón",
+            "Cantabria",
+            "Castilla-La Mancha",
+            "Castilla y León",
+            "Catalunya",
+            "Comunitat Valenciana",
+            "Euskadi",
+            "Extremadura",
+            "Galicia",
+            "Illes Balears",
+            "La Rioja",
+            "Melilla",
+            "Principado de Asturias",
+            "Región de Murcia"
+        ]
+    },
+    "AU": {
+        "sk_name":"Austrália",
+        "admin_level": 4,
+        "map_aspect": "width",
+        "epsg": "3857",
+        "states": [
+            "New South Wales",
+            "Queensland",
+            "South Australia",
+            "Tasmania",
+            "Victoria",
+            "Western Australia"
+        ]
+    },
+    "IN": {
+        "sk_name":"India",
+        "admin_level": 4,
+        "map_aspect": "height",
+        "epsg": "3857",
+        "states": [
+            "Andaman and Nicobar Islands",
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Delhi",
+            "Goa",
+            "Gujarat",
+            "Haryāna",
+            "Himachal Pradesh",
+            "Jammu and Kashmir",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Ladakh",
+            "Lakshadweep",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttarakhand",
+            "Uttar Pradesh",
+            "West Bengal"
+        ]
     }
 }
