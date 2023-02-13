@@ -105,7 +105,7 @@
         "sk_name":"USA",
         "admin_level": 4,
         "map_aspect": "width",
-        "epsg": "3857",
+        "epsg": "2163",
         "states": [
             "Alabama",
             "Alaska",
@@ -168,7 +168,7 @@
         "sk_name":"Kanada",
         "admin_level": 4,
         "map_aspect": "width",
-        "epsg": "3857",
+        "epsg": "3978",
         "states": [
             "Alberta",
             "British Columbia",
