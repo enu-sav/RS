@@ -503,6 +503,7 @@ function _beliana_get_geodata_image() {
         $places="&place-types=capital,city";
     }
     if($geodata_admin_level_4 != '- Zvoliť -') {
+      $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
       $map_params = $map_params . "&" . urlencode("+init=epsg:". $country_content['epsg']);
       $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
     } else {
