@@ -485,39 +485,47 @@ function _beliana_get_geodata_image() {
 
   #map settings
   $features="?features=borders,landcover,limitPlacesToCountry,coastlineBorders"; #starts with ?, must be the first in the url string
-  $map_params="&margin=20&scale=1&width=1200&hillshading-opacity=0.7&landcover-types=forest,water-body";
-  $place_types="&place-types=city";
+  $map_params="&margin=20&scale=1&width=1200&hillshading-opacity=0.7&landcover-types=forest,water-body&coastline-width-factor=0.5";
 
   if ($geodata_country != 'sk') { # not SK
     $states_content = get_states_data_from_json(TRUE);
     $country_content = $states_content[strtoupper($geodata_country)];
-      #decide, if width or height of the map is fixed. Default: width
+    #decide, if width or height of the map is fixed. Default: width
     $map_params = str_replace("width", $country_content['map_aspect'], $map_params);
-    $place_types="&place-types=city,town";
+    $places="&place-types=capital";
+    if (country_content['cities']) { #if a list of cities is specified
+        $places=$places . "&place-label-placements=URLD";
+        $places=$places . "&places=" . urlencode($country_content['cities']);
+        if ($country_content['place-size-factor']) {
+            $places=$places . "&place-size-factor=" . urlencode($country_content['place-size-factor']);
+        }
+    } else { #No list of places specified
+        $places="&place-types=capital,city";
+    }
     if($geodata_admin_level_4 != '- Zvoliť -') {
       $map_params = $map_params . "&" . urlencode("+init=epsg:". $country_content['epsg']);
-      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
+      $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
     } else {
-      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4";
+      $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4";
     }
   } else {
+    $places="&place-types=city"; # the list of cities happens to be also the list of 'krajske mesta' in SK
     if ($geodata_municipality) {  #SK 'kraj' + 'okres' + obec`
       $geodata_district = urlencode('okres ' . $geodata_district);
-      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district&$geodata_municipality";
+      $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district&$geodata_municipality";
     } else if ($geodata_district) {  #SK 'kraj' + 'okres'
       $features = $features . ",scale";
       $geodata_district = urlencode('okres ' . $geodata_district);
-      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district";
+      $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4&micro-borders=$geodata_country:8&highlight-admin-area=$geodata_district";
     } else if($geodata_region) {    #SK 'kraj' + 'region'
       $features = $features . ",scale";
       $geodata_region = urlencode($geodata_region);
-      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_region";
+      $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_region";
     } else {    #SK
       $features = $features . ",scale";
-      $params_url = "$features$map_params$place_types&country=$geodata_country&minor-borders=$geodata_country:4";
+      $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4";
     }
   }
- dpm($params_url);
 
   $url = 'http://127.0.0.1:8081' . $params_url;
 //  $url = 'host.docker.internal:8080' . $params_url;
