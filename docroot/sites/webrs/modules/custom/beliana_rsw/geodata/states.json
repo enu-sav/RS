@@ -172,6 +172,7 @@
         "admin_level": 4,
         "map_aspect": "width",
         "epsg": "3978",
+        "cities": "St. John's,24922221,Fredericton,315422127,Québec,18063533,Winnipeg,Regina,Edmonton,30189922,Iqaluit,Yellowknife,Whitehorse",
         "states": [
             "Alberta",
             "British Columbia",
