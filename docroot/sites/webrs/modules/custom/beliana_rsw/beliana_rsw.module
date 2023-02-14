@@ -493,7 +493,7 @@ function _beliana_get_geodata_image() {
     #decide, if width or height of the map is fixed. Default: width
     $map_params = str_replace("width", $country_content['map_aspect'], $map_params);
     $places="&place-types=capital";
-    if (country_content['cities']) { #if a list of cities is specified
+    if ($country_content['cities']) { #if a list of cities is specified
         $places=$places . "&place-label-placements=URLD";
         $places=$places . "&places=" . urlencode($country_content['cities']);
         if ($country_content['place-size-factor']) {
