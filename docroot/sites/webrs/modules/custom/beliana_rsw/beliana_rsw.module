@@ -505,6 +505,9 @@ function _beliana_get_geodata_image() {
     if($geodata_admin_level_4 != '- Zvoliť -') {
       $geodata_admin_level_4 = urlencode($geodata_admin_level_4);
       $map_params = $map_params . "&srs=" . urlencode("+init=epsg:". $country_content['epsg']);
+      if ($country_content['bbox']) {
+        $map_params = $map_params . "&bbox=" . urlencode($country_content['bbox']);
+      }
       $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4&highlight-admin-area=$geodata_admin_level_4";
     } else {
       $params_url = "$features$map_params$places&country=$geodata_country&minor-borders=$geodata_country:4";
