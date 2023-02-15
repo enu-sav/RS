@@ -611,58 +611,56 @@ function _create_map_image(array $img_types = NULL, string $url, array $data = [
  * Update fields data from mapa/mapa poloha
  */
 function update_fields_value_from_map_creator(&$node) {
-  if ($node->type != "heslo" && $node->type != 'importovane_heslo') {
-    if ($node->type == "ilustracia") {
-      if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa') {
-        if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
-          $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
-          $field_mapa_obrazok_fid_jpg = explode('/', $field_mapa_obrazok_fid);
-          $file_jpg = file_load($field_mapa_obrazok_fid_jpg[0]);
-          $file_uri = $file_jpg->uri;
+  if ($node->type == "ilustracia") {
+    if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa') {
+      if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
+        $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
+        $field_mapa_obrazok_fid_jpg = explode('/', $field_mapa_obrazok_fid);
+        $file_jpg = file_load($field_mapa_obrazok_fid_jpg[0]);
+        $file_uri = $file_jpg->uri;
 
-          if (!file_destination($file_uri, FILE_EXISTS_ERROR) && $file_jpg) {
-            $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file_jpg;
-            $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
-              'fid' => $file_jpg->fid,
-              'display' => 1,
-            ];
-            image_style_create_derivative(image_style_load('medium'), $file_uri, image_style_path('medium', $file_uri));
-          }
+        if (!file_destination($file_uri, FILE_EXISTS_ERROR) && $file_jpg) {
+          $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file_jpg;
+          $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
+            'fid' => $file_jpg->fid,
+            'display' => 1,
+          ];
+          image_style_create_derivative(image_style_load('medium'), $file_uri, image_style_path('medium', $file_uri));
+        }
+      }
+
+      $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
+      $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
+      $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
+      $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
+      $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
+      $node->field_url_diela_l[LANGUAGE_NONE][0]['url'] = $node->field_freemap_url[LANGUAGE_NONE][0]["value"];
+    }
+    if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
+      if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
+        $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
+
+        $file_jpg = file_load(explode('/', $field_mapa_obrazok_fid)[0]);
+        $file_uri_jpg = $file_jpg->uri;
+        if (!file_destination($file_uri_jpg, FILE_EXISTS_ERROR) && $file_jpg) {
+          $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file_jpg;
         }
 
-        $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
-        $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
-        $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
-        $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
-        $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
-        $node->field_url_diela_l[LANGUAGE_NONE][0]['url'] = $node->field_freemap_url[LANGUAGE_NONE][0]["value"];
-      }
-      if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
-        if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
-          $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
-
-          $file_jpg = file_load(explode('/', $field_mapa_obrazok_fid)[0]);
-          $file_uri_jpg = $file_jpg->uri;
-          if (!file_destination($file_uri_jpg, FILE_EXISTS_ERROR) && $file_jpg) {
-            $node->field_obrazok_navrh_[LANGUAGE_NONE][0] = (array)$file_jpg;
-          }
-
-          $file_svg = file_load(explode('/', $field_mapa_obrazok_fid)[1]);
-          $file_uri_svg = $file_svg->uri;
-          if (!file_destination($file_uri_svg, FILE_EXISTS_ERROR) && $file_svg) {
-            $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
-              'fid' => $file_svg->fid,
-              'display' => 1,
-            ];
-          }
+        $file_svg = file_load(explode('/', $field_mapa_obrazok_fid)[1]);
+        $file_uri_svg = $file_svg->uri;
+        if (!file_destination($file_uri_svg, FILE_EXISTS_ERROR) && $file_svg) {
+          $node->field_subor_ilustracie[LANGUAGE_NONE][0] = [
+            'fid' => $file_svg->fid,
+            'display' => 1,
+          ];
         }
-
-        $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
-        $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
-        $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
-        $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
-        $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
       }
+
+      $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
+      $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
+      $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
+      $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
+      $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
     }
   }
 }
