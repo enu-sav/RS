@@ -612,6 +612,8 @@ function _create_map_image(array $img_types = NULL, string $url, array $data = [
  */
 function update_fields_value_from_map_creator(&$node) {
   if ($node->type == "ilustracia") {
+    $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
+    $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
     if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa') {
       if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
         $field_mapa_obrazok_fid = $node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'];
@@ -629,11 +631,8 @@ function update_fields_value_from_map_creator(&$node) {
         }
       }
 
-      $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
       $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
       $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
-      $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
-      $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
       $node->field_url_diela_l[LANGUAGE_NONE][0]['url'] = $node->field_freemap_url[LANGUAGE_NONE][0]["value"];
     }
     if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
@@ -655,12 +654,6 @@ function update_fields_value_from_map_creator(&$node) {
           ];
         }
       }
-
-      $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = '© Prispievatelia OpenStreetMap';
-      $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
-      $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
-      $node->field_licencia1[LANGUAGE_NONE][0]['value'] = 'IVL';
-      $node->field_modifikovane[LANGUAGE_NONE][0]['value'] = 0;
     }
   }
 }
