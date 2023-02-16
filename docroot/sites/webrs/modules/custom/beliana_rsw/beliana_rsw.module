@@ -491,7 +491,7 @@ function _beliana_get_geodata_image() {
     $states_content = get_states_data_from_json(TRUE);
     $country_content = $states_content[strtoupper($geodata_country)];
     #decide, if width or height of the map is fixed. Default: width
-    $map_params = str_replace("width", $country_content['map_aspect'], $map_params);
+    $map_params = str_replace("width=", $country_content['map_aspect'] . "=", $map_params);
     $places="&place-types=capital";
     if ($country_content['cities']) { #if a list of cities is specified
         $places=$places . "&place-label-placements=URLD";
