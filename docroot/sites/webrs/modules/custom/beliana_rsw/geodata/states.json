@@ -38,6 +38,7 @@
         "admin_level": 4,
         "map_aspect": "height",
         "epsg": "3035",
+        "cities": "Stuttgart,München,Potsdam,20982927,Hamburg,Wiesbaden,21993086,Hannover,Düsseldorf,Mainz,Saarbrücken,Dresden,Magdeburg,Kiel,Erfurt", 
         "states": [
             "Baden-Württemberg",
             "Bayern",
@@ -75,8 +76,10 @@
     "FR": {
         "sk_name":"Francúzsko",
         "epsg": "3035",
+        "bbox": "-3.2,41.2,9.7,50.7",
         "admin_level": 4,
         "map_aspect": "width",
+        "cities": "Lyon,Dijon,Rennes,Orléans,Ajaccio,Strasbourg,26686577,Rouen,Bordeaux,Toulouse,Nantes,Marseille",
         "states": [
             "Auvergne-Rhône-Alpes",
             "Bourgogne-Franche-Comté",
@@ -206,6 +209,8 @@
     "IT": {
         "sk_name":"Taliansko",
         "epsg": "3035",
+        "bbox": "6.7,36.4,18.5,47.0",
+        "cities": "70990193,Potenza,Catanzaro,Napoli,667350399,Trieste,Genova,Milano,Ancona,Campobasso,Torino,Bari,72990657,Palermo,Firenze,Trento,Perugia,Aosta,Venezia",
         "admin_level": 4,
         "map_aspect": "height",
         "states": [
