@@ -2095,11 +2095,14 @@ function _validate_heslo_node_form(&$form, &$form_state) {
   //lexical group - all must be English or none must be English.
   if (!empty($form_values['field_lexikalna_skupina'][LANGUAGE_NONE]) && !empty($form_values['field_doplnkova_ls'][LANGUAGE_NONE])) {
     $is_lexikalna_skupina_en = strpos($form_values['field_lexikalna_skupina'][LANGUAGE_NONE][0]['name'], '(EN)') !== false;
-    $is_doplnkova_ls_name_en = strpos($form_values['field_doplnkova_ls'][LANGUAGE_NONE][0]['name'], '(EN)') !== false;
 
-    if(($is_lexikalna_skupina_en && !$is_doplnkova_ls_name_en) || (!$is_lexikalna_skupina_en && $is_doplnkova_ls_name_en)) {
-      form_set_error('field_lexikalna_skupina', t(''));
-      form_set_error('field_doplnkova_ls', t('Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť anglické alebo žiadna nesmie byť anglická.'));
+    foreach ($form_values['field_doplnkova_ls'][LANGUAGE_NONE] as $item) {
+      $is_doplnkova_ls_name_en = strpos($item['name'], '(EN)') !== false;
+
+      if(($is_lexikalna_skupina_en && !$is_doplnkova_ls_name_en) || (!$is_lexikalna_skupina_en && $is_doplnkova_ls_name_en)) {
+        form_set_error('field_lexikalna_skupina', t(''));
+        form_set_error('field_doplnkova_ls', t('Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť anglické alebo žiadna nesmie byť anglická.'));
+      }
     }
   }
 }
