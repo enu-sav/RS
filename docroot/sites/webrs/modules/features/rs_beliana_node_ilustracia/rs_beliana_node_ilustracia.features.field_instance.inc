@@ -297,10 +297,8 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 23,
+        'type' => 'hidden',
       ),
       'export' => array(
         'label' => 'above',
@@ -1519,7 +1517,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_subor_ilustracie'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => '<b>Vložte súbory obrázka určeného na zverejnenie.</b> Rastrový obrázok treba vložiť vo formáte <b>jpg</b> (v rozlíšení pre web — cca 1500 x 1500 pixelov. Originál s väčším rozlíšením – ak je k dispozícii – vložte do poľa <i>Originál obrázka</i>). 
+    'description' => '<b>Vložte súbory obrázka určeného na zverejnenie.</b> Rastrový obrázok treba vložiť vo formáte <b>jpg</b> (v rozlíšení pre web — cca 1500 x 1500 pixelov. Originál s väčším rozlíšením – ak je k dispozícii – vložte do poľa <i>Originál obrázka</i>).
 Pokiaľ ide o vektorový obrázok, tak treba vložiť <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b>, <b>cdx</b>, <b>asy</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
 Nevkladať dva jpg obrázky alebo spolu jpg a png.',
     'display' => array(
@@ -1983,7 +1981,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('<b>Vložte súbory obrázka určeného na zverejnenie.</b> Rastrový obrázok treba vložiť vo formáte <b>jpg</b> (v rozlíšení pre web — cca 1500 x 1500 pixelov. Originál s väčším rozlíšením – ak je k dispozícii – vložte do poľa <i>Originál obrázka</i>). 
+  t('<b>Vložte súbory obrázka určeného na zverejnenie.</b> Rastrový obrázok treba vložiť vo formáte <b>jpg</b> (v rozlíšení pre web — cca 1500 x 1500 pixelov. Originál s väčším rozlíšením – ak je k dispozícii – vložte do poľa <i>Originál obrázka</i>).
 Pokiaľ ide o vektorový obrázok, tak treba vložiť <b>svg</b> (pre webovú verziu) a <b>eps</b> (pre tlačenú verziu). Okrem toho treba vložiť aj zdrojové súbory, napr. <b>cdr</b>, <b>odg</b>, <b>cdx</b>, <b>asy</b> alebo podobne (podľa aplikácie, v ktorej bol vektorový obrázok vytvorený).
 Nevkladať dva jpg obrázky alebo spolu jpg a png.');
   t('<strong>Alternatíva k poľu Obrázok (návrh/náhľad)</strong>: Autor alebo redaktor vloží odkaz na súbor obrázka na internetovej stránke. Ak sa toto pole vyplní, vyplniť treba aj pole <em>URL stránky s obrázkom a údajmi k dielu</em>');
