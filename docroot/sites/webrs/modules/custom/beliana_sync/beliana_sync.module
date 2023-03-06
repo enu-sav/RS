@@ -255,6 +255,36 @@ function beliana_sync_sync($nid, &$context) {
     }
   }
 
+  //check lexical group - all must be English or none must be English.
+  if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE]) && !empty($node->field_doplnkova_ls[LANGUAGE_NONE])) {
+    $term_lexikalna_skupina = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
+    $is_lexikalna_skupina_en = strpos($term_lexikalna_skupina->name, '(EN)') !== false;
+
+    foreach ($node->field_doplnkova_ls[LANGUAGE_NONE] as $doplnkova_ls) {
+      $term_doplnkova_ls = taxonomy_term_load($doplnkova_ls['tid']);
+      $is_doplnkova_ls_name_en = strpos($term_doplnkova_ls->name, '(EN)') !== false;
+
+      if(($is_lexikalna_skupina_en && !$is_doplnkova_ls_name_en) || (!$is_lexikalna_skupina_en && $is_doplnkova_ls_name_en)) {
+        drupal_set_message('Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť anglické alebo žiadna nesmie byť anglická.', 'warning');
+        $skip = TRUE;
+      }
+    }
+
+    foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
+      $ilu_generic_node = node_load($illustration['target_id']);
+      if ($ilu_generic_node) {
+        foreach ($ilu_generic_node->field_lexikalna_skupina_il[LANGUAGE_NONE] as $lexikalna_skupina_il) {
+          $term_lexikalna_skupina_il = taxonomy_term_load($lexikalna_skupina_il['tid']);
+          $is_lexikalna_skupina_il_name_en = strpos($term_lexikalna_skupina_il->name, '(EN)') !== false;
+          if (($is_lexikalna_skupina_en && !$is_lexikalna_skupina_il_name_en) || (!$is_lexikalna_skupina_en && $is_lexikalna_skupina_il_name_en)) {
+            drupal_set_message('Nesúlad lexikálnych skupín medzi heslom a ilustráciou. Všetky musia byť anglické alebo žiadna nesmie byť anglická.', 'warning');
+            $skip = TRUE;
+          }
+        }
+      }
+    }
+  }
+
   if (isset($node->field_ilustracia[LANGUAGE_NONE]) ) {
     foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
       $ilu_generic_node = node_load($illustration['target_id']);

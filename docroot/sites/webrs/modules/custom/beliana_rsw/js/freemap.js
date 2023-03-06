@@ -151,6 +151,12 @@
           }
         });
       });
+
+      $('#edit-field-zdroj-ilustracie-und input[type="radio"]').click(function() {
+        if(!$(this).val().includes('Mapa')) {
+          $('#edit-field-freemap-url input').val('');
+        }
+      });
     },
     commentInstructionAddValue: function (comment_instruction) {
       var country = $('select.country-code option:selected').text();
