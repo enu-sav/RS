@@ -14854,7 +14854,6 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'heslo' => 'heslo',
-    'ilustracia' => 'ilustracia',
     'importovane_heslo' => 'importovane_heslo',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -14865,26 +14864,6 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
   );
   /* Filter criterion: Workbench Moderation: Stav */
   $handler->display->display_options['filters']['state']['id'] = 'state';
@@ -16853,7 +16832,7 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
-  $handler->display->display_options['path'] = 'vsetky-operacie';
+  $handler->display->display_options['path'] = 'vsetky-operacie-heslo';
   $handler->display->display_options['menu']['title'] = 'Prehľad';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
@@ -17797,14 +17776,13 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     'field_obrazok_navrh_' => 'field_obrazok_navrh_',
     'field_obrazok_odkaz' => 'field_obrazok_odkaz',
     'title_1' => 'title_1',
-    'state_1' => 'state_1',
+    'state' => 'state',
     'field_komentar_instrukcie' => 'field_komentar_instrukcie',
     'field_popis' => 'field_popis',
     'field_lexikalna_skupina_il' => 'field_lexikalna_skupina_il',
     'field_licencia1' => 'field_licencia1',
     'field_zdroj_ilustracie' => 'field_zdroj_ilustracie',
     'field_pouzit' => 'field_pouzit',
-    'state' => 'state',
     'name_1' => 'name_1',
     'name' => 'name',
     'changed' => 'changed',
@@ -17815,7 +17793,9 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     'field_institucia' => 'field_institucia',
     'field_meno_autora_snimky_diela' => 'field_meno_autora_snimky_diela',
     'field_url_autora_diela_l' => 'field_url_autora_diela_l',
+    'field_freemap_url' => 'field_freemap_url',
   );
+  $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
     'views_bulk_operations' => array(
@@ -17858,7 +17838,7 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
       'separator' => '',
       'empty_column' => 0,
     ),
-    'state_1' => array(
+    'state' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -17899,13 +17879,6 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
       'empty_column' => 0,
     ),
     'field_pouzit' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -17978,6 +17951,13 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_freemap_url' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['style_options']['sticky'] = TRUE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -18007,6 +17987,14 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::reset_vyradene_ilustracie' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -18021,16 +18009,10 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
           'ilustracia::field_zdroj_ilustracie' => 'ilustracia::field_zdroj_ilustracie',
           'ilustracia::field_lexikalna_skupina_il' => 'ilustracia::field_lexikalna_skupina_il',
           'ilustracia::field_licencia1' => 'ilustracia::field_licencia1',
+          'ilustracia::field_meno_autora_diela' => 'ilustracia::field_meno_autora_diela',
+          'ilustracia::field_freemap_url' => 'ilustracia::field_freemap_url',
         ),
       ),
-    ),
-    'action::reset_vyradene_ilustracie' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'skip_permission_check' => 0,
-      'override_label' => 0,
-      'label' => '',
     ),
     'action::workbench_moderation_set_state_action' => array(
       'selected' => 1,
@@ -18141,6 +18123,16 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Pole: Obsah: Freemap url */
+  $handler->display->display_options['fields']['field_freemap_url']['id'] = 'field_freemap_url';
+  $handler->display->display_options['fields']['field_freemap_url']['table'] = 'field_data_field_freemap_url';
+  $handler->display->display_options['fields']['field_freemap_url']['field'] = 'field_freemap_url';
+  $handler->display->display_options['fields']['field_freemap_url']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['field_freemap_url']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => '',
+    'title_class' => '',
+  );
   /* Pole: Obsah: Súbory ilustrácie */
   $handler->display->display_options['fields']['field_subor_ilustracie']['id'] = 'field_subor_ilustracie';
   $handler->display->display_options['fields']['field_subor_ilustracie']['table'] = 'field_data_field_subor_ilustracie';
@@ -18394,6 +18386,22 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     2 => '2',
   );
   $handler->display->display_options['filters']['state_1']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Obsah: Typ ilustrácie (field_zdroj_ilustracie) */
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['id'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['table'] = 'field_data_field_zdroj_ilustracie';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['field'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator_id'] = 'field_zdroj_ilustracie_value_op';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['label'] = 'Typ ilustrácie';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator'] = 'field_zdroj_ilustracie_value_op';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['identifier'] = 'field_zdroj_ilustracie_value';
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['reduce_duplicates'] = TRUE;
   /* Filter criterion: Obsah: Názov */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
@@ -18479,40 +18487,6 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     23 => 0,
     26 => 0,
   );
-  /* Filter criterion: Obsah: Typ ilustrácie (field_zdroj_ilustracie) */
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['id'] = 'field_zdroj_ilustracie_value';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['table'] = 'field_data_field_zdroj_ilustracie';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['field'] = 'field_zdroj_ilustracie_value';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator_id'] = 'field_zdroj_ilustracie_value_op';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['label'] = 'Typ ilustrácie';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['operator'] = 'field_zdroj_ilustracie_value_op';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['identifier'] = 'field_zdroj_ilustracie_value';
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['filters']['field_zdroj_ilustracie_value']['reduce_duplicates'] = TRUE;
   /* Filter criterion: Obsah: Názov (title_field) */
   $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
@@ -18737,6 +18711,21 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     22 => 0,
     23 => 0,
     26 => 0,
+  );
+  /* Filter criterion: Obsah: Freemap url (field_freemap_url) */
+  $handler->display->display_options['filters']['field_freemap_url_value']['id'] = 'field_freemap_url_value';
+  $handler->display->display_options['filters']['field_freemap_url_value']['table'] = 'field_data_field_freemap_url';
+  $handler->display->display_options['filters']['field_freemap_url_value']['field'] = 'field_freemap_url_value';
+  $handler->display->display_options['filters']['field_freemap_url_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_freemap_url_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_freemap_url_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_freemap_url_value']['expose']['operator_id'] = 'field_freemap_url_value_op';
+  $handler->display->display_options['filters']['field_freemap_url_value']['expose']['label'] = 'Freemap url';
+  $handler->display->display_options['filters']['field_freemap_url_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_freemap_url_value']['expose']['operator'] = 'field_freemap_url_value_op';
+  $handler->display->display_options['filters']['field_freemap_url_value']['expose']['identifier'] = 'field_freemap_url_value';
+  $handler->display->display_options['filters']['field_freemap_url_value']['expose']['remember_roles'] = array(
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-ilustracie-prehlad';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -21479,6 +21468,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('[field_zdroj_ilustracie] / [field_licencia1]'),
     t('Naposledy upravil / autor'),
     t('[name] / [name_1]'),
+    t('Freemap url'),
     t('Súbory ilustrácie'),
     t('Meno autora diela'),
     t('URL stránky s obrázkom a údajmi k dielu'),
