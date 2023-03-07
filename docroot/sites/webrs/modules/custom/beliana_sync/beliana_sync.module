@@ -277,7 +277,7 @@ function beliana_sync_sync($nid, &$context) {
           $term_lexikalna_skupina_il = taxonomy_term_load($lexikalna_skupina_il['tid']);
           $is_lexikalna_skupina_il_name_en = strpos($term_lexikalna_skupina_il->name, '(EN)') !== false;
           if (($is_lexikalna_skupina_en && !$is_lexikalna_skupina_il_name_en) || (!$is_lexikalna_skupina_en && $is_lexikalna_skupina_il_name_en)) {
-            drupal_set_message('Nesúlad lexikálnych skupín medzi heslom a ilustráciou. Všetky musia byť anglické alebo žiadna nesmie byť anglická.', 'warning');
+            drupal_set_message('Nesúlad lexikálnych skupín medzi heslom a ilustráciou ' . l($ilu_generic_node->title, $ilu_generic_node->path['source']) . '. Všetky musia byť anglické alebo žiadna nesmie byť anglická.', 'warning');
             $skip = TRUE;
           }
         }
