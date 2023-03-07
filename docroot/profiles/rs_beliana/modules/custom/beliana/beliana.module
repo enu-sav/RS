@@ -2093,7 +2093,7 @@ function _validate_heslo_node_form(&$form, &$form_state) {
   }
 
   //lexical group - all must be English or none must be English.
-  if (!empty($form_values['field_lexikalna_skupina'][LANGUAGE_NONE]) && !empty($form_values['field_doplnkova_ls'][LANGUAGE_NONE])) {
+  if (!empty($form_values['field_lexikalna_skupina'][LANGUAGE_NONE]) || !empty($form_values['field_doplnkova_ls'][LANGUAGE_NONE])) {
     $is_lexikalna_skupina_en = strpos($form_values['field_lexikalna_skupina'][LANGUAGE_NONE][0]['name'], '(EN)') !== false;
 
     foreach ($form_values['field_doplnkova_ls'][LANGUAGE_NONE] as $doplnkova_ls) {

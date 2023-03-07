@@ -256,7 +256,7 @@ function beliana_sync_sync($nid, &$context) {
   }
 
   //check lexical group - all must be English or none must be English.
-  if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE]) && !empty($node->field_doplnkova_ls[LANGUAGE_NONE])) {
+  if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE]) || !empty($node->field_doplnkova_ls[LANGUAGE_NONE])) {
     $term_lexikalna_skupina = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
     $is_lexikalna_skupina_en = strpos($term_lexikalna_skupina->name, '(EN)') !== false;
 
