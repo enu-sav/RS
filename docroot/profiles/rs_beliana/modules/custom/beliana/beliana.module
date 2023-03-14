@@ -1713,6 +1713,9 @@ function beliana_node_presave($node) {
     if ($node->title == 'Anglické heslo - Vyradené' && $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
       $node->workbench_moderation_state_new = 'vyradene';
     }
+    if ($node->title == 'Anglická ilustrácia - Vyradené' && $node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'] == 'Neurčená') {
+      $node->workbench_moderation_state_new = 'vyradene';
+    }
   }
 
   // Update fields data from mapa/mapa poloha
@@ -3581,6 +3584,14 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
           $terms[] = $value['name'];
         }
         $data['field_lexikalna_skupina_il[und]'] = implode(', ', $terms);
+      }
+
+      if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
+        $data['status'] = 0;
+        $data['title_field[und][0][value]'] = 'Anglická ilustrácia - Vyradené';
+        $data['field_popis[und][0][value]'] = 'Anglická ilustrácia vytvorená vo WEBRS';
+        $data['field_popis[und][0][format]'] = 'filtered_html';
+        $data['field_lexikalna_skupina_il[und]'] = 'Neurčená';
       }
     }
 
