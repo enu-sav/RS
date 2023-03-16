@@ -42,7 +42,8 @@ function beliana_form_ilustracia_node_form_alter(&$form, &$form_state) {
 
   $states_content = get_states_data_from_json(FALSE);
 
-  if (isset($form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'])) {
+  if (isset($form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'])
+    && !empty($form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'])) {
     $freemap_default_url = $form['field_freemap_url'][LANGUAGE_NONE][0]["value"]['#default_value'];
   }
 
@@ -639,6 +640,8 @@ function update_fields_value_from_map_creator(&$node) {
       $node->field_institucia[LANGUAGE_NONE][0]['value'] = 'Freemap.sk';
       $node->field_url_textu_licencie_l[LANGUAGE_NONE][0]['value'] = 'https://www.freemap.sk';
       $node->field_url_diela_l[LANGUAGE_NONE][0]['url'] = $node->field_freemap_url[LANGUAGE_NONE][0]["value"];
+    } else {
+      $node->field_freemap_url[LANGUAGE_NONE][0]["value"] = '';
     }
     if ($node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] == 'Mapa - Poloha') {
       if (isset($node->field_mapa_obrazok_fid[LANGUAGE_NONE][0]['value'])) {
