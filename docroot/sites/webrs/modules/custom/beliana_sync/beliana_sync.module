@@ -333,11 +333,14 @@ function beliana_sync_sync($nid, &$context) {
       }
     }
 
+    $info_published = _extract_published_info($node)._extract_updated_info($node);
 
     foreach($node->field_lexikalna_skupina["und"] as $ls) {
       $term = taxonomy_term_load($ls['tid']);
       if (strpos($term->name, '(EN)') !== false) {
         $language = 'en';
+        // novy alebo aktualizovane - odlisny text datumu.
+        $info_published = _extract_published_info_EN($node)._extract_updated_info_EN($node);
       }
     }
 
@@ -349,7 +352,7 @@ function beliana_sync_sync($nid, &$context) {
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
       //'dates' => $dates,
-      'info_published' => _extract_published_info($node)._extract_updated_info($node),
+      'info_published' => $info_published,
       //'category' => ["geografia;afrika","geografia;európa","fyzika"],
       //'category' => ["asdf;ghjk;pqr"],
       //'category' => ["asdf1;ghjk;pqr"],
@@ -751,6 +754,22 @@ function _extract_published_info($node) {
 function _extract_updated_info($node) {
   if (isset($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value'])) {
     return " Aktualizované " .  _form_date2($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value']) . ".";
+  } else {
+    return("");
+  }
+}
+
+function _extract_published_info_EN($node) {
+  if (isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
+    return 'Published on ' .  date('F jS Y', strtotime($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) . ".";
+  } else {
+    return 'Published on ' .  date('F jS Y', time()) . '.';
+  }
+}
+
+function _extract_updated_info_EN($node) {
+  if (isset($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value'])) {
+    return " Updated on " .  date('F jS Y', strtotime($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value'])) . ".";
   } else {
     return("");
   }
