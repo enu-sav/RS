@@ -1755,6 +1755,10 @@ function beliana_node_presave($node) {
         #dpm("Odstránený nepotrebný text v field_popis_modifikacie (2)");
         unset($node->field_popis_modifikacie[LANGUAGE_NONE][0]);
       }
+      if (isset($node->field_freemap_url[LANGUAGE_NONE][0]) and $node->field_zdroj_ilustracie[LANGUAGE_NONE][0]['value'] !== "Mapa") {
+        #dpm("Odstránený nepotrebný text v field_freemap_url");
+        unset($node->field_freemap_url[LANGUAGE_NONE][0]);
+      }
     }
     return;
   }
