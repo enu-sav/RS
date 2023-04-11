@@ -72,6 +72,7 @@
             alert('Error' + errorMessage);
           }
         });
+        self.cleanFreeMapUrlIfNotTypeMap(freemap_url_input);
       });
 
       body.find('#geodata-btn-place').unbind('click').click(function (e) {
@@ -151,10 +152,12 @@
           }
         });
       });
-
+      self.cleanFreeMapUrlIfNotTypeMap(freemap_url_input);
+    },
+    cleanFreeMapUrlIfNotTypeMap: function (freemap_url_input) {
       $('#edit-field-zdroj-ilustracie-und input[type="radio"]').click(function() {
         if(!$(this).val().includes('Mapa')) {
-          $('#edit-field-freemap-url input').val('');
+          freemap_url_input.val('');
         }
       });
     },
