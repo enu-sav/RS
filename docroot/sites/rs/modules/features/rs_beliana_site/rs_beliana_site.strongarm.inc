@@ -181,7 +181,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'dblog_row_limit';
-  $strongarm->value = '1000';
+  $strongarm->value = '100000';
   $export['dblog_row_limit'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -258,7 +258,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'mail_system';
   $strongarm->value = array(
-    'default-system' => 'MimeMailSystem',
+    'default-system' => 'SmtpMailSystem',
     'mimemail' => 'MimeMailSystem',
   );
   $export['mail_system'] = $strongarm;
@@ -567,7 +567,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_debugging';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['smtp_debugging'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -653,6 +653,7 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
         'Iná licencia' => 'Logo, erb, zástava',
         'Mapa' => 'Mapa',
         'Mapa - Poloha' => 'Mapa - Poloha',
+        'OpenStreetMap' => 'Mapa - OpenStreetMap',
       ),
       'allowed_values_function' => '',
     ),
