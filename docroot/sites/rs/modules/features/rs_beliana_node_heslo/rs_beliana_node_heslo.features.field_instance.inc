@@ -647,7 +647,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ',
+    'description' => 'Zadajte názov ilustrácie. Ak ilustrácia ešte nie je v systéme, treba ju najskôr vytvoriť pomocou <strong>Vytvoriť > Ilustrácia</strong> na hornej lište.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1871,12 +1871,12 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
   t('Text určený pre autora redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
   t('Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).');
-  t('Vložte potrebný počet ilustrácií.  Zadajte prvé písmená jej názvu ilustrácie. Ilustráciu treba najskôr <a href="ilustracia" target="_blank">vytvoriť</a>. ');
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyplatenie odmeny');
   t('Vypĺňané programovo. Dátum, keď bolo vyplnené pole "Dĺžka autorovho textu" ');
   t('Vyšlo knižne');
   t('Zadajte dátum aktualizácie vydaného hesla v tvare <strong>RRRR/MM/DD</strong> napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zadajte názov ilustrácie. Ak ilustrácia ešte nie je v systéme, treba ju najskôr vytvoriť pomocou <strong>Vytvoriť > Ilustrácia</strong> na hornej lište.');
   t('Zadajte počet znakov textu. Ak zadáte číslo 0, systém doplní počet znakov tejto verzie.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny.');
   t('Zadajte číslo zmluvy, na základe ktorej bolo heslo objednané. Ak ho nepoznáte, zadajte číslo zmluvy, ktorá bola aktívna v čase odovzdanie textu autorom (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie">viac o určení čísla zmluvy</a>).');

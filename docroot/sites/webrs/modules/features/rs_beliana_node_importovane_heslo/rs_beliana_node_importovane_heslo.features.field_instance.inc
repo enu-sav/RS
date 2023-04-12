@@ -453,7 +453,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'bundle' => 'importovane_heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Zadajte názov ilustrácie. Ak ilustrácia ešte nie je v systéme, treba ju najskôr vytvoriť pomocou <strong>Vytvoriť > Ilustrácia</strong> na hornej lište.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1322,6 +1322,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyplatenie odmeny');
   t('Zadajte dátum aktualizácie vydaného hesla v tvare RRRR/MM/DD napr. 2020/04/25. Dátum uvedený pod poľom sa nemusí zhodovať s aktuálnym dátumom. Aktualizáciou môže byť napr. prispôsobenie textu hesla novele zákona, vloženie dátumu úmrtia osoby, aktualizácia štatistických údajov v geografickom hesle, závažná vecná oprava alebo doplnenie textu hesla a podobne. Aktualizáciou nie je oprava chýb, preklepov, odkazov či odstránenie skratiek.');
+  t('Zadajte názov ilustrácie. Ak ilustrácia ešte nie je v systéme, treba ju najskôr vytvoriť pomocou <strong>Vytvoriť > Ilustrácia</strong> na hornej lište.');
   t('Zadajte časť názvu lex. skupiny, napr. "deji" a vyberte zo zoznamu, ktorý sa otvorí. Zadávať môžete len svoje lexikálne skupiny. Slúži na riadenie prístupu k heslám a na kategorizáciu hesla na webe. Ak chcete heslo priradiť autorovi, zadajte len jednu hodnotu.');
   t('Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie');
   t('Zaškrtnite, ak sa majú na webe zobraziť meno a stručný životopis.');
