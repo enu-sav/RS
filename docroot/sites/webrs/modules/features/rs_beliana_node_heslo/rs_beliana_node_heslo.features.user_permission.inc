@@ -19,6 +19,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_autori_hesla'.
+  $permissions['create field_autori_hesla'] = array(
+    'name' => 'create field_autori_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_datum'.
   $permissions['create field_datum'] = array(
     'name' => 'create field_datum',
@@ -93,6 +103,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'create field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -352,6 +363,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_autori_hesla'.
+  $permissions['edit field_autori_hesla'] = array(
+    'name' => 'edit field_autori_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_datum'.
   $permissions['edit field_datum'] = array(
     'name' => 'edit field_datum',
@@ -426,6 +447,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -634,6 +656,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_autori_hesla'.
+  $permissions['edit own field_autori_hesla'] = array(
+    'name' => 'edit own field_autori_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_datum'.
   $permissions['edit own field_datum'] = array(
     'name' => 'edit own field_datum',
@@ -708,6 +740,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -933,6 +966,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
   // Exported permission: 'view field_atributy'.
   $permissions['view field_atributy'] = array(
     'name' => 'view field_atributy',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_autori_hesla'.
+  $permissions['view field_autori_hesla'] = array(
+    'name' => 'view field_autori_hesla',
     'roles' => array(
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
@@ -1227,6 +1270,16 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view own field_autori_hesla'.
+  $permissions['view own field_autori_hesla'] = array(
+    'name' => 'view own field_autori_hesla',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_datum'.
   $permissions['view own field_datum'] = array(
     'name' => 'view own field_datum',
@@ -1298,6 +1351,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view own field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor' => 'Výstupný redaktor',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
