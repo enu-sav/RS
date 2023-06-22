@@ -93,6 +93,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'create field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -455,6 +459,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -743,6 +751,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit own field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),
@@ -1365,6 +1377,10 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view own field_doplnkova_ls',
     'roles' => array(
       'Redaktor' => 'Redaktor',
+      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 2Z' => 'Výstupný redaktor 2Z',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'useradmin' => 'useradmin',
     ),

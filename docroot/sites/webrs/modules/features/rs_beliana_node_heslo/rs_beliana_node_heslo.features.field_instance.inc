@@ -111,6 +111,57 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_autori_hesla'.
+  $field_instances['node-heslo-field_autori_hesla'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 52,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_autori_hesla',
+    'label' => 'Autori hesla',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 32,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-heslo-field_datum'.
   $field_instances['node-heslo-field_datum'] = array(
     'bundle' => 'heslo',
@@ -1617,7 +1668,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
     'description' => 'Zadajte číslo zmluvy, na základe ktorej bolo heslo dané na vypracovanie (<a href="https://rs.beliana.sav.sk/content/urcenie-cisla-zmluvy-na-vyplatenie>viac o určení čísla zmluvy</a>).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1804,6 +1855,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   // Included for use with string extractors like potx.
   t('Atribúty');
   t('Atribúty sú pomôcka pri vyhľadávaní obsahu alebo kontrole hesiel.');
+  t('Autori hesla');
   t('Comment');
   t('Do polí Dátum a Dátum 2 sa pri uložení hesla automaticky prenesú dátumy uvedené v záhlaví hesla (nesmú byť zafarbené). Pokiaľ v záhlaví žiadne dátumy nie sú, môžete sem zadať významné dátumy z textu hesla (napr 14. júl 1789 v hesle Bastila). Na poradí nezáleží. Uvádzajte len jednoznačné dátumy od roku 1000. Dátum bude použitý vo webovej verzii.');
   t('Do poľa sa programovo ukladá čas prvého zverejnenia hesla na webe');

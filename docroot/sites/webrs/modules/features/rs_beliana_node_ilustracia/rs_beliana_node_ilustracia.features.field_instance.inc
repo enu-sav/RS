@@ -297,8 +297,9 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 28,
       ),
       'export' => array(

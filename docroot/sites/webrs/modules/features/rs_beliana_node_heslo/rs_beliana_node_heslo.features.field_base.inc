@@ -34,6 +34,43 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_autori_hesla'.
+  $field_bases['field_autori_hesla'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_id_type' => NULL,
+    'entity_types' => array(),
+    'field_name' => 'field_autori_hesla',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(),
+      ),
+      'target_type' => 'user',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
   // Exported field_base: 'field_datum'.
   $field_bases['field_datum'] = array(
     'active' => 1,

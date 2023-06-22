@@ -4178,6 +4178,7 @@ function rs_beliana_views_views_default_views() {
   $handler = $view->new_display('page', 'Konzultácia', 'page_22');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Konzultácia';
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
@@ -4561,14 +4562,8 @@ Ak chcete vybrať heslá, ktoré odkazujú na heslá začínajúce na "a", do po
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     18 => '18',
-    32 => '32',
-    20 => '20',
     4 => '4',
     6 => '6',
-    13 => '13',
-    14 => '14',
-    15 => '15',
-    16 => '16',
   );
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -15003,6 +14998,7 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
     'field_remote_id' => 'field_remote_id',
     'type' => 'type',
     'state' => 'state',
+    'field_datum_prveho_zverejnenia' => 'field_datum_prveho_zverejnenia',
     'changed' => 'changed',
     'created' => 'created',
     'field_datum' => 'field_datum',
@@ -15056,6 +15052,13 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
       'empty_column' => 0,
     ),
     'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_datum_prveho_zverejnenia' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -15203,6 +15206,19 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Obsah: Dátum prvého zverejnenia */
+  $handler->display->display_options['fields']['field_datum_prveho_zverejnenia']['id'] = 'field_datum_prveho_zverejnenia';
+  $handler->display->display_options['fields']['field_datum_prveho_zverejnenia']['table'] = 'field_data_field_datum_prveho_zverejnenia';
+  $handler->display->display_options['fields']['field_datum_prveho_zverejnenia']['field'] = 'field_datum_prveho_zverejnenia';
+  $handler->display->display_options['fields']['field_datum_prveho_zverejnenia']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Pole: Obsah: Dátum aktualizácie */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -21425,6 +21441,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('Remote ID'),
     t('<a href="https://rs.beliana.sav.sk/node/[field_remote_id]">[field_remote_id]</a>'),
     t('<a href="https://webrs.beliana.sav.sk/node/[nid]">[nid]</a>'),
+    t('Dátum prvého zverejnenia'),
     t('Dátum vytvorenia'),
     t('Dátum výročia'),
     t('[field_datum]'),
