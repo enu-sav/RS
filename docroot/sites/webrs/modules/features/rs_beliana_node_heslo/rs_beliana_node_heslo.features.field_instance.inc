@@ -54,7 +54,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 29,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -126,7 +126,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 52,
+        'weight' => 5,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -180,7 +180,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -250,7 +250,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 11,
+        'weight' => 8,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -312,7 +312,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 18,
+        'weight' => 13,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -374,7 +374,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 20,
+        'weight' => 15,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -436,7 +436,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 9,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -492,7 +492,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 19,
+        'weight' => 14,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -566,7 +566,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 17,
+        'weight' => 12,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -614,7 +614,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -665,7 +665,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 50,
+        'weight' => 20,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -718,7 +718,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 21,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -788,7 +788,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -840,7 +840,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'title_style' => '',
         ),
         'type' => 'title_linked',
-        'weight' => 30,
+        'weight' => 17,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -909,7 +909,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 25,
+        'weight' => 22,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -977,7 +977,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 27,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1023,7 +1023,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 26,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1070,7 +1070,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 25,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1122,7 +1122,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 29,
+        'weight' => 16,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1289,10 +1289,9 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 30,
+        'type' => 'hidden',
+        'weight' => 23,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1407,7 +1406,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 24,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1475,7 +1474,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 30,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1526,7 +1525,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 16,
+        'weight' => 10,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1573,7 +1572,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 30,
+        'weight' => 18,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1624,7 +1623,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 30,
+        'weight' => 19,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1672,7 +1671,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 51,
+        'weight' => 11,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1745,7 +1744,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'lite_display' => array(
         'label' => 'above',
@@ -1790,7 +1789,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 28,
       ),
       'lite_display' => array(
         'label' => 'above',
