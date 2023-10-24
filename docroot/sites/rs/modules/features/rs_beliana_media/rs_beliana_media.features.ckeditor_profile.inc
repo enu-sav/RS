@@ -18,7 +18,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'Undo\',\'Redo\'],
     [\'JustifyCenter\',\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'Mathjax\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    [\'Table\',\'EqnEditor\',\'BGColor\',\'SpecialChar\',\'Image\'],
     [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
 ]',
         'expand' => 't',
@@ -101,6 +101,18 @@ function rs_beliana_media_ckeditor_profile_defaults() {
             ),
             'default' => 't',
           ),
+          'eqneditor' => array(
+            'name' => 'eqneditor',
+            'desc' => 'Plugin file: eqneditor',
+            'path' => '%plugin_dir%eqneditor/',
+            'buttons' => array(
+              'EqnEditor' => array(
+                'label' => 'EqnEditor',
+                'icon' => 'icons/eqneditor.png',
+              ),
+            ),
+            'default' => 'f',
+          ),
           'fixed' => array(
             'name' => 'fixed',
             'desc' => 'Plugin file: fixed',
@@ -140,16 +152,11 @@ function rs_beliana_media_ckeditor_profile_defaults() {
             ),
             'default' => 't',
           ),
-          'mathjax' => array(
-            'name' => 'mathjax',
-            'desc' => 'Plugin for inserting Mathematical Formula (MathJax). See <a href="http://ckeditor.com/addon/mathjax">addon page</a> for more details. See <a href="/admin/help/ckeditor#mathjax">help</a> for additional instructions.',
-            'path' => '//cdn.ckeditor.com/4.11.3/full-all/plugins/mathjax/',
-            'buttons' => array(
-              'Mathjax' => array(
-                'icon' => 'icons/mathjax.png',
-                'label' => 'Insert Mathematical Formulas',
-              ),
-            ),
+          'lite-fix' => array(
+            'name' => 'lite-fix',
+            'desc' => 'Plugin file: lite-fix',
+            'path' => '%plugin_dir%lite-fix/',
+            'buttons' => FALSE,
             'default' => 'f',
           ),
           'tableresize' => array(
