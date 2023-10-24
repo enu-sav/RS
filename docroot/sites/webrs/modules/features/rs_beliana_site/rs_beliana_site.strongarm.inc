@@ -258,8 +258,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'mail_system';
   $strongarm->value = array(
-    'default-system' => 'SmtpMailSystem',
-    'mimemail' => 'MimeMailSystem__DefaultMailSystem',
+    'default-system' => 'DefaultMailSystem',
   );
   $export['mail_system'] = $strongarm;
 
