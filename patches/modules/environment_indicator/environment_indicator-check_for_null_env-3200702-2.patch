@@ -1,0 +1,14 @@
+diff --git a/environment_indicator_variable/class/EnvironmentVariableRealmController.php b/environment_indicator_variable/class/EnvironmentVariableRealmController.php
+index 3444c4b..6ca7592 100644
+--- a/environment_indicator_variable/class/EnvironmentVariableRealmController.php
++++ b/environment_indicator_variable/class/EnvironmentVariableRealmController.php
+@@ -32,6 +32,9 @@ class EnvironmentVariableRealmController extends VariableRealmDefaultController
+    */
+   public function getRequestKey() {
+     $env = environment_indicator_get_active();
++    if (empty($env['machine'])) {
++      return NULL;
++    }
+     return $env['machine'];
+   }
+   /**

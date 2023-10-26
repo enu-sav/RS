@@ -44,15 +44,25 @@ function adminimal_admin_menu_module_implements_alter(&$implementations, $hook) 
  * Implements hook_page_build().
  */
 function adminimal_admin_menu_page_build(&$page) {
+  global $theme;
+
   if (!_adminimal_admin_menu_access()) {
     return;
   }
+
   $path = drupal_get_path('module', 'adminimal_admin_menu');
   $load_slicknav = variable_get('adminimal_admin_menu_slicknav', TRUE);
   $load_jquery = variable_get('adminimal_admin_menu_jquery', TRUE);
 
+  // Load Open Sans font if needed.
+  $themes = list_themes(FALSE);
+  $adminimal_active = isset($themes['adminimal']) && $themes['adminimal']->status;
+  if ($adminimal_active && $theme !== 'adminimal' && !theme_get_setting('avoid_custom_font', 'adminimal')) {
+    drupal_add_css('//fonts.googleapis.com/css?family=Open+Sans:400', array('group' => CSS_THEME));
+  }
+
   // Attach the CSS and JavaScript assets.
-  drupal_add_css($path . '/adminimal_admin_menu.css');
+  drupal_add_css($path . '/css/adminimal_admin_menu.menu.css');
 
   _adminimal_admin_menu_support_environment_indicator();
 
@@ -123,7 +133,7 @@ function _adminimal_admin_menu_support_environment_indicator() {
 
   $environment_info = environment_indicator_get_active();
 
-  if (!environment_indicator_check_access($environment_info)) {
+  if (empty($environment_info) || !environment_indicator_check_access($environment_info)) {
     return;
   }
 

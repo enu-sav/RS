@@ -1,0 +1,12 @@
+diff --git a/adminimal_admin_menu.module b/adminimal_admin_menu.module
+index b05610f..4389748 100644
+--- a/adminimal_admin_menu.module
++++ b/adminimal_admin_menu.module
+@@ -133,7 +133,7 @@ function _adminimal_admin_menu_support_environment_indicator() {
+
+   $environment_info = environment_indicator_get_active();
+
+-  if (!environment_indicator_check_access($environment_info)) {
++  if (empty($environment_info) || !environment_indicator_check_access($environment_info)) {
+     return;
+   }
