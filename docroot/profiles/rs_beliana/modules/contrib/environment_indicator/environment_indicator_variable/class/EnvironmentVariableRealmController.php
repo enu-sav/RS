@@ -32,6 +32,9 @@ class EnvironmentVariableRealmController extends VariableRealmDefaultController 
    */
   public function getRequestKey() {
     $env = environment_indicator_get_active();
+    if (empty($env['machine'])) {
+      return NULL;
+    }
     return $env['machine'];
   }
   /**
