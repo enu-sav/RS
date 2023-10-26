@@ -5,9 +5,9 @@ core = 7.x
 dependencies[] = admin_menu
 configure = admin/config/administration/adminimal_menu
 
-; Information added by Drupal.org packaging script on 2018-02-28
-version = "7.x-1.9"
+; Information added by Drupal.org packaging script on 2018-03-12
+version = "7.x-1.9+3-dev"
 core = "7.x"
 project = "adminimal_admin_menu"
-datestamp = "1519862286"
+datestamp = "1520851387"
 

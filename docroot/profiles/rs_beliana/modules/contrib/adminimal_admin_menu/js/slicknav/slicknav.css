@@ -161,7 +161,6 @@
   }
   #admin-menu-menu,
   a#edit-shortcuts,
-  li.admin-menu-account,
   #admin-menu-search,
   #admin-menu-users {
     display: none;
