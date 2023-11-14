@@ -892,9 +892,9 @@ drupal_set_message($msg, 'warning');
 
   // Check if alternative text is correct
   $atext = _beliana_remove_accents(preg_replace('/<[^>]*>/', '',  $text_il));
-  $plen = strlen($atext)>122;
+  $plen = strlen($atext)>122 || strlen($atext) != strlen($text_il);
   if (!isset($ilu_node->field_alternativny_text['und']) && $plen) {
-    il_error($node, $ilu_node, 'popis je dlhší ako 120 znakov a nie je vložený Alternatívny text.', $category);
+    il_error($node, $ilu_node, 'popis je dlhší ako 120 znakov alebo obsahuje tagy (napr. matematiku) a nie je vložený Alternatívny text.', $category);
     $skip = TRUE;
   }
 
