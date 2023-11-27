@@ -9,6 +9,11 @@
  */
 function rs_beliana_workbench_workbench_moderation_export_transitions() {
   $items = array(
+    '1_korektura:u_vyst_redaktora_4' => array(
+      'from_name' => '1_korektura',
+      'to_name' => 'u_vyst_redaktora_4',
+      'name' => '1_korektura-u_vyst_redaktora4',
+    ),
     '2_korekt_ra:u_vyst_redaktora_4' => array(
       'from_name' => '2_korekt_ra',
       'to_name' => 'u_vyst_redaktora_4',
@@ -93,6 +98,21 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'from_name' => 'na_jazykovu_korekturu',
       'to_name' => 'u_vyst_redaktora_2',
       'name' => 'u_jaz_redaktora1-u_vyst_redaktora2',
+    ),
+    'na_zalomenie:u_v_st_redaktora_5' => array(
+      'from_name' => 'na_zalomenie',
+      'to_name' => 'u_v_st_redaktora_5',
+      'name' => 'na_zalomenie-u_vyst_redaktora5',
+    ),
+    'na_zalomenie:v_zalamovani' => array(
+      'from_name' => 'na_zalomenie',
+      'to_name' => 'v_zalamovani',
+      'name' => 'na_zalomenie-v_zalamovani',
+    ),
+    'na_zlucenie:u_vyst_redaktora_2' => array(
+      'from_name' => 'na_zlucenie',
+      'to_name' => 'u_vyst_redaktora_2',
+      'name' => 'na_zlucenie-u_vyst_redaktora2',
     ),
     'na_zverejnenie:needs_review' => array(
       'from_name' => 'na_zverejnenie',
@@ -184,6 +204,11 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_v_st_redaktora_5',
       'name' => 'u_jaz_redaktora2-u_vyst_readaktora5',
     ),
+    'u_jaz_redaktora_2:u_vyst_redaktora_4' => array(
+      'from_name' => 'u_jaz_redaktora_2',
+      'to_name' => 'u_vyst_redaktora_4',
+      'name' => 'u_jaz_redaktora2-u_vyst_redaktora4',
+    ),
     'u_konzultanta:needs_review' => array(
       'from_name' => 'u_konzultanta',
       'to_name' => 'needs_review',
@@ -194,10 +219,25 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'na_zalomenie',
       'name' => 'u_vyst_redaktora5-na_zalomenie',
     ),
+    'u_v_st_redaktora_5:u_vyst_redaktora_4' => array(
+      'from_name' => 'u_v_st_redaktora_5',
+      'to_name' => 'u_vyst_redaktora_4',
+      'name' => 'u_vyst_redaktora5-u_vyst_redaktora4',
+    ),
+    'u_v_st_redaktora_5:vyradene' => array(
+      'from_name' => 'u_v_st_redaktora_5',
+      'to_name' => 'vyradene',
+      'name' => 'u_vyst_redaktora5-vyradene',
+    ),
     'u_vyst_redaktora_2:na_jazykovu_korekturu' => array(
       'from_name' => 'u_vyst_redaktora_2',
       'to_name' => 'na_jazykovu_korekturu',
       'name' => 'u_vyst_redaktora2-u_jaz_redaktora1',
+    ),
+    'u_vyst_redaktora_2:na_zlucenie' => array(
+      'from_name' => 'u_vyst_redaktora_2',
+      'to_name' => 'na_zlucenie',
+      'name' => 'u_vyst_redaktora2-na_zlucenie',
     ),
     'u_vyst_redaktora_2:na_zverejnenie' => array(
       'from_name' => 'u_vyst_redaktora_2',
@@ -239,10 +279,20 @@ function rs_beliana_workbench_workbench_moderation_export_transitions() {
       'to_name' => 'u_jaz_redaktora_2',
       'name' => 'u_vyst_redaktora4-u_jaz_redaktora2',
     ),
+    'u_vyst_redaktora_4:vyradene' => array(
+      'from_name' => 'u_vyst_redaktora_4',
+      'to_name' => 'vyradene',
+      'name' => 'u_vyst_redaktora4-vyradene',
+    ),
     'ukoncenezluene:u_vyst_redaktora_2' => array(
       'from_name' => 'ukoncenezluene',
       'to_name' => 'u_vyst_redaktora_2',
       'name' => 'ukoncene_zlucene-u_vyst_redaktora2',
+    ),
+    'v_zalamovani:publikovane_na_webe' => array(
+      'from_name' => 'v_zalamovani',
+      'to_name' => 'publikovane_na_webe',
+      'name' => 'v_zalamovani-zverejnene_na_webe',
     ),
     'vyradene:zaradene' => array(
       'from_name' => 'vyradene',

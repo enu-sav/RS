@@ -93,6 +93,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'description' => 'Heslo je pripravené pre tlač',
       'weight' => 10,
     ),
+    'na_zlucenie' => array(
+      'name' => 'na_zlucenie',
+      'label' => 'Na zlúčenie',
+      'description' => 'Heslo odoslané na zlúčenie rolou Výstupný redaktor 2Z',
+      'weight' => -4,
+    ),
     'na_zverejnenie' => array(
       'name' => 'na_zverejnenie',
       'label' => 'U výst. redaktora 1',
@@ -122,6 +128,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Objednané',
       'description' => '',
       'weight' => -3,
+    ),
+    'pozdr_an_' => array(
+      'name' => 'pozdr_an_',
+      'label' => 'Pozdržané',
+      'description' => 'Heslo na ceste k zverejnieniu, ale dočasne pozdržané ',
+      'weight' => -6,
     ),
     'publikovane_na_webe' => array(
       'name' => 'publikovane_na_webe',
@@ -182,6 +194,12 @@ function rs_beliana_workbench_workbench_moderation_export_states() {
       'label' => 'Ukončené/zlúčené',
       'description' => 'Heslo bolo zlúčené s inými heslami, v pôvodnej forme ďalej nepokračuje ',
       'weight' => 10,
+    ),
+    'v_zalamovani' => array(
+      'name' => 'v_zalamovani',
+      'label' => 'V zalamovaní (korektúra)',
+      'description' => 'Heslá odoslané na zalomenie',
+      'weight' => -10,
     ),
     'vyradene' => array(
       'name' => 'vyradene',
