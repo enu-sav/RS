@@ -632,7 +632,7 @@ function update_fields_value_from_map_creator(&$node) {
           image_style_create_derivative(image_style_load('medium'), $file_uri, image_style_path('medium', $file_uri));
         }
       }
-      if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
+      if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false || strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(pre školy)') !== false) {
         $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = t('© Contributors OpenStreetMap');
       } else {
         $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = t('© Prispievatelia OpenStreetMap');
@@ -662,7 +662,7 @@ function update_fields_value_from_map_creator(&$node) {
           ];
         }
       }
-      if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
+      if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false || strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
         $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = t('© Contributors OpenStreetMap');
       } else {
         $node->field_meno_autora_diela[LANGUAGE_NONE][0]['value'] = t('© Prispievatelia OpenStreetMap');
