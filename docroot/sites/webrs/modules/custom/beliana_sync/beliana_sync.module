@@ -905,10 +905,17 @@ drupal_set_message($msg, 'warning');
   $text_il = _remove_alternative_text($text_il);
 
   // Check if alternative text is correct
-  $atext = _beliana_remove_accents(preg_replace('/<[^>]*>/', '',  $text_il));
-  $plen = strlen($atext)>122 || strlen($atext) != strlen($text_il);
+
+  // we do not care about accented characters
+  $atext = _beliana_remove_accents($text_il);
+  // Get rid of the p tag, which is always there
+  $atext = str_replace("<p>","",$atext);
+  $atext = str_replace("</p>","",$atext);
+  // remove other tags
+  $btext = preg_replace('/<[^>]*>/', '',  $atext);
+  $plen = strlen($atext)>120 || strlen($atext) != strlen($btext);
   if (!isset($ilu_node->field_alternativny_text['und']) && $plen) {
-    il_error($node, $ilu_node, 'popis je dlhší ako 120 znakov alebo obsahuje tagy (napr. matematiku) a nie je vložený Alternatívny text.', $category);
+    il_error($node, $ilu_node, 'popis je dlhší ako 120 znakov alebo obsahuje html tagy (napr. matematiku) a nie je vložený Alternatívny text.', $category);
     $skip = TRUE;
   }
 
