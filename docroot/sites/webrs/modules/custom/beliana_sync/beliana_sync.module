@@ -322,8 +322,10 @@ function beliana_sync_sync($nid, &$context) {
         // novy alebo aktualizovane - odlisny text datumu.
         $info_published = _extract_published_info_EN($node)._extract_updated_info_EN($node);
       }
+
+      $is_school = FALSE;
       if (strpos($term->name, '(pre školy)') !== false) {
-        $language = 'p-s';
+        $is_school = TRUE;
       }
     }
 
@@ -331,6 +333,7 @@ function beliana_sync_sync($nid, &$context) {
     $remote_node_object = [
       'title' => $node->title,
       'language' => $language,
+      'is_school' => $is_school,
       'body' => $body,
       'images' => $illustrations,
       'sort' => $node->field_na_zoradenie['und'][0]['value'],
