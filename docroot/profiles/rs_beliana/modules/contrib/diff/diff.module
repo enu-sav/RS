@@ -659,6 +659,14 @@ function diff_inline_form_submit(&$form, &$form_state) {
  */
 function diff_normalise_text($text) {
   $text = str_replace(array("\r\n", "\r"), "\n", $text);
+  #remove ins tags
+  $text = preg_replace('|<ins[^>]*>|', '', $text);
+  $text = preg_replace('|</ins>|', '', $text);
+  #remove del tags (with text)
+  $text = preg_replace('|<del[^>]*>.*</del>|U', '', $text);	//U: ungreedy
+  #remove span tags
+  $text = preg_replace('|<span[^>]*>|', '', $text);
+  $text = preg_replace('|</span>|', '', $text);
   return $text;
 }
 
