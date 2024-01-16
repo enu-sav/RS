@@ -1,19 +1,36 @@
-diff --git a/diff.module b/diff.module
-index d3050e3b..6c894f9a 100644
---- a/diff.module
-+++ b/diff.module
-@@ -204,9 +204,11 @@ function diff_admin_paths_alter(&$paths) {
+--- a/docroot/profiles/rs_beliana/modules/contrib/diff/diff.module	(revision 9357ef0dec6533f5028a2b72e0c3ecd4e06ac2bd)
++++ b/docroot/profiles/rs_beliana/modules/contrib/diff/diff.module	(date 1705299083604)
+@@ -204,10 +204,12 @@
  /**
   * Access callback for the node revisions page.
   */
 -function diff_node_revision_access($node, $op = 'view') {
 -  $may_revision_this_type = variable_get('diff_enable_revisions_page_node_' . $node->type, TRUE) || user_access('administer nodes');
 -  return $may_revision_this_type && _node_revision_access($node, $op);
+-}
 +function diff_node_revision_access($node = NULL, $op = 'view') {
 +  if(!empty($node)) {
 +    $may_revision_this_type = variable_get('diff_enable_revisions_page_node_' . $node->type, TRUE) || user_access('administer nodes');
 +    return $may_revision_this_type && _node_revision_access($node, $op);
 +  }
- }
- 
++ }
+
  /**
+  * Implements hook_permission().
+@@ -657,7 +659,15 @@
+  * - line endings: Mac, Windows and UNIX all use different line endings.
+  */
+ function diff_normalise_text($text) {
+-  $text = str_replace(array("\r\n", "\r"), "\n", $text);
++    $text = str_replace(array("\r\n", "\r"), "\n", $text);
++    #remove ins tags
++    $text = preg_replace('|<ins[^>]*>|', '', $text);
++    $text = preg_replace('|</ins>|', '', $text);
++    #remove del tags (with text)
++    $text = preg_replace('|<del[^>]*>.*</del>|U', '', $text);	//U: ungreedy
++    #remove span tags
++    $text = preg_replace('|<span[^>]*>|', '', $text);
++    $text = preg_replace('|</span>|', '', $text);
+   return $text;
+ }
+

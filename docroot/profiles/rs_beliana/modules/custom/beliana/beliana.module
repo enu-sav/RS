@@ -2101,26 +2101,32 @@ function _validate_heslo_node_form(&$form, &$form_state) {
 
   //lexical group - all must be English or none must be English.
   if (!empty($form_values['field_lexikalna_skupina'][LANGUAGE_NONE]) || !empty($form_values['field_doplnkova_ls'][LANGUAGE_NONE])) {
-    $is_lexikalna_skupina_en = strpos($form_values['field_lexikalna_skupina'][LANGUAGE_NONE][0]['name'], '(EN)') !== false;
+    _check_lexical_groups($form_values, '(EN)', 'Nesúlad lexikálnych skupín medzi heslom a ilustráciou ', '. Všetky musia byť anglické alebo žiadna nesmie byť anglická.', 'Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť anglické alebo žiadna nesmie byť anglická.');
 
-    foreach ($form_values['field_doplnkova_ls'][LANGUAGE_NONE] as $doplnkova_ls) {
-      $is_doplnkova_ls_name_en = strpos($doplnkova_ls['name'], '(EN)') !== false;
+    _check_lexical_groups($form_values, '(pre školy)', 'Nesúlad lexikálnych skupín medzi heslom a ilustráciou ', '. Všetky musia byť anglické alebo žiadna nesmie byť pre školy.', 'Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť pre školy alebo žiadna nesmie byť pre školy.');
+  }
+}
 
-      if(($is_lexikalna_skupina_en && !$is_doplnkova_ls_name_en) || (!$is_lexikalna_skupina_en && $is_doplnkova_ls_name_en)) {
-        form_set_error('field_lexikalna_skupina','');
-        form_set_error('field_doplnkova_ls', t('Nesúlad lexikálnych skupín v poliach Lexikálna skupina a Doplnková lexikálna skupina. Všetky musia byť anglické alebo žiadna nesmie byť anglická.'));
-      }
+function _check_lexical_groups($form_values, $condition, $error_message_1 = '', $error_message_2 = '', $field_error_message = '') {
+  $is_lexikalna_skupina = strpos($form_values['field_lexikalna_skupina'][LANGUAGE_NONE][0]['name'], $condition) !== false;
+
+  foreach ($form_values['field_doplnkova_ls'][LANGUAGE_NONE] as $doplnkova_ls) {
+    $is_doplnkova_ls_name = strpos($doplnkova_ls['name'], $condition) !== false;
+
+    if(($is_lexikalna_skupina && !$is_doplnkova_ls_name) || (!$is_lexikalna_skupina && $is_doplnkova_ls_name)) {
+      form_set_error('field_lexikalna_skupina','');
+      form_set_error('field_doplnkova_ls', $field_error_message);
     }
+  }
 
-    foreach ($form_values['field_ilustracia'][LANGUAGE_NONE] as $illustration) {
-      $ilu_generic_node = node_load($illustration['target_id']);
-      if ($ilu_generic_node) {
-        foreach ($ilu_generic_node->field_lexikalna_skupina_il[LANGUAGE_NONE] as $lexikalna_skupina_il) {
-          $term = taxonomy_term_load($lexikalna_skupina_il['tid']);
-          $is_lexikalna_skupina_il_name_en = strpos($term->name, '(EN)') !== false;
-          if (($is_lexikalna_skupina_en && !$is_lexikalna_skupina_il_name_en) || (!$is_lexikalna_skupina_en && $is_lexikalna_skupina_il_name_en)) {
-            drupal_set_message(t('Nesúlad lexikálnych skupín medzi heslom a ilustráciou ' . l($ilu_generic_node->title, $ilu_generic_node->path['source']) . '. Všetky musia byť anglické alebo žiadna nesmie byť anglická.'), 'warning');
-          }
+  foreach ($form_values['field_ilustracia'][LANGUAGE_NONE] as $illustration) {
+    $ilu_generic_node = node_load($illustration['target_id']);
+    if ($ilu_generic_node) {
+      foreach ($ilu_generic_node->field_lexikalna_skupina_il[LANGUAGE_NONE] as $lexikalna_skupina_il) {
+        $term = taxonomy_term_load($lexikalna_skupina_il['tid']);
+        $is_lexikalna_skupina_il_name = strpos($term->name, $condition) !== false;
+        if (($is_lexikalna_skupina && !$is_lexikalna_skupina_il_name) || (!$is_lexikalna_skupina && $is_lexikalna_skupina_il_name)) {
+          drupal_set_message(t($error_message_1 . l($ilu_generic_node->title, $ilu_generic_node->path['source']) . $error_message_2), 'warning');
         }
       }
     }
@@ -3578,6 +3584,13 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
           $data['field_text_hesla[und][0][format]'] = 'filtered_html';
           $data['field_lexikalna_skupina[und]'] = 'Neurčená';
         }
+        if (strpos($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'], '(pre školy)') !== false) {
+          $data['status'] = 0;
+          $data['title_field[und][0][value]'] = 'Heslo pre školy - Vyradené';
+          $data['field_text_hesla[und][0][value]'] = 'Heslo pre školy vytvorené vo WEBRS';
+          $data['field_text_hesla[und][0][format]'] = 'filtered_html';
+          $data['field_lexikalna_skupina[und]'] = 'Neurčená';
+        }
     }
     else { // ilustracia
       $terms = [];
@@ -3589,11 +3602,17 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
         }
         $data['field_lexikalna_skupina_il[und]'] = implode(', ', $terms);
       }
-
       if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
         $data['status'] = 0;
         $data['title_field[und][0][value]'] = 'Anglická ilustrácia - Vyradené';
         $data['field_popis[und][0][value]'] = 'Anglická ilustrácia vytvorená vo WEBRS';
+        $data['field_popis[und][0][format]'] = 'filtered_html';
+        $data['field_lexikalna_skupina_il[und]'] = 'Neurčená';
+      }
+      if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(pre školy)') !== false) {
+        $data['status'] = 0;
+        $data['title_field[und][0][value]'] = 'Ilustrácia pre školy - Vyradené';
+        $data['field_popis[und][0][value]'] = 'Ilustrácia pre školy vytvorená vo WEBRS';
         $data['field_popis[und][0][format]'] = 'filtered_html';
         $data['field_lexikalna_skupina_il[und]'] = 'Neurčená';
       }

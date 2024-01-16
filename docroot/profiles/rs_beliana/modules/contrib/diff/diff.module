@@ -209,7 +209,7 @@ function diff_node_revision_access($node = NULL, $op = 'view') {
     $may_revision_this_type = variable_get('diff_enable_revisions_page_node_' . $node->type, TRUE) || user_access('administer nodes');
     return $may_revision_this_type && _node_revision_access($node, $op);
   }
-}
+ }
 
 /**
  * Implements hook_permission().
@@ -477,7 +477,8 @@ function diff_node_form_build_preview_changes($form, &$form_state) {
   $node = node_form_submit_build_node($form, $form_state);
 
   // Create diff of old node and edited node.
-  $rows = _diff_body_rows($old_node, $node);
+  $state = variable_get('diff_default_state_node', 'raw');
+  $rows = _diff_body_rows($old_node, $node, $state);
 
   $header = _diff_default_header(t('Original'), t('Changes'));
   $changes = theme('table__diff__preview', array(
@@ -658,7 +659,15 @@ function diff_inline_form_submit(&$form, &$form_state) {
  * - line endings: Mac, Windows and UNIX all use different line endings.
  */
 function diff_normalise_text($text) {
-  $text = str_replace(array("\r\n", "\r"), "\n", $text);
+    $text = str_replace(array("\r\n", "\r"), "\n", $text);
+    #remove ins tags
+    $text = preg_replace('|<ins[^>]*>|', '', $text);
+    $text = preg_replace('|</ins>|', '', $text);
+    #remove del tags (with text)
+    $text = preg_replace('|<del[^>]*>.*</del>|U', '', $text);	//U: ungreedy
+    #remove span tags
+    $text = preg_replace('|<span[^>]*>|', '', $text);
+    $text = preg_replace('|</span>|', '', $text);
   return $text;
 }
 
