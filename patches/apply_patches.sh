@@ -17,12 +17,33 @@ function apply {
 }
 
 #apply where (relative to ..) what
-echo "apply docroot/profiles/rs_beliana/modules/contrib/ctools modules/ctools/ctools-fix-disappearing-exposed-in-not-in-operator-filter-1249684-59.patch"
+echo "It is necessary to apply the patch - adminimal_admin_menu-3202255-2.patch"
 
-echo "apply . modules/views/views-export-fix-removed-tags.patch"
+echo "It is necessary to apply the patch - define_lite_icons.patch"
 
-echo "apply . modules/editable_views/editable_views_enable_new_revision.patch"
+echo "It is necessary to apply the patch - hook_access_arguments_error.patch"
 
-echo "apply docroot/profiles/rs_beliana/modules/contrib/workbench_state_access modules/workbench_state_access/workbench_state_access-access_new_content-2456041-1-D7.patch"
+echo "It is necessary to apply the patch - editable_views_enable_new_revision.patch"
 
-echo "apply . modules/shs/shs-fix-hanging-view-lookup.patch"
+echo "It is necessary to apply the patch - environment_indicator-check_for_null_env-3200702-2.patch"
+
+echo "It is necessary to apply the patch - hook_post_action-undefined_index_original-3011103-7-D7.patch.txt"
+
+echo "It is necessary to apply the patch - multivalue_fields_fix-2224803-59.patch"
+
+echo "It is necessary to apply the patch - shs-fix-hanging-view-lookup.patch"
+
+echo "It is necessary to apply the patch - views-export-fix-removed-tags.patch"
+
+echo "It is necessary to apply the patch - process-all-items-2646242-45.patch"
+
+echo "It is necessary to apply the patch - strip-tags-from-export.patch"
+
+echo "It is necessary to apply the patch - workbench_access_active_tree_cache.patch"
+
+echo "It is necessary to apply the patch - workbench_access_remove_error_logs.patch"
+
+echo "It is necessary to apply the patch - workbench_moderation_rs_optimize.patch"
+
+echo "It is necessary to apply the patch - workbench_state_access-access_new_content-2456041-1-D7.patch"
+
