@@ -532,7 +532,7 @@ function _beliana_get_geodata_image() {
     }
   }
 
-  $url = 'http://127.0.0.1:8081' . $params_url;
+  $url = 'http://147.213.4.35:8081' . $params_url;
 //  $url = 'host.docker.internal:8080' . $params_url;
 
   $random_hash = $node_id;
