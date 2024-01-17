@@ -436,7 +436,7 @@ function _beliana_get_freemap_image() {
     ],
   ];
 
-  $url = 'http://127.0.0.1:8080';
+  $url = variable_get('freemap_uri');
 //  $url = 'host.docker.internal:8080';
 
   _create_map_image(['png'], $url, $data, $destination, $title, $map_img_fid);
@@ -532,7 +532,7 @@ function _beliana_get_geodata_image() {
     }
   }
 
-  $url = 'http://147.213.4.35:8081' . $params_url;
+  $url = variable_get('geodata_uri') . $params_url;
 //  $url = 'host.docker.internal:8080' . $params_url;
 
   $random_hash = $node_id;

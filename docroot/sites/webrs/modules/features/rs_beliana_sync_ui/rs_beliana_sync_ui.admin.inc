@@ -68,5 +68,22 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     '#default_value' => variable_get('rs_api_password'),
   ];
 
+  $form['map'] = [
+    '#type' => 'fieldset',
+    '#title' => 'MAP synchronisation config',
+  ];
+
+  $form['map']['freemap_uri'] = [
+    '#type' => 'textfield',
+    '#title' => t('Freemap URI'),
+    '#default_value' => variable_get('freemap_uri'),
+  ];
+
+  $form['map']['geodata_uri'] = [
+    '#type' => 'textfield',
+    '#title' => t('Geodata URI'),
+    '#default_value' => variable_get('geodata_uri'),
+  ];
+
   return system_settings_form($form);
 }
