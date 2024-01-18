@@ -3,18 +3,21 @@ recipe: drupal7
 config:
   php: 7.4
   via: apache
-  webroot: dorcoot
-  drush: 8
+  webroot: docroot
+  database: mariadb:10.6
+  drush: ^8
+  xdebug: true
 services:
   appserver:
-    xdebug: true
+#    scanner: false
     config:
       php: .lando/php.ini
-  mailhog:
-    type: mailhog
-    portforward: true
-    hogfrom:
-      - appserver
+  database:
+    overrides:
+      image: mariadb:10.6
+      command: docker-entrypoint.sh mariadbd
+      environment:
+        MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
 proxy:
   appserver:
     - rs.beliana.lndo.site

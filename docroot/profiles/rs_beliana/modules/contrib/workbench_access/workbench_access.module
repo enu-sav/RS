@@ -462,7 +462,6 @@ function workbench_access_check($op, $type, $access_ids, $account_access) {
       return TRUE;
     }
   }
-
   return FALSE;
 }
 
@@ -562,6 +561,16 @@ function workbench_access_get_active_tree() {
 
   workbench_access_load_include($scheme);
 
+  $access_tree = &drupal_static(__FUNCTION__);
+  if (!isset($access_tree)) {
+    // Now check the cache.
+    $cache = cache_get('workbench_access_tree', 'cache_bootstrap');
+    if (isset($cache->data)) {
+      $access_tree = $cache->data;
+    }
+    if (isset($access_tree['access_scheme'])) {
+      return $access_tree;
+    }
     // Retrieve and cache data.
     $func = $scheme . '_workbench_access_info';
     $info = $func();
@@ -581,7 +590,8 @@ function workbench_access_get_active_tree() {
       'tree' => $tree,
       'active' => $active,
     );
-
+    cache_set('workbench_access_tree', $access_tree, 'cache_bootstrap');
+  }
   return $access_tree;
 }
 
