@@ -39,8 +39,6 @@ echo "It is necessary to apply the patch - process-all-items-2646242-45.patch"
 
 echo "It is necessary to apply the patch - strip-tags-from-export.patch"
 
-echo "It is necessary to apply the patch - workbench_access_active_tree_cache.patch"
-
 echo "It is necessary to apply the patch - workbench_access_remove_error_logs.patch"
 
 echo "It is necessary to apply the patch - workbench_moderation_rs_optimize.patch"
