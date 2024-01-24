@@ -1829,6 +1829,12 @@ function beliana_node_presave($node) {
     if (isset($node->field_vyplatit[LANGUAGE_NONE][0]) and !isset($node->field_datum_autorovho_textu[LANGUAGE_NONE][0]['value'])) {
         $node->field_datum_autorovho_textu = [LANGUAGE_NONE => [['value' => date('Y/m/d')]]];
         $node->log = $node->log . ", vyplnené pole Vyplatiť";
+    } else {
+        #Remove links without an arrow in final states
+        $moderation_state = $node->workbench_moderation['current']->state;
+        if (in_array($moderation_state, ["na_zalomenie", "v_zalamovani", "publikovane_na_webe"])) {
+            _beliana_remove_links_no_arrow($node);
+        }
     }
   } else {  // we are in the web system
     $sync_values = ['Vyplatené v RS', 'Vyplatené mimo RS']; // do not store date in article synchronization
@@ -1880,6 +1886,15 @@ function _beliana_remove_links($node) {
   $text = $node->field_text_hesla['und'][0]['value'];
   $text = preg_replace("/<a[^>]*>/", " ", $text);
   $node->field_text_hesla['und'][0]['value'] = str_replace("</a>", "", $text);
+}
+
+/**
+  remove links without an arrow (^⬈➔) from the node text
+ */
+function _beliana_remove_links_no_arrow($node) {
+  $text = $node->field_text_hesla['und'][0]['value'];
+  $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
+  $node->field_text_hesla['und'][0]['value'] = $text;
 }
 
 /**
