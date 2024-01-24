@@ -428,6 +428,14 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
       node_save($values['node']);
       return;
     }
+    # remove links without an arrow from text of artices with new state 'na_zalomenie'
+    if (in_array($new_state, ['na_zalomenie'])) {
+        $changed = _beliana_remove_links_no_arrow($values['node']);
+        if ($changed) {
+          node_save($values['node']);
+          drupal_set_message('V hesle <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> bol odstránený odkaz príp. viac odkazov bez šípky", 'status');
+        }
+    }
     # remove links from text of artices in state 'vyradene'
     if (in_array($new_state, ['vyradene']) and strpos($values['node']->field_text_hesla['und'][0]['value'], '</a>')) {
       _beliana_remove_links($values['node']);

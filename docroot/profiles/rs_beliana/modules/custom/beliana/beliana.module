@@ -1894,7 +1894,9 @@ function _beliana_remove_links($node) {
 function _beliana_remove_links_no_arrow($node) {
   $text = $node->field_text_hesla['und'][0]['value'];
   $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
+  $equal = $text == $node->field_text_hesla['und'][0]['value'];
   $node->field_text_hesla['und'][0]['value'] = $text;
+  return ! $equal;
 }
 
 /**
