@@ -1830,10 +1830,24 @@ function beliana_node_presave($node) {
         $node->field_datum_autorovho_textu = [LANGUAGE_NONE => [['value' => date('Y/m/d')]]];
         $node->log = $node->log . ", vyplnené pole Vyplatiť";
     } else {
-        #Remove links without an arrow in final states
+        #Remove links without an arrow if no changes are remembered
         $moderation_state = $node->workbench_moderation['current']->state;
-        if (in_array($moderation_state, ["na_zalomenie", "v_zalamovani", "publikovane_na_webe"])) {
-            _beliana_remove_links_no_arrow($node);
+        if (in_array($moderation_state, [
+            "needs_review",
+            "na_zverejnenie",
+            "u_vyst_redaktora_2",
+            "u_vyst_redaktora_4",
+            "u_vyst_redaktora_5",
+            "zlucene",
+            "na_zalomenie",
+            "v_zalamovani",
+            "na_jazykovu_korekturu",
+            "u_jaz_redaktora_2",
+            "publikovane_na_webe"
+        ])) {
+            if (_beliana_remove_links_no_arrow($node)) {
+              drupal_set_message('V hesle <a href="/' . $node->path['alias'] . '">' . $node->title . "</a> boli odstránené odkazy bez šípky", 'status');
+            }
         }
     }
   } else {  // we are in the web system
@@ -1890,13 +1904,25 @@ function _beliana_remove_links($node) {
 
 /**
   remove links without an arrow (^⬈➔) from the node text
+  if no lite changes are remembered
+  If number of links has change, retur true
  */
 function _beliana_remove_links_no_arrow($node) {
   $text = $node->field_text_hesla['und'][0]['value'];
+  #Ak má zmeny, tak neodstraňovať a vrátiť false
+  if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
+      return false;
+  }
+  # normalize and remove double spaces
+  $text = str_replace(" "," ", $text); #odstranit nezalomitelnu medzeru
+  $text = str_replace("&nbsp;", " ", $text);
+  $text = preg_replace('/(  *)/', ' ', $text);
+ 
+  $href_count1 = substr_count($text, "<a href");
   $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
-  $equal = $text == $node->field_text_hesla['und'][0]['value'];
+  $href_count2 = substr_count($text, "<a href");
   $node->field_text_hesla['und'][0]['value'] = $text;
-  return ! $equal;
+  return $href_count1 != $href_count2;
 }
 
 /**
