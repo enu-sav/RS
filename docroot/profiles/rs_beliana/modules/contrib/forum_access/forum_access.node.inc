@@ -75,6 +75,7 @@ function _forum_access_comment_view_alter(&$build, $tid) {
         }
       }
       if (is_array($old_links)) {
+        /** @noinspection SlowArrayOperationsInLoopInspection */
         $links = array_merge($links, $old_links);
       }
     }
@@ -207,7 +208,7 @@ function _forum_access_comment_form(&$form, &$form_state) {
   global $user;
 
   $comment = $form_state['comment'];
-  if ($cid = $form['cid']['#value'] && isset($form['author']) && !empty($user->_forum_access_moderator)) {
+  if ($form['cid']['#value'] && isset($form['author']) && !empty($user->_forum_access_moderator)) {
     $editable_administration_elements = variable_get('forum_access_allowed_comment_edit_administration_elements', array('homepage', 'status', 'subscriptions_notify'));
     foreach (element_children($form['author']) as $key) {
       if (array_search($key, $editable_administration_elements) === FALSE) {

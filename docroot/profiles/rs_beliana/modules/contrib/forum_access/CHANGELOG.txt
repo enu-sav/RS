@@ -5,8 +5,30 @@ CHANGELOG for Forum Access for Drupal 7
 forum_access 7.x-1.x-dev:
 
 
+forum_access 7.x-1.6 (2023-08-23):
+  - Issue by salvis: Update serialization.
+
+
+forum_access 7.x-1.5 (2023-07-28):
+  Enhancements:
+    - Issue by salvis: Require acl 7.x-1.3.
+    - #3375942 by salvis: Require chain_menu_access 7.x-2.1.
+  Bugs fixed:
+    - #3317447 by immaculatexavier: Deprecated implode() function call.
+
+forum_access 7.x-1.4 (2019-09-25):
+  Enhancements:
+    - #3083683 by salvis: Hide inaccessible forums from the forum list.
+    - #2958547 by salvis: Support non-forum nodes with optional forum_taxonomy field.
+  Bugs fixed:
+    - #3003279 by salvis, ron_s: Forum node migration generates warning errors.
+    - #3002918 by ron_s: Define primary key for the {forum_access} table.
+    - #3068844 by salvis: Fix PhpStorm red flags (no functional change).
+    - #3068829 by salvis: Fix Warning: count(): Parameter must be an array or an object that implements Countable in form_process_radios() (line 3183 of includes\form.inc).
+    - Avoid notices in a test.
+
 forum_access 7.x-1.3 (2016-08-16):
-  Bug fixed:
+  Bugs fixed:
     - #2783863: Remove call to non-existent _forum_access_preprocess_comment() function.
     - #2463055 by DrCord: Fix 'Use of undefined constant uids' notice.
     - #2276445 by Bastlynn: Avoid a notice when a comment pending for notification has been deleted.
@@ -15,7 +37,6 @@ forum_access 7.x-1.3 (2016-08-16):
     - #1849288: Clean up the helpful information for Content Access.
     - Avoid a notice on admin/index.
     - #1793504 by RedRat: Fix non-translatable string.
-
 
 forum_access 7.x-1.2 (2012-09-15):
   Bug fixed:

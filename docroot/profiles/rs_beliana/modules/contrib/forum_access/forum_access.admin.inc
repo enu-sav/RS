@@ -64,7 +64,7 @@ function _forum_access_forum_form(&$form, &$form_state, $is_container) {
       '#type' => 'radios',
       '#title' => t('Update the permissions'),
       '#description' => t('<em>If</em> you make any node access changes, then each node in this forum needs to be updated. Hover over the radiobuttons for details.'),
-      '#options' => NULL,
+      '#options' => array(0, 1, 2),
       0 => array(
         '#type' => 'radio',
         '#title' => t('for all %count nodes immediately', array('%count' => $count)),
@@ -358,7 +358,7 @@ function _forum_access_forum_form_after_build_acl0($element, &$form_state) {
 }
 
 function _forum_access_forum_form_after_build_acl2($element, &$form_state) {
-  if (!count(unserialize($element['user_list']['#default_value'])) && !count(unserialize($element['user_list']['#value']))) {
+  if (!count(acl_edit_form_get_user_list($element, TRUE)) && !count(acl_edit_form_get_user_list($element))) {
     $element['#collapsed'] = TRUE;
     $element['#attributes']['class'][] = 'collapsed'; // We're already 'after build' and have to do this ourselves!
   }
@@ -384,7 +384,7 @@ function _forum_access_forum_interference_form($is_container, $na_modules, $fa_p
       '!Content_Access' => $l('Content Access', 'http://drupal.org/project/content_access'),
       '@Content_Access' => 'Content Access',
       '!ACL'            => 'ACL',
-      '!module_list'    => '<ul><li>' . implode($na_modules, '</li><li>') . '</li></ul>',
+      '!module_list'    => '<ul><li>' . implode('</li><li>', $na_modules) . '</li></ul>',
     );
     $description = t('Forums can contain other content types besides %content_type; !Forum_Access will contribute the grants defined above to every node in this forum, but other node access control modules may also contribute their grants, especially to nodes of types other than %content_type.', $variables);
     $form[] = array(
@@ -401,7 +401,7 @@ function _forum_access_forum_interference_form($is_container, $na_modules, $fa_p
         }
       }
       $ca_priority = content_access_get_settings('priority', 'forum');
-      $is_conflict = ($ca_priority >= $fa_priority && !empty($ca_interferes) || $ca_priority > $fa_priority);
+      $is_conflict = (($ca_priority >= $fa_priority && !empty($ca_interferes)) || $ca_priority > $fa_priority);
       $variables += array(
         '!link'     => l(t('@Content_Access configuration for the %content_type type', $variables), 'admin/structure/types/manage/forum/access', array('html' => TRUE)),
         '%Advanced' => $tr('Advanced'),
@@ -594,7 +594,6 @@ function _forum_access_form_submit($form, &$form_state) {
 
   $fa_priority = isset($fa_values['interference']['advanced']['priority']) ? $fa_values['interference']['advanced']['priority'] : 0;
   if (array_key_exists('acl', $fa_values)) {
-    $moderators = unserialize($fa_values['acl']['user_list']);
     acl_save_form($fa_values['acl'], $fa_priority);
   }
   $insert = db_insert('forum_access');

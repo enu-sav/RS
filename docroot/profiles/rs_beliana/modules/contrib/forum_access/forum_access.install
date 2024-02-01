@@ -86,15 +86,14 @@ function forum_access_schema() {
         'unsigned'    => TRUE,
         'not null'    => TRUE,
         'default'     => 0),
-      'priority'  => array(
+      'priority'      => array(
         'description' => 'The priority of this grant.',
         'type'        => 'int',
         'size'        => 'small',
         'not null'    => TRUE,
         'default'     => 0)),
-    'indexes'         => array(
-      'tid'           => array('tid'),
-      'rid'           => array('rid')),
+    'primary key'     => array('tid', 'rid'),
+    'indexes'         => array('rid' => array('rid')),
     'foreign keys'    => array(
       'tid'           => array('taxonomy_term_data' => 'tid'),
       'rid'           => array('role' => 'rid')),
@@ -183,4 +182,12 @@ function forum_access_update_7001() {
  */
 function forum_access_update_7002() {
   variable_del('forum_access_D5_legacy_mode');
+}
+
+/**
+ * Drop tid index and add primary key to forum_access table.
+ */
+function forum_access_update_7003() {
+  db_drop_index('forum_access', 'tid');
+  db_add_primary_key('forum_access', array('tid', 'rid'));
 }

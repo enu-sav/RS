@@ -32,6 +32,7 @@ class ForumAccessBaseTestCase extends ForumTestCase {
   protected $delete_any_content_user;
   protected $delete_own_content_user;
   protected $create_content_user;
+  protected $auth_user;
   protected $moderator;
   protected $time;
   protected $accounts;
@@ -487,7 +488,7 @@ class ForumAccessBaseTestCase extends ForumTestCase {
               $this->drupalGet("comment/$comment->cid/edit");
               $this->assertResponse(200);
               $this->assertText($comment->subject);
-              $comment->title .= ' (updated)';
+              $comment->subject .= ' (updated)';
               $this->drupalPost("comment/$comment->cid/edit", array(
                 'subject' => $comment->subject,
               ), t('Save'));

@@ -10,64 +10,18 @@
  */
 
 /**
- * Implements hook_requirements().
- *
- * Remind the user to upgrade to Chain Menu Access API 2.x.
- */
-function forum_access_requirements($phase) {
-  require_once DRUPAL_ROOT . '/includes/install.inc';
-  $result = array();
-  switch ( $phase ) {
-    case 'update':
-    case 'runtime':
-      $t = get_t();
-      $path = drupal_get_filename('module', 'chain_menu_access');
-      $path = substr($path, 0, strlen($path) - 7) . '.info';
-      $info = drupal_parse_info_file($path);
-      $version = (isset($info['version']) ? $info['version'] : $t('Unknown'));
-      $found = preg_match('/7\.x-([0-9]*)\./', $version, $matches);
-      if ($found && $matches[1] == 1 || !$found) {
-        $cma = 'Chain Menu Access API';
-        $variables = array('@Chain_Menu_Access_API' => $cma, '@module' => url('admin/modules'));
-        $result[] = array(
-          'title'       => $t('@Chain_Menu_Access_API module', $variables),
-          'value'       => $version,
-          'description' => $t('Version 1.x is obsolete. Upgrade to version 2.x as soon as <em>all</em> installed client modules support that version.') . '<br />' .
-                           $t('Check the <a href="@module">module administration page</a> to find out which of your modules depend on @Chain_Menu_Access_API.', $variables),
-          'severity'    => REQUIREMENT_WARNING,
-        );
-      }
-  }
-  return $result;
-}
-
-/**
  * Implements hook_menu_alter().
  *
  * Remove the 'Forum' menu item if no forums are visible.
  */
 function forum_access_menu_alter(&$items) {
-  $requirements = forum_access_requirements('runtime');
-  if (!empty($requirements) && $requirements[0]['value'] != t('Unknown')) {
-    // Fall back to obsolete Chain Menu Access API version 7.x-1.x,
-    // because that's what's installed.
-    chain_menu_access_chain($items['forum'],                 'forum_access_view_any_forum', array());
-    chain_menu_access_chain($items['node/%node'],            '_forum_access_node_access_callback', array(1, 'view'));
-    chain_menu_access_chain($items['comment/%comment/edit'], '_forum_access_comment_edit_callback', array(1));
-    chain_menu_access_chain($items['comment/%comment/edit'], '_forum_access_comment_access_callback', array(1, 2), TRUE);
-    chain_menu_access_chain($items['comment/%/delete'],      '_forum_access_comment_access_callback', array(1, 2), TRUE);
-    chain_menu_access_chain($items['comment/%/approve'],     '_forum_access_comment_access_callback', array(1, 2), TRUE);
-    chain_menu_access_chain($items['comment/reply/%node'],   '_forum_access_comment_access_callback', array(2, 1));
-  }
-  else {
-    chain_menu_access_chain($items, 'forum',                 'forum_access_view_any_forum');
-    chain_menu_access_chain($items, 'node/%node',            '_forum_access_node_access_callback', array(1, 'view'));
-    chain_menu_access_chain($items, 'comment/%comment/edit', '_forum_access_comment_edit_callback', array(1));
-    chain_menu_access_chain($items, 'comment/%comment/edit', '_forum_access_comment_access_callback', array(1, 2), TRUE);
-    chain_menu_access_chain($items, 'comment/%/delete',      '_forum_access_comment_access_callback', array(1, 2), TRUE);
-    chain_menu_access_chain($items, 'comment/%/approve',     '_forum_access_comment_access_callback', array(1, 2), TRUE);
-    chain_menu_access_chain($items, 'comment/reply/%node',   '_forum_access_comment_access_callback', array(2, 1));
-  }
+  chain_menu_access_chain($items, 'forum',                 'forum_access_view_any_forum');
+  chain_menu_access_chain($items, 'node/%node',            '_forum_access_node_access_callback', array(1, 'view'));
+  chain_menu_access_chain($items, 'comment/%comment/edit', '_forum_access_comment_edit_callback', array(1));
+  chain_menu_access_chain($items, 'comment/%comment/edit', '_forum_access_comment_access_callback', array(1, 2), TRUE);
+  chain_menu_access_chain($items, 'comment/%/delete',      '_forum_access_comment_access_callback', array(1, 2), TRUE);
+  chain_menu_access_chain($items, 'comment/%/approve',     '_forum_access_comment_access_callback', array(1, 2), TRUE);
+  chain_menu_access_chain($items, 'comment/reply/%node',   '_forum_access_comment_access_callback', array(2, 1));
 }
 
 function _forum_access_node_access_callback($node, $op) {
@@ -114,6 +68,9 @@ function _forum_access_comment_access_callback($comment, $op) {
     if (empty($comment)) {
       return FALSE;
     }
+  }
+  elseif (is_string($comment)) {
+    return FALSE;
   }
   $node = node_load($comment->nid);
 
@@ -284,6 +241,35 @@ function forum_access_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Implements hook_form_node_form_alter().
+ *
+ * Allows the forum field to be optional on non-forum nodes.
+ */
+function forum_access_form_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['taxonomy_forums'])) {
+    $field = field_info_instance('node', 'taxonomy_forums', $form['type']['#value']);
+    // Make the vocabulary required for 'real' forum-nodes.
+    if (!$field['required']) {
+      $langcode = $form['taxonomy_forums']['#language'];
+      $form['taxonomy_forums'][$langcode]['#required'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implement hook_node_load().
+ *
+ * Sets $node->forum_tid to avoid confusing forum_node_view().
+ */
+function forum_access_node_load($nodes, $types) {
+  foreach ($nodes as $node) {
+    if (isset($node->taxonomy_forums) && empty($node->taxonomy_forums) && !isset($node->forum_tid)) {
+      $node->forum_tid = NULL;
+    }
+  }
+}
+
+/**
  * Implements hook_comment_load().
  */
 function forum_access_comment_load($comments) {
@@ -299,6 +285,11 @@ function forum_access_query_alter($p1, $p2, $p3) {
   return;
 }
 
+/**
+ * Implements hook_query_term_access_alter().
+ *
+ * @param QueryAlterableInterface $query
+ */
 function forum_access_query_term_access_alter(QueryAlterableInterface $query) {
   global $user;
 
@@ -310,9 +301,9 @@ function forum_access_query_term_access_alter(QueryAlterableInterface $query) {
     $op = 'view';
   }
 
-  // If $account can bypass node access, or there are no node access
-  // modules, we don't need to alter the query.
-  if (user_access('bypass node access', $account)) {
+  // If $account can bypass node access, we let them administer the full forum
+  // structure and see the nodes, i.e. we don't restrict the query.
+  if (user_access('bypass node access', $account) && (strpos(current_path(), 'admin/structure/forum') === 0 || strpos(current_path(), 'node/') === 0)) {
     return;
   }
 
@@ -331,13 +322,25 @@ function forum_access_query_term_access_alter(QueryAlterableInterface $query) {
       // The node_access table has the access grants for any given node.
       $access_alias = $query->leftJoin('forum_access', 'fa', '%alias.tid = ' . $talias . '.tid');
       $acl_alias = $query->leftJoin('acl', 'acl', "%alias.number = $talias.tid AND %alias.module = 'forum_access'");
-      $aclu_alias = $query->leftJoin('acl_user', 'aclu', "%alias.acl_id = $acl_alias.acl_id AND %alias.uid = $account->uid");
-      $query->condition(db_or()
-        ->isNull("$access_alias.rid")
-        ->condition(db_and()
-          ->condition("$access_alias.rid", $rids, 'IN')
-          ->condition("$access_alias.grant_$op", 1, '>='))
-        ->condition("$aclu_alias.uid", $account->uid));
+      if (user_access('bypass node access', $account)) {
+        // If $account can bypass node access, we allow access if any role or
+        // account has access.
+        $aclu_alias = $query->leftJoin('acl_user', 'aclu', "%alias.acl_id = $acl_alias.acl_id");
+        $query->condition(db_or()
+          ->isNull("$access_alias.rid")
+          ->condition("$access_alias.grant_$op", 1, '>=')
+          ->isNotNull("$aclu_alias.uid")
+        );
+      }
+      else {
+        $aclu_alias = $query->leftJoin('acl_user', 'aclu', "%alias.acl_id = $acl_alias.acl_id AND %alias.uid = $account->uid");
+        $query->condition(db_or()
+          ->isNull("$access_alias.rid")
+          ->condition(db_and()
+            ->condition("$access_alias.rid", $rids, 'IN')
+            ->condition("$access_alias.grant_$op", 1, '>='))
+          ->condition("$aclu_alias.uid", $account->uid));
+      }
     }
   }
 }
@@ -348,9 +351,18 @@ function forum_access_query_term_access_alter(QueryAlterableInterface $query) {
 function forum_access_node_presave($node, $return_old_tid = FALSE) {
   $old_tid = &drupal_static('forum_access_node_presave');
   if (_forum_node_check_node_type($node)) {
-    $old_tid = db_query('SELECT tid FROM {forum} WHERE nid = :nid', array(
-      ':nid' => $node->nid,
-    ))->fetchField();
+    if (empty($node->nid)) {
+      // Added for migrations, which log errors due to no nid during presave, see #3003279.
+      $old_tid = NULL;
+    }
+    else {
+      $old_tid = db_query('SELECT tid FROM {forum} WHERE nid = :nid', array(
+        ':nid' => $node->nid,
+      ))->fetchField();
+    }
+  }
+  if (!empty($old_tid) && empty($node->taxonomy_forums['und'])) {
+    $node->forum_tid = null;
   }
 }
 
@@ -423,7 +435,7 @@ function forum_access_node_insert($node) {
 function forum_access_enable_moderator($enable = TRUE) {
   global $user;
 
-  if (!$enable || $enable && !user_access('administer comments')) {
+  if (!$enable || !user_access('administer comments')) {
     $perm = &drupal_static('user_access');
     if ($enable) {
       $perm[$user->uid]['administer comments'] = $enable;
@@ -508,12 +520,20 @@ function forum_access_preprocess_forum_list(&$variables) {
 /**
  * Implements hook_node_view_alter().
  *
- * Remove 'Add new comment' link if it shouldn't be there.
+ * Remove 'Add new comment' link and breadcrumb if they shouldn't be there.
  */
 function forum_access_node_view_alter(&$build) {
   if ($tid = _forum_access_get_tid($build['#node'])) {
     _forum_access_module_load_include('node.inc');
     _forum_access_node_view_alter($build, $tid);
+  }
+
+  $breadcrumb = drupal_get_breadcrumb();
+  if (!$tid && count($breadcrumb) == 2 && strpos($breadcrumb[0], '<a href="/">') === 0 && strpos($breadcrumb[1], '<a href="/forum">') === 0) {
+    // We must hack away the bogus breadcrumb set by forum module
+    // (empty taxonomy_forums).
+    $stored_breadcrumb = &drupal_static('drupal_set_breadcrumb');
+    $stored_breadcrumb = NULL;
   }
 }
 
@@ -564,8 +584,8 @@ function forum_access_node_access($node, $op, $account) {
         if (!forum_access_access('view', $tid, $account)) {
           return $cache[$account->uid][$op][$nid] = NODE_ACCESS_DENY;
         }
-        if ($op == 'update' && (user_access('edit any forum content', $account) || ($node->uid == $account->uid && user_access('edit own forum content', $account)))
-          || $op == 'delete' && (user_access('delete any forum content', $account) || ($node->uid == $account->uid && user_access('delete own forum content', $account)))) {
+        if (($op == 'update' && (user_access('edit any forum content', $account) || ($node->uid == $account->uid && user_access('edit own forum content', $account))))
+          || ($op == 'delete' && (user_access('delete any forum content', $account) || ($node->uid == $account->uid && user_access('delete own forum content', $account))))) {
           return $cache[$account->uid][$op][$nid] = forum_access_node_access($node, 'view', $account);
         }
         $access = forum_access_access($op, $tid, $account);
