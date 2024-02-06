@@ -46,46 +46,115 @@ class SmtpMailSystem implements MailSystemInterface {
    *   TRUE if the mail was successfully accepted, otherwise FALSE.
    */
   public function mail(array $message) {
-    $id = $message['id'];
+    if (variable_get('smtp_queue', FALSE)
+       && (!isset($message['params']['skip_queue']) || !$message['params']['skip_queue'])) {
+      smtp_send_queue($message);
+      if (variable_get('smtp_debugging', SMTP_LOGGING_ERRORS) == SMTP_LOGGING_ALL) {
+        watchdog('smtp', 'Queue sending mail to: @to', array('@to' => $message['to']));
+      }
+      return TRUE;
+    }
+    else {
+      return $this->mailWithoutQueue($message);
+    }
+  }
+
+  public function mailWithoutQueue(array $message) {
     $to = $message['to'];
     $from = $message['from'];
+    $from_name = isset($message['from_name']) ? $message['from_name'] : FALSE;
     $body = $message['body'];
     $headers = $message['headers'];
     $subject = $message['subject'];
 
+    // Optionally reroute all emails to a single address.
+    $reroute_address = variable_get('smtp_reroute_address', '');
+    if (!empty($reroute_address)) {
+      $to = $reroute_address;
+      // Remove any CC and BCC headers that might have been set.
+      unset($headers['cc']);
+      unset($headers['bcc']);
+    }
+
     // Create a new PHPMailer object - autoloaded from registry.
     $mailer = new PHPMailer();
 
+    $logging = variable_get('smtp_debugging', SMTP_LOGGING_ERRORS);
+
     // Turn on debugging, if requested.
-    if (variable_get('smtp_debugging', 0) == 1) {
+    if ($logging == SMTP_LOGGING_ALL && user_access('administer smtp module')) {
       $mailer->SMTPDebug = TRUE;
     }
 
-    // Set the from name.
-    if (variable_get('smtp_fromname', '') != '') {
-      $from_name = variable_get('smtp_fromname', '');
+    // Set the From Name.
+    $from_name = FALSE;
+    $from_comp = $this->_get_components($from);
+    // If the From Name has been passed to this function, use that first.
+    if($from_comp['name'] != '') {
+      $from_name = $from_comp['name'];
     }
-    else {
-      // If value is not defined in settings, use site_name.
-      $from_name = variable_get('site_name', '');
-    }
-
-    //Hack to fix reply-to issue.
-    $properfrom = variable_get('site_mail', '');
-    if (!empty($properfrom)) {
-      $headers['From'] = $properfrom;
-    }
-    if (!isset($headers['Reply-To']) || empty($headers['Reply-To'])) {
-      if (strpos($from, '<')) {
-        $reply = preg_replace('/>.*/', '', preg_replace('/.*</', '', $from));
+    // If we don't have a From Name set, try to get the name from i18n, in the case
+    // that it has been translated. The name is set according to the language
+    // of the email being sent.
+    if (empty($from_name)) {
+      if (function_exists('i18n_variable_get')) {
+        // The 'language' value may be stored as an object.
+        $langcode = $message['language'];
+        if (is_object($langcode)) {
+          $langcode = $langcode->language;
+        }
+        if (i18n_variable_get('smtp_fromname', $langcode, '') != '') {
+          $from_name = i18n_variable_get('smtp_fromname', $langcode, '');
+        }
+        // If value is not defined in settings, use site_name.
+        else {
+          $from_name = i18n_variable_get('site_name', $langcode, '');
+        }
       }
+      // If the i18n module is not enabled, get the From name as a
+      // normal variable.
       else {
-        $reply = $from;
+        if (variable_get('smtp_fromname', '') != '') {
+          $from_name = variable_get('smtp_fromname', '');
+        }
+        // If value is not defined in settings, use site_name.
+        else {
+          $from_name = variable_get('site_name', '');
+        }
       }
-      $headers['Reply-To'] = $reply;
     }
 
-    // Blank value will let the e-mail address appear.
+    if (variable_get('smtp_client_hostname', '') != '') {
+      $mailer->Hostname = variable_get('smtp_client_hostname', '');
+    }
+
+    if (variable_get('smtp_client_helo', '') != '') {
+      $mailer->Helo = variable_get('smtp_client_helo', '');
+    }
+
+    if (variable_get('smtp_client_hostname', '') != '') {
+      $mailer->Hostname = variable_get('smtp_client_hostname', '');
+    }
+
+    if (variable_get('smtp_client_helo', '') != '') {
+      $mailer->Helo = variable_get('smtp_client_helo', '');
+    }
+
+    // To pass DMARC, the email sender and headers should match.
+    // Set the Reply-To header to the original 'From' email address.
+    $from = $from_comp['email'];
+    if (!isset($headers['Reply-To']) || empty($headers['Reply-To'])) {
+      $headers['Reply-To'] = $from;
+    }
+    // If the 'From' address has been set in the SMTP module admin settings, use that as the sender.
+    $smtp_from_var = variable_get('smtp_from', FALSE);
+    if(($smtp_from_var) && valid_email_address($smtp_from_var)) {
+      $from = $smtp_from_var;
+    }
+    // If we still don't have a 'From' address, fallback to the site's email.
+    if(empty($from)) {
+      $from = variable_get('site_mail', '');
+    }
 
     if ($from == NULL || $from == '') {
       // If from e-mail address is blank, use smtp_from config option.
@@ -93,44 +162,30 @@ class SmtpMailSystem implements MailSystemInterface {
         // If smtp_from config option is blank, use site_email.
         if (($from = variable_get('site_mail', '')) == '') {
           drupal_set_message(t('There is no submitted from address.'), 'error');
-          watchdog('smtp', 'There is no submitted from address.', array(), WATCHDOG_ERROR);
+          if ($logging) {
+            watchdog('smtp', 'There is no submitted from address.', array(), WATCHDOG_ERROR);
+          }
           return FALSE;
         }
       }
     }
-    if (preg_match('/^"?.*"?\s*<.*>$/', $from)) {
-      // . == Matches any single character except line break characters \r and \n.
-      // * == Repeats the previous item zero or more times.
-      $from_name = preg_replace('/"?([^("\t\n)]*)"?.*$/', '$1', $from); // It gives: Name
-      $from      = preg_replace("/(.*)\<(.*)\>/i", '$2', $from); // It gives: name@domain.tld
-    }
-    elseif (!valid_email_address($from)) {
-      drupal_set_message(t('The submitted from address (@from) is not valid.', array('@from' => $from)), 'error');
-      watchdog('smtp', 'The submitted from address (@from) is not valid.', array('@from' => $from), WATCHDOG_ERROR);
+    if (!valid_email_address($from)) {
+      drupal_set_message(t('The submitted from address (@from) is not valid.', array('@from' => $from_comp['email'])), 'error');
+      if ($logging) {
+        watchdog('smtp', 'The submitted from address (@from) is not valid.', array('@from' => $from_comp['email']), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
 
-    // Defines the From value to what we expect.
-    $mailer->From     = $from;
-    $mailer->FromName = $from_name;
-    $mailer->Sender   = $from;
-
+    // Set headers to match sender to prevent e-mail from looking like spam
+    $headers['From'] = $headers['Sender'] = $headers['Return-Path'] = $from;
 
     // Create the list of 'To:' recipients.
     $torecipients = explode(',', $to);
     foreach ($torecipients as $torecipient) {
-      if (strpos($torecipient, '<') !== FALSE) {
-        $toparts = explode(' <', $torecipient);
-        $toname = $toparts[0];
-        $toaddr = rtrim($toparts[1], '>');
-      }
-      else {
-        $toname = '';
-        $toaddr = $torecipient;
-      }
-      $mailer->AddAddress($toaddr, $toname);
+      $to_comp = $this->_get_components($torecipient);
+      $mailer->AddAddress($to_comp['email'], $to_comp['name']);
     }
-
 
     // Parse the headers of the message and set the PHPMailer object's settings
     // accordingly.
@@ -138,17 +193,10 @@ class SmtpMailSystem implements MailSystemInterface {
       //watchdog('error', 'Key: ' . $key . ' Value: ' . $value);
       switch (drupal_strtolower($key)) {
         case 'from':
-          if ($from == NULL or $from == '') {
-            // If a from value was already given, then set based on header.
-            // Should be the most common situation since drupal_mail moves the
-            // from to headers.
-            $from           = $value;
-            $mailer->From     = $value;
-            // then from can be out of sync with from_name !
-            $mailer->FromName = '';
-            $mailer->Sender   = $value;
-          }
+          // set the correct From headers
+          $mailer->setFrom($from, $from_name);
           break;
+
         case 'content-type':
           // Parse several values on the Content-type header, storing them in an array like
           // key=value -> $vars['key']='value'
@@ -201,8 +249,9 @@ class SmtpMailSystem implements MailSystemInterface {
             default:
               // Everything else is unsuppored by PHPMailer.
               drupal_set_message(t('The %header of your message is not supported by PHPMailer and will be sent as text/plain instead.', array('%header' => "Content-Type: $value")), 'error');
-              watchdog('smtp', 'The %header of your message is not supported by PHPMailer and will be sent as text/plain instead.', array('%header' => "Content-Type: $value"), WATCHDOG_ERROR);
-
+              if ($logging) {
+                watchdog('smtp', 'The %header of your message is not supported by PHPMailer and will be sent as text/plain instead.', array('%header' => "Content-Type: $value"), WATCHDOG_ERROR);
+              }
               // Force the Content-Type to be text/plain.
               $mailer->IsHTML(FALSE);
               $content_type = 'text/plain';
@@ -210,19 +259,8 @@ class SmtpMailSystem implements MailSystemInterface {
           break;
 
         case 'reply-to':
-          // Only add a "reply-to" if it's not the same as "return-path".
-          if ($value != $headers['Return-Path']) {
-            if (strpos($value, '<') !== FALSE) {
-              $replyToParts = explode('<', $value);
-              $replyToName = trim($replyToParts[0]);
-              $replyToName = trim($replyToName, '"');
-              $replyToAddr = rtrim($replyToParts[1], '>');
-              $mailer->AddReplyTo($replyToAddr, $replyToName);
-            }
-            else {
-              $mailer->AddReplyTo($value);
-            }
-          }
+          $replyto_comp = $this->_get_components($value);
+          $mailer->AddReplyTo($replyto_comp['email'], $replyto_comp['name']);
           break;
 
         case 'content-transfer-encoding':
@@ -230,14 +268,8 @@ class SmtpMailSystem implements MailSystemInterface {
           break;
 
         case 'return-path':
-          if (strpos($value, '<') !== FALSE) {
-            $returnPathParts = explode('<', $value);
-            $returnPathAddr = rtrim($returnPathParts[1], '>');
-            $mailer->Sender = $returnPathAddr;
-          }
-          else {
-            $mailer->Sender = $value;
-          }
+          $returnpath_comp = $this->_get_components($value);
+          $mailer->Sender = $returnpath_comp['email'];
           break;
 
         case 'mime-version':
@@ -252,32 +284,16 @@ class SmtpMailSystem implements MailSystemInterface {
         case 'cc':
           $ccrecipients = explode(',', $value);
           foreach ($ccrecipients as $ccrecipient) {
-            if (strpos($ccrecipient, '<') !== FALSE) {
-              $ccparts = explode(' <', $ccrecipient);
-              $ccname = $ccparts[0];
-              $ccaddr = rtrim($ccparts[1], '>');
-            }
-            else {
-              $ccname = '';
-              $ccaddr = $ccrecipient;
-            }
-            $mailer->AddCC($ccaddr, $ccname);
+            $cc_comp = $this->_get_components($ccrecipient);
+            $mailer->AddCC($cc_comp['email'], $cc_comp['name']);
           }
           break;
 
         case 'bcc':
           $bccrecipients = explode(',', $value);
           foreach ($bccrecipients as $bccrecipient) {
-            if (strpos($bccrecipient, '<') !== FALSE) {
-              $bccparts = explode(' <', $bccrecipient);
-              $bccname = $bccparts[0];
-              $bccaddr = rtrim($bccparts[1], '>');
-            }
-            else {
-              $bccname = '';
-              $bccaddr = $bccrecipient;
-            }
-            $mailer->AddBCC($bccaddr, $bccname);
+            $bcc_comp = $this->_get_components($bccrecipient);
+            $mailer->AddBCC($bcc_comp['email'], $bcc_comp['name']);
           }
           break;
 
@@ -377,7 +393,7 @@ class SmtpMailSystem implements MailSystemInterface {
               // If plain/html within the body part, add it to $mailer->Body.
               elseif (strpos($body_part2, 'text/html')) {
                 // Get the encoding.
-                $body_part2_encoding = $this->_get_substring($body_part2, 'Content-Transfer-Encoding', ':', "\n");
+                $body_part2_encoding = trim($this->_get_substring($body_part2, 'Content-Transfer-Encoding', ':', "\n"));
                 // Clean up the text.
                 $body_part2 = trim($this->_remove_headers(trim($body_part2)));
                 // Check whether the encoding is base64, and if so, decode it.
@@ -466,13 +482,53 @@ class SmtpMailSystem implements MailSystemInterface {
     // Process mimemail attachments, which are prepared in mimemail_mail().
     if (isset($message['params']['attachments'])) {
       foreach ($message['params']['attachments'] as $attachment) {
+        // Allow file objects, handled as mimemail_html_body() does.
+        if (is_object($attachment)) {
+          $file = $attachment;
+          $attachment = array();
+          $attchmentArray = array('filecontent', 'filename', 'filemime');
+          if (isset($file->filepath)) {
+            $attchmentArray = array('filepath', 'filename', 'filemime');
+          }
+          foreach ($attchmentArray as $key) {
+            if (isset($file->{$key})) {
+              $attachment[$key] = $file->{$key};
+            }
+          }
+          if (isset($file->uri)) {
+            $attachment['filepath'] = $file->uri;
+          }
+        }
+
         if (isset($attachment['filecontent'])) {
           $mailer->AddStringAttachment($attachment['filecontent'], $attachment['filename'], 'base64', $attachment['filemime']);
+        }
+        if (!isset($attachment['filepath']) && isset($attachment['uri'])) {
+          $attachment['filepath'] = $attachment['uri'];
         }
         if (isset($attachment['filepath'])) {
           $filename = isset($attachment['filename']) ? $attachment['filename'] : basename($attachment['filepath']);
           $filemime = isset($attachment['filemime']) ? $attachment['filemime'] : file_get_mimetype($attachment['filepath']);
           $mailer->AddAttachment($attachment['filepath'], $filename, 'base64', $filemime);
+        }
+      }
+    }
+
+    // Process inline images.
+    if (!empty($message['params']['images'])) {
+      foreach ($message['params']['images'] as $image) {
+        if (!empty($image['filepath']) && !empty($image['cid'])) {
+          if (file_exists($image['filepath'])) {
+            $image_extension = pathinfo($image['filepath'], PATHINFO_EXTENSION);
+            $image_mime_type = PHPMailer::_mime_types($image_extension);
+            if (empty($image['name'])) {
+              $image_name = pathinfo($image['filepath'], PATHINFO_FILENAME);
+            }
+            else {
+              $image_name = $image['name'];
+            }
+            $mailer->AddEmbeddedImage($image['filepath'], $image['cid'], $image_name, 'base64', $image_mime_type);
+          }
         }
       }
     }
@@ -503,26 +559,148 @@ class SmtpMailSystem implements MailSystemInterface {
         $mailer->SMTPSecure = '';
     }
 
+    // Set SSL stream context options
+    if (variable_get('smtp_protocol', 'standard') != 'standard') {
+      $smtp_allow_self_signed = array('allow_self_signed' => variable_get('smtp_allow_self_signed', FALSE));
+
+      if (version_compare(phpversion(), '5.6.0', '>=')) {
+        $smtp_verify_peer = array('verify_peer' => variable_get('smtp_verify_peer', TRUE));
+        $smtp_verify_peer_name = array('verify_peer_name' => variable_get('smtp_verify_peer_name', TRUE));
+        $mailer->SMTPOptions = array(
+          'ssl' => array_merge($smtp_verify_peer, $smtp_verify_peer_name, $smtp_allow_self_signed),
+        );
+      }
+      else {
+        $smtp_verify_peer = array('verify_peer' => variable_get('smtp_verify_peer', FALSE));
+        $mailer->SMTPOptions = array(
+          'ssl' => array_merge($smtp_verify_peer, $smtp_allow_self_signed),
+        );
+      }
+    }
 
     // Set other connection settings.
     $mailer->Host = variable_get('smtp_host', '') . ';' . variable_get('smtp_hostbackup', '');
     $mailer->Port = variable_get('smtp_port', '25');
     $mailer->Mailer = 'smtp';
 
-    $mailerArr = array(
-      'mailer' => $mailer,
-      'to' => $to,
-      'from' => $from,
-    );
-    if (variable_get('smtp_queue', FALSE)) {
-      watchdog('smtp', 'Queue sending mail to: @to', array('@to' => $to));
-      smtp_send_queue($mailerArr);
-    }
-    else {
-      return _smtp_mailer_send($mailerArr);
+    // Integration with the Maillog module.
+    if (module_exists('maillog')) {
+      if (variable_get('maillog_log', TRUE)) {
+        $record = new stdClass;
+
+        // In case the subject/from/to is already encoded, decode with
+        // mime_header_decode.
+        $record->header_message_id = isset($mailer->MessageID) ? $mailer->MessageID : NULL;
+        $record->subject = drupal_substr(mime_header_decode($mailer->Subject), 0, 255);
+        $record->header_from = $from;
+        $record->header_to = $to;
+        $record->header_reply_to = isset($headers['Reply-To']) ? $headers['Reply-To'] : '';
+        $record->header_all = serialize($headers);
+        $record->sent_date = REQUEST_TIME;
+
+        // Used to separate different portions of the body string.
+        $divider = str_repeat('-', 60) . "\n";
+
+        // Load the attachments.
+        $attachments = $mailer->GetAttachments();
+
+        $record->body = '';
+
+        // If there's more than one item to display, add a divider.
+        if (!empty($mailer->AltBody) || !empty($attachments)) {
+          $record->body .= t('Body') . ":\n";
+          $record->body .= $divider;
+        }
+
+        // Add the body field.
+        if (isset($mailer->Body)) {
+          $record->body .= $mailer->Body;
+        }
+        else {
+          $record->body .= t('*No message body*') . ":\n";
+        }
+
+        // The AltBody value is optional.
+        if (!empty($mailer->AltBody)) {
+          $record->body .= "\n";
+          $record->body .= $divider;
+          $record->body .= t('Alternative body') . ":\n";
+          $record->body .= $divider;
+          $record->body .= $mailer->AltBody;
+        }
+
+        // List the attachments.
+        if (!empty($attachments)) {
+          $record->body .= "\n";
+          $record->body .= $divider;
+          $record->body .= t('Attachments') . ":\n";
+          $record->body .= $divider;
+          foreach ($attachments as $file) {
+            $record->body .= t('Filename') . ':' . $file[1] . "\n";
+            $record->body .= t('Name') . ':' . $file[2] . "\n";
+            $record->body .= t('Encoding') . ':' . $file[3] . "\n";
+            $record->body .= t('Type') . ':' . $file[4] . "\n";
+            $record->body .= "\n";
+          }
+        }
+
+        drupal_write_record('maillog', $record);
+      }
+
+      // Display the e-mail using Devel module.
+      if (variable_get('maillog_devel', TRUE) && function_exists('dpm')) {
+        $devel_msg = array();
+        $devel_msg[t('Subject')] = $mailer->Subject;
+        $devel_msg[t('From')] = $from;
+        $devel_msg[t('To')] = $to;
+        $devel_msg[t('Reply-To')] = isset($headers['Reply-To']) ? $headers['Reply-To'] : NULL;
+        $devel_msg[t('Headers')] = $headers;
+        $devel_msg[t('Body')] = $mailer->Body;
+        $devel_msg[t('Alternative body')] = $mailer->AltBody;
+        $devel_msg[t('Attachments')] = $mailer->GetAttachments();
+
+        dpm($devel_msg, 'maillog');
+      }
     }
 
-    return TRUE;
+    $error = FALSE;
+
+    // Email delivery was disabled.
+    if (!variable_get('smtp_deliver', TRUE)) {
+      if ($logging) {
+        $params = array(
+          '@from' => $from,
+          '@to' => $to,
+        );
+        watchdog('smtp', 'Email delivery is disabled, did not send email from @from to @to.', $params);
+      }
+    }
+    else {
+      if (!$mailer->send()) {
+        $params = array(
+          '@from' => $from,
+          '@to' => $to,
+          '!error_message' => $mailer->ErrorInfo
+        );
+
+        if (variable_get('smtp_queue_fail', FALSE)) {
+          if ($logging) {
+            watchdog('smtp', 'Error sending e-mail from @from to @to, will retry on cron run : !error_message.', $params, WATCHDOG_ERROR);
+          }
+          smtp_failed_messages($message);
+        }
+        elseif ($logging) {
+          $error = TRUE;
+          watchdog('smtp', 'Error sending e-mail from @from to @to : !error_message', $params, WATCHDOG_ERROR);
+        }
+      }
+      elseif (variable_get('smtp_debugging', SMTP_LOGGING_ERRORS) == SMTP_LOGGING_ALL) {
+        watchdog('smtp', 'Sent mail to: @to', array('@to' => $to));
+      }
+    }
+
+    $mailer->SmtpClose();
+    return !$error;
   }
 
   /**
@@ -628,6 +806,42 @@ class SmtpMailSystem implements MailSystemInterface {
       $substring = drupal_substr($substring, 0, $string_length);
     }
 
-    return $substring;
+    return trim($substring);
   }  //  End of _smtp_get_substring().
+
+  /**
+   * Returns an array of name and email address from a string.
+   *
+   * @param $input
+   *  A string that contains different possible combinations of names and
+   *  email address.
+   * @return
+   *  An array containing a name and an email address.
+   */
+  protected function _get_components($input) {
+    $input = trim($input);
+    $components = array(
+      'input' => $input,
+      'name' => '',
+      'email' => '',
+    );
+
+    // If the input is a valid email address in its entirety, then there is
+    // nothing to do, just return that.
+    if (valid_email_address($input)) {
+      $components['email'] = $input;
+      return $components;
+    }
+
+    // Check if $input has one of the following formats, extract what we can:
+    //  some name <address@example.com>
+    //  "another name" <address@example.com>
+    //  <address@example.com>
+    if (preg_match('/^"?([^"\t\n]*)"?\s*<([^>\t\n]*)>$/', $input, $matches)) {
+      $components['name'] = trim($matches[1]);
+      $components['email'] = trim($matches[2]);
+    }
+
+    return $components;
+  }
 }

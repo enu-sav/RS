@@ -6,7 +6,7 @@
  *
  */
 /*~ class.smtp.php
-Orginal release information:
+Original release information:
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
 |   Version: 5.1                                                            |
@@ -114,8 +114,14 @@ class SMTP {
    * @access public
    * @return bool
    */
-  public function Connect($host, $port = 0, $tval = 30) {
-    // set the error val to NULL so there is no confusion
+  public function Connect($host, $port = 0, $tval = 30, $options = array()) {
+    static $streamok;
+    // This is enabled by default since 5.0.0 but some providers disable it
+    // Check this once and cache the result
+    if (is_null($streamok)) {
+      $streamok = function_exists('stream_socket_client');
+    }
+    // clear errors to avoid confusion
     $this->error = NULL;
 
     // make sure we are __not__ connected
@@ -129,33 +135,57 @@ class SMTP {
       $port = $this->SMTP_PORT;
     }
 
-    // connect to the smtp server
-    $this->smtp_conn = @fsockopen($host,    // the host of the server
-                                 $port,    // the port to use
-                                 $errno,   // error number if any
-                                 $errstr,  // error message if any
-                                 $tval);   // give up after ? secs
+    $errno = 0;
+    $errstr = '';
+    if ($streamok) {
+      $socket_context = stream_context_create($options);
+      // Suppress errors; connection failures are handled at a higher level
+      $this->smtp_conn = @stream_socket_client(
+          $host . ":" . $port,
+          $errno,
+          $errstr,
+          $tval,
+          STREAM_CLIENT_CONNECT,
+          $socket_context
+      );
+    } else {
+      // Fall back to fsockopen which should work in more places, but is missing some features
+      $this->smtp_conn = @fsockopen(
+          $host,
+          $port,
+          $errno,
+          $errstr,
+          $tval
+      );
+    }
+
     // verify we connected properly
-    if (empty($this->smtp_conn)) {
+    if (!is_resource($this->smtp_conn)) {
       $this->error = array("error" => "Failed to connect to server",
                            "errno" => $errno,
                            "errstr" => $errstr);
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": $errstr ($errno)" . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @errstr (@errno)", array("@error" => $this->error["error"], "@errstr" => $errstr, "@errno" => $errno)));
       }
       return FALSE;
     }
 
     // SMTP server can take longer to respond, give longer timeout for first read
     // Windows does not have support for this timeout function
-    if (substr(PHP_OS, 0, 3) != "WIN")
-     socket_set_timeout($this->smtp_conn, $tval, 0);
+    if (substr(PHP_OS, 0, 3) != 'WIN'){
+      $max = ini_get('max_execution_time');
+      // Don't bother if unlimited
+      if ($max != 0 && $tval > $max) {
+        @set_time_limit($tval);
+      }
+      stream_set_timeout($this->smtp_conn, $tval, 0);
+    }
 
     // get any announcement
     $announce = $this->get_lines();
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $announce . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @announce", array("@announce" => $announce)));
     }
 
     return TRUE;
@@ -184,7 +214,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 220) {
@@ -193,17 +223,24 @@ class SMTP {
                "smtp_code" => $code,
                "smtp_msg"  => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
 
-    // Begin encrypted connection
-    if (!stream_socket_enable_crypto($this->smtp_conn, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-      return FALSE;
+    // Allow the best TLS version(s) we can
+    $crypto_method = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+    // PHP 5.6.7 dropped inclusion of TLS 1.1 and 1.2 in STREAM_CRYPTO_METHOD_TLS_CLIENT
+    // so add them back in manually if we can
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
+      $crypto_method |= STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+      $crypto_method |= STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT;
     }
 
-    return TRUE;
+    // Begin encrypted connection
+    $crypto_ok = stream_socket_enable_crypto($this->smtp_conn, TRUE, $crypto_method);
+
+    return (bool) $crypto_ok;
   }
 
   /**
@@ -225,7 +262,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -242,7 +279,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -259,7 +296,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -278,7 +315,7 @@ class SMTP {
       if ($sock_status["eof"]) {
         // the socket is valid but we are not connected
         if ($this->do_debug >= 1) {
-            echo "SMTP -> NOTICE:" . $this->CRLF . "EOF caught while checking if connected";
+          drupal_set_message(t("SMTP -> NOTICE: EOF caught while checking if connected"));
         }
         $this->Close();
         return FALSE;
@@ -314,7 +351,7 @@ class SMTP {
    * finializing the mail transaction. $msg_data is the message
    * that is to be send with the headers. Each header needs to be
    * on a single line followed by a <CRLF> with the message headers
-   * and the message body being seperated by and additional <CRLF>.
+   * and the message body being separated by and additional <CRLF>.
    *
    * Implements rfc 821: DATA <CRLF>
    *
@@ -343,7 +380,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 354) {
@@ -352,7 +389,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -390,7 +427,7 @@ class SMTP {
 
     $max_line_length = 998; // used below; set here for ease in change
 
-    while (list(, $line) = @each($lines)) {
+    foreach ($lines as $line) {
       $lines_out = NULL;
       if ($line == "" && $in_headers) {
         $in_headers = FALSE;
@@ -420,7 +457,7 @@ class SMTP {
       $lines_out[] = $line;
 
       // send the lines to the server
-      while (list(, $line_out) = @each($lines_out)) {
+      foreach ($lines_out as $line_out) {
         if (strlen($line_out) > 0) {
           if (substr($line_out, 0, 1) == ".") {
             $line_out = "." . $line_out;
@@ -437,7 +474,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 250) {
@@ -446,7 +483,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -502,7 +539,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER: " . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 250) {
@@ -511,7 +548,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -551,7 +588,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 250) {
@@ -560,7 +597,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -594,7 +631,7 @@ class SMTP {
     $byemsg = $this->get_lines();
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $byemsg . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @byemsg", array("@rply" => $byemsg)));
     }
 
     $rval = TRUE;
@@ -608,7 +645,7 @@ class SMTP {
                  "smtp_rply" => substr($byemsg, 4));
       $rval = FALSE;
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $e["error"] . ": " . $byemsg . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
     }
 
@@ -646,7 +683,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 250 && $code != 251) {
@@ -655,7 +692,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -689,7 +726,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 250) {
@@ -698,7 +735,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -736,7 +773,7 @@ class SMTP {
     $code = substr($rply, 0, 3);
 
     if ($this->do_debug >= 2) {
-      echo "SMTP -> FROM SERVER:" . $rply . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> FROM SERVER: @rply", array("@rply" => $rply)));
     }
 
     if ($code != 250) {
@@ -745,7 +782,7 @@ class SMTP {
               "smtp_code" => $code,
               "smtp_msg" => substr($rply, 4));
       if ($this->do_debug >= 1) {
-        echo "SMTP -> ERROR: " . $this->error["error"] . ": " . $rply . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> ERROR: @error: @rply", array("@error" => $this->error["error"], "@rply" => $rply)));
       }
       return FALSE;
     }
@@ -755,7 +792,7 @@ class SMTP {
   /**
    * This is an optional command for SMTP that this class does not
    * support. This method is here to make the RFC821 Definition
-   * complete for this class and __may__ be implimented in the future
+   * complete for this class and __may__ be implemented in the future
    *
    * Implements from rfc 821: TURN <CRLF>
    *
@@ -768,7 +805,7 @@ class SMTP {
   public function Turn() {
     $this->error = array("error" => "This method, TURN, of the SMTP is not implemented");
     if ($this->do_debug >= 1) {
-      echo "SMTP -> NOTICE: " . $this->error["error"] . $this->CRLF . '<br />';
+      drupal_set_message(t("SMTP -> NOTICE: @error", array("@error" => $this->error["error"])));
     }
     return FALSE;
   }
@@ -799,12 +836,12 @@ class SMTP {
     $data = "";
     while ($str = @fgets($this->smtp_conn, 515)) {
       if ($this->do_debug >= 4) {
-        echo "SMTP -> get_lines(): \$data was \"$data\"" . $this->CRLF . '<br />';
-        echo "SMTP -> get_lines(): \$str is \"$str\"" . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> get_lines(): \$data was \"@data\"", array("@data" => $data)));
+        drupal_set_message(t("SMTP -> get_lines(): \$str is \"@str\"", array("@str" => $str)));
       }
       $data .= $str;
       if ($this->do_debug >= 4) {
-        echo "SMTP -> get_lines(): \$data is \"$data\"" . $this->CRLF . '<br />';
+        drupal_set_message(t("SMTP -> get_lines(): \$data was \"@data\"", array("@data" => $data)));
       }
       // if 4th character is a space, we are done reading, break the loop
       if (substr($str, 3, 1) == " ") {
