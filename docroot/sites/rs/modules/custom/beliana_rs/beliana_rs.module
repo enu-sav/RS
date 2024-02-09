@@ -252,6 +252,21 @@ function modify_links_merged(&$node) {
 }
 
 /*
+ * Check link consistency
+ */
+function _get_inconsistent_links(&$node) {
+    // no code here
+}
+
+/*
+ * display warning about inconsistent links
+ * argument $links is output from _get_inconsistent_links
+ */
+function _warn_inconsistent_links(&$node, &$links) {
+    // no code here
+}
+
+/*
  * Handle special transitions in the book workflow
  */
 function handle_special_transitions(&$values) {

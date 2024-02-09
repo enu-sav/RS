@@ -808,6 +808,65 @@ function modify_links_merged(&$node) {
 // currently no code here
 }
 
+/*
+ * Check link consistency
+ * beliana/en/skola articles are allowed to link only beliana/en/skola articles respectively
+ * These are distinguisehed by lexikalna field_lexikalna_skupina
+ * @return  list of failed links
+ */
+function _get_inconsistent_links(&$node) {
+  $node_t_name = $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'];
+  $en_key = "(EN)";
+  $is_en = strpos($node_t_name, $en_key) !== false;
+  $skola_key = "(pre školy)";
+  $is_skola = strpos($node_t_name, $skola_key) !== false;
+  $is_beliana = !($is_en or $is_skola);
+  $dom = new \DOMDocument();
+  $dom->loadHTML(mb_convert_encoding($node->field_text_hesla[LANGUAGE_NONE][0]['value'], 'HTML-ENTITIES', 'UTF-8'));
+  /** @var \DOMElement[] $links */
+  $links = $dom->getElementsByTagName('a');
+  $failed_links=array(); // list of editors
+  foreach ($links as $item) {
+    $text_content = $item->textContent;
+    $target = substr($item->getAttribute('href'), 1); // we do not need the leading slash /
+    $path = drupal_get_normal_path($target);
+    $parts = explode("/", $path);
+    if ($parts[0] === 'node') {
+      //$term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+      $lnode = node_load($parts[1]); // the linked node
+      $term_name = taxonomy_term_load($lnode->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid'])->name;
+      $has_en = strpos($term_name, $en_key) !== false;
+      $has_skola = strpos($term_name, $skola_key) !== false;
+      $has_failed_link = false;
+      if ($is_skola and !$has_skola) {
+          $has_failed_link = true;
+      } else if ($is_en and !$has_en) {
+          $has_failed_link = true;
+      } else if ($is_beliana and ($has_skola or $has_en)) {
+          $has_failed_link = true;
+      }
+      if ($has_failed_link) {
+          $failed_links[] = array("lname"=>$term_name, "text"=>$text_content, "alias"=>$target);
+      }
+    }
+  }
+  return $failed_links;
+}
+
+/*
+ * display warning about inconsistent links
+ * argument $links is output from _get_inconsistent_links
+ */
+function _warn_inconsistent_links(&$node, &$links) {
+  foreach ($links as $item) {
+    $node_t_name = $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'];
+    $link = '<a href="/'.$item["alias"].'">'.$item["text"].'</a>';
+    $msg = "V hesle s lexikálnou skupinou <strong>{$node_t_name}</strong> sa nachádza odkaz na heslo {$link} s nevyhovujúcou lexikálnou skupinou <strong>{$item['lname']}</strong>.";
+    $msg = "{$msg} Odkaz nahraďte alebo odstráňte.";
+    drupal_set_message($msg, 'error');
+  }
+}
+
 
 /**
  * Menu callback for `admin/group-list` path.

@@ -1891,6 +1891,10 @@ function beliana_node_presave($node) {
   }
   #update the link table (updated only in the beliana-webrs module)
   _beliana_process_links($node);
+
+  #warn about inconsistent links
+  _warn_inconsistent_links($node, _get_inconsistent_links($node));
+
 }
 
 /**
@@ -1917,6 +1921,9 @@ function _beliana_remove_links_no_arrow($node) {
   $text = str_replace(" "," ", $text); #odstranit nezalomitelnu medzeru
   $text = str_replace("&nbsp;", " ", $text);
   $text = preg_replace('/(  *)/', ' ', $text);
+
+  $matches = preg_match_all('/[^⬈➔] (<a[^>]*>([^<]*)<\/a>)/', $text);
+dpm($matches);
  
   $href_count1 = substr_count($text, "<a href");
   $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
