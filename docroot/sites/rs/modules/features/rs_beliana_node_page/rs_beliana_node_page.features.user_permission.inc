@@ -13,7 +13,9 @@ function rs_beliana_node_page_user_default_permissions() {
   // Exported permission: 'create body'.
   $permissions['create body'] = array(
     'name' => 'create body',
-    'roles' => array(),
+    'roles' => array(
+      'Oznamy' => 'Oznamy',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -68,6 +70,7 @@ function rs_beliana_node_page_user_default_permissions() {
   $permissions['edit own body'] = array(
     'name' => 'edit own body',
     'roles' => array(
+      'Oznamy' => 'Oznamy',
       'administrátor' => 'administrátor',
       'zRedaktor' => 'zRedaktor',
     ),
@@ -97,6 +100,7 @@ function rs_beliana_node_page_user_default_permissions() {
   $permissions['view body'] = array(
     'name' => 'view body',
     'roles' => array(
+      'Oznamy' => 'Oznamy',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
