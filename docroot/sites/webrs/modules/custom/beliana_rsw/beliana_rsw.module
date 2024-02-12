@@ -815,7 +815,7 @@ function modify_links_merged(&$node) {
  * @return  list of failed links
  */
 function _get_inconsistent_links(&$node) {
-  $node_t_name = $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'];
+  $node_t_name = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid'])->name;
   $en_key = "(EN)";
   $is_en = strpos($node_t_name, $en_key) !== false;
   $skola_key = "(pre školy)";
@@ -859,9 +859,10 @@ function _get_inconsistent_links(&$node) {
  */
 function _warn_inconsistent_links(&$node, &$links) {
   foreach ($links as $item) {
-    $node_t_name = $node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'];
-    $link = '<a href="/'.$item["alias"].'">'.$item["text"].'</a>';
-    $msg = "V hesle s lexikálnou skupinou <strong>{$node_t_name}</strong> sa nachádza odkaz na heslo {$link} s nevyhovujúcou lexikálnou skupinou <strong>{$item['lname']}</strong>.";
+    $node_t_name = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid'])->name;
+    $link1 = '<a href="/'.$node->path["alias"].'">'.$node->title.'</a>';
+    $link2 = '<a href="/'.$item["alias"].'">'.$item["text"].'</a>';
+    $msg = "V hesle {$link1} s lexikálnou skupinou <strong>{$node_t_name}</strong> sa nachádza odkaz na heslo {$link2} s nevyhovujúcou lexikálnou skupinou <strong>{$item['lname']}</strong>.";
     $msg = "{$msg} Odkaz nahraďte alebo odstráňte.";
     drupal_set_message($msg, 'error');
   }
