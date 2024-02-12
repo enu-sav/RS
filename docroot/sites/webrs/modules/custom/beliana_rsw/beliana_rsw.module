@@ -969,8 +969,8 @@ function webrs_beliana_workflow_reaction(&$form, &$form_state) {
     }
   }
 
-  // check types heslo and importovane_heslo, ignore for authors
-  if (!($cur_state === "u_autora" and $new_state === "needs_review")) {
+  // check types heslo and importovane_heslo, ignore for authors and published articles
+  if (!($cur_state === "u_autora"  or $cur_state === "publikovane_na_webe")) {
     if ($values['node']->type === 'importovane_heslo' or $values['node']->type === 'heslo') {
       // Check link correctness
       $skip = FALSE;
@@ -992,6 +992,11 @@ function webrs_beliana_workflow_reaction(&$form, &$form_state) {
         if (!_check_alternative_text_markers($values['node'], $text_table, "v tabuľke pre geografické údaje hesla")) {
           $skip = TRUE;
         }
+      }
+      //check link consistency
+      $links = _get_inconsistent_links($values['node']);
+      if ($links) {
+        $skip = TRUE;
       }
       if ($skip) {
         drupal_set_message('<strong>Stav hesla nebol zmenený</strong>', 'error');
