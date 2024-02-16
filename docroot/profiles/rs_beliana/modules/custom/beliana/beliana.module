@@ -3429,6 +3429,7 @@ function beliana_clean_tags($node, $text, $where) {
     ["table", "cellspacing"],
     ["table", "cellpadding"],
     ["table", "style"],
+    ["table", "align"],
   ];
   foreach ($cltags as $cltag) {
     $tagstring = "//" . $cltag[0] . "[@" . $cltag[1] . "]";
