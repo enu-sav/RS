@@ -559,7 +559,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_debugging';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['smtp_debugging'] = $strongarm;
 
   $strongarm = new stdClass();
