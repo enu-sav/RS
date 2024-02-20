@@ -285,6 +285,15 @@ function rs_beliana_site_user_default_permissions() {
     'module' => 'imce',
   );
 
+  // Exported permission: 'administer jquery update'.
+  $permissions['administer jquery update'] = array(
+    'name' => 'administer jquery update',
+    'roles' => array(
+      'administrátor' => 'administrátor',
+    ),
+    'module' => 'jquery_update',
+  );
+
   // Exported permission: 'administer languages'.
   $permissions['administer languages'] = array(
     'name' => 'administer languages',
