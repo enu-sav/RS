@@ -22,7 +22,8 @@
   */
  function diff_normalise_text($text) {
 -  $text = str_replace(array("\r\n", "\r"), "\n", $text);
-+    $text = str_replace(array("\r\n", "\r"), "\n", $text);
++    $text = str_replace(array("\r\n", "\r", "\n"), " ", $text);
++    $text = str_replace(array("<p>","</p>"), "", $text);
 +    #remove ins tags
 +    $text = preg_replace('|<ins[^>]*>|', '', $text);
 +    $text = preg_replace('|</ins>|', '', $text);
