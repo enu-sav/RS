@@ -180,7 +180,9 @@ function beliana_merge(&$entity, $context = array()) {
     // Set automatic alias creation to FALSE.
     //$entity->path['pathauto'] = FALSE;
     node_save($entity);
+
     workbench_moderation_moderate($entity, 'ukoncenezluene');
+    _beliana_fix_links_in_backlinks($entity);
   }
 
   // If current entity is the last, make workflow transition.
@@ -204,6 +206,38 @@ function beliana_merge(&$entity, $context = array()) {
     node_save($master);
     $_SESSION['master'] = NULL;
   }
+}
+
+
+/**
+ * find backlinking nodes and modify the urls to point to the merged article
+ * To be used only in the beliana_merge function
+ */
+function _beliana_fix_links_in_backlinks(&$node) {
+    if (isset($node->path['alias'])) {
+        $alias = $node->path['alias'];
+    } else {
+        $alias = $node->path['source'];
+    }
+    # Not necessary, but does not work anyway. It looks like the state changes only after some time, not immediately
+    #if ($node->workbench_moderation['current']->state != 'ukoncenezluene') {
+        #return;
+    #}
+
+    //Query the database - search for heslo and importovane_heslo nodes which contain $alias in text
+    $query = new EntityFieldQuery();
+    $query
+      ->entityCondition('entity_type', "node")
+      ->entityCondition('bundle', array("heslo", "importovane_heslo"))
+      ->fieldCondition('field_text_hesla', 'value', '%' . db_like($alias) . '"%', 'like');
+    $result = $query->execute();
+    if (isset($result['node'])) {
+        foreach ($result['node'] as $rn) {
+            $rnode = node_load($rn->nid);
+            //fix the links simply by saving the node
+            node_save($rnode);
+        }
+    }
 }
 
 /**
@@ -245,6 +279,7 @@ function modify_links_merged(&$node) {
         $newpath = $znode->path['alias'];
         // replace including the closing '"' to make the replacement string unique
         $node->field_text_hesla[LANGUAGE_NONE][0]['value'] = str_replace($target . '"', $newpath . '"', $node->field_text_hesla[LANGUAGE_NONE][0]['value']);
+        $node->log = "Aktualizovaný odkaz na zlúčené heslo " . '</a> <a href="/' . $newpath . '">' . $newpath . '</a>';
         watchdog('aktualizovany odkaz', 'Heslo "' . $node->title . '": aktualizovaný odkaz na zlúčené heslo (z <a href="/' . $target . '">' . $target . '</a> na <a href="/' . $newpath . '">' . $newpath . '</a>)');
       }
     }
