@@ -1831,23 +1831,9 @@ function beliana_node_presave($node) {
         $node->log = $node->log . ", vyplnené pole Vyplatiť";
     } else {
         #Remove links without an arrow if no changes are remembered
-        $moderation_state = $node->workbench_moderation['current']->state;
-        if (in_array($moderation_state, [
-            "needs_review",
-            "na_zverejnenie",
-            "u_vyst_redaktora_2",
-            "u_vyst_redaktora_4",
-            "u_vyst_redaktora_5",
-            "zlucene",
-            "na_zalomenie",
-            "v_zalamovani",
-            "na_jazykovu_korekturu",
-            "u_jaz_redaktora_2",
-            "publikovane_na_webe"
-        ])) {
-            if (_beliana_remove_links_no_arrow($node)) {
-              drupal_set_message('V hesle <a href="/' . $node->path['alias'] . '">' . $node->title . "</a> boli odstránené odkazy bez šípky", 'status');
-            }
+        $rslt = _beliana_remove_links_no_arrow($node);
+        if ($rslt) {
+          drupal_set_message('V hesle <a href="/' . $node->path['alias'] . '">' . $node->title . "</a> boli odstránené odkazy bez šípky: " . implode(", ",$rslt), 'status');
         }
     }
   } else {  // we are in the web system
@@ -1917,19 +1903,33 @@ function _beliana_remove_links_no_arrow($node) {
   if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
       return false;
   }
-  # normalize and remove double spaces
+  $moderation_state = $node->workbench_moderation['current']->state;
+  # neodstraňovať u autora a konzultanta
+  if (in_array($moderation_state, [
+            "u_autora",
+            "u_konzultanta"
+        ])) {
+      return false;
+  }
+           
+  # remove funny spaces and normalize arrows
   $text = str_replace(" "," ", $text); #odstranit nezalomitelnu medzeru
   $text = str_replace("&nbsp;", " ", $text);
   $text = preg_replace('/(  *)/', ' ', $text);
+  $text = str_replace("—&gt; <a","➔ <a", $text); #opraviť šípku —> (dlhá)
+  $text = str_replace("–&gt; <a","➔ <a", $text); #opraviť šípku —> (stredná)
+  $text = str_replace("-&gt; <a","➔ <a", $text); #opraviť šípku —> (krátka)
 
-  $matches = preg_match_all('/[^⬈➔] (<a[^>]*>([^<]*)<\/a>)/', $text);
-dpm($matches);
+  # find all links without arrows
+  $n_matches = preg_match_all('/[^⬈➔] (<a[^>]*>[^<]*<\/a>)/', $text, $matches);
+  if ($n_matches == 0) {
+      return false;
+  }
  
-  $href_count1 = substr_count($text, "<a href");
+  # remove the links
   $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
-  $href_count2 = substr_count($text, "<a href");
   $node->field_text_hesla['und'][0]['value'] = $text;
-  return $href_count1 != $href_count2;
+  return $matches[1];
 }
 
 /**
