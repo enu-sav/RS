@@ -16,7 +16,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'toolbar' => '[
     [\'Source\',\'Cut\',\'Copy\',\'Replace\',\'Find\'],
     [\'Undo\',\'Redo\'],
-    [\'JustifyCenter\',\'Bold\',\'Italic\'],
+    [\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'EqnEditor\',\'BGColor\',\'SpecialChar\',\'Image\'],
     [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
