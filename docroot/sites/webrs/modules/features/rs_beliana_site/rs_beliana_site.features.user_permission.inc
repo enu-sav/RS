@@ -776,6 +776,7 @@ function rs_beliana_site_user_default_permissions() {
       'Jaz. redaktor DS' => 'Jaz. redaktor DS',
       'Jaz. redaktor JS' => 'Jaz. redaktor JS',
       'Jaz. redaktor KK' => 'Jaz. redaktor KK',
+      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',

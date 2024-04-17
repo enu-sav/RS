@@ -410,7 +410,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in ilustracia_na_webe state',
     'roles' => array(
       'Grafik' => 'Grafik',
-      'Komentátor' => 'Komentátor',
     ),
     'module' => 'workbench_state_access',
   );
@@ -469,7 +468,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'name' => 'edit revisions in importovane state',
     'roles' => array(
       'Grafik' => 'Grafik',
-      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'garant' => 'garant',
     ),
@@ -632,9 +630,7 @@ function rs_beliana_workbench_user_default_permissions() {
   // Exported permission: 'edit revisions in publikovane_na_webe state'.
   $permissions['edit revisions in publikovane_na_webe state'] = array(
     'name' => 'edit revisions in publikovane_na_webe state',
-    'roles' => array(
-      'Komentátor' => 'Komentátor',
-    ),
+    'roles' => array(),
     'module' => 'workbench_state_access',
   );
 
@@ -714,7 +710,6 @@ function rs_beliana_workbench_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
-      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor' => 'Výstupný redaktor',

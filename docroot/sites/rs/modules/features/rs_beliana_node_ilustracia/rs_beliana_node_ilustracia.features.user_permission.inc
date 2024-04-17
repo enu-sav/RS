@@ -298,6 +298,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
     'roles' => array(
       'Autor' => 'Autor',
       'Grafik' => 'Grafik',
+      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
@@ -823,6 +824,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
   $permissions['view any unpublished ilustracia content'] = array(
     'name' => 'view any unpublished ilustracia content',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'view_unpublished',

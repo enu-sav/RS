@@ -59,6 +59,7 @@ function rs_beliana_node_article_user_default_permissions() {
   $permissions['view any unpublished article content'] = array(
     'name' => 'view any unpublished article content',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'view_unpublished',
