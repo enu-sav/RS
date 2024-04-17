@@ -44,7 +44,11 @@ function rs_beliana_node_ilustracia_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 2,
     ),
-    'indexes' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
     'locked' => 0,
     'module' => 'date',
     'settings' => array(

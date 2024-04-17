@@ -790,6 +790,7 @@ function rs_beliana_site_user_default_permissions() {
       'Autor' => 'Autor',
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Redaktor' => 'Redaktor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',

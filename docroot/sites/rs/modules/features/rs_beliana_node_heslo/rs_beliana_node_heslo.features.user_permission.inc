@@ -1104,6 +1104,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view field_ilustracia'] = array(
     'name' => 'view field_ilustracia',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'administrátor' => 'administrátor',
       'authenticated user' => 'authenticated user',
     ),
@@ -1114,6 +1115,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view field_lexikalna_skupina'] = array(
     'name' => 'view field_lexikalna_skupina',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'administrátor' => 'administrátor',
@@ -1183,6 +1185,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Jazykový redaktor 1' => 'Jazykový redaktor 1',
       'Jazykový redaktor 2' => 'Jazykový redaktor 2',
+      'Komentátor' => 'Komentátor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
       'Výstupný redaktor 4' => 'Výstupný redaktor 4',
@@ -1584,6 +1587,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view title_field'] = array(
     'name' => 'view title_field',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'Správca heslára' => 'Správca heslára',
       'administrátor' => 'administrátor',
       'anonymous user' => 'anonymous user',
