@@ -10,7 +10,7 @@ include_once 'rs_beliana_users.features.inc';
  * Implements hook_menu_alter().
  */
 function rs_beliana_users_menu_alter(&$items) {
-  $items['admin/config/development/generate/user']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
+//  $items['admin/config/development/generate/user']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
   $items['admin/config/people/accounts']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
   $items['admin/people/permissions']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';
   $items['admin/people/permissions/roles']['access callback'] = 'rs_beliana_users_uadmin_access_disallow';

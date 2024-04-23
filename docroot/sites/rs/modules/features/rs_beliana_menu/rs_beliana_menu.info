@@ -10,7 +10,6 @@ dependencies[] = rs_beliana_workbench
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
-features[menu_custom][] = devel
 features[menu_custom][] = features
 features[menu_custom][] = main-menu
 features[menu_custom][] = management
