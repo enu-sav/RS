@@ -29,10 +29,7 @@
     <p><br/></p>
     <p> Autor: <b><?php print $assign_user['titul_pred_menom']; ?> <?php print $assign_user['name']; ?><?php print !empty($assign_user['titul_za_menom']) ? ', ' . $assign_user['titul_za_menom'] : ''; ?></b></p>
     <p> Príloha k zmluve č. <b><?php print $contract; ?></b></p>
-    <p> Odbor: <font color="#ff0000"><b>doplní redaktor</b></font></p>
-    <p>
-      Termín dodania vypracovaných hesiel: <font color="#ff0000"><b>dátum doplní
-          redaktor</b></font></p>
+    <p> Termín dodania vypracovaných hesiel: dva mesiace od vytvorenia tejto objednávky.</p>
     <h2>Zoznam hesiel na vypracovanie</h2>
     <?php foreach ($order_data as $data): ?>
       <a href="<?php print $GLOBALS['base_root'] . '/node/' . $data['nid']; ?>"><?php print $data['password']; ?></a>,
