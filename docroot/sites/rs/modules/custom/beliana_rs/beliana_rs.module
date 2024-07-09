@@ -251,6 +251,46 @@ function modify_links_merged(&$node) {
   }
 }
 
+/**
+  remove links without an arrow (⬈➔) from the node text
+  if lite changes are remembered, return 'false'
+  return list of the changed links, if any
+ */
+function _beliana_remove_links_no_arrow($node) {
+  $text = $node->field_text_hesla['und'][0]['value'];
+  #Ak má zmeny, tak neodstraňovať a vrátiť false
+  if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
+      return false;
+  }
+  $moderation_state = $node->workbench_moderation['current']->state;
+  # neodstraňovať u autora a konzultanta
+  if (in_array($moderation_state, [
+            "u_autora",
+            "u_konzultanta"
+        ])) {
+      return false;
+  }
+           
+  # remove funny spaces and normalize arrows
+  $text = str_replace(" "," ", $text); #odstranit nezalomitelnu medzeru
+  $text = str_replace("&nbsp;", " ", $text);
+  $text = preg_replace('/(  *)/', ' ', $text);
+  $text = str_replace("—&gt; <a","➔ <a", $text); #opraviť šípku —> (dlhá)
+  $text = str_replace("–&gt; <a","➔ <a", $text); #opraviť šípku —> (stredná)
+  $text = str_replace("-&gt; <a","➔ <a", $text); #opraviť šípku —> (krátka)
+
+  # find all links without arrows
+  $n_matches = preg_match_all('/[^⬈➔] (<a[^>]*>[^<]*<\/a>)/', $text, $matches);
+  if ($n_matches == 0) {
+      return false;
+  }
+ 
+  # remove the links
+  $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
+  $node->field_text_hesla['und'][0]['value'] = $text;
+  return $matches[1];
+}
+
 /*
  * Check link consistency
  */

@@ -1907,32 +1907,6 @@ function _beliana_remove_links($node) {
 }
 
 /**
-  remove links without an arrow (^⬈➔) from the node text
-  if no lite changes are remembered
-  If number of links has change, retur true
- */
-function _beliana_remove_links_no_arrow($node) {
-  $text = $node->field_text_hesla['und'][0]['value'];
-  #Ak má zmeny, tak neodstraňovať a vrátiť false
-  if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
-      return false;
-  }
-  # normalize and remove double spaces
-  $text = str_replace(" "," ", $text); #odstranit nezalomitelnu medzeru
-  $text = str_replace("&nbsp;", " ", $text);
-  $text = preg_replace('/(  *)/', ' ', $text);
-
-  $matches = preg_match_all('/[^⬈➔] (<a[^>]*>([^<]*)<\/a>)/', $text);
-dpm($matches);
- 
-  $href_count1 = substr_count($text, "<a href");
-  $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
-  $href_count2 = substr_count($text, "<a href");
-  $node->field_text_hesla['und'][0]['value'] = $text;
-  return $href_count1 != $href_count2;
-}
-
-/**
  * Implements hook_views_post_execute().
  */
 function beliana_views_post_execute(&$view) {
