@@ -25,12 +25,12 @@
     <p> Objednávajúci redaktor: <b><?php print $current_user['titul_pred_menom']; ?> <?php print $current_user['name']; ?><?php print !empty($current_user['titul_za_menom']) ? ', ' . $current_user['titul_za_menom'] : ''; ?></b></p>
     <p> E-mail: <b><?php print $current_user['email']; ?></b></p>
     <p><br/></p>
-    <h2>Objednávka hesiel do Encyclopaedie Beliany</h2>
+    <h3>Objednávka hesiel do Encyclopaedie Beliany č. <?php print $assign_user['cislo_objednavky']; ?> </h3>
     <p><br/></p>
     <p> Autor: <b><?php print $assign_user['titul_pred_menom']; ?> <?php print $assign_user['name']; ?><?php print !empty($assign_user['titul_za_menom']) ? ', ' . $assign_user['titul_za_menom'] : ''; ?></b></p>
     <p> Príloha k zmluve č. <b><?php print $contract; ?></b></p>
     <p> Termín dodania vypracovaných hesiel: dva mesiace od vytvorenia tejto objednávky.</p>
-    <h2>Zoznam hesiel na vypracovanie</h2>
+    <h3>Zoznam hesiel na vypracovanie</h3>
     <?php foreach ($order_data as $data): ?>
       <a href="<?php print $GLOBALS['base_root'] . '/node/' . $data['nid']; ?>"><?php print $data['password']; ?></a>,
     <?php endforeach; ?>

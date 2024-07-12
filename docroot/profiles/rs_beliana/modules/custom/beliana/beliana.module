@@ -662,7 +662,8 @@ function beliana_order_article(&$node, $context) {
 /**
  * Helper function create article order variable.
  *
- * Create variable beliana_create_article_order_data
+ * Create or update variable beliana_create_article_order_data
+ * Called for each article in the list
  *
  * @param $node
  * @param $assign_user
@@ -675,12 +676,14 @@ function _beliana_create_article_order_variable($node, $assign_user, $contract) 
   $user = user_load($user->uid);
 
   if (!is_null(variable_get('beliana_create_article_order_data'))) {
+    # The variable already exists, just add the node  
     $context = variable_get('beliana_create_article_order_data');
     $context['order_data'][] = [
       'nid' => $node->nid,
       'password' => $node->title,
     ];
   } else {
+    # The variable does not exist yet, add user data and node  
     $context = [
       'type' => 'ordered',
       'current_user' => [
@@ -726,10 +729,112 @@ function beliana_batch_alter(&$batch) {
  * @return false|mixed|string
  */
 function beliana_create_article_order_execute_finished($success, $results, $operations) {
+    # gets number of the next order in the current year
+    function _get_next_order_number()
+    {
+        $query = new EntityFieldQuery();
+
+        #I can't get fieldCondition working, so let's query the database in this funny way
+        $entities = $query
+            ->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'objednavka_hesiel')
+            ->execute();
+        $y = date("Y"); 
+        $maxnum = 0;
+        if (!empty($entities)) {
+            $nids = array_keys($entities['node']);
+            $cisla = array();
+            foreach	($nids as $nid) {
+	            $node = node_load($nid);
+                $rex = "/-" . $y . "-([0-9]+)/";
+                    #print($rex."\n");
+                preg_match_all($rex, $node->title, $num);
+                if ($num[1]) {
+                    if ($num[1][0] > $maxnum) {
+                        $maxnum = $num[1][0];
+                    }
+                }
+            }
+        }
+        if (variable_get('rs_api_type') == 'webrs') {
+            return(sprintf("OH-RS-%s-%03d", $y, (int)$maxnum+1));
+        } else {
+            return(sprintf("OH-WEBRS-%s-%03d", $y, (int)$maxnum+1));
+        }
+    }
+
+    #Creates "objednavka_hesiel" node for the current order
+    function _create_order_node($next, $order_data, $filepath) 
+    {
+        global $user;
+
+        $author_login = $order_data['assign_user']['login'];
+    
+        $node = new stdClass();
+        $node->title = $author_login . "(" . $next . ")"; 
+        $node->type = "objednavka_hesiel";
+        node_object_prepare($node);
+        $node->language = LANGUAGE_NONE;
+        $node->uid = $order_data["current_user"]["id"];
+        $node->status = 0; //(1 or 0): published or not
+        $node->promote = 0; //(1 or 0): promoted to front page
+        $node->field_objednavka_autor[LANGUAGE_NONE][0]['value'] = $author_login;
+        $node->field_objednavka_redaktor[LANGUAGE_NONE][0]['value'] = $order_data['current_user']['name'];
+        $node->field_objednavka_datum[LANGUAGE_NONE][0]['value'] = date("Y-m-d", $order_data['date']);
+        $node->field_objednavka_cislo[LANGUAGE_NONE][0]['value'] = $next;
+        $node->field_objednavka_zmluva[LANGUAGE_NONE][0]['value'] = $order_data['contract'];
+
+        $hesla_text = "<p>";
+        # get list (string) of articles and array of their 'lexikalna skupina'
+        $lexikalne = array();
+        foreach($order_data['order_data'] as $heslo) {
+            $hesla_text = sprintf('%s <a href="/node/%s">%s</a>, ', $hesla_text, $heslo['nid'], $heslo['password']);
+	        $article = node_load($heslo['nid']);
+            # get lexikalna skupina' from article
+            foreach ($article->field_lexikalna_skupina[LANGUAGE_NONE][0] as $tid) {
+                $lexikalne[] = $tid;
+            }
+        }
+        $hesla_text = $hesla_text."</p>";
+        $node->field_objednavka_hesla[LANGUAGE_NONE][0]['value'] = $hesla_text;
+        $node->field_objednavka_hesla[LANGUAGE_NONE][0]['format'] = 'full_html';
+
+        $lexikalne = array_unique($lexikalne);
+        $node->field_lexikalna_skupina[LANGUAGE_NONE] = array();
+        foreach($lexikalne as $ls) {
+            $node->field_lexikalna_skupina[LANGUAGE_NONE][] = array("tid"=>$ls);
+        }
+
+        $fname = substr($filepath, strpos($filepath, "orders"));
+        $uri = 'public://' . $fname;
+        $file = file_save((object) array(
+            'filename' => basename($uri),
+            'uri' => $uri,
+            'status' => FILE_STATUS_PERMANENT,
+            'filemime' => "application/msword",
+            'display' => "1",
+            'description' => null
+        ));
+        $node->field_objednavka_subor[LANGUAGE_NONE][0] = (array)$file;
+
+        #Update ordered articles
+        foreach($order_data['order_data'] as $heslo) {
+	        $article = node_load($heslo['nid']);
+            $article->field_objednavka[LANGUAGE_NONE][0]['value'] = $next;
+            node_save($article);
+        }
+        $node = node_submit($node);
+        node_save($node);
+    }
+
+  # body of 'beliana_create_article_order_execute_finished'
   if (!is_null(variable_get('beliana_create_article_order_data'))) {
     $order_data = variable_get('beliana_create_article_order_data');
     if ($order_data['type'] == 'ordered') {
+      $next_order = _get_next_order_number();
       $request_time = REQUEST_TIME;
+      # workaround: "hide" cislo_objednavky in assign_user
+      $order_data['assign_user']['cislo_objednavky'] = $next_order;
 
       $order_file_content[] = [
         '#theme' => 'order_file',
@@ -746,6 +851,8 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
       if (!empty($filepath)) {
         drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stiahnutie</a>'));
       }
+      #Create order node and update ordered article nodes
+      _create_order_node($next_order, $order_data, $filepath);
       variable_del('beliana_create_article_order_data');
     }
   }
@@ -854,6 +961,7 @@ function beliana_order_article_cancel(&$node, $context) {
   if ($user = user_load($node->uid)) {
     $node->revision = TRUE;
     $node->uid = 719;
+    $node->field_objednavka = null;
     $node->log = 'Zrušená objednávka: ' . $user->name;
     $node->workbench_moderation_state_new = 'zaradene';
   }
