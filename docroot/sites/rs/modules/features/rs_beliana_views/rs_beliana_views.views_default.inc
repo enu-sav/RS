@@ -736,35 +736,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
-    2 => 0,
+    2 => 2,
     4 => '4',
-    1 => 0,
-    9 => 0,
-    31 => 0,
-    27 => 0,
-    18 => 0,
-    28 => 0,
-    22 => 0,
-    29 => 0,
-    32 => 0,
-    10 => 0,
-    5 => 0,
-    23 => 0,
-    20 => 0,
-    34 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    33 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    21 => 0,
-    26 => 0,
   );
   /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
   $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
@@ -9128,6 +9103,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
     'section' => 'section',
     'field_taxsubor' => 'field_taxsubor',
@@ -9135,10 +9111,16 @@ function rs_beliana_views_views_default_views() {
     'field_zmluva' => 'field_zmluva',
     'from_state' => 'from_state',
     'timestamp' => 'timestamp',
+    'field_objednavka' => 'field_objednavka',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'timestamp';
   $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -9182,6 +9164,13 @@ function rs_beliana_views_views_default_views() {
     'timestamp' => array(
       'sortable' => 1,
       'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_objednavka' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -9285,6 +9274,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'today time ago';
   $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+  /* Pole: Obsah: Objednávka */
+  $handler->display->display_options['fields']['field_objednavka']['id'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['field'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['relationship'] = 'nid';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Názov */
@@ -9558,6 +9552,7 @@ function rs_beliana_views_views_default_views() {
  • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať'),
     t('Objednané u'),
     t('Číslo zmluvy'),
+    t('Objednávka'),
     t('Name (raw)'),
   );
   $export['beliana'] = $view;
@@ -12447,6 +12442,7 @@ function rs_beliana_views_views_default_views() {
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
     'field_datum_vyplatenia' => 'field_datum_vyplatenia',
+    'field_objednavka' => 'field_objednavka',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -12527,6 +12523,13 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_datum_vyplatenia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_objednavka' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -12637,6 +12640,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  /* Pole: Obsah: Objednávka */
+  $handler->display->display_options['fields']['field_objednavka']['id'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['field'] = 'field_objednavka';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -12710,34 +12717,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    29 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    28 => 0,
   );
   $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
   /* Filter criterion: Obsah: Dátum uloženia údajov pre vyplatenie (field_datum_autorovho_textu) */
@@ -12940,6 +12923,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['type'] = 'text_plain';
+  /* Pole: Obsah: Objednávka */
+  $handler->display->display_options['fields']['field_objednavka']['id'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['field'] = 'field_objednavka';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -14011,6 +13998,7 @@ function rs_beliana_views_views_default_views() {
     t('Meno'),
     t('Priezvisko'),
     t('Dátum uloženia údajov pre vyplatenie'),
+    t('Objednávka'),
     t('Autor hesla'),
     t('Lexikálna skupina (podľa redaktorov)'),
     t('Vyplatiť heslá - dáta'),
@@ -21144,7 +21132,7 @@ function rs_beliana_views_views_default_views() {
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -21244,10 +21232,6 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Typ */
-  $handler->display->display_options['fields']['type']['id'] = 'type';
-  $handler->display->display_options['fields']['type']['table'] = 'node';
-  $handler->display->display_options['fields']['type']['field'] = 'type';
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
@@ -21282,6 +21266,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_objednavka_redaktor']['field'] = 'field_objednavka_redaktor';
   $handler->display->display_options['fields']['field_objednavka_redaktor']['label'] = 'Objednávajúci redaktor';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Kritéria zoradenia: Obsah: Dátum objednávky (field_objednavka_datum) */
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['id'] = 'field_objednavka_datum_value';
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['table'] = 'field_data_field_objednavka_datum';
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['field'] = 'field_objednavka_datum_value';
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
