@@ -8445,23 +8445,32 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
+    'nid' => 'nid',
     'name' => 'name',
     'field_lexikalna_skupina' => 'field_lexikalna_skupina',
-    'state' => 'state',
     'field_meno_1' => 'field_meno_1',
+    'state' => 'state',
     'field_meno' => 'field_meno',
     'field_priezvisko' => 'field_priezvisko',
-    'field_autorska_zmluva' => 'field_autorska_zmluva',
+    'field_zmluva' => 'field_zmluva',
     'field_vyplatit' => 'field_vyplatit',
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
     'field_datum_autorovho_textu' => 'field_datum_autorovho_textu',
     'field_datum_vyplatenia' => 'field_datum_vyplatenia',
+    'field_objednavka' => 'field_objednavka',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -8479,14 +8488,14 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'state' => array(
+    'field_meno_1' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_meno_1' => array(
+    'state' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -8507,7 +8516,7 @@ Heslá treba preradiť do stavov:
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_autorska_zmluva' => array(
+    'field_zmluva' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -8536,6 +8545,13 @@ Heslá treba preradiť do stavov:
       'empty_column' => 0,
     ),
     'field_datum_vyplatenia' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_objednavka' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -8649,6 +8665,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  /* Pole: Obsah: Objednávka */
+  $handler->display->display_options['fields']['field_objednavka']['id'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['field'] = 'field_objednavka';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -8723,34 +8743,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['label'] = 'Vyplatenie odmeny';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['operator'] = 'field_vyplatit_value_op';
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['identifier'] = 'field_vyplatit_value';
+  $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    29 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    28 => 0,
   );
   $handler->display->display_options['filters']['field_vyplatit_value']['reduce_duplicates'] = TRUE;
   /* Filter criterion: Používateľ: Kategórie používateľov */
@@ -8988,6 +8984,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
+  /* Pole: Obsah: Objednávka */
+  $handler->display->display_options['fields']['field_objednavka']['id'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['field'] = 'field_objednavka';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -10077,6 +10077,7 @@ Heslá treba preradiť do stavov:
     t('Meno'),
     t('Priezvisko'),
     t('Dátum uloženia údajov pre vyplatenie'),
+    t('Objednávka'),
     t('Kategórie používateľov'),
     t('Používatelia'),
     t('Autor hesla'),
@@ -19784,6 +19785,181 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Objednávky hesiel */
+  $handler = $view->new_display('page', 'Objednávky hesiel', 'page_4');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Objednávky hesiel';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Výsledný súhrn */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['label'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Autor hesla';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Obsah: Objednané heslá */
+  $handler->display->display_options['fields']['field_objednavka_hesla']['id'] = 'field_objednavka_hesla';
+  $handler->display->display_options['fields']['field_objednavka_hesla']['table'] = 'field_data_field_objednavka_hesla';
+  $handler->display->display_options['fields']['field_objednavka_hesla']['field'] = 'field_objednavka_hesla';
+  /* Pole: Obsah: Súbor objednávky */
+  $handler->display->display_options['fields']['field_objednavka_subor']['id'] = 'field_objednavka_subor';
+  $handler->display->display_options['fields']['field_objednavka_subor']['table'] = 'field_data_field_objednavka_subor';
+  $handler->display->display_options['fields']['field_objednavka_subor']['field'] = 'field_objednavka_subor';
+  $handler->display->display_options['fields']['field_objednavka_subor']['click_sort_column'] = 'fid';
+  /* Pole: Obsah: Dátum objednávky */
+  $handler->display->display_options['fields']['field_objednavka_datum']['id'] = 'field_objednavka_datum';
+  $handler->display->display_options['fields']['field_objednavka_datum']['table'] = 'field_data_field_objednavka_datum';
+  $handler->display->display_options['fields']['field_objednavka_datum']['field'] = 'field_objednavka_datum';
+  $handler->display->display_options['fields']['field_objednavka_datum']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Pole: Obsah: Redaktor */
+  $handler->display->display_options['fields']['field_objednavka_redaktor']['id'] = 'field_objednavka_redaktor';
+  $handler->display->display_options['fields']['field_objednavka_redaktor']['table'] = 'field_data_field_objednavka_redaktor';
+  $handler->display->display_options['fields']['field_objednavka_redaktor']['field'] = 'field_objednavka_redaktor';
+  $handler->display->display_options['fields']['field_objednavka_redaktor']['label'] = 'Objednávajúci redaktor';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Kritéria zoradenia: Obsah: Dátum objednávky (field_objednavka_datum) */
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['id'] = 'field_objednavka_datum_value';
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['table'] = 'field_data_field_objednavka_datum';
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['field'] = 'field_objednavka_datum_value';
+  $handler->display->display_options['sorts']['field_objednavka_datum_value']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['id'] = 'taxonomy_entity_index_tid_depth';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['field'] = 'taxonomy_entity_index_tid_depth';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['group'] = 1;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator_id'] = 'taxonomy_entity_index_tid_depth_op';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['description'] = 'Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['operator'] = 'taxonomy_entity_index_tid_depth_op';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['identifier'] = 'taxonomy_entity_index_tid_depth';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    4 => 0,
+    10 => 0,
+    7 => 0,
+    12 => 0,
+    6 => 0,
+    13 => 0,
+    19 => 0,
+    14 => 0,
+    15 => 0,
+    16 => 0,
+    18 => 0,
+    3 => 0,
+    9 => 0,
+    25 => 0,
+    20 => 0,
+    21 => 0,
+    22 => 0,
+    23 => 0,
+  );
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['type'] = 'select';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['depth'] = '3';
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'starts';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'objednavka_hesiel' => 'objednavka_hesiel',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Objednané heslá (field_objednavka_hesla) */
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['id'] = 'field_objednavka_hesla_value';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['table'] = 'field_data_field_objednavka_hesla';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['field'] = 'field_objednavka_hesla_value';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['expose']['operator_id'] = 'field_objednavka_hesla_value_op';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['expose']['label'] = 'Objednané heslá';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['expose']['operator'] = 'field_objednavka_hesla_value_op';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['expose']['identifier'] = 'field_objednavka_hesla_value';
+  $handler->display->display_options['filters']['field_objednavka_hesla_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Redaktor (field_objednavka_redaktor) */
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['id'] = 'field_objednavka_redaktor_value';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['table'] = 'field_data_field_objednavka_redaktor';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['field'] = 'field_objednavka_redaktor_value';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['operator_id'] = 'field_objednavka_redaktor_value_op';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['label'] = 'Objednávajúci redaktor';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['operator'] = 'field_objednavka_redaktor_value_op';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['identifier'] = 'field_objednavka_redaktor_value';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['path'] = 'objednavky';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Objednávky hesiel';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['vsetky_hesla_detaily'] = array(
     t('Master'),
     t('Všetky heslá'),
@@ -19926,6 +20102,12 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('Spôsob preberania'),
     t('Jazyková korektúra JS'),
     t('Jazyková korektúra KK'),
+    t('Objednávky hesiel'),
+    t('Displaying @start - @end of @total'),
+    t('Objednané heslá'),
+    t('Súbor objednávky'),
+    t('Dátum objednávky'),
+    t('Objednávajúci redaktor'),
   );
   $export['vsetky_hesla_detaily'] = $view;
 
