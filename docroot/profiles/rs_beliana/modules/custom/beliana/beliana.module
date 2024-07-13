@@ -771,7 +771,7 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
         $author_login = $order_data['assign_user']['login'];
     
         $node = new stdClass();
-        $node->title = $author_login . "(" . $next . ")"; 
+        $node->title = $author_login . " (" . $next . ")"; 
         $node->type = "objednavka_hesiel";
         node_object_prepare($node);
         $node->language = LANGUAGE_NONE;
@@ -848,9 +848,6 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
       $file_content = render($order_file_content);
       $filepath = _beliana_create_article_order_file($request_time, $file_content, $order_data['assign_user']);
 
-      if (!empty($filepath)) {
-        drupal_set_message(t('<a href="/download-order-file/' . $request_time . '">Objednávka na stiahnutie</a>'));
-      }
       #Create order node and update ordered article nodes
       _create_order_node($next_order, $order_data, $filepath);
       variable_del('beliana_create_article_order_data');
