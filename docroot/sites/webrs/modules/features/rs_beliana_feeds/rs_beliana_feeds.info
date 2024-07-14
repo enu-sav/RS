@@ -1,4 +1,4 @@
-name = Redakčný systém Beliana Kanály správhttps://dev.beliana.sav.sk/admin
+name = Redakčný systém Beliana Kanály správ
 core = 7.x
 package = Feeds
 version = 7.x-1.0
