@@ -893,6 +893,51 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_objednavka'.
+  $field_instances['node-heslo-field_objednavka'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 31,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_objednavka',
+    'label' => 'Objednávka',
+    'required' => FALSE,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-heslo-field_pouzite_zdroje'.
   $field_instances['node-heslo-field_pouzite_zdroje'] = array(
     'bundle' => 'heslo',
@@ -1857,6 +1902,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
   t('Lexikálna skupina');
   t('Na zoradenie');
   t('Názov');
+  t('Objednávka');
   t('Opravy, ktoré sa majú uviesť vo zväzku Erráta. Opravy uveďte formou "pôvodné >> opravené;", napríklad "King of Blue >> Kind of Blue;", a to vždy na samostatný riadok a na koniec dajte znak ;. Ak sú zmeny rozsiahle (napr. heslo je celkom prepísané), uveďte len "rozsiahle zmeny".');
   t('Pomocné pole používané na zapamätanie zoznamu redaktorov, ktorí majú vidieť zlúčené heslo v 1. alebo 2. korektúre. Vyplňuje sa automaticky');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');

@@ -903,6 +903,51 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-heslo-field_objednavka'.
+  $field_instances['node-heslo-field_objednavka'] = array(
+    'bundle' => 'heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 31,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_objednavka',
+    'label' => 'Objednávka',
+    'required' => FALSE,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 33,
+    ),
+  );
+
   // Exported field_instance: 'node-heslo-field_pouzite_zdroje'.
   $field_instances['node-heslo-field_pouzite_zdroje'] = array(
     'bundle' => 'heslo',
@@ -1876,6 +1921,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Lexikálna skupina');
   t('Na zoradenie');
   t('Názov');
+  t('Objednávka');
   t('Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.');
   t('Pomocné pole: lexikálne skupiny hesiel, z ktorých bolo heslo vytvorené zlúčením. Vyplňuje sa automaticky pri zlučovaní hesiel.');
   t('Pomocné pole: zoznam redaktorov zlúčených hesiel. Vyplní sa automaticky pri zlučovaní hesiel.');
