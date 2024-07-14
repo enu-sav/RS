@@ -19945,6 +19945,7 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
   $handler->display->display_options['filters']['field_objednavka_redaktor_value']['id'] = 'field_objednavka_redaktor_value';
   $handler->display->display_options['filters']['field_objednavka_redaktor_value']['table'] = 'field_data_field_objednavka_redaktor';
   $handler->display->display_options['filters']['field_objednavka_redaktor_value']['field'] = 'field_objednavka_redaktor_value';
+  $handler->display->display_options['filters']['field_objednavka_redaktor_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_objednavka_redaktor_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['operator_id'] = 'field_objednavka_redaktor_value_op';
   $handler->display->display_options['filters']['field_objednavka_redaktor_value']['expose']['label'] = 'Objednávajúci redaktor';
