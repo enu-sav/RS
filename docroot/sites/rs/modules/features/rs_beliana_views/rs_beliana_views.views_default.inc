@@ -16379,6 +16379,7 @@ function rs_beliana_views_views_default_views() {
     'field_vyplatit' => 'field_vyplatit',
     'field_dlzka_autorovho_textu_zad' => 'field_dlzka_autorovho_textu_zad',
     'field_zmluva' => 'field_zmluva',
+    'field_objednavka' => 'field_objednavka',
   );
   $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'changed';
@@ -16511,6 +16512,13 @@ function rs_beliana_views_views_default_views() {
       'empty_column' => 0,
     ),
     'field_zmluva' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_objednavka' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -16685,6 +16693,10 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_zmluva']['id'] = 'field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['table'] = 'field_data_field_zmluva';
   $handler->display->display_options['fields']['field_zmluva']['field'] = 'field_zmluva';
+  /* Pole: Obsah: Objednávka */
+  $handler->display->display_options['fields']['field_objednavka']['id'] = 'field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['fields']['field_objednavka']['field'] = 'field_objednavka';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Obsah: Súbor (field_taxsubor) */
@@ -17463,6 +17475,26 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['field_remote_id_value']['expose']['operator'] = 'field_remote_id_value_op';
   $handler->display->display_options['filters']['field_remote_id_value']['expose']['identifier'] = 'field_remote_id_value';
   $handler->display->display_options['filters']['field_remote_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Objednávka (field_objednavka) */
+  $handler->display->display_options['filters']['field_objednavka_value']['id'] = 'field_objednavka_value';
+  $handler->display->display_options['filters']['field_objednavka_value']['table'] = 'field_data_field_objednavka';
+  $handler->display->display_options['filters']['field_objednavka_value']['field'] = 'field_objednavka_value';
+  $handler->display->display_options['filters']['field_objednavka_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_objednavka_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['operator_id'] = 'field_objednavka_value_op';
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['label'] = 'Objednávka (field_objednavka)';
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['operator'] = 'field_objednavka_value_op';
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['limit_operators'] = TRUE;
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['available_operators'] = array(
+    'contains' => 'contains',
+    'empty' => 'empty',
+    'not empty' => 'not empty',
+  );
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['identifier'] = 'field_objednavka_value';
+  $handler->display->display_options['filters']['field_objednavka_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
   $handler->display->display_options['path'] = 'vsetky-prehlad';
@@ -21412,9 +21444,11 @@ function rs_beliana_views_views_default_views() {
     t('Vyplatenie odmeny'),
     t('Počet znakov na vyplatenie'),
     t('Zmluva na vyplatenie'),
+    t('Objednávka'),
     t('Redaktori zlúčeného hesla'),
     t('Tabuľka pre geografické heslá'),
     t('Zlúčené z'),
+    t('Objednávka (field_objednavka)'),
     t('Všetky heslá - operácie'),
     t('Operácia'),
     t('Vybrať operáciu'),
