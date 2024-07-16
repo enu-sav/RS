@@ -908,10 +908,10 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Nevypĺňať – vyplní sa automaticky pri vytvorení objednávky.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -933,12 +933,35 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_objednavka',
     'label' => 'Objednávka',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'size' => 60,
@@ -946,6 +969,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'text_textfield',
       'weight' => 33,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-heslo-field_pouzite_zdroje'.
@@ -1920,6 +1944,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
   t('Lexikálna skupina');
   t('Na zoradenie');
+  t('Nevypĺňať – vyplní sa automaticky pri vytvorení objednávky.');
   t('Názov');
   t('Objednávka');
   t('Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.');

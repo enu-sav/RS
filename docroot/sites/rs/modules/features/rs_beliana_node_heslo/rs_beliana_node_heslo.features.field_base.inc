@@ -430,6 +430,9 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'entity_id_type' => NULL,
     'entity_types' => array(),
     'field_name' => 'field_objednavka',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
