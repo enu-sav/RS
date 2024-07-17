@@ -214,7 +214,7 @@ function beliana_merge(&$entity, $context = array()) {
  * To be used only in the beliana_merge function
  */
 function _beliana_fix_links_in_backlinks(&$node) {
-    if (isset($node->path['alias'])) {
+    if (isset($node->path['alias']) and $node->path['alias']) {
         $alias = $node->path['alias'];
     } else {
         $alias = $node->path['source'];
