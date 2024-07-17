@@ -337,7 +337,7 @@ function _get_inconsistent_links(&$node) {
  * display warning about inconsistent links
  * argument $links is output from _get_inconsistent_links
  */
-function _warn_inconsistent_links(&$node, &$links) {
+function _warn_inconsistent_links(&$node, $links) {
     // no code here
 }
 

@@ -828,6 +828,7 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
     }
 
   # body of 'beliana_create_article_order_execute_finished'
+  dpm('beliana_create_article_order_execute_finished');
   if (!is_null(variable_get('beliana_create_article_order_data'))) {
     $order_data = variable_get('beliana_create_article_order_data');
     if ($order_data['type'] == 'ordered') {
