@@ -3690,7 +3690,9 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
             }
             $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
             $data['field_text_hesla[und][0][format]'] = 'filtered_html';
-            $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
+            #If there are more values than 1, split them in field_lexikalna_skupina and field_doplnkova_ls 
+            $data['field_lexikalna_skupina[und]'] = $terms[0];
+            $data['field_doplnkova_ls[und]'] = implode(', ', array_slice($terms, 1));
           }
         }
         if (strpos($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
