@@ -3759,7 +3759,9 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
     }
     else {
       $http_message = curl_error($curl);
-      watchdog('error', 'Error creating remote node (' . $node->title . '): ' . $http_message);
+      watchdog('error', 'Error creating remote node to ' .  l($node->title, $node->path['source']) . ". " . $http_message);
+      $rsrsw = $site != 'rsw' ? 'vo webovom' : 'v knižnom';
+      drupal_set_message("Zlyhalo vytvorenie párového hesla $rsrsw redakčnom systéme k položke ". l($node->title, $node->path['source']) . ". Upozornite, prosím, administrátora.", 'warning');
     }
   }
 
