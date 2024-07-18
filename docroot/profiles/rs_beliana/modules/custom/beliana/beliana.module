@@ -577,7 +577,44 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_add_missing_pair_article' => [    // fix, if a remote pair article does not exist
+      'type' => 'entity',
+      'label' => "Vytvoriť chýbajúce vzdialené párové heslo",
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_add_missing_pair_article` action.
+ *
+ * If for some reason the compulsory remote pair article is missing, it needs to be manually created using this action.
+ * The reason why the pair article is not created can be found in /admin/reports/dblog (error)
+ */
+function beliana_add_missing_pair_article(&$node, $context) {
+  $link = l($node->title, $node->path['source']);
+  if (!in_array($node->type, ["heslo", 'ilustracia'])) {
+    $link = l($node->title, $node->path['source']);
+    drupal_set_message("Položka $link bola vynechaná, lebo nie je 'heslo' ani 'ilustrácia", 'warning');
+    return;
+  }
+  if ($node->nid < 553661){
+    drupal_set_message("Položka $link bola vynechaná, lebo pole 'Remote ID' sa pre heslá vytvorené pred 2019-10-04 (nid < 553661) nevypĺňa", 'warning');
+  }
+  if (isset($node->field_remote_id[LANGUAGE_NONE])) {
+    drupal_set_message("Položka $link bola vynechaná, lebo jej pole 'Remote ID' je vyplnené", 'warning');
+  }
+
+  #Create the remote object now
+  $site = (variable_get('rs_api_type') == "webrs") ? "rs" : "webrs";
+  $pokec = (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) ? "Zlúčené heslo (prenos)" : "(prenos)";
+  if ($response = beliana_api_rest_create_node($node, $site, $pokec)) {
+    $node->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
+  }
 }
 
 /**
@@ -3661,7 +3698,7 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
       'title' => $node->title,
       'status' => $node->status,
       'title_field[und][0][value]' => $node->title,
-      'field_komentar_instrukcie[und][0][value]' => $which_article . ' vytvorené ' . $comment . ' redakčnom systéme ' . date('d.m.Y') . ', ' . $user->name . '. ' . $instructions,
+      'field_komentar_instrukcie[und][0][value]' => sprintf("%s Vytvorené %s redakčnom systéme %s, %s", $which_article, $comment, date('d. m. Y'), $user->name),
       'field_remote_id[und][0][value]' => $node->nid,
     ];
 
@@ -3672,29 +3709,23 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
         $terms = [];
         $data['field_text_hesla[und][0][value]'] = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
         $data['field_text_hesla[und][0][format]'] = 'filtered_html';
-        if (!$attribute) {  # regularly created article
-          if (!empty($node->field_lexikalna_skupina[LANGUAGE_NONE])) {
-            foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
-              $terms[] = $value['name'];
-            }
-            $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
-            $data['field_text_hesla[und][0][format]'] = 'filtered_html';
-            $data['field_lexikalna_skupina[und]'] = implode(', ', $terms);
-          }
-        }
-        else {  # only if article is created by merging
-          if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) {
+        if (!empty($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE])) { #Merged (Zlucene) article
             foreach ($node->field_povodne_lexikalne_skupiny[LANGUAGE_NONE] as $value) {
               $term = taxonomy_term_load($value['tid']);
               $terms[] = $term->name;
             }
-            $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
-            $data['field_text_hesla[und][0][format]'] = 'filtered_html';
-            #If there are more values than 1, split them in field_lexikalna_skupina and field_doplnkova_ls 
-            $data['field_lexikalna_skupina[und]'] = $terms[0];
-            $data['field_doplnkova_ls[und]'] = implode(', ', array_slice($terms, 1));
-          }
+        } else {    #regular article
+            foreach ($node->field_lexikalna_skupina[LANGUAGE_NONE] as $value) {
+              $terms[] = $value['name'];
+            }
         }
+        #If there are more values than 1, split them in field_lexikalna_skupina and field_doplnkova_ls 
+        $data['field_lexikalna_skupina[und]'] = $terms[0];
+        $data['field_doplnkova_ls[und]'] = implode(', ', array_slice($terms, 1));
+
+        $data['field_text_hesla[und][0][value]'] = '<strong>' . $node->title . '</strong> —';
+        $data['field_text_hesla[und][0][format]'] = 'filtered_html';
+
         if (strpos($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
           $data['status'] = 0;
           $data['title_field[und][0][value]'] = 'Anglické heslo - Vyradené';
@@ -3715,9 +3746,10 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
       $data['field_popis[und][0][value]'] = $node->field_popis[LANGUAGE_NONE][0]['value'];
       $data['field_popis[und][0][format]'] = 'filtered_html';
       if (!empty($node->field_lexikalna_skupina_il[LANGUAGE_NONE])) {
-        foreach ($node->field_lexikalna_skupina_il[LANGUAGE_NONE] as $value) {
-          $terms[] = $value['name'];
-        }
+            foreach ($node->field_lexikalna_skupina_il[LANGUAGE_NONE] as $value) {
+              $term = taxonomy_term_load($value['tid']);
+              $terms[] = $term->name;
+            }
         $data['field_lexikalna_skupina_il[und]'] = implode(', ', $terms);
       }
       if (strpos($node->field_lexikalna_skupina_il[LANGUAGE_NONE][0]['name'], '(EN)') !== false) {
@@ -3739,7 +3771,6 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
     if ($attribute) {
       $data['field_atributy[und][0][value]'] = $attribute;
     }
-
     curl_setopt($curl, CURLOPT_HTTPHEADER, [
       'Accept: application/json',
       'X-CSRF-Token: ' . $login['token'],
