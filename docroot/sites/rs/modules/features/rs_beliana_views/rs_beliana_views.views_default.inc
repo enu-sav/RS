@@ -17678,6 +17678,14 @@ function rs_beliana_views_views_default_views() {
         'log' => 0,
       ),
     ),
+    'action::beliana_remove_link_no_arrow' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::reset_importovane_and_link_transfer' => array(
       'selected' => 1,
       'postpone_processing' => 0,

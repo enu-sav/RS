@@ -586,7 +586,41 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
     ],
+    'beliana_remove_link_no_arrow' => [    // rs only
+      'type' => 'entity',
+      'label' => "Odstrániť odkazy bez šípky",
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['changes_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => TRUE,
+    ],
   ];
+}
+
+/**
+ * Callback for `beliana_remove_link_no_arrow` action.
+ *
+ * Use only in the book editorial system
+ * Links with no arrow are not transferred to the book and must be removed. 
+ * This action should be run per 'subor' after its articles are fetched to the web editorial system
+ */
+function beliana_remove_link_no_arrow(&$node, $context) {
+  # remove links without an arrow from text of articles 
+  $link = l($values["node"]->title, $values["node"]->path['source']);
+  if (in_array($node->type, ['ilustracia'])) {
+      return;
+  }
+  if (variable_get('rs_api_type') != 'webrs') {    #We are in the book system
+    drupal_set_message("$link: Akcia sa používa len v knižnom RS. Heslo nebolo zmenené");
+  }
+  $rslt = _beliana_remove_links_no_arrow($node, true);
+  if ($rslt) {
+    node_save($node);
+    $link = l($node->title, $node->path['source']);
+    $to_remove = implode(", ",$rslt);
+    drupal_set_message("V hesle $link boli odstránené odkazy bez šípky: $to_remove", 'status');
+  }
 }
 
 /**
