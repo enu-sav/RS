@@ -1972,10 +1972,12 @@ function beliana_node_presave($node) {
         $node->field_datum_autorovho_textu = [LANGUAGE_NONE => [['value' => date('Y/m/d')]]];
         $node->log = $node->log . ", vyplnené pole Vyplatiť";
     } else {
-        #Remove links without an arrow if no changes are remembered
+        #Warn about links without an arrow if no changes are remembered
         $rslt = _beliana_remove_links_no_arrow($node);
         if ($rslt) {
-          drupal_set_message('V hesle <a href="/' . $node->path['alias'] . '">' . $node->title . "</a> boli odstránené odkazy bez šípky: " . implode(", ",$rslt), 'status');
+          $link = l($node->title, $node->path['source']);
+          $to_remove = implode(", ",$rslt);
+          drupal_set_message("V hesle $link sa nachádzajú odkazy bez šípky: $to_remove. V knihe nebudú uvedené a neskôr budú z textu hesla odstránené." , 'status');
         }
     }
   } else {  // we are in the web system

@@ -199,7 +199,7 @@ function beliana_merge(&$entity, $context = array()) {
     $term = array_shift($term);
     $master->field_lexikalna_skupina[LANGUAGE_NONE][]['tid'] = $term->tid;
     workbench_moderation_moderate($master, 'zlucene');
-    # Synchtonize to the web editorial system
+    # Synchronize to the web editorial system
     if ($response = beliana_api_rest_create_node($master, 'rs', "Zlúčené heslo:", "Zlúčené heslo")) {
       $master->field_remote_id[LANGUAGE_NONE][0]['value'] = $response->nid;
     }
@@ -291,7 +291,7 @@ function modify_links_merged(&$node) {
   if lite changes are remembered, return 'false'
   return list of the changed links, if any
  */
-function _beliana_remove_links_no_arrow($node) {
+function _beliana_remove_links_no_arrow($node, $remove=false) {
   $text = $node->field_text_hesla['und'][0]['value'];
   #Ak má zmeny, tak neodstraňovať a vrátiť false
   if (strpos($text, "ice-ins") or strpos($text, "ice-del")) {
@@ -321,8 +321,10 @@ function _beliana_remove_links_no_arrow($node) {
   }
  
   # remove the links
-  $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
-  $node->field_text_hesla['und'][0]['value'] = $text;
+  if ($remove) {
+    $text = preg_replace('/([^⬈➔]) <a[^>]*>([^<]*)<\/a>/', '\1 \2', $text);
+    $node->field_text_hesla['und'][0]['value'] = $text;
+  }
   return $matches[1];
 }
 
@@ -518,12 +520,14 @@ function rs_beliana_workflow_reaction(&$form, &$form_state) {
       node_save($values['node']);
       return;
     }
-    # remove links without an arrow from text of artices 
+    # remove links without an arrow from text of articles 
     if (in_array($new_state, ['na_zalomenie'])) {
-        $changed = _beliana_remove_links_no_arrow($values['node']);
-        if ($changed) {
+        $rslt = _beliana_remove_links_no_arrow($values['node'], true);
+        if ($rslt) {
           node_save($values['node']);
-          drupal_set_message('V hesle <a href="/' . $values['node']->path['alias'] . '">' . $values['node']->title . "</a> boli odstránené odkazy bez šípky", 'status');
+          $link = l($values["node"]->title, $values["node"]->path['source']);
+          $to_remove = implode(", ",$rslt);
+          drupal_set_message("V hesle $link boli odstránené odkazy bez šípky: $to_remove", 'status');
         }
     }
     # remove links from text of artices in state 'vyradene'
