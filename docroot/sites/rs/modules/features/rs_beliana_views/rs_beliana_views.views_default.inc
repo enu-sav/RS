@@ -18364,7 +18364,7 @@ function rs_beliana_views_views_default_views() {
       'title' => 'Áno',
       'operator' => '>=',
       'value' => array(
-        'value' => '553661',
+        'value' => '553890',
         'min' => '',
         'max' => '',
       ),
