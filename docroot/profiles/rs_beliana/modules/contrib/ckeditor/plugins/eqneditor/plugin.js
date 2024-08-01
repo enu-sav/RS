@@ -16,7 +16,7 @@ CKEDITOR.plugins.add( 'eqneditor', {
 	
 	init : function(editor)
 	{		
-	  var host='latex.codecogs.com';
+	  var host='legacy.codecogs.com';
 	  var http=('https:' == document.location.protocol ? 'https://' : 'http://');
 			
 		// First make sure we have loaded the necessary scripts
