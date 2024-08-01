@@ -223,7 +223,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'jquery_update_latest_version_jquery_migrate';
-  $strongarm->value = '3.5.0';
+  $strongarm->value = '3.5.2';
   $export['jquery_update_latest_version_jquery_migrate'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -237,7 +237,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'jquery_update_latest_versions_checked';
-  $strongarm->value = 1721074214;
+  $strongarm->value = 1722250801;
   $export['jquery_update_latest_versions_checked'] = $strongarm;
 
   $strongarm = new stdClass();
