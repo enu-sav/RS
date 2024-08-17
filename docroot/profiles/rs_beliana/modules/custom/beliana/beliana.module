@@ -3607,6 +3607,8 @@ function beliana_clean_tags($node, $text, $where) {
 function eqneditor2mathjax($html)
 {
     #<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
+    //Since 2024 the eqneditor plugin inserts "latex.oncodecogs.com" instead of "latex.codecogs.com"
+    $html = str_replace("oncodecogs.com",  "codecogs.com", $html);
     if (strpos($html, "latex.codecogs.com")) {
         #The U modifier enforces nongreedy matching
         $rexp = '#<img alt="([^"]*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
