@@ -15262,7 +15262,7 @@ Ak chcete zobraziť heslá, ktoré ste už komentovali, zadajte svoje používat
   $handler->display->display_options['filters']['field_vyplatit_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
-  $handler->display->display_options['path'] = 'vsetky-operacie-heslo';
+  $handler->display->display_options['path'] = 'vsetky-operacie';
   $handler->display->display_options['menu']['title'] = 'Prehľad';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';

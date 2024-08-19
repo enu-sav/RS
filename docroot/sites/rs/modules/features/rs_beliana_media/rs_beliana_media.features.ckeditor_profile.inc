@@ -18,7 +18,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'Undo\',\'Redo\'],
     [\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'EqnEditor\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    [\'Table\',\'BGColor\',\'EqnEditor\',\'SpecialChar\',\'Image\'],
     [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
 ]',
         'expand' => 't',
