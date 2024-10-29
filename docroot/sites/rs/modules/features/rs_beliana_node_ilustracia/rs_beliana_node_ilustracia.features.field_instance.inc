@@ -1465,7 +1465,7 @@ Nevkladať dva jpg obrázky alebo spolu jpg a png.',
         'label' => 'inline',
         'module' => 'file',
         'settings' => array(),
-        'type' => 'file_url_plain',
+        'type' => 'file_default',
         'weight' => 6,
       ),
       'export' => array(
