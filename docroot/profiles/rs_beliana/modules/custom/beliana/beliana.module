@@ -392,7 +392,7 @@ function beliana_users_list() {
  */
 function beliana_action_info() {
   return [
-    'beliana_assign_author' => [    // rs and webrs
+    'beliana_assign_author' => [    // rs and webrs, article will be authored by Author
       'type' => 'entity',
       'label' => 'Určiť autora a priradiť autorovi',
       'configurable' => TRUE,
@@ -411,7 +411,7 @@ function beliana_action_info() {
       'pass rows' => FALSE,
       'permissions' => ['administer taxonomy'],
     ],
-    'beliana_assign_corrector' => [ // rs and webrs
+    'beliana_assign_corrector' => [ // rs and webrs, article was authored by an Author
       'type' => 'entity',
       'label' => 'Určiť autora a priradiť redaktorovi',
       'configurable' => TRUE,
@@ -419,6 +419,15 @@ function beliana_action_info() {
       'behavior' => ['create_property'],
       'vbo_configurable' => FALSE,
       'pass rows' => TRUE,
+    ],
+    'beliana_creates_editor' => [ // rs and webrs, article will be authored by Redaktor
+      'type' => 'node',
+      'label' => 'Authored by editor',
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['create_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
     ],
     'beliana_assign_consultant' => [    // rs and webrs
       'type' => 'entity',
@@ -584,6 +593,7 @@ function beliana_action_info() {
  * Callback for `beliana_order_article_assign_editor` action.
  *
  * Changes workflow status to `U redaktora`.
+ * Called from the "Objednané' view
  */
 function beliana_order_article_assign_editor(&$node, $context) {
   if ($user = user_load($node->uid)) {
@@ -597,6 +607,7 @@ function beliana_order_article_assign_editor(&$node, $context) {
  * Callback for `beliana_order_article_assign_author` action.
  *
  * Changes workflow status to `U autora`.
+ * Called from the "Objednané' view
  */
 function beliana_order_article_assign_author(&$node, $context) {
   if ($user = user_load($node->uid)) {
@@ -1140,6 +1151,18 @@ function beliana_assign_author(&$node, $context) {
 }
 
 /**
+ * Callback for `beliana_creates_editor` action.
+ *
+ * Assigns selected user as node author and
+ * changes workflow status to `u_autora`.
+ *
+ * @inheritdoc
+ */
+function beliana_creates_editor(&$node, $context) {
+  _beliana_assign_user($node);  #empty $context: current editor will be used
+}
+
+/**
  * Callback for `beliana_unassign_author` action.
  *
  * Unassign user from node author and
@@ -1233,7 +1256,7 @@ function beliana_assign_corrector_form($form, &$form_state) {
  * @inheritdoc
  */
 function beliana_assign_corrector_validate($form, &$form_state) {
-  _beliana_validate_assign_user_form($form_state, ["Autor", "Redaktor"]);
+  _beliana_validate_assign_user_form($form_state, ["Autor"]);
 }
 
 /**
@@ -2526,7 +2549,16 @@ function _beliana_submit_assign_user_form($form_state, $state) {
  * @throws \Exception
  *
  */
-function _beliana_assign_user(&$node, $context) {
+function _beliana_assign_user(&$node, $context = Null) {
+  if (!$context) {  #called by beliana_creates_editor, node to be assined to the current editor, who authors the article
+      global $user;
+      $node->uid = $user->uid;
+      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Redaktor';
+      $node->log = 'Priradené na vypracovanie redaktorovi: ' . $user->name;
+      node_save($node);
+      workbench_moderation_moderate($node, "needs_review");
+      return;
+  }
   if ($user = user_load_by_name($context['user'])) {
     // create array of node's categories
     $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
@@ -2548,10 +2580,14 @@ function _beliana_assign_user(&$node, $context) {
     // use field_redaktori_zluceneho for that
     if ($context['status'] === 'u_konzultanta') {
       $node->field_uid_autora['und'][0]['value'] = $node->uid;
+    } else {
+      # from 11.2024: We set field_vyplatit to Vyplatené
+      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené';
     }
     $node->uid = $user->uid;
     $new_state = $context['status'];
     $node->log = 'Priradené autorovi: ' . $user->name;
+    node_save($node);
     workbench_moderation_moderate($node, $new_state);
   }
 }
