@@ -63,7 +63,6 @@ function rs_beliana_taxonomy_user_default_permissions() {
     'name' => 'edit terms in lexikalne_skupiny',
     'roles' => array(
       'administrátor' => 'administrátor',
-      'useradmin' => 'useradmin',
     ),
     'module' => 'taxonomy',
   );

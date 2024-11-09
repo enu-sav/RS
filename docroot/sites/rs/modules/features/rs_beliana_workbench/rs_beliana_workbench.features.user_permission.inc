@@ -397,6 +397,7 @@ function rs_beliana_workbench_user_default_permissions() {
   $permissions['edit revisions in any state'] = array(
     'name' => 'edit revisions in any state',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'administrátor' => 'administrátor',
     ),
     'module' => 'workbench_state_access',
