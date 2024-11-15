@@ -315,6 +315,7 @@ function beliana_sync_sync($nid, &$context) {
 
     $info_published = _extract_published_info($node)._extract_updated_info($node);
 
+    $language = "";
     foreach($node->field_lexikalna_skupina["und"] as $ls) {
       $term = taxonomy_term_load($ls['tid']);
       if (strpos($term->name, '(EN)') !== false) {
@@ -458,6 +459,7 @@ function beliana_sync_check_lexical_groups(&$skip, $node, $condition, $error_mes
   $term_lexikalna_skupina = taxonomy_term_load($node->field_lexikalna_skupina[LANGUAGE_NONE][0]['tid']);
   $is_lexikalna_skupina = strpos($term_lexikalna_skupina->name, $condition) !== false;
 
+ if ($node->field_doplnkova_ls) {
   foreach ($node->field_doplnkova_ls[LANGUAGE_NONE] as $doplnkova_ls) {
     $term_doplnkova_ls = taxonomy_term_load($doplnkova_ls['tid']);
     $is_doplnkova_ls_name = strpos($term_doplnkova_ls->name, $condition) !== false;
@@ -467,7 +469,9 @@ function beliana_sync_check_lexical_groups(&$skip, $node, $condition, $error_mes
       $skip = TRUE;
     }
   }
+ }
 
+ if ($node->field_ilustracia) {
   foreach ($node->field_ilustracia[LANGUAGE_NONE] as $illustration) {
     $ilu_generic_node = node_load($illustration['target_id']);
     if ($ilu_generic_node) {
@@ -481,6 +485,7 @@ function beliana_sync_check_lexical_groups(&$skip, $node, $condition, $error_mes
       }
     }
   }
+ }
 
   return $skip;
 }
