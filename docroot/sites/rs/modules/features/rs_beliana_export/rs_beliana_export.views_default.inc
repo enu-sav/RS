@@ -91,64 +91,6 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['id'] = 'field_na_zoradenie_value';
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['table'] = 'field_data_field_na_zoradenie';
   $handler->display->display_options['sorts']['field_na_zoradenie_value']['field'] = 'field_na_zoradenie_value';
-  /* Filter criterion: Workbench Moderation: Stav */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'na_zalomenie' => 'na_zalomenie',
-    'publikovane_na_webe' => 'publikovane_na_webe',
-    'zverejnene_oprava' => 'zverejnene_oprava',
-    'zverejnene_vratene' => 'zverejnene_vratene',
-    'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
-    'pozdr_an_' => 'pozdr_an_',
-    'na_zverejnenie' => 'na_zverejnenie',
-    'u_vyst_redaktora_2' => 'u_vyst_redaktora_2',
-    'u_vyst_redaktora_3' => 'u_vyst_redaktora_3',
-    'u_vyst_redaktora_4' => 'u_vyst_redaktora_4',
-    'u_v_st_redaktora_5' => 'u_v_st_redaktora_5',
-    'zlucene' => 'zlucene',
-    '1_korektura' => '1_korektura',
-    '2_korekt_ra' => '2_korekt_ra',
-    'u_jaz_redaktora_2' => 'u_jaz_redaktora_2',
-    'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
-  );
-  $handler->display->display_options['filters']['state']['group'] = 1;
-  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
-  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    9 => 0,
-    30 => 0,
-    31 => 0,
-    27 => 0,
-    29 => 0,
-    18 => 0,
-    10 => 0,
-    5 => 0,
-    4 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    3 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-    26 => 0,
-    28 => 0,
-  );
-  $handler->display->display_options['filters']['state']['expose']['reduce'] = TRUE;
   /* Filter criterion: Taxonomy Entity Index: Has taxonomy terms on Uzol  (with depth and indexed in taxonomy_entity_index) */
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['id'] = 'taxonomy_entity_index_tid_depth';
   $handler->display->display_options['filters']['taxonomy_entity_index_tid_depth']['table'] = 'node';
@@ -303,7 +245,7 @@ function rs_beliana_export_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Krátky popis';
-  $handler->display->display_options['header']['area']['content'] = 'Pomocou nastavení vyberte požadované heslá, a potom kliknite na oranžové tlačidlo HTML, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa stránka vo formáte HTML, ktorá sa podľa typu a nastavení prehliadača buď priamo v prehliadači zobrazí alebo prehliadač ponúkne inú možnosť. Stránku môžete uložiť do súboru, ktorý môžete otvoriť v textovom editore a tam upraviť, vytlačiť alebo niekomu poslať. Vytvorenú stránku môžete vytlačiť aj priamo z prehliadača. Vybrané heslá sa zobrazia po 20-tich, exportujú sa však všetky vybrané heslá. Povinne treba zadať práve jeden súbor.';
+  $handler->display->display_options['header']['area']['content'] = 'Zvoľte súbor na exportovanie, kliknite na <strong>Použiť</strong, a potom kliknite na oranžové tlačidlo DOC, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa súbor <strong>export_sadzac.html</strong>, ten uložte a spracujte programom <strong>konverzia.sh</strong>.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['path'] = 'export-na-sadzbu';
   $handler->display->display_options['menu']['type'] = 'normal';
@@ -345,14 +287,13 @@ function rs_beliana_export_views_default_views() {
     t('Zobrazenie po @per_page položkách, @start - @end z @total'),
     t('Tabuľka pre geografické heslá: [field_table]'),
     t('Ilustrácie'),
-    t('Stav'),
     t('Lexikálna skupina'),
     t('Názov'),
     t('Súbor'),
     t('Page'),
     t('Exportovanie hesiel (sadzba)'),
     t('Krátky popis'),
-    t('Pomocou nastavení vyberte požadované heslá, a potom kliknite na oranžové tlačidlo HTML, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa stránka vo formáte HTML, ktorá sa podľa typu a nastavení prehliadača buď priamo v prehliadači zobrazí alebo prehliadač ponúkne inú možnosť. Stránku môžete uložiť do súboru, ktorý môžete otvoriť v textovom editore a tam upraviť, vytlačiť alebo niekomu poslať. Vytvorenú stránku môžete vytlačiť aj priamo z prehliadača. Vybrané heslá sa zobrazia po 20-tich, exportujú sa však všetky vybrané heslá. Povinne treba zadať práve jeden súbor.'),
+    t('Zvoľte súbor na exportovanie, kliknite na <strong>Použiť</strong, a potom kliknite na oranžové tlačidlo DOC, ktoré sa nachádza celkom dolu vľavo. Vytvorí sa súbor <strong>export_sadzac.html</strong>, ten uložte a spracujte programom <strong>konverzia.sh</strong>.'),
     t('Data export'),
   );
   $export['export_sadzac'] = $view;
