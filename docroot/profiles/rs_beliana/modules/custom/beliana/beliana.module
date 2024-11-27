@@ -422,7 +422,7 @@ function beliana_action_info() {
     ],
     'beliana_creates_editor' => [ // rs and webrs, article will be authored by Redaktor
       'type' => 'node',
-      'label' => 'Authored by editor',
+      'label' => t('Authored by editor'),
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
