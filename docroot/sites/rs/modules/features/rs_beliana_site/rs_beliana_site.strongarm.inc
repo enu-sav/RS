@@ -230,14 +230,14 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'jquery_update_latest_version_jqueryui';
-  $strongarm->value = '1.14.0';
+  $strongarm->value = '1.14.1';
   $export['jquery_update_latest_version_jqueryui'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'jquery_update_latest_versions_checked';
-  $strongarm->value = 1730214001;
+  $strongarm->value = 1732219201;
   $export['jquery_update_latest_versions_checked'] = $strongarm;
 
   $strongarm = new stdClass();
