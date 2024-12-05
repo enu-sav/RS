@@ -33,14 +33,9 @@ CKEDITOR.plugins.add('lite-fix', {
             event.cancel();
         });
 
-        // if plugin 'eqneditor' is enabled, convert mathjax equations to codecogs <img...>
+        // if plugin 'eqneditor' 'enumath' is enabled, convert mathjax equations to <img...>
         editor.on('instanceReady', function(event) { 
-            // if the eqneditor (codecogs) plugin is enabled
-            if (event.editor.plugins.eqneditor) {
-                var data = event.editor.getData();
-                var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
-                // replace owing to eqneditor limitations
-                if ( data.match(rexp)) {
+            function fix_math(data) {
                     var fixes1 = {
                         "\\gt{": ">{",
                         "\\lt{": "<{",
@@ -121,7 +116,7 @@ CKEDITOR.plugins.add('lite-fix', {
                     };
 
                     var math_exp = /\\\(.*?\\\)/g;
-                    //spec_char musst contain all keys of fixes2 
+                    //spec_char must contain all keys of fixes2 
                     var spec_char = /[∈∉°◦≤≥´’–−—∅⊂≠·×⟨⟩▪αβγδϵεζηθϑικϰλμνξπρϱσςτυϕφχψωΓΔΘΛΞΠΣϒΦΨΩ]/g;
                     var math_matches = data.match(math_exp);
                     var to_replace = [];
@@ -146,18 +141,29 @@ CKEDITOR.plugins.add('lite-fix', {
                     for (var key in to_replace) {
                         data = data.replaceAll(key, to_replace[key]);
                     }
-                    
+                return data;
+            } // function fix_math(data)
+
+            // if the eqneditor (codecogs) plugin is enabled
+            if (event.editor.plugins.enumath) {
+                var data = event.editor.getData();
+
+                // check if there are equation in the text
+                var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
+                // replace owing to eqneditor limitations
+                if ( data.match(rexp)) {
+                    data = fix_math(data);
 
                     // replace mathjax equations by codecogs image
                     // if the mathjax plugin is not enabled, 'class="math-tex"' is removed
                     var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
-                    //var rep = '<img src="https:\/\/latex.codecogs.com\/gif.latex?$1" title="$1" \/>';
-                    var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/gif.latex?$1" \/>';
+                    //var rep = '<img src="https:\/\/latex.codecogs.com\/svg.latex?$1" title="$1" \/>';
+                    var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/svg.latex?$1"  style="vertical-align:middle"\/>';
                     var data = data.replace(rexp,rep);
                     event.editor.setData(data);
                 }
-            }
-        });
+            } //if (event.editor.plugins.enumath)
+        }); // editor.on('instanceReady', function(event) {})
 
         // cancel key-press event SHIFT-Enter nad CTRL-X
 	    // SHIFT-ENTER: inserts <br /> (we do not want this)
