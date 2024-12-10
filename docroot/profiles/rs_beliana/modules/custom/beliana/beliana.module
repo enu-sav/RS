@@ -3643,13 +3643,20 @@ function beliana_clean_tags($node, $text, $where) {
 function eqneditor2mathjax($html)
 {
     #<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
+    #<img alt="x" src="https://math.vercel.app?from=x" style="vertical-align:middle" />
     //Since 2024 the eqneditor plugin inserts "latex.oncodecogs.com" instead of "latex.codecogs.com"
+    //Since 12/2024 we can have both codecogs and vercel equations
     $html = str_replace("oncodecogs.com",  "codecogs.com", $html);
-    if (strpos($html, "latex.codecogs.com")) {
-        #The U modifier enforces nongreedy matching
-        $rexp = '#<img alt="([^"]*)" src="https://latex.codecogs.com/gif.latex\?.*" [/]>#U';
-        $rep =  '<span class="math-tex">\\(\1\\)</span>';
-        $html = preg_replace($rexp, $rep, $html);
+    $math_servers = array("latex.codecogs.com/", "math.vercel.app?");
+    foreach ($math_servers as $ms) {
+        if (strpos($html, $ms)) {
+            #The U modifier enforces nongreedy matching
+            $rexp = '#<img alt="([^"]*)" src="https://'.$ms.'.*" [/]>#U';
+            $rep =  '<span class="math-tex">\\(\1\\)</span>';
+            #$rexp = str_replace('#<img alt="([^"]*)" src="https://%ms%/svg.latex\?.*" [/]>#U', $ms);
+            #$rep =  '<span class="math-tex">\\(\1\\)</span>';
+            $html = preg_replace($rexp, $rep, $html);
+        }
     }
     return $html;
 }

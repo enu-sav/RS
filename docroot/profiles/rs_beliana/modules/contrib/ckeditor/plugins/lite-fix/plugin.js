@@ -33,7 +33,7 @@ CKEDITOR.plugins.add('lite-fix', {
             event.cancel();
         });
 
-        // if plugin 'eqneditor' 'enumath' is enabled, convert mathjax equations to <img...>
+        // if plugin 'eqneditor' or 'enumath' is enabled, convert mathjax equations to <img...>
         editor.on('instanceReady', function(event) { 
             function fix_math(data) {
                     var fixes1 = {
@@ -144,22 +144,43 @@ CKEDITOR.plugins.add('lite-fix', {
                 return data;
             } // function fix_math(data)
 
-            // if the eqneditor (codecogs) plugin is enabled
-            if (event.editor.plugins.enumath) {
-                var data = event.editor.getData();
 
-                // check if there are equation in the text
-                var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
-                // replace owing to eqneditor limitations
-                if ( data.match(rexp)) {
+            // check if there are equations in the text
+            var data = event.editor.getData();
+            var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
+            // replace owing to eqneditor limitations
+            if (data.match(rexp)) {
+                // if the eqneditor (codecogs) plugin is enabled
+                // select math style
+                var math_style = null; 
+                if (event.editor.plugins.eqneditor) {
+                    math_style = "codecogs";
+                } else if (event.editor.plugins.enumath) {
+                    math_style = event.editor.config.ENUMATH_EQUATION_ENGINE;
+                }
+
+                    //math_style = "codecogs";
+                console.log(data);
+                if (math_style) {
                     data = fix_math(data);
 
                     // replace mathjax equations by codecogs image
                     // if the mathjax plugin is not enabled, 'class="math-tex"' is removed
                     var rexp = /<span>\\\((.*?)\\\)<\/span>/gs;
                     //var rep = '<img src="https:\/\/latex.codecogs.com\/svg.latex?$1" title="$1" \/>';
-                    var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/svg.latex?$1"  style="vertical-align:middle"\/>';
-                    var data = data.replace(rexp,rep);
+                    if (math_style == "codecogs") {
+                        //<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
+                        var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/svg.latex?$1"  style="vertical-align:middle"\/>';
+                        var data = data.replace(rexp,rep);
+                    } else {
+                        //<img alt="x" src="https://math.vercel.app?from=x" style="vertical-align:middle" />
+                        //callback function needs to be used here, since $1 in the codecogs case is a regex placeholder, not a variable. 
+                        var data = data.replace(rexp, (match, group1) => {
+                            var group2 = group1.replaceAll("&lt;","<").replaceAll("&gt;",">").replaceAll("&amp;", "&");
+                            return `<img alt="${group1}" src="https://math.vercel.app?from=${encodeURIComponent(group2)}" style="vertical-align:middle" />`;
+                            });
+                    }
+                    //data = data.replaceAll("<", "XXLTXX");
                     event.editor.setData(data);
                 }
             } //if (event.editor.plugins.enumath)
