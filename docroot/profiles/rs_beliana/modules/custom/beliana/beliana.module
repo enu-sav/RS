@@ -1239,7 +1239,13 @@ function beliana_assign_author(&$node, $context) {
  * @inheritdoc
  */
 function beliana_creates_editor(&$node, $context) {
-  _beliana_assign_user($node);  #empty $context: current editor will be used
+  global $user;
+  $node->uid = $user->uid;
+  $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Redaktor';
+  $node->log = 'Priradené na vypracovanie redaktorovi: ' . $user->name;
+  node_save($node);
+  workbench_moderation_moderate($node, "needs_review");
+  return;
 }
 
 
@@ -2651,15 +2657,6 @@ function _beliana_submit_assign_user_form($form_state, $state) {
  *
  */
 function _beliana_assign_user(&$node, $context = Null) {
-  if (!$context) {  #called by beliana_creates_editor, node to be assined to the current editor, who authors the article
-      global $user;
-      $node->uid = $user->uid;
-      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Redaktor';
-      $node->log = 'Priradené na vypracovanie redaktorovi: ' . $user->name;
-      node_save($node);
-      workbench_moderation_moderate($node, "needs_review");
-      return;
-  }
   if ($user = user_load_by_name($context['user'])) {
     // create array of node's categories
     $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
