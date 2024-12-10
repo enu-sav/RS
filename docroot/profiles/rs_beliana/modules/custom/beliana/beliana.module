@@ -429,6 +429,15 @@ function beliana_action_info() {
       'vbo_configurable' => FALSE,
       'pass rows' => FALSE,
     ],
+    'beliana_link_article' => [ // rs and webrs, article is a link article
+      'type' => 'node',
+      'label' => t('Assign as link article'),
+      'configurable' => FALSE,
+      'triggers' => ['any'],
+      'behavior' => ['create_property'],
+      'vbo_configurable' => FALSE,
+      'pass rows' => FALSE,
+    ],
     'beliana_assign_consultant' => [    // rs and webrs
       'type' => 'entity',
       'label' => t('Assign to consultant'),
@@ -1225,12 +1234,31 @@ function beliana_assign_author(&$node, $context) {
  * Callback for `beliana_creates_editor` action.
  *
  * Assigns selected user as node author and
- * changes workflow status to `u_autora`.
+ * changes workflow status to 'needs_review' (U redaktora).
  *
  * @inheritdoc
  */
 function beliana_creates_editor(&$node, $context) {
   _beliana_assign_user($node);  #empty $context: current editor will be used
+}
+
+
+/**
+ * Callback for `beliana_link_article` action.
+ *
+ * Assigns selected user as node author and
+ * changes workflow status to 'needs_review' (U redaktora).
+ *
+ * @inheritdoc
+ */
+function beliana_link_article(&$node, $context) {
+  global $user;
+  $node->uid = $user->uid;
+  $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Odkazové';
+  $node->log = 'Odkazové heslo, priradené redaktorovi: ' . $user->name;
+  node_save($node);
+  workbench_moderation_moderate($node, "needs_review");
+  return;
 }
 
 /**
