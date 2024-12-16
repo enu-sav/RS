@@ -27,7 +27,8 @@ CKEDITOR.editorConfig = function (config) {
 //config.removePlugins = 'scayt,menubutton,contextmenu';
   config.browserContextMenuOnCtrl = true;
 // Values: 'vercel' or 'codecogs'. Plugin enumat then decides which engine url from enu_config.js to use
-  config.ENUMATH_EQUATION_ENGINE = 'vercel'; 
+//config.ENUMATH_EQUATION_ENGINE = 'vercel'; 
+  config.ENUMATH_EQUATION_ENGINE = 'codecogs'; 
   config.specialChars = [
     ['—', 'dlhá pomlčka: 1. na oddelenie definície od záhlavia, 2. členenie tematických odsekov v texte väčších hesiel'],
     ['–', 'stredná pomlčka, Alt + 2013: 1. číselné rozpätie (1959 – 60), 2. vlak premáva na úseku Bratislava – Malacky – Kúty.'],
