@@ -719,9 +719,9 @@ function beliana_order_article(&$node, $context) {
       '@autor' => $user->name,
     ];
 
-    if ($node->workbench_moderation['current']->state != 'zaradene') {
+    if (! in_array($node->workbench_moderation['current']->state, array('zaradene','needs_review', "u_autora"))) {
       $odkaz = '<a href="' . $base_url . '/node/' . $node->nid . '">' . $node->title . '</a>';
-      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené';
+      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené, U autora alebo U redaktora';
     }
 
     // Skip rules
