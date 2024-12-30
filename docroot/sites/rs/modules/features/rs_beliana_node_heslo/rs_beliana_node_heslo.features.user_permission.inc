@@ -242,25 +242,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_text_hesla'.
-  $permissions['create field_text_hesla'] = array(
-    'name' => 'create field_text_hesla',
-    'roles' => array(
-      'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-      'garant' => 'garant',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'create field_text_z_gh'.
   $permissions['create field_text_z_gh'] = array(
     'name' => 'create field_text_z_gh',
@@ -640,25 +621,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit field_text_hesla'.
-  $permissions['edit field_text_hesla'] = array(
-    'name' => 'edit field_text_hesla',
-    'roles' => array(
-      'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-      'garant' => 'garant',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit field_text_z_gh'.
   $permissions['edit field_text_z_gh'] = array(
     'name' => 'edit field_text_z_gh',
@@ -947,25 +909,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['edit own field_taxsubor'] = array(
     'name' => 'edit own field_taxsubor',
     'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit own field_text_hesla'.
-  $permissions['edit own field_text_hesla'] = array(
-    'name' => 'edit own field_text_hesla',
-    'roles' => array(
-      'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-      'garant' => 'garant',
-    ),
     'module' => 'field_permissions',
   );
 
@@ -1317,16 +1260,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_text_hesla'.
-  $permissions['view field_text_hesla'] = array(
-    'name' => 'view field_text_hesla',
-    'roles' => array(
-      'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view field_text_z_gh'.
   $permissions['view field_text_z_gh'] = array(
     'name' => 'view field_text_z_gh',
@@ -1616,25 +1549,6 @@ function rs_beliana_node_heslo_user_default_permissions() {
   $permissions['view own field_taxsubor'] = array(
     'name' => 'view own field_taxsubor',
     'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_text_hesla'.
-  $permissions['view own field_text_hesla'] = array(
-    'name' => 'view own field_text_hesla',
-    'roles' => array(
-      'Autor' => 'Autor',
-      'Jazykový redaktor 1' => 'Jazykový redaktor 1',
-      'Jazykový redaktor 2' => 'Jazykový redaktor 2',
-      'Konzultant' => 'Konzultant',
-      'Redaktor' => 'Redaktor',
-      'Výstupný redaktor 1' => 'Výstupný redaktor 1',
-      'Výstupný redaktor 2' => 'Výstupný redaktor 2',
-      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
-      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
-      'administrátor' => 'administrátor',
-      'garant' => 'garant',
-    ),
     'module' => 'field_permissions',
   );
 
