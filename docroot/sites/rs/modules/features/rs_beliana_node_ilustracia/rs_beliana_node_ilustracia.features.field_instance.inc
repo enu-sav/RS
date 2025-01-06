@@ -500,7 +500,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.',
+    'description' => 'Zadajte rovnakú lexikálnu skupinu, akú má zodpovedajúce heslo.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -536,7 +536,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'taxonomy',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
@@ -1981,7 +1981,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte text do popisu ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
   t('Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.');
-  t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
+  t('Zadajte rovnakú lexikálnu skupinu, akú má zodpovedajúce heslo.');
   t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');
   t('Zvoľte, kde má byť obrázok použitý. "Zobraziť na webe" možno zvoliť len vtedy, ak to licenčné podmienky diela umožňujú: <br />- Ak je v poli "Typ ilustrácie" uvedené "Vlastná ilustrácia EnÚ", "Voľné dielo", "Creative Commons" alebo "Logo, erb, zástava", alebo ak je ilustrácia vložená pomocou poľa "Obrázok - odkaz (návrh/náhľad)", tak dielo možno zobraziť na webe. <br />- V prípadoch "Autorské dielo" a "Muzeálny objekt" záleží na zmluve EnÚ s príslušnou inštitúciou. ');
