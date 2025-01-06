@@ -487,7 +487,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.',
+    'description' => 'Text určený pre autora, redaktora alebo grafika. Ak už v poli text je, nový text pridajte na začiatok.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -528,6 +528,28 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'label' => 'Komentár/inštrukcie',
     'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -548,7 +570,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.',
+    'description' => 'Zadajte rovnakú lexikálnu skupinu, akú má zodpovedajúce heslo.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -592,7 +614,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'taxonomy',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
@@ -601,7 +623,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 1,
     ),
-    'workbench_access_field' => TRUE,
+    'workbench_access_field' => 1,
   );
 
   // Exported field_instance: 'node-ilustracia-field_licencia1'.
@@ -1126,7 +1148,7 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
   $field_instances['node-ilustracia-field_obrazok_navrh_'] = array(
     'bundle' => 'ilustracia',
     'deleted' => 0,
-    'description' => 'Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.',
+    'description' => 'Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo prekreslí a obrázok vymení.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -2122,7 +2144,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
     'bundle' => 'ilustracia',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.',
+    'description' => 'Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať aj ďalší text, napr. "Ilustrácia1" a podobne.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2214,7 +2236,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
 ');
   t('Alternatívny text');
   t('Alternatívny text k ilustrácii určený pre nevidiacich. Netreba vypĺňať, ak text k ilustrácii má menej ako 125 znakov a neobsahuje formátovanie (napr. matematické rovnice).');
-  t('Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo alebo prekreslí a obrázok vymení.');
+  t('Autor alebo redaktor sem vloží návrh obrázka. V prípade potreby ho výtvarný redaktor upraví alebo prekreslí a obrázok vymení.');
   t('Comment');
   t('Držiteľ práv');
   t('Dátum prebratia obsahu');
@@ -2243,7 +2265,7 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Súbor');
   t('Súbory ilustrácie');
   t('Text k ilustrácii');
-  t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text existuje, nový text pridajte na začiatok.');
+  t('Text určený pre autora, redaktora alebo grafika. Ak už v poli text je, nový text pridajte na začiatok.');
   t('Typ CC licencie');
   t('Typ ilustrácie');
   t('URL autora diela alebo inštitúcie');
@@ -2259,8 +2281,8 @@ Ak je zaškrtnuté "Creative Commons alebo iná verejná licencia", treba vyplni
   t('Uveďte text do popisu ilustrácie ');
   t('Uveďte, kto je držiteľom práv licencovaného diela (informácia môže byť dostupná v príslušnej zmluve o použití). Držiteľ práv bude uvedený v oznámení o licencii (© autor)');
   t('Vložte originál rastrového obrázka (jpg, tif), <b>ak sa líši</b> od obrázka, ktorý bol vložený do poľa <i>Súbory ilustrácie</i>, napr. ak má väčšie rozlíšenie, nie je orezaný a pod.');
-  t('Zadajte rovnakú lexikálnu skupinu akú má zodpovedajúce heslo.');
-  t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať ďalší text, napr. "Ilustrácia1" a podobne.');
+  t('Zadajte rovnakú lexikálnu skupinu, akú má zodpovedajúce heslo.');
+  t('Zadajte rovnaký názov, ako je názov zodpovedajúceho hesla. Môžete pridať aj ďalší text, napr. "Ilustrácia1" a podobne.');
   t('Zaškrtnite, ak boli originál obrázka upravený (orezanie, zmena kontrastu, ...). V prípade licencií CC s atribútom No Derivates (ND, bez odvodeného obsahu) dielo nemožno modifikovať.');
   t('Zvoľte, kde má byť obrázok použitý. "Zobraziť na webe" možno zvoliť len vtedy, ak to licenčné podmienky diela umožňujú: <br />- Ak je v poli "Typ ilustrácie" uvedené "Vlastná ilustrácia EnÚ", "Voľné dielo", "Creative Commons" alebo "Logo, erb, zástava", alebo ak je ilustrácia vložená pomocou poľa "Obrázok - odkaz (návrh/náhľad)", tak dielo možno zobraziť na webe. <br />- V prípadoch "Autorské dielo" a "Muzeálny objekt" záleží na zmluve EnÚ s príslušnou inštitúciou. ');
 

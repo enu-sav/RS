@@ -35,6 +35,7 @@ features[field_instance][] = node-importovane_heslo-field_ilustracia
 features[field_instance][] = node-importovane_heslo-field_komentar_instrukcie
 features[field_instance][] = node-importovane_heslo-field_lexikalna_skupina
 features[field_instance][] = node-importovane_heslo-field_na_zoradenie
+features[field_instance][] = node-importovane_heslo-field_objednavka
 features[field_instance][] = node-importovane_heslo-field_pouzite_zdroje
 features[field_instance][] = node-importovane_heslo-field_povodny_autor
 features[field_instance][] = node-importovane_heslo-field_table
