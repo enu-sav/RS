@@ -479,8 +479,8 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -516,8 +516,8 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -662,8 +662,8 @@ function rs_beliana_site_user_default_permissions() {
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
     'roles' => array(
+      'Komentátor' => 'Komentátor',
       'administrátor' => 'administrátor',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
