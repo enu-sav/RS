@@ -18,7 +18,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'Undo\',\'Redo\'],
     [\'Bold\',\'Italic\',\'Format\',\'NumberedList\',\'BulletedList\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'BGColor\',\'EqnEditor\',\'SpecialChar\',\'Image\'],
+    [\'Table\',\'BGColor\',\'SpecialChar\',\'enumath\',\'Image\'],
     [\'lite-acceptall\',\'lite-rejectall\',\'lite-acceptone\',\'lite-rejectone\',\'lite-toggleshow\',\'lite-toggletracking\']
 ]',
         'expand' => 't',
@@ -101,14 +101,14 @@ function rs_beliana_media_ckeditor_profile_defaults() {
             ),
             'default' => 't',
           ),
-          'eqneditor' => array(
-            'name' => 'eqneditor',
-            'desc' => 'Plugin file: eqneditor',
-            'path' => '%plugin_dir%eqneditor/',
+          'enumath' => array(
+            'name' => 'enumath',
+            'desc' => 'Plugin file: enumath',
+            'path' => '%plugin_dir%enumath/',
             'buttons' => array(
-              'EqnEditor' => array(
-                'label' => 'EqnEditor',
-                'icon' => 'icons/eqneditor.png',
+              'enumath' => array(
+                'label' => 'enumath',
+                'icon' => 'icons/enumath.png',
               ),
             ),
             'default' => 'f',

@@ -15,7 +15,9 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'comment_node_heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Komentujte len heslá, ku ktorým sa dostanete cez menu <strong>Komentovať</strong> (hore na lište).<br />
+Z textu hesla vyššie môžete kopírovať pomocou CRTL-C/CTRL-V, matematické rovnice však nemusia byť skopírované správne.<br />
+Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -28,12 +30,35 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'entity_type' => 'comment',
     'field_name' => 'comment_body',
     'label' => 'Comment',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
-      'text_processing' => 1,
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
@@ -41,6 +66,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'text_textarea',
       'weight' => 0,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-heslo-field_atributy'.
@@ -717,7 +743,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
     'bundle' => 'heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Text určený pre autora, redaktora alebo výstupnú redakciu. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.',
+    'description' => 'Text určený pre autora redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -1941,6 +1967,9 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Dátum vyplatenia');
   t('Dátum výročia');
   t('Ilustrácie');
+  t('Komentujte len heslá, ku ktorým sa dostanete cez menu <strong>Komentovať</strong> (hore na lište).<br />
+Z textu hesla vyššie môžete kopírovať pomocou CRTL-C/CTRL-V, matematické rovnice však nemusia byť skopírované správne.<br />
+Ak je text v poriadku, uveďte <strong>Text OK</strong>.');
   t('Komentár/inštrukcie/návrh/zdôvodnenie');
   t('Lexikálna skupina');
   t('Na zoradenie');
@@ -1965,7 +1994,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Tabuľka pre geografické heslá');
   t('Text hesla');
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
-  t('Text určený pre autora, redaktora alebo výstupnú redakciu. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
+  t('Text určený pre autora redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
   t('UID autora');
   t('Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).');
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');

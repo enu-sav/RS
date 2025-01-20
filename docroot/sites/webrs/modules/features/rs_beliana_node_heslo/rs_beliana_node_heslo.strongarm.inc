@@ -14,7 +14,7 @@ function rs_beliana_node_heslo_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_heslo';
-  $strongarm->value = 'edit-workflow';
+  $strongarm->value = 'edit-comment';
   $export['additional_settings__active_tab_heslo'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -49,14 +49,14 @@ function rs_beliana_node_heslo_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_heslo';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['comment_heslo'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_heslo';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_preview_heslo'] = $strongarm;
 
   $strongarm = new stdClass();
