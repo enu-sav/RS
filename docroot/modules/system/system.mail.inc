@@ -21,10 +21,8 @@ class DefaultMailSystem implements MailSystemInterface {
   public function format(array $message) {
     // Join the body array into one string.
     $message['body'] = implode("\n\n", $message['body']);
-    // Convert any HTML to plain-text.
+    // Convert any HTML to plain-text and wrap the mail body for sending.
     $message['body'] = drupal_html_to_text($message['body']);
-    // Wrap the mail body for sending.
-    $message['body'] = drupal_wrap_mail($message['body']);
     return $message;
   }
 
@@ -64,12 +62,19 @@ class DefaultMailSystem implements MailSystemInterface {
     $mail_body = preg_replace('@\r?\n@', $line_endings, $message['body']);
     // For headers, PHP's API suggests that we use CRLF normally,
     // but some MTAs incorrectly replace LF with CRLF. See #234403.
-    $mail_headers = join("\n", $mimeheaders);
+    $headers_line_endings = variable_get('mail_headers_line_endings', "\n");
+    if (defined('PHP_VERSION_ID') && PHP_VERSION_ID >= 80000 ) {
+      // PHP 8+ requires headers to be separated by CRLF, see:
+      // - https://bugs.php.net/bug.php?id=81158
+      // - https://github.com/php/php-src/commit/6983ae751cd301886c966b84367fc7aaa1273b2d#diff-c6922cd89f6f75912eb377833ca1eddb7dd41de088be821024b8a0e340fed3df
+      $headers_line_endings = variable_get('mail_headers_line_endings', "\r\n");
+    }
+    $mail_headers = join($headers_line_endings, $mimeheaders);
 
     // We suppress warnings and notices from mail() because of issues on some
     // hosts. The return value of this method will still indicate whether mail
     // was sent successfully.
-    if (!isset($_SERVER['WINDIR']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Win32') === FALSE) {
+    if (!isset($_SERVER['WINDIR']) && (!isset($_SERVER['SERVER_SOFTWARE']) || strpos($_SERVER['SERVER_SOFTWARE'], 'Win32') === FALSE)) {
       // We validate the return path, unless it is equal to the site mail, which
       // we assume to be safe.
       if (isset($message['Return-Path']) && !ini_get('safe_mode') && (variable_get('site_mail', ini_get('sendmail_from')) === $message['Return-Path'] || self::_isShellSafe($message['Return-Path']))) {
