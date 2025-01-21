@@ -61,3 +61,6 @@ docroot/sites/*/files
 docroot/sites/*/private
 
 docroot/profiles/*/modules/contrib/ckeditor/plugins/flite
+
+/freemap-snapshot/
+/minimap-creator/
