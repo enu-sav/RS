@@ -16,7 +16,9 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'bundle' => 'comment_node_importovane_heslo',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Komentujte len heslá, ku ktorým sa dostanete cez menu <strong>Komentovať</strong> (hore na lište).<br />
+Z textu hesla vyššie môžete kopírovať pomocou CRTL-C/CTRL-V, matematické rovnice však nemusia byť skopírované správne.<br />
+Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -29,12 +31,35 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
     'entity_type' => 'comment',
     'field_name' => 'comment_body',
     'label' => 'Comment',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
-      'text_processing' => 1,
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
@@ -42,6 +67,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'type' => 'text_textarea',
       'weight' => 0,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-importovane_heslo-field_atributy'.
@@ -101,6 +127,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
+          'custom_date_format' => '',
           'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
@@ -163,6 +190,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
+          'custom_date_format' => '',
           'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
@@ -226,6 +254,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
+          'custom_date_format' => '',
           'format_type' => 'long',
           'fromto' => 'both',
           'multiple_from' => '',
@@ -662,6 +691,75 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 8,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-importovane_heslo-field_objednavka'.
+  $field_instances['node-importovane_heslo-field_objednavka'] = array(
+    'bundle' => 'importovane_heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Nevypĺňať – vyplní sa automaticky pri vytvorení objednávky.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_objednavka',
+    'label' => 'Objednávka',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -1294,11 +1392,16 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Dátum vyplatenia');
   t('Dátum výročia');
   t('Ilustrácie');
+  t('Komentujte len heslá, ku ktorým sa dostanete cez menu <strong>Komentovať</strong> (hore na lište).<br />
+Z textu hesla vyššie môžete kopírovať pomocou CRTL-C/CTRL-V, matematické rovnice však nemusia byť skopírované správne.<br />
+Ak je text v poriadku, uveďte <strong>Text OK</strong>.');
   t('Komentár/inštrukcie');
   t('Lexikálna skupina');
   t('Na zoradenie');
+  t('Nevypĺňať – vyplní sa automaticky pri vytvorení objednávky.');
   t('Názov');
   t('Názov súboru sa doplní automaticky na základe názvu hesla');
+  t('Objednávka');
   t('Pole je <strong>potrebné vyplniť</strong> len vtedy, ak ho chcete zo stavu "U redaktora" odoslať do stavu "U výst. redaktora". Ide najmä o situáciu, keď heslo bolo prepracované autorom. V ostatných prípadoch môže zostať nevyplnené.
 Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte nič alebo zvoľte N/A.<br />
 Pri odosielaní hesla VR však pole musí byť vyplnené.<br /> 

@@ -1322,6 +1322,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'view field_text_hesla',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
