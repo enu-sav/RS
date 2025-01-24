@@ -169,6 +169,16 @@ function beliana_merge(&$entity, $context = array()) {
       }
     }
 
+    // Merge field_pouzite_zdroje
+    if (isset($entity->field_pouzite_zdroje[LANGUAGE_NONE][0]['value'])) {
+      if (!isset($master->field_pouzite_zdroje[LANGUAGE_NONE][0]['value']) || empty($master->field_pouzite_zdroje[LANGUAGE_NONE][0]['value'])) {
+        $master->field_pouzite_zdroje[LANGUAGE_NONE][0]['value'] = $entity->field_pouzite_zdroje[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $master->field_pouzite_zdroje[LANGUAGE_NONE][0]['value'] .= "," . $entity->field_pouzite_zdroje[LANGUAGE_NONE][0]['value'];
+      }
+    }
+
     $master->field_zlucene_z[LANGUAGE_NONE][]['target_id'] = $entity->nid;
     node_save($master);
 
