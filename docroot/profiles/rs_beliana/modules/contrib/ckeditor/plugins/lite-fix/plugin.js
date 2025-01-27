@@ -41,8 +41,8 @@ CKEDITOR.plugins.add('lite-fix', {
                         "\\lt{": "<{",
                         "\\gt ": ">",
                         "\\lt ": "<",
-                        "\\textrm": "\\mathrm",
-                        "\\text": "\\mathrm",
+                        //"\\textrm": "\\mathrm",
+                        //"\\text": "\\mathrm",
                         "\\\(\\\)": "",     //Blank equation
                         "\\\( \\\)": "",    //Blank equation
                     };
