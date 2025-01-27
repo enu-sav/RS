@@ -3687,7 +3687,7 @@ function eqneditor2mathjax($html)
     foreach ($math_servers as $ms) {
         if (strpos($html, $ms)) {
             #The U modifier enforces nongreedy matching
-            $rexp = '#<img alt="([^"]*)" src="https://'.$ms.'.*" [/]>#U';
+            $rexp = '#<img alt="([^"]*)" .* src="https://'.$ms.'.*" [/]>#U';
             $rep =  '<span class="math-tex">\\(\1\\)</span>';
             #$rexp = str_replace('#<img alt="([^"]*)" src="https://%ms%/svg.latex\?.*" [/]>#U', $ms);
             #$rep =  '<span class="math-tex">\\(\1\\)</span>';
