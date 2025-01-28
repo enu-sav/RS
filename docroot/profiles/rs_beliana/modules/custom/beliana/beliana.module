@@ -719,9 +719,9 @@ function beliana_order_article(&$node, $context) {
       '@autor' => $user->name,
     ];
 
-    if ($node->workbench_moderation['current']->state != 'zaradene') {
+    if (! in_array($node->workbench_moderation['current']->state, array('zaradene','needs_review', "u_autora"))) {
       $odkaz = '<a href="' . $base_url . '/node/' . $node->nid . '">' . $node->title . '</a>';
-      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené';
+      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené, U autora alebo U redaktora';
     }
 
     // Skip rules
@@ -1994,6 +1994,17 @@ function beliana_node_presave($node) {
       }
     }
     return;
+  }
+
+  // In the 'needs_review' (U redaktora) state one cannot set 'vyplatit" without order 
+  if ($node->workbench_moderation['current']->state == 'needs_review') {
+    if (!empty($node->field_vyplatit[LANGUAGE_NONE]) and 
+      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] === "Vyplatiť" and
+      empty($node->field_objednavka[LANGUAGE_NONE])) {
+        unset($node->field_vyplatit[LANGUAGE_NONE]);
+        unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE]);
+        drupal_set_message("V hesle ". l($node->title, $node->path['source']) . " bol odstránený záznam o vyplácaní autorskej odmeny, lebo heslu chýba objednávka. Heslo treba u autora najskôr objednať v ".l("Redakčný systém > Priradiť autora", "/admin/beliana/priradit-autora"), 'warning');
+    }
   }
 
   // update field_datum according to the text
@@ -3676,7 +3687,7 @@ function eqneditor2mathjax($html)
     foreach ($math_servers as $ms) {
         if (strpos($html, $ms)) {
             #The U modifier enforces nongreedy matching
-            $rexp = '#<img alt="([^"]*)" src="https://'.$ms.'.*" [/]>#U';
+            $rexp = '#<img alt="([^"]*)" .* src="https://'.$ms.'.*" [/]>#U';
             $rep =  '<span class="math-tex">\\(\1\\)</span>';
             #$rexp = str_replace('#<img alt="([^"]*)" src="https://%ms%/svg.latex\?.*" [/]>#U', $ms);
             #$rep =  '<span class="math-tex">\\(\1\\)</span>';
