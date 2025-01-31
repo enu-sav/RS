@@ -25,8 +25,28 @@ function title_install() {
 }
 
 /**
- * Implements hook_update_N.
- *
+ * Implements hook_disable().
+ */
+function title_disable() {
+  foreach (field_read_fields() as $field) {
+    if ($field['type'] !== 'taxonomy_term_reference') {
+      continue;
+    }
+
+    if ($field['settings']['options_list_callback'] !== 'title_taxonomy_allowed_values') {
+      continue;
+    }
+
+    $field['settings']['options_list_callback'] = '';
+    field_update_field($field);
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+
+/**
  * Make sure Title has a very high weight to be able to perform reverse
  * synchronization reliably.
  */
@@ -35,8 +55,6 @@ function title_update_7001() {
 }
 
 /**
- * Implements hook_update_N.
- *
  * Update title_auto_attach variables to the new format.
  */
 function title_update_7002() {
