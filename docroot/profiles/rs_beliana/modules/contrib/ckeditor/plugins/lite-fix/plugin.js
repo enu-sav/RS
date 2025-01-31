@@ -41,8 +41,8 @@ CKEDITOR.plugins.add('lite-fix', {
                         "\\lt{": "<{",
                         "\\gt ": ">",
                         "\\lt ": "<",
-                        "\\textrm": "\\mathrm",
-                        "\\text": "\\mathrm",
+                        //"\\textrm": "\\mathrm",
+                        //"\\text": "\\mathrm",
                         "\\\(\\\)": "",     //Blank equation
                         "\\\( \\\)": "",    //Blank equation
                     };
@@ -170,14 +170,14 @@ CKEDITOR.plugins.add('lite-fix', {
                     //var rep = '<img src="https:\/\/latex.codecogs.com\/svg.latex?$1" title="$1" \/>';
                     if (math_style == "codecogs") {
                         //<img alt="O" src="https://latex.codecogs.com/gif.latex?O" />
-                        var rep = '<img alt="$1" src="https:\/\/latex.codecogs.com\/svg.latex?$1"  style="vertical-align:middle"\/>';
+                        var rep = '<img alt="$1" class="enumath" src="https:\/\/latex.codecogs.com\/svg.latex?$1" />';
                         var data = data.replace(rexp,rep);
                     } else {
                         //<img alt="x" src="https://math.vercel.app?from=x" style="vertical-align:middle" />
                         //callback function needs to be used here, since $1 in the codecogs case is a regex placeholder, not a variable. 
                         var data = data.replace(rexp, (match, group1) => {
                             var group2 = group1.replaceAll("&lt;","<").replaceAll("&gt;",">").replaceAll("&amp;", "&");
-                            return `<img alt="${group1}" src="https://math.vercel.app?from=${encodeURIComponent(group2)}" style="vertical-align:middle" />`;
+                            return `<img alt="${group1}" class="enumath" src="https://math.vercel.app?from=${encodeURIComponent(group2)}" />`;
                             });
                     }
                     //data = data.replaceAll("<", "XXLTXX");

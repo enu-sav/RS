@@ -719,9 +719,9 @@ function beliana_order_article(&$node, $context) {
       '@autor' => $user->name,
     ];
 
-    if ($node->workbench_moderation['current']->state != 'zaradene') {
+    if (! in_array($node->workbench_moderation['current']->state, array('zaradene','needs_review', "u_autora"))) {
       $odkaz = '<a href="' . $base_url . '/node/' . $node->nid . '">' . $node->title . '</a>';
-      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené';
+      $error_message = 'Objednávanie hesla ' . $odkaz . ' zlyhalo, lebo nie je v stave Zaradené, U autora alebo U redaktora';
     }
 
     // Skip rules
@@ -1239,13 +1239,7 @@ function beliana_assign_author(&$node, $context) {
  * @inheritdoc
  */
 function beliana_creates_editor(&$node, $context) {
-  global $user;
-  $node->uid = $user->uid;
-  $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Redaktor';
-  $node->log = 'Priradené na vypracovanie redaktorovi: ' . $user->name;
-  node_save($node);
-  workbench_moderation_moderate($node, "needs_review");
-  return;
+  _beliana_assign_user($node);  #empty $context: current editor will be used
 }
 
 
@@ -2657,6 +2651,15 @@ function _beliana_submit_assign_user_form($form_state, $state) {
  *
  */
 function _beliana_assign_user(&$node, $context = Null) {
+  if (!$context) {  #called by beliana_creates_editor, node to be assined to the current editor, who authors the article
+      global $user;
+      $node->uid = $user->uid;
+      $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Redaktor';
+      $node->log = 'Priradené na vypracovanie redaktorovi: ' . $user->name;
+      node_save($node);
+      workbench_moderation_moderate($node, "needs_review");
+      return;
+  }
   if ($user = user_load_by_name($context['user'])) {
     // create array of node's categories
     $parents_all = taxonomy_get_parents_all(array_values($node->workbench_access)[0]);
@@ -3676,7 +3679,7 @@ function eqneditor2mathjax($html)
     foreach ($math_servers as $ms) {
         if (strpos($html, $ms)) {
             #The U modifier enforces nongreedy matching
-            $rexp = '#<img alt="([^"]*)" src="https://'.$ms.'.*" [/]>#U';
+            $rexp = '#<img alt="([^"]*)" .* src="https://'.$ms.'.*" [/]>#U';
             $rep =  '<span class="math-tex">\\(\1\\)</span>';
             #$rexp = str_replace('#<img alt="([^"]*)" src="https://%ms%/svg.latex\?.*" [/]>#U', $ms);
             #$rep =  '<span class="math-tex">\\(\1\\)</span>';
