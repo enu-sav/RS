@@ -13081,6 +13081,7 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     4 => '4',
+    34 => '34',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';

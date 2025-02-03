@@ -503,6 +503,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'name' => 'edit field_objednavka',
     'roles' => array(
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
@@ -1138,6 +1139,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Redaktor' => 'Redaktor',
       'administrátor' => 'administrátor',
+      'useradmin' => 'useradmin',
     ),
     'module' => 'field_permissions',
   );
