@@ -133,7 +133,7 @@ function _adminimal_admin_menu_support_environment_indicator() {
 
   $environment_info = environment_indicator_get_active();
 
-  if (empty($environment_info) || !environment_indicator_check_access($environment_info)) {
+  if (!environment_indicator_check_access($environment_info)) {
     return;
   }
 
