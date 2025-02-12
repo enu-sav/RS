@@ -61,7 +61,7 @@ class shs_handler_filter_term_node_tid_depth extends shs_handler_filter_term_nod
         return;
       }
       else {
-        $this->value = explode('+', $this->value[0]);
+        $this->value = explode('+', reset($this->value));
         $this->value = explode(',', end($this->value));
         $operator = 'IN';
       }
@@ -103,7 +103,6 @@ class shs_handler_filter_term_node_tid_depth extends shs_handler_filter_term_nod
     if (module_exists('taxonomy_entity_index')) {
       $subquery = db_select('taxonomy_entity_index', 'tn');
       $subquery->addField('tn', 'entity_id');
-      $subquery->condition('entity_type', 'node');
     }
     else {
       $subquery = db_select('taxonomy_index', 'tn');

@@ -1,6 +1,5 @@
-
 /**
- * Taxonomy Manager Tree formating
+ * Taxonomy Manager Tree styles.
  */
 
 #taxonomy-manager-double-tree-form,
@@ -178,7 +177,7 @@
 }
 
 div.highlightActiveTerm div.form-item {
-  background-color:#dddddd;
+  background-color: #ddd;
 }
 .highlightActiveTerm a {
   font-weight: bold;
@@ -260,7 +259,7 @@ div.form-item-taxonomy2-manager-top-language label {
 }
 
 #taxonomy-manager-toolbar-buttons {
-  float:left;
+  float: left;
 }
 
 #taxonomy-manager-double-tree-form input.taxonomy-manager-buttons,
@@ -276,20 +275,18 @@ div.form-item-taxonomy2-manager-top-language label {
   font-family: "Lucida Grande", Verdana, sans-serif;
   border: 1px solid #e4e4e4;
   border-bottom: 1px solid #b4b4b4;
-  border-left-color: #D2D2D2;
-  border-right-color: #D2D2D2;
+  border-left-color: #d2d2d2;
+  border-right-color: #d2d2d2;
   padding-left: 30px;
   padding-bottom: 3px;
   padding-right: 3px;
   padding-top: 0px;
   height: 30px;
-  margin-bottom:0px;
-
+  margin-bottom: 0px;
   background-repeat: no-repeat;
-  background-position:6px;
-  background-color: #F0EFEF;
+  background-position: 6px;
+  background-color: #f0efef;
   background-attachment: scroll;
-
 }
 
 #taxonomy-manager-double-tree-form input.add,
@@ -343,7 +340,7 @@ input#edit-weight-down {
 
 #taxonomy-manager-double-tree-form input.double-tree,
 #taxonomy-manager-form input.double-tree {
-  background-position:8px;
+  background-position: 8px;
   padding-left: 32px;
   background-image: url(../images/double-tree.png);
 }
@@ -376,11 +373,9 @@ fieldset#edit-term-merge {
   margin: 0;
 }
 
-
 /**
- * Term Data Form
+ * Term Data Form.
  */
-
 
 .term-data-overlay {
   position: absolute;
@@ -388,17 +383,17 @@ fieldset#edit-term-merge {
   top: 100px;
   width: 500px;
   z-index: 100;
-  background: #FFFFFF;
+  background: #fff;
 }
 
 .term-data-overlay fieldset {
   border-width: 5px;
 }
 
-.term-data-overlay legend span{
+.term-data-overlay legend span {
   cursor: move;
   background-image: url(../images/move-small.png);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-position: 8px 3px;
   padding-left: 24px;
   line-height: 150%;
@@ -409,7 +404,6 @@ fieldset#edit-term-merge {
   margin: 0;
   text-align: right;
   line-height: 100%;
-
 }
 
 #term-data-close span {
@@ -429,32 +423,6 @@ td.term-data-autocomplete-add,
 td.taxonomy-term-data-operations {
   text-align: center;
 }
-
-/*.term-data-autocomplete-add span {
-  text-decoration: none;
-  width: 22px;
-  height: 22px;
-  display:block;
-  background-image: url(../images/list-add.png);
-}
-
-.term-data-autocomplete-add span:hover {
-  text-decoration: none;
-  background-image: url(../images/list-add-hover.png);
-}
-
-.taxonomy-term-data-operations span {
-  text-decoration: none;
-  width: 22px;
-  height: 22px;
-  display:block;
-  background-image: url(../images/list-remove.png);
-}
-
-.taxonomy-term-data-operations span:hover {
-  text-decoration: none;
-  background-image: url(../images/list-remove-hover.png);
-}*/
 
 #taxonomy-term-data #edit-term-data-name-wrapper {
   margin-top: 0;
@@ -488,13 +456,13 @@ td.taxonomy-term-data-operations {
   height: 30px;
 }
 
-
 #taxonomy-term-data .filter-wrapper .fieldset-wrapper {
   padding-bottom: 0px;
 }
 
+/* hide descriptions, they use too much space */
 #taxonomy-term-data .filter-guidelines {
-  display:none; //hide descriptions, they use too much space
+  display: none;
 }
 
 .term-data-form-file-field-info {
@@ -530,7 +498,6 @@ td.taxonomy-term-data-operations {
   margin-top: 0.3em;
 }
 
-
 #taxonomy-term-data table .form-item {
   margin-bottom: 0.2em;
 }
@@ -540,7 +507,8 @@ td.taxonomy-term-data-operations {
   margin-bottom: 0em;
 }
 
-#taxonomy-term-data td, th {
+#taxonomy-term-data td,
+th {
   padding-top: 0.1em;
   padding-bottom: 0.1em;
   padding-left: 0.5em;
@@ -556,7 +524,7 @@ td.taxonomy-term-data-operations {
 }
 
 span.taxonomy-manager-message-close {
-  float:right;
+  float: right;
 }
 
 /**
@@ -569,3 +537,50 @@ span.taxonomy-manager-message-close {
   display: inline;
 }
 
+span.taxonomy-manager-select-helpers span.remove-all-settings {
+  margin-left: 20px;
+  /*margin-right: 10px;*/
+  text-decoration: none;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABG0lEQVQ4jaXTvytFcRjH8ddFlEHyYzFTJuom+R8o8iNdG6OUiCwWInUHA6tBXQwSKZtNKRPZFJOSidEkGc45nL5O997yWb71Pp/v0+c5z/Pln8rFZx/msIj3wHOA+oB9oYjbtKkHx6gNzEX0B6wxvvOjUnwOYS0wt+IoI30JagJ4gTb0ptgbHpDPKPKnAGxgNWD7GMkqUJfBXvGCLjyigAm0V5sADjGMSVH0UTxhttoCdxgUjXc5ZtPowEylFuATTVgJ+DYuRXtwXS4BrGPH77I1Y0/UVjc+0uaSbI1hFy04R2fqWxFTlQrAOO5FUwl1mrSQE61nlk6wKZpALsWXcJWAvOhvh+8g0Q2eMRD7FtCArTLJM1XAGeYT8A0K7S74j//lHwAAAABJRU5ErkJggg==);
+}
+
+span.taxonomy-manager-select-helpers span.remove-all-settings:hover {
+  width: 20px;
+  height: 20px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAABmklEQVQ4ja3Uv2/NYRTH8Vf9iKakCSIS4S/owuqOokuFGkRaQkPqRzqQGJkZsLBUWNgslhtpIzWKqEpqIGFksYncEAlawzlfvr2+33td8Ume5Pme833ezznPec7Df1Zfab4LazFf8+8hbKywL+M5FmFVCTaNm9hdA5zEzgr7atxp903iNHbgBbZULBzC45rNziTjV4R9Gfp7XMS9kq/QK7zD3grgUjL+WASzeIuJCt9VnKuJUh0QLuE8BtrsrzGIrb0CW7iLk232faKiB3oFEpUbK31fxygaOP4vwE85tuMK1otK7hEFPNYrEBZwDf04m6DPGMbRHCu0pgtwMCMcS1ihLzgouqofH2UXdYvwRm66qcI3Je7mkeQ0y85TOao0jKfYXLJdwP3cbABzmUXXlOGR6NcmRvzu6XH8wHeRfhNf/wYIMyKtebzE4YQVamE/5grgckbRSQ9FkaawQVypsk5gsQAu4HbOlzpAW7icEY+I6hJt2sB4EdUHPMM2Kx/ddq3DE7wRb+cDcT8b4ky/dVjbVaPiTG8pFfcnP/9QL63cikUAAAAASUVORK5CYII=);
+}
+
+span.taxonomy-manager-select-helpers span.expand-all {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAdklEQVQ4jdXPMQqDQBBG4Y+0AcGbJl1QyLHs03uS9DZptNkBWVTcDQTywxY7zHszwz/kihfm7H0tAZeTggkD3qWTI7c09bnapBh+pH+ccyr3DI40W815cQ/ezYi2FpaAEV0NHIIZH/Sl8FoQm7TH7ceCasnvswBn4Sgch1r6agAAAABJRU5ErkJggg==);
+}
+
+span.taxonomy-manager-select-helpers span.expand-all:hover {
+  width: 20px;
+  height: 20px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAAvElEQVQ4jc3UrQoCQRSG4cefJngzgsFgUvBOjBYvwO51aLFbBJMGg+CVKIhgEFnD7sIqLu7qBF84ZebwzuGbYfh3KiV6qxii+WZvi803A7RwRPRSk+ypZdijj1NeQ1khHLDDNYSwjjkG4sxyJy1CDTNxZotEnmY6CSFLaWEUSpbtKbRYRJbLGN1QMuJgL4n0Z1kqjBLp6ldZVhjhjvU3sryHXUUbnVBCaGDp+aI+kv2+ekm9csYUtzLi/+UBmkcvG0F9UpcAAAAASUVORK5CYII=);
+}
+
+span.taxonomy-manager-select-helpers span.collapse-all {
+  /*margin-left: 10px;*/
+  margin-right: 20px;
+  text-decoration: none;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAwElEQVQ4jc3SPW4CQQwF4C/QpFqJK6SEE3AICgruAVvlp0lDQ0HHOSi4AtI22ybXiJQyzabIrDJxWECigCdZo2e9efZ4zC1hjfIMXZm0/zBHg6fEC4xSFCm3SJrHLvfW5BUVZilqPJ+63KIVNplBy1+iuBd4gckR8ykGeeIuCEYYZrxK5zjLveOtq4OLUaSqXTOohSfEDj6xO1Jgi4880Q+CBVZ+vvHe7wwesMESX9gfco9LcmiR4rL9wcWrfB18Ayc4KuO32cxDAAAAAElFTkSuQmCC);
+}
+
+span.taxonomy-manager-select-helpers span.collapse-all:hover {
+  width: 20px;
+  height: 20px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAAyUlEQVQ4jdWUPQoCMRBGH+7qOewtlTX4U3oePZQW4p08giDYaIpYZIJrnLBZdwv9IASGbx4zZCbwb1oBZQt/KTmq1oAFjpnQUrxWcj9UAHvAASdgKHEDjOWYmvdQ8yYLiKFz4AJM5FyBRS5Mg97lDkAHPNrAgqoaLAYG6DIXNsW36UgDHb59EydrJd+ATRQ7yz1TvG8a5JbdRZ1aTunrR9FaLoAtMJLEWBY/9Dtew59UvAEV+mBrG9UICxOQWr1GaO+fA/T8ff2mnguhTkpwbl7fAAAAAElFTkSuQmCC);
+}

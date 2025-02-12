@@ -1,13 +1,10 @@
 <?php
 
-
 /**
- *
  * @file
- * Taxonomy Manager
+ * Taxonomy Manager.
  *
- * Administration interface for managing taxonomy vocabularies
- *
+ * Administration interface for managing taxonomy vocabularies.
  */
 
 // Default value for the tree pager. Value can be overridden with the variable
@@ -19,74 +16,74 @@ define('TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT', 100);
  */
 function taxonomy_manager_menu() {
 
-  $items['admin/structure/taxonomy_manager/voc'] = array(
+  $items['admin/structure/taxonomy_manager/voc'] = [
     'title' => 'Taxonomy Manager',
     'description' => 'Administer vocabularies with the Taxonomy Manager',
     'page callback' => 'taxonomy_manager_voc_list',
-    'access arguments' => array('administer taxonomy'),
+    'access arguments' => ['administer taxonomy'],
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
 
-  $items['admin/structure/taxonomy_manager/voc/%taxonomy_vocabulary_machine_name'] = array(
+  $items['admin/structure/taxonomy_manager/voc/%taxonomy_vocabulary_machine_name'] = [
     'title callback' => 'taxonomy_admin_vocabulary_title_callback',
-    'title arguments' => array(4),
+    'title arguments' => [4],
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('taxonomy_manager_form', 4),
-    'access arguments' => array('administer taxonomy'),
+    'page arguments' => ['taxonomy_manager_form', 4],
+    'access arguments' => ['administer taxonomy'],
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
 
-  $items['admin/structure/taxonomy_manager/childform'] = array(
+  $items['admin/structure/taxonomy_manager/childform'] = [
     'page callback' => 'taxonomy_manager_tree_build_child_form',
-    'access arguments' => array('administer taxonomy'),
+    'access arguments' => ['administer taxonomy'],
     'type' => MENU_CALLBACK,
-  );
+  ];
 
-  $items['admin/structure/taxonomy_manager/weight'] = array(
+  $items['admin/structure/taxonomy_manager/weight'] = [
     'page callback' => 'taxonomy_manager_update_weights',
-    'access arguments' => array('administer taxonomy'),
+    'access arguments' => ['administer taxonomy'],
     'type' => MENU_CALLBACK,
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
 
-  $items['admin/structure/taxonomy_manager/siblingsform'] = array(
+  $items['admin/structure/taxonomy_manager/siblingsform'] = [
     'page callback' => 'taxonomy_manager_tree_build_siblings_form',
-    'access arguments' => array('administer taxonomy'),
+    'access arguments' => ['administer taxonomy'],
     'type' => MENU_CALLBACK,
-  );
+  ];
 
-  $items['admin/structure/taxonomy_manager/export'] = array(
+  $items['admin/structure/taxonomy_manager/export'] = [
     'page callback' => 'taxonomy_manager_export',
-    'access arguments' => array('administer taxonomy'),
+    'access arguments' => ['administer taxonomy'],
     'type' => MENU_CALLBACK,
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
 
-  $items['admin/structure/taxonomy_manager/double-tree/%taxonomy_vocabulary_machine_name/%taxonomy_vocabulary_machine_name'] = array(
+  $items['admin/structure/taxonomy_manager/double-tree/%taxonomy_vocabulary_machine_name/%taxonomy_vocabulary_machine_name'] = [
     'title' => 'Taxonomy Manager',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('taxonomy_manager_double_tree_form', 4, 5),
-    'access arguments' => array('administer taxonomy'),
+    'page arguments' => ['taxonomy_manager_double_tree_form', 4, 5],
+    'access arguments' => ['administer taxonomy'],
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
 
-  $items['admin/config/user-interface/taxonomy-manager-settings'] = array(
+  $items['admin/config/user-interface/taxonomy-manager-settings'] = [
     'title' => 'Taxonomy Manager',
     'description' => 'Advanced settings for the Taxonomy Manager',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('taxonomy_manager_settings'),
-    'access arguments' => array('administer site configuration'),
+    'page arguments' => ['taxonomy_manager_settings'],
+    'access arguments' => ['administer site configuration'],
     'type' => MENU_NORMAL_ITEM,
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
 
-  $items['taxonomy_manager/autocomplete'] = array(
+  $items['taxonomy_manager/autocomplete'] = [
     'title' => 'Taxonomy Manager Autocomplete',
     'page callback' => 'taxonomy_manager_autocomplete_load',
-    'access arguments' => array('administer taxonomy'),
+    'access arguments' => ['administer taxonomy'],
     'type' => MENU_CALLBACK,
     'file' => 'taxonomy_manager.admin.inc',
-  );
+  ];
   return $items;
 }
 
@@ -97,49 +94,48 @@ function taxonomy_manager_admin_menu_map() {
   if (!user_access('administer taxonomy')) {
     return;
   }
-  $map['admin/structure/taxonomy_manager/voc/%taxonomy_vocabulary_machine_name'] = array(
+  $map['admin/structure/taxonomy_manager/voc/%taxonomy_vocabulary_machine_name'] = [
     'parent' => 'admin/structure/taxonomy_manager/voc',
-    'arguments' => array(
-      array('%taxonomy_vocabulary_machine_name' => array_keys(taxonomy_vocabulary_get_names())),
-    ),
-  );
+    'arguments' => [
+      ['%taxonomy_vocabulary_machine_name' => array_keys(taxonomy_vocabulary_get_names())],
+    ],
+  ];
   return $map;
 }
-
 
 /**
  * Implements hook_theme().
  */
 function taxonomy_manager_theme() {
-  return array(
-    'taxonomy_manager_form' => array(
+  return [
+    'taxonomy_manager_form' => [
       'render element' => 'form',
-    ),
-    'taxonomy_manager_double_tree_form' => array(
+    ],
+    'taxonomy_manager_double_tree_form' => [
       'render element' => 'form',
-    ),
-    'no_submit_button' => array(
+    ],
+    'no_submit_button' => [
       'render element' => 'element',
-    ),
-    'taxonomy_manager_image_button' => array(
+    ],
+    'taxonomy_manager_image_button' => [
       'render element' => 'element',
-    ),
-    'taxonomy_manager_tree' => array(
+    ],
+    'taxonomy_manager_tree' => [
       'render element' => 'element',
-    ),
-    'taxonomy_manager_tree_elements' => array(
+    ],
+    'taxonomy_manager_tree_elements' => [
       'render element' => 'element',
-    ),
-    'taxonomy_manager_tree_checkbox' => array(
+    ],
+    'taxonomy_manager_tree_checkbox' => [
       'render element' => 'element',
-    ),
-    'taxonomy_manager_tree_radio' => array(
+    ],
+    'taxonomy_manager_tree_radio' => [
       'render element' => 'element',
-    ),
-    'taxonomy_manager_term_data_extra' => array(
+    ],
+    'taxonomy_manager_term_data_extra' => [
       'render element' => 'element',
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -148,58 +144,102 @@ function taxonomy_manager_theme() {
 function taxonomy_manager_help($path, $arg) {
   switch ($path) {
     case 'admin/help#taxonomy_manager':
-      $output = t('The Taxonomy Manager provides an additional interface for managing vocabularies of the taxonomy module. It\'s especially very useful for long sets of terms.
+      $output = t("The Taxonomy Manager provides an additional interface for managing vocabularies of the taxonomy module. It's especially very useful for long sets of terms.
                    The vocabulary is represented in a dynamic tree view.
                    It supports operation like mass adding and deleting of terms, fast weight editing, moving of terms in hierarchies, merging of terms and fast term data editing.
-                   For more information on how to use please read the readme file included in the taxonomy_manager directory.');
+                   For more information on how to use please read the readme file included in the taxonomy_manager directory.");
       return $output;
   }
 }
 
-
 /**
- * function gets called by the taxonomy_manager_tree form type ('taxonomy_manager_'. form_id .'_operations')
+ * Tree operations.
+ *
+ * Function gets called by the taxonomy_manager_tree
+ * form type ('taxonomy_manager_'. form_id .'_operations').
+ *
  * return an form array with values to show next to every term value
  */
 function taxonomy_manager_taxonomy_manager_tree_operations($term) {
-  $form = array();
+  $form = [];
   if (!variable_get('taxonomy_manager_disable_mouseover', 0)) {
     $module_path = drupal_get_path('module', 'taxonomy_manager') . '/';
     if (_taxonomy_manager_tree_term_children_count($term->tid) > 0) {
-      $form['select_all'] = array('#weight' => -1, '#markup' => '<span class="select-all-children" title="' . t("Select all children") . '">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+      $form['select_all'] = [
+        '#weight' => -1,
+        '#markup' => '<span class="select-all-children" title="' . t("Select all children") . '">&nbsp;&nbsp;&nbsp;&nbsp;</span>',
+      ];
     }
-    $form['up'] = array('#markup' => theme("image", array('path' => $module_path . "images/go-up-small.png", 'alt' => "go up", 'title' => t("Move up"), 'attributes' => array('class' => 'term-up'))));
-    $form['down'] = array('#markup' => theme("image", array('path' => $module_path . "images/go-down-small.png", 'alt' => "go down", 'title' => t("Move down"), 'attributes' => array('class' => 'term-down'))));
-    $link_img = theme("image", array('path' => $module_path . "images/link-small.png", 'alt' => "link to term page"));
-    $link = l('&nbsp;' . $link_img, 'taxonomy/term/' . $term->tid, array('attributes' => array('rel' => 'tag', 'title' => t("Go to term page"), 'target' => '_blank'), 'html' => TRUE));
-    $form['link'] = array('#markup' => $link, '#weight' => 10);
+    $form['up'] = [
+      '#markup' => theme("image", [
+        'path' => $module_path . "images/go-up-small.png",
+        'alt' => "go up",
+        'title' => t("Move up"),
+        'attributes' => [
+          'class' => 'term-up',
+        ],
+      ]),
+    ];
+    $form['down'] = [
+      '#markup' => theme("image", [
+        'path' => $module_path . "images/go-down-small.png",
+        'alt' => "go down",
+        'title' => t("Move down"),
+        'attributes' => [
+          'class' => 'term-down',
+        ],
+      ]),
+    ];
+    $link_img = theme("image", [
+      'path' => $module_path . "images/link-small.png",
+      'alt' => "link to term page",
+    ]);
+    $link = l('&nbsp;' . $link_img, 'taxonomy/term/' . $term->tid, [
+      'attributes' => [
+        'rel' => 'tag',
+        'title' => t("Go to term page"),
+        'target' => '_blank',
+      ],
+      'html' => TRUE,
+    ]
+    );
+    $form['link'] = ['#markup' => $link, '#weight' => 10];
   }
   return $form;
 }
 
 /**
- * function gets called by taxonomy_manager_tree form type ('taxonomy_manager_'. form_id .'_link')
- * and returns an link, where to go, when a term gets clicked
+ * Tree link.
  *
- * @param $vid vocabulary id
+ * Function gets called by taxonomy_manager_tree
+ * form type ('taxonomy_manager_'. form_id .'_link')
+ * and returns an link, where to go, when a term gets clicked.
+ *
+ * @param $vid
+ *   vocabulary id
  */
 function taxonomy_manager_taxonomy_manager_tree_link($term) {
   return "admin/structure/taxonomy_manager/termdata/" . $term->tid;
 }
 
+/**
+ *
+ */
 function taxonomy_manager_taxonomy2_manager_tree_operations($term) {
   return taxonomy_manager_taxonomy_manager_tree_operations($term);
 }
+
+/**
+ *
+ */
 function taxonomy_manager_taxonomy2_manager_tree_link($term) {
   return taxonomy_manager_taxonomy_manager_tree_link($term);
 }
 
-
-
 /******************************************
- * TAXONOMY TREE FORM ELEMENT DEFINITION
+ * TAXONOMY TREE FORM ELEMENT DEFINITION.
  *
- * how to use:
+ * How to use:
  * $form['name'] = array(
  *   '#type' => 'taxonomy_manager_tree',
  *   '#vid' => $vid,
@@ -207,70 +247,75 @@ function taxonomy_manager_taxonomy2_manager_tree_link($term) {
  *
  * additional parameter:
  *   #pager: TRUE / FALSE,
- *     whether to use pagers (drupal pager, load of nested children, load of siblings)
- *     or to load the whole tree on page generation
+ *     whether to use pagers (drupal pager, load of nested children, load of
+ * siblings) or to load the whole tree on page generation
  *   #parent: only children on this parent will be loaded
  *   #terms_to_expand: loads and opens the first path of given term ids
  *   #siblings_page: current page for loading pf next siblings, internal use
  *   #default_value: an array of term ids, which get selected by default
- *   #render_whole_tree: set this option to TRUE, if you have defined a parent for the tree and you want
- *      the the tree is fully rendered
- *   #add_term_info: if TRUE, hidden form values with the term id and weight are going to be added
+ *   #render_whole_tree: set this option to TRUE, if you have defined a parent
+ * for the tree and you want the the tree is fully rendered
+ *   #add_term_info: if TRUE, hidden form values with the term id and weight
+ * are going to be added
  *   #expand_all: if TRUE, all elements are going to be expanded by default
- *   #multiple: if TRUE the tree will contain checkboxes, otherwise radio buttons
- *   #tree_is_required: use #tree_is_required instead of #required if you are using the tree within an other
- *                      element and don't want that both are internally required, because it might cause that
- *                      error messages are shown twice (see content_taxonomy_tree)
+ *   #multiple: if TRUE the tree will contain checkboxes, otherwise radio
+ * buttons
+ *   #tree_is_required: use #tree_is_required instead of #required if you are
+ * using the tree within an other element and don't want that both are
+ * internally required, because it might cause that error messages are shown
+ * twice (see content_taxonomy_tree)
  *   #language lang code if i18n is enabled and multilingual vocabulary
  *
  * defining term operations:
- *   to add values (operations,..) to each term, add a function, which return a form array
+ *   to add values (operations,..) to each term, add a function, which return a
+ * form array
  *   'taxonomy_manager_'. $tree_form_id .'_operations'
  *
  * how to retrieve selected values:
  *   selected terms ids are available in validate / submit function in
  *   $form_values['name']['selected_terms'];
- *
  ******************************************/
 
 /**
  * Implements hook_elements().
  */
 function taxonomy_manager_element_info() {
-  $type['taxonomy_manager_tree'] = array(
+  $type['taxonomy_manager_tree'] = [
     '#input' => TRUE,
-    '#process' => array('taxonomy_manager_tree_process_elements'),
+    '#process' => ['taxonomy_manager_tree_process_elements'],
     '#tree' => TRUE,
-    '#element_validate' => array('taxonomy_manager_tree_validate'),
+    '#element_validate' => ['taxonomy_manager_tree_validate'],
     '#theme' => 'taxonomy_manager_tree',
     '#parent' => 0,
     '#siblings_page' => 0,
     '#operations' => "",
-    '#default_value' => array(),
+    '#default_value' => [],
     '#multiple' => TRUE,
     '#add_term_info' => TRUE,
     '#required' => FALSE,
     '#expand_all' => FALSE,
     '#render_whole_tree' => FALSE,
     '#search_string' => '',
-    '#terms_to_expand' => array(),
-    '#terms_to_highlight' => array(),
+    '#terms_to_expand' => [],
+    '#terms_to_highlight' => [],
     '#language' => NULL,
     '#pager' => FALSE,
-  );
+  ];
 
   return $type;
 }
 
 /**
- * Processes the tree form element
+ * Processes the tree form element.
  *
  * @param $element
+ *
  * @return the tree element
  */
 function taxonomy_manager_tree_process_elements($element) {
-  global $_taxonomy_manager_existing_ids; //TEMP: seems like this functions gets called twice in preview and cause problem because of adding the settings to js twice
-  $_taxonomy_manager_existing_ids = is_array($_taxonomy_manager_existing_ids) ? $_taxonomy_manager_existing_ids : array();
+  // TEMP: seems like this functions gets called twice in preview and cause problem because of adding the settings to js twice.
+  global $_taxonomy_manager_existing_ids;
+  $_taxonomy_manager_existing_ids = is_array($_taxonomy_manager_existing_ids) ? $_taxonomy_manager_existing_ids : [];
 
   $module_path = drupal_get_path('module', 'taxonomy_manager') . '/';
   $id = drupal_clean_css_identifier(implode('-', $element['#parents']));
@@ -282,9 +327,27 @@ function taxonomy_manager_tree_process_elements($element) {
     drupal_add_css($module_path . 'css/taxonomy_manager.css');
     drupal_add_js($module_path . 'js/tree.js');
 
-    drupal_add_js(array('siblingsForm' => array('url' => url('admin/structure/taxonomy_manager/siblingsform'), 'modulePath' => $module_path)), 'setting');
-    drupal_add_js(array('childForm' => array('url' => url('admin/structure/taxonomy_manager/childform'), 'modulePath' => $module_path)), 'setting');
-    drupal_add_js(array('taxonomytree' => array(array('id' => $id, 'vid' => $vid, 'parents' => $element['#parents']))), 'setting');
+    drupal_add_js([
+      'siblingsForm' => [
+        'url' => url('admin/structure/taxonomy_manager/siblingsform'),
+        'modulePath' => $module_path,
+      ],
+    ], 'setting');
+    drupal_add_js([
+      'childForm' => [
+        'url' => url('admin/structure/taxonomy_manager/childform'),
+        'modulePath' => $module_path,
+      ],
+    ], 'setting');
+    drupal_add_js([
+      'taxonomytree' => [
+        [
+          'id' => $id,
+          'vid' => $vid,
+          'parents' => $element['#parents'],
+        ],
+      ],
+    ], 'setting');
   }
 
   if (empty($element['#operations'])) {
@@ -300,19 +363,19 @@ function taxonomy_manager_tree_process_elements($element) {
     }
   }
 
-  $element['#elements'] = array();
+  $element['#elements'] = [];
   $tree = _taxonomy_manager_tree_get_item($element['#vid'], $element['#parent'], $element['#pager'], $element['#siblings_page'], $element['#search_string'], $element['#language']);
   if (count($tree)) {
     if ($element['#pager'] && !($element['#parent'] || $element['#siblings_page'])) {
-      $element['pager'] = array('#value' => theme('pager'));
+      $element['pager'] = ['#value' => theme('pager')];
     }
 
-    $terms_to_expand = array();
+    $terms_to_expand = [];
     if (isset($element['#terms_to_expand'])) {
-      // allow multiple terms to be expanded
-      $requested_terms_to_expand = is_array($element['#terms_to_expand']) ? $element['#terms_to_expand'] : array($element['#terms_to_expand']);
+      // Allow multiple terms to be expanded.
+      $requested_terms_to_expand = is_array($element['#terms_to_expand']) ? $element['#terms_to_expand'] : [$element['#terms_to_expand']];
       foreach ($requested_terms_to_expand as $term_to_expand) {
-        // Multiple term version
+        // Multiple term version.
         _taxonomy_manager_tree_get_first_path($term_to_expand, $tree, $terms_to_expand);
       }
       $terms_to_expand = taxonomy_manager_tree_get_terms_to_expand($tree, $requested_terms_to_expand, TRUE);
@@ -323,12 +386,18 @@ function taxonomy_manager_tree_process_elements($element) {
     }
 
     if (!empty($element['#language'])) {
-      $element['#elements']['language'] = array('#type' => 'hidden', '#value' => $element['#language'], '#attributes' => array('class' => 'tree-lang'));
+      $element['#elements']['language'] = [
+        '#type' => 'hidden',
+        '#value' => $element['#language'],
+        '#attributes' => [
+          'class' => 'tree-lang',
+        ],
+      ];
       _taxonomy_manager_tree_element_set_params($element['#parents'], $element['#elements']);
     }
 
     if (!is_array($element['#terms_to_highlight'])) {
-      $element['#terms_to_highlight'] = array($element['#terms_to_highlight']);
+      $element['#terms_to_highlight'] = [$element['#terms_to_highlight']];
     }
 
     $index = 0;
@@ -339,23 +408,27 @@ function taxonomy_manager_tree_process_elements($element) {
 }
 
 /**
- * loads tree with terms (depending on various settings)
+ * Loads tree with terms (depending on various settings).
  *
  * @param $vid
  * @param $parent
  * @param $pager
  * @param $siblings_page
+ *
  * @return array with term elements
  */
 function _taxonomy_manager_tree_get_item($vid, $parent = 0, $pager = FALSE, $siblings_page = 0, $search_string = NULL, $language_code = NULL) {
-  $tree = array();
+  $tree = [];
   if (module_exists('i18n_taxonomy') && $language_code != "") {
     return _taxonomy_manager_tree_get_translated_item($vid, $parent, $pager, $siblings_page, $search_string, $language_code);
   }
   if ($pager) {
     if ($parent || $siblings_page) {
-      $start = ($siblings_page-1) * variable_get('taxonomy_manager_pager_tree_page_size', TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT);
-      $result = db_query_range("SELECT t.* FROM {taxonomy_term_data} t INNER JOIN {taxonomy_term_hierarchy} h ON t.tid = h.tid WHERE vid = :vid AND h.parent = :parent ORDER BY t.weight, t.name", $start, variable_get('taxonomy_manager_pager_tree_page_size', 100), array(':vid' => $vid, ':parent' => $parent));
+      $start = ($siblings_page - 1) * variable_get('taxonomy_manager_pager_tree_page_size', TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT);
+      $result = db_query_range("SELECT t.* FROM {taxonomy_term_data} t INNER JOIN {taxonomy_term_hierarchy} h ON t.tid = h.tid WHERE vid = :vid AND h.parent = :parent ORDER BY t.weight, t.name", $start, variable_get('taxonomy_manager_pager_tree_page_size', 100), [
+        ':vid' => $vid,
+        ':parent' => $parent,
+      ]);
     }
     else {
       $query = db_select('taxonomy_term_data', 't')->extend('PagerDefault');
@@ -383,25 +456,30 @@ function _taxonomy_manager_tree_get_item($vid, $parent = 0, $pager = FALSE, $sib
 }
 
 /**
- * loads translated tree with terms (depending on various settings)
+ * Loads translated tree with terms (depending on various settings).
  *
  * @param $vid
  * @param $parent
  * @param $pager
  * @param $siblings_page
+ *
  * @return array with term elements
  */
 function _taxonomy_manager_tree_get_translated_item($vid, $parent = 0, $pager = FALSE, $siblings_page = 0, $search_string = NULL, $language_code = NULL) {
-  //TODO merge with function above
-
-  $tree = array();
+  // @todo merge with function above
+  $tree = [];
   if ($language_code == "no language") {
-    $language_code = ""; //get terms where no language is specified
+    // Get terms where no language is specified.
+    $language_code = "";
   }
   if ($pager) {
     if ($parent || $siblings_page) {
-      $start = ($siblings_page-1) * variable_get('taxonomy_manager_pager_tree_page_size', TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT);
-      $result = db_query_range("SELECT t.* FROM {taxonomy_term_data} t INNER JOIN {taxonomy_term_hierarchy} h ON t.tid = h.tid WHERE vid = :vid AND h.parent = :parent AND t.language = :language ORDER BY t.weight, t.name", $start, variable_get('taxonomy_manager_pager_tree_page_size', 50), array(':vid' => $vid, ':parent' => $parent, ':language' => $language_code));
+      $start = ($siblings_page - 1) * variable_get('taxonomy_manager_pager_tree_page_size', TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT);
+      $result = db_query_range("SELECT t.* FROM {taxonomy_term_data} t INNER JOIN {taxonomy_term_hierarchy} h ON t.tid = h.tid WHERE vid = :vid AND h.parent = :parent AND t.language = :language ORDER BY t.weight, t.name", $start, variable_get('taxonomy_manager_pager_tree_page_size', 50), [
+        ':vid' => $vid,
+        ':parent' => $parent,
+        ':language' => $language_code,
+      ]);
     }
     else {
       $query = db_select('taxonomy_term_data', 't')->extend('PagerDefault');
@@ -431,10 +509,10 @@ function _taxonomy_manager_tree_get_translated_item($vid, $parent = 0, $pager = 
 }
 
 /**
- * marks parent terms to expand if a child terms is selected by default
+ * Marks parent terms to expand if a child terms is selected by default.
  */
 function taxonomy_manager_tree_get_terms_to_expand($tree, $default_values, $multiple) {
-  $terms = array();
+  $terms = [];
   foreach (array_reverse($tree) as $term) {
     if (in_array($term->tid, array_values($default_values)) || in_array($term->tid, $terms)) {
       if (isset($term->parents) && is_array($term->parents)) {
@@ -453,14 +531,15 @@ function taxonomy_manager_tree_get_terms_to_expand($tree, $default_values, $mult
 }
 
 /**
- * calculates a path to a certain term and merges it into the tree
+ * Calculates a path to a certain term and merges it into the tree.
  */
 function _taxonomy_manager_tree_get_first_path($tid, &$tree, &$terms_to_expand) {
-  $path = array();
+  $path = [];
   $next_tid = $tid;
 
   $i = 0;
-  while ($i < 100) { //prevent infinite loop if inconsistent hierarchy
+  // Prevent infinite loop if inconsistent hierarchy.
+  while ($i < 100) {
     $parents = taxonomy_get_parents($next_tid);
     if (count($parents)) {
       // Takes first parent.
@@ -480,10 +559,11 @@ function _taxonomy_manager_tree_get_first_path($tid, &$tree, &$terms_to_expand) 
   $path[] = taxonomy_term_load($tid);
 
   $root_term = $path[0];
-  $root_term_index;
+  $root_term_index = NULL;
 
-  // build a map of the path keyed on tid - helps in avoiding duplicates when merging multiple paths to the tree
-  $term_map = array();
+  // Build a map of the path keyed on tid - helps in avoiding duplicates
+  // when merging multiple paths to the tree.
+  $term_map = [];
   if (count($path) > 1) {
     foreach ($tree as $index => $term) {
       $term_map[$term->tid] = $index;
@@ -497,44 +577,45 @@ function _taxonomy_manager_tree_get_first_path($tid, &$tree, &$terms_to_expand) 
   if (isset($root_term_index)) {
     $path_tree = taxonomy_manager_get_partial_tree($path);
 
-    // build map of path tree keyed on tids
-    $path_term_map = array();
+    // Build map of path tree keyed on tids.
+    $path_term_map = [];
     foreach ($path_tree as $index => $term) {
       $path_term_map[$term->tid] = $index;
     }
 
     reset($path_tree);
 
-    // first find the set of new terms that we need to add - new terms should be contiguous within $path_tree
+    // First find the set of new terms that we need to add - new terms should
+    // be contiguous within $path_tree.
     $new_path_terms_map = array_diff_key($path_term_map, $term_map);
 
     if (!empty($new_path_terms_map)) {
-      // something to add
+      // Something to add.
       $insert_term_index = reset($new_path_terms_map);
       if ($insert_term_index > 0) {
-        // use previous term as insertion point
-        $previous_tid = $path_tree[$insert_term_index-1]->tid;
+        // Use previous term as insertion point.
+        $previous_tid = $path_tree[$insert_term_index - 1]->tid;
         $insertion_index = $term_map[$previous_tid];
       }
       else {
-        // use root index as insertion point
+        // Use root index as insertion point.
         $insertion_index = $root_term_index;
       }
 
-      // get the new terms to add from the path tree
+      // Get the new terms to add from the path tree.
       $new_path_tree = array_slice($path_tree, $insert_term_index, count($new_path_terms_map));
 
-      // stick the new terms into the tree at the insertion point
-      array_splice($tree, $insertion_index+1, 0, $new_path_tree);
+      // Stick the new terms into the tree at the insertion point.
+      array_splice($tree, $insertion_index + 1, 0, $new_path_tree);
     }
   }
 }
 
 /**
- * helper function to check whether a given term is a root term
+ * Helper function to check whether a given term is a root term.
  */
 function taxonomy_manager_term_is_root($tid) {
-  $is_root = (bool) db_query_range("SELECT 1 FROM {taxonomy_term_hierarchy} h WHERE h.tid = :tid AND h.parent = 0", 0, 1, array(':tid' => $tid))->fetchField();
+  $is_root = (bool) db_query_range("SELECT 1 FROM {taxonomy_term_hierarchy} h WHERE h.tid = :tid AND h.parent = 0", 0, 1, [':tid' => $tid])->fetchField();
   if ($is_root) {
     return TRUE;
   }
@@ -542,10 +623,10 @@ function taxonomy_manager_term_is_root($tid) {
 }
 
 /**
- * returns partial tree for a given path
+ * Returns partial tree for a given path.
  */
 function taxonomy_manager_get_partial_tree($path, $depth = 0) {
-  $tree = array();
+  $tree = [];
   $root_term = $path[$depth];
   $children = taxonomy_get_children($root_term->tid);
   if (isset($path[++$depth])) {
@@ -553,7 +634,7 @@ function taxonomy_manager_get_partial_tree($path, $depth = 0) {
   }
   foreach ($children as $key => $child) {
     $child->depth = $depth;
-    $child->parents = array(0 => $root_term->tid);
+    $child->parents = [0 => $root_term->tid];
     $tree[] = $child;
     if (isset($next_term) && $child->tid == $next_term->tid) {
       $tree = array_merge($tree, taxonomy_manager_get_partial_tree($path, $depth));
@@ -563,27 +644,30 @@ function taxonomy_manager_get_partial_tree($path, $depth = 0) {
 }
 
 /**
- * recursive function for building nested form array
- * with checkboxes and weight forms for each term
+ * Recursive function for building nested form array
+ * with checkboxes and weight forms for each term.
  *
- * nested form array are allways appended to parent-form['children']
+ * Nested form array are allways appended to parent-form['children']
  *
- * @param $index current index in tree, start with 0
- * @param $tree of terms (generated by taxonomy_get_tree)
+ * @param $index
+ *   current index in tree, start with 0
+ * @param $tree
+ *   of terms (generated by taxonomy_get_tree)
+ *
  * @return a form array
  */
-function taxonomy_manager_tree_build_form(&$index, $tree, &$form, $root_form, $parents = array(), $page = 0, $default_value = array(), $multiple = TRUE, $terms_to_expand = array(), $terms_to_highlight = array()) {
+function taxonomy_manager_tree_build_form(&$index, $tree, &$form, $root_form, $parents = [], $page = 0, $default_value = [], $multiple = TRUE, $terms_to_expand = [], $terms_to_highlight = []) {
   $current_depth = $tree[$index]->depth;
   while ($index < count($tree) && $tree[$index]->depth >= $current_depth) {
     $term = $tree[$index];
-    $attributes = array();
+    $attributes = [];
 
     $this_parents = $parents;
     $this_parents[] = $term->tid;
 
     $value = in_array($term->tid, $default_value) ? 1 : 0;
     if ($value && !$multiple) {
-      // Find our direct parent
+      // Find our direct parent.
       $newindex = $index;
       while ($newindex >= 0 && $tree[$newindex]->depth >= $current_depth) {
         $newindex--;
@@ -592,16 +676,17 @@ function taxonomy_manager_tree_build_form(&$index, $tree, &$form, $root_form, $p
         $value = in_array($tree[$newindex]->tid, $terms_to_expand) ? 1 : 0;
       }
     }
-    $form[$term->tid]['checkbox'] = array(
+    $form[$term->tid]['checkbox'] = [
       '#type' => ($multiple) ? 'checkbox' : 'radio',
-      '#title' => $term->name, // Escaping is done in theme wrappers.
+      // Escaping is done in theme wrappers.
+      '#title' => $term->name,
       '#value' => $value,
       '#return_value' => $term->tid,
       '#required' => FALSE,
-      '#theme_wrappers' => ($multiple) ? array('taxonomy_manager_tree_checkbox') : array('taxonomy_manager_tree_radio'),
+      '#theme_wrappers' => ($multiple) ? ['taxonomy_manager_tree_checkbox'] : ['taxonomy_manager_tree_radio'],
       '#highlight' => in_array($term->tid, $terms_to_highlight) ? TRUE : FALSE,
-    );
-    $form[$term->tid]['#attributes'] = array();
+    ];
+    $form[$term->tid]['#attributes'] = [];
 
     if (!empty($root_form['#link_callback'])) {
       $link_callback = $root_form['#link_callback'];
@@ -611,8 +696,24 @@ function taxonomy_manager_tree_build_form(&$index, $tree, &$form, $root_form, $p
     }
 
     if ($root_form['#add_term_info']) {
-      $form[$term->tid]['weight'] = array('#type' => 'hidden', '#value' => $term->weight, '#attributes' => array('class' => array('weight-form')));
-      $form[$term->tid]['tid'] = array('#type' => 'hidden', '#value' => $term->tid, '#attributes' => array('class' => array('term-id')));
+      $form[$term->tid]['weight'] = [
+        '#type' => 'hidden',
+        '#value' => $term->weight,
+        '#attributes' => [
+          'class' => [
+            'weight-form',
+          ],
+        ],
+      ];
+      $form[$term->tid]['tid'] = [
+        '#type' => 'hidden',
+        '#value' => $term->tid,
+        '#attributes' => [
+          'class' => [
+            'term-id',
+          ],
+        ],
+      ];
       $form[$term->tid]['checkbox']['#extra_info'] = taxonomy_manager_tree_term_extra_info($term);
     }
 
@@ -624,14 +725,14 @@ function taxonomy_manager_tree_build_form(&$index, $tree, &$form, $root_form, $p
     }
 
     if ($page) {
-      if ($index == (variable_get('taxonomy_manager_pager_tree_page_size', TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT) - 1) && !isset($tree[$index+1])) {
-        $form[$term->tid]['page'] = array(
+      if ($index == (variable_get('taxonomy_manager_pager_tree_page_size', TAXONOMY_MANAGER_PAGER_TREE_PAGE_SIZE_DEFAULT) - 1) && !isset($tree[$index + 1])) {
+        $form[$term->tid]['page'] = [
           '#type' => 'hidden',
           '#value' => $page,
-          '#attributes' => array('class' => 'page'),
-        );
+          '#attributes' => ['class' => 'page'],
+        ];
         $next_count = _taxonomy_manager_tree_get_next_siblings_count($term->vid, $page, $root_form['#parent']);
-        $form[$term->tid]['next_count'] = array('#markup' => $next_count);
+        $form[$term->tid]['next_count'] = ['#markup' => $next_count];
         $form[$term->tid]['#attributes']['class'][] = 'has-more-siblings';
       }
     }
@@ -643,22 +744,22 @@ function taxonomy_manager_tree_build_form(&$index, $tree, &$form, $root_form, $p
     $index++;
 
     if (isset($tree[$index]) && $tree[$index]->depth > $current_depth) {
-      taxonomy_manager_tree_build_form($index, $tree, $form[$term->tid]['children'], $root_form, array_merge($this_parents, array('children')), $page, $default_value, $multiple, $terms_to_expand, $terms_to_highlight);
+      taxonomy_manager_tree_build_form($index, $tree, $form[$term->tid]['children'], $root_form, array_merge($this_parents, ['children']), $page, $default_value, $multiple, $terms_to_expand, $terms_to_highlight);
     }
   }
 }
 
 /**
- * adds #id and #name to all form elements
+ * Adds #id and #name to all form elements.
  *
  * @param $parents
  * @param $form
  */
 function _taxonomy_manager_tree_element_set_params($parents, &$form) {
   foreach (element_children($form) as $field_name) {
-    $field_parents = array_merge($parents, array($field_name));
+    $field_parents = array_merge($parents, [$field_name]);
     $form[$field_name]['#tree'] = TRUE;
-    $form[$field_name]['#post'] = array();
+    $form[$field_name]['#post'] = [];
     $form[$field_name]['#parents'] = $field_parents;
     $form[$field_name]['#id'] = drupal_clean_css_identifier('edit- ' . implode('-', $field_parents));
     $form[$field_name]['#name'] = array_shift($field_parents) . '[' . implode('][', $field_parents) . ']';
@@ -666,16 +767,18 @@ function _taxonomy_manager_tree_element_set_params($parents, &$form) {
 }
 
 /**
- * calculates class type (expandable, lastExpandable) for current element
+ * Calculates class type (expandable, lastExpandable) for current element.
  *
- * @param $current_index in tree array
- * @param $tree array with terms
+ * @param $current_index
+ *   in tree array
+ * @param $tree
+ *   array with terms
  */
 function _taxonomy_manager_tree_term_set_class(&$class, $current_index, $tree, $expand) {
   $term = $tree[$current_index];
 
   $next_index = ++$current_index;
-  $next = isset($tree[$next_index]) ? $tree[$next_index] : NULL;
+  $next = $tree[$next_index] ?? NULL;
 
   $children = FALSE;
   if (!empty($next) && $next->depth > $term->depth) {
@@ -707,11 +810,14 @@ function _taxonomy_manager_tree_term_set_class(&$class, $current_index, $tree, $
 }
 
 /**
+ * Count children of term.
+ *
  * @param $tid
+ *
  * @return children count
  */
 function _taxonomy_manager_tree_term_children_count($tid) {
-  static $tids = array();
+  static $tids = [];
 
   if (!isset($tids[$tid])) {
     $query = db_select('taxonomy_term_hierarchy', 'h');
@@ -723,21 +829,24 @@ function _taxonomy_manager_tree_term_children_count($tid) {
 }
 
 /**
-* returns some additional information about the term which gets added to the link title
-*/
+ * Term extra info.
+ *
+ * Returns some additional information about the term which gets added
+ * to the link title.
+ */
 function taxonomy_manager_tree_term_extra_info($term) {
   $extra_info = "";
   $term_children_count = _taxonomy_manager_tree_term_children_count($term->tid);
   $term_parents = taxonomy_get_parents($term->tid);
 
   if ($term_children_count > 0) {
-    $extra_info = t('Children Count:') . ' ' . $term_children_count;
+    $extra_info = t('Children Count: @count', ['@count' => $term_children_count]);
   }
 
   if (count($term_parents) >= 1) {
     $extra_info .= !empty($extra_info) ? ' | ' : '';
     $extra_info .= t('Direct Parents:') . ' ';
-    $p_names = array();
+    $p_names = [];
     foreach ($term_parents as $p) {
       if ($p->tid != $term->tid) {
         $p_names[] = $p->name;
@@ -745,15 +854,27 @@ function taxonomy_manager_tree_term_extra_info($term) {
     }
     $extra_info .= implode(', ', $p_names);
   }
+
+  if (module_exists('synonyms')) {
+    $full_term = taxonomy_term_load($term->tid);
+    $term_synonyms = synonyms_get_term_synonyms($full_term);
+    $term_synonyms_count = sizeof($term_synonyms);
+    if ($term_synonyms_count > 0) {
+      $extra_info .= !empty($extra_info) ? ' | ' : '';
+      $extra_info .= t('Synonyms Count: @count', ['@count' => $term_synonyms_count]);
+    }
+  }
+
   return $extra_info;
 }
 
 /**
- * calculates number of next siblings if using paging
+ * Calculates number of next siblings if using paging.
  *
  * @param $vid
  * @param $page
  * @param $parent
+ *
  * @return next page size
  */
 function _taxonomy_manager_tree_get_next_siblings_count($vid, $page, $parent = 0) {
@@ -774,23 +895,24 @@ function _taxonomy_manager_tree_get_next_siblings_count($vid, $page, $parent = 0
 }
 
 /**
- * callback for generating and rendering nested child forms (AHAH)
+ * Callback for generating and rendering nested child forms (AHAH).
  *
  * @param $tree_id
- * @param $parent term id of parent, that is expanded and of which children have to be loaded
+ * @param $parent
+ *   term id of parent, that is expanded and of which children have to be loaded
  */
 function taxonomy_manager_tree_build_child_form($tree_id, $vid, $parent) {
   $params = $_GET;
   $form_state = form_state_defaults();
   $form_state['method'] = 'get';
-  $form_state['values'] = array();
+  $form_state['values'] = [];
   $form_state['process_input'] = TRUE;
-  $form_state['input'] = array();
-  $form_state['complete form'] = array();
+  $form_state['input'] = [];
+  $form_state['complete form'] = [];
 
-  $tids = array();
+  $tids = [];
   if (isset($params['#terms_to_expand']) && $params['#terms_to_expand'] != 0) {
-    // convert to array
+    // Convert to array.
     $tids = explode(',', $params['#terms_to_expand']);
   }
 
@@ -801,7 +923,7 @@ function taxonomy_manager_tree_build_child_form($tree_id, $vid, $parent) {
     $language = $params['language'];
   }
 
-  $child_form = array(
+  $child_form = [
     '#type' => 'taxonomy_manager_tree',
     '#vid' => $vid,
     '#parent' => $parent,
@@ -809,7 +931,7 @@ function taxonomy_manager_tree_build_child_form($tree_id, $vid, $parent) {
     '#language' => $language,
     '#terms_to_expand' => $tids,
     '#siblings_page' => 1,
-  );
+  ];
 
   $opertions_callback = 'taxonomy_manager_' . str_replace('-', '_', $tree_id) . '_operations';
   if (function_exists($opertions_callback)) {
@@ -825,37 +947,40 @@ function taxonomy_manager_tree_build_child_form($tree_id, $vid, $parent) {
 
   $child_form = form_builder('taxonomy_manager_form', $child_form, $form_state);
 
-  print drupal_json_output(array('data' => drupal_render($child_form)));
+  print drupal_json_output(['data' => drupal_render($child_form)]);
   ajax_footer();
 }
 
 /**
- * callback for generating and rendering next siblings terms form (AHAH)
+ * Callback for generating and rendering next siblings terms form (AHAH).
  *
  * @param $tree_id
- * @param $page current page
- * @param $prev_tid last sibling, that appears
- * @param $parent if in hierarchies, parent id
+ * @param $page
+ *   current page
+ * @param $prev_tid
+ *   last sibling, that appears
+ * @param $parent
+ *   if in hierarchies, parent id
  */
 function taxonomy_manager_tree_build_siblings_form($tree_id, $page, $prev_tid, $parent = 0) {
   $params = $_GET;
   $form_state = form_state_defaults();
   $form_state['method'] = 'get';
-  $form_state['values'] = array();
+  $form_state['values'] = [];
   $form_state['process_input'] = TRUE;
-  $form_state['input'] = array();
-  $form_state['complete form'] = array();
+  $form_state['input'] = [];
+  $form_state['complete form'] = [];
 
-  $vid = db_query("SELECT vid FROM {taxonomy_term_data} WHERE tid = :tid", array(':tid' => $prev_tid))->fetchField();
+  $vid = db_query("SELECT vid FROM {taxonomy_term_data} WHERE tid = :tid", [':tid' => $prev_tid])->fetchField();
 
-  $siblings_form = array(
+  $siblings_form = [
     '#type' => 'taxonomy_manager_tree',
     '#vid' => $vid,
     '#parent' => $parent,
     '#pager' => TRUE,
-    '#siblings_page' => $page+1,
+    '#siblings_page' => $page + 1,
     '#language' => $params['language'],
-  );
+  ];
 
   $opertions_callback = 'taxonomy_manager_' . str_replace('-', '_', $tree_id) . '_operations';
   if (function_exists($opertions_callback)) {
@@ -873,19 +998,20 @@ function taxonomy_manager_tree_build_siblings_form($tree_id, $page, $prev_tid, $
 
   $output = drupal_render($siblings_form);
 
-  //cutting of <ul> and ending </ul> ... can this be done cleaner?
+  // Cutting of <ul> and ending </ul> ... can this be done cleaner?
   $output = drupal_substr($output, 21, -5);
 
-  print drupal_json_output(array('data' => $output));
+  print drupal_json_output(['data' => $output]);
   ajax_footer();
 
 }
 
 /**
- * sets parents depending on form_id and hierarchical parents
+ * Sets parents depending on form_id and hierarchical parents.
  *
  * @param $tree_id
- * @param $parent term id
+ * @param $parent
+ *   term id
  * @param $form
  */
 function _taxonomy_manager_tree_sub_forms_set_parents($form_parents, $parent, &$form) {
@@ -898,30 +1024,32 @@ function _taxonomy_manager_tree_sub_forms_set_parents($form_parents, $parent, &$
     $form['#parents'][] = 'children';
     /*$all_parents = taxonomy_get_parents_all($parent);
     for ($i=count($all_parents)-1; $i >= 0; $i--) {
-      $form['#parents'][] = $all_parents[$i]->tid;
-      $form['#parents'][] = 'children';
+    $form['#parents'][] = $all_parents[$i]->tid;
+    $form['#parents'][] = 'children';
     }*/
   }
 }
 
 /**
- * validates submitted form values
- * checks if selected terms really belong to initial voc, if not --> form_set_error
+ * Validates submitted form values.
  *
- * if all is valid, selected values get added to 'selected_terms' for easy use in submit
+ * Checks if selected terms really belong to initial voc,
+ * if not --> form_set_error if all is valid, selected values get added to
+ * 'selected_terms' for easy use in submit.
  *
  * @param $form
  */
 function taxonomy_manager_tree_validate($form, &$form_state) {
-  $selected = array();
+  $selected = [];
 
-  //this can be useful for more complex processing, where the parent of the selecte term in the tree view is need (releveant if multi parent)
-  //used in double tree
-  $direct_parents = array();
+  // This can be useful for more complex processing, where the parent of the
+  // selected term in the tree view is need (releveant if multi parent).
+  // Used in double tree.
+  $direct_parents = [];
   $selected = _taxonomy_manager_tree_get_selected_terms($form['#value'], $direct_parents);
   if (!$form['#multiple'] && count($selected) > 1) {
     // There should only be one selected term here. Make sure this is the case.
-    $selected = array(key($selected) => key($selected));
+    $selected = [key($selected) => key($selected)];
   }
   $vid = $form['#vid'];
   foreach ($selected as $tid) {
@@ -929,32 +1057,41 @@ function taxonomy_manager_tree_validate($form, &$form_state) {
       form_set_error('', t('An illegal choice has been detected. Please contact the site administrator.'));
     }
   }
-  form_set_value($form, array('selected_terms' => $selected, 'selected_terms_direct_parents' => $direct_parents), $form_state);
+  form_set_value($form, [
+    'selected_terms' => $selected,
+    'selected_terms_direct_parents' => $direct_parents,
+  ], $form_state);
 }
 
 /**
- * checks if term id belongs to vocabulary
+ * Checks if term id belongs to vocabulary.
  *
- * @param $tid term id
- * @param $vid voc id
+ * @param $tid
+ *   term id
+ * @param $vid
+ *   voc id
+ *
  * @return true, if term belongs to voc, else false
  */
 function _taxonomy_manager_tree_term_valid($tid, $vid) {
   $term = taxonomy_term_load($tid);
-  if ($term->vid != $vid) return FALSE;
+  if ($term->vid != $vid) {
+    return FALSE;
+  }
   return TRUE;
 }
 
 /**
- * returns term ids of selected checkboxes
+ * Returns term ids of selected checkboxes.
  *
- * goes through nested form array recursivly
+ * Goes through nested form array recursivly.
  *
  * @param $form_values
+ *
  * @return an array with ids of selected terms
  */
-function _taxonomy_manager_tree_get_selected_terms($form_values, &$direct_parents = array(), $direct_parent = 0) {
-  $tids = array();
+function _taxonomy_manager_tree_get_selected_terms($form_values, &$direct_parents = [], $direct_parent = 0) {
+  $tids = [];
   if (is_array($form_values)) {
     foreach ($form_values as $tid => $form_value) {
       if (isset($form_value['checkbox']) && $tid && ($tid == $form_value['checkbox'])) {
@@ -972,7 +1109,7 @@ function _taxonomy_manager_tree_get_selected_terms($form_values, &$direct_parent
 }
 
 /**
- * returns language of a term (multilingual voc), if i18ntaxonomy enabled
+ * Returns language of a term (multilingual voc), if i18ntaxonomy enabled.
  */
 function _taxonomy_manager_term_get_lang($tid) {
   if (module_exists('i18n_taxonomy')) {
@@ -985,29 +1122,31 @@ function _taxonomy_manager_term_get_lang($tid) {
 }
 
 /**
- * theme function for root element
+ * Theme function for root element.
  *
  * @param $element
+ *
  * @return html output
  */
 function theme_taxonomy_manager_tree($variables) {
   $element = $variables['element'];
-  $tree = theme('taxonomy_manager_tree_elements', array('element' => $element['#elements']));
+  $tree = theme('taxonomy_manager_tree_elements', ['element' => $element['#elements']]);
   if ((!$element['#parent'] && !$element['#siblings_page']) || $element['#render_whole_tree']) {
     $element['#children'] = '<div id="' . $element['#id'] . '">';
     $element['#children'] .= $tree;
     $element['#children'] .= '</div>';
     $element['#title_display'] = 'none';
-    return theme('form_element', array('element' => $element));
+    return theme('form_element', ['element' => $element]);
   }
 
   return $tree;
 }
 
 /**
- * recursive theme function for term elements
+ * Recursive theme function for term elements.
  *
  * @param $element
+ *
  * @return html lists
  */
 function theme_taxonomy_manager_tree_elements($variables) {
@@ -1017,6 +1156,7 @@ function theme_taxonomy_manager_tree_elements($variables) {
   if (is_array($element)) {
     foreach (element_children($element) as $tid) {
       if (is_numeric($tid)) {
+        $element[$tid]['#attributes']['data-li-tid'] = $tid;
         $output .= '<li' . drupal_attributes($element[$tid]['#attributes']) . '>';
         if ((is_array($element[$tid]['#attributes']['class']) && in_array('has-children', $element[$tid]['#attributes']['class'])) || (isset($element[$tid]['children']) && is_array($element[$tid]['children']))) {
           $output .= '<div class="hitArea"></div>';
@@ -1044,10 +1184,10 @@ function theme_taxonomy_manager_tree_elements($variables) {
         }
 
         if (isset($element[$tid]['children']) && is_array($element[$tid]['children'])) {
-          $output .= theme('taxonomy_manager_tree_elements', array('element' => $element[$tid]['children']));
+          $output .= theme('taxonomy_manager_tree_elements', ['element' => $element[$tid]['children']]);
         }
 
-        $output .='</li>';
+        $output .= '</li>';
       }
     }
   }
@@ -1060,29 +1200,33 @@ function theme_taxonomy_manager_tree_elements($variables) {
 }
 
 /**
- * themes a checkbox, where a label can optional contain a link
+ * Themes a checkbox, where a label can optional contain a link.
  */
 function theme_taxonomy_manager_tree_checkbox($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'checkbox';
-  element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
+  element_set_attributes($element, [
+    'id',
+    'name',
+    '#return_value' => 'value',
+  ]);
 
   // Unchecked checkbox has #value of integer 0.
   if (!empty($element['#checked'])) {
     $element['#attributes']['checked'] = 'checked';
   }
-  _form_set_class($element, array('form-checkbox'));
+  _form_set_class($element, ['form-checkbox']);
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
 
   $title = $element['#title'];
   if (isset($element['#link'])) {
-    $attr = array();
+    $attr = [];
     $attr["class"][] = "term-data-link";
     $attr["class"][] = "term-data-link-id-" . $element['#return_value'];
     if (isset($element['#extra_info'])) {
       $attr["title"] = $element['#extra_info'];
     }
-    $title = l($title, $element['#link'], array('attributes' => $attr));
+    $title = l($title, $element['#link'], ['attributes' => $attr]);
   }
   else {
     $title = check_plain($title);
@@ -1090,26 +1234,30 @@ function theme_taxonomy_manager_tree_checkbox($variables) {
   $element['#children'] = '<label class="option">' . $output . ' ' . $title . '</label>';
   $element['#title_display'] = 'none';
 
-  return theme('form_element', array('element' => $element));
+  return theme('form_element', ['element' => $element]);
 }
 
 /**
- * themes a radio, where a label can optional contain a link
+ * Themes a radio, where a label can optional contain a link.
  */
 function theme_taxonomy_manager_tree_radio($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'radio';
-  element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
+  element_set_attributes($element, [
+    'id',
+    'name',
+    '#return_value' => 'value',
+  ]);
   if (isset($element['#return_value']) && $element['#value'] !== FALSE && $element['#value'] == $element['#return_value']) {
     $element['#attributes']['checked'] = 'checked';
   }
-  _form_set_class($element, array('form-radio'));
+  _form_set_class($element, ['form-radio']);
 
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
 
   $title = $element['#title'];
   if (isset($element['#link'])) {
-    $title = l($title, $element['#link'], array('attributes' => array("class" => "term-data-link term-data-link-id-" . $element['#return_value'])));
+    $title = l($title, $element['#link'], ['attributes' => ["class" => "term-data-link term-data-link-id-" . $element['#return_value']]]);
   }
   else {
     $title = check_plain($title);
@@ -1117,5 +1265,5 @@ function theme_taxonomy_manager_tree_radio($variables) {
   $element['#children'] = '<label class="option">' . $output . ' ' . $title . '</label>';
   $element['#title_display'] = 'none';
 
-  return theme('form_element', array('element' => $element));
+  return theme('form_element', ['element' => $element]);
 }

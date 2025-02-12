@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update and uninstall functions for the Taxonomy Manager
+ * Install, update and uninstall functions for the Taxonomy Manager.
  */
 
 /**
@@ -17,7 +17,7 @@ function taxonomy_manager_uninstall() {
  * Resets 'taxonomy_override_selector' variable.
  */
 function taxonomy_manager_update_7001() {
-  // remove parent selector in core taxonomy term edit pages
+  // Remove parent selector in core taxonomy term edit pages.
   variable_set('taxonomy_override_selector', FALSE);
   return t('Successfully updated Taxonomy Manager settings.');
 }

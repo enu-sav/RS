@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * feeds_import.feeds_importer_default.inc
@@ -11,7 +12,7 @@ function feeds_import_feeds_importer_default() {
   $export = array();
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'node';
   $feeds_importer->config = array(
@@ -70,7 +71,7 @@ function feeds_import_feeds_importer_default() {
   $export['node'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
-  $feeds_importer->disabled = TRUE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'user';
   $feeds_importer->config = array(

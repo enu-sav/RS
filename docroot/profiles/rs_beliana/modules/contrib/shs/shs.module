@@ -58,7 +58,7 @@ function shs_json() {
       // Get arguments and validate them.
       $post_args = (isset($_POST['arguments']) && is_array($_POST['arguments'])) ? $_POST['arguments'] : array();
       $arguments = _shs_json_callback_get_arguments($valid_callbacks[$_callback], $post_args);
-      if (($callback_result = call_user_func_array($valid_callbacks[$_callback]['callback'], $arguments)) !== FALSE) {
+      if (($callback_result = call_user_func_array($valid_callbacks[$_callback]['callback'], array_values($arguments))) !== FALSE) {
         $result['success'] = TRUE;
         $result['data'] = $callback_result;
       }

@@ -32,9 +32,12 @@ define('FEEDS_FILE_EXISTS_SKIP', 5);
 function file_feeds_processor_targets($entity_type, $bundle_name) {
   $targets = array();
 
-  foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
+  foreach (feeds_field_info_instances($entity_type, $bundle_name) as $name => $instance) {
     $info = field_info_field($name);
-
+    // Continue if the field was not found.
+    if (!$info) {
+      continue;
+    }
     if (in_array($info['type'], array('file', 'image'))) {
       $targets[$name . ':uri'] = array(
         'name' => t('@label: URI', array('@label' => $instance['label'])),
@@ -190,7 +193,6 @@ function file_feeds_set_target(FeedsSource $source, $entity, $target, array $val
           }
           catch (Exception $e) {
             watchdog('feeds', check_plain($e->getMessage()));
-            continue;
           }
         }
         break;
