@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Contains FeedsContentTypeTest.
+ */
+
+/**
+ * Tests for when an importer is attached to a content type.
+ */
+class FeedsCleanTest extends FeedsWebTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Feed clean',
+      'description' => 'Tests with cleaning up items that no longer appear in the source.',
+      'group' => 'Feeds',
+    );
+  }
+
+  /**
+   * Set up test.
+   */
+  public function setUp() {
+    parent::setUp();
+
+    // Include FeedsProcessor.inc so processor related constants are available.
+    module_load_include('inc', 'feeds', 'plugins/FeedsProcessor');
+
+    // Create node type.
+    $node_type = $this->drupalCreateContentType();
+
+    // Create and configure importer.
+    $this->createImporterConfiguration('Content CSV', 'csv');
+    $this->setPlugin('csv', 'FeedsFileFetcher');
+    $this->setPlugin('csv', 'FeedsCSVParser');
+    $this->setSettings('csv', 'FeedsNodeProcessor', array(
+      'bundle' => $node_type->type,
+      'update_non_existent' => FEEDS_DELETE_NON_EXISTENT,
+      'update_existing' => FEEDS_UPDATE_EXISTING,
+    ));
+    $this->addMappings('csv', array(
+      0 => array(
+        'source' => 'guid',
+        'target' => 'guid',
+      ),
+      1 => array(
+        'source' => 'title',
+        'target' => 'title',
+      ),
+    ));
+  }
+
+  /**
+   * Tests importing an empty source the second time.
+   */
+  public function testWithEmptySource() {
+    $this->importFile('csv', $this->absolutePath() . '/tests/feeds/content.csv');
+    $this->assertText('Created 2 nodes.');
+    $this->assertNodeCount(2);
+
+    // Now import an empty file.
+    $this->importFile('csv', $this->absolutePath() . '/tests/feeds/empty.csv');
+    $this->assertText('The CSV file is empty.');
+  }
+
+}

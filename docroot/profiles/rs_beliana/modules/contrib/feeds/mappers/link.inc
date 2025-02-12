@@ -11,7 +11,7 @@
 function link_feeds_processor_targets($entity_type, $bundle_name) {
   $targets = array();
 
-  foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
+  foreach (feeds_field_info_instances($entity_type, $bundle_name) as $name => $instance) {
     $info = field_info_field($name);
     if ($info['type'] == 'link_field') {
       if (array_key_exists('url', $info['columns'])) {

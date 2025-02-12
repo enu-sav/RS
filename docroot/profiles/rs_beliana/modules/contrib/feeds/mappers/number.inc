@@ -16,7 +16,7 @@ function number_feeds_processor_targets($entity_type, $bundle_name) {
     'number_decimal',
     'number_float',
   );
-  foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
+  foreach (feeds_field_info_instances($entity_type, $bundle_name) as $name => $instance) {
     $info = field_info_field($name);
 
     if (in_array($info['type'], $numeric_types)) {

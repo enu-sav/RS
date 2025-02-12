@@ -25,7 +25,7 @@ function field_feeds_presave(FeedsSource $source, $entity, $item, $entity_id) {
 
   list(, , $bundle) = entity_extract_ids($entity_type, $entity);
 
-  foreach (field_info_instances($entity_type, $bundle) as $instance) {
+  foreach (feeds_field_info_instances($entity_type, $bundle) as $instance) {
     $field_name = $instance['field_name'];
 
     // Skip fields that Feeds isn't mapping to, and empty fields.

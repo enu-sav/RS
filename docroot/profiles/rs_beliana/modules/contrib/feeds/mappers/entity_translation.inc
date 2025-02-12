@@ -24,7 +24,7 @@ function entity_translation_feeds_presave(FeedsSource $source, $entity, $item, $
 
   $languages_seen = array();
 
-  foreach (field_info_instances($entity_type, $bundle) as $instance) {
+  foreach (feeds_field_info_instances($entity_type, $bundle) as $instance) {
     $field_name = $instance['field_name'];
 
     // No values in this field, skip it.
