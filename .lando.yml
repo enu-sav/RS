@@ -9,7 +9,7 @@ config:
   xdebug: true
 services:
   appserver:
-#    scanner: false
+    scanner: false
     config:
       php: .lando/php.ini
   database:
