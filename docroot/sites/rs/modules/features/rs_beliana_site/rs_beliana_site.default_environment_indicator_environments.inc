@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_site.default_environment_indicator_environments.inc
@@ -18,10 +19,10 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment->regexurl = '';
   $environment->settings = array(
     'color' => '#37aa33',
+    'fixed' => 0,
+    'position' => 'top',
     'text_color' => '#ffffff',
     'weight' => '99',
-    'position' => 'top',
-    'fixed' => 0,
   );
   $export['default_environment'] = $environment;
 
@@ -33,10 +34,10 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment->regexurl = 'dev.beliana.sav.sk';
   $environment->settings = array(
     'color' => '#37aa33',
+    'fixed' => 1,
+    'position' => 'top',
     'text_color' => '#ffffff',
     'weight' => '99',
-    'position' => 'top',
-    'fixed' => 1,
   );
   $export['dev'] = $environment;
 
@@ -48,10 +49,10 @@ function rs_beliana_site_default_environment_indicator_environment() {
   $environment->regexurl = 'rs.beliana.sav.sk';
   $environment->settings = array(
     'color' => '#d0d0d0',
+    'fixed' => 1,
+    'position' => 'top',
     'text_color' => '#ffffff',
     'weight' => '',
-    'position' => 'top',
-    'fixed' => 1,
   );
   $export['prod'] = $environment;
 

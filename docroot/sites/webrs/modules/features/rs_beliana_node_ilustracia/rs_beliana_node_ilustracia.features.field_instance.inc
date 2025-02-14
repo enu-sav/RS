@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_ilustracia.features.field_instance.inc
@@ -325,9 +326,11 @@ function rs_beliana_node_ilustracia_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'title',
         'settings' => array(
+          'enable_trim' => FALSE,
           'title_class' => '',
           'title_link' => '',
           'title_style' => '',
+          'trim_length' => 50,
         ),
         'type' => 'title_linked',
         'weight' => 22,

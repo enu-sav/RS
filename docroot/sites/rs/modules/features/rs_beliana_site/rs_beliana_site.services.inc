@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_site.services.inc
@@ -21,8 +22,8 @@ function rs_beliana_site_default_services_endpoint() {
   );
   $endpoint->server_settings = array(
     'formatters' => array(
-      'json' => TRUE,
       'bencode' => FALSE,
+      'json' => TRUE,
       'jsonp' => FALSE,
       'php' => FALSE,
       'xml' => FALSE,
@@ -38,10 +39,10 @@ function rs_beliana_site_default_services_endpoint() {
   $endpoint->resources = array(
     'node' => array(
       'operations' => array(
-        'retrieve' => array(
+        'create' => array(
           'enabled' => '1',
         ),
-        'create' => array(
+        'retrieve' => array(
           'enabled' => '1',
         ),
         'update' => array(
@@ -84,8 +85,8 @@ function rs_beliana_site_default_services_endpoint() {
   );
   $endpoint->server_settings = array(
     'formatters' => array(
-      'json' => TRUE,
       'bencode' => FALSE,
+      'json' => TRUE,
       'jsonp' => FALSE,
       'php' => FALSE,
       'xml' => FALSE,
@@ -148,8 +149,8 @@ function rs_beliana_site_default_services_endpoint() {
   );
   $endpoint->server_settings = array(
     'formatters' => array(
-      'json' => TRUE,
       'bencode' => FALSE,
+      'json' => TRUE,
       'jsonp' => FALSE,
       'php' => FALSE,
       'xml' => FALSE,

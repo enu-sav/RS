@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_views.strongarm.inc

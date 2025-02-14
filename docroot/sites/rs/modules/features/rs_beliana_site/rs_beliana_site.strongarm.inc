@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_site.strongarm.inc
@@ -22,9 +23,9 @@ function rs_beliana_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'admin_menu_components';
   $strongarm->value = array(
+    'admin_menu.account' => TRUE,
     'admin_menu.icon' => TRUE,
     'admin_menu.menu' => TRUE,
-    'admin_menu.account' => TRUE,
     'admin_menu.search' => FALSE,
     'admin_menu.users' => FALSE,
   );
@@ -237,7 +238,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'jquery_update_latest_versions_checked';
-  $strongarm->value = 1738562401;
+  $strongarm->value = 1739480401;
   $export['jquery_update_latest_versions_checked'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -245,16 +246,16 @@ function rs_beliana_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'language_negotiation_language';
   $strongarm->value = array(
+    'language-default' => array(
+      'callbacks' => array(
+        'language' => 'language_from_default',
+      ),
+    ),
     'locale-user' => array(
       'callbacks' => array(
         'language' => 'locale_language_from_user',
       ),
       'file' => 'includes/locale.inc',
-    ),
-    'language-default' => array(
-      'callbacks' => array(
-        'language' => 'language_from_default',
-      ),
     ),
   );
   $export['language_negotiation_language'] = $strongarm;
@@ -631,29 +632,29 @@ function rs_beliana_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'theme_adminimal_settings';
   $strongarm->value = array(
-    'toggle_logo' => 1,
-    'toggle_name' => 1,
-    'toggle_slogan' => 1,
-    'toggle_node_user_picture' => 1,
+    'adminimal_theme_skin' => 'default',
+    'avoid_custom_font' => 0,
+    'custom_css' => 0,
+    'default_favicon' => 1,
+    'default_logo' => 1,
+    'display_icons_config' => 1,
+    'favicon_path' => '',
+    'favicon_upload' => '',
+    'logo_path' => '',
+    'logo_upload' => '',
+    'media_query_mobile' => 'only screen and (max-width: 480px)',
+    'media_query_tablet' => 'only screen and (min-width : 481px) and (max-width : 1024px)',
+    'style_checkboxes' => 1,
     'toggle_comment_user_picture' => 1,
     'toggle_comment_user_verification' => 1,
     'toggle_favicon' => 1,
+    'toggle_logo' => 1,
     'toggle_main_menu' => 1,
+    'toggle_name' => 1,
+    'toggle_node_user_picture' => 1,
     'toggle_secondary_menu' => 1,
-    'default_logo' => 1,
-    'logo_path' => '',
-    'logo_upload' => '',
-    'default_favicon' => 1,
-    'favicon_path' => '',
-    'favicon_upload' => '',
-    'style_checkboxes' => 1,
-    'display_icons_config' => 1,
-    'avoid_custom_font' => 0,
+    'toggle_slogan' => 1,
     'use_custom_media_queries' => 0,
-    'media_query_mobile' => 'only screen and (max-width: 480px)',
-    'media_query_tablet' => 'only screen and (min-width : 481px) and (max-width : 1024px)',
-    'custom_css' => 0,
-    'adminimal_theme_skin' => 'default',
   );
   $export['theme_adminimal_settings'] = $strongarm;
 
@@ -669,20 +670,20 @@ function rs_beliana_site_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'theme_settings';
   $strongarm->value = array(
-    'toggle_logo' => 1,
-    'toggle_name' => 1,
-    'toggle_slogan' => 1,
-    'toggle_node_user_picture' => 1,
+    'default_favicon' => 1,
+    'default_logo' => 0,
+    'favicon_path' => '',
+    'favicon_upload' => '',
+    'logo_path' => 'public://beliana_0.png',
     'toggle_comment_user_picture' => 1,
     'toggle_comment_user_verification' => 1,
     'toggle_favicon' => 1,
+    'toggle_logo' => 1,
     'toggle_main_menu' => 1,
+    'toggle_name' => 1,
+    'toggle_node_user_picture' => 1,
     'toggle_secondary_menu' => 1,
-    'default_logo' => 0,
-    'logo_path' => 'public://beliana_0.png',
-    'default_favicon' => 1,
-    'favicon_path' => '',
-    'favicon_upload' => '',
+    'toggle_slogan' => 1,
   );
   $export['theme_settings'] = $strongarm;
 

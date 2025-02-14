@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_views.views_default.inc
@@ -8304,12 +8305,6 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['fields']['field_datum_vyplatenia']['id'] = 'field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['table'] = 'field_data_field_datum_vyplatenia';
   $handler->display->display_options['fields']['field_datum_vyplatenia']['field'] = 'field_datum_vyplatenia';
-  /* Pole: Obsah: Lexikálna skupina */
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
   /* Pole: Obsah: Ilustrácie */
   $handler->display->display_options['fields']['field_ilustracia']['id'] = 'field_ilustracia';
   $handler->display->display_options['fields']['field_ilustracia']['table'] = 'field_data_field_ilustracia';
@@ -8322,6 +8317,17 @@ Heslá treba preradiť do stavov:
     'links' => 1,
   );
   $handler->display->display_options['fields']['field_ilustracia']['delta_offset'] = '0';
+  /* Pole: Obsah: Lexikálna skupina */
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Obsah: Súbor */
+  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';

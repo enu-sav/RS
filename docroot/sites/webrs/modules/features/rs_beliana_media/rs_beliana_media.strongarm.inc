@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_media.strongarm.inc
@@ -44,103 +45,103 @@ function rs_beliana_media_strongarm() {
   $strongarm->name = 'imce_profiles';
   $strongarm->value = array(
     1 => array(
-      'name' => 'User-1',
-      'usertab' => 1,
-      'filesize' => 0,
-      'quota' => 0,
-      'tuquota' => 0,
-      'extensions' => '*',
       'dimensions' => '1200x1200',
-      'filenum' => 0,
       'directories' => array(
         0 => array(
-          'name' => '.',
-          'subnav' => 1,
           'browse' => 1,
-          'upload' => 1,
-          'thumb' => 1,
           'delete' => 1,
+          'name' => '.',
           'resize' => 1,
+          'subnav' => 1,
+          'thumb' => 1,
+          'upload' => 1,
         ),
       ),
+      'extensions' => '*',
+      'filenum' => 0,
+      'filesize' => 0,
+      'name' => 'User-1',
+      'quota' => 0,
       'thumbnails' => array(
         0 => array(
-          'name' => 'Small',
           'dimensions' => '90x90',
+          'name' => 'Small',
           'prefix' => 'small_',
           'suffix' => '',
         ),
         1 => array(
-          'name' => 'Medium',
           'dimensions' => '120x120',
+          'name' => 'Medium',
           'prefix' => 'medium_',
           'suffix' => '',
         ),
         2 => array(
-          'name' => 'Large',
           'dimensions' => '180x180',
+          'name' => 'Large',
           'prefix' => 'large_',
           'suffix' => '',
         ),
       ),
+      'tuquota' => 0,
+      'usertab' => 1,
     ),
     2 => array(
-      'name' => 'Sample profile',
-      'usertab' => 1,
-      'filesize' => '1',
-      'quota' => '2',
-      'tuquota' => '0',
-      'extensions' => 'gif png jpg jpeg',
       'dimensions' => '800x600',
-      'filenum' => '1',
       'directories' => array(
         0 => array(
-          'name' => 'u%uid',
-          'subnav' => 0,
           'browse' => 1,
-          'upload' => 1,
-          'thumb' => 0,
           'delete' => 1,
+          'name' => 'u%uid',
           'resize' => 0,
+          'subnav' => 0,
+          'thumb' => 0,
+          'upload' => 1,
         ),
       ),
+      'extensions' => 'gif png jpg jpeg',
+      'filenum' => '1',
+      'filesize' => '1',
+      'name' => 'Sample profile',
+      'quota' => '2',
       'thumbnails' => array(
         0 => array(
-          'name' => 'Thumb',
           'dimensions' => '90x90',
+          'name' => 'Thumb',
           'prefix' => 'thumb_',
           'suffix' => '',
         ),
       ),
+      'tuquota' => '0',
+      'usertab' => 1,
     ),
     3 => array(
-      'name' => 'redaktor',
-      'usertab' => 0,
-      'filesize' => '1',
-      'quota' => '0',
-      'tuquota' => '0',
-      'extensions' => 'gif png jpg jpeg svg',
       'dimensions' => '0',
-      'filenum' => '0',
       'directories' => array(
         0 => array(
-          'name' => 'imce/u%uid',
-          'subnav' => 1,
           'browse' => 1,
-          'upload' => 1,
-          'thumb' => 1,
           'delete' => 1,
+          'name' => 'imce/u%uid',
           'resize' => 0,
+          'subnav' => 1,
+          'thumb' => 1,
+          'upload' => 1,
         ),
       ),
+      'extensions' => 'gif png jpg jpeg svg',
+      'filenum' => '0',
+      'filesize' => '1',
+      'name' => 'redaktor',
+      'quota' => '0',
       'thumbnails' => array(
         0 => array(
-          'name' => 'Thumb',
           'dimensions' => '90x90',
+          'name' => 'Thumb',
           'prefix' => 'thumb_',
           'suffix' => '',
         ),
       ),
+      'tuquota' => '0',
+      'usertab' => 0,
     ),
   );
   $export['imce_profiles'] = $strongarm;
@@ -150,73 +151,73 @@ function rs_beliana_media_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_roles_profiles';
   $strongarm->value = array(
-    5 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    4 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    10 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    7 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    12 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    6 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    3 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    13 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    15 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    16 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    14 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    8 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    9 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    17 => array(
-      'weight' => '0',
-      'public_pid' => '3',
-    ),
-    18 => array(
-      'weight' => '0',
+    1 => array(
       'public_pid' => 0,
+      'weight' => 12,
     ),
     2 => array(
+      'public_pid' => 0,
       'weight' => 11,
-      'public_pid' => 0,
     ),
-    1 => array(
-      'weight' => 12,
+    3 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    4 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    5 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    6 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    7 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    8 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    9 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    10 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    12 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    13 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    14 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    15 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    16 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    17 => array(
+      'public_pid' => '3',
+      'weight' => '0',
+    ),
+    18 => array(
       'public_pid' => 0,
+      'weight' => '0',
     ),
   );
   $export['imce_roles_profiles'] = $strongarm;

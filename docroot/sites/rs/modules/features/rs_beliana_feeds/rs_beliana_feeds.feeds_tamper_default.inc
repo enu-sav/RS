@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_feeds.feeds_tamper_default.inc
@@ -18,9 +19,9 @@ function rs_beliana_feeds_feeds_tamper_default() {
   $feeds_tamper->source = 'ls';
   $feeds_tamper->plugin_id = 'explode';
   $feeds_tamper->settings = array(
-    'separator' => ';',
     'limit' => '',
     'real_separator' => ';',
+    'separator' => ';',
   );
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'Explode';
