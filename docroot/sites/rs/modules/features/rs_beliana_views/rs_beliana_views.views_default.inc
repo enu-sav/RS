@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_views.views_default.inc
@@ -12094,6 +12095,11 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['fields']['field_lexikalna_skupina']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
+  /* Pole: Obsah: Súbor */
+  $handler->display->display_options['fields']['field_taxsubor']['id'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['table'] = 'field_data_field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['field'] = 'field_taxsubor';
+  $handler->display->display_options['fields']['field_taxsubor']['type'] = 'taxonomy_term_reference_plain';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';

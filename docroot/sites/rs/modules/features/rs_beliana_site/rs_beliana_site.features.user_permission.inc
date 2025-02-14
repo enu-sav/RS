@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_site.features.user_permission.inc

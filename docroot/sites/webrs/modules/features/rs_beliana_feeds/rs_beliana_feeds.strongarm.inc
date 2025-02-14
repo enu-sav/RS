@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_feeds.strongarm.inc
@@ -15,24 +16,17 @@ function rs_beliana_feeds_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'default_feeds_tamper';
   $strongarm->value = array(
-    'bb-iltext-explode' => FALSE,
-    'bb-editor-explode' => FALSE,
+    'bb-atrib-explode' => FALSE,
     'bb-autor-explode' => FALSE,
-    'bb-kategoria-explode' => FALSE,
     'bb-datum-explode' => FALSE,
     'bb-den-explode' => FALSE,
-    'bb-atrib-explode' => FALSE,
-    'beliana_importovanie_gh-kategoria-explode' => TRUE,
-    'beliana_importovanie_gh-geo-explode' => FALSE,
-    'import_ilustr_cie-kategoria-explode' => FALSE,
+    'bb-editor-explode' => FALSE,
+    'bb-iltext-explode' => FALSE,
     'bb-ilustracia-explode' => FALSE,
-    'reimport_gh-geo-explode' => FALSE,
-    'reimport_gh-ilustracia-explode' => FALSE,
-    'import_ilustr_cie-povod_ilustracie-find_replace' => FALSE,
-    'import_ilustr_cie-povod_ilustracie-find_replace2' => FALSE,
-    'import_ilustr_cie-povod_ilustracie-find_replace3' => FALSE,
-    'import_ilustr_cie-povod_ilustracie-find_replace4' => FALSE,
-    'import_ilustr_cie-povod_ilustracie-find_replace5' => FALSE,
+    'bb-kategoria-explode' => FALSE,
+    'beliana_importovanie_gh-geo-explode' => FALSE,
+    'beliana_importovanie_gh-kategoria-explode' => TRUE,
+    'import_ilustr_cie-kategoria-explode' => FALSE,
     'import_ilustr_cie-licencia-find_replace_lic1' => FALSE,
     'import_ilustr_cie-licencia-find_replace_lic2' => FALSE,
     'import_ilustr_cie-licencia-find_replace_lic3' => FALSE,
@@ -42,10 +36,17 @@ function rs_beliana_feeds_strongarm() {
     'import_ilustr_cie-licencia-find_replace_lic7' => FALSE,
     'import_ilustr_cie-licencia-find_replace_lic8' => FALSE,
     'import_ilustr_cie-licencia-find_replace_lic9' => FALSE,
-    'reimport_exp_il-kategoria-explode' => FALSE,
-    'reimport_exp_il-pouzit-explode' => FALSE,
+    'import_ilustr_cie-povod_ilustracie-find_replace' => FALSE,
+    'import_ilustr_cie-povod_ilustracie-find_replace2' => FALSE,
+    'import_ilustr_cie-povod_ilustracie-find_replace3' => FALSE,
+    'import_ilustr_cie-povod_ilustracie-find_replace4' => FALSE,
+    'import_ilustr_cie-povod_ilustracie-find_replace5' => FALSE,
     'reimport_exp_il-datum_prevzatia-strtotime' => FALSE,
+    'reimport_exp_il-kategoria-explode' => FALSE,
     'reimport_exp_il-nazverejnenie-explode' => FALSE,
+    'reimport_exp_il-pouzit-explode' => FALSE,
+    'reimport_gh-geo-explode' => FALSE,
+    'reimport_gh-ilustracia-explode' => FALSE,
   );
   $export['default_feeds_tamper'] = $strongarm;
 

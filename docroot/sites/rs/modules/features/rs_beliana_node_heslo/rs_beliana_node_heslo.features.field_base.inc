@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_heslo.features.field_base.inc

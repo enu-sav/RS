@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_heslo.features.field_instance.inc
@@ -867,9 +868,11 @@ Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
         'label' => 'inline',
         'module' => 'title',
         'settings' => array(
+          'enable_trim' => FALSE,
           'title_class' => '',
           'title_link' => '',
           'title_style' => '',
+          'trim_length' => 50,
         ),
         'type' => 'title_linked',
         'weight' => 17,
