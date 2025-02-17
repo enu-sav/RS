@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_users.strongarm.inc
@@ -43,17 +44,14 @@ function rs_beliana_users_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_user__user';
   $strongarm->value = array(
-    'view_modes' => array(),
     'extra_fields' => array(
+      'display' => array(),
       'form' => array(
-        'ckeditor' => array(
-          'weight' => '10',
-        ),
         'account' => array(
           'weight' => '1',
         ),
-        'timezone' => array(
-          'weight' => '9',
+        'ckeditor' => array(
+          'weight' => '10',
         ),
         'password_policy' => array(
           'weight' => '0',
@@ -61,9 +59,12 @@ function rs_beliana_users_strongarm() {
         'privatemsg' => array(
           'weight' => '8',
         ),
+        'timezone' => array(
+          'weight' => '9',
+        ),
       ),
-      'display' => array(),
     ),
+    'view_modes' => array(),
   );
   $export['field_bundle_settings_user__user'] = $strongarm;
 
