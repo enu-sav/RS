@@ -17,7 +17,9 @@ function rs_beliana_users_default_services_endpoint() {
   $endpoint->name = 'users';
   $endpoint->server = 'rest_server';
   $endpoint->path = 'api/users';
-  $endpoint->authentication = array();
+  $endpoint->authentication = array(
+    'services' => 'services',
+  );
   $endpoint->server_settings = array(
     'formatters' => array(
       'bencode' => FALSE,
