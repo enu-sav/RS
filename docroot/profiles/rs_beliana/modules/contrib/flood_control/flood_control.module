@@ -28,3 +28,90 @@ function flood_control_variables() {
     'contact_threshold_window' => 3600,
   );
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function flood_control_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'flood_control') . '/includes/views/',
+  );
+}
+
+/**
+ * Implements hook_user_operations().
+ */
+function flood_control_user_operations() {
+  return array(
+    'flood_control_unlock' => array(
+      'label' => t('Unlock the flood control lock for the selected users'),
+      'callback' => 'flood_control_operations_unlock_flood',
+    ),
+  );
+}
+
+/**
+ * User Operation to unlock flood control locked user accounts.
+ */
+function flood_control_operations_unlock_flood($accounts) {
+  $accounts = user_load_multiple($accounts);
+  foreach ($accounts as $account) {
+    if ($account != FALSE) {
+      flood_control_unflood_action($account);
+    }
+  }
+}
+
+/**
+ * Implements hook_action_info().
+ */
+function flood_control_action_info() {
+  return array(
+    'flood_control_unflood_action' => array(
+      'label' => t('Unlock the flood control lock for selected user'),
+      'type' => 'user',
+      'description' => t('Unlock the user'),
+      'configurable' => FALSE,
+      'hooks' => array(
+        'any' => TRUE,
+      ),
+      'aggregate' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Action: Mark an item to remove flood control.
+ */
+function flood_control_unflood_action(&$entity, $context = array()) {
+  if (isset($entity->uid)) {
+    $uid = $entity->uid;
+  }
+  elseif (isset($context['uid'])) {
+    $uid = $context['uid'];
+  }
+
+  if (isset($uid)) {
+    // Find any locks for this UID for any IP address. When an account gets
+    // flood control locked, both the IP and User ID + IP combo get locked.
+    if (!variable_get('user_failed_login_identifier_uid_only', FALSE)) {
+      $flooded_ips = db_select('flood', 'f')
+        ->fields('f')
+        ->condition('identifier', db_like($uid) . '-%', 'LIKE')
+        ->condition('event', 'failed_login_attempt_user')
+        ->execute()
+        ->fetchAll();
+      foreach ($flooded_ips as $flooded_ip) {
+        $ip = str_replace($uid . '-', '', $flooded_ip->identifier);
+        flood_clear_event('failed_login_attempt_ip', $ip);
+        flood_clear_event('failed_login_attempt_user', $flooded_ip->identifier);
+      }
+    }
+    else {
+      db_delete('flood')
+        ->condition('identifier', $uid)
+        ->execute();
+    }
+  }
+}
