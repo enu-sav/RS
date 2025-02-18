@@ -3,9 +3,12 @@ description = "Interface for hidden flood control options."
 core = 7.x
 configure = admin/config/system/flood-control
 
-; Information added by drupal.org packaging script on January 1, 1970 - 00:00
-version = "7.x-1.0"
+files[] = includes/views/views_handler_field_flood_control_locked.inc
+files[] = includes/views/views_handler_filter_flood_control_locked.inc
+files[] = includes/views/views_handler_flood_identifier.inc
+
+; Information added by Drupal.org packaging script on 2023-01-27
+version = "7.x-1.1"
 core = "7.x"
 project = "flood_control"
-datestamp = "1295633801"
-
+datestamp = "1674851537"
