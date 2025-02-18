@@ -89,7 +89,7 @@ function mailsystem_theme_theme_registry_alter(&$theme_registry) {
 }
 
 /**
- * Helper to swap themes safely for use by mailsystem_theme_theme_registry_alter().
+ * To swap themes safely for use by mailsystem_theme_theme_registry_alter().
  */
 function mailsystem_theme_swap_theme($new_theme) {
   // Make sure the theme exists.
