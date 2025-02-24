@@ -1,9 +1,11 @@
-name = Privatemsg Limits
-description = Allows to define limits for private messages including amount of sent messages per timeframe and number of recipients
+name = Privatemsg Groups
+description = Allows to send message to all members of a group.
 package = Mail
 core = 7.x
 dependencies[] = privatemsg
-files[]=privatemsg_limits.test
+dependencies[] = og (2.x)
+files[]=privatemsg_groups.test
+
 ; Information added by Drupal.org packaging script on 2016-09-11
 version = "7.x-2.0-alpha1"
 core = "7.x"
