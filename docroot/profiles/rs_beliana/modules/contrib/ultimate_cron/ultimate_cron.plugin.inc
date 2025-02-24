@@ -15,6 +15,8 @@ class UltimateCronPlugin {
   public $title = '';
   public $description = '';
   public $plugin;
+  public $type;
+  public $key;
   public $settings = array();
   static public $multiple = FALSE;
   static public $instances = array();

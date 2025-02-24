@@ -330,6 +330,7 @@ function ultimate_cron_requirements($phase) {
       }
 
       // Check for PHP safe mode.
+      // phpcs:ignore PHPCompatibility.IniDirectives.RemovedIniDirectives.safe_modeDeprecatedRemoved
       if (ini_get('safe_mode')) {
         $response['severity'] = $response['severity'] > REQUIREMENT_WARNING ? $response['severity'] : REQUIREMENT_WARNING;
         $response['value'][] = $t('Safe mode enabled');

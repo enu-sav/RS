@@ -649,8 +649,9 @@ function _ultimate_cron_job_import($code) {
   ob_start();
   eval($code);
   ob_end_clean();
+  $identifier = $export['identifier'];
 
-  if (empty(${$export['identifier']})) {
+  if (empty($$identifier)) {
     $errors = ob_get_contents();
     if (empty($errors)) {
       $errors = t('No item found.');
@@ -658,7 +659,7 @@ function _ultimate_cron_job_import($code) {
     return $errors;
   }
 
-  $item = ${$export['identifier']};
+  $item = $$identifier;
 
   $jobs = _ultimate_cron_job_load_all();
   if (isset($jobs[$item->name])) {
@@ -1784,4 +1785,11 @@ function ultimate_cron_watchdog_throwable($type, Throwable $exception, $message 
   require_once DRUPAL_ROOT . '/includes/errors.inc';
   $variables += _drupal_decode_exception($exception);
   watchdog($type, $message, $variables, $severity, $link);
+}
+
+/**
+ * Implements hook_nodejs_user_channels().
+ */
+function ultimate_cron_nodejs_user_channels($account) {
+  return array('ultimate_cron');
 }

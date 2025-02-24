@@ -10,6 +10,7 @@ class CronRule {
   public $rule = NULL;
   public $time = NULL;
   public $skew = 0;
+  public $parsed;
 
   public $allow_shorthand = FALSE;
   private static $ranges = array(
