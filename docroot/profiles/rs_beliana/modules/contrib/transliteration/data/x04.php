@@ -54,3 +54,13 @@ $variant['uk'] = array(
   0x18 => 'Y',
   0x38 => 'y',
 );
+
+// Overrides for Kazakh input.
+$variant['kk'] = array(
+  0x92 => 'G',
+  0x93 => 'g',
+  0x9A => 'Q',
+  0x9B => 'q',
+  0xD8 => 'A',
+  0xD9 => 'a',
+);

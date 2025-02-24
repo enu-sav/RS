@@ -29,6 +29,8 @@ function transliteration_install() {
 function transliteration_uninstall() {
   variable_del('transliteration_file_uploads');
   variable_del('transliteration_file_lowercase');
+  variable_del('transliteration_file_underscore_replacement_option');
+  variable_del('transliteration_file_underscore_replacement');
   variable_del('transliteration_search');
 }
 
@@ -38,6 +40,9 @@ function transliteration_uninstall() {
 function transliteration_update_7300() {
   // Delete all the transliteration_filter_no_known_transliteration_* variables
   // and then clear the variable cache.
-  db_query("DELETE FROM {variable} WHERE name LIKE 'transliteration_filter_no_known_transliteration_%'");
+  db_delete('variable')
+    ->condition('name', 'transliteration_filter_no_known_transliteration_%', 'like')
+    ->execute();
+
   cache_clear_all('variables', 'cache');
 }

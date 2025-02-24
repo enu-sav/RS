@@ -10,18 +10,19 @@
  *
  * Based on Mediawiki's UtfNormal::quickIsNFCVerify().
  *
- * @param $string
+ * @param string $string
  *   UTF-8 encoded text input.
- * @param $unknown
+ * @param string $unknown
  *   Replacement string for characters that do not have a suitable ASCII
  *   equivalent.
- * @param $source_langcode
+ * @param string $source_langcode
  *   Optional ISO 639 language code that denotes the language of the input and
  *   is used to apply language-specific variations. If the source language is
  *   not known at the time of transliteration, it is recommended to set this
  *   argument to the site default language to produce consistent results.
  *   Otherwise the current display language will be used.
- * @return
+ *
+ * @return string
  *   Transliterated text.
  */
 function _transliteration_process($string, $unknown = '?', $source_langcode = NULL) {
@@ -83,13 +84,12 @@ function _transliteration_process($string, $unknown = '?', $source_langcode = NU
     //
     // Since PHP is not the fastest language on earth, some of this code is a
     // little ugly with inner loop optimizations.
-
     $head = '';
     $chunk = strlen($str);
     // Counting down is faster. I'm *so* sorry.
     $len = $chunk + 1;
 
-    for ($i = -1; --$len; ) {
+    for ($i = -1; --$len;) {
       $c = $str[++$i];
       if ($remaining = $tail_bytes[$c]) {
         // UTF-8 head byte!
@@ -162,16 +162,17 @@ function _transliteration_process($string, $unknown = '?', $source_langcode = NU
 /**
  * Replaces a Unicode character using the transliteration database.
  *
- * @param $ord
+ * @param string $ord
  *   An ordinal Unicode character code.
- * @param $unknown
+ * @param string $unknown
  *   Replacement string for characters that do not have a suitable ASCII
  *   equivalent.
- * @param $langcode
+ * @param string $langcode
  *   Optional ISO 639 language code that denotes the language of the input and
  *   is used to apply language-specific variations.  Defaults to the current
  *   display language.
- * @return
+ *
+ * @return string
  *   ASCII replacement character.
  */
 function _transliteration_replace($ord, $unknown = '?', $langcode = NULL) {
@@ -188,11 +189,13 @@ function _transliteration_replace($ord, $unknown = '?', $langcode = NULL) {
     $file = drupal_get_path('module', 'transliteration') . '/data/' . sprintf('x%02x', $bank) . '.php';
     if (file_exists($file)) {
       include $file;
+      // $base and/or $variant can be exists by included file. @codingStandardsIgnoreLine
       if ($langcode != 'en' && isset($variant[$langcode])) {
-        // Merge in language specific mappings.
+        // Merge in language specific mappings. @codingStandardsIgnoreLine
         $map[$bank][$langcode] = $variant[$langcode] + $base;
       }
       else {
+        // @codingStandardsIgnoreLine
         $map[$bank][$langcode] = $base;
       }
     }

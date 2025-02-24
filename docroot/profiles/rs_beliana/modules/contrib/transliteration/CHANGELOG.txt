@@ -61,4 +61,3 @@ Transliteration 6.x-1.0, 2008-03-20
 Transliteration 5.x-1.0, 2007-12-09
 -----------------------------------
 Initial release.
-

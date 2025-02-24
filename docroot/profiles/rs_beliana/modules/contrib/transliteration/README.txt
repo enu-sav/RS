@@ -1,5 +1,19 @@
-﻿
--- SUMMARY --
+CONTENTS OF THIS FILE
+---------------------
+   
+ * Introduction
+ * Requirements
+ * Installation
+ * Configuration
+ * 3rd Party Integration
+ * Language Specific Replacements
+ * Credits
+ * Maintainers
+ * Useful Resources
+
+
+INTRODUCTION
+------------
 
 Provides a central transliteration service to other Drupal modules, and
 sanitizes file names while uploading.
@@ -10,36 +24,47 @@ Bug reports, feature suggestions and latest developments:
   http://drupal.org/project/issues/transliteration
 
 
--- INSTALLATION --
+REQUIREMENTS
+------------
 
-1. Install as usual, see http://drupal.org/node/70151 for further information.
-
-2. If you are installing to an existing Drupal site, you might want to fix
-   existing file names after installation, which will update all file names
-   containing non-ASCII characters. However, if you have manually entered links
-   to those files in any contents, these links will break since the original
-   files are renamed. Therefore it is a good idea to test the conversion
-   first on a copy of your web site. You'll find the retroactive conversion at
-   Configuration and modules >> Media >> File system >> Transliteration.
+No special requirements
 
 
--- CONFIGURATION --
+INSTALLATION
+------------
 
-This module doesn't require special permissions.
+Install as you would normally install a contributed Drupal module. See:
+https://drupal.org/documentation/install/modules-themes/modules-7 for further
+information.
 
-This module can be configured from the File system configuration page
-(Configuration and modules >> Media >> File system >> Settings).
-
-- Transliterate file names during upload: If you need more control over the
-  resulting file names you might want to disable this feature here and install
-  the FileField Paths module (http://drupal.org/project/filefield_paths)
-  instead.
-
-- Lowercase transliterated file names: It is recommended to enable this option
-  to prevent issues with case-insensitive file systems.
+If you are installing to an existing Drupal site, you might want to fix
+existing file names after installation, which will update all file names
+containing non-ASCII characters. However, if you have manually entered links
+to those files in any contents, these links will break since the original
+files are renamed. Therefore it is a good idea to test the conversion
+first on a copy of your web site. You'll find the retroactive conversion at
+Configuration and modules >> Media >> File system >> Transliteration.
 
 
--- 3RD PARTY INTEGRATION --
+CONFIGURATION
+-------------
+
+ * This project doesn't require special permissions.
+
+ * This project can be configured from the File system configuration page
+   (Configuration and modules » Media » File system » Settings).
+
+   - Transliterate file names during upload: If you need more control over the
+     resulting file names you might want to disable this feature here and
+     install the FileField Paths  (http://drupal.org/project/filefield_paths)
+     instead.
+
+   - Lowercase transliterated file names: It is recommended to enable this
+     option to prevent issues with case-insensitive file systems.
+
+
+3RD PARTY INTEGRATION
+---------------------
 
 Third party developers seeking an easy way to transliterate text or file names
 may use transliteration functions as follows:
@@ -64,9 +89,10 @@ Otherwise the current display language will be used, which might produce
 inconsistent results.
 
 
--- LANGUAGE SPECIFIC REPLACEMENTS --
+LANGUAGE SPECIFIC REPLACEMENTS
+------------------------------
 
-This module supports language specific variations in addition to the basic
+This project supports language specific variations in addition to the basic
 transliteration replacements. The following guide explains how to add them:
 
 1. First find the Unicode character code you want to replace. As an example,
@@ -98,13 +124,19 @@ specific replacements. If you think your overrides are useful for others please
 file a patch at http://drupal.org/project/issues/transliteration.
 
 
--- CREDITS --
+CREDITS
+-------
 
 Authors:
 * Stefan M. Kudwien (smk-ka) - http://drupal.org/user/48898
 * Daniel F. Kudwien (sun) - http://drupal.org/user/54136
 
-Maintainers:
+
+MAINTAINERS
+-----------
+* Stefan M. Kudwien (smk-ka) - http://drupal.org/user/48898
+* Renato Gonçalves (RenatoG) - https://www.drupal.org/user/3326031
+* Daniel F. Kudwien (sun) - http://drupal.org/user/54136
 * Andrei Mateescu (amateescu) - http://drupal.org/user/729614
 
 UTF-8 normalization is based on UtfNormal.php from MediaWiki
@@ -113,7 +145,8 @@ Text::Unidecode CPAN module
 (http://search.cpan.org/~sburke/Text-Unidecode-0.04/lib/Text/Unidecode.pm).
 
 
--- USEFUL RESOURCES --
+USEFUL RESOURCES
+----------------
 
 Unicode Code Converter:
 http://people.w3.org/rishida/tools/conversion/

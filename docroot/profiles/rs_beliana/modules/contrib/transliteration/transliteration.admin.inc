@@ -32,13 +32,17 @@ function transliteration_retroactive() {
   $rows = array();
   $header = array(
     t('Original file name'),
-    t('Transliterated file name')
+    t('Transliterated file name'),
   );
   foreach ($query->range(0, 10)->execute() as $file) {
     $filename = basename($file->uri);
-    $rows[] = array(l($filename, file_create_url($file->uri)), transliteration_clean_filename($filename));
+    $rows[] = array(
+      l($filename, file_create_url($file->uri)), transliteration_clean_filename($filename),
+    );
   }
-  $description = '<p><strong>' . t('The database currently lists @x_filenames containing non-ASCII characters.', array('@x_filenames' => format_plural($count, '1 file name', '@count file names'))) . '</strong><br />';
+  $description = '<p><strong>' . t('The database currently lists @x_filenames containing non-ASCII characters.', array(
+    '@x_filenames' => format_plural($count, '1 file name', '@count file names'),
+  )) . '</strong><br />';
   $description .= t('This count might be inaccurate, though, since some files may not need to be renamed. For example, off-site files will never be changed.') . '</p>';
   $description .= theme('table', array('header' => $header, 'rows' => $rows));
   if ($count > 10) {
@@ -96,15 +100,13 @@ function transliteration_retroactive_submit($form, &$form_state) {
         redirect_object_prepare($redirect, array(
           'source' => $wrapper->getDirectoryPath() . '/' . file_uri_target($file->uri),
           'redirect' => $wrapper->getDirectoryPath() . '/' . file_uri_target($destination),
-          'status_code' => 301)
+          'status_code' => 301,
+        )
         );
         redirect_save($redirect);
       }
       $file->uri = $destination;
-      // Don't use file_save() as it modifies the timestamp.
-      drupal_write_record('file_managed', $file, 'fid');
-      // Inform modules that the file has been updated.
-      module_invoke_all('file_update', $file);
+      file_save($file);
       $count++;
     }
     else {
@@ -118,7 +120,9 @@ function transliteration_retroactive_submit($form, &$form_state) {
     drupal_set_message($message, 'error');
   }
   else {
-    drupal_set_message(t('@filenames have been successfully transliterated.', array('@filenames' => format_plural($count, '1 file name', '@count file names'))));
+    drupal_set_message(t('@filenames have been successfully transliterated.', array(
+      '@filenames' => format_plural($count, '1 file name', '@count file names'),
+    )));
   }
 
   // Flush page cache.
@@ -126,20 +130,25 @@ function transliteration_retroactive_submit($form, &$form_state) {
 }
 
 /**
- * Builds a query that returns all file names from the database containing non-ASCII characters.
+ * File query.
  *
- * @return
+ * Builds a query that returns all file names from the database containing
+ * non-ASCII characters.
+ *
+ * @return mixed
  *   SelectQuery
  */
 function transliteration_file_query() {
   // Regular expressions are not supported by Drupal's database layer and
   // operators differ between manufacturers.
+  $field = 'uri';
   switch (db_driver()) {
     case 'mysql':
     case 'mysqli':
-      $operator = 'NOT REGEXP';
+      $operator = ' NOT REGEXP';
       if (variable_get('transliteration_file_lowercase', TRUE)) {
         $operator .= ' BINARY';
+        $field = 'CAST(uri AS BINARY)';
       }
       $regex = '/[a-z0-9_.-]+$';
       break;
@@ -160,5 +169,5 @@ function transliteration_file_query() {
 
   return db_select('file_managed')
     ->fields('file_managed')
-    ->condition('uri', $regex, $operator);
+    ->where($field . $operator . ' :regex', array(':regex' => $regex));
 }

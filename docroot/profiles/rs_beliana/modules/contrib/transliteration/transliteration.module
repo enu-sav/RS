@@ -69,6 +69,30 @@ function transliteration_form_system_file_system_settings_alter(&$form, &$form_s
       ),
     ),
   );
+
+  $form['transliteration']['transliteration_file_underscore_replacement_option'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Underscore replacement in the file names.'),
+    '#default_value' => variable_get('transliteration_file_underscore_replacement_option', TRUE),
+    '#description' => t('This is used to enaled replacing underscore in all file names.'),
+  );
+
+  $form['transliteration']['transliteration_file_underscore_replacement'] = array(
+    '#type' => 'radios',
+    '#title' => t('Replace underscore with'),
+    '#default_value' => variable_get('transliteration_file_underscore_replacement', '_'),
+    '#description' => t('Select what character to use when replacing Underscore in file names. It has no effect if transliteration has been disabled.'),
+    '#options' => array(
+      '_' => t('Default (_)'),
+      '-' => t('Hyphen (-)'),
+    ),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="transliteration_file_underscore_replacement_option"]' => array('checked' => FALSE),
+      ),
+    ),
+  );
+
   $form['buttons']['#weight'] = 1;
 }
 
@@ -98,15 +122,16 @@ function transliteration_form_search_admin_settings_alter(&$form, &$form_state) 
  * If multiple files have been submitted as an array, the names will be
  * processed recursively.
  *
- * @param $filename
+ * @param string $filename
  *   A file name, or an array of file names.
- * @param $source_langcode
+ * @param string $source_langcode
  *   Optional ISO 639 language code that denotes the language of the input and
  *   is used to apply language-specific variations. If the source language is
  *   not known at the time of transliteration, it is recommended to set this
  *   argument to the site default language to produce consistent results.
  *   Otherwise the current display language will be used.
- * @return
+ *
+ * @return mixed
  *   Sanitized file name, or array of sanitized file names.
  *
  * @see language_default()
@@ -124,14 +149,24 @@ function transliteration_clean_filename($filename, $source_langcode = NULL) {
   $filename = transliteration_get($filename, '', $source_langcode);
   // Replace whitespace.
   $filename = str_replace(' ', '_', $filename);
+
+  // Enable underscore options.
+  if (variable_get('transliteration_file_underscore_replacement_option', TRUE)) {
+    // Replace underscore.
+    $filename = str_replace('_', variable_get('transliteration_file_underscore_replacement', '_'), $filename);
+  }
+
   // Remove remaining unsafe characters.
   $filename = preg_replace('![^0-9A-Za-z_.-]!', '', $filename);
   // Remove multiple consecutive non-alphabetical characters.
   $filename = preg_replace('/(_)_+|(\.)\.+|(-)-+/', '\\1\\2\\3', $filename);
   // Force lowercase to prevent issues on case-insensitive file systems.
   if (variable_get('transliteration_file_lowercase', TRUE)) {
-    $filename = strtolower($filename);
+    $filename = drupal_strtolower($filename);
   }
+  // Allow other modules to alter the filename after processing.
+  drupal_alter('transliteration_clean_filename', $filename, $source_langcode);
+
   return $filename;
 }
 
@@ -142,18 +177,19 @@ function transliteration_clean_filename($filename, $source_langcode = NULL) {
  * represent it in US-ASCII characters by conveying, in Roman letters, the
  * pronunciation expressed by the text in some other writing system.
  *
- * @param $text
+ * @param string $text
  *   UTF-8 encoded text input.
- * @param $unknown
+ * @param string $unknown
  *   Replacement string for characters that do not have a suitable ASCII
  *   equivalent.
- * @param $source_langcode
+ * @param string $source_langcode
  *   Optional ISO 639 language code that denotes the language of the input and
  *   is used to apply language-specific variations. If the source language is
  *   not known at the time of transliteration, it is recommended to set this
  *   argument to the site default language to produce consistent results.
  *   Otherwise the current display language will be used.
- * @return
+ *
+ * @return string
  *   Transliterated text.
  *
  * @see language_default()
@@ -181,10 +217,12 @@ function transliteration_init() {
         $langcode = $_POST['language'];
       }
     }
-    foreach ($_FILES['files']['name'] as $field => $filename) {
-      // Keep a copy of the unaltered file name.
-      $_FILES['files']['orig_name'][$field] = $filename;
-      $_FILES['files']['name'][$field] = transliteration_clean_filename($filename, $langcode);
+    if (is_array($_FILES['files']['name'])) {
+      foreach ($_FILES['files']['name'] as $field => $filename) {
+        // Keep a copy of the unaltered file name.
+        $_FILES['files']['orig_name'][$field] = $filename;
+        $_FILES['files']['name'][$field] = transliteration_clean_filename($filename, $langcode);
+      }
     }
   }
 }
@@ -229,7 +267,7 @@ function transliteration_filter_info() {
       'process callback' => '_transliteration_filter_process',
       'settings callback' => '_transliteration_filter_settings',
       'default settings' => array(
-        'no_known_transliteration' => '?'
+        'no_known_transliteration' => '?',
       ),
       'tips callback' => '_transliteration_filter_tips',
     ),
@@ -254,11 +292,33 @@ function _transliteration_filter_settings($form, &$form_state, $filter, $format,
       '#type' => 'textfield',
       '#title' => t('Placeholder for characters with no known US-ASCII equivalent'),
       '#size' => 2,
-      // The maximum length is 5 in order to accommodate unicode multibyte input.
+      // The maximum length is 5 in order to accommodate unicode multibyte
+      // input.
       '#maxlength' => 5,
       '#default_value' => $filter->settings['no_known_transliteration'],
-    )
+    ),
   );
+}
+
+/**
+ * Implements hook_help().
+ */
+function transliteration_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#transliteration':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides a central transliteration service to other Drupal modules, and sanitizes file names while uploading.') . '</p>';
+      $output .= '<p>' . t('Provides one-way string transliteration (romanization) and cleans file names during upload by replacing unwanted characters..') . '</p>';
+      $output .= '<p>' . t('Generally spoken, it takes Unicode text and tries to represent it in US-ASCII characters (universally displayable, unaccented characters) by attempting to transliterate the pronunciation expressed by the text in some other writing system to Roman letters..') . '</p>';
+      $output .= '<p>' . t('According to Unidecode, from which most of the transliteration data has been derived, "Russian and Greek seem to work passably. But it works quite bad on Japanese and Thai.".') . '</p>';
+      $output .= '<h3>' . t('Usage') . '</h3>';
+      $output .= '<p>' . t("If you are installing to an existing Drupal site, you might want to fix existing file names after installation, which will update all file names containing non-ASCII characters. However, if you have manually entered links to those files in any contents, these links will break since the original files are renamed. Therefore it is a good idea to test the conversion first on a copy of your web site. You'll find the retroactive conversion at Configuration and modules >> Media >> File system >> Transliteration.") . '</p>';
+      $output .= '<p>' . t("This project doesn't require special permissions.") . '</p>';
+      $output .= '<p>' . t('This project can be configured from the File system configuration page (Configuration and modules » Media » File system » Settings).') . '</p>';
+      $output .= '<p>' . t('Transliterate file names during upload: If you need more control over the resulting file names you might want to disable this feature here and install the FileField Paths  (http://drupal.org/project/filefield_paths) instead.') . '</p>';
+      $output .= '<p>' . t('Lowercase transliterated file names: It is recommended to enable this option to prevent issues with case-insensitive file systems.') . '</p>';
+      return $output;
+  }
 }
 
 /**

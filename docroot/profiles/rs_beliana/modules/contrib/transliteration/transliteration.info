@@ -3,9 +3,8 @@ description = Converts non-latin text to US-ASCII and sanitizes file names.
 core = 7.x
 configure = admin/config/media/file-system
 
-; Information added by Drupal.org packaging script on 2014-03-17
-version = "7.x-3.2"
+; Information added by Drupal.org packaging script on 2024-02-07
+version = "7.x-3.3"
 core = "7.x"
 project = "transliteration"
-datestamp = "1395079444"
-
+datestamp = "1707307307"
