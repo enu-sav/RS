@@ -142,17 +142,21 @@ class views_handler_field_date extends views_handler_field {
   public function render($values) {
     $value = $this->get_value($values);
 
-    if (!is_numeric($value)) {
-      // If the value isn't numeric, assume it's an SQL DATETIME.
+    // If the value isn't numeric, assume it's an SQL DATETIME.
+    if (!empty($value) && !is_numeric($value)) {
       $value = strtotime($value);
     }
 
-    $format = $this->options['date_format'];
-    if (in_array($format, $this->supported_date_types())) {
-      $custom_format = $this->options['custom_date_format'];
-    }
-
     if ($value) {
+      $format = $this->options['date_format'];
+
+      // The custom format can be either a number or a string, depending upon
+      // what format is being used.
+      $custom_format = NULL;
+      if (in_array($format, $this->supported_date_types())) {
+        $custom_format = $this->options['custom_date_format'];
+      }
+
       $timezone = !empty($this->options['timezone']) ? $this->options['timezone'] : NULL;
       // Will be positive for a datetime in the past (ago), and negative for a
       // datetime in the future (hence).
@@ -202,9 +206,10 @@ class views_handler_field_date extends views_handler_field {
           if ($custom_format == 'r') {
             return format_date($value, $format, $custom_format, $timezone, 'en');
           }
-          return format_date($value, $format, $custom_format, $timezone);
+          return format_date($value, $format, t($custom_format), $timezone);
 
         default:
+          // The custom format is not used in this scenario.
           return format_date($value, $format, '', $timezone);
       }
     }
