@@ -68,6 +68,17 @@ function rs_beliana_sync_ui_sync_settings_form($form, &$form_state) {
     '#default_value' => variable_get('rs_api_password'),
   ];
 
+  $form['bkb'] = [
+    '#type' => 'fieldset',
+    '#title' => 'Beliana BKB synchronisation config',
+  ];
+
+  $form['bkb']['beliana_bkb_uri'] = [
+    '#type' => 'textfield',
+    '#title' => t('BKB URI'),
+    '#default_value' => variable_get('beliana_bkb_uri'),
+  ];
+
   $form['map'] = [
     '#type' => 'fieldset',
     '#title' => 'MAP synchronisation config',
