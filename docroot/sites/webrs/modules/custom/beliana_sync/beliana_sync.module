@@ -7,6 +7,7 @@
  */
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Implements hook_menu().
@@ -301,6 +302,9 @@ function beliana_sync_sync($nid, &$context) {
   }
 
   $body = modify_body_text($node, $body);
+
+  // Get BKB citations from $body
+  beliana_sync_get_bkb_citations($body);
 
   // publish everything now
     $dates = [];
@@ -1053,3 +1057,76 @@ function _remove_alternative_text($text)
   return $text;
 }
 
+function beliana_sync_get_bkb_citations(string &$text): void {
+  $citations = [];
+
+  $pattern = '/<a\s+class="bkb-comment"\s+data-comment-id="(\d+)"[^>]*>(.*?)<\/a>/';
+  preg_match_all($pattern, $text, $matches);
+
+  $search = $matches[0] ?? [];
+  $ids = $matches[1] ?? [];
+  $keys = $matches[2] ?? [];
+
+  $comments = array_map(function ($i, $id) use ($keys) {
+    return (object)['id' => $id, 'key' => $keys[$i]];
+  }, array_keys($ids), $ids);
+
+  if (empty($comments)) {
+    return;
+  }
+
+  $client = new Client(['base_uri' => variable_get('beliana_bkb_uri'), 'verify' => false]);
+
+  foreach ($comments as $index => $comment) {
+    try {
+      $response = $client->request('GET', 'jsonapi/comment', [
+        'query' => [
+          'include' => 'sources.source',
+          'filter[drupal_internal__id]' => $comment->id,
+        ],
+      ]);
+    } catch (RequestException $e) {
+      watchdog('sync', 'Error getting comment @id from BKB: @reason', [
+        '@id' => $comment->id,
+        '@reason' => $e->getMessage(),
+      ], WATCHDOG_ERROR);
+
+      continue;
+    }
+
+    $content = $response->getBody()->getContents();
+    $json = json_decode($content);
+
+    if(empty($json->included)) {
+      return;
+    }
+
+    $sources = array_filter($json->included, function ($item) {
+      return $item->type == 'source';
+    });
+
+    $published_groups = array_filter($json->included, function ($item) {
+      return $item->type == 'source--group' && $item->attributes->published;
+    });
+
+    foreach($published_groups as $group) {
+      $source = array_values(array_filter($sources, function ($item) use ($group) {
+        return $item->id == $group->relationships->source->data->id;
+      }));
+
+      $citations[$index] = (object) ['key' => $comment->key, 'text' => $source[0]->attributes->citation];
+    }
+  }
+
+  if(empty($citations)) {
+    return;
+  }
+
+  $text .= '<br /><br />';
+  foreach ($citations as $index => $citation) {
+    // Replace <a> tag of citation with inner text
+    $text = str_replace($search[$index], $citation->key, $text);
+    // Add citations from BKB at the end of "heslo" text
+    $text .= '<p>' . $citation->key . ': ' . $citation->text . '</p>';
+  }
+}
