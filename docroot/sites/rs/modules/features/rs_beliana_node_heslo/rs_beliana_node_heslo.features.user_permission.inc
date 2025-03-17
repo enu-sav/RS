@@ -1052,6 +1052,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
       'Grafik' => 'Grafik',
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
     ),
@@ -1064,6 +1065,7 @@ function rs_beliana_node_heslo_user_default_permissions() {
     'roles' => array(
       'Správca heslára' => 'Správca heslára',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 4' => 'Výstupný redaktor 4',
       'administrátor' => 'administrátor',
     ),
     'module' => 'field_permissions',
