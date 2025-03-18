@@ -113,7 +113,10 @@ class views_plugin_style extends views_plugin {
    */
   public function uses_tokens() {
     if ($this->uses_row_class()) {
-      $class = $this->options['row_class'];
+      $class = '';
+      if (isset($this->options['row_class'])) {
+        $class = $this->options['row_class'];
+      }
       if (strpos($class, '[') !== FALSE || strpos($class, '!') !== FALSE || strpos($class, '%') !== FALSE) {
         return TRUE;
       }
@@ -152,6 +155,9 @@ class views_plugin_style extends views_plugin {
    * Take a value and apply token replacement logic to it.
    */
   public function tokenize_value($value, $row_index) {
+    if (!isset($value)) {
+      $value = '';
+    }
     if (strpos($value, '[') !== FALSE || strpos($value, '!') !== FALSE || strpos($value, '%') !== FALSE) {
       $fake_item = array(
         'alter_text' => TRUE,
@@ -481,7 +487,7 @@ class views_plugin_style extends views_plugin {
             if ($rendered) {
               $grouping = $group_content;
               if ($rendered_strip) {
-                $group_content = $grouping = strip_tags(htmlspecialchars_decode($group_content));
+                $group_content = $grouping = strip_tags(htmlspecialchars_decode((string) $group_content));
               }
             }
             else {
@@ -554,14 +560,7 @@ class views_plugin_style extends views_plugin {
         foreach ($result as $count => $row) {
           $this->view->row_index = $count;
           foreach ($keys as $id) {
-            //MS $this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
-	    //MS start
-	    if ($id == "field_text_hesla"){
-            	$this->rendered_fields[$count][$id] = $row->_field_data["nid"]["entity"]->field_text_hesla["und"][0]["value"];
-	    } else {
-            	$this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
-	    }
-	    // MS end
+            $this->rendered_fields[$count][$id] = $this->view->field[$id]->theme($row);
           }
 
           $this->row_tokens[$count] = $this->view->field[$id]->get_render_tokens(array());

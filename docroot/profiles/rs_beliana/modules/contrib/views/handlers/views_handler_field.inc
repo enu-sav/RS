@@ -74,6 +74,13 @@ class views_handler_field extends views_handler {
   public $additional_fields = array();
 
   /**
+   * Keeps track of the last render index.
+   *
+   * @var int|NULL
+   */
+  protected $last_render_index = NULL;
+
+  /**
    * Construct a new field handler.
    */
   public function construct() {
@@ -125,7 +132,9 @@ class views_handler_field extends views_handler {
    *   An array of fields. The key is an identifier used to later find the field
    *   alias used. The value is either a string in which case it's assumed to be
    *   a field on this handler's table; or it's an array in the form of
-   *   @code array('table' => $tablename, 'field' => $fieldname) @endcode
+   *   @code
+   *   array('table' => $tablename, 'field' => $fieldname)
+   *   @endcode
    */
   public function add_additional_fields($fields = NULL) {
     if (!isset($fields)) {
@@ -1072,6 +1081,11 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
    * text-replacement rendering is necessary.
    */
   public function advanced_render($values) {
+    // Clean up values from previous render calls.
+    if ($this->last_render_index != $this->view->row_index) {
+      $this->last_render_text = '';
+    }
+
     if ($this->allow_advanced_render() && method_exists($this, 'render_item')) {
       $raw_items = $this->get_items($values);
       // If there are no items, set the original value to NULL.
@@ -1130,6 +1144,11 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
       }
     }
 
+    // If we rendered something, update the last render index.
+    if ((string) $this->last_render !== '') {
+      $this->last_render_index = $this->view->row_index;
+    }
+
     return $this->last_render;
   }
 
@@ -1174,7 +1193,7 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
       $value = $this->render_altered($alter, $tokens);
     }
 
-    if (!empty($this->options['alter']['trim_whitespace'])) {
+    if (!is_null($value) && !empty($this->options['alter']['trim_whitespace'])) {
       $value = trim($value);
     }
 

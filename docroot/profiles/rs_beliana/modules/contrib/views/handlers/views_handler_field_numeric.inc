@@ -27,8 +27,8 @@ class views_handler_field_numeric extends views_handler_field {
     $options['decimal'] = array('default' => '.', 'translatable' => TRUE);
     $options['separator'] = array('default' => ',', 'translatable' => TRUE);
     $options['format_plural'] = array('default' => FALSE, 'bool' => TRUE);
-    $options['format_plural_singular'] = array('default' => '1');
-    $options['format_plural_plural'] = array('default' => '@count');
+    $options['format_plural_singular'] = array('default' => '1', 'translatable' => TRUE);
+    $options['format_plural_plural'] = array('default' => '@count', 'translatable' => TRUE);
     $options['prefix'] = array('default' => '', 'translatable' => TRUE);
     $options['suffix'] = array('default' => '', 'translatable' => TRUE);
 
@@ -134,7 +134,7 @@ class views_handler_field_numeric extends views_handler_field {
     else {
       $point_position = strpos($value, '.');
       $remainder = ($point_position === FALSE) ? '' : substr($value, $point_position + 1);
-      $value = $value > 0 ? floor($value) : ceil($value);
+      $value = $value > 0 ? floor((float) $value) : ceil((float) $value);
       $value = number_format($value, 0, '', $this->options['separator']);
       if ($remainder) {
         // The substr may not be locale safe.

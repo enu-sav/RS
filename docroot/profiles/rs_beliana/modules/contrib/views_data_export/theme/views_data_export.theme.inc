@@ -105,7 +105,7 @@ function template_preprocess_views_data_export_csv_header(&$vars) {
 
   // Format header values.
   foreach ($vars['header'] as $key => $value) {
-    $output = decode_entities($value);
+    $output = decode_entities((string) $value);
     $output = (empty($vars['options']['keep_html'])) ? strip_tags($output) : $output;
     if (!empty($vars['options']['trim'])) {
       $output = trim($output);
@@ -151,7 +151,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
   // Format row values.
   foreach ($vars['themed_rows'] as $i => $values) {
     foreach ($values as $j => $value) {
-      $output = decode_entities($value);
+      $output = decode_entities((string) $value);
       $output = (empty($vars['options']['keep_html'])) ? strip_tags($output) : $output;
       if (!empty($vars['options']['trim'])) {
         $output = trim($output);
@@ -336,14 +336,29 @@ function template_process_views_data_export_msoffice_body(&$vars) {
 
       // Build row
       foreach ($cells as $cell) {
-	if (!empty($cell)) {
-	  // beliana_render_export defined in the beliana module
-          $output .= beliana_render_export($vars['view']->name, $vars['view']->current_display, render($cell)."\n");
-	}
+        $output .= render($cell);
       }
     }
   }
-  $vars['tbody'] = $output;
+
+  // Export na tlac
+  if ($vars['view']->name === 'export' && $vars['view']->current_display === 'views_data_export_1') {
+    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some html tags
+    $output = preg_replace('/➔ /', '→ ', $output);
+    $output = preg_replace('/➔/', '→ ', $output);
+    $vars['tbody'] = $output;
+  }
+  // Export pre sadzac
+  else if ($vars['view']->name === 'export_sadzac' && $vars['view']->current_display === 'views_data_export_1') {
+    $output = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip some other html tags
+    $output = preg_replace('/➔ /', '→ ', $output);
+    $output = preg_replace('/➔/', '→ ', $output);
+    $vars['tbody'] = $output;
+  }
+  else {
+  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
+  }
+
 }
 
 function template_preprocess_views_data_export_doc_header(&$vars) {
@@ -410,16 +425,18 @@ function template_preprocess_views_data_export_xml_body(&$vars) {
   foreach ($vars['themed_rows'] as $num => $row) {
     foreach ($row as $field => $content) {
 
-      // Perform xml entity encoding unless excluded by style options.
-      if (empty($no_encode[$field]) && empty($cdata_wrapper[$field])) {
-
-        // Prevent double encoding of the ampersand. Look for the entities produced by check_plain().
-        $content = preg_replace('/&(?!(amp|quot|#039|lt|gt);)/', '&amp;', $content);
-        // Convert < and > to HTML entities.
-        $content = str_replace(
-          array('<', '>'),
-          array('&lt;', '&gt;'),
-          $content);
+      if (!is_null($content)) {
+        // Perform xml entity encoding unless excluded by style options.
+        if (empty($no_encode[$field]) && empty($cdata_wrapper[$field])) {
+          // Prevent double encoding of the ampersand. Look for the entities produced by check_plain().
+          $content = preg_replace('/&(?!(amp|quot|#039|lt|gt);)/', '&amp;', $content);
+          // Convert < and > to HTML entities.
+          $content = str_replace(
+            array('<', '>'),
+            array('&lt;', '&gt;'),
+            $content
+          );
+        }
       }
 
       // Perform wrapping the field data using the CDATA tag
