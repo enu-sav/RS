@@ -19,6 +19,9 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 type: 'text',
                 id: 'searchField',
                 label: 'Search comments',
+                onShow: function() {
+                  fetchSearchResults(this, true);
+                },
                 onKeyUp: debounce(function () {
                   fetchSearchResults(this);
                 }, 300),
@@ -94,12 +97,12 @@ function debounce(func, delay) {
 }
 
 // Fetch autocomplete search results
-function fetchSearchResults(field) {
+function fetchSearchResults(field, init = false) {
   var input = field.getInputElement().$;
   var query = input.value;
   var nid = Drupal.settings.ckeditor_bkb_comment.nid;
 
-  if (query.length < 2 || !Number.isInteger(nid)) {
+  if (!init && ((query.length < 2 && query.length != 0) || !Number.isInteger(nid))) {
     jQuery("#searchResults").hide();
     return;
   }
@@ -112,7 +115,7 @@ function fetchSearchResults(field) {
       var dropdown = jQuery("#searchResults").empty().show();
       if (data.length) {
         data.forEach(item => {
-          dropdown.append(`<div class="search-result-item" data-url="${item.value}">${item.label}</div>`);
+          dropdown.append(`<div class="search-result-item" style="cursor: pointer; margin: 4px;" data-url="${item.value}">${item.label}</div>`);
         });
       } else {
         dropdown.append('<div class="no-results">No results found</div>');

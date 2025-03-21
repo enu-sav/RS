@@ -63,15 +63,16 @@ function ckeditor_bkb_comment_callback($nid) {
       ],
     ]);
 
-    $url = '/jsonapi/comment?filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
+    $url = '/jsonapi/comment?page[limit]=5&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
     $response = $client->request('GET', $url);
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
       if (!empty($data)) {
         foreach ($data->data as $item) {
-          if (isset($item->attributes->label)) {
+          if (isset($item->attributes->comment)) {
+            $comment = $item->attributes->comment;
             $links[] = [
-              'label' => $item->attributes->label,
+              'label' => strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment,
               'value' => $item->attributes->drupal_internal__id,
             ];
           }
@@ -155,7 +156,7 @@ function ckeditor_bkb_comment_page_alter(&$page) {
  * Implements MODULE_preprocess_HOOK().
  */
 function ckeditor_bkb_comment_preprocess_node(&$variables) {
-  if ($variables['node']->type == 'heslo') {
+  if (in_array($variables['type'], ['heslo', 'importovane_heslo'])) {
     drupal_add_js(drupal_get_path('module', 'ckeditor_bkb_comment') . '/js/tooltip.js');
   }
 }
