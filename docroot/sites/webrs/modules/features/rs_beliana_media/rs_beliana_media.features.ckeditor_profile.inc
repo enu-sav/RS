@@ -20,7 +20,8 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'Bold\',\'Italic\',\'Format\',\'NumberedList\',\'BulletedList\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
     [\'Table\',\'BGColor\',\'SpecialChar\',\'enumath\',\'Image\'],
-    [\'lite-acceptall\',\'lite-rejectall\',\'lite-acceptone\',\'lite-rejectone\',\'lite-toggleshow\',\'lite-toggletracking\']
+    [\'lite-acceptall\',\'lite-rejectall\',\'lite-acceptone\',\'lite-rejectone\',\'lite-toggleshow\',\'lite-toggletracking\'],
+    [\'comments\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -33,7 +34,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'language_direction' => 'default',
         'allowed_content' => 't',
         'extraAllowedContent' => '',
-        'enter_mode' => 'p',
+        'enter_mode' => 'br',
         'shift_enter_mode' => 'br',
         'font_format' => 'p;h2;h3',
         'custom_formatting' => 'f',
@@ -51,7 +52,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'css_path' => '',
         'css_style' => 'theme',
         'styles_path' => '',
-        'filebrowser' => 'imce',
+        'filebrowser' => 'none',
         'filebrowser_image' => '',
         'filebrowser_flash' => '',
         'UserFilesPath' => '%b%f/',
@@ -82,6 +83,17 @@ function rs_beliana_media_ckeditor_profile_defaults() {
               ),
             ),
             'default' => 'f',
+          ),
+          'comments' => array(
+            'name' => 'ckeditor_bkb_comment',
+            'desc' => 'Add BKB comment link',
+            'path' => '%base_path%profiles/rs_beliana/modules/custom/ckeditor_bkb_comment/ckeditor_plugin/',
+            'buttons' => array(
+              'comments' => array(
+                'icon' => 'images/comments.png',
+                'label' => 'Autocomplete Link',
+              ),
+            ),
           ),
           'counter' => array(
             'name' => 'counter',
