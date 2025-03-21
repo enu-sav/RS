@@ -1,0 +1,5 @@
+name = CKEditor BKB comment (BKB)
+description = Provides an autocomplete insert of comments from BKB into CKEditor.
+core = 7.x
+dependencies[] = ckeditor
+package = Custom
