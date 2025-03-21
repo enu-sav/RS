@@ -219,3 +219,12 @@ function rs_beliana_update_7007() {
     module_enable(array('rs_beliana_sync_ui'));
   }
 }
+
+/**
+ * Enable ckeditor_bkb_comment modules.
+ */
+function rs_beliana_update_7008() {
+  if (!module_exists('ckeditor_bkb_comment')) {
+    module_enable(array('ckeditor_bkb_comment'));
+  }
+}

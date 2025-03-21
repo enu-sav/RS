@@ -1,0 +1,180 @@
+<?php
+
+use GuzzleHttp\Client;
+
+/**
+ * Implements hook_ckeditor_plugins().
+ */
+function ckeditor_bkb_comment_ckeditor_plugin() {
+  return [
+    'comments' => [
+      'name' => 'ckeditor_bkb_comment',
+      'desc' => t('Add BKB comment link'),
+      'path' => drupal_get_path('module', 'ckeditor_bkb_comment') . '/ckeditor_plugin/',
+      'buttons' => [
+        'comments' => [
+          'icon' => 'images/comments.png',
+          'label' => 'Autocomplete Link',
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_menu().
+ */
+function ckeditor_bkb_comment_menu() {
+  $items = [];
+
+  $items['ckeditor/autocomplete_link/%'] = [
+    'page callback' => 'ckeditor_bkb_comment_callback',
+    'access arguments' => ['access content'],
+    'page arguments' => [2],
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['get_comment_text/%'] = [
+    'page callback' => 'get_comment_text_callback',
+    'access arguments' => ['access content'],
+    'page arguments' => [1],
+    'type' => MENU_CALLBACK,
+  ];
+
+  return $items;
+}
+
+/**
+ * AJAX callback for CKEditor autocomplete.
+ */
+function ckeditor_bkb_comment_callback($nid) {
+  $links = [];
+  $query = isset($_GET['query']) ? $_GET['query'] : '';
+  $query = check_plain($query);
+  $node = node_load($nid);
+  if ($node instanceof stdClass && isset($node->nid)) {
+    $alias = drupal_get_path_alias('node/' . $node->nid);
+    $client = new Client([
+      'base_uri' => variable_get('beliana_bkb_uri'),
+      'verify' => FALSE,
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json',
+      ],
+    ]);
+
+    $url = '/jsonapi/comment?page[limit]=5&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
+    $response = $client->request('GET', $url);
+    if ($response->getStatusCode() === 200) {
+      $data = json_decode($response->getBody());
+      if (!empty($data)) {
+        foreach ($data->data as $item) {
+          if (isset($item->attributes->comment)) {
+            $comment = $item->attributes->comment;
+            $links[] = [
+              'label' => strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment,
+              'value' => $item->attributes->drupal_internal__id,
+            ];
+          }
+        }
+      }
+    }
+  }
+
+  drupal_json_output($links);
+  exit;
+}
+
+/**
+ * Callback to get comment text from BKB.
+ */
+function get_comment_text_callback($commentID) {
+  $cache_id = 'ckeditor_bkb_comment' . md5($commentID);
+
+  // Try to get data from cache first
+  $cached_data = cache_get($cache_id);
+  if ($cached_data) {
+    $links = $cached_data->data;
+  }
+  else {
+    // Perform API request if no cached data
+    $client = new Client([
+      'base_uri' => variable_get('beliana_bkb_uri'),
+      'verify' => FALSE,
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json',
+      ],
+    ]);
+
+    $url = '/jsonapi/comment?filter[drupal_internal__id]=' . $commentID;
+    $response = $client->request('GET', $url);
+    $links = [];
+
+    if ($response->getStatusCode() === 200) {
+      $data = json_decode($response->getBody());
+      if (!empty($data)) {
+        foreach ($data->data as $item) {
+          if (isset($item->attributes->label)) {
+            $links = [
+              'label' => $item->attributes->label,
+              'value' => $item->attributes->drupal_internal__id,
+              'commentText' => $item->attributes->comment,
+            ];
+          }
+        }
+      }
+    }
+
+    // Store the result in the cache with a 3600-second expiration (1 hour)
+    cache_set($cache_id, $links, 'cache', REQUEST_TIME + 3600);
+  }
+
+  drupal_json_output($links);
+  exit;
+}
+
+/**
+ * Implements hook_init().
+ */
+function ckeditor_bkb_comment_init() {
+  drupal_add_css(drupal_get_path('module', 'ckeditor_bkb_comment') . '/css/admin_menu_override.css');
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function ckeditor_bkb_comment_page_alter(&$page) {
+  // Check if we are on a node page
+  if ($node = menu_get_object()) {
+    // Pass the Node ID to JavaScript using drupalSettings
+    drupal_add_js(['ckeditor_bkb_comment' => ['nid' => (integer) $node->nid]], 'setting');
+  }
+}
+
+/**
+ * Implements MODULE_preprocess_HOOK().
+ */
+function ckeditor_bkb_comment_preprocess_node(&$variables) {
+  if (in_array($variables['type'], ['heslo', 'importovane_heslo'])) {
+    drupal_add_js(drupal_get_path('module', 'ckeditor_bkb_comment') . '/js/tooltip.js');
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ckeditor_bkb_comment_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'rs_beliana_sync_ui_sync_settings_form') {
+    $form['bkb'] = [
+      '#type' => 'fieldset',
+      '#title' => 'Beliana BKB config',
+    ];
+
+    $form['bkb']['beliana_bkb_uri'] = [
+      '#type' => 'textfield',
+      '#title' => t('BKB URI'),
+      '#default_value' => variable_get('beliana_bkb_uri'),
+    ];
+  }
+}

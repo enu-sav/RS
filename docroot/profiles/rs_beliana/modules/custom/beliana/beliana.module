@@ -1996,10 +1996,11 @@ function beliana_node_presave($node) {
     return;
   }
 
-  // In the 'needs_review' (U redaktora) state one cannot set 'vyplatit" without order 
+  // In the 'needs_review' (U redaktora) state one cannot set 'vyplatit" without order unless already payed for
   if ($node->workbench_moderation['current']->state == 'needs_review') {
     if (!empty($node->field_vyplatit[LANGUAGE_NONE]) and 
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] === "Vyplatiť" and
+      empty($node->field_datum_vyplatenia[LANGUAGE_NONE]) and   #no payment date
       empty($node->field_objednavka[LANGUAGE_NONE])) {
         unset($node->field_vyplatit[LANGUAGE_NONE]);
         unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE]);
