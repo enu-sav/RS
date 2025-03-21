@@ -7,7 +7,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
   init: function (editor) {
     CKEDITOR.dialog.add('commentsDialog', function (editor) {
       return {
-        title: 'Select comment',
+        title: Drupal.t('Vybrať komentár'),
         minWidth: 500,
         minHeight: 50,
         contents: [
@@ -18,7 +18,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
               {
                 type: 'text',
                 id: 'searchField',
-                label: 'Search comments',
+                label: Drupal.t('Hľadať komentár'),
                 onShow: function() {
                   fetchSearchResults(this, true);
                 },
@@ -102,7 +102,7 @@ function fetchSearchResults(field, init = false) {
   var query = input.value;
   var nid = Drupal.settings.ckeditor_bkb_comment.nid;
 
-  if (!init && ((query.length < 2 && query.length != 0) || !Number.isInteger(nid))) {
+  if (!init && ((query.length < 2 && query.length !== 0) || !Number.isInteger(nid))) {
     jQuery("#searchResults").hide();
     return;
   }
@@ -118,11 +118,11 @@ function fetchSearchResults(field, init = false) {
           dropdown.append(`<div class="search-result-item" style="cursor: pointer; margin: 4px;" data-url="${item.value}">${item.label}</div>`);
         });
       } else {
-        dropdown.append('<div class="no-results">No results found</div>');
+        dropdown.append('<div class="no-results">' + Drupal.t('Nenašli sa žiadne výsledky.') + '</div>');
       }
     },
     error: function () {
-      console.error('Error fetching search results');
+      console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania.'));
     }
   });
 }
