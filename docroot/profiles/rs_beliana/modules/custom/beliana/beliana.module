@@ -620,11 +620,11 @@ function beliana_action_info() {
  * Callback for `beliana_remove_link_no_arrow` action.
  *
  * Use only in the book editorial system
- * Links with no arrow are not transferred to the book and must be removed. 
+ * Links with no arrow are not transferred to the book and must be removed.
  * This action should be run per 'subor' after its articles are fetched to the web editorial system
  */
 function beliana_remove_link_no_arrow(&$node, $context) {
-  # remove links without an arrow from text of articles 
+  # remove links without an arrow from text of articles
   $link = l($values["node"]->title, $values["node"]->path['source']);
   if (in_array($node->type, ['ilustracia'])) {
       return;
@@ -767,14 +767,14 @@ function _beliana_create_article_order_variable($node, $assign_user, $contract) 
   $user = user_load($user->uid);
 
   if (!is_null(variable_get('beliana_create_article_order_data'))) {
-    # The variable already exists, just add the node  
+    # The variable already exists, just add the node
     $context = variable_get('beliana_create_article_order_data');
     $context['order_data'][] = [
       'nid' => $node->nid,
       'password' => $node->title,
     ];
   } else {
-    # The variable does not exist yet, add user data and node  
+    # The variable does not exist yet, add user data and node
     $context = [
       'type' => 'ordered',
       'current_user' => [
@@ -830,7 +830,7 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
             ->entityCondition('entity_type', 'node')
             ->entityCondition('bundle', 'objednavka_hesiel')
             ->execute();
-        $y = date("Y"); 
+        $y = date("Y");
         $maxnum = 0;
         if (!empty($entities)) {
             $nids = array_keys($entities['node']);
@@ -855,14 +855,14 @@ function beliana_create_article_order_execute_finished($success, $results, $oper
     }
 
     #Creates "objednavka_hesiel" node for the current order
-    function _create_order_node($next, $order_data, $filepath) 
+    function _create_order_node($next, $order_data, $filepath)
     {
         global $user;
 
         $author_login = $order_data['assign_user']['login'];
-    
+
         $node = new stdClass();
-        $node->title = $author_login . " (" . $next . ")"; 
+        $node->title = $author_login . " (" . $next . ")";
         $node->type = "objednavka_hesiel";
         node_object_prepare($node);
         $node->language = LANGUAGE_NONE;
@@ -1998,7 +1998,7 @@ function beliana_node_presave($node) {
 
   // In the 'needs_review' (U redaktora) state one cannot set 'vyplatit" without order unless already payed for
   if ($node->workbench_moderation['current']->state == 'needs_review') {
-    if (!empty($node->field_vyplatit[LANGUAGE_NONE]) and 
+    if (!empty($node->field_vyplatit[LANGUAGE_NONE]) and
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] === "Vyplatiť" and
       empty($node->field_datum_vyplatenia[LANGUAGE_NONE]) and   #no payment date
       empty($node->field_objednavka[LANGUAGE_NONE])) {
@@ -2563,6 +2563,7 @@ function _check_links(&$node) {
     for ($i = 0; $i < $links->length; $i++) {
       $item = $links->item($i);
       $target = $item->getAttribute('href');
+      $class = $item->getAttribute('class');
       // no external lins allowed
       if (url_is_external($target)) {
         drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '"', 'error');
@@ -2595,9 +2596,11 @@ function _check_links(&$node) {
           }
         }
         else {
-          // not in the form '/heslo/alias'
-          drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '"', 'error');
-          $retvalue = FALSE;
+          if ($class != 'bkb-comment') {
+            // not in the form '/heslo/alias'
+            drupal_set_message('Chybný odkaz v hesle <a href="/' . $node->path['alias'] . '">' . $node->title . '</a>: "' . $item->nodeValue . '"', 'error');
+            $retvalue = FALSE;
+          }
         }
       }
     }
@@ -3838,7 +3841,7 @@ function beliana_api_rest_create_node($node, $site, $which_article, $attribute =
               $terms[] = $value['name'];
             }
         }
-        #If there are more values than 1, split them in field_lexikalna_skupina and field_doplnkova_ls 
+        #If there are more values than 1, split them in field_lexikalna_skupina and field_doplnkova_ls
         $data['field_lexikalna_skupina[und]'] = $terms[0];
         $data['field_doplnkova_ls[und]'] = implode(', ', array_slice($terms, 1));
 

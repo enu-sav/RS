@@ -79,10 +79,7 @@ function beliana_sync_mail($key, &$message, $params) {
  *
  * @param $nid
  */
-function _beliana_sync_remove_links($node) {
-  #dpm("_beliana_sync_remove_links", $node->title." (".$node->nid.")");
-  // Extract links from field_text_hesla.
-  $text = $node->field_text_hesla[LANGUAGE_NONE][0]['value'];
+function _beliana_sync_remove_links($node, $text) {
   $dom = beliana_get_dom($node, $text, "Text hesla (_beliana_sync_remove_links)");
   if (!$dom) return $text;
 
@@ -91,8 +88,9 @@ function _beliana_sync_remove_links($node) {
   if (!empty($links)) {
     for ($i = $links->length - 1; $i >= 0; $i--) {
       $item = $links->item($i);
+      $class = $item->getAttribute('class');
       $target = $item->getAttribute('href');
-      if (!url_is_external($target)) {
+      if (!url_is_external($target) && $class != 'bkb-comment') {
         // Get rid of leading slash.
         if ($target[0] === '/') {
           $target = substr($target, 1);
@@ -294,7 +292,7 @@ function beliana_sync_sync($nid, &$context) {
   }
 
   # remove links to not yet published articles
-  $body = _beliana_sync_remove_links($node);
+  $body = _beliana_sync_remove_links($node, $text_hesla);
   # if failed owing to html syntax error
   if (!$body) {
     $context['results']['error']++;
