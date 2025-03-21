@@ -19,8 +19,9 @@ function rs_beliana_media_ckeditor_profile_defaults() {
     [\'Undo\',\'Redo\'],
     [\'Bold\',\'Italic\'],
     [\'Link\',\'Unlink\',\'Subscript\',\'Superscript\'],
-    [\'Table\',\'BGColor\',\'enumath\',\'SpecialChar\',\'Image\'],
-    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\']
+    [\'Table\',\'BGColor\',\'SpecialChar\',\'Image\'],
+    [\'lite-acceptall\',\'lite-rejectall\',\'lite-toggleshow\',\'lite-toggletracking\',\'lite-acceptone\',\'lite-rejectone\'],
+    [\'comments\']
 ]',
         'expand' => 't',
         'default' => 't',
@@ -82,6 +83,17 @@ function rs_beliana_media_ckeditor_profile_defaults() {
               ),
             ),
             'default' => 'f',
+          ),
+          'comments' => array(
+            'name' => 'ckeditor_bkb_comment',
+            'desc' => 'Add BKB comment link',
+            'path' => '%base_path%sites/all/modules/custom/ckeditor_bkb_comment/ckeditor_plugin/',
+            'buttons' => array(
+              'comments' => array(
+                'icon' => 'images/comments.png',
+                'label' => 'Autocomplete Link',
+              ),
+            ),
           ),
           'counter' => array(
             'name' => 'counter',
