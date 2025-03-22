@@ -99,7 +99,7 @@ function debounce(func, delay) {
 // Fetch autocomplete search results
 function fetchSearchResults(field, init = false) {
   var input = field.getInputElement().$;
-  var query = input.value;
+  var query = input.value.replace(/\.\.\.$/, '');
   var nid = Drupal.settings.ckeditor_bkb_comment.nid;
 
   if (!init && ((query.length < 2 && query.length !== 0) || !Number.isInteger(nid))) {
