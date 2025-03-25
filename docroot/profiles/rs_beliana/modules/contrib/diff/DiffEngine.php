@@ -132,6 +132,7 @@ class _DiffOp_Change extends _DiffOp {
  * @private
  * @subpackage DifferenceEngine
  */
+#[\AllowDynamicProperties]
 class _DiffEngine {
   function MAX_XREF_LENGTH() {
     return 10000;
@@ -799,6 +800,16 @@ class DiffFormatter {
   var $trailing_context_lines = 0;
 
   /**
+   * Keep track of lines.
+   *
+   * @var array
+   */
+  var $line_stats = array(
+    'counter' => array('x' => 0, 'y' => 0),
+    'offset' => array('x' => 0, 'y' => 0),
+  );
+
+  /**
    * Format a diff.
    *
    * @param $diff object A Diff object.
@@ -956,6 +967,7 @@ define('NBSP', '&#160;');      // iso-8859-x non-breaking space.
  * @private
  * @subpackage DifferenceEngine
  */
+#[AllowDynamicProperties]
 class _HWLDF_WordAccumulator {
   function __construct() {
     $this->_lines = array();
