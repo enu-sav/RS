@@ -17,6 +17,19 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
             elements: [
               {
                 type: 'text',
+                id: 'identificator',
+                label: Drupal.t('Identifikátor komentára'),
+                onShow: function() {
+                  var selection = editor.getSelection();
+                  var selectedText = selection.getSelectedText() || editor._selectedText;
+                  var input = this.getInputElement().$;
+                  if (input && selectedText) {
+                    jQuery(input).val(selectedText);
+                  }
+                },
+              },
+              {
+                type: 'text',
                 id: 'searchField',
                 label: Drupal.t('Hľadať komentár'),
                 onShow: function() {
@@ -29,7 +42,9 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
               {
                 type: 'html',
                 id: 'resultList',
-                html: '<div id="searchResults" style="border: 1px solid #ccc; max-height: 150px; overflow-y: auto; display: none; padding: 5px;"></div>'
+                html: '<div>' + Drupal.t('Vyberte komentár zo zoznamu:') +
+                  '<div id="searchResults" style="border: 1px solid #ccc; max-height: 150px; overflow-y: auto; display: none; padding: 5px;"></div>' +
+                  '</div>'
               }
             ]
           }
@@ -81,6 +96,8 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
       var element = evt.data.element;
       if (element.is('a') && element.hasClass('bkb-comment')) {
         evt.cancel();
+        var selection = editor.getSelection();
+        editor._selectedText = selection.getSelectedText();
         editor.execCommand('comments');
       }
     });
@@ -99,7 +116,7 @@ function debounce(func, delay) {
 // Fetch autocomplete search results
 function fetchSearchResults(field, init = false) {
   var input = field.getInputElement().$;
-  var query = input.value.replace(/\.\.\.$/, '');
+  var query = input.value;
   var nid = Drupal.settings.ckeditor_bkb_comment.nid;
 
   if (!init && ((query.length < 2 && query.length !== 0) || !Number.isInteger(nid))) {
@@ -136,45 +153,97 @@ function selectSearchResult(dialog, item) {
   jQuery(inputField).val(selectedText).attr('data-url', selectedUrl);
 }
 
-// Insert the selected comment link into the editor
 function insertCommentLink(editor, dialog) {
-  var inputField = dialog.getContentElement('tab1', 'searchField').getInputElement().$;
-  var itemURL = jQuery(inputField).attr('data-url');
-  var itemLabel = jQuery(inputField).val();
-  var selection = editor.getSelection();
-  var selectedText = selection.getSelectedText() || itemLabel;
+  const inputField = dialog.getContentElement('tab1', 'searchField').getInputElement().$;
+  const identificatorField = dialog.getContentElement('tab1', 'identificator').getInputElement().$;
+  const itemURL = jQuery(inputField).attr('data-url');
+  const itemLabel = jQuery(inputField).val();
+  const selection = editor.getSelection();
+  let selectedText = jQuery(identificatorField).val() || selection.getSelectedText();
+  const selectedElement = selection.getStartElement();
+  const isExistingLink = selectedElement?.is('a') && selectedElement.hasAttribute('data-comment-id');
+
+  if (!selectedText && isExistingLink) {
+    selectedText = selectedElement.getText();
+  }
 
   if (itemLabel && selectedText && itemURL) {
-    var linkElement = new CKEDITOR.dom.element('a', editor.document);
-    linkElement.setAttributes({
-      href: '',
-      class: 'bkb-comment',
-      'data-comment-label': CKEDITOR.tools.htmlEncode(itemLabel),
-      'data-comment-id': CKEDITOR.tools.htmlEncode(itemURL)
-    });
-    linkElement.setStyle('color', 'green');
-    linkElement.setText(selectedText);
+    if (isExistingLink) {
+      // Update existing link
+      selectedElement.setAttributes({
+        href: '',
+        class: 'bkb-comment',
+        'data-comment-label': CKEDITOR.tools.htmlEncode(itemLabel),
+        'data-comment-id': CKEDITOR.tools.htmlEncode(itemURL)
+      });
+      selectedElement.setStyle('color', 'green');
+      selectedElement.setText(`[${selectedText}]`);
+    } else {
+      // Create new link
+      const linkElement = new CKEDITOR.dom.element('a', editor.document);
+      linkElement.setAttributes({
+        href: '',
+        class: 'bkb-comment',
+        'data-comment-label': CKEDITOR.tools.htmlEncode(itemLabel),
+        'data-comment-id': CKEDITOR.tools.htmlEncode(itemURL)
+      });
+      linkElement.setStyle('color', 'green');
+      linkElement.setText(`[${selectedText}]`);
 
-    var range = selection.getRanges()[0];
-    range.deleteContents();
-    range.insertNode(linkElement);
+      const range = selection.getRanges()[0];
+      range.deleteContents();
+      range.insertNode(linkElement);
+    }
   } else {
-    var selectedElement = selection.getStartElement();
-    if (selectedElement && selectedElement.is('a') && selectedElement.hasAttribute('data-comment-id')) {
-      var textNode = new CKEDITOR.dom.text(selectedElement.getText(), editor.document);
-      selectedElement.insertBeforeMe(textNode); // Insert text before <a>
-      selectedElement.remove(); // Remove <a> tag
+    // If selectedElement is empty, remove link and surrounding brackets
+    if (isExistingLink) {
+      let text = selectedElement.getText();
+      text = text.replace(/^\[|\]$/g, ''); // Remove brackets if present
+      var textNode = new CKEDITOR.dom.text(text, editor.document);
+      selectedElement.insertBeforeMe(textNode);
+      selectedElement.remove();
     }
   }
 }
+
 
 // Prefill dialog with existing link data
 function prefillDialog(dialog, editor) {
   var selection = editor.getSelection();
   var element = selection.getStartElement();
+
   if (element && element.is('a') && element.hasAttribute('data-comment-label')) {
     var searchField = dialog.getContentElement('tab1', 'searchField');
-    searchField.setValue(element.getAttribute('data-comment-label'));
-    jQuery(searchField.getInputElement().$).attr('data-url', element.getAttribute('data-comment-id'));
+
+    if (searchField) {
+      var commentId = element.getAttribute('data-comment-id');
+
+      // Fetch the latest comment text asynchronously
+      getCommentById(commentId, function (searchFieldValue) {
+        searchField.setValue(searchFieldValue);
+        jQuery(searchField.getInputElement().$).attr('data-url', commentId);
+      });
+    }
   }
 }
+
+// Get latest comment data from API (asynchronous)
+function getCommentById(commentId, callback) {
+  jQuery.ajax({
+    url: `/get_comment_text/${commentId}`, // API call to fetch comment details
+    type: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      if (data && data.commentText) {
+        callback(data.commentText); // Use callback to pass the fetched data
+      } else {
+        callback(''); // Provide empty string if no data found
+      }
+    },
+    error: function () {
+      console.error('Error fetching comment data');
+      callback(''); // Ensure callback is always called, even on error
+    }
+  });
+}
+

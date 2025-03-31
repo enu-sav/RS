@@ -89,10 +89,11 @@ function ckeditor_bkb_comment_callback($nid) {
  * Callback to get comment text from BKB.
  */
 function get_comment_text_callback($commentID) {
-  $cache_id = 'ckeditor_bkb_comment' . md5($commentID);
+  $cache_id = 'ckeditor_bkb_comment_' . md5($commentID);
 
   // Try to get data from cache first
   $cached_data = cache_get($cache_id);
+
   if ($cached_data) {
     $links = $cached_data->data;
   }
@@ -110,12 +111,11 @@ function get_comment_text_callback($commentID) {
     $url = '/jsonapi/comment?filter[drupal_internal__id]=' . $commentID;
     $response = $client->request('GET', $url);
     $links = [];
-
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
       if (!empty($data)) {
         foreach ($data->data as $item) {
-          if (isset($item->attributes->label)) {
+          if (isset($item->attributes->comment)) {
             $links = [
               'label' => $item->attributes->label,
               'value' => $item->attributes->drupal_internal__id,
@@ -138,7 +138,7 @@ function get_comment_text_callback($commentID) {
  * Implements hook_init().
  */
 function ckeditor_bkb_comment_init() {
-  drupal_add_css(drupal_get_path('module', 'ckeditor_bkb_comment') . '/css/admin_menu_override.css');
+  drupal_add_css(drupal_get_path('module', 'ckeditor_bkb_comment') . '/css/admin_ckeditor_override.css');
 }
 
 /**
