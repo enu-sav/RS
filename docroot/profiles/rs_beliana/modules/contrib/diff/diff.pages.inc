@@ -442,6 +442,15 @@ function diff_compare_entities($left_entity, $right_entity, $context) {
   // Field rows. Recurse through all child elements.
   $count = 0;
   foreach (element_children($diff) as $key) {
+
+    // Get translated field name if translations are enabled.
+    if (module_exists('i18n_field')) {
+      if (isset($diff[$key]['#name']) && isset($entity_type) && isset($bundle)) {
+        $field_instance = field_info_instance($entity_type, $key, $bundle);
+        $diff[$key]['#name'] = i18n_field_translate_property($field_instance, 'label');
+      }
+    }
+
     if (!isset($diff[$key]['#states'])) {
       $diff[$key]['#states'] = array();
     }
