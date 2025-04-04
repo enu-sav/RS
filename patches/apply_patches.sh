@@ -45,3 +45,5 @@ echo "It is necessary to apply the patch - workbench_moderation_rs_optimize.patc
 
 echo "It is necessary to apply the patch - workbench_state_access-access_new_content-2456041-1-D7.patch"
 
+echo "It is necessary to apply the patch - call_beliana_render_export.patch"
+
