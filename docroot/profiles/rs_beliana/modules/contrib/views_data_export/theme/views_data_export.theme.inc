@@ -336,7 +336,9 @@ function template_process_views_data_export_msoffice_body(&$vars) {
 
       // Build row
       foreach ($cells as $cell) {
-        $output .= render($cell);
+        // $output .= render($cell);
+        // beliana_render_export defined in the beliana module
+        $output .= beliana_render_export($vars['view']->name, $vars['view']->current_display, render($cell)."\n");
       }
     }
   }
