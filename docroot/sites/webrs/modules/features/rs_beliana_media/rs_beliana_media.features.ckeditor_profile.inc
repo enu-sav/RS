@@ -87,7 +87,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
           'comments' => array(
             'name' => 'ckeditor_bkb_comment',
             'desc' => 'Add BKB comment link',
-            'path' => '%base_path%profiles/rs_beliana/modules/custom/ckeditor_bkb_comment/ckeditor_plugin/',
+            'path' => '/profiles/rs_beliana/modules/custom/ckeditor_bkb_comment/ckeditor_plugin/',
             'buttons' => array(
               'comments' => array(
                 'icon' => 'images/comments.png',
