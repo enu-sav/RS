@@ -21,7 +21,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 label: Drupal.t('Identifikátor komentára'),
                 onShow: function() {
                   var selection = editor.getSelection();
-                  var selectedText = selection.getSelectedText() || editor._selectedText;
+                  var selectedText = selection.getSelectedText();
                   var input = this.getInputElement().$;
                   if (input && selectedText) {
                     jQuery(input).val(selectedText);
@@ -59,8 +59,46 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
           insertCommentLink(editor, this);
         },
         onShow: function () {
+          var selection = editor.getSelection();
+          var selectedText = selection.getSelectedText();
           prefillDialog(this, editor);
-        }
+
+          setTimeout(() => {
+            var dialogEl = document.querySelector('.cke_dialog');
+            var buttons = dialogEl?.querySelectorAll('.cke_dialog_ui_button');
+
+            buttons?.forEach(btn => {
+              if (btn.innerText.includes('Vytvoriť')) {
+                if (selectedText && selectedText.trim().length > 0) {
+                  var element = selection.getStartElement();
+                  if (element && element.is('a') && element.hasAttribute('data-comment-label')) {
+                    var commentId = element.getAttribute('data-comment-id');
+                  }
+                  btn.innerText = 'Vytvoriť ďalší Komentár k heslu v BKB';
+                  // Change URL onclick
+                  btn.onclick = function () {
+                    window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + commentId + '/edit?operation=add-new-comment', '_blank');
+                  };
+                } else {
+                  // Restore default if needed
+                  btn.innerText = 'Vytvoriť komentár v BKB';
+                  btn.onclick = function () {
+                    window.open(Drupal.settings.ckeditor_bkb_comment.bkb_add_url, '_blank');
+                  };
+                }
+              }
+            });
+          }, 0);
+        },
+        buttons: [
+          {
+            type: 'button',
+            id: 'redirectToBkb',
+            label: Drupal.t('Vytvoriť komentár v BKB'),
+          },
+          CKEDITOR.dialog.cancelButton,
+          CKEDITOR.dialog.okButton
+        ]
       };
     });
 
@@ -96,8 +134,6 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
       var element = evt.data.element;
       if (element.is('a') && element.hasClass('bkb-comment')) {
         evt.cancel();
-        var selection = editor.getSelection();
-        editor._selectedText = selection.getSelectedText();
         editor.execCommand('comments');
       }
     });
