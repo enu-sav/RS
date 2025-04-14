@@ -2,62 +2,46 @@
   Drupal.behaviors.ckeditorCommentTooltip = {
     attach: function (context, settings) {
       $(document).ready(function () {
-        // Ensure tooltips are not created multiple times
         $('a.bkb-comment', context).once('ckeditorCommentTooltip').each(function () {
-          var element = $(this);
-          var commentId = element.attr('data-comment-id'); // Get comment ID from element attribute
-          if (!commentId) return; // Skip if no comment ID is found
+          const element = this;
+          const $element = $(element);
+          const commentId = $element.attr('data-comment-id');
 
-          var tooltip = $('<div class="custom-tooltip"></div>')
-            .css({
-              position: 'absolute',
-              backgroundColor: '#333',
-              color: 'white',
-              padding: '5px',
-              borderRadius: '5px',
-              zIndex: '1000',
-              display: 'none',
-              fontSize: '12px'
-            })
-            .appendTo('body');
+          if (!commentId) return;
 
-          // AJAX call on page load to fetch the tooltip content
-          jQuery.ajax({
-            url: `/get_comment_text/${commentId}`, // Fetch specific comment details
+          // Create a Tippy instance but keep it disabled until content is loaded
+          const instance = tippy(element, {
+            content: 'Loading...',
+            allowHTML: true,
+            trigger: 'mouseenter focus',
+            interactive: true, // Keep tooltip open when hovering over it
+            placement: 'bottom',
+            theme: 'light-border',
+            onShow(instance) {
+              // Optional: prevent showing until content is available
+              if (!$element.data('tooltip-loaded')) {
+                return false;
+              }
+            }
+          });
+
+          // Fetch the comment text
+          $.ajax({
+            url: `/get_comment_text/${commentId}`,
             type: 'GET',
             dataType: 'json',
             success: function (data) {
               if (data && data.commentText) {
-                element.data('tooltip-text', data.commentText); // Store tooltip text
-                element.data('tooltip-loaded', true); // Mark as loaded
-                tooltip.text(data.commentText);
+                $element.data('tooltip-loaded', true);
+                instance.setContent(data.commentText);
+              } else {
+                instance.setContent('No comment found.');
               }
             },
             error: function () {
-              console.error('Error fetching comment tooltip data');
+              instance.setContent('Error loading comment.');
             }
           });
-
-          // Show tooltip on hover
-          element.hover(
-            function () {
-              var offset = element.offset();
-
-              // Use the cached tooltip text if it has already been loaded
-              if (element.data('tooltip-text')) {
-                tooltip.text(element.data('tooltip-text'));
-              }
-
-              tooltip.css({
-                top: offset.top + element.outerHeight() + 5 + 'px',
-                left: offset.left + 'px',
-                display: 'block'
-              });
-            },
-            function () {
-              tooltip.fadeOut(200); // Smooth hide
-            }
-          );
         });
       });
     }

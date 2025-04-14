@@ -108,18 +108,23 @@ function get_comment_text_callback($commentID) {
       ],
     ]);
 
-    $url = '/jsonapi/comment?filter[drupal_internal__id]=' . $commentID;
+    $url = '/jsonapi/comment?include=sources,sources.source&filter[drupal_internal__id]=' . $commentID;
     $response = $client->request('GET', $url);
     $links = [];
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
       if (!empty($data)) {
+        // Sources (Zdroje) output.
+        $json_data = drupal_json_decode($response->getBody());
+        $sources_text = render_sources_from_json($json_data);
+        $sources = nl2br(($sources_text));
+
         foreach ($data->data as $item) {
           if (isset($item->attributes->comment)) {
             $links = [
-              'label' => $item->attributes->label,
+              //'label' => $item->attributes->label,
               'value' => $item->attributes->drupal_internal__id,
-              'commentText' => $item->attributes->comment,
+              'commentText' => $item->attributes->comment . $sources,
             ];
           }
         }
@@ -134,6 +139,60 @@ function get_comment_text_callback($commentID) {
   exit;
 }
 
+function render_sources_from_json($json_data) {
+  $included = $json_data['included'];
+  $output = "<br>\n<b>Zdroje:</b>\n";
+
+  // Separate groups and sources
+  $groups = array_filter($included, function($item) {
+    return $item['type'] === 'source--group';
+  });
+
+  $sources = array_filter($included, function($item) {
+    return $item['type'] === 'source';
+  });
+
+  // Index sources by ID
+  $sources_by_id = array();
+  foreach ($sources as $source) {
+    $sources_by_id[$source['id']] = $source;
+  }
+
+  $index = 1;
+  foreach ($groups as $group) {
+    $source_ref = $group['relationships']['source']['data'];
+    if (!isset($source_ref['id']) || $source_ref['type'] !== 'source') {
+      continue;
+    }
+
+    $source_id = $source_ref['id'];
+    if (!isset($sources_by_id[$source_id])) {
+      continue;
+    }
+
+    $source = $sources_by_id[$source_id];
+    $source_label = $source['attributes']['label'];
+
+    $output .= "Zdroj [{$index}]\n";
+    $output .= $source_label . "\n";
+
+    if (!empty($group['attributes']['pages'])) {
+      $output .= "Strany:" . $group['attributes']['pages'] . "\n";
+    }
+
+    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
+    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
+
+    $output .= "Zverejniť: $published\n";
+    $output .= "Použité: $used\n\n";
+
+    $index++;
+  }
+
+  return trim($output);
+}
+
+
 /**
  * Implements hook_init().
  */
@@ -145,10 +204,22 @@ function ckeditor_bkb_comment_init() {
  * Implements hook_page_alter().
  */
 function ckeditor_bkb_comment_page_alter(&$page) {
+  global $base_url;
   // Check if we are on a node page
   if ($node = menu_get_object()) {
-    // Pass the Node ID to JavaScript using drupalSettings
-    drupal_add_js(['ckeditor_bkb_comment' => ['nid' => (integer) $node->nid]], 'setting');
+    if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
+      // Pass the Node ID to JavaScript using drupalSettings
+      $alias = drupal_get_path_alias('node/' . $node->nid);
+      $absolute_url = $base_url . '/' . $alias;
+      $bkb_url = variable_get('beliana_bkb_uri') . '/word/add?label=' . $node->title . '&url=' . $absolute_url;
+      drupal_add_js([
+        'ckeditor_bkb_comment' => [
+          'nid' => (integer) $node->nid,
+          'bkb_add_url' => $bkb_url,
+          'bkb_edit_url' => variable_get('beliana_bkb_uri') . '/word/',
+        ],
+      ], 'setting');
+    }
   }
 }
 
@@ -158,6 +229,12 @@ function ckeditor_bkb_comment_page_alter(&$page) {
 function ckeditor_bkb_comment_preprocess_node(&$variables) {
   if (in_array($variables['type'], ['heslo', 'importovane_heslo'])) {
     drupal_add_js(drupal_get_path('module', 'ckeditor_bkb_comment') . '/js/tooltip.js');
+    drupal_add_css('https://unpkg.com/tippy.js@6/dist/tippy.css', [
+      'type' => 'external',
+    ]);
+
+    drupal_add_js('https://unpkg.com/@popperjs/core@2', 'external');
+    drupal_add_js('https://unpkg.com/tippy.js@6', 'external');
   }
 }
 
