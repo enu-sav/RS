@@ -4,9 +4,8 @@ core = "7.x"
 package = "Media"
 configure = "admin/config/media/imce"
 
-; Information added by Drupal.org packaging script on 2017-05-27
-version = "7.x-1.11"
+; Information added by Drupal.org packaging script on 2022-12-28
+version = "7.x-2.0"
 core = "7.x"
 project = "imce"
-datestamp = "1495890787"
-
+datestamp = "1672242663"
