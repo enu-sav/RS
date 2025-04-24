@@ -74,6 +74,7 @@ function ckeditor_bkb_comment_callback($nid) {
             $links[] = [
               'label' => strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment,
               'value' => $item->attributes->drupal_internal__id,
+              'parent' => $item->attributes->parent,
             ];
           }
         }
@@ -87,6 +88,9 @@ function ckeditor_bkb_comment_callback($nid) {
 
 /**
  * Callback to get comment text from BKB.
+ *
+ * @param int $commentID
+ * @param bool $source
  */
 function get_comment_text_callback($commentID) {
   $cache_id = 'ckeditor_bkb_comment_' . md5($commentID);
@@ -108,7 +112,7 @@ function get_comment_text_callback($commentID) {
       ],
     ]);
 
-    $url = '/jsonapi/comment?include=sources,sources.source&filter[drupal_internal__id]=' . $commentID;
+    $url = '/jsonapi/comment?include=sources,sources.source,sources.source.attachment&filter[drupal_internal__id]=' . $commentID;
     $response = $client->request('GET', $url);
     $links = [];
     if ($response->getStatusCode() === 200) {
@@ -122,9 +126,9 @@ function get_comment_text_callback($commentID) {
         foreach ($data->data as $item) {
           if (isset($item->attributes->comment)) {
             $links = [
-              //'label' => $item->attributes->label,
               'value' => $item->attributes->drupal_internal__id,
               'commentText' => $item->attributes->comment . $sources,
+              'plainCommentText' => $item->attributes->comment,
             ];
           }
         }
@@ -139,27 +143,28 @@ function get_comment_text_callback($commentID) {
   exit;
 }
 
+/**
+ * Function to format JSON to tooltip formatting.
+ */
 function render_sources_from_json($json_data) {
   $included = $json_data['included'];
   $output = "<br>\n<b>Zdroje:</b>\n";
 
-  // Separate groups and sources
-  $groups = array_filter($included, function($item) {
-    return $item['type'] === 'source--group';
-  });
-
-  $sources = array_filter($included, function($item) {
-    return $item['type'] === 'source';
-  });
-
-  // Index sources by ID
-  $sources_by_id = array();
+  $groups = array_filter($included, fn($item) => $item['type'] === 'source--group');
+  $sources = array_filter($included, fn($item) => $item['type'] === 'source');
+  $files = array_filter($included, fn($item) => $item['type'] === 'file');
+  $sources_by_id = [];
   foreach ($sources as $source) {
     $sources_by_id[$source['id']] = $source;
   }
 
-  $index = 1;
+  $files_by_id = [];
+  foreach ($files as $file) {
+    $files_by_id[$file['id']] = $file;
+  }
+
   foreach ($groups as $group) {
+    $group_index = $group['attributes']['index'];
     $source_ref = $group['relationships']['source']['data'];
     if (!isset($source_ref['id']) || $source_ref['type'] !== 'source') {
       continue;
@@ -172,12 +177,25 @@ function render_sources_from_json($json_data) {
 
     $source = $sources_by_id[$source_id];
     $source_label = $source['attributes']['label'];
-
-    $output .= "Zdroj [{$index}]\n";
+    $output .= "Zdroj [{$group_index}]\n";
     $output .= $source_label . "\n";
 
-    if (!empty($group['attributes']['pages'])) {
-      $output .= "Strany:" . $group['attributes']['pages'] . "\n";
+    // Handle PDF attachment
+    if (!empty($source['relationships']['attachment']['data'])) {
+      $attachment = $source['relationships']['attachment']['data'];
+      $file_id = $attachment['id'] ?? null;
+
+      if ($file_id && isset($files_by_id[$file_id])) {
+        $file = $files_by_id[$file_id];
+        $file_url = variable_get('beliana_bkb_uri') . $file['attributes']['uri']['url'] ?? null;
+        if ($file_url) {
+          $output .= "PDF: <a href=\"$file_url\" target=\"_blank\">" . t('Stiahnut') ."</a>\n";
+        } else {
+          $output .= "PDF: (neplatná URL)\n";
+        }
+      } else {
+        $output .= "PDF: (súbor nenájdený)\n";
+      }
     }
 
     $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
@@ -185,11 +203,9 @@ function render_sources_from_json($json_data) {
 
     $output .= "Zverejniť: $published\n";
     $output .= "Použité: $used\n\n";
-
-    $index++;
   }
 
-  return trim($output);
+  return $output;
 }
 
 
