@@ -78,12 +78,20 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                   // Change URL onclick
                   btn.onclick = function () {
                     window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + commentId + '/edit?operation=add-new-comment', '_blank');
+                    var dialog = CKEDITOR.dialog.getCurrent();
+                    if (dialog) {
+                      dialog.hide();
+                    }
                   };
                 } else {
                   // Restore default if needed
                   btn.innerText = 'Vytvoriť komentár v BKB';
                   btn.onclick = function () {
                     window.open(Drupal.settings.ckeditor_bkb_comment.bkb_add_url, '_blank');
+                    var dialog = CKEDITOR.dialog.getCurrent();
+                    if (dialog) {
+                      dialog.hide();
+                    }
                   };
                 }
               }
