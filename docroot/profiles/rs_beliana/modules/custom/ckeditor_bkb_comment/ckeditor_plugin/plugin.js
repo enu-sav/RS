@@ -13,7 +13,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
         contents: [
           {
             id: 'tab1',
-            label: 'Autocomplete',
+            label: Drupal.t('Autocomplete'),
             elements: [
               {
                 type: 'text',
@@ -59,44 +59,51 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
           insertCommentLink(editor, this);
         },
         onShow: function () {
-          var selection = editor.getSelection();
-          var selectedText = selection.getSelectedText();
+          var nid = Drupal.settings.ckeditor_bkb_comment.nid;
           prefillDialog(this, editor);
 
-          setTimeout(() => {
-            var dialogEl = document.querySelector('.cke_dialog');
-            var buttons = dialogEl?.querySelectorAll('.cke_dialog_ui_button');
+          jQuery.ajax({
+            url: `/ckeditor/autocomplete_link/${nid}`,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+              const success = data.length > 0;
 
-            buttons?.forEach(btn => {
-              if (btn.innerText.includes('Vytvoriť')) {
-                if (selectedText && selectedText.trim().length > 0) {
-                  var element = selection.getStartElement();
-                  if (element && element.is('a') && element.hasAttribute('data-comment-label')) {
-                    var commentId = element.getAttribute('data-comment-id');
-                  }
-                  btn.innerText = 'Vytvoriť ďalší Komentár k heslu v BKB';
-                  // Change URL onclick
-                  btn.onclick = function () {
-                    window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + commentId + '/edit?operation=add-new-comment', '_blank');
-                    var dialog = CKEDITOR.dialog.getCurrent();
-                    if (dialog) {
-                      dialog.hide();
+              // Wait for the dialog to be available in DOM
+              const interval = setInterval(() => {
+                const dialogEl = document.querySelector('.cke_dialog');
+                const buttons = dialogEl?.querySelectorAll('.cke_dialog_ui_button');
+
+                if (dialogEl && buttons?.length) {
+                  clearInterval(interval); // Stop polling
+
+                  buttons.forEach(btn => {
+                    if (btn.innerText.includes('Vytvoriť')) {
+                      if (success) {
+                        let commentId = data[0].parent;
+                        btn.innerText = Drupal.t('Vytvoriť ďalší Komentár k heslu v BKB');
+                        btn.onclick = function () {
+                          window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + commentId + '/edit?operation=add-new-comment', '_blank');
+                          const dialog = CKEDITOR.dialog.getCurrent();
+                          if (dialog) dialog.hide();
+                        };
+                      } else {
+                        btn.innerText = Drupal.t('Vytvoriť komentár v BKB');
+                        btn.onclick = function () {
+                          window.open(Drupal.settings.ckeditor_bkb_comment.bkb_add_url, '_blank');
+                          const dialog = CKEDITOR.dialog.getCurrent();
+                          if (dialog) dialog.hide();
+                        };
+                      }
                     }
-                  };
-                } else {
-                  // Restore default if needed
-                  btn.innerText = 'Vytvoriť komentár v BKB';
-                  btn.onclick = function () {
-                    window.open(Drupal.settings.ckeditor_bkb_comment.bkb_add_url, '_blank');
-                    var dialog = CKEDITOR.dialog.getCurrent();
-                    if (dialog) {
-                      dialog.hide();
-                    }
-                  };
+                  });
                 }
-              }
-            });
-          }, 0);
+              }, 100); // Poll every 100ms until the dialog is ready
+            },
+            error: function () {
+              console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania.'));
+            }
+          });
         },
         buttons: [
           {
@@ -111,12 +118,12 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
     });
 
     editor.addCommand('comments', new CKEDITOR.dialogCommand('commentsDialog', {
-      allowedContent: 'a[class,data-comment-id,data-comment-label]',
+      allowedContent: 'a[class,data-comment-id,data-comment-label,data-parent-id]',
       requiredContent: 'a[class]'
     }));
 
     editor.ui.addButton('comments', {
-      label: 'Add a comment link',
+      label: Drupal.t('Add a comment link'),
       icon: this.path + 'images/comments.png',
       command: 'comments'
     });
@@ -124,7 +131,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
     if (editor.addMenuItems) {
       editor.addMenuItems({
         comments: {
-          label: 'Edit comment link',
+          label: Drupal.t('Edit comment link'),
           command: 'comments',
           icon: this.path + 'images/comments.png',
           group: 'comments'
@@ -274,12 +281,12 @@ function prefillDialog(dialog, editor) {
 // Get latest comment data from API (asynchronous)
 function getCommentById(commentId, callback) {
   jQuery.ajax({
-    url: `/get_comment_text/${commentId}`, // API call to fetch comment details
+    url: `/get_comment_text/${commentId}`,
     type: 'GET',
     dataType: 'json',
     success: function (data) {
-      if (data && data.commentText) {
-        callback(data.commentText); // Use callback to pass the fetched data
+      if (data && data.plainCommentText) {
+        callback(data.plainCommentText); // Use callback to pass the fetched data
       } else {
         callback(''); // Provide empty string if no data found
       }
