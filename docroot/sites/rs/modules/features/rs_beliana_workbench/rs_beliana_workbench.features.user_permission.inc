@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_workbench.features.user_permission.inc
@@ -1047,6 +1048,7 @@ function rs_beliana_workbench_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'ig-redaktor' => 'ig-redaktor',
       'useradmin' => 'useradmin',
     ),

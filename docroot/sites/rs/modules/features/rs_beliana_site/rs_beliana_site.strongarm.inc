@@ -238,7 +238,7 @@ function rs_beliana_site_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'jquery_update_latest_versions_checked';
-  $strongarm->value = 1742162402;
+  $strongarm->value = 1747087201;
   $export['jquery_update_latest_versions_checked'] = $strongarm;
 
   $strongarm = new stdClass();
