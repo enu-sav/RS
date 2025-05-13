@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_ilustracia.features.user_permission.inc
@@ -268,6 +269,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
     ),
@@ -814,6 +816,7 @@ function rs_beliana_node_ilustracia_user_default_permissions() {
       'Redaktor' => 'Redaktor',
       'Výstupný redaktor 1' => 'Výstupný redaktor 1',
       'Výstupný redaktor 2' => 'Výstupný redaktor 2',
+      'Výstupný redaktor 5' => 'Výstupný redaktor 5',
       'administrátor' => 'administrátor',
       'ig-redaktor' => 'ig-redaktor',
     ),

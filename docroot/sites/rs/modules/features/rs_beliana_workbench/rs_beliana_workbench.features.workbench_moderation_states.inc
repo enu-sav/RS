@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_workbench.features.workbench_moderation_states.inc
