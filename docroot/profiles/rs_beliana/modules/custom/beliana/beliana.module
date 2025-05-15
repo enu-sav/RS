@@ -413,7 +413,7 @@ function beliana_action_info() {
     ],
     'beliana_assign_corrector' => [ // rs and webrs, article was authored by an Author
       'type' => 'entity',
-      'label' => t("Set author and assign to author"),
+      'label' => t("Set author and assign to editor"),
       'configurable' => TRUE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
