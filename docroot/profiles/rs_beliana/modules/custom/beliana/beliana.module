@@ -2004,6 +2004,7 @@ function beliana_node_presave($node) {
       empty($node->field_objednavka[LANGUAGE_NONE])) {
         unset($node->field_vyplatit[LANGUAGE_NONE]);
         unset($node->field_dlzka_autorovho_textu_zad[LANGUAGE_NONE]);
+        unset($node->field_datum_autorovho_textu[LANGUAGE_NONE]);
         drupal_set_message("V hesle ". l($node->title, $node->path['source']) . " bol odstránený záznam o vyplácaní autorskej odmeny, lebo heslu chýba objednávka. Heslo treba u autora najskôr objednať v ".l("Redakčný systém > Priradiť autora", "/admin/beliana/priradit-autora"), 'warning');
     }
   }
