@@ -394,7 +394,7 @@ function beliana_action_info() {
   return [
     'beliana_assign_author' => [    // rs and webrs, article will be authored by Author
       'type' => 'entity',
-      'label' => 'Určiť autora a priradiť autorovi',
+      'label' => t("Set author and assign to author"),
       'configurable' => TRUE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
@@ -403,7 +403,7 @@ function beliana_action_info() {
     ],
     'beliana_unassign_author' => [    // rs and webrs - BEL-13
       'type' => 'entity',
-      'label' => 'Zrušiť priradenie autora',
+      'label' => t('Cancel author assignment'),
       'configurable' => FALSE,
       'triggers' => ['any'],
       'behavior' => ['changes_property'],
@@ -413,7 +413,7 @@ function beliana_action_info() {
     ],
     'beliana_assign_corrector' => [ // rs and webrs, article was authored by an Author
       'type' => 'entity',
-      'label' => 'Určiť autora a priradiť redaktorovi',
+      'label' => t("Set author and assign to author"),
       'configurable' => TRUE,
       'triggers' => ['any'],
       'behavior' => ['create_property'],
