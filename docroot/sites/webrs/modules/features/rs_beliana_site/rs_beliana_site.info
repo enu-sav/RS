@@ -167,7 +167,6 @@ features[variable][] = jquery_update_latest_version_jquery_cookie
 features[variable][] = jquery_update_latest_version_jquery_form
 features[variable][] = jquery_update_latest_version_jquery_migrate
 features[variable][] = jquery_update_latest_version_jqueryui
-features[variable][] = jquery_update_latest_versions_checked
 features[variable][] = language_negotiation_language
 features[variable][] = language_negotiation_language_content
 features[variable][] = language_negotiation_language_url
