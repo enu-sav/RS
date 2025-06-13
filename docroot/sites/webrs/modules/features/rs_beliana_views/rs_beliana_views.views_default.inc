@@ -10435,6 +10435,8 @@ Heslá treba preradiť do stavov:
     t('Odpovedí'),
     t('.'),
     t(','),
+    t('1'),
+    t('@count'),
     t('Posledný príspevok'),
     t(' nové'),
     t('Všetky'),
@@ -11158,6 +11160,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['description'] = ' "ZadajteText" zmažte alebo nahraďte iným textom ';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
@@ -12053,6 +12056,7 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['description'] = ' "ZadajteText" zmažte alebo nahraďte iným textom ';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
@@ -12810,6 +12814,7 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['description'] = ' "ZadajteText" zmažte alebo nahraďte iným textom ';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
@@ -13019,6 +13024,7 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
     t('Tabuľka pre geografické heslá'),
     t('Na požadovanú hlavnú kategóriu prejdete stlačením prvého písmena jej názvu'),
     t('Typ'),
+    t(' "ZadajteText" zmažte alebo nahraďte iným textom '),
     t('Komentár obsahuje'),
     t('Komentár neobsahuje'),
     t('Lexikálna skupina (alt)'),
