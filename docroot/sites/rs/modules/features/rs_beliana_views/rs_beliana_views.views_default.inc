@@ -747,6 +747,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['description'] = ' "ZadajteText" zmažte alebo nahraďte iným textom ';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
@@ -8681,6 +8682,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['description'] = ' "ZadajteText" zmažte alebo nahraďte iným textom ';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
@@ -9434,6 +9436,7 @@ function rs_beliana_views_views_default_views() {
     t('Vybrať operáciu'),
     t('Súbor'),
     t('Záznam z pôvodného GH'),
+    t(' "ZadajteText" zmažte alebo nahraďte iným textom '),
     t('Komentár obsahuje'),
     t('Rozpracované'),
     t('Tu sú zobrazené všetky heslá, ktoré máte vypracovať alebo upraviť.
@@ -14207,6 +14210,8 @@ function rs_beliana_views_views_default_views() {
     t('Odpovedí'),
     t('.'),
     t(','),
+    t('1'),
+    t('@count'),
     t('Posledný príspevok'),
     t(' nové'),
     t('Všetky'),
@@ -14994,6 +14999,7 @@ function rs_beliana_views_views_default_views() {
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['description'] = '"ZadajteText" zmažte alebo nahraďte iným textom ';
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
@@ -15712,6 +15718,7 @@ function rs_beliana_views_views_default_views() {
     t('Komentár/inštrukcie'),
     t('Tabuľka pre geografické heslá'),
     t('Stlačením prvého písmena mena redaktora prejdete na jeho lexikálne skupiny.'),
+    t('"ZadajteText" zmažte alebo nahraďte iným textom '),
     t('Komentár obsahuje'),
     t('Lexikálna skupina (alt)'),
     t('Lexikálna skupina (doplnenie)'),
