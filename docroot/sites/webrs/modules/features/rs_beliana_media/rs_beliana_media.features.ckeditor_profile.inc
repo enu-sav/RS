@@ -34,7 +34,7 @@ function rs_beliana_media_ckeditor_profile_defaults() {
         'language_direction' => 'default',
         'allowed_content' => 't',
         'extraAllowedContent' => '',
-        'enter_mode' => 'br',
+        'enter_mode' => 'p',
         'shift_enter_mode' => 'br',
         'font_format' => 'p;h2;h3',
         'custom_formatting' => 'f',
