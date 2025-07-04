@@ -231,7 +231,7 @@ function beliana_sync_sync($nid, &$context) {
     drupal_set_message($msg, 'warning');
   }
 
-  // issue a warning if text contains {aA]gebrick
+  // issue a warning if text contains [aA]gebrick
   if (strpos($text_hesla, "lgebrick")){
     $msg = 'Upozornenie: v texte hesla <a href ="/' . $node->path['source'] . '">' . $node->title . '</a> je použité slovo <b>algebrický</b>.';
     drupal_set_message($msg, 'warning');
@@ -774,12 +774,30 @@ function _extract_published_info($node) {
 }
 
 function _extract_updated_info($node) {
+  // ignore update date if type is heslo and is not published yet
+  if ( $node->type ==  'heslo' and !isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
+    return("");
+  }
   if (isset($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value'])) {
-    return " Aktualizované " .  _form_date2($node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value']) . ".";
+    $datum_aktualizacie = $node->field_datum_aktualizacie[LANGUAGE_NONE][0]['value'];
+    if ( $node->type ==  'heslo' ) {
+      $datum_prveho = $node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'];
+      if ( $datum_aktualizacie > $datum_prveho) {
+        return " Aktualizované " .  _form_date2($datum_aktualizacie) . ".";
+      } else {
+        // ignore update date
+        return "";
+      }
+    } else {	// importovane_heslo
+      return " Aktualizované " .  _form_date2($datum_aktualizacie) . ".";
+    }
   } else {
     return("");
   }
 }
+
+
+
 
 function _extract_published_info_EN($node) {
   if (isset($node->field_datum_prveho_zverejnenia[LANGUAGE_NONE][0]['value'])) {
