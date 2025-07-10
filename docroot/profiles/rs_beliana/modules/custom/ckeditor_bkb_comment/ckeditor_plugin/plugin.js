@@ -29,9 +29,16 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 },
               },
               {
+                type: 'html',
+                id: 'resultList',
+                html: '<div>' + Drupal.t('Vyberte komentár zo zoznamu:') +
+                  '<div id="searchResults" style="border: 1px solid #ccc; max-height: 150px; overflow-y: auto; display: none; padding: 5px;"></div>' +
+                  '</div>'
+              },
+              {
                 type: 'text',
                 id: 'searchField',
-                label: Drupal.t('Hľadať komentár'),
+                label: Drupal.t('Vybraný komentár'),
                 onShow: function() {
                   fetchSearchResults(this, true);
                 },
@@ -39,13 +46,6 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                   fetchSearchResults(this);
                 }, 300),
               },
-              {
-                type: 'html',
-                id: 'resultList',
-                html: '<div>' + Drupal.t('Vyberte komentár zo zoznamu:') +
-                  '<div id="searchResults" style="border: 1px solid #ccc; max-height: 150px; overflow-y: auto; display: none; padding: 5px;"></div>' +
-                  '</div>'
-              }
             ]
           }
         ],
@@ -199,7 +199,7 @@ function fetchSearchResults(field, init = false) {
 function selectSearchResult(dialog, item) {
   var selectedText = item.text();
   var selectedUrl = item.data("url");
-  jQuery("#searchResults").hide();
+  //jQuery("#searchResults").hide();
   var inputField = dialog.getContentElement('tab1', 'searchField').getInputElement().$;
   jQuery(inputField).val(selectedText).attr('data-url', selectedUrl);
 }
