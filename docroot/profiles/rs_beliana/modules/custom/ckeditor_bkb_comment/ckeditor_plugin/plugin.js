@@ -81,9 +81,9 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                     if (btn.innerText.includes('Vytvoriť')) {
                       if (success) {
                         let commentId = data[0].parent;
-                        btn.innerText = Drupal.t('Vytvoriť ďalší Komentár k heslu v BKB');
+                        btn.innerText = Drupal.t('Vytvoriť ďalší komentár k heslu v BKB');
                         btn.onclick = function () {
-                          window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + commentId + '/edit?operation=add-new-comment', '_blank');
+                          window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + commentId + '/edit', '_blank');
                           const dialog = CKEDITOR.dialog.getCurrent();
                           if (dialog) dialog.hide();
                         };
