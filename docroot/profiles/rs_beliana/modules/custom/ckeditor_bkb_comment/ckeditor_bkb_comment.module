@@ -63,7 +63,8 @@ function ckeditor_bkb_comment_callback($nid) {
       ],
     ]);
 
-    $url = '/jsonapi/comment?page[limit]=5&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
+    //$url = '/jsonapi/comment?page[limit]=10&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
+    $url = '/jsonapi/comment?filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
     $response = $client->request('GET', $url);
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
@@ -75,6 +76,7 @@ function ckeditor_bkb_comment_callback($nid) {
               'label' => strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment,
               'value' => $item->attributes->drupal_internal__id,
               'parent' => $item->attributes->parent,
+'url' => $url,
             ];
           }
         }
