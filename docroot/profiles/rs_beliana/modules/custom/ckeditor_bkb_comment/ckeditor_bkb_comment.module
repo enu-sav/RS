@@ -63,21 +63,25 @@ function ckeditor_bkb_comment_callback($nid) {
       ],
     ]);
 
-    //$url = '/jsonapi/comment?page[limit]=10&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
-    $url = '/jsonapi/comment?filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
+    $url = '/jsonapi/comment?filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias;
     $response = $client->request('GET', $url);
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
       if (!empty($data)) {
+        $delta = 0;
         foreach ($data->data as $item) {
           if (isset($item->attributes->comment)) {
+            $delta++;
             $comment = $item->attributes->comment;
-            $links[] = [
-              'label' => strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment,
-              'value' => $item->attributes->drupal_internal__id,
-              'parent' => $item->attributes->parent,
-'url' => $url,
-            ];
+
+            if (empty($query) || (strpos($comment, $query) !== FALSE)) {
+              $links[] = [
+                'id' => $delta,
+                'label' => '[' . $delta . ']: ' . (strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment),
+                'value' => $item->attributes->drupal_internal__id,
+                'parent' => $item->attributes->parent,
+              ];
+            }
           }
         }
       }
@@ -150,7 +154,7 @@ function get_comment_text_callback($commentID) {
  */
 function render_sources_from_json($json_data) {
   $included = $json_data['included'];
-  $output = "<br>\n<b>Zdroje:</b>\n";
+  $output = "<br>\n<b>Zdroje:</b>\n<ul>";
 
   $groups = array_filter($included, fn($item) => $item['type'] === 'source--group');
   $sources = array_filter($included, fn($item) => $item['type'] === 'source');
@@ -179,33 +183,46 @@ function render_sources_from_json($json_data) {
 
     $source = $sources_by_id[$source_id];
     $source_label = $source['attributes']['label'];
-    $output .= "Zdroj [{$group_index}]\n";
-    $output .= $source_label . "\n";
+    $output .= "<li>Zdroj [{$group_index}]: ";
+
+    if (strpos($source_label, 'digitalna-kniznica.beliana.sav.sk') !== FALSE) {
+      parse_str(parse_url($source_label)['query'], $query);
+      $output .= "<a href=\"$source_label\" target=\"_blank\">" . $query['title'] . "</a>\n";
+    }
+    else {
+      $output .= $source_label . "\n";
+    }
 
     // Handle PDF attachment
     if (!empty($source['relationships']['attachment']['data'])) {
       $attachment = $source['relationships']['attachment']['data'];
-      $file_id = $attachment['id'] ?? null;
+      $file_id = $attachment['id'] ?? NULL;
 
       if ($file_id && isset($files_by_id[$file_id])) {
         $file = $files_by_id[$file_id];
-        $file_url = variable_get('beliana_bkb_uri') . $file['attributes']['uri']['url'] ?? null;
+        $file_url = variable_get('beliana_bkb_uri') . $file['attributes']['uri']['url'] ?? NULL;
         if ($file_url) {
-          $output .= "PDF: <a href=\"$file_url\" target=\"_blank\">" . t('Stiahnut') ."</a>\n";
-        } else {
+          $output .= "PDF: <a href=\"$file_url\" target=\"_blank\">" . t('Stiahnut') . "</a>\n";
+        }
+        else {
           $output .= "PDF: (neplatná URL)\n";
         }
-      } else {
+      }
+      else {
         $output .= "PDF: (súbor nenájdený)\n";
       }
     }
 
-    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
-    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
+    //    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
+    //    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
+    //
+    //    $output .= "Zverejniť: $published\n";
+    //    $output .= "Použité: $used\n\n";
 
-    $output .= "Zverejniť: $published\n";
-    $output .= "Použité: $used\n\n";
+    $output .= "</li>";
   }
+
+  $output .= "</ul>";
 
   return $output;
 }
@@ -229,12 +246,12 @@ function ckeditor_bkb_comment_page_alter(&$page) {
       // Pass the Node ID to JavaScript using drupalSettings
       $alias = drupal_get_path_alias('node/' . $node->nid);
       $absolute_url = $base_url . '/' . $alias;
-      $bkb_url = variable_get('beliana_bkb_uri') . '/word/add?label=' . $node->title . '&url=' . $absolute_url;
+      $bkb_url = variable_get('beliana_bkb_uri') . '/source-comment/add';
       drupal_add_js([
         'ckeditor_bkb_comment' => [
           'nid' => (integer) $node->nid,
-          'bkb_add_url' => $bkb_url,
-          'bkb_edit_url' => variable_get('beliana_bkb_uri') . '/word/',
+          'bkb_add_url' => $bkb_url . '?title=' . $node->title . '&url=' . $absolute_url,
+          'bkb_edit_url' => $bkb_url,
         ],
       ], 'setting');
     }
