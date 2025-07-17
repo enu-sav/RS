@@ -206,11 +206,11 @@ function render_sources_from_json($json_data) {
       }
     }
 
-    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
-    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
-
-    $output .= "Zverejniť: $published\n";
-    $output .= "Použité: $used\n\n";
+//    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
+//    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
+//
+//    $output .= "Zverejniť: $published\n";
+//    $output .= "Použité: $used\n\n";
   }
 
   return $output;
