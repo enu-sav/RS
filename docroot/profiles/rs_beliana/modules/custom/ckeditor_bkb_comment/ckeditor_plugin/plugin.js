@@ -16,23 +16,23 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
             label: Drupal.t('Autocomplete'),
             elements: [
               {
+                type: 'html',
+                id: 'resultList',
+                html: '<div>' + Drupal.t('Vyberte komentár zo zoznamu:') +
+                  '<div id="searchResults" style="border: 1px solid #ccc; max-height: 150px; overflow-y: auto; display: none; padding: 5px;"></div>' +
+                  '</div>'
+              },
+              {
                 type: 'text',
                 id: 'searchField',
-                label: Drupal.t('Hľadať komentár'),
-                onShow: function () {
+                label: Drupal.t('Vybraný komentár'),
+                onShow: function() {
                   fetchSearchResults(this, true);
                 },
                 onKeyUp: debounce(function () {
                   fetchSearchResults(this);
                 }, 300),
               },
-              {
-                type: 'html',
-                id: 'resultList',
-                html: '<div>' + Drupal.t('Vyberte komentár zo zoznamu:') +
-                  '<div id="searchResults" style="border: 1px solid #ccc; max-height: 150px; overflow-y: auto; display: none; padding: 5px;"></div>' +
-                  '</div>'
-              }
             ]
           }
         ],
@@ -68,7 +68,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                     if (btn.innerText.includes('Vytvoriť')) {
                       if (success) {
                         let commentId = data[0].parent;
-                        btn.innerHTML = '<span class="cke_dialog_ui_button">' + Drupal.t('Vytvoriť ďalší Komentár k heslu v BKB') + '</span>';
+                        btn.innerHTML = '<span class="cke_dialog_ui_button">' + Drupal.t('Pridať ďalší komentár k heslu v BKB') + '</span>';
                         btn.onclick = function () {
                           window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + '?word=' + commentId, '_blank');
                           const dialog = CKEDITOR.dialog.getCurrent();
@@ -220,7 +220,7 @@ function selectSearchResult(dialog, item) {
   var inputField = dialog.getContentElement('tab1', 'searchField').getInputElement().$;
 
   jQuery(inputField).val(item.text()).attr('data-url', item.data('url')).attr('data-id', item.data('id'));
-  jQuery("#searchResults").hide();
+  // jQuery("#searchResults").hide();
 }
 
 function insertCommentLink(editor, dialog) {
