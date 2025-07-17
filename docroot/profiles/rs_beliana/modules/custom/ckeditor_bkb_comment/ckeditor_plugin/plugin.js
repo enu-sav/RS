@@ -68,7 +68,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                     if (btn.innerText.includes('Vytvoriť')) {
                       if (success) {
                         let commentId = data[0].parent;
-                        btn.innerText = Drupal.t('Pridať ďalší komentár k heslu v BKB');
+                        btn.innerHTML = '<span class="cke_dialog_ui_button">' + Drupal.t('Pridať ďalší komentár k heslu v BKB') + '</span>';
                         btn.onclick = function () {
                           window.open(Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + '?word=' + commentId, '_blank');
                           const dialog = CKEDITOR.dialog.getCurrent();
@@ -220,7 +220,7 @@ function selectSearchResult(dialog, item) {
   var inputField = dialog.getContentElement('tab1', 'searchField').getInputElement().$;
 
   jQuery(inputField).val(item.text()).attr('data-url', item.data('url')).attr('data-id', item.data('id'));
-  jQuery("#searchResults").hide();
+  // jQuery("#searchResults").hide();
 }
 
 function insertCommentLink(editor, dialog) {
