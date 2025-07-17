@@ -154,7 +154,7 @@ function get_comment_text_callback($commentID) {
  */
 function render_sources_from_json($json_data) {
   $included = $json_data['included'];
-  $output = "<br>\n<b>Zdroje:</b>\n";
+  $output = "<br>\n<b>Zdroje:</b>\n<ul>";
 
   $groups = array_filter($included, fn($item) => $item['type'] === 'source--group');
   $sources = array_filter($included, fn($item) => $item['type'] === 'source');
@@ -183,8 +183,15 @@ function render_sources_from_json($json_data) {
 
     $source = $sources_by_id[$source_id];
     $source_label = $source['attributes']['label'];
-    $output .= "Zdroj [{$group_index}]\n";
-    $output .= $source_label . "\n";
+    $output .= "<li>Zdroj [{$group_index}]: ";
+
+    if (strpos($source_label, 'digitalna-kniznica.beliana.sav.sk') !== FALSE) {
+      parse_str(parse_url($source_label)['query'], $query);
+      $output .= "<a href=\"$source_label\" target=\"_blank\">" . $query['title'] . "</a>\n";
+    }
+    else {
+      $output .= $source_label . "\n";
+    }
 
     // Handle PDF attachment
     if (!empty($source['relationships']['attachment']['data'])) {
@@ -206,12 +213,16 @@ function render_sources_from_json($json_data) {
       }
     }
 
-//    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
-//    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
-//
-//    $output .= "Zverejniť: $published\n";
-//    $output .= "Použité: $used\n\n";
+    //    $published = $group['attributes']['published'] ? 'Áno' : 'Nie';
+    //    $used = $group['attributes']['used'] ? 'Áno' : 'Nie';
+    //
+    //    $output .= "Zverejniť: $published\n";
+    //    $output .= "Použité: $used\n\n";
+
+    $output .= "</li>";
   }
+
+  $output .= "</ul>";
 
   return $output;
 }
