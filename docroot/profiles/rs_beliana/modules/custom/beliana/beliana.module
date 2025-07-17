@@ -2523,14 +2523,14 @@ function _check_alternative_text_markers(&$node, $text, $where) {
 }
 
 /**
- * if article state should be changed to 'vyradene' (rejected), the must be no
+ * if article state should be changed to 'vyradene' (rejected), there must be no
  * articles referencing to it
  *
  * @param $nid
  */
 function _check_transition_to_vyradene(&$node) {
-  // get nodes linking to $node
-  $query = db_query('SELECT node.nid AS nid FROM {node} node INNER JOIN {search_node_links} links ON node.nid = links.sid WHERE links.nid = :nid', [':nid' => $node->nid]);
+  // get nodes linking to $node, ignore type objednavka_hesiel
+  $query = db_query("SELECT node.nid AS nid FROM {node} node INNER JOIN {search_node_links} links ON node.nid = links.sid WHERE node.type != 'objednavka_hesiel' and links.nid = :nid", [':nid' => $node->nid]);
   $result = $query->fetchAll();
   if ($result) {
     drupal_set_message('Heslo <a href="/' . $node->path['alias'] . '">' . $node->title . '</a> ' . 'nebolo presunuté do stavu Vyradené, lebo naň odkazujú iné heslá.', 'error');
