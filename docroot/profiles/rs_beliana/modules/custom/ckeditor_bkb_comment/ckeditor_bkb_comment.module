@@ -63,19 +63,25 @@ function ckeditor_bkb_comment_callback($nid) {
       ],
     ]);
 
-    $url = '/jsonapi/comment?page[limit]=5&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&filter[comment][operator]=CONTAINS&filter[comment][value]=' . $query;
+    $url = '/jsonapi/comment?page[limit]=50&filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias;
     $response = $client->request('GET', $url);
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
       if (!empty($data)) {
+        $delta = 0;
         foreach ($data->data as $item) {
           if (isset($item->attributes->comment)) {
+            $delta++;
             $comment = $item->attributes->comment;
-            $links[] = [
-              'label' => strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment,
-              'value' => $item->attributes->drupal_internal__id,
-              'parent' => $item->attributes->parent,
-            ];
+
+            if (empty($query) || (strpos($comment, $query) !== FALSE)) {
+              $links[] = [
+                'id' => $delta,
+                'label' => '[' . $delta . ']: ' . (strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment),
+                'value' => $item->attributes->drupal_internal__id,
+                'parent' => $item->attributes->parent,
+              ];
+            }
           }
         }
       }
@@ -183,17 +189,19 @@ function render_sources_from_json($json_data) {
     // Handle PDF attachment
     if (!empty($source['relationships']['attachment']['data'])) {
       $attachment = $source['relationships']['attachment']['data'];
-      $file_id = $attachment['id'] ?? null;
+      $file_id = $attachment['id'] ?? NULL;
 
       if ($file_id && isset($files_by_id[$file_id])) {
         $file = $files_by_id[$file_id];
-        $file_url = variable_get('beliana_bkb_uri') . $file['attributes']['uri']['url'] ?? null;
+        $file_url = variable_get('beliana_bkb_uri') . $file['attributes']['uri']['url'] ?? NULL;
         if ($file_url) {
-          $output .= "PDF: <a href=\"$file_url\" target=\"_blank\">" . t('Stiahnut') ."</a>\n";
-        } else {
+          $output .= "PDF: <a href=\"$file_url\" target=\"_blank\">" . t('Stiahnut') . "</a>\n";
+        }
+        else {
           $output .= "PDF: (neplatná URL)\n";
         }
-      } else {
+      }
+      else {
         $output .= "PDF: (súbor nenájdený)\n";
       }
     }
@@ -227,12 +235,12 @@ function ckeditor_bkb_comment_page_alter(&$page) {
       // Pass the Node ID to JavaScript using drupalSettings
       $alias = drupal_get_path_alias('node/' . $node->nid);
       $absolute_url = $base_url . '/' . $alias;
-      $bkb_url = variable_get('beliana_bkb_uri') . '/word/add?label=' . $node->title . '&url=' . $absolute_url;
+      $bkb_url = variable_get('beliana_bkb_uri') . '/source-comment/add';
       drupal_add_js([
         'ckeditor_bkb_comment' => [
           'nid' => (integer) $node->nid,
-          'bkb_add_url' => $bkb_url,
-          'bkb_edit_url' => variable_get('beliana_bkb_uri') . '/word/',
+          'bkb_add_url' => $bkb_url . '?title=' . $node->title . '&url=' . $absolute_url,
+          'bkb_edit_url' => $bkb_url,
         ],
       ], 'setting');
     }
