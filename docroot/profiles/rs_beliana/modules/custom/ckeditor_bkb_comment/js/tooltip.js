@@ -2,47 +2,85 @@
   Drupal.behaviors.ckeditorCommentTooltip = {
     attach: function (context, settings) {
       $(document).ready(function () {
+        // Regular DOM elements (outside CKEditor)
         $('a.bkb-comment', context).once('ckeditorCommentTooltip').each(function () {
-          const element = this;
-          const $element = $(element);
-          const commentId = $element.attr('data-comment-id');
-
-          if (!commentId) return;
-
-          // Create a Tippy instance but keep it disabled until content is loaded
-          const instance = tippy(element, {
-            content: 'Loading...',
-            allowHTML: true,
-            trigger: 'mouseenter focus',
-            interactive: true, // Keep tooltip open when hovering over it
-            placement: 'bottom',
-            theme: 'light-border',
-            onShow(instance) {
-              // Optional: prevent showing until content is available
-              if (!$element.data('tooltip-loaded')) {
-                return false;
-              }
-            }
-          });
-
-          // Fetch the comment text
-          $.ajax({
-            url: `/get_comment_text/${commentId}`,
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-              if (data && data.commentText) {
-                $element.data('tooltip-loaded', true);
-                instance.setContent(data.commentText);
-              } else {
-                instance.setContent('No comment found.');
-              }
-            },
-            error: function () {
-              instance.setContent('Error loading comment.');
-            }
-          });
+          Drupal.behaviors.ckeditorCommentTooltip.setupTippy($(this));
         });
+
+        // CKEditor instances (inside WYSIWYG)
+        if (typeof CKEDITOR !== 'undefined') {
+          for (const instanceName in CKEDITOR.instances) {
+            const editor = CKEDITOR.instances[instanceName];
+
+            // Avoid duplicate listeners
+            if (!editor._bkbTooltipInitialized) {
+              editor._bkbTooltipInitialized = true;
+
+              editor.on('instanceReady', function () {
+                // Delay to ensure content is loaded
+                setTimeout(function () {
+                  const body = editor.document.$.body;
+                  const $links = $(body).find('a.bkb-comment').once('ckeditorCommentTooltip');
+
+                  $links.each(function () {
+                    Drupal.behaviors.ckeditorCommentTooltip.setupTippy($(this));
+                  });
+                }, 100);
+              });
+            }
+          }
+        }
+      });
+    },
+    setupTippy: function ($element) {
+      const commentId = $element.attr('data-comment-id');
+      if (!commentId) {
+        return;
+      }
+
+      const element = $element.get(0);
+      const ownerDoc = element.ownerDocument;
+
+      // Create tooltip container inside same document as the target (iframe or
+      // main doc)
+      const tooltipContainer = ownerDoc.createElement('div');
+      tooltipContainer.setAttribute('contenteditable', 'false');
+      tooltipContainer.innerHTML = 'Loading...';
+
+      // Needed for CKEditor
+      tooltipContainer.addEventListener('click', function (e) {
+        const href = e.target.getAttribute('href');
+        if (href) {
+          window.open(href, '_blank');
+        }
+      });
+
+      ownerDoc.body.appendChild(tooltipContainer);
+
+      tippy(element, {
+        content: tooltipContainer,
+        allowHTML: true,
+        trigger: 'mouseenter focus',
+        interactive: true,
+        placement: 'bottom',
+        theme: 'light-border',
+        appendTo: ownerDoc.body,
+        onShow() {
+          return $element.data('tooltip-loaded') === true;
+        }
+      });
+
+      $.ajax({
+        url: `/get_comment_text/${commentId}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          $element.data('tooltip-loaded', true);
+          tooltipContainer.innerHTML = data?.commentText || 'No comment found.';
+        },
+        error: function () {
+          tooltipContainer.innerHTML = 'Error loading comment.';
+        }
       });
     }
   };

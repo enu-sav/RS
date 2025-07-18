@@ -160,7 +160,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
       const selectedText = selection ? selection.getSelectedText() : '';
 
       const cmd = editor.getCommand('comments');
-      if (!cmd) {
+      if (!cmd || !selectedText) {
         return;
       }
 
