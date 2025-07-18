@@ -3,6 +3,46 @@
 use GuzzleHttp\Client;
 
 /**
+ * Implements hook_library().
+ */
+function ckeditor_bkb_comment_library() {
+  $libraries['tooltip'] = [
+    'title' => 'Tooltip',
+    'version' => '1.0.0',
+    'js' => [
+      drupal_get_path('module', 'ckeditor_bkb_comment') . '/js/tooltip.js' => [],
+    ],
+    'dependencies' => [
+      ['ckeditor_bkb_comment', 'tippy'],
+    ],
+  ];
+
+  $libraries['tippy'] = [
+    'title' => 'Tippy',
+    'version' => '6.3.7',
+    'js' => [
+      'https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js' => ['type' => 'external'],
+    ],
+    'css' => [
+      'https://unpkg.com/tippy.js@6.3.7/dist/tippy.css' => ['type' => 'external'],
+    ],
+    'dependencies' => [
+      ['ckeditor_bkb_comment', 'popper'],
+    ],
+  ];
+
+  $libraries['popper'] = [
+    'title' => 'Popper',
+    'version' => '2.11.8',
+    'js' => [
+      'https://unpkg.com/@popperjs/core@2.11.8/dist/umd/popper.min.js' => ['type' => 'external'],
+    ],
+  ];
+
+  return $libraries;
+}
+
+/**
  * Implements hook_ckeditor_plugins().
  */
 function ckeditor_bkb_comment_ckeditor_plugin() {
@@ -20,6 +60,21 @@ function ckeditor_bkb_comment_ckeditor_plugin() {
     ],
   ];
 }
+
+/**
+ * Implements hook_ckeditor_settings_alter().
+ */
+function ckeditor_bkb_comment_ckeditor_settings_alter(&$settings, $conf) {
+  $library = drupal_get_library('ckeditor_bkb_comment', 'tippy');
+
+  if (!empty($library['css'])) {
+    $keys = array_keys($library['css']);
+    $settings['contentsCss'] = array_merge($settings['contentsCss'], $keys);
+  }
+
+  debug($settings['contentsCss']);
+}
+
 
 /**
  * Implements hook_menu().
@@ -263,13 +318,7 @@ function ckeditor_bkb_comment_page_alter(&$page) {
  */
 function ckeditor_bkb_comment_preprocess_node(&$variables) {
   if (in_array($variables['type'], ['heslo', 'importovane_heslo'])) {
-    drupal_add_js(drupal_get_path('module', 'ckeditor_bkb_comment') . '/js/tooltip.js');
-    drupal_add_css('https://unpkg.com/tippy.js@6/dist/tippy.css', [
-      'type' => 'external',
-    ]);
-
-    drupal_add_js('https://unpkg.com/@popperjs/core@2', 'external');
-    drupal_add_js('https://unpkg.com/tippy.js@6', 'external');
+    drupal_add_library('ckeditor_bkb_comment', 'tooltip');
   }
 }
 
@@ -277,16 +326,22 @@ function ckeditor_bkb_comment_preprocess_node(&$variables) {
  * Implements hook_form_alter().
  */
 function ckeditor_bkb_comment_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'rs_beliana_sync_ui_sync_settings_form') {
-    $form['bkb'] = [
-      '#type' => 'fieldset',
-      '#title' => 'Beliana BKB config',
-    ];
+  switch ($form_id) {
+    case 'heslo_node_form':
+    case 'importovane_heslo_node_form':
+      drupal_add_library('ckeditor_bkb_comment', 'tooltip');
+      break;
+    case 'rs_beliana_sync_ui_sync_settings_form':
+      $form['bkb'] = [
+        '#type' => 'fieldset',
+        '#title' => 'Beliana BKB config',
+      ];
 
-    $form['bkb']['beliana_bkb_uri'] = [
-      '#type' => 'textfield',
-      '#title' => t('BKB URI'),
-      '#default_value' => variable_get('beliana_bkb_uri'),
-    ];
+      $form['bkb']['beliana_bkb_uri'] = [
+        '#type' => 'textfield',
+        '#title' => t('BKB URI'),
+        '#default_value' => variable_get('beliana_bkb_uri'),
+      ];
+      break;
   }
 }
