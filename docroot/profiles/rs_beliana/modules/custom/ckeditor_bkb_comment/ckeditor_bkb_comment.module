@@ -118,7 +118,7 @@ function ckeditor_bkb_comment_callback($nid) {
       ],
     ]);
 
-    $url = '/jsonapi/comment?filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias;
+    $url = '/jsonapi/comment?filter[url][condition][path]=url.uri&filter[url][condition][operator]=ENDS_WITH&filter[url][condition][value]=' . $alias . '&sort=drupal_internal__id';
     $response = $client->request('GET', $url);
     if ($response->getStatusCode() === 200) {
       $data = json_decode($response->getBody());
