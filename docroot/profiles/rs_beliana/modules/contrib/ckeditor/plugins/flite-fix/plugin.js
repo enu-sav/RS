@@ -3,11 +3,14 @@ CKEDITOR.plugins.add('flite-fix', {
     init: function (editor) {
         // get html of a selection
         function getSelectionHtml(editor) {
-            var sel = editor.getSelection();
-            var ranges = sel.getRanges();
             var el = new CKEDITOR.dom.element("div");
-            for (var i = 0, len = ranges.length; i < len; ++i) {
-                el.append(ranges[i].cloneContents());
+            var sel = editor.getSelection();
+
+            if (sel) {
+                var ranges = sel.getRanges();
+                for (var i = 0, len = ranges.length; i < len; ++i) {
+                    el.append(ranges[i].cloneContents());
+                }
             }
             return el.getHtml();
         }
@@ -16,7 +19,7 @@ CKEDITOR.plugins.add('flite-fix', {
 	    // cut does not work correctly
         editor.removeMenuItem('cut');
 	    // paste is not an FLITE problem - just open a popup sometimes
-        editor.removeMenuItem('paste');	
+        editor.removeMenuItem('paste');
 
         // disable drag&drop inside the editor
         editor.on( 'dragstart', function( event ) {
@@ -26,7 +29,7 @@ CKEDITOR.plugins.add('flite-fix', {
         // cancel key-press event SHIFT-Enter nad CTRL-X
 	    // SHIFT-ENTER: inserts <br /> (we do not want this)
 	    // CTRL-X: cut does not work correctly
-        editor.on( 'key', function( event ) { 
+        editor.on( 'key', function( event ) {
             //var cancel_keys = [CKEDITOR.SHIFT + 13, CKEDITOR.CTRL + 88];
             var cancel_keys = [CKEDITOR.SHIFT + 13];
             if (cancel_keys.includes(event.data.keyCode)) {

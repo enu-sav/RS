@@ -3,7 +3,7 @@
     attach: function (context, settings) {
       $(document).ready(function () {
         // Regular DOM elements (outside CKEditor)
-        $('a.bkb-comment', context).once('ckeditorCommentTooltip').each(function () {
+        $('a.bkb-comment', context).each(function () {
           Drupal.behaviors.ckeditorCommentTooltip.setupTippy($(this));
         });
 
@@ -20,7 +20,7 @@
                 // Delay to ensure content is loaded
                 setTimeout(function () {
                   const body = editor.document.$.body;
-                  const $links = $(body).find('a.bkb-comment').once('ckeditorCommentTooltip');
+                  const $links = $(body).find('a.bkb-comment');
 
                   $links.each(function () {
                     Drupal.behaviors.ckeditorCommentTooltip.setupTippy($(this));
