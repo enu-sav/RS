@@ -26,7 +26,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 type: 'text',
                 id: 'searchField',
                 label: Drupal.t('Vybraný komentár'),
-                onShow: function() {
+                onShow: function () {
                   fetchSearchResults(this, true);
                 },
                 onKeyUp: debounce(function () {
@@ -156,13 +156,14 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
 
     // Helper function to set plugin button state
     function updateCommentsCommandState() {
-      const selection = editor.getSelection();
-      const selectedText = selection ? selection.getSelectedText() : '';
-
       const cmd = editor.getCommand('comments');
-      if (!cmd || !selectedText) {
+
+      if (!cmd) {
         return;
       }
+
+      const selection = editor.getSelection();
+      const selectedText = selection ? selection.getSelectedText() : '';
 
       if (selectedText.length === 0) {
         cmd.setState(CKEDITOR.TRISTATE_OFF);
