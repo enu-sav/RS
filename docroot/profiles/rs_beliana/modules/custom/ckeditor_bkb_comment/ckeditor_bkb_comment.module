@@ -130,7 +130,7 @@ function ckeditor_bkb_comment_callback($nid) {
             if (empty($query) || (strpos($comment, $query) !== FALSE)) {
               $links[] = [
                 'id' => $delta,
-                'label' => '[' . $delta . ']: ' . (strlen($comment) > 75 ? substr($comment, 0, 75) . '...' : $comment),
+                'label' => '[' . $delta . ']: ' . $comment,
                 'value' => $item->attributes->drupal_internal__id,
                 'parent' => $item->attributes->parent,
               ];
