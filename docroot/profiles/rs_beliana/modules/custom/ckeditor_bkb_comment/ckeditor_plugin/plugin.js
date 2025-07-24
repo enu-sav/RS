@@ -93,7 +93,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
               }, 100); // Poll every 100ms until the dialog is ready
             },
             error: function (request, status, error) {
-              console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: '), request.responseText);
+              console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: ') + error.stack);
             }
           });
         },
@@ -240,7 +240,7 @@ function fetchSearchResults(field, init = false) {
       }
     },
     error: function (request, status, error) {
-      console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: '), request.responseText);
+      console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: ') + error.stack);
     }
   });
 }
