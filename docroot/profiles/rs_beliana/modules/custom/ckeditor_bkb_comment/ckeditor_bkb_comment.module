@@ -299,11 +299,12 @@ function ckeditor_bkb_comment_page_alter(&$page) {
       // Pass the Node ID to JavaScript using drupalSettings
       $alias = drupal_get_path_alias('node/' . $node->nid);
       $absolute_url = $base_url . '/' . $alias;
-      $bkb_url = variable_get('beliana_bkb_uri') . '/source-comment/add';
+      $bkb_url = variable_get('beliana_bkb_uri') . '/source-comment';
       drupal_add_js([
         'ckeditor_bkb_comment' => [
           'nid' => (integer) $node->nid,
-          'bkb_add_url' => $bkb_url . '?title=' . $node->title . '&url=' . $absolute_url,
+          'bkb_add_url' => $bkb_url . '/add' . '?title=' . $node->title . '&url=' . $absolute_url,
+          'bkb_extend_url' => $bkb_url . '/add',
           'bkb_edit_url' => $bkb_url,
         ],
       ], 'setting');
