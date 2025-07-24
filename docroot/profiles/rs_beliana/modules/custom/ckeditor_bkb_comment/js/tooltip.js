@@ -32,7 +32,7 @@
         }
       });
     },
-    setupTippy: function ($element) {
+    setupTippy: function ($element, useShift = true) {
       const commentId = $element.attr('data-comment-id');
       if (!commentId) {
         return;
@@ -57,10 +57,10 @@
 
       ownerDoc.body.appendChild(tooltipContainer);
 
-      tippy(element, {
+      const tooltip = tippy(element, {
         content: tooltipContainer,
         allowHTML: true,
-        trigger: 'mouseenter focus',
+        trigger: 'manual',
         interactive: true,
         placement: 'bottom',
         theme: 'light-border',
@@ -68,6 +68,16 @@
         onShow() {
           return $element.data('tooltip-loaded') === true;
         }
+      });
+
+      element.addEventListener('mouseenter', (event) => {
+        if (!useShift || (useShift && event.shiftKey)) {
+          tooltip.show();
+        }
+      });
+
+      element.addEventListener('mouseleave', () => {
+        tooltip.hide();
       });
 
       $.ajax({

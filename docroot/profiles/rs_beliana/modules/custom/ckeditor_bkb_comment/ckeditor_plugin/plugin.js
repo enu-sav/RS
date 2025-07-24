@@ -232,6 +232,7 @@ function insertCommentLink(editor, dialog) {
   const selection = editor.getSelection();
   const selectedElement = selection.getStartElement();
   const isExistingLink = selectedElement?.is('a') && selectedElement.hasAttribute('data-comment-id');
+  const text = ` [${itemId}] `;
 
   if (itemLabel && itemUrl) {
     if (isExistingLink) {
@@ -244,7 +245,7 @@ function insertCommentLink(editor, dialog) {
         'data-comment-id': CKEDITOR.tools.htmlEncode(itemUrl)
       });
       selectedElement.setStyle('color', 'green');
-      selectedElement.setText(`[${itemId}]`);
+      selectedElement.setText(text);
     }
     else {
       // Create new link
@@ -257,11 +258,16 @@ function insertCommentLink(editor, dialog) {
         'data-comment-id': CKEDITOR.tools.htmlEncode(itemUrl)
       });
       linkElement.setStyle('color', 'green');
-      linkElement.setText(`[${itemId}]`);
+      linkElement.setText(text);
 
       const range = selection.getRanges()[0];
       range.deleteContents();
       range.insertNode(linkElement);
+
+      // Move cursor after inserted node
+      const newRange = editor.createRange();
+      newRange.moveToPosition(linkElement, CKEDITOR.POSITION_AFTER_END);
+      newRange.select();
     }
   }
   else {
