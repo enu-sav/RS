@@ -71,8 +71,6 @@ function ckeditor_bkb_comment_ckeditor_settings_alter(&$settings, $conf) {
     $keys = array_keys($library['css']);
     $settings['contentsCss'] = array_merge($settings['contentsCss'], $keys);
   }
-
-  debug($settings['contentsCss']);
 }
 
 

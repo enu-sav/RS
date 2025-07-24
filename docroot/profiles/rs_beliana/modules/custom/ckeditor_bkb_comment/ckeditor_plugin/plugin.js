@@ -92,8 +92,8 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 }
               }, 100); // Poll every 100ms until the dialog is ready
             },
-            error: function () {
-              console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania.'));
+            error: function (request, status, error) {
+              console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: '), request.responseText);
             }
           });
         },
@@ -157,7 +157,6 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
     // Helper function to set plugin button state
     function updateCommentsCommandState() {
       const cmd = editor.getCommand('comments');
-
       if (!cmd) {
         return;
       }
@@ -165,11 +164,41 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
       const selection = editor.getSelection();
       const selectedText = selection ? selection.getSelectedText() : '';
 
+      // Text is selected
       if (selectedText.length === 0) {
         cmd.setState(CKEDITOR.TRISTATE_OFF);
       }
-      else {
+
+      // No text selected — check cursor position
+      const range = selection && selection.getRanges()[0];
+      if (!range || !range.collapsed) {
         cmd.setState(CKEDITOR.TRISTATE_DISABLED);
+        return;
+      }
+
+      const offset = range.startOffset;
+      const container = range.startContainer;
+
+      if (!container || container.type !== CKEDITOR.NODE_TEXT) {
+        cmd.setState(CKEDITOR.TRISTATE_DISABLED);
+        return;
+      }
+
+      const text = container.getText();
+
+      // Check if cursor is in the middle of a word:
+      const beforeChar = text.charAt(offset - 1);
+      const afterChar = text.charAt(offset);
+
+      const isWordChar = (char) => /\w/.test(char);
+
+      const inMiddleOfWord = isWordChar(beforeChar) && isWordChar(afterChar);
+
+      if (inMiddleOfWord) {
+        cmd.setState(CKEDITOR.TRISTATE_DISABLED);
+      }
+      else {
+        cmd.setState(CKEDITOR.TRISTATE_OFF);
       }
     }
   }
@@ -210,8 +239,8 @@ function fetchSearchResults(field, init = false) {
         dropdown.append('<div class="no-results">' + Drupal.t('Nenašli sa žiadne výsledky.') + '</div>');
       }
     },
-    error: function () {
-      console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania.'));
+    error: function (request, status, error) {
+      console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: '), request.responseText);
     }
   });
 }

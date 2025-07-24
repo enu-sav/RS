@@ -67,8 +67,13 @@
         appendTo: ownerDoc.body,
         onShow() {
           return $element.data('tooltip-loaded') === true;
-        }
+        },
+        delay: [0, 100],
       });
+
+      // Track if cursor is over tooltip
+      let isOverTooltip = false;
+      let hideTimeout = null;
 
       element.addEventListener('mouseenter', (event) => {
         if (!useShift || (useShift && event.shiftKey)) {
@@ -77,6 +82,24 @@
       });
 
       element.addEventListener('mouseleave', () => {
+        // Delay hiding to give time to move to tooltip
+        hideTimeout = setTimeout(() => {
+          if (!isOverTooltip) {
+            tooltip.hide();
+          }
+        }, 100);
+      });
+
+      // When tooltip is shown, attach hover handlers
+      tooltip.popper.addEventListener('mouseenter', () => {
+        isOverTooltip = true;
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+        }
+      });
+
+      tooltip.popper.addEventListener('mouseleave', () => {
+        isOverTooltip = false;
         tooltip.hide();
       });
 
