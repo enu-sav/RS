@@ -232,7 +232,8 @@ function fetchSearchResults(field, init = false) {
       var dropdown = jQuery("#searchResults").empty().show();
       if (data.length) {
         data.forEach(item => {
-          dropdown.append(`<div class="search-result-item" style="cursor: pointer; margin: 4px;" data-id="${item.id}" data-url="${item.value}">${item.label}</div>`);
+          const label = item.label.length > 75 ? item.label.substring(0, 75) + '...' : item.label;
+          dropdown.append(`<div class="search-result-item" style="cursor: pointer; margin: 4px;" data-id="${item.id}" data-url="${item.value}">${label}</div>`);
         });
       }
       else {
