@@ -35,7 +35,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 searchField.show();
               }
 
-              processButtons(buttons, bkbElement.id);
+              processButtons(buttons, false, bkbElement.id);
             }
           }, {
             type: 'html',
@@ -80,7 +80,7 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 Drupal.settings.ckeditor_bkb_comment.parent = data[0].parent;
               }
 
-              processButtons(buttons);
+              processButtons(buttons, true);
             },
             error: function (request, status, error) {
               console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: ') + error.stack);
@@ -308,7 +308,7 @@ function isBkbLink(editor) {
   return {status: false};
 }
 
-function processButtons(buttons, bkbId = false) {
+function processButtons(buttons, bkbOnly = false, bkbId = false) {
   const parent = Drupal.settings.ckeditor_bkb_comment.parent ?? false;
 
   buttons.forEach(btn => {
@@ -319,8 +319,15 @@ function processButtons(buttons, bkbId = false) {
       buildButton(btn, text, url);
     }
 
-    if (bkbId !== false && btn.innerText.includes('BKB')) {
+    if (bkbOnly) {
+      return;
+    }
+
+    if (bkbId !== false && btn.innerText.includes('OK')) {
       btn.style.display = 'none';
+    }
+    else {
+      btn.style.display = 'block';
     }
   });
 }
