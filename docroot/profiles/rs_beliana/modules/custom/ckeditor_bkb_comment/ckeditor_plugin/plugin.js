@@ -34,8 +34,6 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
                 resultList.show();
                 searchField.show();
               }
-
-              processButtons(buttons, false, bkbElement.id);
             }
           }, {
             type: 'html',
@@ -68,6 +66,8 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
         onShow: function () {
           const nid = Drupal.settings.ckeditor_bkb_comment.nid;
 
+          document.querySelector('.cke_dialog .cke_dialog_footer > table').style.opacity = '0';
+
           jQuery.ajax({
             url: `/ckeditor/autocomplete_link/${nid}`,
             type: 'GET',
@@ -75,12 +75,12 @@ CKEDITOR.plugins.add('ckeditor_bkb_comment', {
             success: function (data) {
               const ckeDialog = document.querySelector('.cke_dialog');
               const buttons = ckeDialog.querySelectorAll('.cke_dialog_ui_button');
-
+              const bkbElement = isBkbLink(editor);
               if (data.length > 0) {
                 Drupal.settings.ckeditor_bkb_comment.parent = data[0].parent;
               }
 
-              processButtons(buttons, true);
+              processButtons(buttons, bkbElement.id);
             },
             error: function (request, status, error) {
               console.error(Drupal.t('Chyba pri načítavaní výsledkov vyhľadávania: ') + error.stack);
@@ -308,19 +308,15 @@ function isBkbLink(editor) {
   return {status: false};
 }
 
-function processButtons(buttons, bkbOnly = false, bkbId = false) {
+function processButtons(buttons, bkbId = false) {
   const parent = Drupal.settings.ckeditor_bkb_comment.parent ?? false;
 
   buttons.forEach(btn => {
-    if (btn.innerText.includes('Loading') || btn.innerText.includes('BKB')) {
+    if (btn.innerText.includes('Loading') || btn.innerText.includes('BKB') || btn.innerText.includes('Upraviť')) {
       const text = bkbId !== false ? 'Upraviť' : (parent ? 'Pridať ďalší komentár k heslu v BKB' : 'Vytvoriť komentár v BKB');
       const url = bkbId !== false ? Drupal.settings.ckeditor_bkb_comment.bkb_edit_url + '/' + bkbId + '/edit' : (parent ? Drupal.settings.ckeditor_bkb_comment.bkb_extend_url + '?word=' + parent : Drupal.settings.ckeditor_bkb_comment.bkb_add_url);
 
       buildButton(btn, text, url);
-    }
-
-    if (bkbOnly) {
-      return;
     }
 
     if (bkbId !== false && btn.innerText.includes('OK')) {
@@ -329,6 +325,8 @@ function processButtons(buttons, bkbOnly = false, bkbId = false) {
     else {
       btn.style.display = 'block';
     }
+
+    document.querySelector('.cke_dialog .cke_dialog_footer > table').style.opacity = '1';
   });
 }
 
