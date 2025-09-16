@@ -1,7 +1,7 @@
 // Define the plugin
 CKEDITOR.plugins.add('ckeditor_bkb_comment', {
   requires: ['dialog', 'htmlwriter'], onLoad: function () {
-    CKEDITOR.addCss('a.bkb-comment { color: green !important; text-decoration: none; }');
+    CKEDITOR.addCss('a.bkb-comment { color: purple !important; text-decoration: none; font-weight: bold; }');
   }, init: function (editor) {
     CKEDITOR.dialog.add('commentsDialog', function (editor) {
       return {
