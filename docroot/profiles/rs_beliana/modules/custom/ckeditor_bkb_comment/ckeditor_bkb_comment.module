@@ -151,51 +151,37 @@ function ckeditor_bkb_comment_callback($nid) {
  * @param int $commentID
  * @param bool $source
  */
-function get_comment_text_callback($commentID) {
-  $cache_id = 'ckeditor_bkb_comment_' . md5($commentID);
+function get_comment_text_callback($id) {
+  $client = new Client([
+    'base_uri' => variable_get('beliana_bkb_uri'),
+    'verify' => FALSE,
+    'headers' => [
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json',
+    ],
+  ]);
 
-  // Try to get data from cache first
-  $cached_data = cache_get($cache_id);
+  $url = '/jsonapi/comment?include=sources,sources.source,sources.source.attachment&filter[drupal_internal__id]=' . $id;
+  $response = $client->request('GET', $url);
+  $links = [];
+  if ($response->getStatusCode() === 200) {
+    $data = json_decode($response->getBody());
+    if (!empty($data)) {
+      // Sources (Zdroje) output.
+      $json_data = drupal_json_decode($response->getBody());
+      $sources_text = render_sources_from_json($json_data);
+      $sources = nl2br(($sources_text));
 
-  if ($cached_data) {
-    $links = $cached_data->data;
-  }
-  else {
-    // Perform API request if no cached data
-    $client = new Client([
-      'base_uri' => variable_get('beliana_bkb_uri'),
-      'verify' => FALSE,
-      'headers' => [
-        'Content-Type' => 'application/json',
-        'Accept' => 'application/json',
-      ],
-    ]);
-
-    $url = '/jsonapi/comment?include=sources,sources.source,sources.source.attachment&filter[drupal_internal__id]=' . $commentID;
-    $response = $client->request('GET', $url);
-    $links = [];
-    if ($response->getStatusCode() === 200) {
-      $data = json_decode($response->getBody());
-      if (!empty($data)) {
-        // Sources (Zdroje) output.
-        $json_data = drupal_json_decode($response->getBody());
-        $sources_text = render_sources_from_json($json_data);
-        $sources = nl2br(($sources_text));
-
-        foreach ($data->data as $item) {
-          if (isset($item->attributes->comment)) {
-            $links = [
-              'value' => $item->attributes->drupal_internal__id,
-              'commentText' => $item->attributes->comment . $sources,
-              'plainCommentText' => $item->attributes->comment,
-            ];
-          }
+      foreach ($data->data as $item) {
+        if (isset($item->attributes->comment)) {
+          $links = [
+            'value' => $item->attributes->drupal_internal__id,
+            'commentText' => $item->attributes->comment . $sources,
+            'plainCommentText' => $item->attributes->comment,
+          ];
         }
       }
     }
-
-    // Store the result in the cache with a 3600-second expiration (1 hour)
-    cache_set($cache_id, $links, 'cache', REQUEST_TIME + 3600);
   }
 
   drupal_json_output($links);
