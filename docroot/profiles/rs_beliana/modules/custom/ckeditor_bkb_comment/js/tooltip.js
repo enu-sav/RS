@@ -40,36 +40,69 @@
 
       const element = $element.get(0);
       const ownerDoc = element.ownerDocument;
+      const isInIframe = ownerDoc !== document;
 
-      // Create tooltip container inside same document as the target (iframe or
-      // main doc)
-      const tooltipContainer = ownerDoc.createElement('div');
+      // Create tooltip container in root body
+      const tooltipContainer = document.createElement('div');
       tooltipContainer.setAttribute('contenteditable', 'false');
       tooltipContainer.innerHTML = 'Loading...';
-
-      // Needed for CKEditor
       tooltipContainer.addEventListener('click', function (e) {
         const href = e.target.getAttribute('href');
         if (href) {
           window.open(href, '_blank');
         }
       });
+      document.body.appendChild(tooltipContainer);
 
-      ownerDoc.body.appendChild(tooltipContainer);
+      // Find iframe element if inside one
+      let iframe = null;
+      if (isInIframe) {
+        const iframes = document.querySelectorAll('iframe');
+        for (let i = 0; i < iframes.length; i++) {
+          if (iframes[i].contentDocument === ownerDoc) {
+            iframe = iframes[i];
+            break;
+          }
+        }
+      }
 
-      const tooltip = tippy(element, {
+      // Configure Tippy options
+      const tippyOptions = {
         content: tooltipContainer,
         allowHTML: true,
         trigger: 'manual',
         interactive: true,
         placement: 'bottom',
         theme: 'light-border',
-        appendTo: ownerDoc.body,
+        appendTo: () => document.body,
         onShow() {
           return $element.data('tooltip-loaded') === true;
         },
         delay: [0, 100],
-      });
+      };
+
+      // Add custom positioning for iframe elements
+      if (isInIframe && iframe) {
+        tippyOptions.getReferenceClientRect = () => {
+          const iframeRect = iframe.getBoundingClientRect();
+          const elemRect = element.getBoundingClientRect();
+          return {
+            top: iframeRect.top + elemRect.top,
+            right: iframeRect.left + elemRect.right,
+            bottom: iframeRect.top + elemRect.bottom,
+            left: iframeRect.left + elemRect.left,
+            width: elemRect.width,
+            height: elemRect.height,
+            x: iframeRect.left + elemRect.left,
+            y: iframeRect.top + elemRect.top
+          };
+        };
+        tippyOptions.popperOptions = {
+          strategy: 'fixed'
+        };
+      }
+
+      const tooltip = tippy(element, tippyOptions);
 
       // Track if cursor is over tooltip
       let isOverTooltip = false;
