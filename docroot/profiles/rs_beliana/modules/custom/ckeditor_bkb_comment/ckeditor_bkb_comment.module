@@ -106,7 +106,7 @@ function ckeditor_bkb_comment_callback($nid) {
   $query = check_plain($query);
   $node = node_load($nid);
   if ($node instanceof stdClass && isset($node->nid)) {
-    $alias = drupal_get_path_alias('node/' . $node->nid);
+    $alias = url('node/' . $node->nid, array('absolute' => TRUE));
     $client = new Client([
       'base_uri' => variable_get('beliana_bkb_uri'),
       'verify' => FALSE,
@@ -278,13 +278,11 @@ function ckeditor_bkb_comment_init() {
  * Implements hook_page_alter().
  */
 function ckeditor_bkb_comment_page_alter(&$page) {
-  global $base_url;
   // Check if we are on a node page
   if ($node = menu_get_object()) {
     if (in_array($node->type, ['heslo', 'importovane_heslo'])) {
       // Pass the Node ID to JavaScript using drupalSettings
-      $alias = drupal_get_path_alias('node/' . $node->nid);
-      $absolute_url = $base_url . '/' . $alias;
+      $absolute_url = url('node/' . $node->nid, array('absolute' => TRUE));
       $bkb_url = variable_get('beliana_bkb_uri') . '/source-comment';
       drupal_add_js([
         'ckeditor_bkb_comment' => [
