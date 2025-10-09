@@ -107,6 +107,7 @@ function ckeditor_bkb_comment_callback($nid) {
   $node = node_load($nid);
   if ($node instanceof stdClass && isset($node->nid)) {
     $alias = url('node/' . $node->nid, array('absolute' => TRUE));
+    debug($alias);
     $client = new Client([
       'base_uri' => variable_get('beliana_bkb_uri'),
       'verify' => FALSE,
