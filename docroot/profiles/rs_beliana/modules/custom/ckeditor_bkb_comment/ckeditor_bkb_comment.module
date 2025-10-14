@@ -221,34 +221,28 @@ function render_sources_from_json($json_data) {
     }
 
     $source = $sources_by_id[$source_id];
-    $source_label = $source['attributes']['label'];
     $output .= "<li>Zdroj [{$group_index}]: ";
 
-    if (strpos($source_label, 'digitalna-kniznica.beliana.sav.sk') !== FALSE) {
-      parse_str(parse_url($source_label)['query'], $query);
-      $output .= "<a href=\"$source_label\" target=\"_blank\">" . $query['title'] . "</a>\n";
+    if (!empty($source['attributes']['source_url'])) {
+      $output .= '<a href="' . $source['attributes']['source_url'] . '" target="_blank">' . $source['attributes']['label'] . "</a>\n";
     }
     else {
-      $output .= $source_label . "\n";
+      $output .= $source['attributes']['label'] . "\n";
     }
 
     // Handle PDF attachment
     if (!empty($source['relationships']['attachment']['data'])) {
       $attachment = $source['relationships']['attachment']['data'];
       $file_id = $attachment['id'] ?? NULL;
+      $output .= 'Archivované PDF: ';
 
       if ($file_id && isset($files_by_id[$file_id])) {
         $file = $files_by_id[$file_id];
         $file_url = variable_get('beliana_bkb_uri') . $file['attributes']['uri']['url'] ?? NULL;
-        if ($file_url) {
-          $output .= "PDF: <a href=\"$file_url\" target=\"_blank\">" . t('Stiahnut') . "</a>\n";
-        }
-        else {
-          $output .= "PDF: (neplatná URL)\n";
-        }
+        $output .= ($file_url ? '<a href="' . $file_url . '" target="_blank" style="color: #fff; font-weight: bold; text-decoration: underline;">' . t('Stiahnut') . '</a>' : '(neplatná URL)') . "\n";
       }
       else {
-        $output .= "PDF: (súbor nenájdený)\n";
+        $output .= "(súbor nenájdený)\n";
       }
     }
 
