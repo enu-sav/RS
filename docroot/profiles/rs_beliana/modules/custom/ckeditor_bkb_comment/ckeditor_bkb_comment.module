@@ -224,7 +224,7 @@ function render_sources_from_json($json_data) {
     $output .= "<li>Zdroj [{$group_index}]: ";
 
     if (!empty($source['attributes']['source_url'])) {
-      $output .= '<a href="' . $source['attributes']['source_url'] . '" target="_blank">' . $source['attributes']['label'] . "</a>\n";
+      $output .= '<a href="' . $source['attributes']['source_url'] . '" target="_blank" style="color: #fff; font-weight: bold; text-decoration: underline;">' . $source['attributes']['label'] . "</a>\n";
     }
     else {
       $output .= $source['attributes']['label'] . "\n";
