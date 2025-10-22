@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_sync_ui.views_default.inc
@@ -322,6 +323,85 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Päta: Globálny: Výsledný súhrn */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
+  /* Päta: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Skript a štýl na skracovanie textu';
+  $handler->display->display_options['footer']['area']['content'] = '<style>
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 350px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Vzťah: Workbench Moderation: Uzol */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -403,11 +483,23 @@ function rs_beliana_sync_ui_views_default_views() {
   $handler->display->display_options['fields']['field_komentar_instrukcie']['table'] = 'field_data_field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['field'] = 'field_komentar_instrukcie';
   $handler->display->display_options['fields']['field_komentar_instrukcie']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['alter']['text'] = '<div class="fold-text">
+  <div class="fold-text-short">[field_komentar_instrukcie]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>';
+  $handler->display->display_options['fields']['field_komentar_instrukcie']['element_class'] = 'fold-text-col';
   /* Pole: Obsah: Text hesla */
   $handler->display->display_options['fields']['field_text_hesla_1']['id'] = 'field_text_hesla_1';
   $handler->display->display_options['fields']['field_text_hesla_1']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla_1']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla_1']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_text_hesla_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_text_hesla_1']['alter']['text'] = '<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla_1]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>';
+  $handler->display->display_options['fields']['field_text_hesla_1']['element_class'] = 'fold-text-col';
   /* Pole: Obsah: Ilustracia: Nazov/Pouzit */
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['id'] = 'ilustracia_nazov_pouzit';
   $handler->display->display_options['fields']['ilustracia_nazov_pouzit']['table'] = 'node';
@@ -626,6 +718,85 @@ function rs_beliana_sync_ui_views_default_views() {
 </ol>
 Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (namiesto bodu 3)  preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
 ';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Päta: Globálny: Výsledný súhrn */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total';
+  /* Päta: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Skript a štýl na skracovanie textu';
+  $handler->display->display_options['footer']['area']['content'] = '<style>
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 550px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Hromadné operácie: Obsah */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -690,6 +861,12 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
   $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
   $handler->display->display_options['fields']['field_text_hesla']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['text'] = '<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>';
+  $handler->display->display_options['fields']['field_text_hesla']['element_class'] = 'fold-text-col';
   /* Pole: Beliana: Remote ID (Sync) */
   $handler->display->display_options['fields']['sync_remote_id']['id'] = 'sync_remote_id';
   $handler->display->display_options['fields']['sync_remote_id']['table'] = 'node';
@@ -967,9 +1144,85 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
     t('Obrázok je odkaz'),
     t('Má ilustráciu'),
     t('Zverejniť na web'),
+    t('Skript a štýl na skracovanie textu'),
+    t('<style>
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 350px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+'),
     t('Synchronizácia'),
     t('[timestamp] / [updated]'),
     t('Komentár/inštrukcie'),
+    t('<div class="fold-text">
+  <div class="fold-text-short">[field_komentar_instrukcie]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>'),
+    t('<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla_1]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>'),
     t('Ilustrácie'),
     t('Zverejnené na webe'),
     t('Zobrazené publikované heslá @start - @end z celkového počtu @total
@@ -981,6 +1234,77 @@ Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (n
 </ol>
 Ak ide len o dočasné stiahnutie hesla, krok 2 treba vynechať a heslo treba (namiesto bodu 3)  preradiť (priamo v hesle) do stavu <em> Zverejnené – oprava</em>. 
 '),
+    t('<style>
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 550px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+'),
+    t('<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>'),
     t('Heslo na webe'),
     t('Synchronizácia po'),
     t('Dátum vo formáte RRRR-MM-DD alebo záporná hodnota (-2 day, -5 hour)'),

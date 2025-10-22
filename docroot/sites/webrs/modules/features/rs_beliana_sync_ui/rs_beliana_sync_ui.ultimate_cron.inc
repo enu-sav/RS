@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_sync_ui.ultimate_cron.inc
@@ -16,6 +17,14 @@ function rs_beliana_sync_ui_default_ultimate_cron_job() {
   $job->name = 'beliana_sync_cron';
   $job->title = 'Default cron handler';
   $job->settings = array(
+    'launcher' => array(
+      'name' => '',
+      'serial' => array(),
+    ),
+    'logger' => array(
+      'database' => array(),
+      'name' => '',
+    ),
     'scheduler' => array(
       'name' => '',
       'simple' => array(
@@ -24,18 +33,10 @@ function rs_beliana_sync_ui_default_ultimate_cron_job() {
         ),
       ),
     ),
-    'launcher' => array(
-      'name' => '',
-      'serial' => array(),
-    ),
-    'logger' => array(
-      'name' => '',
-      'database' => array(),
-    ),
     'settings' => array(
-      'queue' => array(),
-      'poorman' => array(),
       'general' => array(),
+      'poorman' => array(),
+      'queue' => array(),
     ),
   );
   $export['beliana_sync_cron'] = $job;
