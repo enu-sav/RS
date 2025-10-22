@@ -5807,6 +5807,616 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['menu']['weight'] = '51';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Heslá pre garanta */
+  $handler = $view->new_display('page', 'Heslá pre garanta', 'page_14');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Heslá pre garanta';
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    23 => '23',
+  );
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
+    'title' => 'title',
+    'field_taxsubor' => 'field_taxsubor',
+    'name_1' => 'name_1',
+    'state' => 'state',
+    'from_state' => 'from_state',
+    'section' => 'section',
+    'field_ilustracia' => 'field_ilustracia',
+    'timestamp' => 'timestamp',
+  );
+  $handler->display->display_options['style_options']['default'] = 'timestamp';
+  $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_taxsubor' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'from_state' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'section' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ilustracia' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'timestamp' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené všetky heslá z vášho odboru (lexikálnej skupiny).</em>
+';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Päta: Globálny: Výsledný súhrn */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = 'Zobrazenie po @per_page položkách, položky @start - @end z @total';
+  /* Päta: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Skript a štýl na skracovanie textu';
+  $handler->display->display_options['footer']['area']['content'] = '<style>
+/* More changes in Text field Style changes and Rewrite results */
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 700px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['content'] = 'Podmienkam zobrazenia nezodpovedajú žiadne položky.';
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
+  /* Pole: Obsah: Názov */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Pole: Workbench Moderation: Stav */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
+  /* Pole: Workbench Access: Lexikálna skupina */
+  $handler->display->display_options['fields']['section']['id'] = 'section';
+  $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
+  $handler->display->display_options['fields']['section']['field'] = 'section';
+  $handler->display->display_options['fields']['section']['label'] = 'Lex. skupina';
+  /* Pole: Content revision: Dátum aktualizácie */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'today time ago';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['text'] = '<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>';
+  $handler->display->display_options['fields']['field_text_hesla']['element_class'] = 'fold-text-col';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Obsah: Názov */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['title']['operator'] = 'starts';
+  $handler->display->display_options['filters']['title']['value'] = 'k';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Názov';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['limit_operators'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['available_operators'] = array(
+    '=' => '=',
+    'contains' => 'contains',
+    'starts' => 'starts',
+  );
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
+  $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['field'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['field_text_hesla_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_text_hesla_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_id'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['label'] = 'Text hesla';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['limit_operators'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['available_operators'] = array(
+    'contains' => 'contains',
+    'word' => 'word',
+    'allwords' => 'allwords',
+  );
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
+  $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state_1']['field'] = 'state';
+  $handler->display->display_options['filters']['state_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['state_1']['value'] = array(
+    'importovane_vyradene' => 'importovane_vyradene',
+    'importovane_u_jr2' => 'importovane_u_jr2',
+    'pozdr_an_' => 'pozdr_an_',
+    'wiki' => 'wiki',
+    'zlucene' => 'zlucene',
+    'vyradene' => 'vyradene',
+    'published' => 'published',
+    'ukoncenezluene' => 'ukoncenezluene',
+  );
+  $handler->display->display_options['filters']['state_1']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Stav */
+  $handler->display->display_options['filters']['state_2']['id'] = 'state_2';
+  $handler->display->display_options['filters']['state_2']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state_2']['field'] = 'state';
+  $handler->display->display_options['filters']['state_2']['group'] = 1;
+  $handler->display->display_options['filters']['state_2']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state_2']['expose']['operator_id'] = 'state_2_op';
+  $handler->display->display_options['filters']['state_2']['expose']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state_2']['expose']['operator'] = 'state_2_op';
+  $handler->display->display_options['filters']['state_2']['expose']['identifier'] = 'state_2';
+  $handler->display->display_options['filters']['state_2']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state_2']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['state_2']['group_info']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state_2']['group_info']['identifier'] = 'state_2';
+  $handler->display->display_options['filters']['state_2']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['state_2']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Zverejnené na webe',
+      'operator' => 'in',
+      'value' => array(
+        'publikovane_na_webe' => 'publikovane_na_webe',
+        'zverejnene_oprava' => 'zverejnene_oprava',
+        'zverejnene_vratene' => 'zverejnene_vratene',
+        'zverejnene_jaz_kontrola' => 'zverejnene_jaz_kontrola',
+        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'importovane_u_jr2' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    2 => array(
+      'title' => 'Vo výstupnej redakcii',
+      'operator' => 'in',
+      'value' => array(
+        'importovane_u_vr' => 'importovane_u_vr',
+        'importovane_na_zverejnenie' => 'importovane_na_zverejnenie',
+        'na_zalomenie' => 'na_zalomenie',
+        'na_zverejnenie' => 'na_zverejnenie',
+        'kontrola_etymologie' => 'kontrola_etymologie',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    3 => array(
+      'title' => 'V jazykovej redakcii',
+      'operator' => 'in',
+      'value' => array(
+        'importovane_u_jaz_korektora' => 'importovane_u_jaz_korektora',
+        'importovane_jaz_kontrola' => 'importovane_jaz_kontrola',
+        'importovan_u_jr_kk' => 'importovan_u_jr_kk',
+        'u_jr_kk' => 'u_jr_kk',
+        'u_jaz_korektora' => 'u_jaz_korektora',
+        'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    4 => array(
+      'title' => 'U autora, konzultanta, redaktora',
+      'operator' => 'in',
+      'value' => array(
+        'u_autora' => 'u_autora',
+        'needs_review' => 'needs_review',
+        'u_konzultanta' => 'u_konzultanta',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    5 => array(
+      'title' => 'Prevzaté z knižnej verzie',
+      'operator' => 'in',
+      'value' => array(
+        'importovane' => 'importovane',
+        'prevzate_z_rs' => 'prevzate_z_rs',
+        'all' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    6 => array(
+      'title' => 'Bez vypracovania',
+      'operator' => 'in',
+      'value' => array(
+        'draft' => 'draft',
+        'objednane' => 'objednane',
+        'zaradene' => 'zaradene',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+  );
+  $handler->display->display_options['path'] = 'admin/beliana/zoznam_g';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Heslá pre garanta';
+  $handler->display->display_options['menu']['weight'] = '50';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['beliana'] = array(
     t('Defaults'),
     t('Content I\'ve edited'),
@@ -5976,6 +6586,83 @@ Heslá treba preradiť do stavov:
  • <b>Ak autor heslo vypracuje priamo v redakčnom systéme:</b> Heslo zaškrtnite a kliknite na <em>Priradiť autorovi</em>. Stav hesla sa zmení na "U autora", v ktorom ho môže autor upravovať'),
     t('Objednané u'),
     t('Číslo zmluvy'),
+    t('Heslá pre garanta'),
+    t('<em>Tu sú zobrazené všetky heslá z vášho odboru (lexikálnej skupiny).</em>
+'),
+    t('Zobrazenie po @per_page položkách, položky @start - @end z @total'),
+    t('Skript a štýl na skracovanie textu'),
+    t('<style>
+/* More changes in Text field Style changes and Rewrite results */
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 700px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+'),
+    t('<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>'),
   );
   $export['beliana'] = $view;
 
@@ -10711,11 +11398,10 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     37 => '37',
-    23 => '23',
     31 => '31',
     18 => '18',
-    7 => '7',
     12 => '12',
+    7 => '7',
     2 => '2',
     4 => '4',
     10 => '10',
@@ -10932,12 +11618,11 @@ Heslá treba preradiť do stavov:
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     37 => '37',
-    23 => '23',
     31 => '31',
     18 => '18',
     39 => '39',
-    7 => '7',
     12 => '12',
+    7 => '7',
     20 => '20',
     2 => '2',
     4 => '4',
@@ -15423,10 +16108,10 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Všetky heslá - prehľad (G) */
-  $handler = $view->new_display('page', 'Všetky heslá - prehľad (G)', 'page_2');
+  /* Display: Všetky heslá (G) */
+  $handler = $view->new_display('page', 'Všetky heslá (G)', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Všetky heslá - prehľad (G)';
+  $handler->display->display_options['title'] = 'Všetky heslá (G)';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -15434,6 +16119,107 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
     3 => '3',
     23 => '23',
   );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položiek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Všetko -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Zobraziť od';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« prvá';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ predchádzajúca';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'nasledujúca ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'posledná »';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Nadpis: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<em>Tu sú zobrazené heslá všetkých odborov (lexikálnych skupín).</em>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Päta: Globálny: Výsledný súhrn */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = 'Zobrazenie po @per_page položkách, @start - @end z @total
+';
+  /* Päta: Globálny: Rozsiahle textové pole */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Skript a štýl na skracovanie textu';
+  $handler->display->display_options['footer']['area']['content'] = '<style>
+/* More changes in Text field Style changes and Rewrite results */
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 700px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Pole: Obsah: Názov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -15442,109 +16228,50 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Pole: Obsah: Typ */
-  $handler->display->display_options['fields']['type']['id'] = 'type';
-  $handler->display->display_options['fields']['type']['table'] = 'node';
-  $handler->display->display_options['fields']['type']['field'] = 'type';
   /* Pole: Workbench Moderation: Stav */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
-  /* Pole: Obsah: Dátum aktualizácie */
-  $handler->display->display_options['fields']['changed']['id'] = 'changed';
-  $handler->display->display_options['fields']['changed']['table'] = 'node';
-  $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
-  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Pole: Obsah: Lexikálna skupina */
   $handler->display->display_options['fields']['field_lexikalna_skupina']['id'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['table'] = 'field_data_field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['field'] = 'field_lexikalna_skupina';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_lexikalna_skupina']['delta_offset'] = '0';
-  /* Pole: Používateľ: Názov */
-  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
-  $handler->display->display_options['fields']['name_1']['table'] = 'users';
-  $handler->display->display_options['fields']['name_1']['field'] = 'name';
-  $handler->display->display_options['fields']['name_1']['relationship'] = 'uid_1';
-  $handler->display->display_options['fields']['name_1']['label'] = 'Autor';
-  $handler->display->display_options['fields']['name_1']['link_to_user'] = FALSE;
+  /* Pole: Obsah: Dátum aktualizácie */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Pole: Obsah: Text hesla */
+  $handler->display->display_options['fields']['field_text_hesla']['id'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['table'] = 'field_data_field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['field'] = 'field_text_hesla';
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_text_hesla']['alter']['text'] = '<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>';
+  $handler->display->display_options['fields']['field_text_hesla']['element_class'] = 'fold-text-col';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Obsah: Súbor (field_taxsubor) */
-  $handler->display->display_options['filters']['field_taxsubor_tid']['id'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['table'] = 'field_data_field_taxsubor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['field'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator_id'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['label'] = 'Súbor';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['operator'] = 'field_taxsubor_tid_op';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['identifier'] = 'field_taxsubor_tid';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_taxsubor_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
+  /* Filter criterion: Workbench Moderation: Aktuálny */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Obsah: Typ */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'heslo' => 'heslo',
+    'importovane_heslo' => 'importovane_heslo',
   );
-  $handler->display->display_options['filters']['field_taxsubor_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['vocabulary'] = 'subory';
-  $handler->display->display_options['filters']['field_taxsubor_tid']['hierarchy'] = 1;
-  /* Filter criterion: Obsah: Lexikálna skupina (field_lexikalna_skupina) */
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['id'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['table'] = 'field_data_field_lexikalna_skupina';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['field'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator_id'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['label'] = 'Lexikálna skupina';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['operator'] = 'field_lexikalna_skupina_tid_op';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['identifier'] = 'field_lexikalna_skupina_tid';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
-  );
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['vocabulary'] = 'lexikalne_skupiny';
-  $handler->display->display_options['filters']['field_lexikalna_skupina_tid']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['type_1']['group'] = 1;
   /* Filter criterion: Obsah: Názov */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
@@ -15557,27 +16284,16 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_label'] = 'dddd';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['limit_operators'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['available_operators'] = array(
+    '=' => '=',
+    'contains' => 'contains',
+    'starts' => 'starts',
+  );
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
   );
   /* Filter criterion: Obsah: Text hesla (field_text_hesla) */
   $handler->display->display_options['filters']['field_text_hesla_value']['id'] = 'field_text_hesla_value';
@@ -15591,144 +16307,332 @@ Ak chcete vyhľadať heslá, ktoré ste <strong>upravili</strong>, vložte svoje
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator_label'] = 'ddddd';
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['operator'] = 'field_text_hesla_value_op';
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['limit_operators'] = TRUE;
+  $handler->display->display_options['filters']['field_text_hesla_value']['expose']['available_operators'] = array(
+    'contains' => 'contains',
+    'word' => 'word',
+    'allwords' => 'allwords',
+  );
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['identifier'] = 'field_text_hesla_value';
   $handler->display->display_options['filters']['field_text_hesla_value']['expose']['remember_roles'] = array(
     2 => '2',
-  );
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
-  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['label'] = 'Typ';
-  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
-  $handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
-    2 => '2',
-  );
-  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Workbench Moderation: Aktuálny */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  $handler->display->display_options['filters']['is_current']['group'] = 1;
-  /* Filter criterion: Obsah: Komentár/inštrukcie (field_komentar_instrukcie) */
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['id'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['table'] = 'field_data_field_komentar_instrukcie';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['field'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator_id'] = 'field_komentar_instrukcie_value_op';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['label'] = 'Komentár';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['operator'] = 'field_komentar_instrukcie_value_op';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['identifier'] = 'field_komentar_instrukcie_value';
-  $handler->display->display_options['filters']['field_komentar_instrukcie_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    17 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-  );
-  /* Filter criterion: Obsah: User has a revision */
-  $handler->display->display_options['filters']['uid_revision']['id'] = 'uid_revision';
-  $handler->display->display_options['filters']['uid_revision']['table'] = 'node';
-  $handler->display->display_options['filters']['uid_revision']['field'] = 'uid_revision';
-  $handler->display->display_options['filters']['uid_revision']['value'] = '';
-  $handler->display->display_options['filters']['uid_revision']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['uid_revision']['expose']['operator_id'] = 'uid_revision_op';
-  $handler->display->display_options['filters']['uid_revision']['expose']['label'] = 'Upravil niektorú verziu';
-  $handler->display->display_options['filters']['uid_revision']['expose']['operator'] = 'uid_revision_op';
-  $handler->display->display_options['filters']['uid_revision']['expose']['identifier'] = 'uid_revision';
-  $handler->display->display_options['filters']['uid_revision']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
   );
   /* Filter criterion: Workbench Moderation: Stav */
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['group'] = 1;
   $handler->display->display_options['filters']['state']['exposed'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['label'] = 'Stav';
   $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
-  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['state']['group_info']['label'] = 'Stav';
+  $handler->display->display_options['filters']['state']['group_info']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['state']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Zverejnené na webe',
+      'operator' => 'in',
+      'value' => array(
+        'publikovane_na_webe' => 'publikovane_na_webe',
+        'zverejnene_oprava' => 'zverejnene_oprava',
+        'zverejnene_vratene' => 'zverejnene_vratene',
+        'zverejnene_jaz_kontrola' => 'zverejnene_jaz_kontrola',
+        'na_opakovane_zverejnenie' => 'na_opakovane_zverejnenie',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'importovane_u_jr2' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    2 => array(
+      'title' => 'Vo výstupnej redakcii',
+      'operator' => 'in',
+      'value' => array(
+        'importovane_u_vr' => 'importovane_u_vr',
+        'importovane_na_zverejnenie' => 'importovane_na_zverejnenie',
+        'na_zalomenie' => 'na_zalomenie',
+        'na_zverejnenie' => 'na_zverejnenie',
+        'kontrola_etymologie' => 'kontrola_etymologie',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    3 => array(
+      'title' => 'V jazykovej redakcii',
+      'operator' => 'in',
+      'value' => array(
+        'importovane_u_jaz_korektora' => 'importovane_u_jaz_korektora',
+        'importovane_jaz_kontrola' => 'importovane_jaz_kontrola',
+        'importovan_u_jr_kk' => 'importovan_u_jr_kk',
+        'u_jr_kk' => 'u_jr_kk',
+        'u_jaz_korektora' => 'u_jaz_korektora',
+        'na_jazykovu_korekturu' => 'na_jazykovu_korekturu',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    4 => array(
+      'title' => 'U autora, konzultanta, redaktora',
+      'operator' => 'in',
+      'value' => array(
+        'u_autora' => 'u_autora',
+        'needs_review' => 'needs_review',
+        'u_konzultanta' => 'u_konzultanta',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    5 => array(
+      'title' => 'Prevzaté z knižnej verzie',
+      'operator' => 'in',
+      'value' => array(
+        'importovane' => 'importovane',
+        'prevzate_z_rs' => 'prevzate_z_rs',
+        'all' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'draft' => 0,
+        'objednane' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'zaradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+    6 => array(
+      'title' => 'Bez vypracovania',
+      'operator' => 'in',
+      'value' => array(
+        'draft' => 'draft',
+        'objednane' => 'objednane',
+        'zaradene' => 'zaradene',
+        'all' => 0,
+        'importovane' => 0,
+        'importovane_u_vr' => 0,
+        'importovane_vyradene' => 0,
+        'importovane_u_jaz_korektora' => 0,
+        'importovane_jaz_kontrola' => 0,
+        'importovan_u_jr_kk' => 0,
+        'importovane_na_zverejnenie' => 0,
+        'na_zalomenie' => 0,
+        'publikovane_na_webe' => 0,
+        'zverejnene_oprava' => 0,
+        'importovane_u_jr2' => 0,
+        'zverejnene_vratene' => 0,
+        'zverejnene_jaz_kontrola' => 0,
+        'na_opakovane_zverejnenie' => 0,
+        'pozdr_an_' => 0,
+        'wiki' => 0,
+        'prevzate_z_rs' => 0,
+        'navrhnute_na_vyradenie' => 0,
+        'zlucene' => 0,
+        'u_jr_kk' => 0,
+        'u_autora' => 0,
+        'vyradene' => 0,
+        'published' => 0,
+        'needs_review' => 0,
+        'u_konzultanta' => 0,
+        'na_zverejnenie' => 0,
+        'ukoncenezluene' => 0,
+        'nova_ilustracia' => 0,
+        'u_jaz_korektora' => 0,
+        'ilustracia_na_webe' => 0,
+        'kontrola_etymologie' => 0,
+        '_ilustr_cia_u_autora' => 0,
+        'ilustracia_u_grafika' => 0,
+        'na_jazykovu_korekturu' => 0,
+        'ilustracia_u_redaktora' => 0,
+        'ilustracia_na_zverejnenie' => 0,
+        'ilustracia_u_vyst_redaktora_5' => 0,
+      ),
+    ),
+  );
+  /* Filter criterion: Obsah: Has taxonomy terms (with depth; Simple hierarchical select) */
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Lexikálna skupina';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    5 => 0,
-    4 => 0,
-    10 => 0,
-    7 => 0,
-    12 => 0,
-    6 => 0,
-    13 => 0,
-    19 => 0,
-    14 => 0,
-    15 => 0,
-    16 => 0,
-    18 => 0,
-    3 => 0,
-    9 => 0,
-    25 => 0,
-    20 => 0,
-    21 => 0,
-    22 => 0,
-    23 => 0,
   );
-  /* Filter criterion: Obsah: Typ */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'heslo' => 'heslo',
-    'importovane_heslo' => 'importovane_heslo',
-  );
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'lexikalne_skupiny';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '2';
   $handler->display->display_options['path'] = 'vsetky-prehlad-g';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Prehľad (G)';
+  $handler->display->display_options['menu']['title'] = 'Všetky heslá (G)';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
@@ -20229,8 +21133,83 @@ Dávkovo možno prevziať heslá, ktoré sú v tomto systéme v stavoch Zaraden�
     t('Neuvedené'),
     t('Prišlo zo stavu'),
     t('Autor hesla'),
-    t('Všetky heslá - prehľad (G)'),
-    t('Upravil niektorú verziu'),
+    t('Všetky heslá (G)'),
+    t('<em>Tu sú zobrazené heslá všetkých odborov (lexikálnych skupín).</em>'),
+    t('Zobrazenie po @per_page položkách, @start - @end z @total
+'),
+    t('Skript a štýl na skracovanie textu'),
+    t('<style>
+/* More changes in Text field Style changes and Rewrite results */
+/* Fix column width */
+.views-table td.fold-text-col {
+  width: 700px;
+  max-width: 700px;
+  vertical-align: top;
+}
+
+/* Short preview: 3 lines */
+.fold-text-short {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Full text expands when .expanded is added */
+.fold-text.expanded .fold-text-short {
+  -webkit-line-clamp: unset;
+}
+</style>
+<script type="text/javascript">
+(function ($) {
+  $(document).ready(function () {
+    var maxLines = 3; // number of lines shown in preview
+
+    $(\'.fold-text\').each(function () {
+      var wrapper = $(this);
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var toggle = wrapper.find(\'.fold-toggle\');
+
+      // Calculate total number of lines in the text
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+
+      // Hide toggle if text fits in preview
+      if (totalLines <= maxLines) {
+        toggle.hide();
+      } else {
+        var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        toggle.text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines +\')\');
+      }
+    });
+
+    // Toggle full text
+    $(\'.fold-toggle\').click(function (e) {
+      e.preventDefault();
+      var wrapper = $(this).closest(\'.fold-text\');
+      wrapper.toggleClass(\'expanded\');
+
+      var shortDiv = wrapper.find(\'.fold-text-short\');
+      var lineHeight = parseFloat(shortDiv.css(\'line-height\'));
+      var totalLines = Math.round(shortDiv[0].scrollHeight / lineHeight);
+      var maxLines = 3;
+
+      // Update toggle text
+      if (wrapper.hasClass(\'expanded\')) {
+        $(this).text(\'Zobraziť skrátený text\');
+      } else {
+         var lines = (totalLines < 5) ? "riadky" : "riadkov";
+        $(this).text(\'Zobraziť celý text (\' + (totalLines) + \' \' + lines + \')\');
+      }
+    });
+  });
+})(jQuery);
+</script>
+'),
+    t('<div class="fold-text">
+  <div class="fold-text-short">[field_text_hesla]</div>
+  <a href="javascript:void(0)" class="fold-toggle">Read more</a>
+</div>'),
     t('Odoslať na zverejnenie (R)'),
     t('Odoslať na zverejnenie'),
     t('Odosielanie skontrolovaných importovaných hesiel na zverejnenie. Pred odoslaním hesiel treba:  skontrolovať <strong>správnosť odkazov</strong>, odstrániť zabudnuté nesprávne odkazové šípky (—>), skontrolovať odstránenie <strong>skratiek</strong>. Odosielať, len ak heslo videli všetci príslušní redaktori - inak iba pridať svoju značku do poznámky, ak tam už nie je. Ak zjavne chýba niektorá lexikálna skupina, treba ju pridať alebo upozorniť príslušného redaktora.'),
