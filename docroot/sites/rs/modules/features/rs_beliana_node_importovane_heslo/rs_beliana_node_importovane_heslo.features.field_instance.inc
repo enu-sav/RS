@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_importovane_heslo.features.field_instance.inc
@@ -297,6 +298,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
+          'hide_title' => FALSE,
           'links' => 1,
           'use_content_language' => TRUE,
           'view_mode' => 'teaser',
@@ -329,6 +331,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => FALSE,
         'match_operator' => 'STARTS_WITH',
         'path' => '',
         'size' => 60,
@@ -454,7 +457,7 @@ function rs_beliana_node_importovane_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 2,
     ),
-    'workbench_access_field' => 1,
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-importovane_heslo-field_na_zoradenie'.
