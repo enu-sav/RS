@@ -575,7 +575,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 5,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_errta'.
@@ -657,6 +657,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
+          'hide_title' => FALSE,
           'links' => 1,
           'use_content_language' => 1,
           'view_mode' => 'teaser',
@@ -674,6 +675,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
+          'hide_title' => FALSE,
           'links' => TRUE,
           'use_content_language' => TRUE,
           'view_mode' => 'default',
@@ -693,6 +695,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => FALSE,
         'match_operator' => 'STARTS_WITH',
         'path' => '',
         'size' => 60,
@@ -818,7 +821,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 1,
     ),
-    'workbench_access_field' => 1,
+    'workbench_access_field' => TRUE,
   );
 
   // Exported field_instance: 'node-heslo-field_na_zoradenie'.
@@ -1078,7 +1081,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 20,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_redaktori_zluceneho'.
@@ -1125,7 +1128,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 22,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_remote_id'.
@@ -1218,7 +1221,7 @@ function rs_beliana_node_heslo_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 21,
     ),
-    'workbench_access_field' => 0,
+    'workbench_access_field' => FALSE,
   );
 
   // Exported field_instance: 'node-heslo-field_table'.
@@ -1658,6 +1661,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
       'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => FALSE,
         'match_operator' => 'CONTAINS',
         'path' => '',
         'size' => 60,
@@ -1709,6 +1713,7 @@ Po uložení hesla voľbu nemožno zmeniť.',
       'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => FALSE,
         'match_operator' => 'CONTAINS',
         'path' => '',
         'size' => 60,

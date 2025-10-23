@@ -6,7 +6,6 @@ dependencies[] = date
 dependencies[] = features
 dependencies[] = file
 dependencies[] = menu
-dependencies[] = node
 dependencies[] = rs_beliana_node_heslo
 dependencies[] = rs_beliana_node_page
 dependencies[] = strongarm

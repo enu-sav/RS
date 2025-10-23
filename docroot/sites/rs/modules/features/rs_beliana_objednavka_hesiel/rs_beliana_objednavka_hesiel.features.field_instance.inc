@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_objednavka_hesiel.features.field_instance.inc
@@ -94,7 +95,7 @@ function rs_beliana_objednavka_hesiel_field_default_field_instances() {
       'type' => 'taxonomy_autocomplete',
       'weight' => 3,
     ),
-    'workbench_access_field' => 1,
+    'workbench_access_field' => TRUE,
   );
 
   // Exported field_instance: 'node-objednavka_hesiel-field_objednavka_autor'.
