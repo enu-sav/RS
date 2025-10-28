@@ -90,7 +90,11 @@ function _beliana_sync_remove_links($node, $text) {
       $item = $links->item($i);
       $class = $item->getAttribute('class');
       $target = $item->getAttribute('href');
-      if (!url_is_external($target) && $class != 'bkb-comment') {
+      if ($class == 'bkb-comment') { #remove bkb comments
+        $lnkText = "";
+        $newTxtNode = $dom->createTextNode($lnkText);
+        $item->parentNode->replaceChild($newTxtNode, $item);
+      } else if (!url_is_external($target) && $class != 'bkb-comment') {
         // Get rid of leading slash.
         if ($target[0] === '/') {
           $target = substr($target, 1);
