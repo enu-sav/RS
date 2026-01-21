@@ -384,6 +384,31 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_konzultacia_data'.
+  $field_bases['field_konzultacia_data'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_id_type' => NULL,
+    'entity_types' => array(),
+    'field_name' => 'field_konzultacia_data',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 80,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lexikalna_skupina'.
   $field_bases['field_lexikalna_skupina'] = array(
     'active' => 1,
@@ -711,24 +736,6 @@ function rs_beliana_node_heslo_field_default_field_bases() {
     'settings' => array(),
     'translatable' => 0,
     'type' => 'text_long',
-  );
-
-  // Exported field_base: 'field_uid_autora'.
-  $field_bases['field_uid_autora'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_uid_autora',
-    'field_permissions' => array(
-      'type' => 2,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_vyplatit'.
