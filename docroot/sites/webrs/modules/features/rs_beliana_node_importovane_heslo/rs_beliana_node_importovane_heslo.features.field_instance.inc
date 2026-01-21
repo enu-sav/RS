@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_importovane_heslo.features.field_instance.inc
@@ -488,6 +489,7 @@ Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
         'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
+          'hide_title' => FALSE,
           'links' => 1,
           'use_content_language' => 1,
           'view_mode' => 'teaser',
@@ -520,6 +522,7 @@ Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
       'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => FALSE,
         'match_operator' => 'STARTS_WITH',
         'path' => '',
         'size' => 60,
@@ -574,6 +577,75 @@ Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
       ),
       'type' => 'text_textarea',
       'weight' => 4,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-importovane_heslo-field_konzultacia_data'.
+  $field_instances['node-importovane_heslo-field_konzultacia_data'] = array(
+    'bundle' => 'importovane_heslo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
+      'lite_display' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_konzultacia_data',
+    'label' => 'Konzultácia dáta',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'filtered_html' => 'filtered_html',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'filtered_html' => array(
+              'weight' => 5,
+            ),
+            'full_html' => array(
+              'weight' => 2,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -870,6 +942,7 @@ Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
       'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => FALSE,
         'match_operator' => 'CONTAINS',
         'path' => '',
         'size' => 60,
@@ -1115,53 +1188,6 @@ Ak je text v poriadku, uveďte <strong>Text OK</strong>.',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-importovane_heslo-field_uid_autora'.
-  $field_instances['node-importovane_heslo-field_uid_autora'] = array(
-    'bundle' => 'importovane_heslo',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 21,
-      ),
-      'lite_display' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_uid_autora',
-    'label' => 'UID autora',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 20,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-importovane_heslo-field_vyplatit'.
   $field_instances['node-importovane_heslo-field_vyplatit'] = array(
     'bundle' => 'importovane_heslo',
@@ -1396,6 +1422,7 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
 Z textu hesla vyššie môžete kopírovať pomocou CRTL-C/CTRL-V, matematické rovnice však nemusia byť skopírované správne.<br />
 Ak je text v poriadku, uveďte <strong>Text OK</strong>.');
   t('Komentár/inštrukcie');
+  t('Konzultácia dáta');
   t('Lexikálna skupina');
   t('Na zoradenie');
   t('Nevypĺňať – vyplní sa automaticky pri vytvorení objednávky.');
@@ -1407,7 +1434,6 @@ Zvoľte spôsob vypracovania hesla. Ak pole ešte nechcete vyplniť, nevoľte ni
 Pri odosielaní hesla VR však pole musí byť vyplnené.<br /> 
 Po uložení hesla voľbu nemožno zmeniť.<br />
 <strong>Položku "Vyriešené v knižnom RS" nepoužívajte, je vyhradená pre heslá prenesené z knižného RS.</strong>');
-  t('Pole slúži na programové uloženie UID autora textu hesla v čase, keď je heslo v stave U konzultanta. Po vrátení redaktorovi sa autor textu opätovne nastaví ako autor hesla.');
   t('Popri Lexikálnej skupine slúži na kategorizáciu hesla na webe (nevkladajte rovnakú skupinu ako je v poli Lexikálna skupina)');
   t('Použité zdroje');
   t('Pozícia tabuľky pre geografické heslá');
@@ -1419,7 +1445,6 @@ Po uložení hesla voľbu nemožno zmeniť.<br />
   t('Text hesla');
   t('Text na použitie pri abecednom zoraďovaní hesiel. Použite len malé písmená bez diakritiky okrem znakov č, ž a š. Na správne zoradenie rovnako znejúcich hesiel na koniec pridajte podčiarnik \'_\' a vhodnú kombináciu znakov a, b, c.... ');
   t('Text určený pre autora, redaktora alebo správcu heslára. Ak už v poli text existuje, nový text pridajte na začiatok. Nepotrebný starý text možno zmazať.');
-  t('UID autora');
   t('Uveďte zdroje, ktoré boli použité. Môžu to byť aj odkazy na web. Prípadne zo zdroja skopírujte aj relevantný text (max. niekoľko riadkov).');
   t('Vložte tabuľku so základnými údajmi o štátoch ap.');
   t('Vyplatenie odmeny');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * rs_beliana_node_importovane_heslo.strongarm.inc
@@ -92,15 +93,32 @@ function rs_beliana_node_importovane_heslo_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__importovane_heslo';
   $strongarm->value = array(
+    'extra_fields' => array(
+      'display' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '9',
+        ),
+        'title' => array(
+          'weight' => '0',
+        ),
+        'workbench_access' => array(
+          'weight' => '0',
+        ),
+      ),
+    ),
     'view_modes' => array(
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
       'export' => array(
         'custom_settings' => FALSE,
       ),
-      'teaser' => array(
-        'custom_settings' => TRUE,
-      ),
       'full' => array(
         'custom_settings' => FALSE,
+      ),
+      'lite_display' => array(
+        'custom_settings' => TRUE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
@@ -111,29 +129,12 @@ function rs_beliana_node_importovane_heslo_strongarm() {
       'search_result' => array(
         'custom_settings' => FALSE,
       ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
+      'teaser' => array(
+        'custom_settings' => TRUE,
       ),
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'lite_display' => array(
-        'custom_settings' => TRUE,
-      ),
-    ),
-    'extra_fields' => array(
-      'form' => array(
-        'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
-          'weight' => '9',
-        ),
-        'workbench_access' => array(
-          'weight' => '0',
-        ),
-      ),
-      'display' => array(),
     ),
   );
   $export['field_bundle_settings_node__importovane_heslo'] = $strongarm;
