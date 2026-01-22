@@ -2253,6 +2253,20 @@ function beliana_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
+    #Adjust return states if a consultant is returning article to the editor
+    if ($form['node']['#value']->workbench_moderation['current']->state === 'u_konzultanta' &&
+		  array_intersect(array("Konzultant","useradmin", "administrátor"), $user->roles)) {
+      if (isset( $form['node']['#value']->field_konzultacia_data[LANGUAGE_NONE])) {
+        $konzultacia_data = explode(";", $form['node']['#value']->field_konzultacia_data[LANGUAGE_NONE][0]['value']);
+        $from_state = $konzultacia_data[1];
+        foreach ($form['state']['#options'] as $k => $v) {
+          if (!in_array($k, [$from_state])) {
+            unset($form['state']['#options'][$k]);
+          }
+        }
+      }
+    }
+
     // remove some states from the list of transitions in the case of role Redaktor (webrs only)
     //rs_api_type specifies type of the opposite side, therefore '!='  in the test
     if (variable_get('rs_api_type') != "webrs" && in_array("Redaktor", $user->roles) ) {
@@ -2691,16 +2705,17 @@ function _beliana_assign_user(&$node, $context = Null) {
       return FALSE;
     }
     // in the case of transfer to consultant save the author's uid to be later restored
-    // use field_redaktori_zluceneho for that
+    // use field_konzultacia_data for that
     if ($context['status'] === 'u_konzultanta') {
-      $node->field_uid_autora['und'][0]['value'] = $node->uid;
+      #$node->field_uid_autora['und'][0]['value'] = $node->uid;
+      $node->field_konzultacia_data['und'][0]['value'] = $node->uid . ";" . $node->workbench_moderation["current"]->state;
     } else {
-      # from 11.2024: We set field_vyplatit to Vyplatené
+      # from 11.2024: We set field_vyplatit to Vyplatené (the only option owing to the view where initiaded from)
       $node->field_vyplatit[LANGUAGE_NONE][0]['value'] = 'Vyplatené';
     }
     $node->uid = $user->uid;
     $new_state = $context['status'];
-    $node->log = 'Priradené autorovi: ' . $user->name;
+    $node->log = 'Priradené: ' . $user->name;
     node_save($node);
     workbench_moderation_moderate($node, $new_state);
   }

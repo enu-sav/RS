@@ -1021,12 +1021,15 @@ function webrs_beliana_workflow_reaction(&$form, &$form_state) {
     }
   }
 
-  // restore id of the node author from the saved value
-  if (($cur_state === "u_konzultanta" and $new_state === "needs_review"))
+  // restore node state and id of the node author from the saved value
+  // only if the new states are "U redaktora" (needs_review) and "U vyst. redaktora \" (na_zverejnenie)
+  if ($cur_state === "u_konzultanta" and in_array($new_state, ["needs_review", "na_zverejnenie"]))
   {
-    if (isset($values['node']->field_uid_autora['und'])) {
-      $values['node']->uid = $values['node']->field_uid_autora['und'][0]['value'];
-      unset($values['node']->field_uid_autora['und']);
+    if (isset($values['node']->field_konzultacia_data['und'])) {
+      $konzultacia_data = explode(";", $values['node']->field_konzultacia_data[LANGUAGE_NONE][0]['value']);
+      $values['node']->uid = $konzultacia_data[0];
+      $values['node']->workbench_moderation_state_new = $konzultacia_data[1];
+      unset($values['node']->field_konzultacia_data['und']);
       node_save($values['node']);
     }
   }
