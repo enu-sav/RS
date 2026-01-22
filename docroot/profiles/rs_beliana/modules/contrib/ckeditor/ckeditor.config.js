@@ -67,6 +67,7 @@ CKEDITOR.editorConfig = function(config) {
   if (this.element.$.rows > 0) {
     config.height = this.element.$.rows * 20 + 'px';
   }
+  config.undoStackSize = 50;
 }
 
 /*
